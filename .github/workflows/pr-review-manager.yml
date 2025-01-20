@@ -1,0 +1,19 @@
+name: Automate PR Reviews
+
+on:
+  pull_request:
+    types: [opened, ready_for_review] # PR 생성 시 또는 Draft 상태에서 '리뷰 가능' 상태로 전환될 때 트리거되는 액션
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # Assignee와 Reviewer 할당을 위한 권한
+    steps:
+      - uses: hkusu/review-assign-action@v1 # https://github.com/hkusu/review-assign-action
+        with:
+          # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
+          assignees: ${{ github.actor }} # PR 작성자를 assignee로 지정
+          # Repository Variables에 정의한 값
+          # - Settings > Secrets and Variables > Actions > Variables > Repository variables
+          reviewers: ${{ vars.REVIEWERS }} # 리뷰할 수 있는 사람의 목록
