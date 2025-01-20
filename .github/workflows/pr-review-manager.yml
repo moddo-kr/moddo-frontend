@@ -5,7 +5,7 @@ on:
     types: [opened, ready_for_review] # PR 생성 시 또는 Draft 상태에서 '리뷰 가능' 상태로 전환될 때 트리거되는 액션
 
 jobs:
-  assign:
+  assign: # PR 작성자를 Assignee로 지정하고 Reviewer를 지정하는 작업
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write # Assignee와 Reviewer 할당을 위한 권한
