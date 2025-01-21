@@ -17,6 +17,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
           ref: ${{ github.event.pull_request.base.ref }} # PR의 타겟 브랜치를 체크아웃
+          fetch-depth: 0 # 전체 히스토리를 보존하기 위해 0으로 설정 (기본값: 1)
 
       # "empty ident name" 에러를 방지하기 위해 사용자 정보 설정 (GITHUB_TOKEN 유저)
       # https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token
