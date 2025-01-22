@@ -12,13 +12,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
-      { find: '@', replacement: '/src'},
-      { find: '@assets', replacement: '/src/assets'},
-      { find: '@common', replacement: '/src/common'},
-      { find: '@mocks', replacement: '/src/mocks'},
-      { find: '@pages', replacement: '/src/pages'},
-      { find: '@service', replacement: '/src/service'},
-      { find: '@stores', replacement: '/src/stores'},
+      { find: '@', replacement: '/src'}
     ],
   },
   server: {
