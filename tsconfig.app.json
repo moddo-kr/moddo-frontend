@@ -24,5 +24,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"], // src 디렉토리 내 모든 파일 포함
+  "exclude": [".eslintrc.cjs", "node_modules", "dist", "dev-dist"] // 제외할 디렉토리
 }
