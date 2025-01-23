@@ -7,10 +7,10 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'airbnb-typescript',
-    'plugin:react/recommended',
+    'plugin:react/recommended', 
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'plugin:jsx-a11y/recommended',
+    'plugin:jsx-a11y/recommended', // jsx-a11y 규칙은 웹 접근성을 준수하기 위함
     'plugin:@tanstack/query/recommended',
   ],
   parser: '@typescript-eslint/parser',
@@ -32,14 +32,14 @@ module.exports = {
     '@tanstack/query',
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn'],
-    'import/prefer-default-export': 'off',
-    'react/prop-types': 'off',
-    'jsx-a11y/anchor-is-valid': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'prettier/prettier': ['error'],
-    'import/no-extraneous-dependencies': [
+    'react/react-in-jsx-scope': 'off', // React 17 이상에서는 React import 없이 사용 가능
+    '@typescript-eslint/no-unused-vars': ['warn'], // 사용하지 않는 변수는 경고로 처리
+    'import/prefer-default-export': 'off', // 단일 export만 있을 때도 default export를 강제하지 않음
+    'react/prop-types': 'off', // TypeScript로 PropTypes를 대체하므로 비활성화
+    'jsx-a11y/anchor-is-valid': 'off', // react router의 Link 컴포넌트가 a 태그를 대체하므로 비활성화
+    'react/jsx-props-no-spreading': 'off', // JSX에서 props 스프레드(...props)를 허용
+    'prettier/prettier': ['error'], // Prettier 에러 발생 시 ESLint 에러로 표시
+    'import/no-extraneous-dependencies': [ // devDependencies에 대한 규칙 설정
       'error',
       {
         devDependencies: [
