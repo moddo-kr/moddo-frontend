@@ -1,0 +1,22 @@
+# 빌드 아웃풋 디렉토리
+node_modules/
+dist/
+dev-dist/
+
+# 환경 설정 파일
+.env
+*.config.ts
+
+# 테스트 파일 무시
+**/*.test.ts
+**/*.test.tsx
+
+# 특정 파일
+.eslintrc.cjs
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+
+# IDE 설정 파일
+.vscode/
+.idea/
