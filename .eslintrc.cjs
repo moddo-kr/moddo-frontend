@@ -61,6 +61,7 @@ module.exports = {
           '**/*.stories.tsx', // Storybook 파일 허용
           '**/*.stories.ts', // Storybook 파일 허용
           'src/setupTests.ts', // 테스트 설정 파일 허용
+          "**/mocks/**", // mocks 폴더에서 devDependencies 사용 허용
         ],
       },
     ],
@@ -74,7 +75,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.cjs'], // .eslintrc.cjs 파일에 대한 규칙 비활성화
+      files: ['.eslintrc.cjs', 'public/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
       parserOptions: {
         project: null, // TypeScript 타입 검사 비활성화
       },
