@@ -33,7 +33,18 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off', // React 17 이상에서는 React import 없이 사용 가능
-    '@typescript-eslint/no-unused-vars': ['warn'], // 사용하지 않는 변수는 경고로 처리
+    '@typescript-eslint/no-unused-vars': [ // typescript에서 사용하지 않는 변수에 대한 경고
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_", 
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
     'import/prefer-default-export': 'off', // 단일 export만 있을 때도 default export를 강제하지 않음
     'react/prop-types': 'off', // TypeScript로 PropTypes를 대체하므로 비활성화
     'jsx-a11y/anchor-is-valid': 'off', // react router의 Link 컴포넌트가 a 태그를 대체하므로 비활성화
