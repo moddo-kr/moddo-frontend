@@ -1,0 +1,39 @@
+name: Setup Node.js Environment
+description: Setup Node.js environment and install dependencies for Github Actions
+
+runs:
+  using: "composite"
+  steps:
+    # Step 1: node.js 환경 설정
+    # https://github.com/actions/setup-node
+    - name: setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    # Step 2: Yarn 캐시 디렉토리 경로 확인
+    # https://github.com/actions/cache/blob/main/examples.md#node---yarn
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+    # Step 3: Yarn 캐시 복원
+    - name: Restore Yarn cache
+      uses: actions/cache@v4
+      id: yarn-cache
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
+        restore-keys: ${{ runner.os }}-yarn-
+
+    # Step 4: 의존성 설치
+    - name: install dependencies
+      run: yarn install
+
+    # Step 5: Yarn 캐시 저장
+    - name: Save Yarn cache
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
