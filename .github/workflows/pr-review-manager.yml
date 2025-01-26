@@ -54,3 +54,16 @@ jobs:
         uses: ./.github/actions/sync-labels
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  # 연결된 이슈를 Review Pipeline로 이동하는 작업
+  move-to-review:
+    runs-on: ubuntu-latest
+    needs: [checkout, setup-node]
+    steps:
+      - name: Move to Review Pipeline
+        uses: ./.github/actions/zenhub-move-issue
+        with:
+          zenhub-token: ${{ secrets.ZENHUB_TOKEN }}
+          repo-id: ${{ vars.ZENHUB_REPO_ID }}
+          workspace-id: ${{ vars.ZENHUB_WORKSPACE_ID }}
+          pipeline-id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
