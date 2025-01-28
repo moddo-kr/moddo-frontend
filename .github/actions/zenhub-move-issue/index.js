@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import axios from "axios";
-import getIssueNumber from "../utils/getIssueNumber.js";
+import getIssueNumberFromBranch from "../utils/getIssueNumberFromBranch.js";
 
 /** 메인 액션 함수 */
 const run = async () => {
@@ -17,8 +17,7 @@ const run = async () => {
     }
 
     // step 1. 이슈 번호 추출
-    const branchName = github.context.payload.pull_request.head.ref;
-    const issueNumber = getIssueNumber(branchName);
+    const issueNumber = getIssueNumberFromBranch();
     if (!issueNumber) {
       core.info("💬 브랜치 이름에 이슈 번호가 없습니다. 액션을 종료합니다.");
       return;
