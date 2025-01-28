@@ -2,16 +2,16 @@ name: "Zenhub - Move an Issue Between Pipelines"
 description: "Move an issue between pipelines in Zenhub"
 
 inputs:
-  zenhub-token:
-    description: "Zenhub token for API access"
+  token:
+    description: "GitHub token"
     required: true
-  repo-id:
-    description: "Zenhub repository ID"
+  zenhub_token:
+    description: "Zenhub token"
     required: true
-  workspace-id:
+  workspace_id:
     description: "Zenhub workspace ID"
     required: true
-  pipeline-id:
+  pipeline_id:
     description: "Zenhub pipeline ID"
     required: true
 

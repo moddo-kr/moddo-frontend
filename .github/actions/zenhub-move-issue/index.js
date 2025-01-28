@@ -1,12 +1,20 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import axios from "axios";
-import { getIssueNumber } from "../utils";
+import getIssueNumber from "../utils/getIssueNumber.js";
 
 /** 메인 액션 함수 */
 const run = async () => {
   try {
-    const { zenhubToken, workspaceId, repoId, pipelineId } = getActionInputs();
+    const { token, zenhubToken, workspaceId, pipelineId } = getActionInputs();
+
+    // step 0. repo id 확인
+    const octokit = github.getOctokit(token);
+    const { owner, repo } = github.context.repo;
+    const repoId = await getRepoId(octokit, owner, repo);
+    if (!repoId) {
+      throw new Error("레포지토리 ID를 가져올 수 없습니다.");
+    }
 
     // step 1. 이슈 번호 추출
     const branchName = github.context.payload.pull_request.head.ref;
@@ -35,12 +43,22 @@ const run = async () => {
 
 /** 액션에 전달된 인풋을 가져오는 함수 */
 const getActionInputs = () => {
-  const zenhubToken = core.getInput("zenhub-token");
-  const workspaceId = core.getInput("workspace-id");
-  const repoId = core.getInput("repo-id");
-  const pipelineId = core.getInput("pipeline-id");
+  const token = core.getInput("token");
+  const zenhubToken = core.getInput("zenhub_token");
+  const workspaceId = core.getInput("workspace_id");
+  const pipelineId = core.getInput("pipeline_id");
 
-  return { zenhubToken, workspaceId, repoId, pipelineId };
+  return { token, zenhubToken, workspaceId, pipelineId };
+};
+
+/**
+ * 레포지토리 ID를 가져오는 함수
+ * @see https://octokit.github.io/rest.js/v21/#repos-get
+ * @see https://docs.github.com/ko/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
+ */
+const getRepoId = async (octokit, owner, repo) => {
+  const { data } = await octokit.rest.repos.get({ owner, repo });
+  return data.id;
 };
 
 // 액션을 실행

@@ -1,6 +1,6 @@
 import * as core from "@actions/core"; // https://github.com/actions/toolkit/tree/main/packages/core
 import * as github from "@actions/github"; // https://github.com/actions/toolkit/tree/main/packages/github
-import { getIssueNumber } from "../utils";
+import getIssueNumber from "../utils/getIssueNumber.js";
 
 /** 메인 액션 함수 */
 const run = async () => {

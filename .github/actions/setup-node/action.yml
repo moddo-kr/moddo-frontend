@@ -11,29 +11,13 @@ runs:
       with:
         node-version: 20
 
-    # Step 2: Yarn 캐시 디렉토리 경로 확인
-    # https://github.com/actions/cache/blob/main/examples.md#node---yarn
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-    # Step 3: Yarn 캐시 복원
-    - name: Restore Yarn cache
-      uses: actions/cache@v4
-      id: yarn-cache
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
-        restore-keys: ${{ runner.os }}-yarn-
-
-    # Step 4: 의존성 설치
+    # Step 2: 의존성 설치
     - name: install dependencies
       run: yarn install
+      working-directory: .github/actions
+      shell: bash
 
-    # Step 5: Yarn 캐시 저장
-    - name: Save Yarn cache
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      uses: actions/cache@v4
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
+    # TODO: 캐싱 설정 추가
+    # https://github.com/actions/cache/blob/main/examples.md#node---yarn
+    # https://stackoverflow.com/questions/69365200/github-actions-how-to-cache-dependencies-between-workflow-runs-of-different-bra
+    # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache

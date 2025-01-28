@@ -19,9 +19,14 @@ jobs:
           # - Settings > Secrets and Variables > Actions > Variables > Repository variables
           reviewers: ${{ vars.REVIEWERS }} # 리뷰할 수 있는 사람의 목록
 
-  checkout:
+  # PR에 라벨을 추가하고 이슈를 이동하는 작업
+  automate-pr-review:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # PR에 라벨을 추가하고 이슈를 이동하기 위한 권한
+      issues: read # 이슈 라벨을 읽어오기 위한 권한
     steps:
+      # 액션에 필요한 파일을 가져오기 위한 작업
       - name: Checkout Action
         uses: actions/checkout@v4 # https://github.com/actions/checkout
         with:
@@ -29,41 +34,21 @@ jobs:
           fetch-depth: 1 # 가장 최근 커밋만 가져오기
           sparse-checkout: .github/actions # 액션 디렉토리만 가져오기
 
-  # 액션 실행을 위한 Node.js 환경 설정
-  setup-node:
-    runs-on: ubuntu-latest
-    needs: [checkout] # 액션 디렉토리를 가져오는 checkout 작업이 선행되어야 함
-    steps:
-      # node.js 환경 설정과 의존성 설치
+      # Node.js 환경 설정
       - name: Setup Node.js Environment
         uses: ./.github/actions/setup-node
 
-      # 의존성 캐싱
-      - name: Cache dependencies
-        uses: actions/cache@v2
-
-  # 연결된 이슈의 라벨을 PR에 추가하는 작업
-  sync-labels:
-    runs-on: ubuntu-latest
-    needs: [checkout, setup-node]
-    permissions:
-      pull-requests: write # PR에 라벨을 추가하기 위한 권한
-      issues: read # 이슈 라벨을 읽어오기 위한 권한
-    steps:
+      # PR에 라벨을 추가하는 작업
       - name: Sync labels from linked issues
         uses: ./.github/actions/sync-labels
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  # 연결된 이슈를 Review Pipeline로 이동하는 작업
-  move-to-review:
-    runs-on: ubuntu-latest
-    needs: [checkout, setup-node]
-    steps:
+      # PR을 Review Pipeline로 이동하는 작업
       - name: Move to Review Pipeline
         uses: ./.github/actions/zenhub-move-issue
         with:
-          zenhub-token: ${{ secrets.ZENHUB_TOKEN }}
-          repo-id: ${{ vars.ZENHUB_REPO_ID }}
-          workspace-id: ${{ vars.ZENHUB_WORKSPACE_ID }}
-          pipeline-id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          zenhub_token: ${{ secrets.ZENHUB_TOKEN }}
+          workspace_id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
+          pipeline_id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
