@@ -23,7 +23,7 @@ jobs:
   automate-pr-review:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write # PR에 라벨을 추가하고 이슈를 이동하기 위한 권한
+      pull-requests: write # PR에 라벨을 추가하기 위한 권한
       issues: read # 이슈 라벨을 읽어오기 위한 권한
     steps:
       # 액션에 필요한 파일을 가져오기 위한 작업
