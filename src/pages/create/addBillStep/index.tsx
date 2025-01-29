@@ -1,4 +1,5 @@
 import { VStack } from '@chakra-ui/react';
+import BillList from './components/BillList';
 import * as S from './styles/index.styles';
 
 function AddBillStep() {
@@ -12,33 +13,7 @@ function AddBillStep() {
         <S.MoimName>모임 이름</S.MoimName>
         <S.TopMessage>{`의\n지출 내역을 입력해주세요.`}</S.TopMessage>
       </S.TopWrapper>
-      <S.BillListWrapper>
-        <S.BillFormCard>
-          <S.BillFormCardTitle>1차</S.BillFormCardTitle>
-          <S.BillFormField required>
-            <S.BillFormFieldLabel>
-              결제 금액
-              <S.BillFormFieldRequired>*</S.BillFormFieldRequired>
-            </S.BillFormFieldLabel>
-            <S.BillFormFieldInput />
-          </S.BillFormField>
-          <S.BillFormField required>
-            <S.BillFormFieldLabel>
-              지출 장소 및 내용
-              <S.BillFormFieldRequired>*</S.BillFormFieldRequired>
-            </S.BillFormFieldLabel>
-            <S.BillFormFieldInput placeholder="ex. 투썸플레이스" />
-          </S.BillFormField>
-          <S.BillFormField>
-            <S.BillFormFieldLabel>지출일</S.BillFormFieldLabel>
-            <S.BillFormFieldInput />
-          </S.BillFormField>
-          <S.BillFormField>
-            <S.BillFormFieldLabel>참여자</S.BillFormFieldLabel>
-            <S.BillFormFieldInput />
-          </S.BillFormField>
-        </S.BillFormCard>
-      </S.BillListWrapper>
+      <BillList />
     </VStack>
   );
 }
