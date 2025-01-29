@@ -46,6 +46,7 @@ jobs:
 
       # PR을 Review Pipeline로 이동하는 작업
       - name: Move to Review Pipeline
+        if: ${{ !github.event.pull_request.draft }} # Draft 상태가 아닌 경우에만 실행
         uses: ./.github/actions/zenhub-move-issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
