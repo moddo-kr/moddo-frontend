@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AddBillStep from './addBillStep';
 
 // NOTE : 페이지 확인용 임시 메인 페이지
 function Create() {
@@ -15,11 +16,7 @@ function Create() {
         </div>
       );
     case 'ADD_BILL':
-      return (
-        <div>
-          <h1>정산 추가</h1>
-        </div>
-      );
+      return <AddBillStep />;
     default:
       return null;
   }
