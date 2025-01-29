@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
-import App from './App';
-import { worker } from './mocks/browser';
+import { worker } from '@/mocks/browser';
+import Router from '@/Router';
 
 if (process.env.NODE_ENV === 'development') {
   worker.start();
 }
 
-createRoot(document.getElementById('root') as Element).render(<App />);
+createRoot(document.getElementById('root') as Element).render(<Router />);
