@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { Input } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
+import Chip from '@/common/components/Chip';
 import BillFormField from './BillFormField';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '../styles/BillFormCard.styles';
@@ -65,8 +66,26 @@ function BillFormCard({ index }: BillFormCardProps) {
       <BillFormField
         label="참여자"
         required
-        register={register(`bills.${index}.participants`)}
         name={`bills.${index}.participants`}
+        control={control}
+        renderInput={({ field }) => (
+          <S.ChipContainer>
+            {field.value.map((participantName: string) => (
+              <Chip
+                key={participantName}
+                label={participantName}
+                closable
+                onClose={() =>
+                  field.onChange(
+                    field.value.filter(
+                      (name: string) => name !== participantName
+                    )
+                  )
+                }
+              />
+            ))}
+          </S.ChipContainer>
+        )}
       />
     </S.BillFormCard>
   );
