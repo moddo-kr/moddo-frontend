@@ -1,12 +1,32 @@
-import { useFormContext } from 'react-hook-form';
+import { forwardRef } from 'react';
+import { Input } from '@chakra-ui/react';
+import { Controller, useFormContext } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '../styles/BillFormCard.styles';
 
 interface BillFormCardProps {
   index: number;
 }
 
+type InputProps = React.HTMLProps<HTMLInputElement>;
+
+const FormInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ value, onClick, className }, ref) => (
+    <Input
+      width="100%"
+      ref={ref}
+      onClick={onClick}
+      value={value}
+      className={className}
+    />
+  )
+);
+
+FormInput.displayName = 'FormInput';
+
 function BillFormCard({ index }: BillFormCardProps) {
-  const { register } = useFormContext();
+  const { register, control } = useFormContext();
 
   return (
     <S.BillFormCard>
@@ -33,8 +53,20 @@ function BillFormCard({ index }: BillFormCardProps) {
       </S.BillFormField>
       <S.BillFormField>
         <S.BillFormFieldLabel>지출일</S.BillFormFieldLabel>
-        <S.BillFormFieldInput {...register(`bills.${index}.date`)} />
-        {/* TODO: Controller */}
+        <Controller
+          name={`bills.${index}.date`}
+          control={control}
+          render={({ field }) => (
+            <S.DatePickerWrapper>
+              <DatePicker
+                selected={field.value}
+                onChange={(date) => field.onChange(date)}
+                dateFormat="yyyy. MM. dd"
+                customInput={<FormInput />}
+              />
+            </S.DatePickerWrapper>
+          )}
+        />
       </S.BillFormField>
       <S.BillFormField required>
         <S.BillFormFieldLabel>

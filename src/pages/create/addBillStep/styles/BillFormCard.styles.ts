@@ -34,3 +34,10 @@ export const BillFormFieldRequired = styled.span`
   font-weight: 600; // semibold
   color: #f47c7c;
 `;
+
+export const DatePickerWrapper = styled.div`
+  width: 100%;
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+`;

@@ -10,7 +10,7 @@ const BillsFormSchema = z.object({
     z.object({
       amount: z.number().int().positive(), // 결제 금액
       place: z.string(), // 지출 장소 및 내용
-      date: z.string().optional(), // 지출일
+      date: z.date(), // 지출일
       participants: z.array(z.string()).optional(), // 참여자 (임시로 optional)
     })
   ),
@@ -19,7 +19,7 @@ const BillsFormSchema = z.object({
 const defaultValues = {
   amount: 0,
   place: '',
-  date: Date.now().toString(),
+  date: Date.now(),
   participants: [''],
 };
 
