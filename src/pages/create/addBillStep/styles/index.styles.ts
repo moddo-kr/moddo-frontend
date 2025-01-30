@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@chakra-ui/react';
 
 export const Header = styled.div`
   width: 100%;
@@ -38,3 +39,12 @@ export const TopMessage = styled.span`
   color: #000000;
   white-space: pre-line;
 `;
+
+export const BillFormList = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 1.25rem;
+`;
+
+export const BottomButton = styled(Button)``;
