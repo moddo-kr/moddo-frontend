@@ -19,7 +19,7 @@ const BillsFormSchema = z.object({
 const defaultValues = {
   amount: 0,
   place: '',
-  date: Date.now(),
+  date: new Date(),
   participants: [''],
 };
 
