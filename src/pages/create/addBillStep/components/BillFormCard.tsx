@@ -20,6 +20,7 @@ const FormInput = forwardRef<HTMLInputElement, InputProps>(
       onClick={onClick}
       value={value}
       className={className}
+      readOnly
     />
   )
 );
