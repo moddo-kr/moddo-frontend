@@ -47,4 +47,9 @@ export const BillFormList = styled.form`
   padding: 1rem 1.25rem;
 `;
 
-export const BottomButton = styled(Button)``;
+export const BottomButton = styled(Button)`
+  width: calc(100% - 2.5rem);
+  margin: 0 1.25rem;
+  position: fixed;
+  bottom: 2.125rem;
+`;
