@@ -68,6 +68,10 @@ function BillFormCard({ index }: BillFormCardProps) {
         required
         name={`bills.${index}.participants`}
         control={control}
+        subButton={{
+          label: '참여자 추가',
+          onClick: () => console.log('참여자 추가 바텀시트 등장'),
+        }}
         renderInput={({ field }) => (
           <S.ChipContainer>
             {field.value.map((participantName: string) => (

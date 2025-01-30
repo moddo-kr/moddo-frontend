@@ -16,6 +16,11 @@ interface RenderInputProps {
   formState: UseFormStateReturn<FieldValues>;
 }
 
+interface SubButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
 interface BillFormFieldProps {
   label: string;
   required?: boolean;
@@ -26,6 +31,7 @@ interface BillFormFieldProps {
   register?: UseFormRegisterReturn<string>;
   renderInput?: (props: RenderInputProps) => ReactElement;
   placeholder?: string;
+  subButton?: SubButtonProps;
 }
 
 function BillFormField({
@@ -36,13 +42,21 @@ function BillFormField({
   register,
   renderInput,
   placeholder,
+  subButton,
 }: BillFormFieldProps) {
   return (
     <S.BillFormField required={required}>
-      <S.BillFormFieldLabel>
-        {label}
-        {required && <S.BillFormFieldRequired>*</S.BillFormFieldRequired>}
-      </S.BillFormFieldLabel>
+      <S.BillFormFieldHeader>
+        <S.BillFormFieldLabel>
+          {label}
+          {required && <S.BillFormFieldRequired>*</S.BillFormFieldRequired>}
+        </S.BillFormFieldLabel>
+        {subButton && (
+          <S.BillFormFieldSubButton type="button" onClick={subButton.onClick}>
+            {subButton.label}
+          </S.BillFormFieldSubButton>
+        )}
+      </S.BillFormFieldHeader>
       {renderInput ? (
         <Controller
           name={name}
