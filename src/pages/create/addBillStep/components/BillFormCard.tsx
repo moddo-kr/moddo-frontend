@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 import { Input } from '@chakra-ui/react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
+import BillFormField from './BillFormField';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '../styles/BillFormCard.styles';
 
@@ -31,50 +32,41 @@ function BillFormCard({ index }: BillFormCardProps) {
   return (
     <S.BillFormCard>
       <S.BillFormCardTitle>1차</S.BillFormCardTitle>
-      <S.BillFormField required>
-        <S.BillFormFieldLabel>
-          결제 금액
-          <S.BillFormFieldRequired>*</S.BillFormFieldRequired>
-        </S.BillFormFieldLabel>
-        <S.BillFormFieldInput
-          {...register(`bills.${index}.amount`, { valueAsNumber: true })}
-        />
-        {/* TODO: Controller */}
-      </S.BillFormField>
-      <S.BillFormField required>
-        <S.BillFormFieldLabel>
-          지출 장소 및 내용
-          <S.BillFormFieldRequired>*</S.BillFormFieldRequired>
-        </S.BillFormFieldLabel>
-        <S.BillFormFieldInput
-          {...register(`bills.${index}.place`)}
-          placeholder="ex. 투썸플레이스"
-        />
-      </S.BillFormField>
-      <S.BillFormField>
-        <S.BillFormFieldLabel>지출일</S.BillFormFieldLabel>
-        <Controller
-          name={`bills.${index}.date`}
-          control={control}
-          render={({ field }) => (
-            <S.DatePickerWrapper>
-              <DatePicker
-                selected={field.value}
-                onChange={(date) => field.onChange(date)}
-                dateFormat="yyyy. MM. dd"
-                customInput={<FormInput />}
-              />
-            </S.DatePickerWrapper>
-          )}
-        />
-      </S.BillFormField>
-      <S.BillFormField required>
-        <S.BillFormFieldLabel>
-          참여자<S.BillFormFieldRequired>*</S.BillFormFieldRequired>
-        </S.BillFormFieldLabel>
-        <S.BillFormFieldInput {...register(`bills.${index}.participants`)} />
-        {/* TODO: Controller */}
-      </S.BillFormField>
+      {/* TODO: Controller */}
+      <BillFormField
+        label="결제 금액"
+        required
+        register={register(`bills.${index}.amount`, { valueAsNumber: true })}
+        name={`bills.${index}.amount`}
+      />
+      <BillFormField
+        label="지출 장소 및 내용"
+        required
+        register={register(`bills.${index}.place`)}
+        name={`bills.${index}.place`}
+        placeholder="ex. 투썸플레이스"
+      />
+      <BillFormField
+        label="지출일"
+        control={control}
+        name={`bills.${index}.date`}
+        renderInput={({ field }) => (
+          <S.DatePickerWrapper>
+            <DatePicker
+              selected={field.value}
+              onChange={(date) => field.onChange(date)}
+              dateFormat="yyyy. MM. dd"
+              customInput={<FormInput />}
+            />
+          </S.DatePickerWrapper>
+        )}
+      />
+      <BillFormField
+        label="참여자"
+        required
+        register={register(`bills.${index}.participants`)}
+        name={`bills.${index}.participants`}
+      />
     </S.BillFormCard>
   );
 }
