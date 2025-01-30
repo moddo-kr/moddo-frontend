@@ -9,9 +9,9 @@ const BillsFormSchema = z.object({
   bills: z.array(
     z.object({
       amount: z.number().int().positive(), // 결제 금액
-      place: z.string(), // 지출 장소 및 내용
+      place: z.string().min(1), // 지출 장소 및 내용
       date: z.date(), // 지출일
-      participants: z.array(z.string()).optional(), // 참여자 (임시로 optional)
+      participants: z.array(z.string()).min(1), // 참여자
     })
   ),
 });
@@ -20,7 +20,7 @@ const defaultValues = {
   amount: 0,
   place: '',
   date: new Date(),
-  participants: [''],
+  participants: ['김달걀', '날달걀', '송에그', '강흰자', '연노른자', '강계란'],
 };
 
 function AddBillStep() {
