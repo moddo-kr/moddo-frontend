@@ -1,13 +1,16 @@
-import GlobalStyles from '@/common/styles/globalStyles.ts';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import GlobalStyles from '@/styles/globalStyles';
 import Router from '@/common/route/Router';
 import Layout from '@/common/components/layout';
 
 function App() {
   return (
-    <Layout>
-      <GlobalStyles />
-      <Router />
-    </Layout>
+    <ChakraProvider value={defaultSystem}>
+      <Layout>
+        <GlobalStyles />
+        <Router />
+      </Layout>
+    </ChakraProvider>
   );
 }
 

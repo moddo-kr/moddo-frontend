@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
 
   html, body {
     font-family: 'Pretendard', sans-serif;
+    font-size: 16px; // 1rem = 16px
     color: black;
     
     height: 100%;
@@ -36,6 +37,10 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
   }
 `;
 
