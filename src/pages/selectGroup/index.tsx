@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/common/components/header';
 import * as S from './index.styles';
 import { SelectNewGroupIcon, SelectRecentGroupIcon } from '@/assets/svgs';
+import { ROUTE } from '@/common/constants/route';
 
 function SelectGroup() {
   const [selectedButton, setSelectedButton] = useState(0);
+
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     setSelectedButton((prev) => (prev === 0 ? 1 : 0));
@@ -51,7 +55,11 @@ function SelectGroup() {
             </S.SelectButton>
           </Flex>
         </main>
-        <Button height={12} borderRadius={12}>
+        <Button
+          height={12}
+          borderRadius={12}
+          onClick={() => navigate(ROUTE.PASSWORD_SETUP())}
+        >
           다음
         </Button>
       </Flex>
