@@ -5,55 +5,55 @@ interface NumPadCellType {
 
 interface NumPadControllerType {
   CELLS: NumPadCellType[][];
-  SHORTCUTS: NumPadCellType[][];
+  SHORTCUTS: NumPadCellType[];
   addDigit: (value: number, digit: number) => number;
   deleteDigit: (value: number) => number;
   applyShortcut: (value: number, shortcutValue: number) => number;
   clearAll: () => number;
 }
 
-const NumPadController: NumPadControllerType = {
+const numPadController: NumPadControllerType = {
   CELLS: [
     [
       {
         label: '1',
-        handler: (value: number) => NumPadController.addDigit(value, 1),
+        handler: (value: number) => numPadController.addDigit(value, 1),
       },
       {
         label: '2',
-        handler: (value: number) => NumPadController.addDigit(value, 2),
+        handler: (value: number) => numPadController.addDigit(value, 2),
       },
       {
         label: '3',
-        handler: (value: number) => NumPadController.addDigit(value, 3),
+        handler: (value: number) => numPadController.addDigit(value, 3),
       },
     ],
     [
       {
         label: '4',
-        handler: (value: number) => NumPadController.addDigit(value, 4),
+        handler: (value: number) => numPadController.addDigit(value, 4),
       },
       {
         label: '5',
-        handler: (value: number) => NumPadController.addDigit(value, 5),
+        handler: (value: number) => numPadController.addDigit(value, 5),
       },
       {
         label: '6',
-        handler: (value: number) => NumPadController.addDigit(value, 6),
+        handler: (value: number) => numPadController.addDigit(value, 6),
       },
     ],
     [
       {
         label: '7',
-        handler: (value: number) => NumPadController.addDigit(value, 7),
+        handler: (value: number) => numPadController.addDigit(value, 7),
       },
       {
         label: '8',
-        handler: (value: number) => NumPadController.addDigit(value, 8),
+        handler: (value: number) => numPadController.addDigit(value, 8),
       },
       {
         label: '9',
-        handler: (value: number) => NumPadController.addDigit(value, 9),
+        handler: (value: number) => numPadController.addDigit(value, 9),
       },
     ],
     [
@@ -63,37 +63,33 @@ const NumPadController: NumPadControllerType = {
       },
       {
         label: '0',
-        handler: (value: number) => NumPadController.addDigit(value, 0),
+        handler: (value: number) => numPadController.addDigit(value, 0),
       },
       {
         label: '←',
-        handler: (value: number) => NumPadController.deleteDigit(value),
+        handler: (value: number) => numPadController.deleteDigit(value),
       },
     ],
   ],
 
   SHORTCUTS: [
-    [
-      {
-        label: '+ 1만',
-        handler: (value: number) =>
-          NumPadController.applyShortcut(value, 10_000),
-      },
-      {
-        label: '+ 5만',
-        handler: (value: number) =>
-          NumPadController.applyShortcut(value, 50_000),
-      },
-      {
-        label: '+ 10만',
-        handler: (value: number) =>
-          NumPadController.applyShortcut(value, 100_000),
-      },
-      {
-        label: '전체삭제',
-        handler: (_value: number) => NumPadController.clearAll(),
-      },
-    ],
+    {
+      label: '+ 1만',
+      handler: (value: number) => numPadController.applyShortcut(value, 10_000),
+    },
+    {
+      label: '+ 5만',
+      handler: (value: number) => numPadController.applyShortcut(value, 50_000),
+    },
+    {
+      label: '+ 10만',
+      handler: (value: number) =>
+        numPadController.applyShortcut(value, 100_000),
+    },
+    {
+      label: '전체삭제',
+      handler: (_value: number) => numPadController.clearAll(),
+    },
   ],
 
   /** 숫자패드를 눌러서 오른쪽에 숫자 하나를 추가하는 함수 */
@@ -109,4 +105,4 @@ const NumPadController: NumPadControllerType = {
   clearAll: (): number => 0,
 };
 
-export default NumPadController;
+export default numPadController;
