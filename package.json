@@ -11,7 +11,8 @@
     "svgr": "npx @svgr/cli -d src/assets/svgs --typescript --no-dimensions public/svgs",
     "pwa": "pwa-assets-generator --preset minimal public/pwa/react.svg",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest run"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.4.0",
@@ -65,7 +66,8 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-svgr": "^4.3.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.4"
   },
   "eslintConfig": {
     "extends": [
