@@ -65,7 +65,6 @@ function BillFormCard({ index }: BillFormCardProps) {
       />
       <BillFormField
         label="참여자"
-        required
         name={`bills.${index}.participants`}
         control={control}
         subButton={{

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@chakra-ui/react';
 import AddBillStep from './addBillStep';
 
 // NOTE : 페이지 확인용 임시 메인 페이지
@@ -10,9 +11,9 @@ function Create() {
       return (
         <div>
           <h1>정산 페이지</h1>
-          <button type="button" onClick={() => setStep('ADD_BILL')}>
+          <Button type="button" onClick={() => setStep('ADD_BILL')}>
             정산 추가
-          </button>
+          </Button>
         </div>
       );
     case 'ADD_BILL':

@@ -52,7 +52,8 @@ function AddBillStep() {
           <S.HeaderButton>지출 추가</S.HeaderButton>
         </S.Header>
         <S.TopWrapper>
-          <S.MoimName>모임 이름</S.MoimName>
+          {/* TODO : 모임 데이터 저장 방식 논의 후 반영할 것 */}
+          <S.MoimName>DND 7조 첫모임</S.MoimName>
           <S.TopMessage>{`의\n지출 내역을 입력해주세요.`}</S.TopMessage>
         </S.TopWrapper>
         <S.BillFormList>
