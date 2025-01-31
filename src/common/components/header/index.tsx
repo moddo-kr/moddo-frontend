@@ -6,7 +6,7 @@ interface HeaderProps {
   title: string;
   showIcon: boolean;
   type: 'TitleLeft' | 'TitleCenter';
-  handleBackButtonClick: () => void;
+  handleBackButtonClick?: () => void;
 }
 
 function Header({ title, showIcon, type, handleBackButtonClick }: HeaderProps) {
