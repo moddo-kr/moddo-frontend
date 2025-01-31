@@ -1,5 +1,6 @@
 import * as core from "@actions/core"; // https://github.com/actions/toolkit/tree/main/packages/core
 import * as github from "@actions/github"; // https://github.com/actions/toolkit/tree/main/packages/github
+import getIssueNumberFromBranch from "../utils/getIssueNumberFromBranch.js";
 
 /** 메인 액션 함수 */
 const run = async () => {
@@ -11,7 +12,7 @@ const run = async () => {
     const { prNumber, branchName, owner, repo } = getPRContext(context);
 
     // step 1. 이슈 라벨 추출
-    const issueNumber = getIssueNumber(branchName);
+    const issueNumber = getIssueNumberFromBranch();
     if (!issueNumber) {
       core.info("💬 브랜치 이름에 이슈 번호가 없습니다. 액션을 종료합니다.");
       return;
@@ -46,19 +47,6 @@ const getPRContext = (context) => {
   const repo = context.repo.repo;
 
   return { prNumber, branchName, owner, repo };
-};
-
-/**
- * 브랜치 이름에서 이슈 번호를 추출하는 함수
- * @param {string} branchName - 브랜치 이름
- * @returns {number} issueNumber - 이슈 번호
- */
-const getIssueNumber = (branchName) => {
-  const match = branchName.match(/#(\d+)/);
-  if (!match) return;
-
-  const issueNumber = parseInt(match[1], 10);
-  return issueNumber;
 };
 
 /**

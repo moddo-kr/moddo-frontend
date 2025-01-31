@@ -1,0 +1,20 @@
+name: "Zenhub - Move an Issue Between Pipelines"
+description: "Move an issue between pipelines in Zenhub"
+
+inputs:
+  token:
+    description: "GitHub token"
+    required: true
+  zenhub_token:
+    description: "Zenhub token"
+    required: true
+  workspace_id:
+    description: "Zenhub workspace ID"
+    required: true
+  pipeline_id:
+    description: "Zenhub pipeline ID"
+    required: true
+
+runs:
+  using: "node20"
+  main: "index.js"
