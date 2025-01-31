@@ -7,7 +7,7 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'airbnb-typescript',
-    'plugin:react/recommended', 
+    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended', // jsx-a11y 규칙은 웹 접근성을 준수하기 위함
@@ -33,24 +33,26 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off', // React 17 이상에서는 React import 없이 사용 가능
-    '@typescript-eslint/no-unused-vars': [ // typescript에서 사용하지 않는 변수에 대한 경고
-      "error",
+    '@typescript-eslint/no-unused-vars': [
+      // typescript에서 사용하지 않는 변수에 대한 경고
+      'error',
       {
-        "args": "all",
-        "argsIgnorePattern": "^_",
-        "caughtErrors": "all",
-        "caughtErrorsIgnorePattern": "^_", 
-        "destructuredArrayIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "ignoreRestSiblings": true
-      }
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
     ],
     'import/prefer-default-export': 'off', // 단일 export만 있을 때도 default export를 강제하지 않음
     'react/prop-types': 'off', // TypeScript로 PropTypes를 대체하므로 비활성화
     'jsx-a11y/anchor-is-valid': 'off', // react router의 Link 컴포넌트가 a 태그를 대체하므로 비활성화
     'react/jsx-props-no-spreading': 'off', // JSX에서 props 스프레드(...props)를 허용
     'prettier/prettier': ['error'], // Prettier 에러 발생 시 ESLint 에러로 표시
-    'import/no-extraneous-dependencies': [ // devDependencies에 대한 규칙 설정
+    'import/no-extraneous-dependencies': [
+      // devDependencies에 대한 규칙 설정
       'error',
       {
         devDependencies: [
@@ -61,16 +63,24 @@ module.exports = {
           '**/*.stories.tsx', // Storybook 파일 허용
           '**/*.stories.ts', // Storybook 파일 허용
           'src/setupTests.ts', // 테스트 설정 파일 허용
-          "**/mocks/**", // mocks 폴더에서 devDependencies 사용 허용
+          '**/mocks/**', // mocks 폴더에서 devDependencies 사용 허용
         ],
       },
     ],
     'react/require-default-props': 'off', // defaultProps 사용을 권장하지 않음
     'react/no-unescaped-entities': 'off', // 문자열 내에서 특수문자를 이스케이프하지 않아도 됨
+    'import/no-extraneous-dependencies': 'off',
+    'import/extensions': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
   },
   settings: {
     react: {
       version: 'detect', // React 버전 자동 감지
+    },
+    import: {
+      node: {
+        moduleDirectory: ['node_modules', 'src/'],
+      },
     },
   },
   overrides: [
