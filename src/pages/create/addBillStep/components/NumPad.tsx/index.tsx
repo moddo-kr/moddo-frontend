@@ -8,13 +8,22 @@ interface NumPadProps {
 }
 
 function NumPad({ onChange }: NumPadProps) {
+  // TODO : 입력 가능한 최댓값을 제한해야 할듯.
   const [value, setValue] = useState<number>(0);
 
   const { CELLS, SHORTCUTS } = numPadController;
 
   return (
     <S.NumPadContainer>
-      <div>{value === 0 ? '금액 입력' : value.toLocaleString()} 원</div>
+      <S.DisplayWrapper>
+        <S.DisplayDescription>결제 금액</S.DisplayDescription>
+        <S.ValueWrapper>
+          <S.DisplayValue isEmpty={value === 0}>
+            {value === 0 ? '금액입력' : value.toLocaleString()}
+          </S.DisplayValue>
+          <S.DisplayValueUnit>원</S.DisplayValueUnit>
+        </S.ValueWrapper>
+      </S.DisplayWrapper>
       <S.ShortcutWrapper>
         {SHORTCUTS.map((shortcut) => (
           <S.ShortcutButton
