@@ -4,7 +4,7 @@ interface NumPadCellType {
 }
 
 interface NumPadControllerType {
-  CELLS: NumPadCellType[][];
+  CELLS: NumPadCellType[];
   SHORTCUTS: NumPadCellType[];
   addDigit: (value: number, digit: number) => number;
   deleteDigit: (value: number) => number;
@@ -14,62 +14,57 @@ interface NumPadControllerType {
 
 const numPadController: NumPadControllerType = {
   CELLS: [
-    [
-      {
-        label: '1',
-        handler: (value: number) => numPadController.addDigit(value, 1),
-      },
-      {
-        label: '2',
-        handler: (value: number) => numPadController.addDigit(value, 2),
-      },
-      {
-        label: '3',
-        handler: (value: number) => numPadController.addDigit(value, 3),
-      },
-    ],
-    [
-      {
-        label: '4',
-        handler: (value: number) => numPadController.addDigit(value, 4),
-      },
-      {
-        label: '5',
-        handler: (value: number) => numPadController.addDigit(value, 5),
-      },
-      {
-        label: '6',
-        handler: (value: number) => numPadController.addDigit(value, 6),
-      },
-    ],
-    [
-      {
-        label: '7',
-        handler: (value: number) => numPadController.addDigit(value, 7),
-      },
-      {
-        label: '8',
-        handler: (value: number) => numPadController.addDigit(value, 8),
-      },
-      {
-        label: '9',
-        handler: (value: number) => numPadController.addDigit(value, 9),
-      },
-    ],
-    [
-      {
-        label: null,
-        handler: null,
-      },
-      {
-        label: '0',
-        handler: (value: number) => numPadController.addDigit(value, 0),
-      },
-      {
-        label: '←',
-        handler: (value: number) => numPadController.deleteDigit(value),
-      },
-    ],
+    {
+      label: '1',
+      handler: (value: number) => numPadController.addDigit(value, 1),
+    },
+    {
+      label: '2',
+      handler: (value: number) => numPadController.addDigit(value, 2),
+    },
+    {
+      label: '3',
+      handler: (value: number) => numPadController.addDigit(value, 3),
+    },
+
+    {
+      label: '4',
+      handler: (value: number) => numPadController.addDigit(value, 4),
+    },
+    {
+      label: '5',
+      handler: (value: number) => numPadController.addDigit(value, 5),
+    },
+    {
+      label: '6',
+      handler: (value: number) => numPadController.addDigit(value, 6),
+    },
+
+    {
+      label: '7',
+      handler: (value: number) => numPadController.addDigit(value, 7),
+    },
+    {
+      label: '8',
+      handler: (value: number) => numPadController.addDigit(value, 8),
+    },
+    {
+      label: '9',
+      handler: (value: number) => numPadController.addDigit(value, 9),
+    },
+
+    {
+      label: null,
+      handler: null,
+    },
+    {
+      label: '0',
+      handler: (value: number) => numPadController.addDigit(value, 0),
+    },
+    {
+      label: '←',
+      handler: (value: number) => numPadController.deleteDigit(value),
+    },
   ],
 
   SHORTCUTS: [
