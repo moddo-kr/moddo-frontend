@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import BillDatePicker from '../BillDatePicker';
 import BillFormField from '../BillFormField';
+import NumPadBottomSheet from '../NumPadBottomSheet';
 import ParticipantChips from '../ParticipantChips';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
@@ -11,6 +13,7 @@ interface BillFormCardProps {
 
 function BillFormCard({ index }: BillFormCardProps) {
   const { register, control } = useFormContext();
+  const [openNumPad, setOpenNumPad] = useState(false);
 
   return (
     <S.BillFormCard>
@@ -19,8 +22,16 @@ function BillFormCard({ index }: BillFormCardProps) {
       <BillFormField
         label="결제 금액"
         required
-        register={register(`bills.${index}.amount`, { valueAsNumber: true })}
+        control={control}
         name={`bills.${index}.amount`}
+        renderInput={({ field }) => (
+          <NumPadBottomSheet
+            initialInput={field.value}
+            open={openNumPad}
+            setOpen={setOpenNumPad}
+            setInput={(value) => field.onChange(value)}
+          />
+        )}
       />
       <BillFormField
         label="지출 장소 및 내용"

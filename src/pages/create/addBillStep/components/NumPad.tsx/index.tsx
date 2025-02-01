@@ -4,12 +4,14 @@ import numPadController from '../../utils/numPadController';
 import * as S from './index.styles';
 
 interface NumPadProps {
+  initialInput: number;
   onChange: (value: number) => void;
+  onClose?: () => void;
 }
 
-function NumPad({ onChange }: NumPadProps) {
+function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
   // TODO : 입력 가능한 최댓값을 제한해야 할듯.
-  const [value, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(initialInput);
 
   const { CELLS, SHORTCUTS } = numPadController;
 
@@ -58,6 +60,7 @@ function NumPad({ onChange }: NumPadProps) {
         type="button"
         onClick={() => {
           onChange(value);
+          onClose?.();
         }}
       >
         확인
