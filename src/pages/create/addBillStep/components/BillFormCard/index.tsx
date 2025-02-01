@@ -1,32 +1,14 @@
-import { forwardRef } from 'react';
-import { Input } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import Chip from '@/common/components/Chip';
 import BillFormField from '../BillFormField';
+import ReadonlyInput from '../ReadonlyInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
 interface BillFormCardProps {
   index: number;
 }
-
-type InputProps = React.HTMLProps<HTMLInputElement>;
-
-const FormInput = forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onClick, className }, ref) => (
-    <Input
-      width="100%"
-      ref={ref}
-      onClick={onClick}
-      value={value}
-      className={className}
-      readOnly
-    />
-  )
-);
-
-FormInput.displayName = 'FormInput';
 
 function BillFormCard({ index }: BillFormCardProps) {
   const { register, control } = useFormContext();
@@ -58,7 +40,7 @@ function BillFormCard({ index }: BillFormCardProps) {
               selected={field.value}
               onChange={(date) => field.onChange(date)}
               dateFormat="yyyy. MM. dd"
-              customInput={<FormInput />}
+              customInput={<ReadonlyInput />}
             />
           </S.DatePickerWrapper>
         )}
