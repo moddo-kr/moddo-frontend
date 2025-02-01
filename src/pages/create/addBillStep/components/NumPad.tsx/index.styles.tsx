@@ -22,6 +22,7 @@ export const DisplayDescription = styled.span`
 export const ValueWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid #cccccc;
   align-items: flex-end;
 `;
