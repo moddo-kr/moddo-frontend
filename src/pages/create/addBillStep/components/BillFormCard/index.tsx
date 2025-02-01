@@ -1,8 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import DatePicker from 'react-datepicker';
 import Chip from '@/common/components/Chip';
+import BillDatePicker from '../BillDatePicker';
 import BillFormField from '../BillFormField';
-import ReadonlyInput from '../ReadonlyInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -35,14 +34,10 @@ function BillFormCard({ index }: BillFormCardProps) {
         control={control}
         name={`bills.${index}.date`}
         renderInput={({ field }) => (
-          <S.DatePickerWrapper>
-            <DatePicker
-              selected={field.value}
-              onChange={(date) => field.onChange(date)}
-              dateFormat="yyyy. MM. dd"
-              customInput={<ReadonlyInput />}
-            />
-          </S.DatePickerWrapper>
+          <BillDatePicker
+            selected={field.value}
+            onChange={(date) => field.onChange(date)}
+          />
         )}
       />
       <BillFormField

@@ -15,13 +15,6 @@ export const BillFormCardTitle = styled(Card.Title)`
   color: #000000;
 `;
 
-export const DatePickerWrapper = styled.div`
-  width: 100%;
-  .react-datepicker-wrapper {
-    width: 100%;
-  }
-`;
-
 export const ChipContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
