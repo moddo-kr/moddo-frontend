@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Button } from '@chakra-ui/react';
 import numPadController from '../../utils/numPadController';
+import * as S from './index.styles';
 
 interface NumPadProps {
   onChange: (value: number) => void;
@@ -11,11 +13,11 @@ function NumPad({ onChange }: NumPadProps) {
   const { CELLS, SHORTCUTS } = numPadController;
 
   return (
-    <div>
+    <S.NumPadContainer>
       <div>{value === 0 ? '금액 입력' : value.toLocaleString()} 원</div>
-      <div>
+      <S.ShortcutWrapper>
         {SHORTCUTS.map((shortcut) => (
-          <button
+          <S.ShortcutButton
             type="button"
             key={shortcut.label}
             onClick={() => {
@@ -24,37 +26,34 @@ function NumPad({ onChange }: NumPadProps) {
             }}
           >
             {shortcut.label}
-          </button>
+          </S.ShortcutButton>
         ))}
-      </div>
-      <div>
-        {CELLS.map((row, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={`cell-row-${index}`}>
-            {row.map((cell) => (
-              <button
-                type="button"
-                key={cell.label ?? 'empty'}
-                onClick={() => {
-                  if (cell.handler === null) return;
-                  setValue(cell.handler(value));
-                }}
-              >
-                {cell.label}
-              </button>
-            ))}
-          </div>
+      </S.ShortcutWrapper>
+      <S.NumCellWrapper>
+        {CELLS.map((cell) => (
+          <S.NumCellButton
+            type="button"
+            key={cell.label ?? 'empty'}
+            onClick={() => {
+              if (cell.handler === null) return;
+              setValue(cell.handler(value));
+            }}
+          >
+            {cell.label}
+          </S.NumCellButton>
         ))}
-      </div>
-      <button
+      </S.NumCellWrapper>
+      {/* NOTE: 임시 버튼.. */}
+      <Button
+        w="100%"
         type="button"
         onClick={() => {
           onChange(value);
         }}
       >
         확인
-      </button>
-    </div>
+      </Button>
+    </S.NumPadContainer>
   );
 }
 
