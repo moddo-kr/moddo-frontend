@@ -8,7 +8,7 @@ import {
   UseFormRegisterReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
-import * as S from '../styles/BillFormField.styles';
+import * as S from './index.styles';
 
 interface RenderInputProps {
   field: ControllerRenderProps<FieldValues, string>;

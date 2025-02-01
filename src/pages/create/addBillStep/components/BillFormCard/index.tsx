@@ -3,9 +3,9 @@ import { Input } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import Chip from '@/common/components/Chip';
-import BillFormField from './BillFormField';
+import BillFormField from '../BillFormField';
 import 'react-datepicker/dist/react-datepicker.css';
-import * as S from '../styles/BillFormCard.styles';
+import * as S from './index.styles';
 
 interface BillFormCardProps {
   index: number;
