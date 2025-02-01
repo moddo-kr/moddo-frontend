@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import Chip from '@/common/components/Chip';
 import BillDatePicker from '../BillDatePicker';
 import BillFormField from '../BillFormField';
+import ParticipantChips from '../ParticipantChips';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -49,22 +49,15 @@ function BillFormCard({ index }: BillFormCardProps) {
           onClick: () => console.log('참여자 추가 바텀시트 등장'),
         }}
         renderInput={({ field }) => (
-          <S.ChipContainer>
-            {field.value.map((participantName: string) => (
-              <Chip
-                key={participantName}
-                label={participantName}
-                closable
-                onClose={() =>
-                  field.onChange(
-                    field.value.filter(
-                      (name: string) => name !== participantName
-                    )
-                  )
-                }
-              />
-            ))}
-          </S.ChipContainer>
+          <ParticipantChips
+            participants={field.value}
+            onDelete={(participantName) => {
+              const newParticipants = field.value.filter(
+                (name: string) => name !== participantName
+              );
+              field.onChange(newParticipants);
+            }}
+          />
         )}
       />
     </S.BillFormCard>
