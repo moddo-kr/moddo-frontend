@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { VStack } from '@chakra-ui/react';
 import BillFormCard from './components/BillFormCard';
-import * as S from './styles/index.styles';
+import * as S from './index.styles';
 
 const BillsFormSchema = z.object({
   bills: z.array(
