@@ -18,7 +18,6 @@ function BillFormCard({ index }: BillFormCardProps) {
   return (
     <S.BillFormCard>
       <S.BillFormCardTitle>1차</S.BillFormCardTitle>
-      {/* TODO: Controller */}
       <BillFormField
         label="결제 금액"
         required
