@@ -30,7 +30,7 @@ function NumPadBottomSheet({
       <DrawerBackdrop />
       <DrawerTrigger asChild>
         <S.ValueWrapper>
-          <S.DisplayValue isEmpty={initialInput === 0}>
+          <S.DisplayValue $isEmpty={initialInput === 0}>
             {initialInput === 0 ? '금액입력' : initialInput.toLocaleString()}
           </S.DisplayValue>
           <S.DisplayValueUnit>원</S.DisplayValueUnit>

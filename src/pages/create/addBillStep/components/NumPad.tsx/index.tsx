@@ -20,7 +20,7 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
       <S.DisplayWrapper>
         <S.DisplayDescription>결제 금액</S.DisplayDescription>
         <S.ValueWrapper>
-          <S.DisplayValue isEmpty={value === 0}>
+          <S.DisplayValue $isEmpty={value === 0}>
             {value === 0 ? '금액입력' : value.toLocaleString()}
           </S.DisplayValue>
           <S.DisplayValueUnit>원</S.DisplayValueUnit>
