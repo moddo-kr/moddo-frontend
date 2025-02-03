@@ -1,9 +1,9 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { ErrorText } from '../index.styles';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
+import { ErrorText } from '../index.styles';
 // import { useNavigate } from 'react-router-dom';
 import Header from '@/common/components/header';
 

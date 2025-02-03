@@ -7,9 +7,9 @@ import PasswordSetup from '@/pages/groupSetup/passwordSetup';
 function Router() {
   return (
     <Routes>
-      <Route path={ROUTE.SELECT_GROUP()} element={<SelectGroup />} />
-      <Route path={ROUTE.GROUP_SETUP_NAME()} element={<GroupNameSetup />} />
-      <Route path={ROUTE.GROUP_SETUP_PASSWORD()} element={<PasswordSetup />} />
+      <Route path={ROUTE.selectGroup} element={<SelectGroup />} />
+      <Route path={ROUTE.groupSetupName} element={<GroupNameSetup />} />
+      <Route path={ROUTE.groupSetupPassword} element={<PasswordSetup />} />
     </Routes>
   );
 }

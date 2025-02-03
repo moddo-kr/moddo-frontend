@@ -61,7 +61,7 @@ function SelectGroup() {
         <Button
           height={12}
           borderRadius={12}
-          onClick={() => navigate(ROUTE.GROUP_SETUP_NAME())}
+          onClick={() => navigate(ROUTE.groupSetupName)}
         >
           다음
         </Button>

@@ -1,11 +1,12 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import { ErrorText } from '../index.styles';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Header from '@/common/components/header';
+import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
+import { ErrorText } from '../index.styles';
+import { ROUTE } from '@/common/constants/route';
 
 const groupNameSchema = z.object({
   groupName: z
@@ -29,7 +30,7 @@ function GroupNameSetup() {
 
   const onNext = (data: { groupName: string }) => {
     setGroupName(data.groupName);
-    navigate('/groupSetup/password');
+    navigate(ROUTE.groupSetupPassword);
   };
 
   return (
