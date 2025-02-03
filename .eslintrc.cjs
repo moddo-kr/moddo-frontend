@@ -79,6 +79,12 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    '@typescript-eslint/no-empty-interface': [
+      'error',
+      {
+        allowSingleExtends: true, // 확장만 하는 빈 인터페이스는 허용
+      },
+    ],
   },
   settings: {
     react: {
