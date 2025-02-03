@@ -1,6 +1,6 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import GlobalStyles from '@/styles/globalStyles';
-import Router from '@/common/route/Router';
+import Router from '@/Router';
 import Layout from '@/common/components/layout';
 
 function App() {
