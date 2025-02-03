@@ -69,17 +69,28 @@ module.exports = {
     ],
     'react/require-default-props': 'off', // defaultProps 사용을 권장하지 않음
     'react/no-unescaped-entities': 'off', // 문자열 내에서 특수문자를 이스케이프하지 않아도 됨
-    'import/no-extraneous-dependencies': 'off',
-    'import/extensions': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
+    'import/extensions': [
+      // import 시 확장자를 생략할 수 있도록 함
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     react: {
       version: 'detect', // React 버전 자동 감지
     },
-    import: {
+    'import/resolver': {
       node: {
-        moduleDirectory: ['node_modules', 'src/'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+      typescript: {
+        alwaysTryTypes: true,
+        project: './tsconfig.json', // tsconfig.json을 기준으로 해석
       },
     },
   },

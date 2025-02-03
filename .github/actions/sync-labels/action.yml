@@ -1,9 +1,11 @@
 name: "Sync Labels from Issues to PR"
 description: "Sync labels from linked issues to pull requests"
+
 inputs:
   token:
     description: "GitHub token for API access"
     required: true
+
 runs:
   using: "node20"
-  main: "dist/index.js"
+  main: "index.js"

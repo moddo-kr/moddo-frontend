@@ -1,14 +1,13 @@
 {
   "name": "sync-pr-labels-action",
   "description": "Sync PR labels with linked issues",
+  "type": "module",
   "scripts": {
     "build": "ncc build src/index.js -o dist"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
-  },
-  "devDependencies": {
-    "@vercel/ncc": "^0.38.3"
+    "@actions/github": "^6.0.0",
+    "axios": "^1.7.9"
   }
 }
