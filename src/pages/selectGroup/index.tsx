@@ -11,7 +11,10 @@ function SelectGroup() {
 
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (index: number) => {
+    if (selectedButton === index) {
+      return;
+    }
     setSelectedButton((prev) => (prev === 0 ? 1 : 0));
   };
 
@@ -41,14 +44,14 @@ function SelectGroup() {
           <Flex gap="6" direction="row">
             <S.SelectButton
               selected={selectedButton === 0}
-              onClick={handleButtonClick}
+              onClick={() => handleButtonClick(0)}
             >
               <SelectNewGroupIcon width={44} />
               새로 생성
             </S.SelectButton>
             <S.SelectButton
               selected={selectedButton === 1}
-              onClick={handleButtonClick}
+              onClick={() => handleButtonClick(1)}
             >
               <SelectRecentGroupIcon width={44} />
               기존 모임
@@ -58,7 +61,7 @@ function SelectGroup() {
         <Button
           height={12}
           borderRadius={12}
-          onClick={() => navigate(ROUTE.PASSWORD_SETUP())}
+          onClick={() => navigate(ROUTE.GROUP_SETUP_NAME())}
         >
           다음
         </Button>
