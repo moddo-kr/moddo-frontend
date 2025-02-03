@@ -67,4 +67,4 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
   };
 };
 
-export { useFunnel };
+export default useFunnel;
