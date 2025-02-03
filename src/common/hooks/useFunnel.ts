@@ -35,10 +35,13 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
   );
 
   /** public - 다음 단계로 이동하는 함수 */
-  const moveToNextStep = (newContextData: Partial<T>) => {
+  const moveToNextStep = (newContextData: T) => {
     const currentStepIndex = findStepIndex(steps, currentStep);
-    // 마지막 단계인 경우에는 이동하지 않는다.
-    if (currentStepIndex === steps.length - 1) return;
+    // 마지막 단계인 경우에는 Context만 업데이트한다.
+    if (currentStepIndex === steps.length - 1) {
+      setContext({ ...context, ...newContextData });
+      return;
+    }
 
     const nextStepIndex = currentStepIndex + 1;
     const nextStep = steps[nextStepIndex];
