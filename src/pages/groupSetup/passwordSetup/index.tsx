@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import { ErrorText } from '../index.styles';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/common/components/header';
 
 const passwordSchema = z.object({
@@ -26,7 +26,7 @@ function PasswordSetup() {
     mode: 'onChange',
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onNext = (data: { password: string }) => {
     setPassword(data.password);
@@ -35,7 +35,7 @@ function PasswordSetup() {
 
   return (
     <>
-      <Header title="" showIcon={false} type="TitleLeft" />
+      <Header title="" showIcon type="TitleLeft" handleBackButtonClick={() => navigate(-1)}/>
       <Flex
         direction="column"
         justify="space-between"

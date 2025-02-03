@@ -8,7 +8,7 @@ export const LeftHeaderArea = styled.div`
   max-height: 64px;
   align-items: center;
   position: sticky;
-  background-color: #fdfdfd;
+  background-color: #fff;
   top: 0;
   left: 0;
   z-index: 1000;
