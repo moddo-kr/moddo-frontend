@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { ExpenseMember } from '@/pages/create/types/expense.type';
 import BillDatePicker from '../BillDatePicker';
 import BillFormField from '../BillFormField';
 import NumPadBottomSheet from '../NumPadBottomSheet';
@@ -22,7 +23,7 @@ function BillFormCard({ index }: BillFormCardProps) {
         label="결제 금액"
         required
         control={control}
-        name={`bills.${index}.amount`}
+        name={`expenses.${index}.amount`}
         renderInput={({ field }) => (
           <NumPadBottomSheet
             initialInput={field.value}
@@ -35,14 +36,14 @@ function BillFormCard({ index }: BillFormCardProps) {
       <BillFormField
         label="지출 장소 및 내용"
         required
-        register={register(`bills.${index}.place`)}
-        name={`bills.${index}.place`}
+        register={register(`expenses.${index}.content`)}
+        name={`expenses.${index}.content`}
         placeholder="ex. 투썸플레이스"
       />
       <BillFormField
         label="지출일"
         control={control}
-        name={`bills.${index}.date`}
+        name={`expenses.${index}.date`}
         renderInput={({ field }) => (
           <BillDatePicker
             selected={field.value}
@@ -52,7 +53,7 @@ function BillFormCard({ index }: BillFormCardProps) {
       />
       <BillFormField
         label="참여자"
-        name={`bills.${index}.participants`}
+        name={`expenses.${index}.memberExpenses`}
         control={control}
         subButton={{
           label: '참여자 추가',
@@ -63,7 +64,8 @@ function BillFormCard({ index }: BillFormCardProps) {
             participants={field.value}
             onDelete={(participantName) => {
               const newParticipants = field.value.filter(
-                (name: string) => name !== participantName
+                (participant: ExpenseMember) =>
+                  participant.name !== participantName
               );
               field.onChange(newParticipants);
             }}

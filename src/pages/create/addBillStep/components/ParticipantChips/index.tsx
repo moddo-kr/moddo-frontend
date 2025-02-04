@@ -1,20 +1,21 @@
 import Chip from '@/common/components/Chip';
+import { ExpenseMember } from '@/pages/create/types/expense.type';
 import * as S from './index.styles';
 
 interface ParticipantChipsProps {
-  participants: string[];
+  participants: ExpenseMember[];
   onDelete: (participantName: string) => void;
 }
 
 function ParticipantChips({ participants, onDelete }: ParticipantChipsProps) {
   return (
     <S.ChipContainer>
-      {participants.map((participantName: string) => (
+      {participants.map((participant: ExpenseMember) => (
         <Chip
-          key={participantName}
-          label={participantName}
+          key={participant.id}
+          label={participant.name}
           closable
-          onClose={() => onDelete(participantName)}
+          onClose={() => onDelete(participant.name)}
         />
       ))}
     </S.ChipContainer>
