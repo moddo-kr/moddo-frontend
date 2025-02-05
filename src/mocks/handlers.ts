@@ -1,1 +1,3 @@
-export const handlers = [];
+import expenseHandlers from './handlers/expense';
+
+export const handlers = [...expenseHandlers];
