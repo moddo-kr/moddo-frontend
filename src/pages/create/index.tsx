@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
-import AddBillStep from './addBillStep';
+import AddExpenseStep from './addExpenseStep';
 
 // NOTE : 페이지 확인용 임시 메인 페이지
 function Create() {
@@ -17,7 +17,7 @@ function Create() {
         </div>
       );
     case 'ADD_BILL':
-      return <AddBillStep />;
+      return <AddExpenseStep />;
     default:
       return null;
   }

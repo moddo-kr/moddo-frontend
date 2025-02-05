@@ -2,7 +2,7 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { VStack } from '@chakra-ui/react';
 import { Expense, ExpenseFormSchema } from '@/pages/create/types/expense.type';
-import BillFormCard from './components/BillFormCard';
+import BillFormCard from './components/FormCard';
 import * as S from './index.styles';
 
 const defaultValues: Expense = {
@@ -19,7 +19,7 @@ const defaultValues: Expense = {
   ],
 };
 
-function AddBillStep() {
+function AddExpenseStep() {
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
@@ -34,8 +34,6 @@ function AddBillStep() {
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
-
-  console.log(formState.errors);
 
   // 임시...
   const onFormSubmit = (data: any) => {
@@ -71,4 +69,4 @@ function AddBillStep() {
   );
 }
 
-export default AddBillStep;
+export default AddExpenseStep;

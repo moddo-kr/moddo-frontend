@@ -1,25 +1,25 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ExpenseMember } from '@/pages/create/types/expense.type';
-import BillDatePicker from '../BillDatePicker';
-import BillFormField from '../BillFormField';
+import BillDatePicker from '../DatePicker';
+import FormField from '../FormField';
 import NumPadBottomSheet from '../NumPadBottomSheet';
-import ParticipantChips from '../ParticipantChips';
+import MemberChips from '../MemberChips';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
-interface BillFormCardProps {
+interface FormCardProps {
   index: number;
 }
 
-function BillFormCard({ index }: BillFormCardProps) {
+function FormCard({ index }: FormCardProps) {
   const { register, control } = useFormContext();
   const [openNumPad, setOpenNumPad] = useState(false);
 
   return (
-    <S.BillFormCard>
-      <S.BillFormCardTitle>1차</S.BillFormCardTitle>
-      <BillFormField
+    <S.FormCard>
+      <S.FormCardTitle>1차</S.FormCardTitle>
+      <FormField
         label="결제 금액"
         required
         control={control}
@@ -33,14 +33,14 @@ function BillFormCard({ index }: BillFormCardProps) {
           />
         )}
       />
-      <BillFormField
+      <FormField
         label="지출 장소 및 내용"
         required
         register={register(`expenses.${index}.content`)}
         name={`expenses.${index}.content`}
         placeholder="ex. 투썸플레이스"
       />
-      <BillFormField
+      <FormField
         label="지출일"
         control={control}
         name={`expenses.${index}.date`}
@@ -51,7 +51,7 @@ function BillFormCard({ index }: BillFormCardProps) {
           />
         )}
       />
-      <BillFormField
+      <FormField
         label="참여자"
         name={`expenses.${index}.memberExpenses`}
         control={control}
@@ -60,20 +60,19 @@ function BillFormCard({ index }: BillFormCardProps) {
           onClick: () => console.log('참여자 추가 바텀시트 등장'),
         }}
         renderInput={({ field }) => (
-          <ParticipantChips
-            participants={field.value}
-            onDelete={(participantName) => {
-              const newParticipants = field.value.filter(
-                (participant: ExpenseMember) =>
-                  participant.name !== participantName
+          <MemberChips
+            members={field.value}
+            onDelete={(name) => {
+              const newMembers = field.value.filter(
+                (member: ExpenseMember) => member.name !== name
               );
-              field.onChange(newParticipants);
+              field.onChange(newMembers);
             }}
           />
         )}
       />
-    </S.BillFormCard>
+    </S.FormCard>
   );
 }
 
-export default BillFormCard;
+export default FormCard;
