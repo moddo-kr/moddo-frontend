@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import SelectGroup from '@/pages/selectGroup';
 import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Header from '@/common/components/header';
 import * as S from './index.styles';
 import { SelectNewGroupIcon, SelectRecentGroupIcon } from '@/assets/svgs';

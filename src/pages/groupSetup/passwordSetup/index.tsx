@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import { ErrorText } from '../index.styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Header from '@/common/components/header';
 
 const passwordSchema = z.object({
