@@ -1,7 +1,7 @@
 import { GoBackIcon } from '@/assets/svgs';
-import * as S from '@/common/components/header/index.styles';
+import * as S from '@/common/components/Header/index.styles';
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string;
   showIcon: boolean;
   type: 'TitleLeft' | 'TitleCenter';

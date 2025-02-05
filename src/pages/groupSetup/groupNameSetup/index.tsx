@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import Header from '@/common/components/header';
+import Header from '@/common/components/Header';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import { ErrorText } from '../index.styles';
 import { ROUTE } from '@/common/constants/route';
