@@ -24,6 +24,7 @@ export const CenterHeaderArea = styled(HeaderArea)`
 `;
 
 export const TitleArea = styled.h2`
+  all: unset;
   font-size: 1.25rem; // 20px
   font-weight: 600;
   line-height: 1;
@@ -38,10 +39,10 @@ export const CenterTitleArea = styled(TitleArea)`
 `;
 
 export const IconWrapper = styled.button`
-  width: fit-content;
-  height: fit-content;
-  cursor: pointer;
   all: unset;
+  width: 0.5rem; // 8px
+  height: 1rem; // 16px
+  cursor: pointer;
 `;
 
 export const DummyIcon = styled.div`
