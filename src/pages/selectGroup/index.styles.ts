@@ -1,12 +1,21 @@
 import styled from 'styled-components';
 
-export const SmallContent = styled.h1`
-  font-size: 16px;
+export const H1 = styled.h1`
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 7.5rem; // 120px
+  gap: 0.25rem;
+`;
+
+export const SmallContent = styled.span`
+  font-size: 1rem;
   font-weight: 500;
 `;
 
-export const MainContent = styled.h1`
-  font-size: 24px;
+export const MainContent = styled.span`
+  font-size: 1.5rem; // 24px
   font-weight: 600;
 `;
 
@@ -15,7 +24,7 @@ export const SelectButton = styled.button<{ selected: boolean }>`
   @media (min-width: 600px) {
     font-size: 22px;
   }
-  height: 192px;
+  height: 12rem; // 192px
   background-color: #f5f5f5;
   border-radius: 12px;
   font-size: 20px;
@@ -25,5 +34,5 @@ export const SelectButton = styled.button<{ selected: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem; // 12px
 `;

@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
-import Header from '@/common/components/header';
+import Header from '@/common/components/Header';
 import * as S from './index.styles';
 import { SelectNewGroupIcon, SelectRecentGroupIcon } from '@/assets/svgs';
 import { ROUTE } from '@/common/constants/route';
 
+type SelectedValueType = 'CREATE' | 'RECENT';
+
 function SelectGroup() {
-  const [selectedButton, setSelectedButton] = useState(0);
+  const [selectedValue, setSelectedValue] =
+    useState<SelectedValueType>('CREATE');
 
   const navigate = useNavigate();
 
-  const handleButtonClick = (index: number) => {
-    if (selectedButton === index) {
+  const handleButtonClick = (value: SelectedValueType) => {
+    if (selectedValue === value) {
       return;
     }
-    setSelectedButton((prev) => (prev === 0 ? 1 : 0));
+    setSelectedValue(value);
   };
 
   return (
@@ -37,21 +40,21 @@ function SelectGroup() {
         flexGrow={1}
       >
         <main>
-          <Flex gap="2" direction="column" justify="flex-start" pb="120px">
+          <S.H1>
             <S.SmallContent>정산을 시작하려는</S.SmallContent>
             <S.MainContent>모임을 선택해 주세요</S.MainContent>
-          </Flex>
+          </S.H1>
           <Flex gap="6" direction="row">
             <S.SelectButton
-              selected={selectedButton === 0}
-              onClick={() => handleButtonClick(0)}
+              selected={selectedValue === 'CREATE'}
+              onClick={() => handleButtonClick('CREATE')}
             >
               <SelectNewGroupIcon width={44} />
               새로 생성
             </S.SelectButton>
             <S.SelectButton
-              selected={selectedButton === 1}
-              onClick={() => handleButtonClick(1)}
+              selected={selectedValue === 'RECENT'}
+              onClick={() => handleButtonClick('RECENT')}
             >
               <SelectRecentGroupIcon width={44} />
               기존 모임
