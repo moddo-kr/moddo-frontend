@@ -102,7 +102,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.cjs', 'public/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
+      files: ['.eslintrc.cjs', 'public/**', 'src/assets/svgs/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
       parserOptions: {
         project: null, // TypeScript 타입 검사 비활성화
       },
