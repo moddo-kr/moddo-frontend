@@ -2,10 +2,11 @@ import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
-import { ErrorText } from '../index.styles';
 import { useNavigate } from 'react-router';
-import Header from '@/common/components/header';
+import { ErrorText } from '../index.styles';
+
+import { useGroupSetupStore } from '../stores/useGroupSetupStore';
+import Header from '@/common/components/Header';
 
 const passwordSchema = z.object({
   password: z
@@ -35,7 +36,12 @@ function PasswordSetup() {
 
   return (
     <>
-      <Header title="" showIcon type="TitleLeft" handleBackButtonClick={() => navigate(-1)}/>
+      <Header
+        title=""
+        showIcon
+        type="TitleLeft"
+        handleBackButtonClick={() => navigate(-1)}
+      />
       <Flex
         direction="column"
         justify="space-between"
@@ -55,6 +61,8 @@ function PasswordSetup() {
             borderRadius={12}
             placeholder="4자리 숫자 입력"
             fontSize={16}
+            type="number"
+            inputMode="numeric"
             py={3}
             height={12}
             {...register('password')}
