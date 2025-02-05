@@ -1,65 +1,51 @@
 import styled from 'styled-components';
 
-export const LeftHeaderArea = styled.div`
+export const HeaderArea = styled.header`
   display: flex;
-  width: 100%;
-  min-width: 320px;
-  height: 100%;
-  max-height: 64px;
   align-items: center;
   position: sticky;
   background-color: #fff;
   top: 0;
   left: 0;
   z-index: 1000;
-  padding: 28px 22px;
-  gap: 15px;
+  padding: 1.75rem 1.375rem; // 28px 22px
+  width: 100%;
+  min-width: 320px;
+  max-height: 64px;
+  height: 100%;
 `;
 
-export const IconWrapper = styled.div`
+export const LeftHeaderArea = styled(HeaderArea)`
+  gap: 1rem;
+`;
+
+export const CenterHeaderArea = styled(HeaderArea)`
+  justify-content: space-between;
+`;
+
+export const TitleArea = styled.h2`
+  font-size: 1.25rem; // 20px
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+`;
+
+export const CenterTitleArea = styled(TitleArea)`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+export const IconWrapper = styled.button`
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  all: unset;
 `;
 
 export const DummyIcon = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem; // 24px
+  height: 1.5rem; // 24px
   visibility: hidden;
-`;
-
-export const LeftTitleArea = styled.div`
-  text-align: center;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 1;
-`;
-
-export const CenterHeaderArea = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  width: 100%;
-  min-width: 320px;
-  height: 100%;
-  max-height: 64px;
-  background-color: #fdfdfd;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  padding: 28px 22px;
-  border-bottom: 1px solid #f0f0f0;
-`;
-
-export const CenterTitleArea = styled.div`
-  position: absolute;
-  text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
 `;

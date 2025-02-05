@@ -24,7 +24,7 @@ function Header({ title, showIcon, type, handleBackButtonClick }: HeaderProps) {
               <S.DummyIcon />
             )}
           </S.IconWrapper>
-          <S.LeftTitleArea>{title}</S.LeftTitleArea>
+          <S.TitleArea>{title}</S.TitleArea>
         </S.LeftHeaderArea>
       );
     case 'TitleCenter':
