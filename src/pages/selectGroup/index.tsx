@@ -1,0 +1,76 @@
+import { useState } from 'react';
+import { Button, Flex } from '@chakra-ui/react';
+import { useNavigate } from 'react-router';
+import Header from '@/common/components/Header';
+import * as S from './index.styles';
+import { SelectNewGroupIcon, SelectRecentGroupIcon } from '@/assets/svgs';
+import { ROUTE } from '@/common/constants/route';
+
+type SelectedValueType = 'CREATE' | 'RECENT';
+
+function SelectGroup() {
+  const [selectedValue, setSelectedValue] =
+    useState<SelectedValueType>('CREATE');
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = (value: SelectedValueType) => {
+    if (selectedValue === value) {
+      return;
+    }
+    setSelectedValue(value);
+  };
+
+  return (
+    <>
+      {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
+      <Header
+        title="모임 선택"
+        showIcon
+        type="TitleLeft"
+        handleBackButtonClick={() => console.log('뒤로가기 클릭')}
+      />
+      <Flex
+        direction="column"
+        justify="space-between"
+        mx="5"
+        height="100%"
+        mt="10px"
+        mb="32px"
+        flexGrow={1}
+      >
+        <main>
+          <S.H1>
+            <S.SmallContent>정산을 시작하려는</S.SmallContent>
+            <S.MainContent>모임을 선택해 주세요</S.MainContent>
+          </S.H1>
+          <Flex gap="6" direction="row">
+            <S.SelectButton
+              selected={selectedValue === 'CREATE'}
+              onClick={() => handleButtonClick('CREATE')}
+            >
+              <SelectNewGroupIcon width={44} />
+              새로 생성
+            </S.SelectButton>
+            <S.SelectButton
+              selected={selectedValue === 'RECENT'}
+              onClick={() => handleButtonClick('RECENT')}
+            >
+              <SelectRecentGroupIcon width={44} />
+              기존 모임
+            </S.SelectButton>
+          </Flex>
+        </main>
+        <Button
+          height={12}
+          borderRadius={12}
+          onClick={() => navigate(ROUTE.groupSetupName)}
+        >
+          다음
+        </Button>
+      </Flex>
+    </>
+  );
+}
+
+export default SelectGroup;

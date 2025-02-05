@@ -79,6 +79,12 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    '@typescript-eslint/no-empty-interface': [
+      'error',
+      {
+        allowSingleExtends: true, // 확장만 하는 빈 인터페이스는 허용
+      },
+    ],
   },
   settings: {
     react: {
@@ -96,7 +102,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.cjs', 'public/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
+      files: ['.eslintrc.cjs', 'public/**', 'src/assets/svgs/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
       parserOptions: {
         project: null, // TypeScript 타입 검사 비활성화
       },
