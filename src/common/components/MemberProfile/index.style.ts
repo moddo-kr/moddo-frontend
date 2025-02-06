@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const ProfileImg = styled.img<{ bgColor: string }>`
+export const ProfileImg = styled.img<{ bgcolor: string }>`
   width: 3rem;
   height: 3rem;
   object-fit: contain;
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ bgcolor }) => bgcolor};
   border-radius: 50%;
 `;
 
