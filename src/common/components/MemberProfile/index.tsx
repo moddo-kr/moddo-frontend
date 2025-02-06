@@ -8,31 +8,40 @@ import { useMemo } from 'react';
 
 interface MemberProfileProps {
   member: Member;
-  index: number;
-  handleDeleteButtonClick: (index: number) => void;
+  handleDeleteButtonClick: (id: string) => void;
 }
 
 function MemberProfile({
   member,
-  index,
   handleDeleteButtonClick,
 }: MemberProfileProps) {
-  
+  // useMemo를 사용하여 부모 컴포넌트의 리렌더링에도 불필요하게 새로운 색상이 생성되지 않도록 함
   const profileBgColor = useMemo(() => getRandomColor(), []);
 
   return (
-    <Flex key={index} gap={1} direction="column" alignItems="center" width="fit-content">
+    <Flex
+      key={member.id}
+      gap={1}
+      direction="column"
+      alignItems="center"
+      width="fit-content"
+      py={2}
+    >
       <S.ProfileWrapper>
-        <S.DeleteButton onClick={() => handleDeleteButtonClick(index)}>
-          <DeleteButtonIcon width="1.1rem" height="1.1rem"/>
-        </S.DeleteButton>
+        {member.role !== 'treasurer' && (
+          <S.DeleteButton onClick={() => handleDeleteButtonClick(member.id)}>
+            <DeleteButtonIcon width="1.1rem" height="1.1rem" />
+          </S.DeleteButton>
+        )}
         <S.ProfileImg
           src={defaultProfileImg}
           alt="profile"
-          bgColor={profileBgColor}
+          bgcolor={profileBgColor}
         />
       </S.ProfileWrapper>
-      <Text fontSize={12} lineHeight="1.5">{member.name}</Text>
+      <Text fontSize={12} lineHeight="1.5">
+        {member.name}
+      </Text>
     </Flex>
   );
 }

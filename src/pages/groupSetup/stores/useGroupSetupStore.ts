@@ -7,7 +7,7 @@ interface GroupSetupState {
   members: Member[];
   setGroupName: (groupName: string) => void;
   setPassword: (password: string) => void;
-  setMembers: (members: {name: string}[]) => void;
+  setMembers: (members: Member[]) => void;
 }
 
 export const useGroupSetupStore = create<GroupSetupState>((set) => ({
