@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,7 +35,12 @@ function GroupNameSetup() {
 
   return (
     <>
-      <Header title="" showIcon={false} type="TitleLeft" />
+      <Header
+        title=""
+        showIcon={false}
+        type="TitleLeft"
+        handleBackButtonClick={() => navigate(-1)}
+      />
       <Flex
         direction="column"
         justify="space-between"

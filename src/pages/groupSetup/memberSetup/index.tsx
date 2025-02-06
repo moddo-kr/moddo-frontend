@@ -1,16 +1,9 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex} from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import * as S from '../index.styles';
-import { ROUTE } from '@/common/constants/route';
 import Header from '@/common/components/Header';
-import { useState } from 'react';
-import AddParticipant from '@/common/components/AddMember';
 import AddMember from '@/common/components/AddMember';
+import { ROUTE } from '@/common/constants/route';
 
 export interface ParticipantProfile {
   name: string;
@@ -40,7 +33,7 @@ function MemberSetup() {
           </S.TitleText>
           <AddMember />
         </Flex>
-        <Button height={12} borderRadius={12}>
+        <Button height={12} borderRadius={12} onClick={() => navigate(ROUTE.create)}>
           다음
         </Button>
       </Flex>

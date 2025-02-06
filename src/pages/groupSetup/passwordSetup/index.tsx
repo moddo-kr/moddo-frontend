@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -32,7 +32,7 @@ function PasswordSetup() {
 
   const onNext = (data: { password: string }) => {
     setPassword(data.password);
-    navigate(ROUTE.groupSetupPaticipants);
+    navigate(ROUTE.groupSetupMember);
   };
 
   return (
