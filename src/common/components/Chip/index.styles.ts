@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Chip = styled.span`
+export const Chip = styled.span<{ $variant?: 'gray' | 'white' }>`
   display: flex;
   height: 2rem;
   padding: 0.3125rem 0.75rem;
@@ -8,7 +8,8 @@ export const Chip = styled.span`
   align-items: center;
   gap: 0.25rem;
   border-radius: 624.9375rem;
-  background: #f1f3f5;
+  background: ${({ $variant }) =>
+    $variant === 'white' ? '#ffffff' : '#f1f3f5'};
 `;
 
 export const CloseButton = styled.button`
