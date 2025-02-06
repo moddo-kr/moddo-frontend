@@ -17,9 +17,14 @@ export const ExpenseFormSchema = z.object({
   expenses: z.array(ExpenseSchema),
 });
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ExpenseMember extends z.infer<typeof ExpenseMemberSchema> {}
 
 export interface Expense extends z.infer<typeof ExpenseSchema> {
+  id: number;
   memberExpenses: ExpenseMember[];
+}
+
+// NOTE : API 스펙 미정이므로 임시 타입
+export interface ExpenseList {
+  expenses: Expense[];
 }

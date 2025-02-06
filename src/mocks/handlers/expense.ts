@@ -16,6 +16,7 @@ const expenseHandlers = [
     return HttpResponse.json({
       expenses: [
         {
+          id: 1,
           amount: 100000,
           content: '하이디라오',
           date: '2025-02-03',
@@ -33,6 +34,7 @@ const expenseHandlers = [
           ],
         },
         {
+          id: 2,
           amount: 20000,
           content: '카페',
           date: '2025-02-03',

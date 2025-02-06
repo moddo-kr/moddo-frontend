@@ -5,7 +5,7 @@ import { Expense, ExpenseFormSchema } from '@/pages/create/types/expense.type';
 import BillFormCard from './components/FormCard';
 import * as S from './index.styles';
 
-const defaultValues: Expense = {
+const defaultValues: Omit<Expense, 'id'> = {
   amount: 0,
   content: '',
   date: new Date(),
