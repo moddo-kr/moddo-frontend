@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Header from '@/common/components/Header';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
-import { ErrorText } from '../index.styles';
+import * as S from '../index.styles';
 import { ROUTE } from '@/common/constants/route';
 
 const groupNameSchema = z.object({
@@ -46,11 +46,11 @@ function GroupNameSetup() {
         flexGrow={1}
       >
         <Flex direction="column">
-          <Text fontSize={20} whiteSpace="pre-wrap" fontWeight={600} mb={8}>
+          <S.TitleText>
             모임 이름을
             <br />
             입력해주세요.
-          </Text>
+          </S.TitleText>
           <Input
             borderRadius={12}
             placeholder="DND 7조 첫모임"
@@ -61,7 +61,7 @@ function GroupNameSetup() {
             mb={4}
           />
           {errors.groupName && (
-            <ErrorText>* {errors.groupName?.message?.toString()}</ErrorText>
+            <S.ErrorText>* {errors.groupName?.message?.toString()}</S.ErrorText>
           )}
         </Flex>
         <Button
