@@ -15,8 +15,8 @@ export const InputContainer = styled.div`
   align-items: center;
   gap: 0.5rem;
   align-self: stretch;
-  border-radius: var(--border-radius-default, 0.75rem);
-  border: 1px solid var(--border-default, #d2d4d5);
-  background: var(--background-normal-default, #fff);
+  border-radius: 0.75rem;
+  border: 1px solid #d2d4d5;
+  background: #fff;
   color: #444950;
 `;

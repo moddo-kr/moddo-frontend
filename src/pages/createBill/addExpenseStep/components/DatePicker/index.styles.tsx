@@ -18,7 +18,7 @@ export const DatePickerWrapper = styled.div`
   // 달력 전체 영역
   .react-datepicker {
     border-radius: 0.75rem;
-    border: 1px solid var(--border-default, #d2d4d5);
+    border: 1px solid #d2d4d5;
     background: #fff;
     box-shadow: 3px 4px 7.5px 0px rgba(0, 0, 0, 0.09);
     width: 100%;
