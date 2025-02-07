@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { ExpenseMember } from '@/pages/create/types/expense.type';
+import distributeAmount from '@/pages/createBill/utils/distributeExpense';
+import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import BillDatePicker from '../DatePicker';
 import FormField from '../FormField';
 import NumPadBottomSheet from '../NumPadBottomSheet';
@@ -13,8 +14,35 @@ interface FormCardProps {
 }
 
 function FormCard({ index }: FormCardProps) {
-  const { register, control } = useFormContext();
+  const { register, watch, setValue, control } = useFormContext();
   const [openNumPad, setOpenNumPad] = useState(false);
+
+  const amount = watch(`expenses.${index}.amount`);
+  const memberExpenses = watch(`expenses.${index}.memberExpenses`);
+
+  useEffect(() => {
+    if (!amount || !memberExpenses) return;
+    if (amount && memberExpenses && memberExpenses.length > 0) {
+      // 지출 금액을 참여자 수에 맞게 분배
+      const distribution = distributeAmount(amount, memberExpenses.length);
+      const updatedMemberExpenses = memberExpenses.map(
+        (member: ExpenseMember, idx: number) => ({
+          ...member,
+          amount: distribution[idx],
+        })
+      );
+
+      // 참여자별 지출 금액이 변경된 경우에만 업데이트
+      if (
+        JSON.stringify(updatedMemberExpenses) !== JSON.stringify(memberExpenses)
+      ) {
+        setValue(`expenses.${index}.memberExpenses`, updatedMemberExpenses, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+      }
+    }
+  }, [amount, index, memberExpenses, setValue]);
 
   return (
     <S.FormCard>

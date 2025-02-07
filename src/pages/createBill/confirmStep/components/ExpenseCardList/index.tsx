@@ -1,4 +1,4 @@
-import { Expense } from '@/pages/create/types/expense.type';
+import { Expense } from '@/pages/createBill/types/expense.type';
 import ExpenseCard from '../ExpenseCard';
 
 interface ExpenseCardListProps {

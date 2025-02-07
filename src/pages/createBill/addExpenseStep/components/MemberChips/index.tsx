@@ -1,5 +1,5 @@
 import Chip from '@/common/components/Chip';
-import { ExpenseMember } from '@/pages/create/types/expense.type';
+import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
 interface MemberChipsProps {
@@ -12,7 +12,7 @@ function MemberChips({ members, onDelete }: MemberChipsProps) {
     <S.ChipContainer>
       {members.map((member: ExpenseMember) => (
         <Chip
-          key={member.id}
+          key={member.memberId}
           label={member.name}
           closable
           onClose={() => onDelete(member.name)}

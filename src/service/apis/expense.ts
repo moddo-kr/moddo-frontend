@@ -1,4 +1,4 @@
-import { ExpenseList } from '@/pages/create/types/expense.type';
+import { ExpenseList } from '@/pages/createBill/types/expense.type';
 import axiosInstance from './axios';
 
 const expense = {

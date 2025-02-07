@@ -3,7 +3,7 @@ import { ROUTE } from '@/common/constants/route';
 import SelectGroup from '@/pages/selectGroup';
 import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
 import PasswordSetup from '@/pages/groupSetup/passwordSetup';
-import Create from './pages/create';
+import CreateBill from './pages/createBill';
 import MemberSetup from './pages/groupSetup/memberSetup';
 import Login from './pages/auth/login';
 import LoginSuccess from './pages/auth/loginSuccess';
@@ -19,7 +19,7 @@ function Router() {
       <Route path={ROUTE.groupSetupName} element={<GroupNameSetup />} />
       <Route path={ROUTE.groupSetupPassword} element={<PasswordSetup />} />
       <Route path={ROUTE.groupSetupMember} element={<MemberSetup />} />
-      <Route path={ROUTE.create} element={<Create />} />
+      <Route path={ROUTE.createBill} element={<CreateBill />} />
     </Routes>
   );
 }

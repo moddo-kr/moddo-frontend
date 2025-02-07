@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 const ExpenseMemberSchema = z.object({
-  id: z.number().int().positive(), // 회원 고유번호
+  memberId: z.number().int().positive(), // 회원 고유번호
   amount: z.number().int().positive(), // 회원별 정산 금액
   name: z.string(), // 회원 이름
 });

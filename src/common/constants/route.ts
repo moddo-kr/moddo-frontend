@@ -3,7 +3,7 @@ export const ROUTE = {
   login: '/login',
   loginSuccess: '/login/success',
   home: '/home',
-  create: '/create',
+  createBill: '/create-bill/:groupId',
   selectGroup: '/selectGroup',
   groupSetupName: '/groupSetup/groupName',
   groupSetupPassword: '/groupSetup/password',

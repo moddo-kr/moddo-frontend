@@ -1,4 +1,4 @@
-import { Expense } from '@/pages/create/types/expense.type';
+import { Expense } from '@/pages/createBill/types/expense.type';
 
 /**
  * 모든 지출의 누적 합을 반환합니다.

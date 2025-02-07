@@ -40,8 +40,10 @@ export const CenterTitleArea = styled(TitleArea)`
 
 export const IconWrapper = styled.button`
   all: unset;
-  width: 0.5rem; // 8px
-  height: 1rem; // 16px
+  /* width: 0.5rem; // 8px
+  height: 1rem; // 16px */
+  width: fit-content;
+  height: fit-content;
   cursor: pointer;
 `;
 
