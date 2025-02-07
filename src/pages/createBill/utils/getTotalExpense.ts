@@ -5,7 +5,7 @@ import { Expense } from '@/pages/createBill/types/expense.type';
  * @param expenses 지출 목록
  * @returns 지출의 총 합
  */
-const getTotalExpense = (expenses: Expense[]) => {
+const getTotalExpense = (expenses: Omit<Expense, 'id'>[]) => {
   return expenses.reduce((acc, cur) => acc + cur.amount, 0);
 };
 
