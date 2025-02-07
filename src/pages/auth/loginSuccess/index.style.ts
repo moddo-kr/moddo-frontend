@@ -11,6 +11,7 @@ export const TitleWrapper = styled.h1`
 
 export const ImgWrapper = styled.div`
   width: 100%;
+  max-width: 31.25rem; // 500px 
   height: fit-content;
   padding: 0 1.5rem; // 24px
   position: absolute;
