@@ -1,6 +1,7 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { VStack } from '@chakra-ui/react';
+import { Close } from '@/assets/svgs/icon';
+import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import {
   Expense,
@@ -51,22 +52,21 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
 
   return (
     <FormProvider {...formMethods}>
-      <VStack align="flex-start">
-        {/* TODO : VStack: 정산 시작 step 공통 레이아웃 적용 전 임시 레이아웃 */}
-        <S.Header>
-          <S.HeaderButton>지출 추가</S.HeaderButton>
-        </S.Header>
-        <S.TopWrapper>
-          {/* TODO : 모임 데이터 저장 방식 논의 후 반영할 것 */}
-          <S.MoimName>DND 7조 첫모임</S.MoimName>
-          <S.TopMessage>{`의\n지출 내역을 입력해주세요.`}</S.TopMessage>
-        </S.TopWrapper>
-        <S.BillFormList>
-          {fields.map((field, index) => (
-            <BillFormCard key={field.id} index={index} />
-          ))}
-        </S.BillFormList>
-      </VStack>
+      <Header
+        type="TitleCenter"
+        leftButtonContent={<Close width="1.5rem" />}
+        rightButtonContent={<S.AddExpenseButton>지출 입력</S.AddExpenseButton>}
+      />
+      <S.TopWrapper>
+        {/* TODO : 모임 데이터 저장 방식 논의 후 반영할 것 */}
+        <S.MoimName>DND 7조 첫모임</S.MoimName>
+        <S.TopMessage>{`의\n지출 내역을 입력해주세요.`}</S.TopMessage>
+      </S.TopWrapper>
+      <S.BillFormList>
+        {fields.map((field, index) => (
+          <BillFormCard key={field.id} index={index} />
+        ))}
+      </S.BillFormList>
       <S.BottomButton
         type="button"
         onClick={handleSubmit(onFormSubmit)}
