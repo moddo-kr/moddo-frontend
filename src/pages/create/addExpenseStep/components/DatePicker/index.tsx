@@ -1,9 +1,9 @@
-import DatePicker from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 import ReadonlyInput from '../ReadonlyInput';
 import * as S from './index.styles';
 
 // react-datepicker - DatePickerProps 참고
-interface BillDatePickerProps {
+interface DatePickerProps {
   selected?: Date | null;
   onChange?: (
     date: Date | null,
@@ -11,10 +11,10 @@ interface BillDatePickerProps {
   ) => void;
 }
 
-function BillDatePicker({ selected, onChange }: BillDatePickerProps) {
+function DatePicker({ selected, onChange }: DatePickerProps) {
   return (
     <S.DatePickerWrapper>
-      <DatePicker
+      <ReactDatePicker
         selected={selected}
         onChange={onChange}
         dateFormat="yyyy. MM. dd"
@@ -24,4 +24,4 @@ function BillDatePicker({ selected, onChange }: BillDatePickerProps) {
   );
 }
 
-export default BillDatePicker;
+export default DatePicker;

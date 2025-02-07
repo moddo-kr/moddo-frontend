@@ -1,39 +1,35 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { VStack } from '@chakra-ui/react';
-import BillFormCard from './components/BillFormCard';
+import { Expense, ExpenseFormSchema } from '@/pages/create/types/expense.type';
+import BillFormCard from './components/FormCard';
 import * as S from './index.styles';
 
-const BillsFormSchema = z.object({
-  bills: z.array(
-    z.object({
-      amount: z.number().int().positive(), // 결제 금액
-      place: z.string().min(1), // 지출 장소 및 내용
-      date: z.date(), // 지출일
-      participants: z.array(z.string()).min(1), // 참여자
-    })
-  ),
-});
-
-const defaultValues = {
+const defaultValues: Omit<Expense, 'id'> = {
   amount: 0,
-  place: '',
+  content: '',
   date: new Date(),
-  participants: ['김달걀', '날달걀', '송에그', '강흰자', '연노른자', '강계란'],
+  memberExpenses: [
+    { id: 1, amount: 0, name: '김달걀' },
+    { id: 2, amount: 0, name: '날달걀' },
+    { id: 3, amount: 0, name: '송에그' },
+    { id: 4, amount: 0, name: '강흰자' },
+    { id: 5, amount: 0, name: '연노른자' },
+    { id: 6, amount: 0, name: '강계란' },
+  ],
 };
 
-function AddBillStep() {
+function AddExpenseStep() {
   const formMethods = useForm({
-    resolver: zodResolver(BillsFormSchema),
+    resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
     defaultValues: {
-      bills: [defaultValues],
+      expenses: [defaultValues],
     },
   });
   const { fields } = useFieldArray({
     control: formMethods.control,
-    name: 'bills',
+    name: 'expenses',
   });
 
   const { handleSubmit, formState } = formMethods;
@@ -73,4 +69,4 @@ function AddBillStep() {
   );
 }
 
-export default AddBillStep;
+export default AddExpenseStep;
