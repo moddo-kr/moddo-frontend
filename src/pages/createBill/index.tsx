@@ -1,29 +1,48 @@
-import { useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import useFunnel from '@/common/hooks/useFunnel';
+import { FunnelStep } from '@/common/types/useFunnel.type';
 import AddExpenseStep from './addExpenseStep';
 import ConfirmStep from './confirmStep';
+import AddAccountStep from './addAccountStep';
+import ShareStep from './shareStep';
 
-// NOTE : 페이지 확인용 임시 메인 페이지
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface BillContext {}
+
+const funnelSteps: FunnelStep<BillContext>[] = [
+  {
+    name: 'ADD_EXPENSE',
+    requiredFields: [],
+  },
+  {
+    name: 'CONFIRM',
+    requiredFields: [],
+  },
+  {
+    name: 'ADD_ACCOUNT',
+    requiredFields: [],
+  },
+  {
+    name: 'SHARE',
+    requiredFields: [],
+  },
+];
+
 function CreateBill() {
-  const [step, setStep] = useState<'MAIN' | 'ADD_BILL' | 'CONFIRM'>('MAIN');
+  const { currentStep, moveToNextStep, moveToPreviousStep } =
+    useFunnel<BillContext>({
+      steps: funnelSteps,
+      initialContext: {},
+    });
 
-  switch (step) {
-    case 'MAIN':
-      return (
-        <div>
-          <h1>정산 페이지</h1>
-          <Button type="button" onClick={() => setStep('ADD_BILL')}>
-            정산 추가
-          </Button>
-          <Button type="button" onClick={() => setStep('CONFIRM')}>
-            정산 확인
-          </Button>
-        </div>
-      );
-    case 'ADD_BILL':
+  switch (currentStep) {
+    case 'ADD_EXPENSE':
       return <AddExpenseStep />;
     case 'CONFIRM':
       return <ConfirmStep />;
+    case 'ADD_ACCOUNT':
+      return <AddAccountStep />;
+    case 'SHARE':
+      return <ShareStep />;
     default:
       return null;
   }
