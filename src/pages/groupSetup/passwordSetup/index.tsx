@@ -1,12 +1,13 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
-import { ErrorText } from '../index.styles';
+import * as S from '../index.styles';
 
 import { useGroupSetupStore } from '../stores/useGroupSetupStore';
 import Header from '@/common/components/Header';
+import { ROUTE } from '@/common/constants/route';
 
 const passwordSchema = z.object({
   password: z
@@ -31,7 +32,7 @@ function PasswordSetup() {
 
   const onNext = (data: { password: string }) => {
     setPassword(data.password);
-    // navigate('/groupSetup/participants');
+    navigate(ROUTE.groupSetupMember);
   };
 
   return (
@@ -52,11 +53,11 @@ function PasswordSetup() {
         flexGrow={1}
       >
         <Flex direction="column">
-          <Text fontSize={20} whiteSpace="pre-wrap" fontWeight={600} mb={8}>
+          <S.TitleText>
             {groupName} 모임의
             <br />
             비밀번호를 설정해주세요.
-          </Text>
+          </S.TitleText>
           <Input
             borderRadius={12}
             placeholder="4자리 숫자 입력"
@@ -69,7 +70,7 @@ function PasswordSetup() {
             mb={4}
           />
           {errors.password && (
-            <ErrorText>* {errors.password?.message?.toString()}</ErrorText>
+            <S.ErrorText>* {errors.password?.message?.toString()}</S.ErrorText>
           )}
         </Flex>
         <Button
