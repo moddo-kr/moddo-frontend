@@ -21,7 +21,7 @@ interface SubButtonProps {
   onClick: () => void;
 }
 
-interface BillFormFieldProps {
+interface FormFieldProps {
   label: string;
   required?: boolean;
   // react-hook-form의 control과 동일한 타입을 사용하기 위해서 any를 허용함
@@ -34,7 +34,7 @@ interface BillFormFieldProps {
   subButton?: SubButtonProps;
 }
 
-function BillFormField({
+function FormField({
   label,
   required,
   control,
@@ -43,20 +43,20 @@ function BillFormField({
   renderInput,
   placeholder,
   subButton,
-}: BillFormFieldProps) {
+}: FormFieldProps) {
   return (
-    <S.BillFormField required={required}>
-      <S.BillFormFieldHeader>
-        <S.BillFormFieldLabel>
+    <S.FormField required={required}>
+      <S.FormFieldHeader>
+        <S.FormFieldLabel>
           {label}
-          {required && <S.BillFormFieldRequired>*</S.BillFormFieldRequired>}
-        </S.BillFormFieldLabel>
+          {required && <S.FormFieldRequired>*</S.FormFieldRequired>}
+        </S.FormFieldLabel>
         {subButton && (
-          <S.BillFormFieldSubButton type="button" onClick={subButton.onClick}>
+          <S.FormFieldSubButton type="button" onClick={subButton.onClick}>
             {subButton.label}
-          </S.BillFormFieldSubButton>
+          </S.FormFieldSubButton>
         )}
-      </S.BillFormFieldHeader>
+      </S.FormFieldHeader>
       {renderInput ? (
         <Controller
           name={name}
@@ -64,10 +64,10 @@ function BillFormField({
           render={renderInput}
         />
       ) : (
-        <S.BillFormFieldInput placeholder={placeholder} {...register} />
+        <S.FormFieldInput placeholder={placeholder} {...register} />
       )}
-    </S.BillFormField>
+    </S.FormField>
   );
 }
 
-export default BillFormField;
+export default FormField;

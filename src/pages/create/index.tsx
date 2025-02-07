@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
-import AddBillStep from './addBillStep';
+import AddExpenseStep from './addExpenseStep';
+import ConfirmStep from './confirmStep';
 
 // NOTE : 페이지 확인용 임시 메인 페이지
 function Create() {
-  const [step, setStep] = useState<'MAIN' | 'ADD_BILL'>('MAIN');
+  const [step, setStep] = useState<'MAIN' | 'ADD_BILL' | 'CONFIRM'>('MAIN');
 
   switch (step) {
     case 'MAIN':
@@ -14,10 +15,15 @@ function Create() {
           <Button type="button" onClick={() => setStep('ADD_BILL')}>
             정산 추가
           </Button>
+          <Button type="button" onClick={() => setStep('CONFIRM')}>
+            정산 확인
+          </Button>
         </div>
       );
     case 'ADD_BILL':
-      return <AddBillStep />;
+      return <AddExpenseStep />;
+    case 'CONFIRM':
+      return <ConfirmStep />;
     default:
       return null;
   }
