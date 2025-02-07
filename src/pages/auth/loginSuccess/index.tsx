@@ -29,10 +29,12 @@ function LoginSuccess() {
         </Text>
       </S.TitleWrapper>
       <S.ImgWrapper>
-      <S.LogoImg src={LoginSuccessImg} alt="loginSuccessImg" />
+        <S.LogoImg src={LoginSuccessImg} alt="loginSuccessImg" />
       </S.ImgWrapper>
       <BottomWrapper>
-        <BottomButton color="#ffffff" onClick={() => navigate(ROUTE.home)}>홈으로 가기</BottomButton>
+        <BottomButton color="#ffffff" onClick={() => navigate(ROUTE.home)}>
+          홈으로 가기
+        </BottomButton>
       </BottomWrapper>
     </Flex>
   );

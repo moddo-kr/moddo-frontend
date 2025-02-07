@@ -5,8 +5,8 @@ import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
 import PasswordSetup from '@/pages/groupSetup/passwordSetup';
 import Create from './pages/create';
 import MemberSetup from './pages/groupSetup/memberSetup';
-import Login from './pages/login';
-import LoginSuccess from './pages/loginSuccess';
+import Login from './pages/auth/login';
+import LoginSuccess from './pages/auth/loginSuccess';
 import Home from './pages/home';
 
 function Router() {
