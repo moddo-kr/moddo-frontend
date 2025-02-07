@@ -1,5 +1,5 @@
 import Chip from '@/common/components/Chip';
-import { ExpenseMember } from '@/pages/create/types/expense.type';
+import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
 interface MemberChipsProps {

@@ -1,7 +1,10 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { VStack } from '@chakra-ui/react';
-import { Expense, ExpenseFormSchema } from '@/pages/create/types/expense.type';
+import {
+  Expense,
+  ExpenseFormSchema,
+} from '@/pages/createBill/types/expense.type';
 import BillFormCard from './components/FormCard';
 import * as S from './index.styles';
 

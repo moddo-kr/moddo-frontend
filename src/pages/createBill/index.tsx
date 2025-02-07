@@ -4,7 +4,7 @@ import AddExpenseStep from './addExpenseStep';
 import ConfirmStep from './confirmStep';
 
 // NOTE : 페이지 확인용 임시 메인 페이지
-function Create() {
+function CreateBill() {
   const [step, setStep] = useState<'MAIN' | 'ADD_BILL' | 'CONFIRM'>('MAIN');
 
   switch (step) {
@@ -29,4 +29,4 @@ function Create() {
   }
 }
 
-export default Create;
+export default CreateBill;

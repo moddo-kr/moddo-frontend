@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
-import { Expense } from '@/pages/create/types/expense.type';
-import distributeAmount from '@/pages/create/utils/distributeExpense';
+import { Expense } from '@/pages/createBill/types/expense.type';
+import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {

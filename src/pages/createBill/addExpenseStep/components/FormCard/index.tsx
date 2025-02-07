@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { ExpenseMember } from '@/pages/create/types/expense.type';
+import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import BillDatePicker from '../DatePicker';
 import FormField from '../FormField';
 import NumPadBottomSheet from '../NumPadBottomSheet';

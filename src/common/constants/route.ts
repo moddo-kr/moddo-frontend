@@ -1,5 +1,5 @@
 export const ROUTE = {
-  create: '/create',
+  createBill: '/create-bill/:groupId',
   selectGroup: '/selectGroup',
   groupSetupName: '/groupSetup/groupName',
   groupSetupPassword: '/groupSetup/password',
