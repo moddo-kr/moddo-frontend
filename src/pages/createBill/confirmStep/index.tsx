@@ -32,7 +32,7 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
         leftButtonOnClick={moveToPreviousStep}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
       />
-      <VStack align="flex-start" gap="1.5rem">
+      <VStack align="flex-start" gap="1.5rem" flex={1}>
         <S.TopWrapper>
           <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
         </S.TopWrapper>
@@ -43,15 +43,18 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
           </S.TotalExpenseAmount>
         </S.TotalExpenseWrapper>
         <ExpenseCardList expenses={data.expenses} />
+        <S.ChangeOrderButton>순서 바꾸기</S.ChangeOrderButton>
       </VStack>
-      <S.BottomButton
-        type="button"
-        onClick={() => {
-          moveToNextStep?.();
-        }}
-      >
-        확인했어요
-      </S.BottomButton>
+      <S.ButtonWrapper>
+        <S.BottomButton
+          type="button"
+          onClick={() => {
+            moveToNextStep?.();
+          }}
+        >
+          확인했어요
+        </S.BottomButton>
+      </S.ButtonWrapper>
     </>
   );
 }
