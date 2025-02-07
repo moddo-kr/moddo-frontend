@@ -1,6 +1,8 @@
 interface NumPadCellType {
   label: string | null;
   handler: ((value: number) => number) | null;
+  isDanger?: boolean;
+  isSecondary?: boolean;
 }
 
 interface NumPadControllerType {
@@ -64,6 +66,7 @@ const numPadController: NumPadControllerType = {
     {
       label: '←',
       handler: (value: number) => numPadController.deleteDigit(value),
+      isSecondary: true,
     },
   ],
 
@@ -84,6 +87,7 @@ const numPadController: NumPadControllerType = {
     {
       label: '전체삭제',
       handler: (_value: number) => numPadController.clearAll(),
+      isDanger: true,
     },
   ],
 
