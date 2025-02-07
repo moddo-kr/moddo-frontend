@@ -6,15 +6,54 @@ export const TitleWrapper = styled.h1`
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  margin-bottom: 2rem;
+  margin-top: 10.5dvh;
 `;
 
 export const LogoImg = styled.img`
   width: 10.625rem; // 170px
   height: 4.125rem; // 66px
+  object-fit: contain;
 `;
 
 export const LoginImg = styled.img`
-  width: 90%;
+  width: 62vw;
+  min-width: 240px;
+  max-width: 360px;
+  @media (min-height: 746px) {
+    width: 36dvh;
+  }
   height: auto;
+  object-fit: contain;
+`;
+
+export const BottomWrapper = styled.footer`
+  position: fixed;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; // 12px
+  padding: 0 1.25rem; // 20px
+  width: 100%;
+  max-width: 600px;
+  min-width: 320px;
+`;
+
+export const BottomButton = styled.button<{ bgColor?: string; color?: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : 'black')};
+  color: ${({ color }) => (color ? color : 'black')};
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 1rem 0.875rem; // 16px 14px
+  height: fit-content;
+  width: 100%;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+    transition: filter 0.1s;
+  }
 `;
