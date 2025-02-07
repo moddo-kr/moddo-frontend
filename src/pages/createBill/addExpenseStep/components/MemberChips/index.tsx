@@ -12,7 +12,7 @@ function MemberChips({ members, onDelete }: MemberChipsProps) {
     <S.ChipContainer>
       {members.map((member: ExpenseMember) => (
         <Chip
-          key={member.id}
+          key={member.memberId}
           label={member.name}
           closable
           onClose={() => onDelete(member.name)}

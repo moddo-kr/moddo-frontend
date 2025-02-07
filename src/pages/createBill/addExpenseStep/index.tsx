@@ -15,12 +15,12 @@ const defaultValues: Omit<Expense, 'id'> = {
   content: '',
   date: new Date(),
   memberExpenses: [
-    { id: 1, amount: 0, name: '김달걀' },
-    { id: 2, amount: 0, name: '날달걀' },
-    { id: 3, amount: 0, name: '송에그' },
-    { id: 4, amount: 0, name: '강흰자' },
-    { id: 5, amount: 0, name: '연노른자' },
-    { id: 6, amount: 0, name: '강계란' },
+    { memberId: 1, amount: 0, name: '김달걀' },
+    { memberId: 2, amount: 0, name: '날달걀' },
+    { memberId: 3, amount: 0, name: '송에그' },
+    { memberId: 4, amount: 0, name: '강흰자' },
+    { memberId: 5, amount: 0, name: '연노른자' },
+    { memberId: 6, amount: 0, name: '강계란' },
   ],
 };
 

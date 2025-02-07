@@ -64,7 +64,11 @@ function ExpenseCard({
               </S.CollapseTrigger>
               <S.CollapseContent>
                 {memberExpenses.map((member) => (
-                  <Chip key={member.id} label={member.name} variant="white" />
+                  <Chip
+                    key={`${index}-${member.memberId}`}
+                    label={member.name}
+                    variant="white"
+                  />
                 ))}
               </S.CollapseContent>
             </S.CollapseItem>
