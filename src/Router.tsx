@@ -5,10 +5,16 @@ import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
 import PasswordSetup from '@/pages/groupSetup/passwordSetup';
 import Create from './pages/create';
 import MemberSetup from './pages/groupSetup/memberSetup';
+import Login from './pages/auth/login';
+import LoginSuccess from './pages/auth/loginSuccess';
+import Home from './pages/home';
 
 function Router() {
   return (
     <Routes>
+      <Route path={ROUTE.login} element={<Login />} />
+      <Route path={ROUTE.loginSuccess} element={<LoginSuccess />} />
+      <Route path={ROUTE.home} element={<Home />} />
       <Route path={ROUTE.selectGroup} element={<SelectGroup />} />
       <Route path={ROUTE.groupSetupName} element={<GroupNameSetup />} />
       <Route path={ROUTE.groupSetupPassword} element={<PasswordSetup />} />

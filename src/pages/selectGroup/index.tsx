@@ -28,7 +28,7 @@ function SelectGroup() {
         title="모임 선택"
         showIcon
         type="TitleLeft"
-        handleBackButtonClick={() => console.log('뒤로가기 클릭')}
+        handleBackButtonClick={() => navigate(-1)}
       />
       <Flex
         direction="column"
