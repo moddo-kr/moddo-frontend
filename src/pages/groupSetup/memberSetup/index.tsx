@@ -4,6 +4,7 @@ import * as S from '../index.styles';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
 import { ROUTE } from '@/common/constants/route';
+import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 
 export interface ParticipantProfile {
   name: string;
@@ -12,6 +13,7 @@ export interface ParticipantProfile {
 
 function MemberSetup() {
   const navigate = useNavigate();
+  const { members, setMembers } = useGroupSetupStore();
 
   return (
     <>
@@ -36,7 +38,7 @@ function MemberSetup() {
             <br />
             참여자를 추가해주세요.
           </S.TitleText>
-          <AddMember />
+          <AddMember members={members} setMembers={setMembers} />
         </Flex>
         <Button
           height={12}

@@ -1,15 +1,18 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
+
 import MemberProfile from '../MemberProfile';
 import { nanoid } from 'nanoid';
 import { Member } from '@/common/types/member.type';
 
-function AddMember() {
-  const [name, setName] = useState('');
-  const { members, setMembers } = useGroupSetupStore();
+interface AddMemberProps {
+  members: Member[];
+  setMembers: (members: Member[]) => void;
+}
 
+function AddMember({ members, setMembers }: AddMemberProps) {
+  const [name, setName] = useState('');
   /**
    * 비회원일때를 가정하여 총무를 members에 추가함
    * @Todo 회원일 경우 store에서 총무를 members에 추가하기
