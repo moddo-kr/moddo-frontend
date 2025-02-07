@@ -1,11 +1,13 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { VStack } from '@chakra-ui/react';
+import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import {
   Expense,
   ExpenseFormSchema,
 } from '@/pages/createBill/types/expense.type';
 import BillFormCard from './components/FormCard';
+import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
 
 const defaultValues: Omit<Expense, 'id'> = {
@@ -22,7 +24,10 @@ const defaultValues: Omit<Expense, 'id'> = {
   ],
 };
 
-function AddExpenseStep() {
+interface AddExpenseStepProps
+  extends BaseFunnelStepComponentProps<BillContext> {}
+
+function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
@@ -41,6 +46,7 @@ function AddExpenseStep() {
   // 임시...
   const onFormSubmit = (data: any) => {
     console.log(data);
+    moveToNextStep?.();
   };
 
   return (
