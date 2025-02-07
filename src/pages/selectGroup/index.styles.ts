@@ -1,12 +1,8 @@
 import styled from 'styled-components';
+import { TitleText } from '../groupSetup/index.styles';
 
-export const H1 = styled.h1`
-  all: unset;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-bottom: 7.5rem; // 120px
-  gap: 0.25rem;
+export const H1 = styled(TitleText)`
+  padding-bottom: 5.5rem; // 88px
 `;
 
 export const SmallContent = styled.span`
