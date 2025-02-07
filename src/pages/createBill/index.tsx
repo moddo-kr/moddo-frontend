@@ -36,7 +36,12 @@ function CreateBill() {
     case 'ADD_EXPENSE':
       return <AddExpenseStep moveToNextStep={moveToNextStep} />;
     case 'CONFIRM':
-      return <ConfirmStep />;
+      return (
+        <ConfirmStep
+          moveToPreviousStep={moveToPreviousStep}
+          moveToNextStep={moveToNextStep}
+        />
+      );
     case 'ADD_ACCOUNT':
       return <AddAccountStep />;
     case 'SHARE':
