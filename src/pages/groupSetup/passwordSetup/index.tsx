@@ -54,7 +54,7 @@ function PasswordSetup() {
       >
         <Flex direction="column">
           <S.TitleText>
-            {groupName} 모임의
+            {groupName}의
             <br />
             비밀번호를 설정해주세요.
           </S.TitleText>

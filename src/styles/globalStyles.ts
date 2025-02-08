@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
     font-display: swap;
   }
 
+
   html, body {
     font-family: 'Pretendard', sans-serif;
     font-size: 16px; // 1rem = 16px
@@ -31,6 +32,8 @@ const GlobalStyles = createGlobalStyle`
     width: 100%;
     background: #f9f9f9;
     overflow: hidden;
+
+    scroll-behavior: smooth;
   }
 
   body {

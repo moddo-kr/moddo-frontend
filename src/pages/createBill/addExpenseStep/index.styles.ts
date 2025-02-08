@@ -51,6 +51,7 @@ export const BillFormList = styled.form`
   flex: 1 0 0;
   padding: 1rem 1.25rem;
   background: #faf6f3;
+  overflow-y: auto;
 `;
 
 export const ButtonWrapper = styled.div`

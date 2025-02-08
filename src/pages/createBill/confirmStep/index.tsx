@@ -7,6 +7,7 @@ import ExpenseCardList from './components/ExpenseCardList';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
+import { useCreateBillStore } from '../stores/useCreateBillStore';
 
 // const DUMMY_MEET_ID = 1;
 
@@ -36,16 +37,7 @@ const data = {
 interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
-  // TODO : meetId를 알아내는 로직이 필요함
-  // const { data, isLoading } = useGetAllExpense(DUMMY_MEET_ID);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (!data || !data.expenses) {
-  //   return <div>지출 내역이 없습니다.</div>;
-  // }
+  const { expenses } = useCreateBillStore();
 
   return (
     <>
@@ -62,10 +54,27 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
         <S.TotalExpenseWrapper>
           <S.TotalExpense>누적 금액</S.TotalExpense>
           <S.TotalExpenseAmount>
-            {getTotalExpense(data.expenses).toLocaleString()}원
+            {getTotalExpense(
+              expenses.expenses.map((value, index) => ({
+                id: index + 1,
+                amount: value.amount,
+                memberExpenses: value.memberExpenses,
+                content: value.content,
+                date: value.date,
+              }))
+            ).toLocaleString()}
+            원
           </S.TotalExpenseAmount>
         </S.TotalExpenseWrapper>
-        <ExpenseCardList expenses={data.expenses} />
+        <ExpenseCardList
+          expenses={expenses.expenses.map((value, index) => ({
+            id: index + 1,
+            amount: value.amount,
+            memberExpenses: value.memberExpenses,
+            content: value.content,
+            date: value.date,
+          }))}
+        />
         <S.ChangeOrderButton>순서 바꾸기</S.ChangeOrderButton>
       </VStack>
       <S.ButtonWrapper>

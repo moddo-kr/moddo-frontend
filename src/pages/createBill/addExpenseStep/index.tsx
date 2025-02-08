@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Close } from '@/assets/svgs/icon';
@@ -8,23 +8,19 @@ import {
   Expense,
   ExpenseFormSchema,
 } from '@/pages/createBill/types/expense.type';
+import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import BillFormCard from './components/FormCard';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
+import { useCreateBillStore } from '../stores/useCreateBillStore';
+import { DevTool } from '@hookform/devtools';
 
 const defaultValues: Omit<Expense, 'id'> = {
   amount: 0,
   content: '',
   date: new Date(),
-  memberExpenses: [
-    { memberId: 1, amount: 0, name: '김달걀' },
-    { memberId: 2, amount: 0, name: '날달걀' },
-    { memberId: 3, amount: 0, name: '송에그' },
-    { memberId: 4, amount: 0, name: '강흰자' },
-    { memberId: 5, amount: 0, name: '연노른자' },
-    { memberId: 6, amount: 0, name: '강계란' },
-  ],
+  memberExpenses: [],
 };
 
 interface AddExpenseStepProps
@@ -34,6 +30,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const [tabMode, setTabMode] = useState<'DIVIDE_N' | 'DIVIDE_CUSTOM'>(
     'DIVIDE_N'
   );
+  const { memberExpenses, setExpenses } = useCreateBillStore();
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
@@ -45,14 +42,28 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
     control: formMethods.control,
     name: 'expenses',
   });
+  const { groupName } = useGroupSetupStore();
 
-  const { handleSubmit, formState, watch } = formMethods;
+  const { handleSubmit, formState, watch, control } = formMethods;
   const allFormsValid = formState.isValid;
   const expenses = watch('expenses');
 
+  // Zustand 상태 변경 시 폼 동기화
+  useEffect(() => {
+    formMethods.setValue('expenses.0.memberExpenses', memberExpenses, {
+      shouldValidate: true, // 유효성 검사 트리거
+      shouldDirty: true, // dirty 상태 업데이트
+    });
+  }, [memberExpenses, formMethods]);
+
   // 임시...
   const onFormSubmit = (data: any) => {
-    console.log(data);
+    setExpenses({
+      expenses: data.expenses.map((expense: any, index: number) => ({
+        ...expense,
+        id: index + 1,
+      })),
+    });
     moveToNextStep?.();
   };
 
@@ -65,7 +76,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       />
       <S.TopWrapper>
         <S.TopMessage>
-          <S.MoimName>DND 7조 첫모임</S.MoimName>
+          <S.MoimName>{groupName}</S.MoimName>
           {`의\n지출 내역을 입력해주세요.`}
         </S.TopMessage>
       </S.TopWrapper>
@@ -99,6 +110,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
         </S.BottomButton>
       </S.ButtonWrapper>
+      {/* <DevTool control={control} /> */}
     </FormProvider>
   );
 }

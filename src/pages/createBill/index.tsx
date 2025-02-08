@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useFunnel from '@/common/hooks/useFunnel';
 import { FunnelStep } from '@/common/types/useFunnel.type';
 import { BillContext } from './types/billContext.type';
@@ -5,6 +6,8 @@ import AddExpenseStep from './addExpenseStep';
 import ConfirmStep from './confirmStep';
 import AddAccountStep from './addAccountStep';
 import ShareStep from './shareStep';
+import { useGroupSetupStore } from '../groupSetup/stores/useGroupSetupStore';
+import { useCreateBillStore } from './stores/useCreateBillStore';
 
 const funnelSteps: FunnelStep<BillContext>[] = [
   {
@@ -31,6 +34,19 @@ function CreateBill() {
       steps: funnelSteps,
       initialContext: {},
     });
+
+  const { members } = useGroupSetupStore();
+  const { setMemberExpenses } = useCreateBillStore();
+
+  useEffect(() => {
+    setMemberExpenses(
+      members.map((member, index) => ({
+        memberId: index + 1,
+        amount: 0,
+        name: member.name,
+      }))
+    );
+  }, [members, setMemberExpenses]);
 
   switch (currentStep) {
     case 'ADD_EXPENSE':

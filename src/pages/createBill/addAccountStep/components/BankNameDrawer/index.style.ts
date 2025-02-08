@@ -1,3 +1,4 @@
+import { Grid } from '@chakra-ui/react';
 import styled from 'styled-components';
 
 export const DrawerHeader = styled.h2`
@@ -5,12 +6,12 @@ export const DrawerHeader = styled.h2`
   font-weight: 700;
 `;
 
-export const DrawerBody = styled.div`
+export const DrawerBody = styled(Grid)`
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
   height: 370px;
   overflow-y: auto;
-  gap: 8px;
-  flex-wrap: wrap;
-  display: flex;
 `;
 
 export const SubmitButton = styled.button`
@@ -31,8 +32,8 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
   height: 5.75rem; // 92px
   cursor: pointer;
   border-radius: 12px;
-  border: 2px solid ${({ isSelected }) => isSelected ? '#FF802E' : 'none'};
-  background-color: #FAF6F3;
+  border: 2px solid ${({ isSelected }) => (isSelected ? '#FF802E' : 'none')};
+  background-color: #faf6f3;
   padding: 1rem; // 20px
   display: flex;
   justify-content: center;

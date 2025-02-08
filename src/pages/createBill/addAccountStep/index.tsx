@@ -4,8 +4,13 @@ import { Button, Flex, Input, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import BankNameDrawer from './components/BankNameDrawer';
+import { BillContext } from '../types/billContext.type';
+import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 
-function AddAccountStep() {
+interface AddAccountStepProps
+  extends BaseFunnelStepComponentProps<BillContext> {}
+
+function AddAccountStep({ moveToNextStep }: AddAccountStepProps) {
   const navigate = useNavigate();
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
@@ -72,7 +77,7 @@ function AddAccountStep() {
           height="fit-content"
           lineHeight={1.5}
           borderRadius={32}
-          onClick={() => navigate('/')}
+          onClick={() => moveToNextStep?.()}
           disabled={!bankName || !accountNumber}
           fontSize={16}
           fontWeight={600}
