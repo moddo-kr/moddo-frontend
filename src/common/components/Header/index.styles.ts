@@ -25,8 +25,8 @@ export const CenterHeaderArea = styled(HeaderArea)`
 
 export const TitleArea = styled.h2`
   all: unset;
-  font-size: 1.25rem; // 20px
-  font-weight: 600;
+  font-size: 1rem; // 16px
+  font-weight: 400;
   line-height: 1;
   white-space: nowrap;
   text-align: center;
