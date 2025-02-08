@@ -1,5 +1,5 @@
 import { Button, Flex } from '@chakra-ui/react';
-import { useNavigate } from 'react-router';
+import { useNavigate, generatePath } from 'react-router';
 import * as S from '../index.styles';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
@@ -43,7 +43,9 @@ function MemberSetup() {
         <Button
           height={12}
           borderRadius={12}
-          onClick={() => navigate(ROUTE.createBill)}
+          onClick={() =>
+            navigate(generatePath(ROUTE.createBill, { groupId: '1' }))
+          }
         >
           정산 시작!
         </Button>
