@@ -43,7 +43,7 @@ function MemberSetup() {
         <Button
           height={12}
           borderRadius={12}
-          onClick={() => navigate('/create-bill/1')}
+          onClick={() => navigate(ROUTE.createBill)}
         >
           정산 시작!
         </Button>
