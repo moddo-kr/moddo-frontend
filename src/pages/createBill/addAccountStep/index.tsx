@@ -28,8 +28,8 @@ function AddAccountStep() {
         justify="space-between"
         mx="5"
         height="100%"
-        mt="10px"
-        mb="32px"
+        mt={2.5}
+        mb={8}
         flexGrow={1}
       >
         <Flex direction="column">
@@ -37,14 +37,13 @@ function AddAccountStep() {
             정산 받을 계좌를 <br />
             입력해주세요.
           </TitleText>
-          <Flex direction="column" mt="23px">
+          <Flex direction="column" mt={6} gap={12}>
             <Input
               borderRadius={12}
               placeholder="은행 선택"
               fontSize={16}
               py={3}
               height={12}
-              mb={4}
               value={bankName}
               onClick={handleBankInputClick}
               readOnly
@@ -61,7 +60,6 @@ function AddAccountStep() {
               py={3}
               height={12}
               value={accountNumber}
-              mb={4}
               onChange={(e) => setAccountNumber(e.target.value)}
               type="number"
               inputMode="numeric"
@@ -69,10 +67,15 @@ function AddAccountStep() {
           </Flex>
         </Flex>
         <Button
-          height={12}
-          borderRadius={12}
+          px={3.5}
+          py={4}
+          height="fit-content"
+          lineHeight={1.5}
+          borderRadius={32}
           onClick={() => navigate('/')}
           disabled={!bankName || !accountNumber}
+          fontSize={16}
+          fontWeight={600}
         >
           다음
         </Button>
