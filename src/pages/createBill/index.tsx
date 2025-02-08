@@ -50,7 +50,7 @@ function CreateBill() {
         />
       );
     case 'SHARE':
-      return <ShareStep />;
+      return <ShareStep moveToNextStep={moveToNextStep} />;
     default:
       return null;
   }
