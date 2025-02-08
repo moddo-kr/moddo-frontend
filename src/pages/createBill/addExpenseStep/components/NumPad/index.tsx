@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import { Close } from '@/assets/svgs/icon';
 import numPadController from '../../utils/numPadController';
 import * as S from './index.styles';
 
@@ -17,20 +17,24 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
 
   return (
     <S.NumPadContainer>
-      <S.DisplayWrapper>
-        <S.DisplayDescription>결제 금액</S.DisplayDescription>
-        <S.ValueWrapper>
-          <S.DisplayValue $isEmpty={value === 0}>
-            {value === 0 ? '금액입력' : value.toLocaleString()}
-          </S.DisplayValue>
-          <S.DisplayValueUnit>원</S.DisplayValueUnit>
-        </S.ValueWrapper>
-      </S.DisplayWrapper>
+      <S.Header>
+        <S.Description>결제 금액 입력</S.Description>
+        <button type="button" onClick={onClose}>
+          <Close width="1.5rem" />
+        </button>
+      </S.Header>
+      <S.ValueWrapper>
+        <S.DisplayValue $isEmpty={value === 0}>
+          {value === 0 ? '금액입력' : value.toLocaleString()}
+        </S.DisplayValue>
+        <S.DisplayValueUnit>원</S.DisplayValueUnit>
+      </S.ValueWrapper>
       <S.ShortcutWrapper>
         {SHORTCUTS.map((shortcut) => (
           <S.ShortcutButton
             type="button"
             key={shortcut.label}
+            $isDanger={shortcut?.isDanger}
             onClick={() => {
               if (shortcut.handler === null) return;
               setValue(shortcut.handler(value));
@@ -45,6 +49,7 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
           <S.NumCellButton
             type="button"
             key={cell.label ?? 'empty'}
+            $isSecondary={cell?.isSecondary}
             onClick={() => {
               if (cell.handler === null) return;
               setValue(cell.handler(value));
@@ -54,17 +59,17 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
           </S.NumCellButton>
         ))}
       </S.NumCellWrapper>
-      {/* NOTE: 임시 버튼.. */}
-      <Button
-        w="100%"
-        type="button"
-        onClick={() => {
-          onChange(value);
-          onClose?.();
-        }}
-      >
-        확인
-      </Button>
+      <S.ButtonWrapper>
+        <S.BottomButton
+          type="button"
+          onClick={() => {
+            onChange(value);
+            onClose?.();
+          }}
+        >
+          완료
+        </S.BottomButton>
+      </S.ButtonWrapper>
     </S.NumPadContainer>
   );
 }

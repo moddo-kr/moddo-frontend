@@ -72,7 +72,7 @@ export const Distribute = styled.div`
 `;
 
 export const DistributeText = styled.span`
-  color: var(--text-strong, #292c30);
+  color: #292c30;
   font-size: 1.25rem;
   font-weight: 700;
 `;

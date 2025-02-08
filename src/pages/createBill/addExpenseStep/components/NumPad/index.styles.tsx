@@ -1,72 +1,107 @@
 import { styled } from 'styled-components';
-import { Button } from '@chakra-ui/react';
 
 export const NumPadContainer = styled.div`
   display: flex;
+  padding-top: 2rem;
   flex-direction: column;
-`;
-
-export const DisplayWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
-  padding: 1rem 1.25rem;
 `;
 
-export const DisplayDescription = styled.span`
-  font-size: 1rem;
-  font-weight: 600; // semi bold
-  color: #1a1a1a;
+export const Header = styled.div`
+  display: flex;
+  padding: 0rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+`;
+
+export const Description = styled.span`
+  flex: 1 0 0;
+  color: #444950;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 150%; /* 1.875rem */
 `;
 
 export const ValueWrapper = styled.div`
   display: flex;
+  padding: 0.75rem 1.25rem;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #cccccc;
-  align-items: flex-end;
+  align-self: stretch;
 `;
 
 export const DisplayValue = styled.span<{ $isEmpty?: boolean }>`
-  flex: 1;
-  font-size: 1.5rem; // 24px
-  font-weight: 700; // bold
-  color: #1a1a1a;
-  opacity: ${({ $isEmpty }) => ($isEmpty ? 0.5 : 1)};
+  color: ${({ $isEmpty }) => ($isEmpty ? '#6f7379' : '#292C30')};
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%; /* 2.25rem */
   word-break: break-all;
+  opacity: ${({ $isEmpty }) => ($isEmpty ? 0.5 : 1)};
 `;
 
 export const DisplayValueUnit = styled.span`
-  font-size: 1.5rem; // 24px
-  font-weight: 700; // bold
-  color: #1a1a1a;
+  color: #292c30;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%; /* 2.25rem */
 `;
 
 export const ShortcutWrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 0 1.25rem;
   gap: 0.5rem;
 `;
 
-export const ShortcutButton = styled(Button)`
-  background-color: #e6e6e6;
-  color: #000000;
-  font-size: 0.75rem;
-  border-radius: 0.75rem;
+export const ShortcutButton = styled.button<{ $isDanger?: boolean }>`
+  padding: 0.5rem 1rem;
+  flex: 1 0 0;
+  border-radius: 624.9375rem;
+  background-color: ${({ $isDanger }) => ($isDanger ? '#FDEFEF' : '#edeeee')};
+  color: ${({ $isDanger }) => ($isDanger ? '#EA605C' : '#444950')};
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.3125rem */
 `;
 
 export const NumCellWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 1.25rem;
+  padding: 0 1.25rem;
+  width: 100%;
 `;
 
-export const NumCellButton = styled.button`
-  background-color: #ffffff;
-  color: #1a1a1a;
-  font-weight: 800; // extra bold
+export const NumCellButton = styled.button<{ $isSecondary?: boolean }>`
+  height: 4rem;
+  padding: 0.75rem 1rem;
+  /* color: #292c30; */
+  color: ${({ $isSecondary }) => ($isSecondary ? '#6F7379' : '#292c30')};
   font-size: 1.5rem;
-  opacity: 0.5;
-  padding: 1rem;
+  font-weight: 700;
+  line-height: 150%; /* 2.25rem */
+`;
+
+export const ButtonWrapper = styled.div`
+  padding: 0 1.25rem 1rem 1.25rem;
+  width: 100%;
+`;
+
+export const BottomButton = styled.button`
+  height: 3.5rem;
+  width: 100%;
+  padding: 1rem 0.875rem;
+  border-radius: 624.9375rem;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 150%; /* 1.6875rem */
+  background-color: #35393e;
+  &:disabled {
+    background-color: #d2d4d5;
+  }
 `;
