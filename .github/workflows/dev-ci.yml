@@ -1,0 +1,58 @@
+name: DEV CI
+
+on: # develop 브랜치에 push가 될 때마다 action이 실행됩니다.
+  push: 
+    branches:
+      - develop
+    tags:
+      - 'development-**'
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: 소스코드 복사
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      
+      # Step 2: node_modules 캐싱
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          # 의존성이 변경될 때마다 새로운 캐시 생성
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          # 캐시 키가 정확히 일치하지 않을 경우, 일치하는 최신 캐시 검색
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      
+      # Step 3: 의존성 패키지 설치
+      - name: Install Dependencies
+        # Cache node modules 단계에서 설정된 출력이 캐시 히트를 발생시키지 않는다면
+        if: steps.cache.outputs.cache-hit != 'true'
+        # yarn install을 실행하여 새로운 캐시 키를 생성함
+        run: yarn install
+      
+      # Step 4: 빌드
+      - name: Build
+        run: yarn build
+      
+      # Step 5: AWS 인증
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # 지역은 ap-northest-2로 생성함
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      # Step 6: AWS S3에 빌드 결과물 배포
+      - name: Deploy to S3
+        # react app의 경우 build 폴더에 파일이 들어 있음
+        run: aws s3 sync ./build s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+
+      # Step 7: CloudFront 캐시 무효화 -> 캐시 서버가 새로운 배포 결과물을 저장할 수 있도록 배포 시마다 캐시 무효화 진행
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
