@@ -1,54 +1,74 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
-
-import { useEffect, useState } from 'react';
-
-import MemberProfile from '../MemberProfile';
+import { Dispatch, SetStateAction } from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 import { nanoid } from 'nanoid';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
+import MemberProfile from '../MemberProfile';
+
+const MemberSchema = z.object({
+  name: z.string().min(1),
+});
 
 interface AddMemberProps {
-  members: Member[];
-  setMembers: (members: Member[]) => void;
+  members: Member[]; // (required) 멤버 목록
+  setMembers?:
+    | Dispatch<SetStateAction<Member[]>>
+    | ((members: Member[]) => void); // (option) 멤버 목록을 직접 업데이트하는 함수
+  onAddName?: (name: string) => void; // (option) 이름 입력 후 추가하기 버튼을 처리하는 함수
+  onDeleteMember?: (id: string) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
 }
 
-function AddMember({ members, setMembers }: AddMemberProps) {
-  const [name, setName] = useState('');
-  /**
-   * 비회원일때를 가정하여 총무를 members에 추가함
-   * @Todo 회원일 경우 store에서 총무를 members에 추가하기
-   */
-  useEffect(() => {
-    if (members.length === 0) {
-      setMembers([{ id: nanoid(), name: '김모또(총무)', role: 'treasurer' }]);
-    }
-  }, []);
+function AddMember({
+  members,
+  setMembers,
+  onAddName,
+  onDeleteMember,
+}: AddMemberProps) {
+  const { register, handleSubmit, clearErrors, formState, reset } = useForm({
+    mode: 'onChange',
+    resolver: zodResolver(MemberSchema),
+    defaultValues: {
+      name: '',
+    },
+  });
 
-  const addNewMember = () => {
-    if (!name.trim()) return; // 이름이 없으면 추가하지 않음
+  /** 이름 입력 후 추가 핸들러 */
+  const handleAddName = (data: any) => {
+    const { name } = data;
+    // 이름 추가 핸들러가 있다면 실행
+    if (onAddName) {
+      onAddName(name);
+    }
+
+    // 새로운 참여자 생성 후 (필요한 경우) members 배열 직접 업데이트
     const newMember: Member = {
-      id: nanoid(), // nanoid를 사용하여 고유한 id 생성
-      name: name,
+      id: nanoid(),
+      name,
       role: 'participant',
     };
-    setMembers([newMember, ...members]);
-    setName('');
+    setMembers?.([...members, newMember]);
+
+    // 초기화
+    clearErrors('name');
+    reset();
   };
 
-  /** 새로운 멤버를 추가하는 폼 이벤트 핸들러 */
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // form submit 방지
-    addNewMember();
-  };
+  /** 참여자 제거 핸들러 */
+  const handleDeleteMember = (id: string) => {
+    // 멤버 삭제 핸들러가 있다면 실행
+    if (onDeleteMember) {
+      onDeleteMember(id);
+    }
 
-  /** 멤버를 삭제하는 이벤트 핸들러 */
-  const handleDeleteButtonClick = (id: string) => {
-    const newMembers = members.filter((member) => member.id !== id);
-    setMembers(newMembers);
+    // (필요한 경우) members 배열 직접 업데이트
+    setMembers?.(members.filter((member) => member.id !== id));
   };
 
   return (
     <Flex direction="column" height="fit-content">
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(handleAddName)}>
         <Flex gap={2} alignItems="center">
           <Input
             borderRadius={12}
@@ -56,8 +76,9 @@ function AddMember({ members, setMembers }: AddMemberProps) {
             fontSize={16}
             py={3}
             height={12}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            {...register('name', {
+              required: '이름을 입력해주세요',
+            })}
           />
           <Button
             type="submit"
@@ -71,7 +92,7 @@ function AddMember({ members, setMembers }: AddMemberProps) {
             lineHeight={1.5}
             py={2}
             height={12}
-            disabled={!name.trim()}
+            disabled={!formState.isValid}
           >
             추가하기
           </Button>
@@ -91,7 +112,7 @@ function AddMember({ members, setMembers }: AddMemberProps) {
             <MemberProfile
               key={member.id}
               member={member}
-              handleDeleteButtonClick={() => handleDeleteButtonClick(member.id)}
+              handleDeleteButtonClick={handleDeleteMember}
             />
           ))}
         </Flex>
