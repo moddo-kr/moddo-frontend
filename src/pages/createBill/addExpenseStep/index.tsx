@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Close } from '@/assets/svgs/icon';
@@ -31,6 +31,7 @@ interface AddExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
 
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
+  const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const [tabMode, setTabMode] = useState<'DIVIDE_N' | 'DIVIDE_CUSTOM'>(
     'DIVIDE_N'
   );
@@ -46,12 +47,21 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
     name: 'expenses',
   });
 
+  useLayoutEffect(() => {
+    // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
+    lastFormCardRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [fields.length]);
+
   const { handleSubmit, formState, watch } = formMethods;
   const allFormsValid = formState.isValid;
   const expenses = watch('expenses');
 
   const handleAddExpense = () => {
-    append(defaultValues);
+    // 기본 focus 기능을 사용하지 않고 새로운 폼 추가
+    append(defaultValues, { shouldFocus: false });
   };
 
   const handleDeleteExpense = (index: number) => {
@@ -97,6 +107,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
         {fields.map((field, index) => (
           <BillFormCard
             key={field.id}
+            ref={index === fields.length - 1 ? lastFormCardRef : null}
             index={index}
             onDelete={handleDeleteExpense}
           />
