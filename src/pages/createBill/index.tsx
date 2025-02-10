@@ -43,9 +43,14 @@ function CreateBill() {
         />
       );
     case 'ADD_ACCOUNT':
-      return <AddAccountStep />;
+      return (
+        <AddAccountStep
+          moveToPreviousStep={moveToPreviousStep}
+          moveToNextStep={moveToNextStep}
+        />
+      );
     case 'SHARE':
-      return <ShareStep />;
+      return <ShareStep moveToPreviousStep={moveToPreviousStep} />;
     default:
       return null;
   }
