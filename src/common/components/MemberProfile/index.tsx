@@ -1,10 +1,10 @@
 import { Flex, Text } from '@chakra-ui/react';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import { Member } from '@/common/types/member.type';
-import * as S from './index.style';
 import { DeleteButtonIcon } from '@/assets/svgs';
 import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useMemo } from 'react';
+import * as S from './index.style';
 
 interface MemberProfileProps {
   member: Member;

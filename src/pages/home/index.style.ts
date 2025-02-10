@@ -5,15 +5,15 @@ export const Button = styled.button<{ color?: string; bgColor?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : 'black')};
-  color: ${({ color }) => (color ? color : 'white')};
+  background-color: ${({ bgColor }) => bgColor || 'black'};
+  color: ${({ color }) => color || 'white'};
   font-weight: 400;
   border-radius: 9999px;
   padding: 0.5rem 0.75rem; // 8px 12px
   height: fit-content;
   width: fit-content;
   line-height: 1.5;
-  font-size: 0.875rem; //14px 
+  font-size: 0.875rem; //14px
   cursor: pointer;
 
   &:hover {
@@ -34,7 +34,7 @@ export const MainHeader = styled.header`
   align-items: center;
   padding: 1rem 1.25rem; // 20px
   width: 100%;
-  background-color: #FAF6F3;
+  background-color: #faf6f3;
 `;
 
 export const MainText = styled.h2`
@@ -51,7 +51,7 @@ export const SubText = styled.p`
 `;
 
 export const DescriptionImg = styled.img`
-  width: 10.75rem; // 172px; 
+  width: 10.75rem; // 172px;
   object-fit: contain;
   position: absolute;
   bottom: 0;
@@ -59,7 +59,7 @@ export const DescriptionImg = styled.img`
 `;
 
 export const Hr = styled.hr`
-  border: 0.5rem solid #EDEEEE;
+  border: 0.5rem solid #edeeee;
   width: 100%;
 `;
 
@@ -70,7 +70,7 @@ export const SettlementTitle = styled.h2`
   white-space: nowrap;
 `;
 
-export const SettlementButton = styled(Button)<{selected?: boolean}>`
+export const SettlementButton = styled(Button)<{ selected?: boolean }>`
   background-color: ${({ selected }) => (selected ? '#FF802E' : '#F1F3F5')};
   color: ${({ selected }) => (selected ? 'white' : 'black')};
 `;
@@ -80,4 +80,3 @@ export const NoSettlementImg = styled.img`
   max-width: 200px;
   object-fit: contain;
 `;
-

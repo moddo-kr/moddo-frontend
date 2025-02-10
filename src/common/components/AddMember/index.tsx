@@ -2,9 +2,9 @@ import { Button, Flex, Input, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
 
-import MemberProfile from '../MemberProfile';
 import { nanoid } from 'nanoid';
 import { Member } from '@/common/types/member.type';
+import MemberProfile from '../MemberProfile';
 
 interface AddMemberProps {
   members: Member[];
@@ -12,22 +12,19 @@ interface AddMemberProps {
 }
 
 function AddMember({ members, setMembers }: AddMemberProps) {
+  /** @Todo 모임원 추가 로직 수정에 따라 삭제할 코드 */
   const [name, setName] = useState('');
-  /**
-   * 비회원일때를 가정하여 총무를 members에 추가함
-   * @Todo 회원일 경우 store에서 총무를 members에 추가하기
-   */
   useEffect(() => {
     if (members.length === 0) {
       setMembers([{ id: nanoid(), name: '김모또(총무)', role: 'treasurer' }]);
     }
-  }, []);
+  }, [members.length, setMembers]); // 의존성 배열에 추가// 빈 배열로 설정하면, setMembers 함수는 한 번만 생성됨
 
   const addNewMember = () => {
     if (!name.trim()) return; // 이름이 없으면 추가하지 않음
     const newMember: Member = {
       id: nanoid(), // nanoid를 사용하여 고유한 id 생성
-      name: name,
+      name,
       role: 'participant',
     };
     setMembers([newMember, ...members]);

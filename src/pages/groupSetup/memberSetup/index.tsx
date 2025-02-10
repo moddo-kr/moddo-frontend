@@ -1,10 +1,10 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
-import * as S from '../index.styles';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
 import { ROUTE } from '@/common/constants/route';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
+import * as S from '../index.styles';
 
 export interface ParticipantProfile {
   name: string;
@@ -19,7 +19,7 @@ function MemberSetup() {
     <>
       <Header
         title=""
-        showIcon={true}
+        showIcon
         type="TitleLeft"
         handleBackButtonClick={() => navigate(-1)}
       />

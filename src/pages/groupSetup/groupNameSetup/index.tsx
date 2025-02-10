@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Header from '@/common/components/Header';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
-import * as S from '../index.styles';
 import { ROUTE } from '@/common/constants/route';
+import * as S from '../index.styles';
 
 const groupNameSchema = z.object({
   groupName: z

@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
+import Header from '@/common/components/Header';
+import { ROUTE } from '@/common/constants/route';
 import * as S from '../index.styles';
 
 import { useGroupSetupStore } from '../stores/useGroupSetupStore';
-import Header from '@/common/components/Header';
-import { ROUTE } from '@/common/constants/route';
 
 const passwordSchema = z.object({
   password: z
