@@ -41,7 +41,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       expenses: [defaultValues],
     },
   });
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: formMethods.control,
     name: 'expenses',
   });
@@ -49,6 +49,14 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const { handleSubmit, formState, watch } = formMethods;
   const allFormsValid = formState.isValid;
   const expenses = watch('expenses');
+
+  const handleAddExpense = () => {
+    append(defaultValues);
+  };
+
+  const handleDeleteExpense = (index: number) => {
+    remove(index);
+  };
 
   // 임시...
   const onFormSubmit = (data: any) => {
@@ -62,6 +70,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
         type="TitleCenter"
         leftButtonContent={<Close width="1.5rem" />}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
+        rightButtonOnClick={handleAddExpense}
       />
       <S.TopWrapper>
         <S.TopMessage>
@@ -86,7 +95,11 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       </S.TabContainer>
       <S.BillFormList>
         {fields.map((field, index) => (
-          <BillFormCard key={field.id} index={index} />
+          <BillFormCard
+            key={field.id}
+            index={index}
+            onDelete={handleDeleteExpense}
+          />
         ))}
       </S.BillFormList>
       {/* TODO : 지출 내역 입력_직접 입력하기 */}

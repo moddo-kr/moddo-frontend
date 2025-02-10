@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import BillDatePicker from '../DatePicker';
@@ -11,9 +12,10 @@ import * as S from './index.styles';
 
 interface FormCardProps {
   index: number;
+  onDelete: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
 }
 
-function FormCard({ index }: FormCardProps) {
+function FormCard({ index, onDelete }: FormCardProps) {
   const { register, watch, setValue, control } = useFormContext();
   const [openNumPad, setOpenNumPad] = useState(false);
 
@@ -46,7 +48,14 @@ function FormCard({ index }: FormCardProps) {
 
   return (
     <S.FormCard>
-      <S.FormCardTitle>1차</S.FormCardTitle>
+      <S.FormCardTitleContainer>
+        <S.FormCardTitle>{index + 1}차</S.FormCardTitle>
+        {index > 0 ? (
+          <S.FormDeleteButton type="button" onClick={() => onDelete(index)}>
+            <Close width="1.5rem" />
+          </S.FormDeleteButton>
+        ) : null}
+      </S.FormCardTitleContainer>
       <FormField
         label="결제 금액"
         required

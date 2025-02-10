@@ -9,8 +9,17 @@ export const FormCard = styled(Card.Root)`
   gap: 1.5rem;
 `;
 
-export const FormCardTitle = styled(Card.Title)`
+export const FormCardTitleContainer = styled(Card.Title)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+export const FormCardTitle = styled.span`
   font-size: 1.25rem;
   font-weight: 700; // bold
   color: #000000;
 `;
+
+export const FormDeleteButton = styled.button``;
