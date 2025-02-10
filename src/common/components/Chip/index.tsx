@@ -14,7 +14,7 @@ function Chip({ label, closable, onClose, variant = 'gray' }: ChipProps) {
       <S.ChipLabel>{label}</S.ChipLabel>
       {closable && (
         <S.CloseButton onClick={onClose}>
-          <Close />
+          <Close width="1.5rem" fill="#444950" />
         </S.CloseButton>
       )}
     </S.Chip>
