@@ -10,15 +10,29 @@
  * ```
  */
 const copyClipboard = async (text: string) => {
-  // Clipboard API를 지원하지 않는 경우
-  if (!navigator.clipboard) return false;
-
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch (_error) {
-    return false;
+  // 1. Clipboard API를 사용할 수 있는 경우
+  if (window.navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (_error) {
+      return false;
+    }
   }
+  // 2. Clipboard API를 사용할 수 없는 경우
+  if (document.queryCommandSupported?.('copy')) {
+    // textarea 를 생성하여 복사
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    return true;
+  }
+  return false;
 };
 
 export default copyClipboard;
