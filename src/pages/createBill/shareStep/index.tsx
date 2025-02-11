@@ -7,6 +7,7 @@ import Header from '@/common/components/Header';
 import copyClipboard from '@/common/utils/copyClipboard';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { BillContext } from '../types/billContext.type';
+import ShareButton from './components/ShareButton';
 import * as S from './index.styles';
 
 const DUMMY_LINK = 'https://dnd.ac';
@@ -16,11 +17,11 @@ interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 function ShareStep({ moveToPreviousStep }: ShareStepProps) {
   // TODO : Dummy link 대신 API로 받아온 링크로 변경해야 함.
   // NOTE : PC Safari에서는 권한 에러 발생함.
-  useLayoutEffect(() => {
-    copyClipboard(DUMMY_LINK).then((isCopied) => {
-      if (isCopied) alert('링크가 복사되었습니다.');
-    });
-  }, [DUMMY_LINK]);
+  // useLayoutEffect(() => {
+  //   copyClipboard(DUMMY_LINK).then((isCopied) => {
+  //     if (isCopied) alert('링크가 복사되었습니다.');
+  //   });
+  // }, [DUMMY_LINK]);
 
   return (
     <>
@@ -55,8 +56,9 @@ function ShareStep({ moveToPreviousStep }: ShareStepProps) {
         </Stack>
       </Stack>
       <S.ButtonWrapper>
-        <S.BottomButton>링크 공유하기</S.BottomButton>
-        <S.BottomSubButton>정산 내역 확인하기</S.BottomSubButton>
+        <ShareButton shareLink={DUMMY_LINK} />
+        {/* TODO : 실제 정산 내역 페이지 링크를 연결해야 함. */}
+        <S.BottomLink to="/home">정산 내역 확인하기</S.BottomLink>
       </S.ButtonWrapper>
     </>
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import styled from 'styled-components';
 
 export const TopWrapper = styled.div`
@@ -12,20 +13,6 @@ export const TopMessage = styled.span`
   line-height: 150%; /* 1.875rem */
 `;
 
-// export const BottomSheetContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   padding: 2rem 1.25rem 0 1.25rem;
-//   gap: 1.75rem;
-// `;
-
-// export const BottomSheetTitle = styled.span`
-//   color: #444950;
-//   font-size: 1.25rem;
-//   font-weight: 700;
-//   line-height: 150%; /* 1.875rem */
-// `;
-
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,22 +21,7 @@ export const ButtonWrapper = styled.div`
   width: 100%;
 `;
 
-export const BottomButton = styled.button`
-  height: 3.5rem;
-  width: 100%;
-  padding: 1rem 0.875rem;
-  border-radius: 624.9375rem;
-  color: #fff;
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 150%; /* 1.6875rem */
-  background-color: #35393e;
-  &:disabled {
-    background-color: #d2d4d5;
-  }
-`;
-
-export const BottomSubButton = styled.button`
+export const BottomLink = styled(Link)`
   height: 2.5rem;
   padding: 1rem 0.875rem;
   text-align: center;
