@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import Link from '@/assets/pngs/Link.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
+import initKakaoSDK from '@/common/utils/initKakaoSDK';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { BillContext } from '../types/billContext.type';
 import ShareButton from './components/ShareButton';
 import * as S from './index.styles';
 
-const DUMMY_LINK = 'https://dnd.ac';
+const DUMMY_LINK = 'http://localhost:3000/home';
 
 interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
@@ -20,6 +22,10 @@ function ShareStep({ moveToPreviousStep }: ShareStepProps) {
   //     if (isCopied) alert('링크가 복사되었습니다.');
   //   });
   // }, [DUMMY_LINK]);
+
+  useEffect(() => {
+    initKakaoSDK();
+  }, []);
 
   return (
     <>

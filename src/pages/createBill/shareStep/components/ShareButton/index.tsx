@@ -10,6 +10,7 @@ import {
 } from '@/common/constants/shareFormat';
 import copyClipboard from '@/common/utils/copyClipboard';
 import share from '@/common/utils/share';
+import shareKakao from '@/common/utils/shareKakao';
 import * as S from './index.styles';
 import ShareItemButton from '../ShareItemButton';
 
@@ -20,6 +21,9 @@ interface ShareButtonProps {
 function ShareButton({ shareLink }: ShareButtonProps) {
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [openToast, setOpenToast] = useState<boolean>(false);
+
+  const shareData = shareDataFormat(shareLink);
+  const shareMessage = shareMessageFormat(shareLink);
 
   return (
     <DrawerRoot
@@ -51,12 +55,17 @@ function ShareButton({ shareLink }: ShareButtonProps) {
                   });
               }}
             />
-            <ShareItemButton text="카카오톡" onClick={() => {}} />
+            <ShareItemButton
+              text="카카오톡"
+              onClick={() => {
+                shareKakao(shareData);
+              }}
+            />
             <ShareItemButton text="메시지" onClick={() => {}} />
             <ShareItemButton
               text="슬랙"
               onClick={() => {
-                copyClipboard(shareMessageFormat(shareLink))
+                copyClipboard(shareMessage)
                   .then(() => {
                     window.open('slack://open', '_blank');
                   })
@@ -68,7 +77,7 @@ function ShareButton({ shareLink }: ShareButtonProps) {
             <ShareItemButton
               text="더보기"
               onClick={() => {
-                share(shareDataFormat(shareLink)).finally(() => {
+                share(shareData).finally(() => {
                   setOpenBottomSheet(false);
                 });
               }}
