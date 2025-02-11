@@ -8,7 +8,7 @@ import { Member } from '@/common/types/member.type';
 import MemberProfile from '../MemberProfile';
 
 const MemberSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().trim().min(1),
 });
 
 interface AddMemberProps {
