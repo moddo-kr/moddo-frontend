@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Close } from '@/assets/svgs/icon';
@@ -31,6 +31,7 @@ interface AddExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
 
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
+  const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const [tabMode, setTabMode] = useState<'DIVIDE_N' | 'DIVIDE_CUSTOM'>(
     'DIVIDE_N'
   );
@@ -41,14 +42,31 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       expenses: [defaultValues],
     },
   });
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: formMethods.control,
     name: 'expenses',
   });
 
+  useLayoutEffect(() => {
+    // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
+    lastFormCardRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [fields.length]);
+
   const { handleSubmit, formState, watch } = formMethods;
   const allFormsValid = formState.isValid;
   const expenses = watch('expenses');
+
+  const handleAddExpense = () => {
+    // 기본 focus 기능을 사용하지 않고 새로운 폼 추가
+    append(defaultValues, { shouldFocus: false });
+  };
+
+  const handleDeleteExpense = (index: number) => {
+    remove(index);
+  };
 
   // 임시...
   const onFormSubmit = (data: any) => {
@@ -62,6 +80,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
         type="TitleCenter"
         leftButtonContent={<Close width="1.5rem" />}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
+        rightButtonOnClick={handleAddExpense}
       />
       <S.TopWrapper>
         <S.TopMessage>
@@ -86,7 +105,12 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       </S.TabContainer>
       <S.BillFormList>
         {fields.map((field, index) => (
-          <BillFormCard key={field.id} index={index} />
+          <BillFormCard
+            key={field.id}
+            ref={index === fields.length - 1 ? lastFormCardRef : null}
+            index={index}
+            onDelete={handleDeleteExpense}
+          />
         ))}
       </S.BillFormList>
       {/* TODO : 지출 내역 입력_직접 입력하기 */}
