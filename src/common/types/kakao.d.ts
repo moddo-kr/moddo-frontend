@@ -34,38 +34,6 @@ declare namespace Kakao {
      */
     function sendDefault(settings: DefaultFeedSettings): void;
 
-    /**
-     * 메시지 템플릿을 이용하여 카카오톡 공유를 하는 기능입니다. [메시지 템플릿 가이드로 이동](https://developers.kakao.com/docs/latest/ko/message/message-template)
-     * @param settings 카카오톡 공유와 관련된 설정을 key/value로 전달합니다.
-     */
-    function sendCustom(settings: {
-      /**
-       * 메시지 템플릿 아이디, [내 애플리케이션 > 메시지 > 메시지 템플릿]에서 확인
-       */
-      templateId: number;
-
-      /**
-       * 메시지 템플릿에서 활용할 arguments, ex) {'name':'kakao', 'url':'https://developers.kakao.com'}
-       */
-      templateArgs?: { [key: string]: any };
-
-      /**
-       * 카카오톡이 설치되어 있지 않은 경우 마켓의 카카오톡 설치 페이지로 이동
-       * @defaultValue `false`
-       */
-      installTalk?: boolean;
-
-      /**
-       * 데스크톱 환경에서 카카오톡 공유를 완료했을 때 호출되는 콜백 함수 (IE 미지원)
-       */
-      callback?: (...args: any[]) => any;
-
-      /**
-       * 카카오톡 공유 시 전송되는 알림에 포함되는 파라미터 ([전송 성공 알림 설정하기](https://developers.kakao.com/docs/latest/ko/message/js-link#set-kakaolink-callback))
-       */
-      serverCallbackArgs?: { [key: string]: any } | string;
-    }): void;
-
     interface DefaultFeedSettings extends DefaultSettings<'feed'> {
       /**
        * 메시지의 메인 콘텐츠 정보
