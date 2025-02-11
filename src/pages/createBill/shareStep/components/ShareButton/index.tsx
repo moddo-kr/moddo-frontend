@@ -4,7 +4,12 @@ import {
   DrawerContent,
   DrawerRoot,
 } from '@/common/components/Drawer/drawer';
+import {
+  shareDataFormat,
+  shareMessageFormat,
+} from '@/common/constants/shareFormat';
 import copyClipboard from '@/common/utils/copyClipboard';
+import share from '@/common/utils/share';
 import * as S from './index.styles';
 import ShareItemButton from '../ShareItemButton';
 
@@ -30,11 +35,44 @@ function ShareButton({ shareLink }: ShareButtonProps) {
         <S.BottomSheetContainer className="BottomSheetContainer">
           <S.BottomSheetTitle>링크 공유</S.BottomSheetTitle>
           <S.ShareItemContainer>
-            <ShareItemButton text="복사" onClick={() => {}} />
+            <ShareItemButton
+              text="복사"
+              onClick={() => {
+                copyClipboard(shareMessageFormat(shareLink))
+                  .then(() => {
+                    // TODO : 공통 컴포넌트에서 토스트 로직을 처리하도록 수정
+                    setOpenToast(true);
+                    setTimeout(() => {
+                      setOpenToast(false);
+                    }, 2000);
+                  })
+                  .finally(() => {
+                    setOpenBottomSheet(false);
+                  });
+              }}
+            />
             <ShareItemButton text="카카오톡" onClick={() => {}} />
             <ShareItemButton text="메시지" onClick={() => {}} />
-            <ShareItemButton text="슬랙" onClick={() => {}} />
-            <ShareItemButton text="더보기" onClick={() => {}} />
+            <ShareItemButton
+              text="슬랙"
+              onClick={() => {
+                copyClipboard(shareMessageFormat(shareLink))
+                  .then(() => {
+                    window.open('slack://open', '_blank');
+                  })
+                  .finally(() => {
+                    setOpenBottomSheet(false);
+                  });
+              }}
+            />
+            <ShareItemButton
+              text="더보기"
+              onClick={() => {
+                share(shareDataFormat(shareLink)).finally(() => {
+                  setOpenBottomSheet(false);
+                });
+              }}
+            />
           </S.ShareItemContainer>
         </S.BottomSheetContainer>
       </DrawerContent>

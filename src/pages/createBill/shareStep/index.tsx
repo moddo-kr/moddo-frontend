@@ -1,10 +1,8 @@
-import { useLayoutEffect } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import Link from '@/assets/pngs/Link.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
-import copyClipboard from '@/common/utils/copyClipboard';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { BillContext } from '../types/billContext.type';
 import ShareButton from './components/ShareButton';
