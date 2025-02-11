@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { VStack } from '@chakra-ui/react';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import ExpenseCardList from './components/ExpenseCardList';
+import EditOrderList from './components/EditOrderList';
 import useGetAllExpense from './hooks/useGetAllExpense';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
@@ -15,6 +17,7 @@ interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
   // TODO : meetId를 알아내는 로직이 필요함
   const { data, isLoading } = useGetAllExpense(DUMMY_MEET_ID);
+  const [mode, setMode] = useState<'VIEW' | 'EDIT'>('VIEW');
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -42,8 +45,22 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
             {getTotalExpense(data.expenses).toLocaleString()}원
           </S.TotalExpenseAmount>
         </S.TotalExpenseWrapper>
-        <ExpenseCardList expenses={data.expenses} />
-        <S.ChangeOrderButton>순서 바꾸기</S.ChangeOrderButton>
+        {mode === 'VIEW' ? (
+          <ExpenseCardList expenses={data.expenses} />
+        ) : (
+          <EditOrderList
+            expenses={data.expenses}
+            returnToViewMode={() => setMode('VIEW')}
+          />
+        )}
+        <S.ChangeOrderButton
+          type="button"
+          onClick={() => {
+            setMode('EDIT');
+          }}
+        >
+          순서 바꾸기
+        </S.ChangeOrderButton>
       </VStack>
       <S.ButtonWrapper>
         <S.BottomButton
