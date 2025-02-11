@@ -6,9 +6,10 @@ import { ExpenseMember } from '@/pages/createBill/types/expense.type';
 import BillDatePicker from '../DatePicker';
 import FormField from '../FormField';
 import NumPadBottomSheet from '../NumPadBottomSheet';
+import MemberBottomSheet from '../MemberBottomSheet';
 import MemberChips from '../MemberChips';
-import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface FormCardProps {
   index: number;
@@ -19,6 +20,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
   ({ index, onDelete }, ref) => {
     const { register, watch, setValue, control } = useFormContext();
     const [openNumPad, setOpenNumPad] = useState(false);
+    const [openMemberSheet, setOpenMemberSheet] = useState(false);
 
     const amount = watch(`expenses.${index}.amount`);
     const memberExpenses = watch(`expenses.${index}.memberExpenses`);
@@ -49,68 +51,74 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
     }, [amount, index, memberExpenses, setValue]);
 
     return (
-      <S.FormCard ref={ref}>
-        <S.FormCardTitleContainer>
-          <S.FormCardTitle>{index + 1}차</S.FormCardTitle>
-          {index > 0 ? (
-            <S.FormDeleteButton type="button" onClick={() => onDelete(index)}>
-              <Close width="1.5rem" />
-            </S.FormDeleteButton>
-          ) : null}
-        </S.FormCardTitleContainer>
-        <FormField
-          label="결제 금액"
-          required
-          control={control}
-          name={`expenses.${index}.amount`}
-          renderInput={({ field }) => (
-            <NumPadBottomSheet
-              initialInput={field.value}
-              open={openNumPad}
-              setOpen={setOpenNumPad}
-              setInput={(value) => field.onChange(value)}
-            />
-          )}
+      <>
+        <S.FormCard ref={ref}>
+          <S.FormCardTitleContainer>
+            <S.FormCardTitle>{index + 1}차</S.FormCardTitle>
+            {index > 0 ? (
+              <S.FormDeleteButton type="button" onClick={() => onDelete(index)}>
+                <Close width="1.5rem" />
+              </S.FormDeleteButton>
+            ) : null}
+          </S.FormCardTitleContainer>
+          <FormField
+            label="결제 금액"
+            required
+            control={control}
+            name={`expenses.${index}.amount`}
+            renderInput={({ field }) => (
+              <NumPadBottomSheet
+                initialInput={field.value}
+                open={openNumPad}
+                setOpen={setOpenNumPad}
+                setInput={(value) => field.onChange(value)}
+              />
+            )}
+          />
+          <FormField
+            label="지출 장소 및 내용"
+            required
+            register={register(`expenses.${index}.content`)}
+            name={`expenses.${index}.content`}
+            placeholder="ex. 투썸플레이스"
+          />
+          <FormField
+            label="지출일"
+            control={control}
+            name={`expenses.${index}.date`}
+            renderInput={({ field }) => (
+              <BillDatePicker
+                selected={field.value}
+                onChange={(date) => field.onChange(date)}
+              />
+            )}
+          />
+          <FormField
+            label="참여자"
+            name={`expenses.${index}.memberExpenses`}
+            control={control}
+            subButton={{
+              label: '참여자 추가',
+              onClick: () => setOpenMemberSheet(true),
+            }}
+            renderInput={({ field }) => (
+              <MemberChips
+                members={field.value}
+                onDelete={(name) => {
+                  const newMembers = field.value.filter(
+                    (member: ExpenseMember) => member.name !== name
+                  );
+                  field.onChange(newMembers);
+                }}
+              />
+            )}
+          />
+        </S.FormCard>
+        <MemberBottomSheet
+          open={openMemberSheet}
+          setOpen={setOpenMemberSheet}
         />
-        <FormField
-          label="지출 장소 및 내용"
-          required
-          register={register(`expenses.${index}.content`)}
-          name={`expenses.${index}.content`}
-          placeholder="ex. 투썸플레이스"
-        />
-        <FormField
-          label="지출일"
-          control={control}
-          name={`expenses.${index}.date`}
-          renderInput={({ field }) => (
-            <BillDatePicker
-              selected={field.value}
-              onChange={(date) => field.onChange(date)}
-            />
-          )}
-        />
-        <FormField
-          label="참여자"
-          name={`expenses.${index}.memberExpenses`}
-          control={control}
-          subButton={{
-            label: '참여자 추가',
-            onClick: () => console.log('참여자 추가 바텀시트 등장'),
-          }}
-          renderInput={({ field }) => (
-            <MemberChips
-              members={field.value}
-              onDelete={(name) => {
-                const newMembers = field.value.filter(
-                  (member: ExpenseMember) => member.name !== name
-                );
-                field.onChange(newMembers);
-              }}
-            />
-          )}
-        />
-      </S.FormCard>
+      </>
     );
   }
 );
