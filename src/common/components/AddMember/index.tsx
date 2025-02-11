@@ -48,7 +48,7 @@ function AddMember({
       name,
       role: 'participant',
     };
-    setMembers?.([...members, newMember]);
+    setMembers?.([newMember, ...members]);
 
     // 초기화
     clearErrors('name');
