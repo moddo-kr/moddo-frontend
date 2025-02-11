@@ -22,14 +22,17 @@ const copyClipboard = async (text: string) => {
   // 2. Clipboard API를 사용할 수 없는 경우
   if (document.queryCommandSupported?.('copy')) {
     // textarea 를 생성하여 복사
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
+    const dummyTextarea = document.createElement('textarea');
+    dummyTextarea.value = text;
+    dummyTextarea.style.position = 'fixed';
+    dummyTextarea.style.opacity = '0';
+    dummyTextarea.style.top = '0';
+    dummyTextarea.style.left = '0';
+    document.body.appendChild(dummyTextarea);
+    dummyTextarea.focus();
+    dummyTextarea.select();
     document.execCommand('copy');
-    document.body.removeChild(textarea);
+    document.body.removeChild(dummyTextarea);
     return true;
   }
   return false;
