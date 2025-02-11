@@ -1,15 +1,27 @@
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
+import { useLayoutEffect } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import Link from '@/assets/pngs/Link.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
-import Header from '@/common/components/Header';
 import { ArrowLeft } from '@/assets/svgs/icon';
+import Header from '@/common/components/Header';
+import copyClipboard from '@/common/utils/copyClipboard';
+import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
+
+const DUMMY_LINK = 'https://dnd.ac';
 
 interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function ShareStep({ moveToPreviousStep }: ShareStepProps) {
+  // TODO : Dummy link 대신 API로 받아온 링크로 변경해야 함.
+  // NOTE : PC Safari에서는 권한 에러 발생함.
+  useLayoutEffect(() => {
+    copyClipboard(DUMMY_LINK).then((isCopied) => {
+      if (isCopied) alert('링크가 복사되었습니다.');
+    });
+  }, [DUMMY_LINK]);
+
   return (
     <>
       <Header
