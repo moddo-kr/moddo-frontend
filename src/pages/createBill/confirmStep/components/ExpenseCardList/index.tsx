@@ -1,18 +1,18 @@
 import { Expense } from '@/pages/createBill/types/expense.type';
 import ExpenseCard from '../ExpenseCard';
+import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
 }
 
 function ExpenseCardList({ expenses }: ExpenseCardListProps) {
-  // TODO : 순서 바꾸기 기능 추가 예정
   return (
-    <>
+    <S.CardListContainer>
       {expenses.map((expense, index) => (
         <ExpenseCard key={expense.id} index={index} {...expense} />
       ))}
-    </>
+    </S.CardListContainer>
   );
 }
 
