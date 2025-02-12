@@ -1,19 +1,33 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Expense } from '@/pages/createBill/types/expense.type';
+import EditOrderItem from '../EditOrderItem';
+import * as S from './index.styles';
 
 interface EditOrderListProps {
   expenses: Expense[];
-  returnToViewMode: () => void;
+  setMode: Dispatch<SetStateAction<'VIEW' | 'EDIT'>>;
 }
 
-function EditOrderList({ expenses, returnToViewMode }: EditOrderListProps) {
+function EditOrderList({ expenses, setMode }: EditOrderListProps) {
   return (
-    <div>
-      {expenses.map((expense, index) => (
-        <div key={expense.id}>
-          <div>{expense.amount}</div>
-        </div>
-      ))}
-    </div>
+    <>
+      <S.CardListContainer>
+        {expenses.map((expense, index) => (
+          <EditOrderItem key={expense.id} index={index} {...expense} />
+        ))}
+      </S.CardListContainer>
+      <S.ButtonWrapper>
+        <S.BottomButton
+          type="button"
+          onClick={() => {
+            // TODO : 순서 변경 요청 보내기
+            setMode('VIEW');
+          }}
+        >
+          완료
+        </S.BottomButton>
+      </S.ButtonWrapper>
+    </>
   );
 }
 

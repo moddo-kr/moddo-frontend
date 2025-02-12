@@ -10,18 +10,6 @@ export const CardListContainer = styled.div`
   padding: 1rem 1.25rem;
 `;
 
-// NOTE: 현재 disabled 상태의 디자인만 존재함
-export const ChangeOrderButton = styled.button`
-  width: 100%;
-  padding: 0rem 1.25rem;
-  color: 868a8f;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 150%; /* 1.5rem */
-  opacity: 0.5;
-`;
-
 export const ButtonWrapper = styled.div`
   padding: 0 1.25rem 1rem 1.25rem;
   width: 100%;
