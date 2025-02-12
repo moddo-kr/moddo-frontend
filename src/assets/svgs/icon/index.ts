@@ -3,4 +3,5 @@ export { default as ArrowRight } from './ArrowRight';
 export { default as Calendar } from './Calendar';
 export { default as CarbonEdit } from './CarbonEdit';
 export { default as Close } from './Close';
+export { default as Drag } from './Drag';
 export { default as Next } from './Next';
