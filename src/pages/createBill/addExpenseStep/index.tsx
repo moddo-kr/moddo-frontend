@@ -28,9 +28,6 @@ interface AddExpenseStepProps
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const [groupInfo, setGroupInfo] = useState<Group | null>(null);
-  const [tabMode, setTabMode] = useState<'DIVIDE_N' | 'DIVIDE_CUSTOM'>(
-    'DIVIDE_N'
-  );
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
@@ -117,21 +114,6 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           {`의\n지출 내역을 입력해주세요.`}
         </S.TopMessage>
       </S.TopWrapper>
-      <S.TabContainer>
-        <S.TabButton
-          $isSelected={tabMode === 'DIVIDE_N'}
-          onClick={() => setTabMode('DIVIDE_N')}
-        >
-          1/N 으로 나누기
-        </S.TabButton>
-        <S.TabButton
-          $isSelected={tabMode === 'DIVIDE_CUSTOM'}
-          onClick={() => setTabMode('DIVIDE_CUSTOM')}
-          disabled
-        >
-          직접 입력하기
-        </S.TabButton>
-      </S.TabContainer>
       <S.BillFormList>
         {fields.map((field, index) => (
           <BillFormCard
