@@ -2,9 +2,6 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import {
   DndContext,
   DragEndEvent,
-  DragOverEvent,
-  DragStartEvent,
-  UniqueIdentifier,
   useDroppable,
   useSensors,
   useSensor,
@@ -23,45 +20,37 @@ interface EditOrderListProps {
 
 function EditOrderList({ initialExpenses, setMode }: EditOrderListProps) {
   const [expenseList, setExpenseList] = useState<Expense[]>(initialExpenses);
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const sensors = useSensors(useSensor(TouchSensor), useSensor(MouseSensor));
   const { setNodeRef } = useDroppable({
     id: 'expense-list',
   });
-  const sensors = useSensors(useSensor(TouchSensor), useSensor(MouseSensor));
 
-  const handleDragStart = ({ active }: DragStartEvent) => {
-    console.log('handleDragStart', active);
-    setActiveId(active.id);
-  };
-  const handleDragCancel = () => {
-    console.log('handleDragCancel');
-    setActiveId(null);
-  };
-  const handleDragOver = ({ active, over }: DragOverEvent) => {
-    const overId = over?.id;
-    if (!overId) {
-      return;
-    }
-    console.log('handleDragOver', activeId, overId);
-  };
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     const overId = over?.id;
     if (!overId) {
       return;
     }
-    console.log('handleDragEnd', activeId, overId);
-    return;
+    setExpenseList((prevList) => {
+      const activeIndex = prevList.findIndex(
+        (expense) => expense.id === active.id
+      );
+      const overIndex = prevList.findIndex((expense) => expense.id === overId);
+      const updatedList = [...prevList];
+      const [removed] = updatedList.splice(activeIndex, 1);
+      updatedList.splice(overIndex, 0, removed);
+      return updatedList;
+    });
+  };
+
+  const handleRequestChangeOrder = () => {
+    // TODO : 순서 변경 요청 보내기
+    console.log(expenseList);
+    setMode('VIEW');
   };
 
   return (
     <>
-      <DndContext
-        sensors={sensors}
-        onDragStart={handleDragStart}
-        onDragCancel={handleDragCancel}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-      >
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <SortableContext
           items={expenseList.map((expense) => expense.id)}
           id="sortable-expense"
@@ -75,13 +64,7 @@ function EditOrderList({ initialExpenses, setMode }: EditOrderListProps) {
         </SortableContext>
       </DndContext>
       <S.ButtonWrapper>
-        <S.BottomButton
-          type="button"
-          onClick={() => {
-            // TODO : 순서 변경 요청 보내기
-            setMode('VIEW');
-          }}
-        >
+        <S.BottomButton type="button" onClick={handleRequestChangeOrder}>
           완료
         </S.BottomButton>
       </S.ButtonWrapper>

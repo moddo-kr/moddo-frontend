@@ -51,6 +51,29 @@ const expenseHandlers = [
             },
           ],
         },
+        {
+          id: 3,
+          amount: 5000,
+          content: '회의실',
+          date: '2025-02-06',
+          memberExpenses: [
+            {
+              memberId: 1,
+              name: '김반숙',
+              amount: 10000,
+            },
+            {
+              memberId: 3,
+              name: '정에그',
+              amount: 10000,
+            },
+            {
+              memberId: 2,
+              name: '박완숙',
+              amount: 50000,
+            },
+          ],
+        },
       ],
     });
   }),
