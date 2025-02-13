@@ -44,6 +44,7 @@ function EditOrderItem({
         content={content}
         date={date}
         memberExpenses={memberExpenses}
+        readonly
       />
     </S.DraggableContainer>
   );

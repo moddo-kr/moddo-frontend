@@ -7,6 +7,7 @@ import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
+  readonly?: boolean;
 }
 
 function ExpenseCard({
@@ -15,6 +16,7 @@ function ExpenseCard({
   content,
   date,
   memberExpenses,
+  readonly,
 }: ExpenseCardProps) {
   return (
     <S.ExpenseCardWrapper>
@@ -25,6 +27,7 @@ function ExpenseCard({
           <S.IconButtonsWrapper>
             <S.IconButton
               type="button"
+              disabled={readonly}
               onClick={() => {
                 console.log(`${index + 1}차 수정`);
               }}
@@ -33,6 +36,7 @@ function ExpenseCard({
             </S.IconButton>
             <S.IconButton
               type="button"
+              disabled={readonly}
               onClick={() => {
                 console.log(`${index + 1}차 삭제`);
               }}
