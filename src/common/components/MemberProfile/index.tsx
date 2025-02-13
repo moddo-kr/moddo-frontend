@@ -36,7 +36,7 @@ function MemberProfile({
         <S.ProfileImg
           src={defaultProfileImg}
           alt="profile"
-          bgcolor={profileBgColor}
+          $bgcolor={profileBgColor}
         />
       </S.ProfileWrapper>
       <Text fontSize={12} lineHeight="1.5">
