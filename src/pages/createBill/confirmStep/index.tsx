@@ -50,11 +50,7 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
           moveToNextStep={moveToNextStep}
         />
       ) : (
-        <EditOrderList
-          expenses={data.expenses}
-          setMode={setMode}
-          moveToNextStep={moveToNextStep}
-        />
+        <EditOrderList initialExpenses={data.expenses} setMode={setMode} />
       )}
     </>
   );
