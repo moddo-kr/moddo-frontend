@@ -1,13 +1,15 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
+import { Group } from '@/common/types/group.type';
 import {
   Expense,
   ExpenseFormSchema,
 } from '@/pages/createBill/types/expense.type';
+import group from '@/service/apis/group';
 import BillFormCard from './components/FormCard';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
@@ -17,14 +19,7 @@ const defaultValues: Omit<Expense, 'id'> = {
   amount: 0,
   content: '',
   date: new Date(),
-  memberExpenses: [
-    { memberId: 1, amount: 0, name: '김달걀' },
-    { memberId: 2, amount: 0, name: '날달걀' },
-    { memberId: 3, amount: 0, name: '송에그' },
-    { memberId: 4, amount: 0, name: '강흰자' },
-    { memberId: 5, amount: 0, name: '연노른자' },
-    { memberId: 6, amount: 0, name: '강계란' },
-  ],
+  memberExpenses: [],
 };
 
 interface AddExpenseStepProps
@@ -32,16 +27,46 @@ interface AddExpenseStepProps
 
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
+  const [groupInfo, setGroupInfo] = useState<Group | null>(null);
   const [tabMode, setTabMode] = useState<'DIVIDE_N' | 'DIVIDE_CUSTOM'>(
     'DIVIDE_N'
   );
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
-    defaultValues: {
-      expenses: [defaultValues],
+    defaultValues: async () => {
+      // TODO : groupToken을 받아오는 로직 추가
+      const groupData = await group.get('groupToken');
+      setGroupInfo(groupData);
+      return {
+        expenses: [
+          {
+            ...defaultValues,
+            memberExpenses: groupData.members.map((member) => ({
+              memberId: member.id,
+              name: member.name,
+              amount: 0,
+            })),
+          },
+        ],
+      };
     },
   });
+  // TODO : 리팩토링 필요할듯...
+  const defaultFormValue = useMemo(() => {
+    if (!groupInfo) {
+      return defaultValues;
+    }
+    return {
+      ...defaultValues,
+      memberExpenses: groupInfo.members.map((member) => ({
+        memberId: member.id,
+        name: member.name,
+        amount: 0,
+      })),
+    };
+  }, [groupInfo]);
+
   const { fields, append, remove } = useFieldArray({
     control: formMethods.control,
     name: 'expenses',
@@ -61,7 +86,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
 
   const handleAddExpense = () => {
     // 기본 focus 기능을 사용하지 않고 새로운 폼 추가
-    append(defaultValues, { shouldFocus: false });
+    append(defaultFormValue, { shouldFocus: false });
   };
 
   const handleDeleteExpense = (index: number) => {
@@ -74,6 +99,10 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
     moveToNextStep?.();
   };
 
+  if (!groupInfo) {
+    return null;
+  }
+
   return (
     <FormProvider {...formMethods}>
       <Header
@@ -84,7 +113,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       />
       <S.TopWrapper>
         <S.TopMessage>
-          <S.MoimName>DND 7조 첫모임</S.MoimName>
+          <S.MoimName>{groupInfo.name}</S.MoimName>
           {`의\n지출 내역을 입력해주세요.`}
         </S.TopMessage>
       </S.TopWrapper>
