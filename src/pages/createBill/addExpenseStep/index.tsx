@@ -12,7 +12,7 @@ import {
 } from '@/pages/createBill/types/expense.type';
 import expense from '@/service/apis/expense';
 import group from '@/service/apis/group';
-import BillFormCard from './components/FormCard';
+import FormCard from './components/FormCard';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
@@ -120,7 +120,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       </S.TopWrapper>
       <S.BillFormList>
         {fields.map((field, index) => (
-          <BillFormCard
+          <FormCard
             key={field.id}
             ref={index === fields.length - 1 ? lastFormCardRef : null}
             index={index}
