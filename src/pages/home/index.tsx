@@ -1,12 +1,12 @@
 import { ArrowRightIcon, LogoIcon, MenuIcon } from '@/assets/svgs';
 import MainHamImg from '@/assets/pngs/MainHamImg.png';
-import * as S from './index.style';
 import { Flex, Text } from '@chakra-ui/react';
 import { Next } from '@/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useState } from 'react';
 import CoinImg from '@/assets/pngs/CoinImg.png';
+import * as S from './index.style';
 
 function Home() {
   const [settlementType, setSettlementType] = useState<'RECEIVE' | 'SEND'>(
@@ -33,8 +33,8 @@ function Home() {
       <Flex
         direction="column"
         position="relative"
-        bgColor={'#FAF6F3'}
-        height={'231px'}
+        bgColor="#FAF6F3"
+        height="231px"
       >
         <Flex direction="column" gap={1} px={5} py={2.5}>
           <S.MainText>즐거운 만남, 끝까지 즐겁게!</S.MainText>
@@ -78,7 +78,7 @@ function Home() {
           </Flex>
         </Flex>
         {settlementList.length > 0 ? (
-          /** @Todo 정산리스트 컴포넌트 구현*/
+          /** @Todo 정산리스트 컴포넌트 구현 */
           <div>정산리스트</div>
         ) : (
           <Flex

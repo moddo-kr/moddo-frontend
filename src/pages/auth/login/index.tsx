@@ -1,9 +1,9 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
-import * as S from './index.style';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
+import * as S from './index.style';
 
 function Login() {
   const navigate = useNavigate();

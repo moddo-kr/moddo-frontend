@@ -42,12 +42,13 @@ export const BottomButton = styled.button<{ bgColor?: string; color?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : 'black')};
-  color: ${({ color }) => (color ? color : 'black')};
+  background-color: ${({ bgColor }) => bgColor || 'black'};
+  color: ${({ color }) => color || 'black'};
   font-weight: 600;
   border-radius: 9999px;
   padding: 1rem 0.875rem; // 16px 14px
-  height: fit-content;
+  /* height: fit-content; */
+  /* height: 100px; */
   width: 100%;
   line-height: 1.5;
   cursor: pointer;

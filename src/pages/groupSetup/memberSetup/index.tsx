@@ -27,11 +27,13 @@ function MemberSetup() {
    * 비회원일때를 가정하여 총무를 members에 추가함
    * @Todo 회원일 경우 store에서 총무를 members에 추가하기
    */
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (members.length === 0) {
       setMembers(defaultMembers);
     }
   }, []);
+  /* eslint-disable react-hooks/exhaustive-deps */
 
   return (
     <>

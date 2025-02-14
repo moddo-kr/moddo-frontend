@@ -14,7 +14,7 @@ export const useGroupSetupStore = create<GroupSetupState>((set) => ({
   groupName: '',
   password: '',
   members: [],
-  setGroupName: (groupName) => set({ groupName: groupName }),
-  setPassword: (password) => set({ password: password }),
-  setMembers: (members) => set({ members: members }),
+  setGroupName: (groupName) => set({ groupName }),
+  setPassword: (password) => set({ password }),
+  setMembers: (members) => set({ members }),
 }));
