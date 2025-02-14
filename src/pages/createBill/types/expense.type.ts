@@ -19,6 +19,8 @@ export const ExpenseFormSchema = z.object({
 
 export interface ExpenseForm extends z.infer<typeof ExpenseFormSchema> {}
 
+export interface SingleExpenseForm extends z.infer<typeof ExpenseSchema> {}
+
 export interface ExpenseMember extends z.infer<typeof ExpenseMemberSchema> {}
 
 export interface Expense extends z.infer<typeof ExpenseSchema> {
