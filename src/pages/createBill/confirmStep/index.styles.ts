@@ -16,7 +16,7 @@ export const TotalExpenseWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  padding: 0 1.25rem;
+  padding: 1.5rem 1.25rem;
 `;
 
 export const TotalExpense = styled.span`

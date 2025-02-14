@@ -30,18 +30,16 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
         leftButtonOnClick={moveToPreviousStep}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
       />
-      <VStack align="flex-start" gap="1.5rem" flex={1}>
-        <S.TopWrapper>
-          <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
-        </S.TopWrapper>
-        <S.TotalExpenseWrapper>
-          <S.TotalExpense>누적 금액</S.TotalExpense>
-          <S.TotalExpenseAmount>
-            {getTotalExpense(data.expenses).toLocaleString()}원
-          </S.TotalExpenseAmount>
-        </S.TotalExpenseWrapper>
-        <ExpenseCardList expenses={data.expenses} />
-      </VStack>
+      <S.TopWrapper>
+        <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
+      </S.TopWrapper>
+      <S.TotalExpenseWrapper>
+        <S.TotalExpense>누적 금액</S.TotalExpense>
+        <S.TotalExpenseAmount>
+          {getTotalExpense(data.expenses).toLocaleString()}원
+        </S.TotalExpenseAmount>
+      </S.TotalExpenseWrapper>
+      <ExpenseCardList expenses={data.expenses} />
       <S.ButtonWrapper>
         <S.BottomButton
           type="button"
