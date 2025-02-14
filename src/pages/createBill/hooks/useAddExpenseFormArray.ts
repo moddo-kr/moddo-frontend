@@ -16,9 +16,9 @@ const defaultValues: Omit<Expense, 'id'> = {
 };
 
 /**
- * 지출 생성 (여러 건), 지출 추가 (단건) 폼을 위한 커스텀 훅
+ * 지출 폼을 위한 커스텀 훅
  */
-const useAddExpenseFormArray = () => {
+const useAddExpenseFormArray = (initialExpense?: Expense) => {
   const [groupInfo, setGroupInfo] = useState<Group | null>(null);
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
@@ -27,6 +27,13 @@ const useAddExpenseFormArray = () => {
       // TODO : groupToken을 받아오는 로직 추가
       const groupData = await group.get('groupToken');
       setGroupInfo(groupData);
+      // 기본 데이터가 있는 경우 (ex. 수정)
+      if (initialExpense) {
+        return {
+          expenses: [initialExpense],
+        };
+      }
+      // 기본 데이터가 없는 경우 (ex. 추가)
       return {
         expenses: [
           {

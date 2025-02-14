@@ -6,6 +6,7 @@ import useGetAllExpense from './hooks/useGetAllExpense';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
+import { Expense } from '../types/expense.type';
 
 interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
@@ -16,6 +17,10 @@ function ConfirmStep({
 }: ConfirmStepProps) {
   // TODO : groupToken 사용 방법 적용 필요함
   const { data, isLoading } = useGetAllExpense('group-token');
+
+  const moveToEditStep = (initialExpense: Expense) => {
+    moveToStep?.('EDIT_EXPENSE', { initialExpense });
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -43,7 +48,10 @@ function ConfirmStep({
           {getTotalExpense(data.expenses).toLocaleString()}원
         </S.TotalExpenseAmount>
       </S.TotalExpenseWrapper>
-      <ExpenseCardList expenses={data.expenses} />
+      <ExpenseCardList
+        expenses={data.expenses}
+        moveToEditStep={moveToEditStep}
+      />
       <S.ButtonWrapper>
         <S.BottomButton
           type="button"
