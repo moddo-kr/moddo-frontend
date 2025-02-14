@@ -35,11 +35,6 @@ const expenseHandlers = [
   http.get('/api/v1/expenses', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
-    const url = new URL(request.url);
-    const meedId = url.searchParams.get('meetId');
-
-    if (!meedId) return new HttpResponse(null, { status: 404 });
-
     return HttpResponse.json({
       expenses: dummyExpenses,
     });

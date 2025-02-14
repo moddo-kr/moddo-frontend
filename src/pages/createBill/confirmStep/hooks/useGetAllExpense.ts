@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import expense from '@/service/apis/expense';
 
-const useGetAllExpense = (meedId: number) => {
+const useGetAllExpense = (groupToken: string) => {
   return useQuery({
-    queryKey: ['expenses', meedId],
-    queryFn: () => expense.getAll(meedId),
+    queryKey: ['expenses', groupToken],
+    queryFn: () => expense.getAll(groupToken),
   });
 };
 

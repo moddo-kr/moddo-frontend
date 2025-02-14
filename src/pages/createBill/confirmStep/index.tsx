@@ -8,13 +8,11 @@ import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
 
-const DUMMY_MEET_ID = 1;
-
 interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
-  // TODO : meetId를 알아내는 로직이 필요함
-  const { data, isLoading } = useGetAllExpense(DUMMY_MEET_ID);
+  // TODO : groupToken 사용 방법 적용 필요함
+  const { data, isLoading } = useGetAllExpense('group-token');
 
   if (isLoading) {
     return <div>Loading...</div>;

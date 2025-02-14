@@ -6,9 +6,9 @@ import axiosInstance from './axios';
 
 const expense = {
   // GET getAllExpense - 아직 API 스펙이 확정되지 않아서 임시 url입니다..
-  getAll: (meetId: number): Promise<ExpenseList> =>
+  getAll: (groupToken: string): Promise<ExpenseList> =>
     axiosInstance
-      .get(`/api/v1/expenses?meetId=${meetId}`, {
+      .get(`/api/v1/expenses`, {
         useMock: true,
       })
       .then((res) => res.data),
