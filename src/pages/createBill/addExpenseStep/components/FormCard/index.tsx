@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseMember } from '@/pages/createBill/types/expense.type';
-import BillDatePicker from '../DatePicker';
-import FormField from '../FormField';
-import NumPadBottomSheet from '../NumPadBottomSheet';
-import MemberBottomSheet from '../MemberBottomSheet';
-import MemberChips from '../MemberChips';
+import BillDatePicker from '@/pages/createBill/addExpenseStep/components/DatePicker';
+import FormField from '@/pages/createBill/addExpenseStep/components/FormField';
+import NumPadBottomSheet from '@/pages/createBill/addExpenseStep/components/NumPadBottomSheet';
+import MemberBottomSheet from '@/pages/createBill/addExpenseStep/components/MemberBottomSheet';
+import MemberChips from '@/pages/createBill/addExpenseStep/components/MemberChips';
 import * as S from './index.styles';
 import 'react-datepicker/dist/react-datepicker.css';
 
