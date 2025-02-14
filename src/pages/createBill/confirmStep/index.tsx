@@ -9,7 +9,11 @@ import * as S from './index.styles';
 
 interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
-function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
+function ConfirmStep({
+  moveToNextStep,
+  moveToPreviousStep,
+  moveToStep,
+}: ConfirmStepProps) {
   // TODO : groupToken 사용 방법 적용 필요함
   const { data, isLoading } = useGetAllExpense('group-token');
 
@@ -28,7 +32,7 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
         leftButtonContent={<ArrowLeft width="1.5rem" />}
         leftButtonOnClick={moveToPreviousStep}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
-        rightButtonOnClick={moveToPreviousStep}
+        rightButtonOnClick={() => moveToStep?.('ADD_EXPENSE')}
       />
       <S.TopWrapper>
         <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
