@@ -1,6 +1,5 @@
-
 export const ROUTE = {
-  login: '/login',
+  login: '/',
   loginSuccess: '/login/success',
   home: '/home',
   createBill: '/create-bill/:groupId',

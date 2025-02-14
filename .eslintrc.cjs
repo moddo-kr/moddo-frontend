@@ -20,7 +20,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true, // JSX 지원
     },
-    project: ['./tsconfig.app.json', './tsconfig.node.json'],
+    project: './tsconfig.app.json',
     tsconfigRootDir: __dirname,
   },
   plugins: [
@@ -96,19 +96,20 @@ module.exports = {
       },
       typescript: {
         alwaysTryTypes: true,
-        project: './tsconfig.json', // tsconfig.json을 기준으로 해석
+        project: './tsconfig.app.json',
       },
     },
   },
   overrides: [
     {
-      files: ['.eslintrc.cjs', 'public/**', 'src/assets/svgs/**'], // .eslintrc.cjs 파일, public 폴더에 대한 규칙 비활성화
+      files: ['.eslintrc.cjs', 'public/**', 'src/assets/svgs/**', '**/*.stories.tsx', '**/*.stories.ts'], 
       parserOptions: {
-        project: null, // TypeScript 타입 검사 비활성화
+        project: './tsconfig.app.json',
       },
       rules: {
         'no-unused-vars': 'off',
         'no-undef': 'off',
+        'react/function-component-definition': 'off',
       },
     },
   ],
