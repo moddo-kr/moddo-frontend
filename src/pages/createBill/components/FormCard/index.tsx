@@ -13,7 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 interface FormCardProps {
   index: number;
-  onDelete: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
+  onDelete?: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
 }
 
 const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
@@ -56,7 +56,10 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
           <S.FormCardTitleContainer>
             <S.FormCardTitle>{index + 1}차</S.FormCardTitle>
             {index > 0 ? (
-              <S.FormDeleteButton type="button" onClick={() => onDelete(index)}>
+              <S.FormDeleteButton
+                type="button"
+                onClick={() => onDelete?.(index)}
+              >
                 <Close width="1.5rem" />
               </S.FormDeleteButton>
             ) : null}
