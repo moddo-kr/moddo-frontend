@@ -12,9 +12,9 @@ import {
 } from '@/pages/createBill/types/expense.type';
 import expense from '@/service/apis/expense';
 import group from '@/service/apis/group';
-import FormCard from './components/FormCard';
-import getTotalExpense from '../utils/getTotalExpense';
-import { BillContext } from '../types/billContext.type';
+import FormCard from '@/pages/createBill/addExpenseStep/components/FormCard';
+import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
+import { BillContext } from '@/pages/createBill/types/billContext.type';
 import * as S from './index.styles';
 
 const defaultValues: Omit<Expense, 'id'> = {
