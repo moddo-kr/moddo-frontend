@@ -20,7 +20,6 @@ interface ShareButtonProps {
 
 function ShareButton({ shareLink }: ShareButtonProps) {
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
-  const [openToast, setOpenToast] = useState<boolean>(false);
 
   const shareData = shareDataFormat(shareLink);
   const shareMessage = shareMessageFormat(shareLink);
@@ -44,11 +43,7 @@ function ShareButton({ shareLink }: ShareButtonProps) {
               onClick={() => {
                 copyClipboard(shareMessageFormat(shareLink))
                   .then(() => {
-                    // TODO : 공통 컴포넌트에서 토스트 로직을 처리하도록 수정
-                    setOpenToast(true);
-                    setTimeout(() => {
-                      setOpenToast(false);
-                    }, 2000);
+                    // TODO : 토스트 메시지 추가
                   })
                   .finally(() => {
                     setOpenBottomSheet(false);
