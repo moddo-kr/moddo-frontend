@@ -1,12 +1,17 @@
 import { http, HttpResponse, passthrough } from 'msw';
+import { Expense } from '@/pages/createBill/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 
-const dummyExpenses = [];
+const dummyExpenses: Expense[] = [];
+
+interface RequestBody {
+  expenses: Expense[];
+}
 
 const expenseHandlers = [
   // POST createExpenses
-  http.post('/api/v1/expenses', async ({ request }) => {
+  http.post<object, RequestBody>('/api/v1/expenses', async ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
     const url = new URL(request.url);
