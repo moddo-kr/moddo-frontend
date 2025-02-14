@@ -1,4 +1,3 @@
-import { VStack } from '@chakra-ui/react';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
