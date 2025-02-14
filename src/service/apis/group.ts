@@ -2,10 +2,9 @@ import { Group } from '@/common/types/group.type';
 import axiosInstance from './axios';
 
 const group = {
-  // TODO : grouptoken 사용 방법 적용 필요함
-  get: (_groupToken: string): Promise<Group> =>
+  get: (groupToken: string): Promise<Group> =>
     axiosInstance
-      .get(`/api/v1/group`, {
+      .get(`/api/v1/group?groupToken=${groupToken}`, {
         useMock: true,
       })
       .then((res) => res.data),

@@ -114,7 +114,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       />
       <S.TopWrapper>
         <S.TopMessage>
-          <S.MoimName>{groupInfo.name}</S.MoimName>
+          <S.MoimName>{groupInfo.groupName}</S.MoimName>
           {`의\n지출 내역을 입력해주세요.`}
         </S.TopMessage>
       </S.TopWrapper>
