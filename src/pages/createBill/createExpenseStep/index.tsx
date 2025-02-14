@@ -11,10 +11,10 @@ import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import * as S from './index.styles';
 
-interface AddExpenseStepProps
+interface CreateExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
 
-function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
+function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
@@ -96,4 +96,4 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   );
 }
 
-export default AddExpenseStep;
+export default CreateExpenseStep;

@@ -1,14 +1,14 @@
 import useFunnel from '@/common/hooks/useFunnel';
 import { FunnelStep } from '@/common/types/useFunnel.type';
 import { BillContext } from './types/billContext.type';
-import AddExpenseStep from './addExpenseStep';
+import CreateExpenseStep from './createExpenseStep';
 import ConfirmStep from './confirmStep';
 import AddAccountStep from './addAccountStep';
 import ShareStep from './shareStep';
 
 const funnelSteps: FunnelStep<BillContext>[] = [
   {
-    name: 'ADD_EXPENSE',
+    name: 'CREATE_EXPENSE',
     requiredFields: [],
   },
   {
@@ -33,8 +33,8 @@ function CreateBill() {
     });
 
   switch (currentStep) {
-    case 'ADD_EXPENSE':
-      return <AddExpenseStep moveToNextStep={moveToNextStep} />;
+    case 'CREATE_EXPENSE':
+      return <CreateExpenseStep moveToNextStep={moveToNextStep} />;
     case 'CONFIRM':
       return (
         <ConfirmStep
