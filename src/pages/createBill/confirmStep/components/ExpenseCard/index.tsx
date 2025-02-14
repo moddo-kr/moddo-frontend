@@ -1,5 +1,7 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
+import expense from '@/service/apis/expense';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
@@ -8,11 +10,29 @@ interface ExpenseCardProps extends Expense {
 }
 
 function ExpenseCard({
+  id,
   index,
   amount,
   content,
   memberExpenses,
 }: ExpenseCardProps) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: expense.delete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['expenses'], // TODO : groupToken 추가 필요함
+      });
+    },
+  });
+
+  const handleDelete = () => {
+    mutation.mutate({
+      groupToken: 'groupToken', // TODO : groupToken 추가 필요함
+      expenseId: id,
+    });
+  };
+
   return (
     <S.ExpenseCardWrapper>
       <S.Card>
@@ -28,12 +48,7 @@ function ExpenseCard({
               <CarbonEdit />
             </S.IconButton>
             {index !== 0 ? (
-              <S.IconButton
-                type="button"
-                onClick={() => {
-                  console.log(`${index + 1}차 삭제`);
-                }}
-              >
+              <S.IconButton type="button" onClick={handleDelete}>
                 <Close />
               </S.IconButton>
             ) : null}

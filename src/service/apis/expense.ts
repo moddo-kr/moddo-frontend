@@ -23,6 +23,20 @@ const expense = {
     axiosInstance.post(`/api/v1/expenses`, data, {
       useMock: true,
     }),
+  // DELETE deleteByExpenseId
+  delete: ({
+    groupToken,
+    expenseId,
+  }: {
+    groupToken: string;
+    expenseId: number;
+  }): Promise<void> =>
+    axiosInstance.delete(
+      `/api/v1/expenses/${expenseId}?groupToken=${groupToken}`,
+      {
+        useMock: true,
+      }
+    ),
 };
 
 export default expense;

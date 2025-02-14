@@ -39,6 +39,34 @@ const expenseHandlers = [
       expenses: dummyExpenses,
     });
   }),
+
+  // DELETE deleteByExpenseId
+  http.delete('/api/v1/expenses/:expenseId', ({ request, params }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const { expenseId } = params;
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
+    const index = dummyExpenses.findIndex(
+      (expense) => expense.id === Number(expenseId)
+    );
+
+    if (index === -1) {
+      return HttpResponse.json({ error: 'expense not found' }, { status: 404 });
+    }
+
+    dummyExpenses.splice(index, 1);
+
+    return HttpResponse.json({ message: 'success' });
+  }),
 ];
 
 export default expenseHandlers;
