@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
-import numPadController from '@/pages/createBill/addExpenseStep/utils/numPadController';
+import numPadController from '@/pages/createBill/utils/numPadController';
 import * as S from './index.styles';
 
 interface NumPadProps {
