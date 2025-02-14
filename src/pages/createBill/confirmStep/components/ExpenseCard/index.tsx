@@ -31,14 +31,16 @@ function ExpenseCard({
             >
               <CarbonEdit />
             </S.IconButton>
-            <S.IconButton
-              type="button"
-              onClick={() => {
-                console.log(`${index + 1}차 삭제`);
-              }}
-            >
-              <Close />
-            </S.IconButton>
+            {index !== 0 ? (
+              <S.IconButton
+                type="button"
+                onClick={() => {
+                  console.log(`${index + 1}차 삭제`);
+                }}
+              >
+                <Close />
+              </S.IconButton>
+            ) : null}
           </S.IconButtonsWrapper>
         </S.TopWrapper>
         <S.Content>{content}</S.Content>
