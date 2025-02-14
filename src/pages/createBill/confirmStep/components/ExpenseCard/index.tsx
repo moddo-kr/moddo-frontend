@@ -1,8 +1,6 @@
-import { format } from 'date-fns';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import { Expense } from '@/pages/createBill/types/expense.type';
-import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
@@ -13,12 +11,10 @@ function ExpenseCard({
   index,
   amount,
   content,
-  date,
   memberExpenses,
 }: ExpenseCardProps) {
   return (
     <S.ExpenseCardWrapper>
-      <S.Date>{format(new Date(date), 'yyyy년 M월 d일')}</S.Date>
       <S.Card>
         <S.TopWrapper>
           <S.Index>{index + 1}차</S.Index>

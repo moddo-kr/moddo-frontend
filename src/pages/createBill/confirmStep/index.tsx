@@ -41,7 +41,6 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
           </S.TotalExpenseAmount>
         </S.TotalExpenseWrapper>
         <ExpenseCardList expenses={data.expenses} />
-        <S.ChangeOrderButton>순서 바꾸기</S.ChangeOrderButton>
       </VStack>
       <S.ButtonWrapper>
         <S.BottomButton

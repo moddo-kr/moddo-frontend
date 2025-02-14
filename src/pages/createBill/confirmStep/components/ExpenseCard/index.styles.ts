@@ -5,14 +5,7 @@ export const ExpenseCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 0rem 1.25rem;
   width: 100%;
-`;
-
-export const Date = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #444950;
 `;
 
 export const Card = styled.div`
