@@ -46,15 +46,8 @@ function ExpenseCard({
         <S.Content>{content}</S.Content>
         <S.BottomWrapper>
           <S.Distribute>
-            <S.DistributeText>
-              {/* 가장 첫번째 참여자의 금액을 보여주도록 함 */}
-              {/* MVP에서는 모든 참여자의 금액이 똑같이 나눠떨어지는 경우만 고려함 */}
-              {distributeAmount(
-                amount,
-                memberExpenses.length
-              )[0].toLocaleString()}
-            </S.DistributeText>
-            <S.DistributeText>원 씩</S.DistributeText>
+            <S.DistributeText>{amount.toLocaleString()}</S.DistributeText>
+            <S.DistributeText> 원</S.DistributeText>
           </S.Distribute>
           <S.MemberCollapse collapsible variant="plain">
             <S.CollapseItem value="members">
