@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Close } from '@/assets/svgs/icon';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import expense from '@/service/apis/expense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/common/components/Header';
-import { Close } from '@/assets/svgs/icon';
+import FormCard from '@/pages/createBill/components/FormCard';
 import * as S from './index.styles';
-import FormCard from '../components/FormCard';
 
 interface AddExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
