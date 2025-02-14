@@ -43,7 +43,18 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
       return;
     }
 
-    const nextStepIndex = currentStepIndex + 1;
+    // 이동할 다음 단계의 인덱스를 찾는다. (수동으로 이동하는 단계는 제외)
+    let nextStepIndex = currentStepIndex + 1;
+    while (
+      steps[nextStepIndex].onlyManualMove &&
+      nextStepIndex < steps.length - 1
+    ) {
+      nextStepIndex += 1;
+    }
+    if (nextStepIndex === steps.length - 1) {
+      setContext({ ...context, ...newContextData });
+      return;
+    }
     const nextStep = steps[nextStepIndex];
     const newContext = { ...context, ...newContextData };
 
@@ -56,10 +67,25 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
     // 첫번째 단계인 경우에는 이동하지 않는다.
     if (currentStepIndex === 0) return;
 
-    const previousStepIndex = currentStepIndex - 1;
+    // 이동할 이전 단계의 인덱스를 찾는다. (수동으로 이동하는 단계는 제외)
+    let previousStepIndex = currentStepIndex - 1;
+    while (steps[previousStepIndex].onlyManualMove && previousStepIndex >= 0) {
+      previousStepIndex -= 1;
+    }
+    if (previousStepIndex < 0) return;
+
     const previousStep = steps[previousStepIndex];
 
     updateStep(previousStep, context);
+  };
+
+  /** public - 특정 단계로 이동하는 함수 */
+  const moveToStep = (stepName: string, newContextData?: T) => {
+    const targetStep = steps.find((step) => step.name === stepName);
+    if (!targetStep) return;
+
+    const newContext = { ...context, ...newContextData };
+    updateStep(targetStep, newContext);
   };
 
   return {
@@ -67,6 +93,7 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
     context,
     moveToNextStep,
     moveToPreviousStep,
+    moveToStep,
   };
 };
 
