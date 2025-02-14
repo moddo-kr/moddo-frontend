@@ -28,6 +28,7 @@ function ConfirmStep({ moveToNextStep, moveToPreviousStep }: ConfirmStepProps) {
         leftButtonContent={<ArrowLeft width="1.5rem" />}
         leftButtonOnClick={moveToPreviousStep}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
+        rightButtonOnClick={moveToPreviousStep}
       />
       <S.TopWrapper>
         <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
