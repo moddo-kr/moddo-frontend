@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
@@ -9,6 +10,7 @@ import {
   Expense,
   ExpenseFormSchema,
 } from '@/pages/createBill/types/expense.type';
+import expense from '@/service/apis/expense';
 import group from '@/service/apis/group';
 import BillFormCard from './components/FormCard';
 import getTotalExpense from '../utils/getTotalExpense';
@@ -28,6 +30,16 @@ interface AddExpenseStepProps
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const [groupInfo, setGroupInfo] = useState<Group | null>(null);
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: expense.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
+      });
+      moveToNextStep?.();
+    },
+  });
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
@@ -63,12 +75,10 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       })),
     };
   }, [groupInfo]);
-
   const { fields, append, remove } = useFieldArray({
     control: formMethods.control,
     name: 'expenses',
   });
-
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
     lastFormCardRef.current?.scrollIntoView({
@@ -88,12 +98,6 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
 
   const handleDeleteExpense = (index: number) => {
     remove(index);
-  };
-
-  // 임시...
-  const onFormSubmit = (data: any) => {
-    console.log(data);
-    moveToNextStep?.();
   };
 
   if (!groupInfo) {
@@ -124,11 +128,13 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           />
         ))}
       </S.BillFormList>
-      {/* TODO : 지출 내역 입력_직접 입력하기 */}
       <S.ButtonWrapper>
         <S.BottomButton
           type="button"
-          onClick={handleSubmit(onFormSubmit)}
+          onClick={handleSubmit((data) =>
+            // TODO : 그룹 토큰을 받아오는 로직 추가
+            mutation.mutate({ groupToken: 'group-token', data })
+          )}
           disabled={!allFormsValid}
         >
           {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
