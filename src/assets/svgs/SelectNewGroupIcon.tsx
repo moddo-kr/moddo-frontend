@@ -1,18 +1,21 @@
 import type { SVGProps } from 'react';
-const SvgSelectNewGroupIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 44 44"
-    {...props}
-  >
-    <circle cx={22} cy={22} r={22} fill="#CECFD3" />
-    <path
-      stroke="#fff"
-      strokeLinecap="round"
-      strokeWidth={1.6}
-      d="M22 15v14M29 22H15"
-    />
-  </svg>
-);
+
+function SvgSelectNewGroupIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 44 44"
+      {...props}
+    >
+      <circle cx={22} cy={22} r={22} fill="#CECFD3" />
+      <path
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeWidth={1.6}
+        d="M22 15v14M29 22H15"
+      />
+    </svg>
+  );
+}
 export default SvgSelectNewGroupIcon;
