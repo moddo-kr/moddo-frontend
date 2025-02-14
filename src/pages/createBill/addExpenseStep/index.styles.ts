@@ -47,8 +47,10 @@ export const TabButton = styled.button<{ $isSelected: boolean }>`
 export const BillFormList = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
   width: 100%;
   flex: 1 0 0;
+  overflow-y: auto;
   padding: 1rem 1.25rem;
   background: #faf6f3;
 `;
