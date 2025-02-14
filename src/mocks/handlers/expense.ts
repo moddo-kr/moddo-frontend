@@ -9,6 +9,16 @@ const expenseHandlers = [
   http.post('/api/v1/expenses', async ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
     const body = await request.json();
     const { expenses } = body;
 
@@ -34,6 +44,16 @@ const expenseHandlers = [
   // GET getAllExpense
   http.get('/api/v1/expenses', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
+
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
 
     return HttpResponse.json({
       expenses: dummyExpenses,
