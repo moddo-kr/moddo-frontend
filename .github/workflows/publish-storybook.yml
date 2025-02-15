@@ -3,7 +3,7 @@ name: Publish Storybook
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
     branches:
       - develop
     paths:
