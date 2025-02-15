@@ -1,8 +1,8 @@
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
+import useGetAllExpense from '@/common/queries/expense/useGetAllExpense';
 import ExpenseCardList from './components/ExpenseCardList';
-import useGetAllExpense from './hooks/useGetAllExpense';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';

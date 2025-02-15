@@ -1,7 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
-import expense from '@/service/apis/expense';
+import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
@@ -16,15 +15,7 @@ function ExpenseCard({
   content,
   memberExpenses,
 }: ExpenseCardProps) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: expense.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : groupToken 추가 필요함
-      });
-    },
-  });
+  const mutation = useDeleteMutation();
 
   const handleDelete = () => {
     mutation.mutate({
