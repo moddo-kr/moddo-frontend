@@ -3,14 +3,11 @@ import type { SVGProps } from 'react';
 const SvgAdd = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
+    fill="#fff"
     viewBox="0 0 30 30"
     {...props}
   >
-    <path
-      fill="#fff"
-      d="M0 15c0 8.284 6.716 15 15 15s15-6.716 15-15S23.284 0 15 0 0 6.716 0 15"
-    />
+    <path d="M0 15c0 8.284 6.716 15 15 15s15-6.716 15-15S23.284 0 15 0 0 6.716 0 15" />
     <path
       fill="#FF9958"
       fillRule="evenodd"

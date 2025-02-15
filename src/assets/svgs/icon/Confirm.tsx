@@ -3,9 +3,9 @@ import type { SVGProps } from 'react';
 const SvgConfirm = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 20 14"
     {...props}
+    fill="none"
   >
     <path
       stroke="#444950"

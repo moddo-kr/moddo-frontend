@@ -3,9 +3,9 @@ import type { SVGProps } from 'react';
 const SvgBell = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 18 20"
     {...props}
+    fill="none"
   >
     <g stroke="#000" strokeLinecap="round" strokeWidth={1.5}>
       <path
