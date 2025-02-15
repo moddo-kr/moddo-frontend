@@ -1,7 +1,7 @@
-import { ArrowRightIcon, LogoIcon, MenuIcon } from '@/assets/svgs';
+import { LogoIcon } from '@/assets/svgs';
 import MainHamImg from '@/assets/pngs/MainHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
-import { Next } from '@/assets/svgs/icon';
+import { ArrowRight, Menu, Next } from '@/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ function Home() {
     <Flex direction="column" height="100dvh">
       <S.MainHeader>
         <LogoIcon width={98} height={36} />
-        <MenuIcon width={24} height={24} />
+        <Menu width={24} height={24} />
       </S.MainHeader>
       <Flex
         direction="column"
@@ -46,7 +46,7 @@ function Home() {
         </Flex>
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
           정산 시작하기
-          <ArrowRightIcon width={20} height={20} />
+          <ArrowRight width={20} height={20} />
         </S.SelectGroupButton>
         <S.DescriptionImg src={MainHamImg} alt="mainHamImg" />
       </Flex>

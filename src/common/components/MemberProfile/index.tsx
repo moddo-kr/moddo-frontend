@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import { SystemDanger } from '@/assets/svgs/icon';
 import { Member } from '@/common/types/member.type';
-import { DeleteButtonIcon } from '@/assets/svgs';
 import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useMemo } from 'react';
 import * as S from './index.style';
@@ -30,7 +30,7 @@ function MemberProfile({
       <S.ProfileWrapper>
         {member.role !== 'treasurer' && (
           <S.DeleteButton onClick={() => handleDeleteButtonClick(member.id)}>
-            <DeleteButtonIcon width="1.1rem" height="1.1rem" />
+            <SystemDanger width="1.1rem" height="1.1rem" />
           </S.DeleteButton>
         )}
         <S.ProfileImg

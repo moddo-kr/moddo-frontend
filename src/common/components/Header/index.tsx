@@ -1,4 +1,4 @@
-import { GoBackIcon } from '@/assets/svgs';
+import { ArrowLeft } from '@/assets/svgs/icon';
 import * as S from '@/common/components/Header/index.styles';
 import { ReactElement } from 'react';
 
@@ -29,7 +29,7 @@ function Header({
         <S.LeftHeaderArea>
           <S.IconWrapper>
             {showIcon ? (
-              <GoBackIcon
+              <ArrowLeft
                 onClick={handleBackButtonClick}
                 width={8}
                 height={16}

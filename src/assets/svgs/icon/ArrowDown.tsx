@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-const SvgArrowLeft = (props: SVGProps<SVGSVGElement>) => (
+const SvgArrowDown = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -10,9 +10,9 @@ const SvgArrowLeft = (props: SVGProps<SVGSVGElement>) => (
     <path
       fill="#444950"
       fillRule="evenodd"
-      d="M15.595 19.735a.8.8 0 0 1-1.13.06l-8-7.2a.8.8 0 0 1 0-1.19l8-7.2a.8.8 0 1 1 1.07 1.19L8.195 12l7.34 6.605a.8.8 0 0 1 .06 1.13"
+      d="M19.734 8.405a.8.8 0 0 1 .06 1.13l-7.2 8a.8.8 0 0 1-1.189 0l-7.2-8a.8.8 0 0 1 1.19-1.07L12 15.804l6.605-7.34a.8.8 0 0 1 1.13-.059"
       clipRule="evenodd"
     />
   </svg>
 );
-export default SvgArrowLeft;
+export default SvgArrowDown;
