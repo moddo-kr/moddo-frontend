@@ -1,12 +1,18 @@
-import Header from '@/common/components/Header';
-import { TitleText } from '@/pages/groupSetup/index.styles';
-import { Button, Flex, Input, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Button, Flex, Input, useDisclosure } from '@chakra-ui/react';
+import Header from '@/common/components/Header';
+import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
+import { TitleText } from '@/pages/groupSetup/index.styles';
 import BankNameDrawer from './components/BankNameDrawer';
+import { BillContext } from '../types/billContext.type';
 
-function AddAccountStep() {
-  const navigate = useNavigate();
+interface AddAccountStepProps
+  extends BaseFunnelStepComponentProps<BillContext> {}
+
+function AddAccountStep({
+  moveToPreviousStep,
+  moveToNextStep,
+}: AddAccountStepProps) {
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
@@ -21,7 +27,7 @@ function AddAccountStep() {
         title="뒤로가기"
         showIcon
         type="TitleLeft"
-        handleBackButtonClick={() => navigate(-1)}
+        handleBackButtonClick={moveToPreviousStep}
       />
       <Flex
         direction="column"
@@ -72,7 +78,7 @@ function AddAccountStep() {
           height="fit-content"
           lineHeight={1.5}
           borderRadius={32}
-          onClick={() => navigate('/')}
+          onClick={moveToNextStep}
           disabled={!bankName || !accountNumber}
           fontSize={16}
           fontWeight={600}

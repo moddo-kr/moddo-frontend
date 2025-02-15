@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
-import * as S from './index.styles';
 import { SelectNewGroupIcon, SelectRecentGroupIcon } from '@/assets/svgs';
 import { ROUTE } from '@/common/constants/route';
+import * as S from './index.styles';
 
 type SelectedValueType = 'CREATE' | 'RECENT';
 

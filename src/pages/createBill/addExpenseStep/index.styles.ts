@@ -22,28 +22,6 @@ export const AddExpenseButton = styled.span`
   font-weight: 600;
 `;
 
-export const TabContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 0rem 1.25rem;
-  align-items: center;
-  border-bottom: 1px solid #f1f3f5;
-`;
-
-export const TabButton = styled.button<{ $isSelected: boolean }>`
-  height: 3rem;
-  padding: 0.625rem 0rem;
-  flex: 1 0 0;
-  border-bottom: 0.125rem solid
-    ${({ $isSelected }) => ($isSelected ? '#1a1a1a' : 'transparent')};
-  color: ${({ $isSelected }) => ($isSelected ? '#444950' : '#1a1a1a')};
-  opacity: ${({ $isSelected }) => ($isSelected ? 1 : 0.3)};
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5rem; /* 150% */
-  letter-spacing: -0.01rem;
-`;
-
 export const BillFormList = styled.form`
   display: flex;
   flex-direction: column;

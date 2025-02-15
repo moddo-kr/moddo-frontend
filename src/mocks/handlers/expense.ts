@@ -1,58 +1,96 @@
 import { http, HttpResponse, passthrough } from 'msw';
+import { Expense } from '@/pages/createBill/types/expense.type';
+import getIsMocked from '@/mocks/utils/getIsMocked';
+import { dummyGroupMembers } from './groupMember';
+
+const dummyExpenses: Expense[] = [];
+
+interface RequestBody {
+  expenses: Expense[];
+}
 
 const expenseHandlers = [
-  // GET getAllExpense
-  http.get('/api/v1/expenses', ({ request }) => {
-    // 모킹 여부 확인 (X-Mock-Request 헤더가 없거나 false이면 실제 서버로 요청)
-    // https://mswjs.io/docs/api/passthrough
-    const isMocked = request.headers.get('X-Mock-Request');
-    if (!isMocked || isMocked !== 'true') return passthrough();
+  // POST createExpenses
+  http.post<object, RequestBody>('/api/v1/expenses', async ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
 
     const url = new URL(request.url);
-    const meedId = url.searchParams.get('meetId');
+    const groupToken = url.searchParams.get('groupToken');
 
-    if (!meedId) return new HttpResponse(null, { status: 404 });
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
+    const body = await request.json();
+    const { expenses } = body;
+
+    expenses.forEach((expense) => {
+      dummyExpenses.push({
+        id: dummyExpenses.length + 1,
+        amount: expense.amount,
+        content: expense.content,
+        date: expense.date,
+        memberExpenses: expense.memberExpenses.map((memberExpense) => ({
+          memberId: memberExpense.memberId,
+          name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+          amount: memberExpense.amount,
+        })),
+      });
+    });
 
     return HttpResponse.json({
-      expenses: [
-        {
-          id: 1,
-          amount: 100000,
-          content: '하이디라오',
-          date: '2025-02-03',
-          memberExpenses: [
-            {
-              memberId: 1,
-              name: '김반숙',
-              amount: 50000,
-            },
-            {
-              memberId: 2,
-              name: '박완숙',
-              amount: 50000,
-            },
-          ],
-        },
-        {
-          id: 2,
-          amount: 20000,
-          content: '카페',
-          date: '2025-02-03',
-          memberExpenses: [
-            {
-              memberId: 1,
-              name: '김반숙',
-              amount: 10000,
-            },
-            {
-              memberId: 3,
-              name: '정에그',
-              amount: 10000,
-            },
-          ],
-        },
-      ],
+      expenses: dummyExpenses,
     });
+  }),
+
+  // GET getAllExpense
+  http.get('/api/v1/expenses', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
+    return HttpResponse.json({
+      expenses: dummyExpenses,
+    });
+  }),
+
+  // DELETE deleteByExpenseId
+  http.delete('/api/v1/expenses/:expenseId', ({ request, params }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const { expenseId } = params;
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
+    const index = dummyExpenses.findIndex(
+      (expense) => expense.id === Number(expenseId)
+    );
+
+    if (index === -1) {
+      return HttpResponse.json({ error: 'expense not found' }, { status: 404 });
+    }
+
+    dummyExpenses.splice(index, 1);
+
+    return HttpResponse.json({ message: 'success' });
   }),
 ];
 
