@@ -170,7 +170,7 @@ const SemanticColor: SemanticColorType = {
   },
 };
 
-const colors: ColorType = {
+const color: ColorType = {
   primitive: PrimitiveColor,
   semantic: SemanticColor,
 };
@@ -179,7 +179,7 @@ const colors: ColorType = {
 // 📏 Unit & Radius
 // ============================================
 
-const units: UnitType = {
+const unit: UnitType = {
   0: '0rem',
   1: '0.0625rem',
   2: '0.125rem',
@@ -209,9 +209,9 @@ const units: UnitType = {
 };
 
 const radius: RadiusType = {
-  default: units[12],
-  large: units[20],
-  circle: units.max,
+  default: unit[12],
+  large: unit[20],
+  circle: unit.max,
 };
 
 // ============================================
@@ -221,14 +221,14 @@ const radius: RadiusType = {
 const typography: TypographyType = {
   fontFamily: 'Pretendard',
   fontSize: {
-    heading1: units[24],
-    heading2: units[20],
-    title: units[18],
-    body1Sb: units[16],
-    body1R: units[16],
-    body2Sb: units[14],
-    body2R: units[14],
-    caption: units[12],
+    heading1: unit[24],
+    heading2: unit[20],
+    title: unit[18],
+    body1Sb: unit[16],
+    body1R: unit[16],
+    body2Sb: unit[14],
+    body2R: unit[14],
+    caption: unit[12],
   },
   fontWeight: {
     heading1: 700,
@@ -251,9 +251,9 @@ const typography: TypographyType = {
     caption: '150%',
   },
   letterSpacing: {
-    typoFontSpacing0: units[0],
-    typoFontSpacing1: units[1],
+    typoFontSpacing0: unit[0],
+    typoFontSpacing1: unit[1],
   },
 };
 
-export default { colors, radius, units, typography };
+export default { color, radius, unit, typography };
