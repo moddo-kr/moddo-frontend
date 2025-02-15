@@ -1,0 +1,49 @@
+name: Publish Storybook
+# https://www.chromatic.com/docs/github-actions/
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - develop
+    paths:
+      - '**/stories/**'
+      - '**/*.stories.tsx'
+      - '**/*.stories.ts'
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
+          fetch-depth: 0
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          # 의존성이 변경될 때마다 새로운 캐시 생성
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          # 캐시 키가 정확히 일치하지 않을 경우, 일치하는 최신 캐시 검색
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Setup Node.js Environment
+        uses: ./.github/actions/setup-node
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        id: chromatic
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+      - name: Comment on PR
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: '✨ **Storybook preview** : ${{ steps.chromatic.outputs.storybookUrl }}'
