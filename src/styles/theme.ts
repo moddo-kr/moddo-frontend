@@ -3,6 +3,7 @@ import {
   PrimitiveColorType,
   RadiusType,
   SemanticColorType,
+  TypographyType,
   UnitType,
 } from './theme.type';
 
@@ -175,7 +176,7 @@ const colors: ColorType = {
 };
 
 // ============================================
-// 📏 Unit
+// 📏 Unit & Radius
 // ============================================
 
 const units: UnitType = {
@@ -213,4 +214,48 @@ const radius: RadiusType = {
   circle: units.max,
 };
 
-export default { colors, radius, units };
+// ============================================
+// 🔠 Typography
+// ============================================
+
+const typography: TypographyType = {
+  fontFamily: 'Pretendard',
+  fontSize: {
+    heading1: units[24],
+    heading2: units[20],
+    title: units[18],
+    body1Sb: units[16],
+    body1R: units[16],
+    body2Sb: units[14],
+    body2R: units[14],
+    caption: units[12],
+  },
+  fontWeight: {
+    heading1: 700,
+    heading2: 700,
+    title: 600,
+    body1Sb: 600,
+    body1R: 400,
+    body2Sb: 600,
+    body2R: 400,
+    caption: 500,
+  },
+  lineHeight: {
+    heading1: 1.5,
+    heading2: 1.5,
+    title: 1.5,
+    body1Sb: 1.5,
+    body1R: 1.5,
+    body2Sb: 1.5,
+    body2R: 1.5,
+    caption: 1.5,
+  },
+  letterSpacing: {
+    typoFontSpacing0: units[0],
+    typoFontSpacing1: units[1],
+  },
+};
+
+export default { colors, radius, units, typography };
+
+// 이렇게 정의되어 있긴 한데, 이걸 테마로 설정하는게 맞는진 모르겠어

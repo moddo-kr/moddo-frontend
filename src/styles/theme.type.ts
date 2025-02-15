@@ -15,6 +15,17 @@ export type RadiusType = {
   circle: string;
 };
 
+export type TypographyType = {
+  fontFamily: string;
+  fontSize: Record<TypographyKey, string>;
+  fontWeight: Record<TypographyKey, number>;
+  lineHeight: Record<TypographyKey, number>;
+  letterSpacing: {
+    typoFontSpacing0: string;
+    typoFontSpacing1: string;
+  };
+};
+
 // ============================================
 // 🎨 Primitive Colors
 // ============================================
@@ -69,3 +80,17 @@ type SemanticBackground = {
   >;
   state: SemanticState;
 };
+
+// ============================================
+// 🔠 Typography
+// ============================================
+
+type TypographyKey =
+  | 'heading1'
+  | 'heading2'
+  | 'title'
+  | 'body1Sb'
+  | 'body1R'
+  | 'body2Sb'
+  | 'body2R'
+  | 'caption';
