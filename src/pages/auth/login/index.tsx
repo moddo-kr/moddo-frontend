@@ -2,7 +2,7 @@ import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
 import * as S from './index.style';
-import { useGetGuestToken } from '@/service/apis/user';
+import { useGetGuestToken } from '@/service/queries/auth/useGetGuestToken';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 

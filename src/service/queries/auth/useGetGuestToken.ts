@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosInstance from '../axios';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
+import { getGuestToken } from '../../apis/auth';
 
 export interface GetGuestToken {
   accessToken: string;
@@ -9,11 +9,6 @@ export interface GetGuestToken {
   expiredAt: Date;
   isMember: boolean;
 }
-
-export const getGuestToken = async () => {
-  const response = await axiosInstance.get('/user/guest/token');
-  return response.data;
-};
 
 export const useGetGuestToken = () => {
   const navigate = useNavigate();
@@ -28,6 +23,6 @@ export const useGetGuestToken = () => {
     onError: (error) => {
       alert('guestToken 발급을 실패했습니다!');
       console.error('Error creating meeting:', error);
-    }
+    },
   });
 };
