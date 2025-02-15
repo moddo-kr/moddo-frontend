@@ -1,10 +1,10 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
-import * as S from './index.style';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
+import * as S from './index.style';
 
 function Login() {
   const { refetch: getGuestToken } = useGetGuestToken();
@@ -14,12 +14,10 @@ function Login() {
     const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
       console.log('카카오 로그인');
+    } else if (!token) {
+      getGuestToken();
     } else {
-      if (!token) {
-        getGuestToken();
-      } else {
-        navigate(ROUTE.selectGroup);
-      }
+      navigate(ROUTE.selectGroup);
     }
   };
 

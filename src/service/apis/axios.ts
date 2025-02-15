@@ -13,20 +13,21 @@ const axiosInstance = axios.create({
 // Axios 요청 인터셉터 설정
 axiosInstance.interceptors.request.use(
   (config) => {
+    const newConfig = { ...config }; // config 객체를 복사하여 수정
     /** 최신값이 있다면 바꿔주기 */
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      config.headers['Authorization'] = accessToken;
+      newConfig.headers.Authorization = accessToken;
     }
     /** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
-    if (config.useMock) {
-      config.baseURL = 'http://localhost:3000/api/v1';
-      config.headers = AxiosHeaders.from({
-        ...config.headers,
+    if (newConfig.useMock) {
+      newConfig.baseURL = 'http://localhost:3000/api/v1';
+      newConfig.headers = AxiosHeaders.from({
+        ...newConfig.headers,
         'X-Mock-Request': 'true',
       });
     }
-    return config;
+    return newConfig;
   },
   (error) => {
     return Promise.reject(error);

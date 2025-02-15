@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
-import * as S from '../index.styles';
-import { useGroupSetupStore } from '../stores/useGroupSetupStore';
 import Header from '@/common/components/Header';
 import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
+import * as S from '../index.styles';
+import { useGroupSetupStore } from '../stores/useGroupSetupStore';
 
 const passwordSchema = z.object({
   password: z
@@ -32,7 +32,7 @@ function PasswordSetup() {
 
   const onNext = (data: { password: string }) => {
     setPassword(data.password);
-    createGroup({ name: groupName, password: password });
+    createGroup({ name: groupName, password });
   };
 
   return (

@@ -9,8 +9,8 @@ import Login from './pages/auth/login';
 import LoginSuccess from './pages/auth/loginSuccess';
 import Home from './pages/home';
 
-/** 
- * 페이지에 접근하기 전에 실행되는 함수 
+/**
+ * 페이지에 접근하기 전에 실행되는 함수
  * -> accessToken이 있는지 확인하고, 없으면 login 으로 redirect
  * */
 const checkAuth = () => {

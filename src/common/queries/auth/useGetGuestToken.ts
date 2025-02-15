@@ -10,7 +10,7 @@ export const useGetGuestToken = () => {
     queryFn: async () => {
       const response = await getGuestToken();
       if (response?.accessToken) {
-        localStorage.setItem('accessToken', 'Bearer ' + response?.accessToken);
+        localStorage.setItem('accessToken', `Bearer ${response?.accessToken}`);
         navigate(ROUTE.selectGroup);
       } else {
         console.error('Access token not found');
