@@ -13,29 +13,25 @@ const axiosInstance = axios.create({
 // Axios 요청 인터셉터 설정
 axiosInstance.interceptors.request.use(
   (config) => {
+    /** 최신값이 있다면 바꿔주기 */
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       config.headers['Authorization'] = accessToken;
+    }
+    /** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
+    if (config.useMock) {
+      config.baseURL = 'http://localhost:3000/api/v1';
+      config.headers = AxiosHeaders.from({
+        ...config.headers,
+        'X-Mock-Request': 'true',
+      });
     }
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
-
-/** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
-axiosInstance.interceptors.request.use((config) => {
-  const updatedConfig = { ...config };
-
-  if (config.useMock) {
-    updatedConfig.headers = AxiosHeaders.from({
-      ...updatedConfig.headers,
-      'X-Mock-Request': 'true',
-    });
-  } 
-  return updatedConfig;
-});
 
 /** accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션 */
 axiosInstance.interceptors.response.use(
@@ -49,8 +45,7 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem('accessToken');
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export default axiosInstance;
-
