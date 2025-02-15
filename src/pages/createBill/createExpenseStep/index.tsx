@@ -1,10 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import { FormProvider } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
-import expense from '@/service/apis/expense';
+import useCreateExpense from '@/common/queries/expense/useCreateExpense';
 import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
@@ -18,16 +17,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: expense.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
-      });
-      moveToNextStep?.();
-    },
-  });
+  const mutation = useCreateExpense({ moveToNextStep });
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
     lastFormCardRef.current?.scrollIntoView({
