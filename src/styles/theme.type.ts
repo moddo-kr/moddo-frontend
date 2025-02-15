@@ -19,7 +19,7 @@ export type TypographyType = {
   fontFamily: string;
   fontSize: Record<TypographyKey, string>;
   fontWeight: Record<TypographyKey, number>;
-  lineHeight: Record<TypographyKey, number>;
+  lineHeight: Record<TypographyKey, string>;
   letterSpacing: {
     typoFontSpacing0: string;
     typoFontSpacing1: string;
