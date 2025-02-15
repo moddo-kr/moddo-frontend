@@ -1,8 +1,7 @@
 import { FormProvider } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Close } from '@/assets/svgs/icon';
-import expense from '@/service/apis/expense';
 import Header from '@/common/components/Header';
+import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import FormCard from '@/pages/createBill/components/FormCard';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
@@ -21,16 +20,7 @@ function EditExpenseStep({
 }: EditExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray(initialExpense);
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: expense.update,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
-      });
-      moveToNextStep?.({ initialExpense: undefined }); // 초기화한 뒤에 다음 스텝으로 이동
-    },
-  });
+  const mutation = useUpdateExpense({ moveToNextStep });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
