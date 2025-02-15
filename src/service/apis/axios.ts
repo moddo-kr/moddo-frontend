@@ -37,6 +37,7 @@ axiosInstance.interceptors.request.use((config) => {
   return updatedConfig;
 });
 
+/** accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션 */
 axiosInstance.interceptors.response.use(
   function (response) {
     return response;
