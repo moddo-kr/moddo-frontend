@@ -1,7 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Close } from '@/assets/svgs/icon';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
-import expense from '@/service/apis/expense';
+import useCreateExpense from '@/common/queries/expense/useCreateExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
@@ -15,16 +14,7 @@ interface AddExpenseStepProps
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: expense.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
-      });
-      moveToNextStep?.();
-    },
-  });
+  const mutation = useCreateExpense({ moveToNextStep });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
