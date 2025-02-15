@@ -46,7 +46,7 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
     // 이동할 다음 단계의 인덱스를 찾는다. (수동으로 이동하는 단계는 제외)
     let nextStepIndex = currentStepIndex + 1;
     while (
-      steps[nextStepIndex].onlyManualMove &&
+      steps[nextStepIndex].manualOnly &&
       nextStepIndex < steps.length - 1
     ) {
       nextStepIndex += 1;
@@ -69,7 +69,7 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
 
     // 이동할 이전 단계의 인덱스를 찾는다. (수동으로 이동하는 단계는 제외)
     let previousStepIndex = currentStepIndex - 1;
-    while (steps[previousStepIndex].onlyManualMove && previousStepIndex >= 0) {
+    while (steps[previousStepIndex].manualOnly && previousStepIndex >= 0) {
       previousStepIndex -= 1;
     }
     if (previousStepIndex < 0) return;

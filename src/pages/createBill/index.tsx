@@ -16,12 +16,12 @@ const funnelSteps: FunnelStep<BillContext>[] = [
   {
     name: 'ADD_EXPENSE',
     requiredFields: [],
-    onlyManualMove: true,
+    manualOnly: true,
   },
   {
     name: 'EDIT_EXPENSE',
     requiredFields: [],
-    onlyManualMove: true,
+    manualOnly: true,
   },
   {
     name: 'CONFIRM',

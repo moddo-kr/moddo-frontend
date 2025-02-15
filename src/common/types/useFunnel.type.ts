@@ -1,7 +1,7 @@
 interface FunnelStep<T> {
   name: string;
   requiredFields: Array<keyof T>;
-  onlyManualMove?: boolean; // 수동으로 이동하는 단계의 경우에만 true (moveToNextStep, moveToPreviousStep 함수의 대상이 아님)
+  manualOnly?: boolean; // 수동으로 이동하는 단계의 경우에만 true (moveToNextStep, moveToPreviousStep 함수의 대상이 아님)
 }
 
 interface UseFunnelProps<T> {
