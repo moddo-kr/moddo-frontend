@@ -257,5 +257,3 @@ const typography: TypographyType = {
 };
 
 export default { colors, radius, units, typography };
-
-// 이렇게 정의되어 있긴 한데, 이걸 테마로 설정하는게 맞는진 모르겠어
