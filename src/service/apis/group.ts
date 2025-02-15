@@ -13,6 +13,7 @@ const group = {
         useMock: true,
       })
       .then((res) => res.data),
+
   post: async (groupData: CreateGroupData) => {
     const response = await axiosInstance.post('/group', groupData, {
       useMock: true,

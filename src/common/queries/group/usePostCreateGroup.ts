@@ -1,5 +1,5 @@
 import { ROUTE } from '@/common/constants/route';
-import { CreateGroupData, postCreateGroup } from '@/service/apis/group';
+import group, { CreateGroupData } from '@/service/apis/group';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
@@ -10,7 +10,7 @@ interface CreateGroupVariables {
 export const usePostCreateGroup = () => {
   const navigate = useNavigate();
   return useMutation<CreateGroupVariables, Error, CreateGroupData>({
-    mutationFn: (newGroup) => postCreateGroup(newGroup),
+    mutationFn: (newGroup) => group.post(newGroup),
     onSuccess: (response) => {
       localStorage.setItem('groupToken', response?.groupToken);
       navigate(ROUTE.groupSetupMember);
