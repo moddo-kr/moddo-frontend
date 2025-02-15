@@ -1,3 +1,4 @@
 import expenseHandlers from './handlers/expense';
+import groupHandlers from './handlers/group';
 
-export const handlers = [...expenseHandlers];
+export const handlers = [...expenseHandlers, ...groupHandlers];

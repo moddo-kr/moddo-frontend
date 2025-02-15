@@ -1,18 +1,31 @@
+import { Fragment } from 'react/jsx-runtime';
 import { Expense } from '@/pages/createBill/types/expense.type';
+import categrizeExpensesByDateWithIndex from '../../utils/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';
+import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
 }
 
 function ExpenseCardList({ expenses }: ExpenseCardListProps) {
-  // TODO : 순서 바꾸기 기능 추가 예정
+  const categorizedExpenses = categrizeExpensesByDateWithIndex(expenses);
+
   return (
-    <>
-      {expenses.map((expense, index) => (
-        <ExpenseCard key={expense.id} index={index} {...expense} />
+    <S.ListContainer>
+      {categorizedExpenses.map(([date, expensesArray]) => (
+        <Fragment key={date}>
+          <S.Date>{date}</S.Date>
+          {expensesArray.map((expense) => (
+            <ExpenseCard
+              key={expense.id}
+              index={expense.globalIndex}
+              {...expense}
+            />
+          ))}
+        </Fragment>
       ))}
-    </>
+    </S.ListContainer>
   );
 }
 
