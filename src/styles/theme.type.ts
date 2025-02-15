@@ -9,6 +9,12 @@ export type ColorType = {
 
 export type UnitType = Record<number | 'max', string>;
 
+export type RadiusType = {
+  default: string;
+  large: string;
+  circle: string;
+};
+
 // ============================================
 // 🎨 Primitive Colors
 // ============================================

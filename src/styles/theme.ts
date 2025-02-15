@@ -1,6 +1,7 @@
 import {
   ColorType,
   PrimitiveColorType,
+  RadiusType,
   SemanticColorType,
   UnitType,
 } from './theme.type';
@@ -206,4 +207,10 @@ const units: UnitType = {
   max: '624.9375rem',
 };
 
-export default { colors, units };
+const radius: RadiusType = {
+  default: units[12],
+  large: units[20],
+  circle: units.max,
+};
+
+export default { colors, radius, units };
