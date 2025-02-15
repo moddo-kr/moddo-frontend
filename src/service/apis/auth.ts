@@ -1,6 +1,15 @@
 import axiosInstance from './axios';
 
-export const getGuestToken = async () => {
-  const response = await axiosInstance.get('/user/guest/token');
+export interface GuestTokenData {
+  accessToken: string;
+  refreshToken: string;
+  expiredAt: Date;
+  isMember: boolean;
+}
+
+export const getGuestToken = async (): Promise<GuestTokenData> => {
+  const response = await axiosInstance.get('/user/guest/token', {
+    useMock: true,
+  });
   return response.data;
 };
