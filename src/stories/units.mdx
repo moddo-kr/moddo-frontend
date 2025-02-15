@@ -1,0 +1,53 @@
+import { Meta } from '@storybook/blocks';
+import theme from '../styles/theme';
+
+<Meta title="Design Tokens/Units" />
+
+# Units
+
+<table
+  style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th style={{ padding: theme.units[12], fontWeight: "bold" }}>
+        Unit
+      </th>
+      <th style={{ padding: theme.units[12], fontWeight: "bold" }}>
+        Value (rem)
+      </th>
+      <th style={{ padding: theme.units[12], fontWeight: "bold" }}>
+        Value (px)
+      </th>
+      <th style={{ padding: theme.units[12], fontWeight: "bold" }}>
+        Preview
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(theme.units).map(([unit, value]) => {
+      const pxValue = parseFloat(value) * 16; // rem → px 변환
+
+      return (
+        <tr key={unit} style={{ borderBottom: `1px solid ${theme.colors.semantic.border.default}` }}>
+          <td style={{ padding: theme.units[12], color: theme.colors.semantic.text.default }}>{unit}</td>
+          <td style={{ padding: theme.units[12], color: theme.colors.semantic.text.default }}>{value}</td>
+          <td style={{ padding: theme.units[12], color: theme.colors.semantic.text.default }}>{pxValue}px</td>
+          <td style={{ padding: theme.units[12] }}>
+            {unit !== "max" ? (
+              <div
+                style={{
+                  width: value,
+                  height: theme.units[16],
+                  backgroundColor: theme.colors.semantic.orange.default,
+                }}
+              />
+            ) : (
+              "-"
+            )}
+          </td>
+        </tr>
+      );
+    })}
+
+  </tbody>
+</table>

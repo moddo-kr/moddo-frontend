@@ -7,6 +7,8 @@ export type ColorType = {
   semantic: SemanticColorType;
 };
 
+export type UnitType = Record<number | 'max', string>;
+
 // ============================================
 // 🎨 Primitive Colors
 // ============================================
