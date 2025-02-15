@@ -6,6 +6,11 @@ export interface CreateGroupData {
   password: string;
 }
 
+export interface AccountVariable {
+  bank: string;
+  accountNumber: string;
+}
+
 const group = {
   get: (groupToken: string): Promise<Group> =>
     axiosInstance
@@ -18,6 +23,19 @@ const group = {
     const response = await axiosInstance.post('/group', groupData, {
       useMock: true,
     });
+    console.log(response);
+    return response.data;
+  },
+
+  put: async (accountData: AccountVariable) => {
+    const groupToken = localStorage.getItem('groupToken');
+    const response = await axiosInstance.put(
+      `/group/account?groupToken=${groupToken}`,
+      accountData,
+      {
+        useMock: true,
+      }
+    );
     console.log(response);
     return response.data;
   },
