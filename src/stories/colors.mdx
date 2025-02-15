@@ -1,0 +1,52 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import theme from '../styles/theme';
+
+<Meta title="Design Tokens/Colors" />
+
+# Colors
+
+## Primitives
+
+<ColorPalette>
+  {Object.entries(theme.colors.primitive).map(([colorName, shades]) => {
+    const isNested = Object.values(shades).some(value => typeof value === 'object');
+
+    return isNested ? (
+      Object.entries(shades).map(([subKey, values]) => (
+        <ColorItem
+          key={`${colorName}-${subKey}`}
+          title={`${colorName}.${subKey}`}
+          subtitle={`theme.colors.primitive.${colorName}.${subKey}`}
+          colors={values} // 기존 복잡한 변환 없이 그대로 전달
+        />
+      ))
+    ) : (
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.colors.primitive.${colorName}`} colors={shades} />
+    );
+
+})}
+
+</ColorPalette>
+
+## Semantic
+
+<ColorPalette>
+  {Object.entries(theme.colors.semantic).map(([colorName, shades]) => {
+    const isNested = Object.values(shades).some(value => typeof value === 'object');
+
+    return isNested ? (
+      Object.entries(shades).map(([subKey, values]) => (
+        <ColorItem
+          key={`${colorName}-${subKey}`}
+          title={`${colorName}.${subKey}`}
+          subtitle={`theme.colors.semantic.${colorName}.${subKey}`}
+          colors={values} // 기존 복잡한 변환 없이 그대로 전달
+        />
+      ))
+    ) : (
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.colors.semantic.${colorName}`} colors={shades} />
+    );
+
+})}
+
+</ColorPalette>
