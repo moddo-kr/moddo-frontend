@@ -2,12 +2,12 @@ import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
 import * as S from './index.style';
-import { useGetGuestToken } from '@/service/queries/auth/useGetGuestToken';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
+import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
 
 function Login() {
-  const { mutate: guestTokenMutate } = useGetGuestToken();
+  const { refetch: getGuestToken } = useGetGuestToken();
   const navigate = useNavigate();
 
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
@@ -16,7 +16,7 @@ function Login() {
       console.log('카카오 로그인');
     } else {
       if (!token) {
-        guestTokenMutate();
+        getGuestToken();
       } else {
         navigate(ROUTE.selectGroup);
       }
