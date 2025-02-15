@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTheme } from 'styled-components';
 import { Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import { Add, CheckCircle } from '@/assets/svgs/icon';
@@ -11,7 +12,7 @@ type SelectedValueType = 'CREATE' | 'RECENT';
 function SelectGroup() {
   const [selectedValue, setSelectedValue] =
     useState<SelectedValueType>('CREATE');
-
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handleButtonClick = (value: SelectedValueType) => {
@@ -56,7 +57,11 @@ function SelectGroup() {
               selected={selectedValue === 'RECENT'}
               onClick={() => handleButtonClick('RECENT')}
             >
-              <CheckCircle width={44} />
+              <CheckCircle
+                width={theme.unit[36]}
+                height={theme.unit[36]}
+                fill={theme.color.semantic.icon.disabled}
+              />
               기존 모임
             </S.SelectButton>
           </Flex>

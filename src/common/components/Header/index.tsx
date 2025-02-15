@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
+import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import * as S from '@/common/components/Header/index.styles';
-import { ReactElement } from 'react';
 
 export interface HeaderProps {
   title?: string;
@@ -23,6 +24,8 @@ function Header({
   leftButtonOnClick,
   rightButtonOnClick,
 }: HeaderProps) {
+  const theme = useTheme();
+
   switch (type) {
     case 'TitleLeft':
       return (
@@ -31,8 +34,8 @@ function Header({
             {showIcon ? (
               <ArrowLeft
                 onClick={handleBackButtonClick}
-                width={8}
-                height={16}
+                width={theme.unit[24]}
+                height={theme.unit[24]}
               />
             ) : (
               <S.DummyIcon />

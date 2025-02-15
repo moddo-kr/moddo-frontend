@@ -7,10 +7,7 @@ const SvgCheckCircle = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 20 20"
     {...props}
   >
-    <path
-      fill="#2391F6"
-      d="M0 10c0 5.523 4.477 10 10 10s10-4.477 10-10S15.523 0 10 0 0 4.477 0 10"
-    />
+    <path d="M0 10c0 5.523 4.477 10 10 10s10-4.477 10-10S15.523 0 10 0 0 4.477 0 10" />
     <path
       fill="#fff"
       fillRule="evenodd"
