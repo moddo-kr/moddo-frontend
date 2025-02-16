@@ -45,13 +45,13 @@ function Login() {
       </Flex>
       <S.BottomWrapper>
         <S.BottomButton
-          bgColor="#FAE100"
+          $bgColor="#FAE100"
           onClick={() => handleLoginButtonClick('KAKAO')}
         >
           카카오로 로그인
         </S.BottomButton>
         <S.BottomButton
-          bgColor="#E2E2E2"
+          $bgColor="#E2E2E2"
           onClick={() => handleLoginButtonClick('GUEST')}
         >
           비회원으로 진행
