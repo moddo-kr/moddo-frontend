@@ -261,9 +261,11 @@ const typography: TypographyType = {
 // 🎨 Theme
 // ============================================
 
-export const theme: Theme = {
+const theme: Theme = {
   color,
   unit,
   radius,
   typography,
 } as const;
+
+export default theme;

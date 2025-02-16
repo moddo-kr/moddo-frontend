@@ -96,7 +96,7 @@ type SemanticBackground = {
 // 🔠 Typography
 // ============================================
 
-type TypographyKey =
+export type TypographyKey =
   | 'heading1'
   | 'heading2'
   | 'title'
