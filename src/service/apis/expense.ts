@@ -8,7 +8,7 @@ const expense = {
   // GET getAllExpense
   getAll: (groupToken: string): Promise<ExpenseList> =>
     axiosInstance
-      .get(`/api/v1/expenses?groupToken=${groupToken}`, {
+      .get(`/expenses?groupToken=${groupToken}`, {
         useMock: true,
       })
       .then((res) => res.data),
@@ -20,7 +20,7 @@ const expense = {
     groupToken: string;
     data: ExpenseForm;
   }): Promise<void> =>
-    axiosInstance.post(`/api/v1/expenses?groupToken=${groupToken}`, data, {
+    axiosInstance.post(`/expenses?groupToken=${groupToken}`, data, {
       useMock: true,
     }),
   // DELETE deleteByExpenseId
@@ -32,7 +32,7 @@ const expense = {
     expenseId: number;
   }): Promise<void> =>
     axiosInstance.delete(
-      `/api/v1/expenses/${expenseId}?groupToken=${groupToken}`,
+      `/expenses/${expenseId}?groupToken=${groupToken}`,
       {
         useMock: true,
       }

@@ -21,7 +21,7 @@ interface RequestBody {
 
 const groupMemberHandlers = [
   http.post<object, RequestBody>(
-    `/api/v1/group-members`,
+    `/group-members`,
     async ({ request }) => {
       if (!getIsMocked(request)) return passthrough();
 
