@@ -5,3 +5,7 @@ export interface Group {
   members: Member[];
 }
 
+export interface CreateGroupData {
+  name: string;
+  password: string;
+}

@@ -38,11 +38,14 @@ export const BottomWrapper = styled.footer`
   min-width: 320px;
 `;
 
-export const BottomButton = styled.button<{ bgColor?: string; color?: string }>`
+export const BottomButton = styled.button<{
+  $bgColor?: string;
+  color?: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ bgColor }) => bgColor || 'black'};
+  background-color: ${({ $bgColor }) => $bgColor || 'black'};
   color: ${({ color }) => color || 'black'};
   font-weight: 600;
   border-radius: 9999px;
