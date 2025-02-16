@@ -4,8 +4,8 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
-import MemberProfile from '../MemberProfile';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import MemberProfile from '../MemberProfile';
 
 const MemberSchema = z.object({
   name: z.string().trim().min(1),

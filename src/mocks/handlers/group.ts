@@ -1,6 +1,6 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/utils/getIsMocked';
-import { AccountVariable } from '@/service/apis/group';
+import { AccountVariable } from '@/common/types/group.type';
 
 const dummyGroups = [
   {
@@ -75,8 +75,8 @@ const groupHandlers = [
         expiredAt: new Date(
           new Date().setMonth(new Date().getMonth() + 1)
         ).toISOString(),
-        bank: bank,
-        accountNumber: accountNumber,
+        bank,
+        accountNumber,
       });
     }
   ),

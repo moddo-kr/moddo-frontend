@@ -1,13 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import group, { AccountVariable } from '@/service/apis/group';
+import group from '@/service/apis/group';
+import { AccountVariable } from '@/common/types/group.type';
 
 interface AccountData {
-  id: number,
-  writer: number,
-  createdAt: Date,
-  expiredAt: Date,
-  bank: string,
-  accountNumber: string
+  id: number;
+  writer: number;
+  createdAt: Date;
+  expiredAt: Date;
+  bank: string;
+  accountNumber: string;
 }
 
 const usePutUpdateAccount = () => {
@@ -20,7 +21,6 @@ const usePutUpdateAccount = () => {
     },
     onError: (error) => {
       console.error('Error updating account:', error);
-      alert('계좌 업데이트에 실패했습니다.');
     },
   });
 };

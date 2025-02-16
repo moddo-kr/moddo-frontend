@@ -3,9 +3,9 @@ import { Button, Flex, Input, useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { TitleText } from '@/pages/groupSetup/index.styles';
+import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
 import BankNameDrawer from './components/BankNameDrawer';
 import { BillContext } from '../types/billContext.type';
-import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
 
 interface AddAccountStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
@@ -25,7 +25,7 @@ function AddAccountStep({
 
   const handleNextButtonClick = () => {
     updateAccountMutate(
-      { bank: bankName, accountNumber: accountNumber },
+      { bank: bankName, accountNumber },
       {
         onSuccess: () => {
           moveToNextStep?.();

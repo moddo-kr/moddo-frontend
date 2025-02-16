@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
 import { Member } from '@/common/types/member.type';
-import * as S from '../index.styles';
 import usePostCreateGroupMembers from '@/common/queries/groupMembers/useCreateGroupMembers';
-import { ROUTE } from '@/common/constants/route';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import * as S from '../index.styles';
 
 export interface ParticipantProfile {
   name: string;

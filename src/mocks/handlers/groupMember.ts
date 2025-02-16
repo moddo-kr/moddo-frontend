@@ -40,23 +40,26 @@ const groupMemberHandlers = [
       console.log(body);
 
       const { members } = body;
-      
+
       // 요청 body를 이용해 멤버 배열을 생성하는 함수
-      const responseMembers = Array.from({ length: members.length + 1 }, (_, index) => {
-        if (index === 0) {
-          // 첫 번째 멤버는 김모또로 고정
-          return dummyGroupMembers[0];
+      const responseMembers = Array.from(
+        { length: members.length + 1 },
+        (_, index) => {
+          if (index === 0) {
+            // 첫 번째 멤버는 김모또로 고정
+            return dummyGroupMembers[0];
+          }
+          const newMember = {
+            id: index,
+            role: 'PARTICIPANT' as MemberRole,
+            name: members[index - 1].name,
+            profile: defaultProfileImg,
+            isPaid: false,
+            paidAt: null,
+          };
+          return newMember;
         }
-        const newMember = {
-          id: index,
-          role: 'PARTICIPANT' as MemberRole,
-          name: members[index - 1].name,
-          profile: defaultProfileImg,
-          isPaid: false,
-          paidAt: null,
-        };
-        return newMember;
-      });
+      );
 
       // 이 시점에서 dummyGroupMembers 배열은 변경되지 않음
       return HttpResponse.json({
