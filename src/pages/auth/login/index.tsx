@@ -1,18 +1,23 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { Flex, Text } from '@chakra-ui/react';
-import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
+import { ROUTE } from '@/common/constants/route';
+import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
 import * as S from './index.style';
 
 function Login() {
+  const { refetch: getGuestToken } = useGetGuestToken();
   const navigate = useNavigate();
 
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
+    const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
       console.log('카카오 로그인');
+    } else if (!token) {
+      getGuestToken();
     } else {
-      navigate(ROUTE.loginSuccess);
+      navigate(ROUTE.selectGroup);
     }
   };
 
@@ -40,13 +45,13 @@ function Login() {
       </Flex>
       <S.BottomWrapper>
         <S.BottomButton
-          bgColor="#FAE100"
+          $bgColor="#FAE100"
           onClick={() => handleLoginButtonClick('KAKAO')}
         >
           카카오로 로그인
         </S.BottomButton>
         <S.BottomButton
-          bgColor="#E2E2E2"
+          $bgColor="#E2E2E2"
           onClick={() => handleLoginButtonClick('GUEST')}
         >
           비회원으로 진행

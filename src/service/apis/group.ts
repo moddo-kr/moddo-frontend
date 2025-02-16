@@ -1,4 +1,4 @@
-import { Group } from '@/common/types/group.type';
+import { CreateGroupData, Group } from '@/common/types/group.type';
 import axiosInstance from './axios';
 
 const group = {
@@ -8,6 +8,13 @@ const group = {
         useMock: true,
       })
       .then((res) => res.data),
+
+  post: async (groupData: CreateGroupData) => {
+    const response = await axiosInstance.post('/group', groupData, {
+      useMock: true,
+    });
+    return response.data;
+  },
 };
 
 export default group;

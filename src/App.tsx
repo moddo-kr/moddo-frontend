@@ -2,8 +2,8 @@ import { ThemeProvider } from 'styled-components';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import GlobalStyles from '@/styles/globalStyles';
 import theme from '@/styles/theme';
-import Router from '@/Router';
 import Layout from '@/common/components/Layout';
+import AppRouter from '@/Router';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Layout>
           <GlobalStyles />
-          <Router />
+          <AppRouter />
         </Layout>
       </ThemeProvider>
     </ChakraProvider>

@@ -4,9 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
-import { ROUTE } from '@/common/constants/route';
+import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
 import * as S from '../index.styles';
-
 import { useGroupSetupStore } from '../stores/useGroupSetupStore';
 
 const passwordSchema = z.object({
@@ -29,10 +28,11 @@ function PasswordSetup() {
   });
 
   const navigate = useNavigate();
+  const { mutate: createGroup } = usePostCreateGroup();
 
   const onNext = (data: { password: string }) => {
     setPassword(data.password);
-    navigate(ROUTE.groupSetupMember);
+    createGroup({ name: groupName, password });
   };
 
   return (
