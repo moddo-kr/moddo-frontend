@@ -1,19 +1,19 @@
 import type { SVGProps } from 'react';
 
-const SvgNext = (props: SVGProps<SVGSVGElement>) => (
+const SvgConfirm = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
+    viewBox="0 0 20 14"
     {...props}
     fill="none"
   >
     <path
-      stroke="#6F7379"
+      stroke="#444950"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="m16 10-4 4-4-4"
+      strokeWidth={1.6}
+      d="M18.5 1 6.813 13 1.5 7.545"
     />
   </svg>
 );
-export default SvgNext;
+export default SvgConfirm;

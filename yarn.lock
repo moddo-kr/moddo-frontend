@@ -1835,6 +1835,13 @@
     "@storybook/global" "^5.0.0"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-themes@^8.5.2":
+  version "8.5.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-themes/-/addon-themes-8.5.6.tgz#d962617531437f5d7fcea27540dfc05015661800"
+  integrity sha512-FaWUJ9ZRXbubp6UeR2EWqx2u8IkhY5zJ72h/jC0rYR/QrxaVJSw0T8T/CE1GkMJjQB8F76Th6zIUQvnG2HSlXA==
+  dependencies:
+    ts-dedent "^2.0.0"
+
 "@storybook/addon-toolbars@8.5.3":
   version "8.5.3"
   resolved "https://registry.yarnpkg.com/@storybook/addon-toolbars/-/addon-toolbars-8.5.3.tgz#8a50b2466c21670efbe7f548961d9fdb4a028bca"
@@ -3718,7 +3725,7 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
-chromatic@^11.15.0:
+chromatic@^11.15.0, chromatic@^11.25.2:
   version "11.25.2"
   resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-11.25.2.tgz#cb93dc1332d8f6b70d97a3ef126bc6d03429d396"
   integrity sha512-/9eQWn6BU1iFsop86t8Au21IksTRxwXAl7if8YHD05L2AbuMjClLWZo5cZojqrJHGKDhTqfrC2X2xE4uSm0iKw==
