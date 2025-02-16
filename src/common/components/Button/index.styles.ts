@@ -20,6 +20,12 @@ const buttonVariants = {
     background: transparent;
     color: ${({ theme }) => theme.color.semantic.text.strong};
   `,
+  text: css`
+    background: transparent;
+    padding: 0;
+    color: ${({ theme }) => theme.color.semantic.text.default};
+    ${TextVariant('body1R')};
+  `,
 };
 
 const buttonSizes = {
@@ -28,10 +34,6 @@ const buttonSizes = {
   `,
   sm: css`
     padding: ${({ theme }) => `${theme.unit[8]} ${theme.unit[16]}`};
-  `,
-  icon: css`
-    padding: 0;
-    background: transparent;
   `,
 };
 
@@ -43,9 +45,9 @@ export const Button = styled.button<StyledButtonProps>`
   border-radius: ${({ theme }) => theme.radius.circle};
   cursor: pointer;
   border: none;
-  ${({ $variant }) => buttonVariants[$variant]};
-  ${({ $size }) => buttonSizes[$size]};
   ${TextVariant('body1Sb')};
+  ${({ $size }) => buttonSizes[$size]};
+  ${({ $variant }) => buttonVariants[$variant]};
   &:disabled {
     cursor: not-allowed;
     background: ${({ theme }) =>

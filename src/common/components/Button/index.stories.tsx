@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Bell } from '@/assets/svgs/icon';
+import { ArrowLeft, Bell } from '@/assets/svgs/icon';
 import theme from '@/styles/theme';
 import { buttonVariants, buttonSizes } from './index.type';
 import Button from '.';
@@ -45,15 +45,71 @@ export const Default: Story = {
   },
 };
 
-export const IconButtons: Story = {
+export const TextButton: Story = {
   args: {
-    size: 'icon',
-    children: <Bell width={24} height={24} />,
+    variant: 'text',
+  },
+  render: (args) => {
+    const childrenVariants = [
+      { key: 'icon-only', content: <Bell width={24} /> },
+      { key: 'text-only', content: '지출 추가' },
+      {
+        key: 'icon-text',
+        content: (
+          <>
+            <ArrowLeft width={24} /> 뒤로가기
+          </>
+        ),
+      },
+    ];
+
+    return (
+      <table
+        style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          textAlign: 'center',
+        }}
+      >
+        <thead>
+          <tr>
+            {childrenVariants.map(({ key }) => (
+              <th
+                key={key}
+                style={{
+                  padding: theme.unit[12],
+                  borderBottom: `1px solid ${theme.color.semantic.border.default}`,
+                }}
+              >
+                {key}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {childrenVariants.map(({ key, content }) => (
+              <td
+                key={key}
+                style={{
+                  padding: theme.unit[12],
+                  borderBottom: `1px solid ${theme.color.semantic.border.subtle}`,
+                }}
+              >
+                <Button {...args}>{content}</Button>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    );
   },
 };
 
 export const Showcase = () => {
-  const showcaseSize = buttonSizes.filter((size) => size !== 'icon');
+  const showcaseVariant = buttonVariants.filter(
+    (variant) => variant !== 'text'
+  );
 
   return (
     <table
@@ -70,7 +126,7 @@ export const Showcase = () => {
           >
             Size
           </th>
-          {buttonVariants.map((variant) => (
+          {showcaseVariant.map((variant) => (
             <th
               key={variant}
               style={{
@@ -92,7 +148,7 @@ export const Showcase = () => {
         </tr>
       </thead>
       <tbody>
-        {showcaseSize.map((size) => (
+        {buttonSizes.map((size) => (
           <tr key={size}>
             <td
               style={{
@@ -104,7 +160,7 @@ export const Showcase = () => {
             >
               {size}
             </td>
-            {buttonVariants.map((variant) => (
+            {showcaseVariant.map((variant) => (
               <td
                 key={`${size}-${variant}`}
                 style={{
