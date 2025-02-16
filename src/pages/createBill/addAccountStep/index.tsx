@@ -5,6 +5,7 @@ import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { TitleText } from '@/pages/groupSetup/index.styles';
 import BankNameDrawer from './components/BankNameDrawer';
 import { BillContext } from '../types/billContext.type';
+import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
 
 interface AddAccountStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
@@ -16,9 +17,21 @@ function AddAccountStep({
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
+  const { mutate: updateAccountMutate } = usePutUpdateAccount();
 
   const handleBankInputClick = () => {
     onOpen();
+  };
+
+  const handleNextButtonClick = () => {
+    updateAccountMutate(
+      { bank: bankName, accountNumber: accountNumber },
+      {
+        onSuccess: () => {
+          moveToNextStep?.();
+        },
+      }
+    );
   };
 
   return (
@@ -78,7 +91,7 @@ function AddAccountStep({
           height="fit-content"
           lineHeight={1.5}
           borderRadius={32}
-          onClick={moveToNextStep}
+          onClick={handleNextButtonClick}
           disabled={!bankName || !accountNumber}
           fontSize={16}
           fontWeight={600}
