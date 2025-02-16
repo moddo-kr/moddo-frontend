@@ -1,27 +1,20 @@
 import { ROUTE } from '@/common/constants/route';
+import { Member } from '@/common/types/member.type';
 import groupMembers, {
   CreateGroupMembersVariable,
 } from '@/service/apis/groupMembers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
-interface groupMembersData {
-  id: number;
-  role: 'MANAGER' | 'PARTICIPANT';
-  name: string;
-  profile: string;
-  isPaid: boolean;
-  paidAt: Date | null;
-}
-
-const useCreateGroupMembers = () => {
+const usePostCreateGroupMembers = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  return useMutation<groupMembersData[], Error, CreateGroupMembersVariable[]>({
+  return useMutation<Member[], Error, CreateGroupMembersVariable[]>({
     mutationFn: (variable) => groupMembers.post(variable),
     onSuccess: (data) => {
       // groupMembers 키에 데이터를 저장
-      queryClient.setQueryData(['groupMembers'], data);
+      queryClient.setQueryData(['createGroupMembers'], data);
+      console.log('data:', data);
       navigate(ROUTE.createBill);
     },
     onError: (error) => {
@@ -31,4 +24,4 @@ const useCreateGroupMembers = () => {
   });
 };
 
-export default useCreateGroupMembers;
+export default usePostCreateGroupMembers;
