@@ -14,7 +14,7 @@ export interface AccountVariable {
 const group = {
   get: (groupToken: string): Promise<Group> =>
     axiosInstance
-      .get(`/api/v1/group?groupToken=${groupToken}`, {
+      .get(`/group?groupToken=${groupToken}`, {
         useMock: true,
       })
       .then((res) => res.data),
