@@ -1,7 +1,7 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
-import { dummyGroupMembers } from './groupMember';
+import { dummyGroupMembers } from './groupMemberHandlers';
 
 const dummyExpenses: Expense[] = [];
 
@@ -35,7 +35,11 @@ const expenseHandlers = [
         date: expense.date,
         memberExpenses: expense.memberExpenses.map((memberExpense) => ({
           memberId: memberExpense.memberId,
-          name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+          // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환 -> 맞나요??
+          name:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.name ?? '',
           amount: memberExpense.amount,
         })),
       });
