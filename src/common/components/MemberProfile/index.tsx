@@ -8,7 +8,7 @@ import * as S from './index.style';
 
 interface MemberProfileProps {
   member: Member;
-  handleDeleteButtonClick: (id: string) => void;
+  handleDeleteButtonClick: (id: number) => void;
 }
 
 function MemberProfile({
@@ -28,7 +28,7 @@ function MemberProfile({
       py={2}
     >
       <S.ProfileWrapper>
-        {member.role !== 'treasurer' && (
+        {member.role !== 'MANAGER' && (
           <S.DeleteButton onClick={() => handleDeleteButtonClick(member.id)}>
             <DeleteButtonIcon width="1.1rem" height="1.1rem" />
           </S.DeleteButton>
