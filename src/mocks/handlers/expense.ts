@@ -35,21 +35,22 @@ const expenseHandlers = [
       const body = await request.json();
       const { expenses } = body;
 
-    expenses.forEach((expense) => {
-      dummyExpenses.push({
-        id: dummyExpenses.length + 1,
-        amount: expense.amount,
-        content: expense.content,
-        date: expense.date,
-        memberExpenses: expense.memberExpenses.map((memberExpense) => ({
-          memberId: memberExpense.memberId,
-          // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환 -> 맞나요??
-          name:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.name ?? '',
-          amount: memberExpense.amount,
-        })),
+      expenses.forEach((expense) => {
+        dummyExpenses.push({
+          id: dummyExpenses.length + 1,
+          amount: expense.amount,
+          content: expense.content,
+          date: expense.date,
+          memberExpenses: expense.memberExpenses.map((memberExpense) => ({
+            memberId: memberExpense.memberId,
+            // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환 -> 맞나요??
+            name:
+              dummyGroupMembers.find(
+                (member) => member.id === memberExpense.memberId
+              )?.name ?? '',
+            amount: memberExpense.amount,
+          })),
+        });
       });
 
       return HttpResponse.json({
@@ -57,7 +58,6 @@ const expenseHandlers = [
       });
     }
   ),
-
   // GET getAllExpense
   http.get('/api/v1/expenses', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
@@ -143,7 +143,10 @@ const expenseHandlers = [
         date,
         memberExpenses: memberExpenses.map((memberExpense) => ({
           memberId: memberExpense.memberId,
-          name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+          name:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.name ?? '',
           amount: memberExpense.amount,
         })),
       };
