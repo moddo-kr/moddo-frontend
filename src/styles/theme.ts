@@ -3,6 +3,7 @@ import {
   PrimitiveColorType,
   RadiusType,
   SemanticColorType,
+  Theme,
   TypographyType,
   UnitType,
 } from './theme.type';
@@ -106,7 +107,7 @@ const PrimitiveColor: PrimitiveColorType = {
     800: '#8a7b22',
     900: '#695e1a',
   },
-};
+} as const;
 
 const SemanticColor: SemanticColorType = {
   background: {
@@ -168,12 +169,12 @@ const SemanticColor: SemanticColorType = {
     strong: PrimitiveColor.gray[800],
     subtle: PrimitiveColor.gray[400],
   },
-};
+} as const;
 
 const color: ColorType = {
   primitive: PrimitiveColor,
   semantic: SemanticColor,
-};
+} as const;
 
 // ============================================
 // 📏 Unit & Radius
@@ -206,13 +207,13 @@ const unit: UnitType = {
   96: '6rem',
   128: '8rem',
   max: '624.9375rem',
-};
+} as const;
 
 const radius: RadiusType = {
   default: unit[12],
   large: unit[20],
   circle: unit.max,
-};
+} as const;
 
 // ============================================
 // 🔠 Typography
@@ -254,6 +255,15 @@ const typography: TypographyType = {
     typoFontSpacing0: unit[0],
     typoFontSpacing1: unit[1],
   },
-};
+} as const;
 
-export default { color, radius, unit, typography };
+// ============================================
+// 🎨 Theme
+// ============================================
+
+export const theme: Theme = {
+  color,
+  unit,
+  radius,
+  typography,
+} as const;

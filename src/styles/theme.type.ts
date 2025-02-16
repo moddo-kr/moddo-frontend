@@ -1,11 +1,22 @@
+import { FlattenKeys } from '@/common/types/utility.type';
+
 // ============================================
 // 📦 Theme Type
 // ============================================
+
+export type Theme = {
+  color: ColorType;
+  unit: UnitType;
+  radius: RadiusType;
+  typography: TypographyType;
+};
 
 export type ColorType = {
   primitive: PrimitiveColorType;
   semantic: SemanticColorType;
 };
+
+export type ColorKey = FlattenKeys<ColorType>;
 
 export type UnitType = Record<number | 'max', string>;
 
