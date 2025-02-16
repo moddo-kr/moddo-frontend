@@ -5,27 +5,35 @@ import { dummyGroupMembers } from './groupMember';
 
 const dummyExpenses: Expense[] = [];
 
-interface RequestBody {
+interface CreateExpensesRequestBody {
   expenses: Expense[];
 }
 
+interface UpdateExpenseParams {
+  expenseId: string;
+}
+
+interface UpdateExpenseRequestBody extends Omit<Expense, 'id'> {}
+
 const expenseHandlers = [
   // POST createExpenses
-  http.post<object, RequestBody>('/api/v1/expenses', async ({ request }) => {
-    if (!getIsMocked(request)) return passthrough();
+  http.post<object, CreateExpensesRequestBody>(
+    '/api/v1/expenses',
+    async ({ request }) => {
+      if (!getIsMocked(request)) return passthrough();
 
-    const url = new URL(request.url);
-    const groupToken = url.searchParams.get('groupToken');
+      const url = new URL(request.url);
+      const groupToken = url.searchParams.get('groupToken');
 
-    if (!groupToken) {
-      return HttpResponse.json(
-        { error: 'groupToken is required' },
-        { status: 400 }
-      );
-    }
+      if (!groupToken) {
+        return HttpResponse.json(
+          { error: 'groupToken is required' },
+          { status: 400 }
+        );
+      }
 
-    const body = await request.json();
-    const { expenses } = body;
+      const body = await request.json();
+      const { expenses } = body;
 
     expenses.forEach((expense) => {
       dummyExpenses.push({
@@ -43,12 +51,12 @@ const expenseHandlers = [
           amount: memberExpense.amount,
         })),
       });
-    });
 
-    return HttpResponse.json({
-      expenses: dummyExpenses,
-    });
-  }),
+      return HttpResponse.json({
+        expenses: dummyExpenses,
+      });
+    }
+  ),
 
   // GET getAllExpense
   http.get('/api/v1/expenses', ({ request }) => {
@@ -96,6 +104,53 @@ const expenseHandlers = [
 
     return HttpResponse.json({ message: 'success' });
   }),
+
+  // PUT updateExpense
+  http.put<UpdateExpenseParams, UpdateExpenseRequestBody>(
+    '/api/v1/expenses/:expenseId',
+    async ({ request, params }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      const { expenseId } = params;
+      const url = new URL(request.url);
+      const groupToken = url.searchParams.get('groupToken');
+
+      if (!groupToken) {
+        return HttpResponse.json(
+          { error: 'groupToken is required' },
+          { status: 400 }
+        );
+      }
+
+      const body = await request.json();
+      const { amount, content, date, memberExpenses } = body;
+
+      const index = dummyExpenses.findIndex(
+        (expense) => expense.id === Number(expenseId)
+      );
+
+      if (index === -1) {
+        return HttpResponse.json(
+          { error: 'expense not found' },
+          { status: 404 }
+        );
+      }
+
+      dummyExpenses[index] = {
+        id: dummyExpenses[index].id,
+        amount,
+        content,
+        date,
+        memberExpenses: memberExpenses.map((memberExpense) => ({
+          memberId: memberExpense.memberId,
+          name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+          amount: memberExpense.amount,
+        })),
+      };
+
+      return HttpResponse.json({ message: 'success' });
+    }
+  ),
 ];
 
 export default expenseHandlers;

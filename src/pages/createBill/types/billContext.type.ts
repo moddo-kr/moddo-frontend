@@ -1,2 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface BillContext {}
+import { Expense } from './expense.type';
+
+export interface BillContext {
+  initialExpense?: Expense;
+}
