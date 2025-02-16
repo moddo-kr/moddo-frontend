@@ -1,0 +1,23 @@
+import { ReactElement } from 'react';
+import Text from '@/common/components/Text';
+import * as S from './index.styles';
+
+interface DescriptionFieldProps {
+  title: string | ReactElement;
+  sub: string;
+}
+
+function DescriptionField({ title, sub }: DescriptionFieldProps) {
+  return (
+    <S.Wrapper>
+      <Text variant="heading2" color="semantic.text.strong">
+        {title}
+      </Text>
+      <Text variant="body1R" color="semantic.text.subtle">
+        {sub}
+      </Text>
+    </S.Wrapper>
+  );
+}
+
+export default DescriptionField;
