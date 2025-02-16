@@ -78,7 +78,7 @@ function AddAccountStep({
           height="fit-content"
           lineHeight={1.5}
           borderRadius={32}
-          onClick={moveToNextStep}
+          onClick={() => moveToNextStep?.()}
           disabled={!bankName || !accountNumber}
           fontSize={16}
           fontWeight={600}

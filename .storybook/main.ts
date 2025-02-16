@@ -7,10 +7,16 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
+    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
+  },
+  refs: {
+    '@chakra-ui/react': {
+      disable: true, // chakra-ui 컴포넌트 스토리를 비활성화
+    },
   },
 };
 export default config;

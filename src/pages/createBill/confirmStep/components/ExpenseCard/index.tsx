@@ -6,6 +6,7 @@ import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
+  moveToEditStep: (initialExpense: Expense) => void;
 }
 
 function ExpenseCard({
@@ -13,7 +14,9 @@ function ExpenseCard({
   index,
   amount,
   content,
+  date,
   memberExpenses,
+  moveToEditStep,
 }: ExpenseCardProps) {
   const mutation = useDeleteMutation();
 
@@ -33,7 +36,13 @@ function ExpenseCard({
             <S.IconButton
               type="button"
               onClick={() => {
-                console.log(`${index + 1}차 수정`);
+                moveToEditStep({
+                  id,
+                  amount,
+                  content,
+                  memberExpenses,
+                  date,
+                });
               }}
             >
               <CarbonEdit />

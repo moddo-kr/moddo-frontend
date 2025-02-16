@@ -1,20 +1,18 @@
 import type { SVGProps } from 'react';
 
-function SvgClose(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 20 21"
-      {...props}
-    >
-      <path
-        fill="#444950"
-        fillRule="evenodd"
-        d="M15.525 4.029a.667.667 0 0 1 .943.943l-5.527 5.527 5.53 5.53a.667.667 0 1 1-.942.944l-5.53-5.531-5.53 5.53a.667.667 0 1 1-.944-.942l5.53-5.53L3.53 4.971a.667.667 0 1 1 .942-.943l5.527 5.527z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
+const SvgClose = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    {...props}
+  >
+    <path
+      fill="#444950"
+      fillRule="evenodd"
+      d="M18.63 4.235a.8.8 0 0 1 1.132 1.131L13.129 12l6.637 6.637a.8.8 0 1 1-1.132 1.131l-6.636-6.637-6.636 6.637a.8.8 0 1 1-1.132-1.131l6.637-6.637-6.633-6.633a.8.8 0 1 1 1.132-1.131l6.632 6.633z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
 export default SvgClose;
