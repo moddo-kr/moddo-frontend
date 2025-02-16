@@ -1,10 +1,5 @@
-import { Group } from '@/common/types/group.type';
+import { CreateGroupData, Group } from '@/common/types/group.type';
 import axiosInstance from './axios';
-
-export interface CreateGroupData {
-  name: string;
-  password: string;
-}
 
 const group = {
   get: (groupToken: string): Promise<Group> =>
@@ -18,7 +13,6 @@ const group = {
     const response = await axiosInstance.post('/group', groupData, {
       useMock: true,
     });
-    console.log(response);
     return response.data;
   },
 };

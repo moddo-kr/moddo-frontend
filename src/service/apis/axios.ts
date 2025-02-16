@@ -34,7 +34,11 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-/** accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션 */
+/** 
+ * accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션 
+ * @Todo accessToken, refreshToken 저장 방식 수정 후 로직 추가
+ * refreshToken 여부 확인 후 재발급 or 로그인 페이지 리다이렉션 로직 추가
+*/
 axiosInstance.interceptors.response.use(
   function (response) {
     return response;
