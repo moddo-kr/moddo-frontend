@@ -12,8 +12,7 @@ const usePostCreateGroupMembers = () => {
   return useMutation<Member[], Error, CreateGroupMembersVariable[]>({
     mutationFn: (variable) => groupMembers.post(variable),
     onSuccess: (data) => {
-      // groupMembers 키에 데이터를 저장
-      queryClient.setQueryData(['createGroupMembers'], data);
+      queryClient.setQueryData(['groupMembers'], data);
       navigate(ROUTE.createBill);
     },
     onError: (error) => {
