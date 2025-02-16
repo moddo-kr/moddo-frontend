@@ -38,7 +38,10 @@ export const BottomWrapper = styled.footer`
   min-width: 320px;
 `;
 
-export const BottomButton = styled.button<{ $bgColor?: string; color?: string }>`
+export const BottomButton = styled.button<{
+  $bgColor?: string;
+  color?: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
