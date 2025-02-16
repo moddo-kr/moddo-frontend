@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/blocks';
+import theme from '../styles/theme';
+
+<Meta title="Design Tokens/Units & Border Radius" />
+
+# Units & Border Radius
+
+## Units
+
+<table
+  style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Unit
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Value (rem)
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Value (px)
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Preview
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(theme.unit).map(([unit, value]) => {
+      const pxValue = parseFloat(value) * 16; // rem → px 변환
+
+      return (
+        <tr key={unit} style={{ borderBottom: `1px solid ${theme.color.semantic.border.default}` }}>
+          <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{unit}</td>
+          <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{value}</td>
+          <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{pxValue}px</td>
+          <td style={{ padding: theme.unit[12] }}>
+            {unit !== "max" ? (
+              <div
+                style={{
+                  width: value,
+                  height: theme.unit[16],
+                  backgroundColor: theme.color.semantic.orange.default,
+                }}
+              />
+            ) : (
+              "-"
+            )}
+          </td>
+        </tr>
+      );
+    })}
+
+  </tbody>
+</table>
+
+## Border Radius
+
+<table
+  style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Unit
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Value (rem)
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Value (px)
+      </th>
+      <th style={{ padding: theme.unit[12], fontWeight: "bold" }}>
+        Preview
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(theme.radius).map(([radius, value]) => {
+      const pxValue = parseFloat(value) * 16; // rem → px 변환
+
+      return (
+        <tr key={radius} style={{ borderBottom: `1px solid ${theme.color.semantic.border.default}` }}>
+        <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{radius}</td>
+        <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{value}</td>
+        <td style={{ padding: theme.unit[12], color: theme.color.semantic.text.default }}>{pxValue}px</td>
+        <td style={{ padding: theme.unit[12] }}>
+          <div
+            style={{
+              width: theme.unit[64],
+              height: theme.unit[64],
+              backgroundColor: theme.color.semantic.orange.default,
+              borderRadius: value,
+            }}
+          />
+        </td>
+      </tr>
+    )})}
+
+  </tbody>
+</table>
