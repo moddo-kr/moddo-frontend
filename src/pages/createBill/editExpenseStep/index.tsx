@@ -1,20 +1,26 @@
-import { Close } from '@/assets/svgs/icon';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
-import useCreateExpense from '@/common/queries/expense/useCreateExpense';
-import { BillContext } from '@/pages/createBill/types/billContext.type';
-import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
+import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
+import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
+import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import FormCard from '@/pages/createBill/components/FormCard';
+import { BillContext } from '@/pages/createBill/types/billContext.type';
+import { Expense } from '@/pages/createBill/types/expense.type';
+import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import * as S from './index.styles';
 
-interface AddExpenseStepProps
-  extends BaseFunnelStepComponentProps<BillContext> {}
+interface EditExpenseStepProps
+  extends BaseFunnelStepComponentProps<BillContext> {
+  initialExpense: Expense;
+}
 
-function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
+function EditExpenseStep({
+  initialExpense,
+  moveToNextStep,
+}: EditExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
-    useAddExpenseFormArray();
-  const mutation = useCreateExpense({ moveToNextStep });
+    useAddExpenseFormArray(initialExpense);
+  const mutation = useUpdateExpense({ moveToNextStep });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -46,15 +52,19 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           type="button"
           onClick={handleSubmit((data) =>
             // TODO : 그룹 토큰을 받아오는 로직 추가
-            mutation.mutate({ groupToken: 'group-token', data })
+            mutation.mutate({
+              groupToken: 'group-token',
+              data: data.expenses[0],
+              expenseId: initialExpense.id,
+            })
           )}
           disabled={!allFormsValid}
         >
-          지출 추가
+          수정 완료
         </S.BottomButton>
       </S.ButtonWrapper>
     </FormProvider>
   );
 }
 
-export default AddExpenseStep;
+export default EditExpenseStep;

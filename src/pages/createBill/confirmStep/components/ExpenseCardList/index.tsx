@@ -6,9 +6,10 @@ import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
+  moveToEditStep: (initialExpense: Expense) => void;
 }
 
-function ExpenseCardList({ expenses }: ExpenseCardListProps) {
+function ExpenseCardList({ expenses, moveToEditStep }: ExpenseCardListProps) {
   const categorizedExpenses = categrizeExpensesByDateWithIndex(expenses);
 
   return (
@@ -20,6 +21,7 @@ function ExpenseCardList({ expenses }: ExpenseCardListProps) {
             <ExpenseCard
               key={expense.id}
               index={expense.globalIndex}
+              moveToEditStep={moveToEditStep}
               {...expense}
             />
           ))}

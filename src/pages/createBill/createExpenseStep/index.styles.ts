@@ -16,6 +16,12 @@ export const TopMessage = styled.span`
   white-space: pre-line;
 `;
 
+export const AddExpenseButton = styled.span`
+  color: #444950;
+  font-size: 1rem;
+  font-weight: 600;
+`;
+
 export const BillFormList = styled.form`
   display: flex;
   flex-direction: column;

@@ -2,7 +2,7 @@ import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@/assets/svgs/icon';
-import ReadonlyInput from '../ReadonlyInput';
+import ReadonlyInput from '@/pages/createBill/components/ReadonlyInput';
 import * as S from './index.styles';
 
 // react-datepicker - DatePickerProps 참고

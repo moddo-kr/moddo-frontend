@@ -3,17 +3,17 @@ import { useFormContext } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseMember } from '@/pages/createBill/types/expense.type';
-import BillDatePicker from '../DatePicker';
-import FormField from '../FormField';
-import NumPadBottomSheet from '../NumPadBottomSheet';
-import MemberBottomSheet from '../MemberBottomSheet';
-import MemberChips from '../MemberChips';
+import BillDatePicker from '@/pages/createBill/components/DatePicker';
+import FormField from '@/pages/createBill/components/FormField';
+import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
+import MemberBottomSheet from '@/pages/createBill/components/MemberBottomSheet';
+import MemberChips from '@/pages/createBill/components/MemberChips';
 import * as S from './index.styles';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface FormCardProps {
   index: number;
-  onDelete: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
+  onDelete?: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
 }
 
 const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
@@ -56,7 +56,10 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
           <S.FormCardTitleContainer>
             <S.FormCardTitle>{index + 1}차</S.FormCardTitle>
             {index > 0 ? (
-              <S.FormDeleteButton type="button" onClick={() => onDelete(index)}>
+              <S.FormDeleteButton
+                type="button"
+                onClick={() => onDelete?.(index)}
+              >
                 <Close width="1.5rem" />
               </S.FormDeleteButton>
             ) : null}
