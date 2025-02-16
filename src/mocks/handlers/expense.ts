@@ -1,7 +1,7 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
-import { dummyGroupMembers } from './groupMemberHandlers';
+import { dummyGroupMembers } from './groupMember';
 
 const dummyExpenses: Expense[] = [];
 
