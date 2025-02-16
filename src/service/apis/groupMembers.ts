@@ -9,7 +9,7 @@ const groupMembers = {
   post: async (groupMemberData: CreateGroupMembersVariable[]) => {
     const groupToken = localStorage.getItem('groupToken');
     const response = await axiosInstance.post(
-      `group-members?groupToken=${groupToken}`,
+      `/group-members?groupToken=${groupToken}`,
       { members: groupMemberData },
       {
         useMock: true,
