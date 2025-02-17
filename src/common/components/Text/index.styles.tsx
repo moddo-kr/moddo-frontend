@@ -18,5 +18,6 @@ interface StyledTextProps {
 
 export const Text = styled.span<StyledTextProps>`
   ${({ variant }) => TextVariant(variant)};
-  color: ${({ theme, color }) => getColorFromTheme(theme.color, color)};
+  color: ${({ theme, color }) =>
+    getColorFromTheme(theme.color, color) ?? 'inherit'};
 `;
