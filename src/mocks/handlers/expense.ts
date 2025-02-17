@@ -43,7 +43,7 @@ const expenseHandlers = [
           date: expense.date,
           memberExpenses: expense.memberExpenses.map((memberExpense) => ({
             memberId: memberExpense.memberId,
-            // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환 -> 맞나요??
+            // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환
             name:
               dummyGroupMembers.find(
                 (member) => member.id === memberExpense.memberId
