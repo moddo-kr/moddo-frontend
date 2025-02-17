@@ -4,14 +4,14 @@ import {
   SystemSuccess,
   SystemWarning,
 } from '@/assets/svgs/icon';
+import { ToastContainerProps, toast } from 'react-toastify';
 import { Container } from './index.style';
-import { toast, ToastContainerProps } from 'react-toastify';
 import { ToastProps } from './index.type';
 
 /** 기존 toastContainer에서 사용되는 옵션 */
 const toastOptions: ToastContainerProps = {
   position: 'bottom-center',
-  autoClose: 500, //500ms
+  autoClose: 500, // 500ms
   hideProgressBar: true,
   closeButton: false,
   closeOnClick: true,
@@ -51,6 +51,8 @@ export function showToast({ type, content }: ToastProps) {
         icon: <SystemWarning />,
       });
       return;
+    default:
+      toast.error('정해진 Toast 타입이 아닙니다!');
   }
 }
 

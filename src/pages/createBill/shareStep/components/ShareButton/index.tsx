@@ -11,9 +11,9 @@ import {
 import copyClipboard from '@/common/utils/copyClipboard';
 import share from '@/common/utils/share';
 import shareKakao from '@/common/utils/shareKakao';
+import { showToast } from '@/common/components/Toast';
 import * as S from './index.styles';
 import ShareItemButton from '../ShareItemButton';
-import { showToast } from '@/common/components/Toast';
 
 interface ShareButtonProps {
   shareLink: string;
@@ -44,7 +44,7 @@ function ShareButton({ shareLink }: ShareButtonProps) {
               onClick={() => {
                 copyClipboard(shareMessageFormat(shareLink))
                   .then(() => {
-                    showToast({type: 'success', content: '링크 복사 완료!'});
+                    showToast({ type: 'success', content: '링크 복사 완료!' });
                   })
                   .finally(() => {
                     setOpenBottomSheet(false);

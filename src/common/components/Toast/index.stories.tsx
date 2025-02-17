@@ -26,14 +26,16 @@ const meta: Meta<typeof Toast> = {
 
 export default meta;
 
-export const Default = (args: ToastProps) => {
+export const Default = ({ type, content }: ToastProps) => {
   const handleButtonClick = () => {
-    showToast({ type: args.type, content: args.content });
+    showToast({ type, content });
   };
 
   return (
     <>
-      <button onClick={handleButtonClick}>토스트 메세지</button>
+      <button type="button" onClick={handleButtonClick}>
+        토스트 메세지
+      </button>
       <Toast />
     </>
   );
