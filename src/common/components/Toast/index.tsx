@@ -6,10 +6,7 @@ import {
 } from '@/assets/svgs/icon';
 import { Container } from './index.style';
 import { toast, ToastContainerProps } from 'react-toastify';
-interface ToastProps {
-  type: 'info' | 'error' | 'success' | 'warning';
-  content: string;
-}
+import { ToastProps } from './index.type';
 
 /** 기존 toastContainer에서 사용되는 옵션 */
 const toastOptions: ToastContainerProps = {
