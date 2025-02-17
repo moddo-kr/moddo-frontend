@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseMember } from '@/pages/createBill/types/expense.type';
-import BillDatePicker from '@/pages/createBill/components/DatePicker';
+import BillDatePicker from '@/common/components/DatePicker';
 import FormField from '@/pages/createBill/components/FormField';
 import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
 import MemberBottomSheet from '@/pages/createBill/components/MemberBottomSheet';
