@@ -1,11 +1,16 @@
-import { Member2 } from './member.type';
+import { Member } from './member.type';
 
 export interface Group {
   groupName: string;
-  members: Member2[];
+  members: Member[];
 }
 
 export interface CreateGroupData {
   name: string;
   password: string;
+}
+
+export interface AccountVariable {
+  bank: string;
+  accountNumber: string;
 }

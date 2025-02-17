@@ -4,6 +4,7 @@ import GlobalStyles from '@/styles/globalStyles';
 import theme from '@/styles/theme';
 import Layout from '@/common/components/Layout';
 import AppRouter from '@/Router';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Layout>
           <GlobalStyles />
           <AppRouter />
+          <ReactQueryDevtools />
         </Layout>
       </ThemeProvider>
     </ChakraProvider>

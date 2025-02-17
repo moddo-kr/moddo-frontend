@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { nanoid } from 'nanoid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
+import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import MemberProfile from '../MemberProfile';
 
 const MemberSchema = z.object({
@@ -17,7 +17,7 @@ interface AddMemberProps {
     | Dispatch<SetStateAction<Member[]>>
     | ((members: Member[]) => void); // (option) 멤버 목록을 직접 업데이트하는 함수
   onAddName?: (name: string) => void; // (option) 이름 입력 후 추가하기 버튼을 처리하는 함수
-  onDeleteMember?: (id: string) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
+  onDeleteMember?: (id: number) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
 }
 
 function AddMember({
@@ -44,10 +44,14 @@ function AddMember({
 
     // 새로운 참여자 생성 후 (필요한 경우) members 배열 직접 업데이트
     const newMember: Member = {
-      id: nanoid(),
+      id: Date.now(),
       name,
-      role: 'participant',
+      role: 'PARTICIPANT',
+      profile: defaultProfileImg,
+      isPaid: false,
+      paidAt: null,
     };
+
     setMembers?.([newMember, ...members]);
 
     // 초기화
@@ -56,7 +60,7 @@ function AddMember({
   };
 
   /** 참여자 제거 핸들러 */
-  const handleDeleteMember = (id: string) => {
+  const handleDeleteMember = (id: number) => {
     // 멤버 삭제 핸들러가 있다면 실행
     if (onDeleteMember) {
       onDeleteMember(id);

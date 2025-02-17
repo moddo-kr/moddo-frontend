@@ -43,7 +43,11 @@ const expenseHandlers = [
           date: expense.date,
           memberExpenses: expense.memberExpenses.map((memberExpense) => ({
             memberId: memberExpense.memberId,
-            name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+            // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환
+            name:
+              dummyGroupMembers.find(
+                (member) => member.id === memberExpense.memberId
+              )?.name ?? '',
             amount: memberExpense.amount,
           })),
         });
@@ -54,7 +58,6 @@ const expenseHandlers = [
       });
     }
   ),
-
   // GET getAllExpense
   http.get('/api/v1/expenses', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
@@ -140,7 +143,10 @@ const expenseHandlers = [
         date,
         memberExpenses: memberExpenses.map((memberExpense) => ({
           memberId: memberExpense.memberId,
-          name: dummyGroupMembers.get(memberExpense.memberId)?.name ?? '',
+          name:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.name ?? '',
           amount: memberExpense.amount,
         })),
       };
