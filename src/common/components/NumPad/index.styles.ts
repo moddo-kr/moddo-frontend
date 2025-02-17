@@ -1,62 +1,76 @@
 import { styled } from 'styled-components';
+import { TextVariant } from '@/common/components/Text/index.styles';
+
+export const NumPadWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.unit[16]};
+`;
 
 export const ValueWrapper = styled.div`
   display: flex;
-  padding: 0.75rem 1.25rem;
+  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  align-self: stretch;
+  gap: ${({ theme }) => theme.unit[8]};
 `;
 
 export const DisplayValue = styled.span<{ $isEmpty?: boolean }>`
-  color: ${({ $isEmpty }) => ($isEmpty ? '#6f7379' : '#292C30')};
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 150%; /* 2.25rem */
-  word-break: break-all;
+  ${TextVariant('heading1')};
+  color: ${({ theme, $isEmpty }) =>
+    $isEmpty
+      ? theme.color.semantic.text.subtle
+      : theme.color.semantic.text.strong};
   opacity: ${({ $isEmpty }) => ($isEmpty ? 0.5 : 1)};
 `;
 
-export const DisplayValueUnit = styled.span`
-  color: #292c30;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 150%; /* 2.25rem */
-`;
-
 export const ShortcutWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 0 1.25rem;
-  gap: 0.5rem;
+  display: flex;
+  padding: ${({ theme }) => `${theme.unit[0]} ${theme.unit[20]}`};
+  gap: ${({ theme }) => theme.unit[8]};
 `;
 
 export const ShortcutButton = styled.button<{ $isDanger?: boolean }>`
-  padding: 0.5rem 1rem;
+  all: unset;
+  display: flex;
+  padding: ${({ theme }) => `${theme.unit[8]} ${theme.unit[16]}`};
+  justify-content: center;
+  align-items: center;
+  gap: ${({ theme }) => theme.unit[8]};
   flex: 1 0 0;
-  border-radius: 624.9375rem;
-  background-color: ${({ $isDanger }) => ($isDanger ? '#FDEFEF' : '#edeeee')};
-  color: ${({ $isDanger }) => ($isDanger ? '#EA605C' : '#444950')};
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 150%; /* 1.3125rem */
+  border-radius: ${({ theme }) => theme.unit.max};
+  background: ${({ theme, $isDanger }) =>
+    $isDanger ? theme.color.semantic.background.state.danger : '#EDEEEE'};
+  ${TextVariant('body2R')};
+  color: ${({ theme, $isDanger }) =>
+    $isDanger
+      ? theme.color.semantic.state.danger
+      : theme.color.semantic.text.default};
 `;
 
 export const NumCellWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 0 1.25rem;
+  padding: ${({ theme }) => `${theme.unit[0]} ${theme.unit[20]}`};
   width: 100%;
 `;
 
 export const NumCellButton = styled.button<{ $isSecondary?: boolean }>`
-  height: 4rem;
-  padding: 0.75rem 1rem;
-  /* color: #292c30; */
-  color: ${({ $isSecondary }) => ($isSecondary ? '#6F7379' : '#292c30')};
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 150%; /* 2.25rem */
+  all: unset;
+  display: flex;
+  box-sizing: border-box;
+  height: ${({ theme }) => theme.unit[64]};
+  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[16]}`};
+  justify-content: center;
+  align-items: center;
+  ${({ $isSecondary }) =>
+    $isSecondary ? TextVariant('body1R') : TextVariant('heading1')};
+  color: ${({ theme, $isSecondary }) =>
+    $isSecondary
+      ? theme.color.semantic.text.default
+      : theme.color.semantic.text.strong};
+  &:active {
+    background: ${({ theme }) =>
+      theme.color.semantic.background.normal.alternative};
+  }
 `;

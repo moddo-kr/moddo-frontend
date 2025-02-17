@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import NumPadController from '@/common/components/NumPad/numPadController';
 import * as S from './index.styles';
+import Text from '../Text';
 
 interface NumPadProps {
   input: number; // Numpad의 입력값
@@ -16,12 +17,14 @@ function NumPad({ input, setInput, onClose }: NumPadProps) {
   );
 
   return (
-    <div>
+    <S.NumPadWrapper>
       <S.ValueWrapper>
         <S.DisplayValue $isEmpty={input === 0}>
           {input === 0 ? '금액입력' : input.toLocaleString()}
         </S.DisplayValue>
-        <S.DisplayValueUnit>원</S.DisplayValueUnit>
+        <Text variant="heading1" color="semantic.text.strong">
+          원
+        </Text>
       </S.ValueWrapper>
       <S.ShortcutWrapper>
         {numPadController.SHORTCUTS.map((shortcut) => (
@@ -53,7 +56,7 @@ function NumPad({ input, setInput, onClose }: NumPadProps) {
           </S.NumCellButton>
         ))}
       </S.NumCellWrapper>
-    </div>
+    </S.NumPadWrapper>
   );
 }
 
