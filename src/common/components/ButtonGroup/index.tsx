@@ -6,10 +6,7 @@ interface ButtonGroupProps extends HtmlHTMLAttributes<HTMLDivElement> {
   direction?: ButtonGroupDirection;
 }
 
-function ButtonGroup({
-  direction = 'horizontal',
-  children,
-}: ButtonGroupProps): JSX.Element {
+function ButtonGroup({ direction = 'horizontal', children }: ButtonGroupProps) {
   return <S.Wrapper $direction={direction}>{children}</S.Wrapper>;
 }
 
