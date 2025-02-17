@@ -51,7 +51,7 @@ const useFunnel = <T>({ steps, initialContext }: UseFunnelProps<T>) => {
     ) {
       nextStepIndex += 1;
     }
-    if (nextStepIndex === steps.length - 1) {
+    if (nextStepIndex === steps.length) {
       setContext({ ...context, ...newContextData });
       return;
     }
