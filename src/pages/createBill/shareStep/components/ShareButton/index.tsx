@@ -13,6 +13,7 @@ import share from '@/common/utils/share';
 import shareKakao from '@/common/utils/shareKakao';
 import * as S from './index.styles';
 import ShareItemButton from '../ShareItemButton';
+import { showToast } from '@/common/components/Toast';
 
 interface ShareButtonProps {
   shareLink: string;
@@ -43,7 +44,7 @@ function ShareButton({ shareLink }: ShareButtonProps) {
               onClick={() => {
                 copyClipboard(shareMessageFormat(shareLink))
                   .then(() => {
-                    // TODO : 토스트 메시지 추가
+                    showToast({type: 'success', content: '링크 복사 완료!'});
                   })
                   .finally(() => {
                     setOpenBottomSheet(false);
