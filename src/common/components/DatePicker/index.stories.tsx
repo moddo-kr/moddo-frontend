@@ -22,9 +22,6 @@ const meta: Meta<typeof DatePicker> = {
     selected: {
       control: 'date',
     },
-    onChange: {
-      action: 'changed',
-    },
     open: {
       control: 'boolean',
     },
