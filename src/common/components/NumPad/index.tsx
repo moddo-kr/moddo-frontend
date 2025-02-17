@@ -1,4 +1,6 @@
-import numPadController from '@/common/components/NumPad/numPadController';
+import { useMemo } from 'react';
+import { nanoid } from 'nanoid';
+import NumPadController from '@/common/components/NumPad/numPadController';
 import * as S from './index.styles';
 
 interface NumPadProps {
@@ -8,7 +10,10 @@ interface NumPadProps {
 }
 
 function NumPad({ input, setInput, onClose }: NumPadProps) {
-  const { CELLS, SHORTCUTS } = numPadController;
+  const numPadController = useMemo(
+    () => new NumPadController(() => onClose?.()),
+    [onClose]
+  );
 
   return (
     <div>
@@ -19,14 +24,13 @@ function NumPad({ input, setInput, onClose }: NumPadProps) {
         <S.DisplayValueUnit>원</S.DisplayValueUnit>
       </S.ValueWrapper>
       <S.ShortcutWrapper>
-        {SHORTCUTS.map((shortcut) => (
+        {numPadController.SHORTCUTS.map((shortcut) => (
           <S.ShortcutButton
             type="button"
-            key={shortcut.label}
+            key={nanoid(10)}
             $isDanger={shortcut?.isDanger}
             onClick={() => {
-              if (shortcut.handler === null) return;
-              setInput(shortcut.handler(input));
+              setInput(shortcut.handler(input) as number);
             }}
           >
             {shortcut.label}
@@ -34,15 +38,16 @@ function NumPad({ input, setInput, onClose }: NumPadProps) {
         ))}
       </S.ShortcutWrapper>
       <S.NumCellWrapper>
-        {CELLS.map((cell) => (
+        {numPadController.CELLS.map((cell) => (
           <S.NumCellButton
             type="button"
-            key={cell.label ?? 'empty'}
+            key={nanoid(10)}
             $isSecondary={cell?.isSecondary}
-            onClick={() => {
-              if (cell.handler === null) return;
-              setInput(cell.handler(input));
-            }}
+            onClick={() =>
+              cell?.type === 'function'
+                ? cell.handler(input)
+                : setInput(cell.handler(input) as number)
+            }
           >
             {cell.label}
           </S.NumCellButton>
