@@ -1,51 +1,62 @@
-import Text from '@/common/components/Text';
 import {
   SystemDanger,
   SystemInfo,
   SystemSuccess,
   SystemWarning,
 } from '@/assets/svgs/icon';
-import * as S from './index.style';
-import { useTheme } from 'styled-components';
-
+import { Container } from './index.style';
+import { toast, ToastContainerProps } from 'react-toastify';
 interface ToastProps {
   type: 'info' | 'error' | 'success' | 'warning';
   content: string;
 }
 
-function Toast({ type, content }: ToastProps) {
-  const theme = useTheme();
-  let IconComponent: React.ComponentType<React.SVGProps<SVGSVGElement>> | null =
-    null;
+/** 기존 toastContainer에서 사용되는 옵션 */
+const toastOptions: ToastContainerProps = {
+  position: 'bottom-center',
+  autoClose: 500, //500ms
+  hideProgressBar: true,
+  closeButton: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true,
+  pauseOnFocusLoss: true,
+};
 
+/**
+ * toast를 호출하는 함수
+ *
+ * ex) showToast({type: 'success', content: '성공!'});
+ */
+export function showToast({ type, content }: ToastProps) {
   switch (type) {
     case 'info':
-      IconComponent = () => <SystemInfo />;
-      break;
+      toast.info(content, {
+        ...toastOptions,
+        icon: <SystemInfo />,
+      });
+      return;
     case 'error':
-      IconComponent = () => <SystemDanger />;
-      break;
+      toast.error(content, {
+        ...toastOptions,
+        icon: <SystemDanger />,
+      });
+      return;
     case 'success':
-      IconComponent = () => <SystemSuccess />;
-      break;
+      toast.success(content, {
+        ...toastOptions,
+        icon: <SystemSuccess />,
+      });
+      return;
     case 'warning':
-      IconComponent = () => <SystemWarning />;
-      break;
-    default:
-      IconComponent = null;
-      break;
+      toast.warning(content, {
+        ...toastOptions,
+        icon: <SystemWarning />,
+      });
+      return;
   }
-
-  return (
-    <S.Wrapper>
-      {IconComponent && (
-        <IconComponent width={theme.unit[20]} height={theme.unit[20]} />
-      )}
-      <Text variant="body2R" color="primitive.base.white">
-        {content}
-      </Text>
-    </S.Wrapper>
-  );
 }
 
-export default Toast;
+export default function Toast() {
+  return <Container />;
+}
