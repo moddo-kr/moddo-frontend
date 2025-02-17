@@ -3,11 +3,11 @@ import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@/assets/svgs/icon';
+import Button from '@/common/components/Button';
+import Text from '@/common/components/Text';
 import ReadonlyInput from '@/pages/createBill/components/ReadonlyInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
-import Button from '../Button';
-import Text from '../Text';
 
 // react-datepicker - DatePickerProps 참고
 interface DatePickerProps {
