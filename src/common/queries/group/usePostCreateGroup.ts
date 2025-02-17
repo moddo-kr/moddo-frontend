@@ -17,7 +17,6 @@ export const usePostCreateGroup = () => {
       navigate(ROUTE.groupSetupMember);
     },
     onError: (error) => {
-      alert('groupToken 발급에 실패했습니다!');
       console.error('Error:', error);
     },
   });

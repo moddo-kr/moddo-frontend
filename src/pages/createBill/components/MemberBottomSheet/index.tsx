@@ -7,17 +7,32 @@ import {
 } from '@/common/components/Drawer/drawer';
 import AddMember from '@/common/components/AddMember';
 import { Member } from '@/common/types/member.type';
+import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 
 const DUMMY_MEMBERS: Member[] = [
   {
-    id: '1234',
-    name: '김계란',
-    role: 'treasurer',
+    id: 1,
+    role: 'MANAGER',
+    name: '김모또',
+    profile: defaultProfileImg,
+    isPaid: true,
+    paidAt: null,
   },
   {
-    id: '4567',
-    name: '박완숙',
-    role: 'participant',
+    id: 2,
+    role: 'PARTICIPANT',
+    name: '김반숙',
+    profile: defaultProfileImg,
+    isPaid: false,
+    paidAt: null,
+  },
+  {
+    id: 3,
+    role: 'PARTICIPANT',
+    name: '정에그',
+    profile: defaultProfileImg,
+    isPaid: false,
+    paidAt: null,
   },
 ];
 
@@ -35,7 +50,7 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
     console.log('새로운 참여자 추가: ', name);
   };
 
-  const handleDeleteMember = (memberId: string) => {
+  const handleDeleteMember = (memberId: number) => {
     // TODO : 참여자 삭제 API 호출
     console.log('참여자 삭제: ', memberId);
   };
