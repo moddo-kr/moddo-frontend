@@ -1,9 +1,13 @@
+import { useTheme } from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@/assets/svgs/icon';
 import ReadonlyInput from '@/pages/createBill/components/ReadonlyInput';
+import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
+import Button from '../Button';
+import Text from '../Text';
 
 // react-datepicker - DatePickerProps 참고
 interface DatePickerProps {
@@ -12,9 +16,12 @@ interface DatePickerProps {
     date: Date | null,
     event?: React.MouseEvent | React.KeyboardEvent
   ) => void;
+  open?: boolean;
 }
 
-function DatePicker({ selected, onChange }: DatePickerProps) {
+function DatePicker({ selected, onChange, open }: DatePickerProps) {
+  const { unit } = useTheme();
+
   return (
     <S.DatePickerWrapper>
       <ReactDatePicker
@@ -23,18 +30,17 @@ function DatePicker({ selected, onChange }: DatePickerProps) {
         onChange={onChange}
         locale={ko}
         dateFormat="yyyy. MM. dd. (eee)"
-        customInput={<ReadonlyInput />}
+        open={open}
+        customInput={<ReadonlyInput />} // TODO : Input 컴포넌트 추가
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <S.Header>
-            <S.Arrow onClick={decreaseMonth} type="button">
-              <ArrowLeft width="1.5rem" />
-            </S.Arrow>
-            <div>
-              <S.HeaderDate>{format(date, 'yyyy년 M월')}</S.HeaderDate>
-            </div>
-            <S.Arrow onClick={increaseMonth} type="button">
-              <ArrowRight width="1.5rem" />
-            </S.Arrow>
+            <Button variant="text" onClick={decreaseMonth} type="button">
+              <ArrowLeft width={unit[24]} />
+            </Button>
+            <Text variant="body1Sb">{format(date, 'yyyy년 M월')}</Text>
+            <Button variant="text" onClick={increaseMonth} type="button">
+              <ArrowRight width={unit[24]} />
+            </Button>
           </S.Header>
         )}
       />
