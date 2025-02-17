@@ -6,7 +6,7 @@ import {
   DrawerRoot,
   DrawerTrigger,
 } from '@/common/components/Drawer/drawer';
-import NumPad from '@/pages/createBill/components/NumPad';
+import NumPad from '@/common/components/NumPad';
 import * as S from './index.styles';
 
 interface NumPadBottomSheetProps {

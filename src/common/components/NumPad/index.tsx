@@ -1,4 +1,4 @@
-import numPadController from '@/pages/createBill/utils/numPadController';
+import numPadController from '@/common/components/NumPad/numPadController';
 import * as S from './index.styles';
 
 interface NumPadProps {
