@@ -1,31 +1,20 @@
-import { useState } from 'react';
-import { Close } from '@/assets/svgs/icon';
 import numPadController from '@/pages/createBill/utils/numPadController';
 import * as S from './index.styles';
 
 interface NumPadProps {
-  initialInput: number;
-  onChange: (value: number) => void;
+  input: number; // Numpad의 입력값
+  setInput: (value: number) => void;
   onClose?: () => void;
 }
 
-function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
-  // TODO : 입력 가능한 최댓값을 제한해야 할듯.
-  const [value, setValue] = useState<number>(initialInput);
-
+function NumPad({ input, setInput, onClose }: NumPadProps) {
   const { CELLS, SHORTCUTS } = numPadController;
 
   return (
-    <S.NumPadContainer>
-      <S.Header>
-        <S.Description>결제 금액 입력</S.Description>
-        <button type="button" onClick={onClose}>
-          <Close width="1.5rem" />
-        </button>
-      </S.Header>
+    <div>
       <S.ValueWrapper>
-        <S.DisplayValue $isEmpty={value === 0}>
-          {value === 0 ? '금액입력' : value.toLocaleString()}
+        <S.DisplayValue $isEmpty={input === 0}>
+          {input === 0 ? '금액입력' : input.toLocaleString()}
         </S.DisplayValue>
         <S.DisplayValueUnit>원</S.DisplayValueUnit>
       </S.ValueWrapper>
@@ -37,7 +26,7 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
             $isDanger={shortcut?.isDanger}
             onClick={() => {
               if (shortcut.handler === null) return;
-              setValue(shortcut.handler(value));
+              setInput(shortcut.handler(input));
             }}
           >
             {shortcut.label}
@@ -52,25 +41,14 @@ function NumPad({ onChange, initialInput, onClose }: NumPadProps) {
             $isSecondary={cell?.isSecondary}
             onClick={() => {
               if (cell.handler === null) return;
-              setValue(cell.handler(value));
+              setInput(cell.handler(input));
             }}
           >
             {cell.label}
           </S.NumCellButton>
         ))}
       </S.NumCellWrapper>
-      <S.ButtonWrapper>
-        <S.BottomButton
-          type="button"
-          onClick={() => {
-            onChange(value);
-            onClose?.();
-          }}
-        >
-          완료
-        </S.BottomButton>
-      </S.ButtonWrapper>
-    </S.NumPadContainer>
+    </div>
   );
 }
 

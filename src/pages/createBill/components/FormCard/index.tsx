@@ -71,10 +71,10 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
             name={`expenses.${index}.amount`}
             renderInput={({ field }) => (
               <NumPadBottomSheet
-                initialInput={field.value}
+                initialValue={field.value}
                 open={openNumPad}
                 setOpen={setOpenNumPad}
-                setInput={(value) => field.onChange(value)}
+                setValue={(value) => field.onChange(value)}
               />
             )}
           />
