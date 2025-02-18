@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
-import { ExpenseMember } from '@/pages/createBill/types/expense.type';
+import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
 import BillDatePicker from '@/common/components/DatePicker';
 import FormField from '@/pages/createBill/components/FormField';
 import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
@@ -31,7 +31,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
         // 지출 금액을 참여자 수에 맞게 분배
         const distribution = distributeAmount(amount, memberExpenses.length);
         const updatedMemberExpenses = memberExpenses.map(
-          (member: ExpenseMember, idx: number) => ({
+          (member: ExpenseFormMember, idx: number) => ({
             ...member,
             amount: distribution[idx],
           })
@@ -109,7 +109,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 members={field.value}
                 onDelete={(name) => {
                   const newMembers = field.value.filter(
-                    (member: ExpenseMember) => member.name !== name
+                    (member: ExpenseFormMember) => member.name !== name
                   );
                   field.onChange(newMembers);
                 }}

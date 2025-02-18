@@ -56,8 +56,10 @@ function CreateBill() {
       return <AddExpenseStep moveToNextStep={moveToNextStep} />;
     case 'EDIT_EXPENSE':
       return (
-        context.initialExpense && (
+        context.initialExpense &&
+        context.id && (
           <EditExpenseStep
+            id={context.id}
             moveToNextStep={moveToNextStep}
             initialExpense={context.initialExpense}
           />

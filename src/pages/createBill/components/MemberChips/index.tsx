@@ -1,16 +1,16 @@
 import Tag from '@/common/components/Tag';
-import { ExpenseMember } from '@/pages/createBill/types/expense.type';
+import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
 import * as S from './index.styles';
 
 interface MemberChipsProps {
-  members: ExpenseMember[];
+  members: ExpenseFormMember[];
   onDelete: (name: string) => void;
 }
 
 function MemberChips({ members, onDelete }: MemberChipsProps) {
   return (
     <S.ChipContainer>
-      {members.map((member: ExpenseMember) => (
+      {members.map((member) => (
         <Tag
           key={member.memberId}
           label={member.name}

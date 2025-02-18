@@ -4,9 +4,8 @@ import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useGetAllExpense from '@/common/queries/expense/useGetAllExpense';
 import ExpenseCardList from './components/ExpenseCardList';
 import getTotalExpense from '../utils/getTotalExpense';
-import { BillContext } from '../types/billContext.type';
+import { BillContext, BillContextRequired } from '../types/billContext.type';
 import * as S from './index.styles';
-import { Expense } from '../types/expense.type';
 
 interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
@@ -18,8 +17,8 @@ function ConfirmStep({
   // TODO : groupToken 사용 방법 적용 필요함
   const { data, isLoading } = useGetAllExpense('group-token');
 
-  const moveToEditStep = (initialExpense: Expense) => {
-    moveToStep?.('EDIT_EXPENSE', { initialExpense });
+  const moveToEditStep = ({ id, initialExpense }: BillContextRequired) => {
+    moveToStep?.('EDIT_EXPENSE', { id, initialExpense });
   };
 
   if (isLoading) {

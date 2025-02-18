@@ -1,12 +1,13 @@
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
-import { Expense } from '@/pages/createBill/types/expense.type';
+import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
+import { Expense } from '@/pages/createBill/types/expense.type2';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
-  moveToEditStep: (initialExpense: Expense) => void;
+  moveToEditStep: (context: BillContextRequired) => void;
 }
 
 function ExpenseCard({
@@ -38,10 +39,17 @@ function ExpenseCard({
               onClick={() => {
                 moveToEditStep({
                   id,
-                  amount,
-                  content,
-                  memberExpenses,
-                  date,
+                  initialExpense: {
+                    amount,
+                    content,
+                    date,
+                    memberExpenses: memberExpenses.map((member) => ({
+                      memberId: member.id,
+                      name: member.name,
+                      amount: member.amount,
+                      profile: member.profile,
+                    })),
+                  },
                 });
               }}
             >
@@ -71,7 +79,7 @@ function ExpenseCard({
               <S.CollapseContent>
                 {memberExpenses.map((member) => (
                   <Chip
-                    key={`${index}-${member.memberId}`}
+                    key={`${index}-${member.id}`}
                     label={member.name}
                     variant="secondary"
                   />

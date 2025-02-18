@@ -1,8 +1,8 @@
 import {
   ExpenseForm,
-  ExpenseList,
   SingleExpenseForm,
-} from '@/pages/createBill/types/expense.type';
+  ExpenseList,
+} from '@/pages/createBill/types/expense.type2';
 import axiosInstance from './axios';
 
 const expense = {
