@@ -19,10 +19,22 @@ function ExpenseTimeline({ groupToken }: ExpenseTimelineProps) {
 
   return (
     <S.TimelineContainer>
-      {data.expenses.map((expense) => (
+      {data.expenses.map((expense, index) => (
         <S.TimelineItem key={expense.id}>
-          <S.TimelineLeft>{expense.content}</S.TimelineLeft>
+          <S.TimelineLeft>
+            <S.Line $hidden={index === 0} />
+            <S.Dot />
+            <S.Line $hidden={index === data.expenses.length - 1} />
+          </S.TimelineLeft>
           <ExpenseTimelineContent expense={expense} />
+          {index < data.expenses.length - 1 && (
+            <>
+              <S.TimelineLeft>
+                <S.Line />
+              </S.TimelineLeft>
+              <S.Gap />
+            </>
+          )}
         </S.TimelineItem>
       ))}
     </S.TimelineContainer>

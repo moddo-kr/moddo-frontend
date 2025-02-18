@@ -19,6 +19,23 @@ export const TimelineLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem 0;
-  margin-right: 1.25rem;
+`;
+
+export const Dot = styled.div`
+  width: ${({ theme }) => theme.unit[10]};
+  height: ${({ theme }) => theme.unit[10]};
+  border-radius: ${({ theme }) => theme.radius.circle};
+  background-color: ${({ theme }) => theme.color.primitive.orange[500]};
+  flex-shrink: 0;
+`;
+
+export const Line = styled.div<{ $hidden?: boolean }>`
+  flex: 1;
+  ${({ $hidden }) => $hidden && 'visibility: hidden;'}
+  border-left: 2px dotted ${({ theme }) =>
+    theme.color.semantic.secondary.strong};
+`;
+
+export const Gap = styled.div`
+  height: ${({ theme }) => theme.unit[16]};
 `;
