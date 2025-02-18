@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
+import Text from '@/common/components/Text';
+import DescriptionField from '@/common/components/DescriptionField';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useCreateExpense from '@/common/queries/expense/useCreateExpense';
 import FormCard from '@/pages/createBill/components/FormCard';
@@ -70,12 +72,17 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
           }}
         />
       )}
-      <S.TopWrapper>
-        <S.TopMessage>
-          <S.MoimName>{groupInfo.groupName}</S.MoimName>
-          {`의\n지출 내역을 입력해주세요.`}
-        </S.TopMessage>
-      </S.TopWrapper>
+      <DescriptionField
+        title={
+          <>
+            <Text variant="heading2" color="semantic.orange.default">
+              DND 7조 첫모임
+            </Text>
+            {`의\n지출 내역을 입력해주세요.`}
+          </>
+        }
+        sub="총 지출 금액을 1/N로 나눌게요."
+      />
       <S.BillFormList>
         {fieldArrayReturns.fields.map((field, index) => (
           <FormCard

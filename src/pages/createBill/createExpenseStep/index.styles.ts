@@ -1,21 +1,5 @@
 import styled from 'styled-components';
 
-export const TopWrapper = styled.div`
-  padding: 0.625rem 1.25rem;
-`;
-
-export const MoimName = styled.span`
-  color: #ff802e;
-`;
-
-export const TopMessage = styled.span`
-  color: #292c30;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 150%;
-  white-space: pre-line;
-`;
-
 export const AddExpenseButton = styled.span`
   color: #444950;
   font-size: 1rem;
