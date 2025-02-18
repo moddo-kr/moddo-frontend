@@ -22,6 +22,17 @@ const meta: Meta<typeof Toast> = {
     type: SAMPLE_TYPE as ToastType,
     content: SAMPLE_CONTENT,
   },
+  decorators: [
+    (Story) => (  
+      <div  
+        style={{  
+          height: '30rem'  
+        }}  
+      >  
+        <Story />  
+      </div>  
+    ), 
+  ]
 };
 
 export default meta;
