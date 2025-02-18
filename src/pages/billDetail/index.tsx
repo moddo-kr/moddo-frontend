@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Button from '@/common/components/Button';
 import Header from '@/common/components/Header';
+import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { GroupTokenUrlLoaderData } from '@/common/types/group.type';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
@@ -10,6 +12,7 @@ import * as S from './index.styles';
 
 function BillDetail() {
   const { unit } = useTheme();
+  const [activeTab, setActiveTab] = useState('member');
   // const { groupToken, groupData } = useLoaderData(); // lint 오류 제거용 주석..
   const { groupData } = useLoaderData<GroupTokenUrlLoaderData>();
   // TODO : 필요하다면 useQuery의 initialData에 groupData를 넣어서 사용
@@ -30,7 +33,20 @@ function BillDetail() {
           </Text>
         }
       />
-      <S.Content>내용</S.Content>
+      <S.Content>
+        {/* TODO : 정산 현황 */}
+        <S.TabListContainer>
+          <TabsList activeTab={activeTab} setActiveTab={setActiveTab}>
+            <Tab label="참여자별 정산" value="member" />
+            <Tab label="전체 지출내역" value="expense" />
+          </TabsList>
+        </S.TabListContainer>
+        {activeTab === 'expense' ? (
+          <div>전체 지출내역</div>
+        ) : (
+          <div>참여자별 정산</div>
+        )}
+      </S.Content>
       <BottomButtonContainer>
         <Button>링크 공유하기</Button>
       </BottomButtonContainer>
