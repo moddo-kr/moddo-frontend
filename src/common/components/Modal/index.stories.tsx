@@ -79,7 +79,9 @@ const EmptyStory = (args: ModalProps) => {
   return (
     <>
       <Button onClick={() => setOpen(!open)}>Toggle Empty Modal</Button>
-      <Modal {...args} open={open} setOpen={setOpen} />
+      <Modal {...args} open={open} setOpen={setOpen}>
+        비어 있는 Modal입니다!
+      </Modal>
     </>
   );
 };
