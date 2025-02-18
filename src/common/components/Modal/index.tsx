@@ -18,7 +18,7 @@ export interface ModalProps
   onCancel?: () => void;
   onSubmit?: () => void;
   /** variant : empty인 경우에만 필요한 props */
-  _children?: ReactNode;
+  children?: ReactNode;
 }
 
 function Modal({
@@ -31,7 +31,7 @@ function Modal({
   submit,
   onCancel,
   onSubmit,
-  _children,
+  children,
   ...rest
 }: ModalProps) {
   const modalRoot = document.querySelector('#modal') as HTMLElement;
@@ -65,6 +65,7 @@ function Modal({
               </S.ButtonWrapper>
             </S.DefaultWrapper>
           )}
+          {variant === 'empty' && children}
         </S.ModalWrapper>
       </>
     ) : (
