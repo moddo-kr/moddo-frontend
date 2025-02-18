@@ -2,6 +2,7 @@ import useGetExpenseDetail from '@/common/queries/expense/useGetExpenseDetail';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
 import { Next } from '@/assets/svgs/icon';
+import ExpenseTimelineContent from '../ExpenseTimelineContent';
 import * as S from './index.styles';
 
 interface ExpenseTimelineProps {
@@ -24,22 +25,7 @@ function ExpenseTimeline({ groupToken }: ExpenseTimelineProps) {
       {data.expenses.map((expense) => (
         <S.TimelineItem key={expense.id}>
           <S.TimelineLeft>{expense.content}</S.TimelineLeft>
-          <S.ExpenseContent>
-            <S.ContentTitle>
-              <Text variant="body1Sb" color="semantic.text.subtle">
-                {expense.content}
-              </Text>
-              <Text variant="heading2" color="semantic.text.strong">
-                {expense.totalAmount.toLocaleString()}원
-              </Text>
-            </S.ContentTitle>
-            <S.MemberChipContainer>
-              <Button variant="text">
-                <Text>{expense.groupMembers.length}명</Text>
-                <Next width={24} />
-              </Button>
-            </S.MemberChipContainer>
-          </S.ExpenseContent>
+          <ExpenseTimelineContent expense={expense} />
         </S.TimelineItem>
       ))}
     </S.TimelineContainer>
