@@ -1,7 +1,4 @@
 import useGetExpenseDetail from '@/common/queries/expense/useGetExpenseDetail';
-import Text from '@/common/components/Text';
-import Button from '@/common/components/Button';
-import { Next } from '@/assets/svgs/icon';
 import ExpenseTimelineContent from '../ExpenseTimelineContent';
 import * as S from './index.styles';
 
