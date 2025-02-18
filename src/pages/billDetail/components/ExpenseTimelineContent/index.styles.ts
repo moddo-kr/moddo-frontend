@@ -5,7 +5,7 @@ export const ExpenseContent = styled.div`
   flex-direction: column;
   padding: ${({ theme }) => `${theme.unit[24]} ${theme.unit[20]}`};
   align-items: center;
-  gap: 0.25rem 5.625rem; // unit/4
+  gap: ${({ theme }) => theme.unit[4]};
   border-radius: ${({ theme }) => theme.radius.large};
   background: ${({ theme }) => theme.color.semantic.primary.subtle};
 `;

@@ -13,7 +13,7 @@ import ExpenseTimeline from './components/ExpenseTimeline';
 function BillDetail() {
   const { unit } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
-  const { groupToken, groupData } = useLoaderData(); // lint 오류 제거용 주석..
+  const { groupToken, groupData } = useLoaderData();
   // TODO : 필요하다면 useQuery의 initialData에 groupData를 넣어서 사용
 
   return (
