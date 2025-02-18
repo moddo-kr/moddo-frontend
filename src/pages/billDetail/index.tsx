@@ -8,7 +8,7 @@ import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
-import ExpenseTimeline from './components/expenseTimeline';
+import ExpenseTimeline from './components/ExpenseTimeline';
 
 function BillDetail() {
   const { unit } = useTheme();
