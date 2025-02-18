@@ -73,7 +73,7 @@ function ExpenseCard({
                   <Chip
                     key={`${index}-${member.memberId}`}
                     label={member.name}
-                    variant="white"
+                    variant="secondary"
                   />
                 ))}
               </S.CollapseContent>

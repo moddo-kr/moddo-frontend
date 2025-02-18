@@ -14,6 +14,7 @@ export { default as Crown } from './Crown';
 export { default as DollarCircle } from './DollarCircle';
 export { default as Dot } from './Dot';
 export { default as Download } from './Download';
+export { default as Dummy } from './Dummy';
 export { default as Menu } from './Menu';
 export { default as Next } from './Next';
 export { default as Reset } from './Reset';

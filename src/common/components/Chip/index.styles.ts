@@ -1,30 +1,45 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { TextVariant } from '@/common/components/Text/index.styles';
+import { ChipVariant, ChipSize } from './index.type';
 
-export const Chip = styled.span<{ $variant?: 'gray' | 'white' }>`
-  display: flex;
-  height: 2rem;
-  padding: 0.3125rem 0.75rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
-  border-radius: 624.9375rem;
-  background: ${({ $variant }) =>
-    $variant === 'white' ? '#ffffff' : '#f1f3f5'};
-`;
+interface StyledChipContainerProps {
+  $variant: ChipVariant;
+  $size: ChipSize;
+}
 
-export const CloseButton = styled.button`
+const chipSizes = {
+  md: css`
+    padding: ${({ theme }) => `${theme.unit[8]} ${theme.unit[12]}`};
+    ${TextVariant('body2R')};
+  `,
+  sm: css`
+    padding: ${({ theme }) => `${theme.unit[4]} ${theme.unit[12]}`};
+    ${TextVariant('caption')};
+  `,
+};
+
+const chipVariants = {
+  primary: css`
+    background: ${({ theme }) => theme.color.semantic.primary.default};
+    color: ${({ theme }) => theme.color.semantic.text.inverse};
+  `,
+  secondary: css`
+    background: ${({ theme }) => theme.color.semantic.secondary.default};
+    color: ${({ theme }) => theme.color.semantic.text.default};
+  `,
+  disabled: css`
+    background: ${({ theme }) =>
+      theme.color.semantic.background.normal.disabled};
+    color: ${({ theme }) => theme.color.semantic.text.disabled};
+  `,
+};
+
+export const Container = styled.div<StyledChipContainerProps>`
   display: inline-flex;
   justify-content: center;
-  cursor: pointer;
   align-items: center;
-  margin-left: 2px;
-  width: 1rem;
-  height: 1rem;
-  color: #444950;
-`;
-
-export const ChipLabel = styled.span`
-  color: #444950;
-  font-size: 0.75rem;
-  font-weight: 400;
+  gap: ${({ theme }) => theme.unit[2]};
+  border-radius: ${({ theme }) => theme.radius.circle};
+  ${({ $size }) => chipSizes[$size]};
+  ${({ $variant }) => chipVariants[$variant]};
 `;
