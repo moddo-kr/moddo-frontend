@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import Modal from '.';
+import Modal, { ModalProps } from '.';
 import Button from '../Button'; // Button 컴포넌트
 
 const SAMPLE_TITLE = '타이틀입력 최대 한줄';
@@ -39,6 +39,29 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
+const DefaultStory = (args: ModalProps) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <>
+      <Button onClick={handleClick}>Toggle Default Modal</Button>
+      <Modal
+        {...args}
+        open={open}
+        setOpen={setOpen}
+        onCancel={handleClick}
+        onSubmit={() => {
+          alert('승인 버튼 클릭');
+          handleClick();
+        }}
+      />
+    </>
+  );
+};
+
 export const Default: Story = {
   args: {
     variant: 'default',
@@ -48,24 +71,17 @@ export const Default: Story = {
     submit: SAMPLE_SUBMIT,
   },
 
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <>
-        <Button onClick={() => setOpen(!open)}>Toggle Default Modal</Button>
-        <Modal
-          {...args}
-          open={open}
-          setOpen={setOpen}
-          onCancel={() => setOpen(false)}
-          onSubmit={() => {
-            alert('승인 버튼 클릭');
-            setOpen(false);
-          }}
-        />
-      </>
-    );
-  },
+  render: DefaultStory,
+};
+
+const EmptyStory = (args: ModalProps) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(!open)}>Toggle Empty Modal</Button>
+      <Modal {...args} open={open} setOpen={setOpen} />
+    </>
+  );
 };
 
 export const Empty: Story = {
@@ -73,13 +89,5 @@ export const Empty: Story = {
     variant: 'empty',
   },
 
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <>
-        <Button onClick={() => setOpen(!open)}>Toggle Empty Modal</Button>
-        <Modal {...args} open={open} setOpen={setOpen} />
-      </>
-    );
-  },
+  render: EmptyStory,
 };

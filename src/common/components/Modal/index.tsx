@@ -18,7 +18,7 @@ export interface ModalProps
   onCancel?: () => void;
   onSubmit?: () => void;
   /** variant : empty인 경우에만 필요한 props */
-  children?: ReactNode;
+  _children?: ReactNode;
 }
 
 function Modal({
@@ -31,7 +31,7 @@ function Modal({
   submit,
   onCancel,
   onSubmit,
-  children = null,
+  _children,
   ...rest
 }: ModalProps) {
   const modalRoot = document.querySelector('#modal') as HTMLElement;
@@ -41,33 +41,35 @@ function Modal({
   };
 
   return ReactDOM.createPortal(
-    <>
-      {open ? (
-        <>
-          <S.Backdrop onClick={onClose} />
-          <S.ModalWrapper {...rest}>
-            {variant == 'default' && (
-              <S.DefaultWrapper>
-                <S.TextWrapper>
-                  <Text variant="title" color="semantic.text.strong">
-                    {title}
-                  </Text>
-                  <Text variant="body1R" color="semantic.text.strong">
-                    {subscribe}
-                  </Text>
-                </S.TextWrapper>
-                <S.ButtonWrapper>
-                <ButtonGroup direction='horizontal'>
-                  <Button onClick={onCancel} variant="secondary">{cancel}</Button>
+    open ? (
+      <>
+        <S.Backdrop onClick={onClose} />
+        <S.ModalWrapper {...rest}>
+          {variant === 'default' && (
+            <S.DefaultWrapper>
+              <S.TextWrapper>
+                <Text variant="title" color="semantic.text.strong">
+                  {title}
+                </Text>
+                <Text variant="body1R" color="semantic.text.strong">
+                  {subscribe}
+                </Text>
+              </S.TextWrapper>
+              <S.ButtonWrapper>
+                <ButtonGroup direction="horizontal">
+                  <Button onClick={onCancel} variant="secondary">
+                    {cancel}
+                  </Button>
                   <Button onClick={onSubmit}>{submit}</Button>
                 </ButtonGroup>
-                </S.ButtonWrapper>
-              </S.DefaultWrapper>
-            )}
-          </S.ModalWrapper>
-        </>
-      ) : null}
-    </>,
+              </S.ButtonWrapper>
+            </S.DefaultWrapper>
+          )}
+        </S.ModalWrapper>
+      </>
+    ) : (
+      <div />
+    ),
     modalRoot
   );
 }

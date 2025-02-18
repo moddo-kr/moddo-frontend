@@ -34,7 +34,7 @@ export const DefaultWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: ${({theme}) => theme.unit[28]};
+  gap: ${({ theme }) => theme.unit[28]};
   align-items: flex-start;
   height: 100%;
   width: 100%;

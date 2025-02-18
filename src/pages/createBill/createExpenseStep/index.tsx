@@ -8,8 +8,8 @@ import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
-import * as S from './index.styles';
 import Modal from '@/common/components/Modal';
+import * as S from './index.styles';
 
 interface CreateExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
