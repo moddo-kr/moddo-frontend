@@ -5,6 +5,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      external: ['react-toastify'], // react-toastify를 외부 모듈로 처리
+    },
+  },
   plugins: [
     react(),
     svgr({
