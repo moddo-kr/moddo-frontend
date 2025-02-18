@@ -1,29 +1,72 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
-import ReactDOM from "react-dom";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import ReactDOM from 'react-dom';
 import * as S from './index.style';
+import Text from '../Text';
+import ButtonGroup from '../ButtonGroup';
+import Button from '../Button';
 
-interface ModalProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
-  isOpen: boolean;
-  setOpen: (isOpen: false) => void;
-  children: ReactNode;
+interface ModalProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  open: boolean;
+  setOpen: (open: false) => void;
+  variant: 'default' | 'empty';
+  /** variant : default인 경우에만 필요한 props */
+  title?: string;
+  subscribe?: string;
+  cancel?: string;
+  submit?: string;
+  onCancel?: () => void;
+  onSubmit?: () => void;
+  /** variant : empty인 경우에만 필요한 props */
+  children?: ReactNode;
 }
 
-function Modal({ isOpen = false, setOpen, children, ...rest }: ModalProps) {
-  const modalRoot = document.querySelector("#modal") as HTMLElement;
+function Modal({
+  open = false,
+  setOpen,
+  variant,
+  title,
+  subscribe,
+  cancel,
+  submit,
+  onCancel,
+  onSubmit,
+  children = null,
+  ...rest
+}: ModalProps) {
+  const modalRoot = document.querySelector('#modal') as HTMLElement;
 
   const onClose = () => {
     setOpen(false);
   };
 
   return ReactDOM.createPortal(
-    <>{
-      isOpen ? (
-        <div>
-          <S.Backdrop onClick={onClose}/>
-          <S.ModalWrapper {...rest}>{children}</S.ModalWrapper>
-        </div>
-      ): null
-    }
+    <>
+      {open ? (
+        <>
+          <S.Backdrop onClick={onClose} />
+          <S.ModalWrapper {...rest}>
+            {variant == 'default' && (
+              <S.DefaultWrapper>
+                <S.TextWrapper>
+                  <Text variant="title" color="semantic.text.strong">
+                    {title}
+                  </Text>
+                  <Text variant="body1R" color="semantic.text.strong">
+                    {subscribe}
+                  </Text>
+                </S.TextWrapper>
+                <S.ButtonWrapper>
+                <ButtonGroup direction='horizontal'>
+                  <Button onClick={onCancel} variant="secondary">{cancel}</Button>
+                  <Button onClick={onSubmit}>{submit}</Button>
+                </ButtonGroup>
+                </S.ButtonWrapper>
+              </S.DefaultWrapper>
+            )}
+          </S.ModalWrapper>
+        </>
+      ) : null}
     </>,
     modalRoot
   );
