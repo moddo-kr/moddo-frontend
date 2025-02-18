@@ -110,64 +110,64 @@ const PrimitiveColor: PrimitiveColorType = {
 } as const;
 
 const SemanticColor: SemanticColorType = {
+  orange: {
+    subtle: PrimitiveColor.orange[50],
+    default: PrimitiveColor.orange[400],
+    strong: PrimitiveColor.orange[600],
+    heavy: PrimitiveColor.orange[700],
+  },
+  primary: {
+    subtle: PrimitiveColor.gray[50],
+    default: PrimitiveColor.gray[600],
+    strong: PrimitiveColor.gray[700],
+    heavy: PrimitiveColor.gray[800],
+  },
+  secondary: {
+    subtle: PrimitiveColor.base.white,
+    default: PrimitiveColor.gray[50],
+    strong: PrimitiveColor.gray[100],
+    heavy: PrimitiveColor.gray[200],
+  },
+  state: {
+    danger: PrimitiveColor.red[500],
+    warning: PrimitiveColor.yellow[500],
+    info: PrimitiveColor.blue[500],
+    success: PrimitiveColor.green[500],
+  },
+  text: {
+    strong: PrimitiveColor.gray[800],
+    default: PrimitiveColor.gray[600],
+    subtle: PrimitiveColor.gray[400],
+    disabled: PrimitiveColor.gray[300],
+    inverse: PrimitiveColor.base.white,
+  },
+  icon: {
+    strong: PrimitiveColor.gray[800],
+    default: PrimitiveColor.gray[600],
+    subtle: PrimitiveColor.gray[400],
+    disabled: PrimitiveColor.gray[300],
+    inverse: PrimitiveColor.base.white,
+  },
+  border: {
+    strong: PrimitiveColor.gray[800],
+    default: PrimitiveColor.gray[100],
+    subtle: PrimitiveColor.gray[50],
+    disabled: PrimitiveColor.gray[100],
+    inverse: PrimitiveColor.base.white,
+  },
   background: {
     normal: {
-      alternative: PrimitiveColor.gray[50],
       default: PrimitiveColor.base.white,
+      alternative: PrimitiveColor.gray[50],
       disabled: PrimitiveColor.gray[100],
       inverse: PrimitiveColor.gray[600],
     },
     state: {
       danger: PrimitiveColor.red[50],
+      warning: PrimitiveColor.yellow[50],
       info: PrimitiveColor.blue[50],
       success: PrimitiveColor.green[50],
-      warning: PrimitiveColor.yellow[50],
     },
-  },
-  border: {
-    default: PrimitiveColor.gray[100],
-    disabled: PrimitiveColor.gray[100],
-    inverse: PrimitiveColor.base.white,
-    strong: PrimitiveColor.gray[800],
-    subtle: PrimitiveColor.gray[50],
-  },
-  icon: {
-    default: PrimitiveColor.gray[600],
-    disabled: PrimitiveColor.gray[300],
-    inverse: PrimitiveColor.base.white,
-    strong: PrimitiveColor.gray[800],
-    subtle: PrimitiveColor.gray[400],
-  },
-  orange: {
-    default: PrimitiveColor.orange[500],
-    heavy: PrimitiveColor.orange[700],
-    strong: PrimitiveColor.orange[600],
-    subtle: PrimitiveColor.orange[50],
-  },
-  primary: {
-    default: PrimitiveColor.gray[600],
-    heavy: PrimitiveColor.gray[800],
-    strong: PrimitiveColor.gray[700],
-    subtle: PrimitiveColor.gray[50],
-  },
-  secondary: {
-    default: PrimitiveColor.gray[50],
-    heavy: PrimitiveColor.gray[200],
-    strong: PrimitiveColor.gray[100],
-    subtle: PrimitiveColor.base.white,
-  },
-  state: {
-    danger: PrimitiveColor.red[500],
-    info: PrimitiveColor.blue[500],
-    success: PrimitiveColor.green[500],
-    warning: PrimitiveColor.yellow[500],
-  },
-  text: {
-    default: PrimitiveColor.gray[600],
-    disabled: PrimitiveColor.gray[300],
-    inverse: PrimitiveColor.base.white,
-    strong: PrimitiveColor.gray[800],
-    subtle: PrimitiveColor.gray[400],
   },
 } as const;
 
