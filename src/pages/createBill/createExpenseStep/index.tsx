@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
+import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/assets/svgs/icon';
+import { ROUTE } from '@/common/constants/route';
+import Button from '@/common/components/Button';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
 import DescriptionField from '@/common/components/DescriptionField';
@@ -22,6 +25,8 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
     useAddExpenseFormArray();
   const mutation = useCreateExpense({ moveToNextStep });
   const [open, setOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { groupToken } = useLoaderData();
 
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
@@ -52,7 +57,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
       <Header
         type="TitleCenter"
         leftButtonContent={<Close width="1.5rem" />}
-        rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
+        rightButtonContent={<Text>지출 추가</Text>}
         rightButtonOnClick={handleAddExpense}
         leftButtonOnClick={() => setOpen(true)}
       />
@@ -68,7 +73,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
           onCancel={() => setOpen(false)}
           onSubmit={() => {
             setOpen(false);
-            moveToNextStep?.();
+            navigate(ROUTE.home);
           }}
         />
       )}
@@ -98,16 +103,15 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
         ))}
       </S.BillFormList>
       <S.ButtonWrapper>
-        <S.BottomButton
+        <Button
           type="button"
           onClick={handleSubmit((data) =>
-            // TODO : 그룹 토큰을 받아오는 로직 추가
-            mutation.mutate({ groupToken: 'group-token', data })
+            mutation.mutate({ groupToken, data })
           )}
           disabled={!allFormsValid}
         >
           {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
-        </S.BottomButton>
+        </Button>
       </S.ButtonWrapper>
     </FormProvider>
   );
