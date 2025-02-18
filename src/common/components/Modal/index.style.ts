@@ -37,6 +37,7 @@ export const DefaultWrapper = styled.div`
   gap: ${({theme}) => theme.unit[28]};
   align-items: flex-start;
   height: 100%;
+  width: 100%;
 `;
 
 export const TextWrapper = styled.div`

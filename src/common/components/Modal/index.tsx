@@ -5,7 +5,7 @@ import Text from '../Text';
 import ButtonGroup from '../ButtonGroup';
 import Button from '../Button';
 
-interface ModalProps
+export interface ModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   open: boolean;
   setOpen: (open: false) => void;
