@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import numPadController from './numPadController';
+import NumPadController from './numPadController';
 
 describe('addDigit', () => {
   it.each([
@@ -19,7 +19,7 @@ describe('addDigit', () => {
       expected: 567,
     },
   ])('($value, $digit) => $expected', ({ value, digit, expected }) => {
-    expect(numPadController.addDigit(value, digit)).toBe(expected);
+    expect(NumPadController.addDigit(value, digit)).toBe(expected);
   });
 });
 
@@ -42,7 +42,7 @@ describe('deleteDigit', () => {
       expected: 56,
     },
   ])('($value) => $expected', ({ value, expected }) => {
-    expect(numPadController.deleteDigit(value)).toBe(expected);
+    expect(NumPadController.deleteDigit(value)).toBe(expected);
   });
 });
 
@@ -66,7 +66,7 @@ describe('applyShortcut', () => {
   ])(
     '($value, $shortcutValue) => $expected',
     ({ value, shortcutValue, expected }) => {
-      expect(numPadController.applyShortcut(value, shortcutValue)).toBe(
+      expect(NumPadController.applyShortcut(value, shortcutValue)).toBe(
         expected
       );
     }
@@ -74,5 +74,5 @@ describe('applyShortcut', () => {
 });
 
 it('clearAll', () => {
-  expect(numPadController.clearAll()).toBe(0);
+  expect(NumPadController.clearAll()).toBe(0);
 });
