@@ -7,4 +7,5 @@ export const ROUTE = {
   groupSetupName: '/groupSetup/groupName',
   groupSetupPassword: '/groupSetup/password',
   groupSetupMember: '/groupSetup/member',
+  billDetail: '/bill-detail/:groupToken',
 } as const;

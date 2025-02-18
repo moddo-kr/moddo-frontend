@@ -8,6 +8,7 @@ import MemberSetup from './pages/groupSetup/memberSetup';
 import Login from './pages/auth/login';
 import LoginSuccess from './pages/auth/loginSuccess';
 import Home from './pages/home';
+import BillDetail from './pages/billDetail';
 
 /**
  * 페이지에 접근하기 전에 실행되는 함수
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
     path: ROUTE.createBill,
     element: <CreateBill />,
     loader: checkAuth,
+  },
+  {
+    path: ROUTE.billDetail,
+    element: <BillDetail />,
   },
 ]);
 
