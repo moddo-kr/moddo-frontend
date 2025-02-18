@@ -2,6 +2,7 @@ import {
   ExpenseForm,
   ExpenseList,
   SingleExpenseForm,
+  ExpenseDetailList,
 } from '@/pages/createBill/types/expense.type';
 import axiosInstance from './axios';
 
@@ -45,13 +46,16 @@ const expense = {
     expenseId: number;
     data: SingleExpenseForm;
   }): Promise<void> =>
-    axiosInstance.put(
-      `/api/v1/expenses/${expenseId}?groupToken=${groupToken}`,
-      data,
-      {
+    axiosInstance.put(`/expenses/${expenseId}?groupToken=${groupToken}`, data, {
+      useMock: true,
+    }),
+  // GET getExpenseDetailsByGroupId
+  getDetail: (groupToken: string): Promise<ExpenseDetailList> =>
+    axiosInstance
+      .get(`expenses/details?groupToken=${groupToken}`, {
         useMock: true,
-      }
-    ),
+      })
+      .then((res) => res.data),
 };
 
 export default expense;

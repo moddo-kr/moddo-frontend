@@ -3,6 +3,37 @@ import { Expense } from '@/pages/createBill/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 
+const dummyExpenseDetail = [
+  {
+    id: 1,
+    date: new Date('2025-02-03'),
+    content: '하이디라오',
+    totalAmount: 100000,
+    groupMembers: ['김모또(총무)', '김반숙'],
+  },
+  {
+    id: 2,
+    date: new Date('2025-02-03'),
+    content: '카페',
+    totalAmount: 22000,
+    groupMembers: ['김모또(총무)', '김반숙'],
+  },
+  {
+    id: 3,
+    date: new Date('2025-02-04'),
+    content: '향수공방',
+    totalAmount: 210000,
+    groupMembers: ['김모또(총무)', '김반숙', '정에그'],
+  },
+  {
+    id: 4,
+    date: new Date('2025-02-04'),
+    content: '간술',
+    totalAmount: 36000,
+    groupMembers: ['김모또(총무)', '김반숙', '정에그'],
+  },
+];
+
 const dummyExpenses: Expense[] = [];
 
 interface CreateExpensesRequestBody {
@@ -154,6 +185,25 @@ const expenseHandlers = [
       return HttpResponse.json({ message: 'success' });
     }
   ),
+
+  // GET getExpenseDetailsByGroupId
+  http.get('/api/v1/expenses/details', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
+
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
+    }
+
+    return HttpResponse.json({
+      expenses: dummyExpenseDetail,
+    });
+  }),
 ];
 
 export default expenseHandlers;

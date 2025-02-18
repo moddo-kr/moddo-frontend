@@ -6,15 +6,14 @@ import Button from '@/common/components/Button';
 import Header from '@/common/components/Header';
 import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
-import { GroupTokenUrlLoaderData } from '@/common/types/group.type';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
+import ExpenseTimeline from './components/expenseTimeline';
 
 function BillDetail() {
   const { unit } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
-  // const { groupToken, groupData } = useLoaderData(); // lint 오류 제거용 주석..
-  const { groupData } = useLoaderData<GroupTokenUrlLoaderData>();
+  const { groupToken, groupData } = useLoaderData(); // lint 오류 제거용 주석..
   // TODO : 필요하다면 useQuery의 initialData에 groupData를 넣어서 사용
 
   return (
@@ -42,7 +41,7 @@ function BillDetail() {
           </TabsList>
         </S.TabListContainer>
         {activeTab === 'expense' ? (
-          <div>전체 지출내역</div>
+          <ExpenseTimeline groupToken={groupToken} />
         ) : (
           <div>참여자별 정산</div>
         )}
