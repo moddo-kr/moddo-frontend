@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, redirect } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
+import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
 import SelectGroup from '@/pages/selectGroup';
 import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
 import PasswordSetup from '@/pages/groupSetup/passwordSetup';
@@ -52,22 +53,22 @@ const router = createBrowserRouter([
   {
     path: ROUTE.groupSetupName,
     element: <GroupNameSetup />,
-    loader: checkAuth,
+    loader: getGroupManagerAuth,
   },
   {
     path: ROUTE.groupSetupPassword,
     element: <PasswordSetup />,
-    loader: checkAuth,
+    loader: getGroupManagerAuth,
   },
   {
     path: ROUTE.groupSetupMember,
     element: <MemberSetup />,
-    loader: checkAuth,
+    loader: getGroupManagerAuth,
   },
   {
     path: ROUTE.createBill,
     element: <CreateBill />,
-    loader: checkAuth,
+    loader: getGroupManagerAuth,
   },
 ]);
 
