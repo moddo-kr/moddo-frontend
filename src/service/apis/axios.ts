@@ -2,7 +2,7 @@ import { ROUTE } from '@/common/constants/route';
 import axios, { AxiosHeaders } from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_SERVER_URL,
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
