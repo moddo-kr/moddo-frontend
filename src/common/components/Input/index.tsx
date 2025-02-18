@@ -1,0 +1,53 @@
+import { forwardRef, InputHTMLAttributes, ReactElement } from 'react';
+import Text from '@/common/components/Text';
+import * as S from './index.styles';
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  placeholder: string;
+  icon?: ReactElement;
+}
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      label,
+      error = false,
+      disabled = false,
+      required = false,
+      icon,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <S.Container>
+        {label ? (
+          <S.LabelField>
+            <Text variant="body2R">{label}</Text>
+            {required ? (
+              <Text variant="body2R" color="semantic.state.danger">
+                *
+              </Text>
+            ) : null}
+          </S.LabelField>
+        ) : null}
+        <S.Wrapper
+          $error={error}
+          $disabled={disabled}
+          className="input-wrapper"
+        >
+          <S.Input ref={ref} disabled={disabled} {...props} />
+          {icon}
+        </S.Wrapper>
+      </S.Container>
+    );
+  }
+);
+
+Input.displayName = 'Input';
+
+export default Input;

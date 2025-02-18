@@ -1,23 +1,17 @@
-import { Close } from '@/assets/svgs/icon';
+import { ChipVariant, ChipSize } from './index.type';
 import * as S from './index.styles';
 
 interface ChipProps {
   label: string;
-  closable?: boolean;
-  onClose?: () => void;
-  variant?: 'gray' | 'white'; // NOTE : 컴포넌트 디자인 확정 전 임시
+  variant?: ChipVariant;
+  size?: ChipSize;
 }
 
-function Chip({ label, closable, onClose, variant = 'gray' }: ChipProps) {
+function Chip({ label, variant = 'primary', size = 'md' }: ChipProps) {
   return (
-    <S.Chip $variant={variant}>
-      <S.ChipLabel>{label}</S.ChipLabel>
-      {closable && (
-        <S.CloseButton onClick={onClose}>
-          <Close width="1.5rem" fill="#444950" />
-        </S.CloseButton>
-      )}
-    </S.Chip>
+    <S.Container $variant={variant} $size={size}>
+      {label}
+    </S.Container>
   );
 }
 
