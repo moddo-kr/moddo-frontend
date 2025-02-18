@@ -28,9 +28,8 @@ const chipVariants = {
     color: ${({ theme }) => theme.color.semantic.text.default};
   `,
   disabled: css`
-    background: ${({ theme }) =>
-      theme.color.semantic.background.normal.disabled};
-    color: ${({ theme }) => theme.color.semantic.text.disabled};
+    background: ${({ theme }) => theme.color.semantic.icon.disabled};
+    color: ${({ theme }) => theme.color.primitive.base.white};
   `,
 };
 
