@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
@@ -8,6 +8,7 @@ import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
+import Modal from '@/common/components/Modal';
 import * as S from './index.styles';
 
 interface CreateExpenseStepProps
@@ -18,6 +19,8 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
   const mutation = useCreateExpense({ moveToNextStep });
+  const [open, setOpen] = useState<boolean>(false);
+
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
     lastFormCardRef.current?.scrollIntoView({
@@ -49,7 +52,24 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
         leftButtonContent={<Close width="1.5rem" />}
         rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
         rightButtonOnClick={handleAddExpense}
+        leftButtonOnClick={() => setOpen(true)}
       />
+      {open && (
+        <Modal
+          open={open}
+          setOpen={setOpen}
+          variant="default"
+          title="지출 내역 입력을 종료할까요?"
+          subscribe="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
+          cancel="계속 입력"
+          submit="끝내기"
+          onCancel={() => setOpen(false)}
+          onSubmit={() => {
+            setOpen(false);
+            moveToNextStep?.();
+          }}
+        />
+      )}
       <S.TopWrapper>
         <S.TopMessage>
           <S.MoimName>{groupInfo.groupName}</S.MoimName>
