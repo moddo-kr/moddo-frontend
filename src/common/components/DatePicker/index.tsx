@@ -2,10 +2,10 @@ import { useTheme } from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import { format } from 'date-fns';
-import { ArrowLeft, ArrowRight } from '@/assets/svgs/icon';
+import { ArrowLeft, ArrowRight, Calendar } from '@/assets/svgs/icon';
 import Button from '@/common/components/Button';
+import Input from '@/common/components/Input';
 import Text from '@/common/components/Text';
-import ReadonlyInput from '@/pages/createBill/components/ReadonlyInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -31,7 +31,9 @@ function DatePicker({ selected, onChange, open }: DatePickerProps) {
         locale={ko}
         dateFormat="yyyy. MM. dd. (eee)"
         open={open}
-        customInput={<ReadonlyInput />} // TODO : Input 컴포넌트 추가
+        customInput={
+          <Input placeholder="" readOnly icon={<Calendar width={unit[24]} />} />
+        }
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <S.Header>
             <Button variant="text" onClick={decreaseMonth} type="button">
