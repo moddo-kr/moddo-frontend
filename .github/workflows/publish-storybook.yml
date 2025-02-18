@@ -37,6 +37,9 @@ jobs:
         uses: ./.github/actions/setup-node
         if: steps.cache.outputs.cache-hit != 'true'
 
+      - name: Install dependencies
+        run: yarn install # 명시적으로 의존성 설치
+
       - name: Run Chromatic
         uses: chromaui/action@latest
         id: chromatic
