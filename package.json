@@ -12,7 +12,8 @@
     "pwa": "pwa-assets-generator --preset minimal public/pwa/react.svg",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "chromatic": "npx chromatic --project-token chpt_bfadae16e9f9922"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.4.0",
