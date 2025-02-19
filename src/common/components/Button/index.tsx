@@ -11,7 +11,7 @@ function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', children, ...rest } = props;
 
   return (
-    <S.Button $variant={variant} $size={size} {...rest}>
+    <S.Button type="button" $variant={variant} $size={size} {...rest}>
       {children}
     </S.Button>
   );
