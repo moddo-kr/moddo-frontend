@@ -14,9 +14,7 @@ const group = {
       .then((res) => res.data),
 
   post: async (groupData: CreateGroupData) => {
-    const response = await axiosInstance.post('/group', groupData, {
-      useMock: true,
-    });
+    const response = await axiosInstance.post('/group', groupData);
     return response.data;
   },
 
