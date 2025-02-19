@@ -27,7 +27,7 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
             <Text variant="caption">{member.name}</Text>
           </S.ProfileContainer>
           <NumberInput
-            defaultValue={member.amount}
+            value={member.amount.toLocaleString() ?? ''}
             readOnly
             variant="sm"
             placeholder="금액 입력"
