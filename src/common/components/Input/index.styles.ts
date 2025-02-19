@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: ${({ theme }) => theme.unit[8]};
+  width: 100%;
 `;
 
 export const LabelField = styled.div`
