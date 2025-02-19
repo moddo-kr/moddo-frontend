@@ -1,13 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
-import {
-  DrawerBackdrop,
-  DrawerContent,
-  DrawerRoot,
-  DrawerTrigger,
-} from '@/common/components/Drawer/drawer';
 import NumPad from '@/common/components/NumPad';
 import * as S from './index.styles';
+import BottomSheet from '@/common/components/BottomSheet';
 
 interface NumPadBottomSheetProps {
   initialValue: number;
@@ -26,21 +21,14 @@ function NumPadBottomSheet({
   const [input, setInput] = useState<number>(initialValue); // Numpad의 입력값을 관리하는 상태
 
   return (
-    <DrawerRoot
-      open={open}
-      onOpenChange={(e) => setOpen(e.open)}
-      placement="bottom"
-    >
-      <DrawerBackdrop />
-      <DrawerTrigger asChild>
-        <S.ValueWrapper>
-          <S.DisplayValue $isEmpty={initialValue === 0}>
-            {initialValue === 0 ? '금액입력' : initialValue.toLocaleString()}
-          </S.DisplayValue>
-          <S.DisplayValueUnit>원</S.DisplayValueUnit>
-        </S.ValueWrapper>
-      </DrawerTrigger>
-      <DrawerContent>
+    <>
+      <S.ValueWrapper onClick={() => setOpen(true)}>
+        <S.DisplayValue $isEmpty={initialValue === 0}>
+          {initialValue === 0 ? '금액입력' : initialValue.toLocaleString()}
+        </S.DisplayValue>
+        <S.DisplayValueUnit>원</S.DisplayValueUnit>
+      </S.ValueWrapper>
+      <BottomSheet open={open} setOpen={setOpen}>
         <S.NumPadContainer>
           <S.Header>
             <S.Description>결제 금액 입력</S.Description>
@@ -65,8 +53,8 @@ function NumPadBottomSheet({
             </S.BottomButton>
           </S.ButtonWrapper>
         </S.NumPadContainer>
-      </DrawerContent>
-    </DrawerRoot>
+      </BottomSheet>
+    </>
   );
 }
 
