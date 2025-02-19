@@ -1,13 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Text, Stack } from '@chakra-ui/react';
-import {
-  DrawerBackdrop,
-  DrawerContent,
-  DrawerRoot,
-} from '@/common/components/Drawer/drawer';
 import AddMember from '@/common/components/AddMember';
 import { Member } from '@/common/types/member.type';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import BottomSheet from '@/common/components/BottomSheet';
 
 const DUMMY_MEMBERS: Member[] = [
   {
@@ -56,30 +52,24 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
   };
 
   return (
-    <DrawerRoot
-      open={open}
-      onOpenChange={(e) => setOpen(e.open)}
-      placement="bottom"
-    >
-      <DrawerBackdrop />
-      <DrawerContent>
-        <Stack
-          paddingTop="2rem"
-          paddingBottom="1.75rem"
-          paddingX="1.25rem"
-          gap="1.75rem"
-        >
-          <Text fontSize="1.25rem" fontWeight="700" color="#444950">
-            참여자 추가
-          </Text>
-          <AddMember
-            members={DUMMY_MEMBERS}
-            onAddName={handleAddName}
-            onDeleteMember={handleDeleteMember}
-          />
-        </Stack>
-      </DrawerContent>
-    </DrawerRoot>
+    <BottomSheet open={open} setOpen={setOpen}>
+      <Stack
+        paddingTop="2rem"
+        paddingBottom="1.75rem"
+        paddingX="1.25rem"
+        gap="1.75rem"
+        width="100%"
+      >
+        <Text fontSize="1.25rem" fontWeight="700" color="#444950">
+          참여자 추가
+        </Text>
+        <AddMember
+          members={DUMMY_MEMBERS}
+          onAddName={handleAddName}
+          onDeleteMember={handleDeleteMember}
+        />
+      </Stack>
+    </BottomSheet>
   );
 }
 

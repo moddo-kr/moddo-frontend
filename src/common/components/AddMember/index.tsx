@@ -2,10 +2,13 @@ import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import MemberProfile from '../MemberProfile';
+import InputGroup from '../InputGroup';
+import Input from '../Input';
+import Button from '../Button';
 
 const MemberSchema = z.object({
   name: z.string().trim().min(1),
@@ -74,32 +77,17 @@ function AddMember({
     <Flex direction="column" height="fit-content">
       <form onSubmit={handleSubmit(handleAddName)}>
         <Flex gap={2} alignItems="center">
-          <Input
-            borderRadius={12}
-            placeholder="참가자를 입력해주세요"
-            fontSize={16}
-            py={3}
-            height={12}
-            {...register('name', {
-              required: '이름을 입력해주세요',
-            })}
-          />
-          <Button
-            type="submit"
-            fontSize={16}
-            borderRadius={12}
-            backgroundColor="#e6e6e6"
-            color="black"
-            fontWeight={400}
-            px={5}
-            textAlign="center"
-            lineHeight={1.5}
-            py={2}
-            height={12}
-            disabled={!formState.isValid}
-          >
-            추가하기
-          </Button>
+          <InputGroup>
+            <Input
+              placeholder="이정산"
+              {...register('name', {
+                required: '이름을 입력해주세요',
+              })}
+            />
+            <Button variant="secondary" size="md" disabled={!formState.isValid}>
+              추가하기
+            </Button>
+          </InputGroup>
         </Flex>
       </form>
       <Flex direction="column" gap={2} mt={7}>

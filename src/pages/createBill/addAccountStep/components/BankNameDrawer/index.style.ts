@@ -11,6 +11,7 @@ export const DrawerBody = styled.div`
   gap: 8px;
   flex-wrap: wrap;
   display: flex;
+  justify-content: space-between;
 `;
 
 export const SubmitButton = styled.button`
@@ -35,8 +36,14 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
   background-color: #faf6f3;
   padding: 1rem; // 20px
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const BankImg = styled.img`
+  width: 1.875rem;
+  height: auto;
 `;
 
 export const BankName = styled.p`

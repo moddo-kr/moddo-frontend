@@ -11,7 +11,7 @@ interface TextProps {
 
 function Text({ variant = 'body1R', color, as = 'span', children }: TextProps) {
   return (
-    <S.Text as={as} variant={variant} color={color}>
+    <S.Text as={as} $variant={variant} $color={color}>
       {children}
     </S.Text>
   );

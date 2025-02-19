@@ -1,15 +1,10 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
-import {
-  DrawerBackdrop,
-  DrawerContent,
-  DrawerRoot,
-  DrawerTrigger,
-} from '@/common/components/Drawer/drawer';
+import NumPad from '@/common/components/NumPad';
+import BottomSheet from '@/common/components/BottomSheet';
 import Button from '@/common/components/Button';
 import NumberInput from '@/common/components/NumberInput';
 import Text from '@/common/components/Text';
-import NumPad from '@/common/components/NumPad';
 import * as S from './index.styles';
 
 interface NumPadBottomSheetProps {
@@ -29,21 +24,17 @@ function NumPadBottomSheet({
   const [input, setInput] = useState<number>(initialValue); // Numpad의 입력값을 관리하는 상태
 
   return (
-    <DrawerRoot
-      open={open}
-      onOpenChange={(e) => setOpen(e.open)}
-      placement="bottom"
-    >
-      <DrawerBackdrop />
-      <DrawerTrigger asChild>
-        {/* FIXME : placeholder가 보이지 않는 문제 해결 필요함 */}
-        <NumberInput
-          defaultValue={initialValue ? initialValue.toLocaleString() : ''}
-          placeholder="금액 입력"
-          readOnly
-        />
-      </DrawerTrigger>
-      <DrawerContent>
+    <>
+      {/* <S.ValueWrapper onClick={() => setOpen(true)}> */}
+      {/* FIXME : placeholder가 보이지 않는 문제 해결 필요함 */}
+      <NumberInput
+        onClick={() => setOpen(true)}
+        defaultValue={initialValue ? initialValue.toLocaleString() : ''}
+        placeholder="금액 입력"
+        readOnly
+      />
+      {/* </S.ValueWrapper> */}
+      <BottomSheet open={open} setOpen={setOpen}>
         <S.NumPadContainer>
           <S.Header>
             <Text variant="heading2">결제 금액 입력</Text>
@@ -68,8 +59,8 @@ function NumPadBottomSheet({
             </Button>
           </S.ButtonWrapper>
         </S.NumPadContainer>
-      </DrawerContent>
-    </DrawerRoot>
+      </BottomSheet>
+    </>
   );
 }
 

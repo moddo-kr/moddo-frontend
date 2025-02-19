@@ -6,6 +6,7 @@ export const NumPadWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: ${({ theme }) => theme.unit[16]};
+  width: 100%;
 `;
 
 export const ValueWrapper = styled.div`

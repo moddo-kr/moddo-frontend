@@ -5,6 +5,11 @@ export interface Group {
   members: Member[];
 }
 
+export interface GroupTokenUrlLoaderData {
+  groupToken: string;
+  groupData: Group;
+}
+
 export interface CreateGroupData {
   name: string;
   password: string;

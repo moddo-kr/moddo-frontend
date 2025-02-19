@@ -33,6 +33,7 @@ export const NumPadContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  width: 100%;
 `;
 
 export const Header = styled.div`

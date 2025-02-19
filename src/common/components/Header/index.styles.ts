@@ -7,7 +7,7 @@ export const HeaderArea = styled.header`
   background-color: #fff;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 998;
   padding: 1.75rem 1.375rem; // 28px 22px
   width: 100%;
   min-width: 320px;

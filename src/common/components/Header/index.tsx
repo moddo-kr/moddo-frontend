@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/assets/svgs/icon';
+import Button from '@/common/components/Button';
 import * as S from '@/common/components/Header/index.styles';
 
 export interface HeaderProps {
@@ -48,17 +49,17 @@ function Header({
       return (
         <S.CenterHeaderArea>
           {leftButtonContent ? (
-            <S.IconWrapper onClick={leftButtonOnClick}>
+            <Button variant="text" onClick={leftButtonOnClick}>
               {leftButtonContent}
-            </S.IconWrapper>
+            </Button>
           ) : (
             <S.DummyIcon />
           )}
           <S.CenterTitleArea>{title}</S.CenterTitleArea>
           {rightButtonContent ? (
-            <S.IconWrapper onClick={rightButtonOnClick}>
+            <Button variant="text" onClick={rightButtonOnClick}>
               {rightButtonContent}
-            </S.IconWrapper>
+            </Button>
           ) : (
             <S.DummyIcon />
           )}

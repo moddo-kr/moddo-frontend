@@ -45,6 +45,7 @@ export const Button = styled.button<StyledButtonProps>`
   border-radius: ${({ theme }) => theme.radius.circle};
   cursor: pointer;
   border: none;
+  white-space: nowrap;
   ${TextVariant('body1Sb')};
   ${({ $size }) => buttonSizes[$size]};
   ${({ $variant }) => buttonVariants[$variant]};

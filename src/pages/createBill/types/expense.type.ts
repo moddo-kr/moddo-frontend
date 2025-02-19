@@ -1,1 +1,11 @@
-// NOTE : API 스펙 미정이므로 임시 타입
+export interface ExpenseDetail {
+  id: number;
+  date: Date;
+  content: string;
+  totalAmount: number;
+  groupMembers: string[];
+}
+
+export interface ExpenseDetailList {
+  expenses: ExpenseDetail[];
+}
