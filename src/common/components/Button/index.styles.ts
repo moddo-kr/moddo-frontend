@@ -31,9 +31,11 @@ const buttonVariants = {
 const buttonSizes = {
   md: css`
     padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[16]}`};
+    ${TextVariant('body1Sb')};
   `,
   sm: css`
     padding: ${({ theme }) => `${theme.unit[8]} ${theme.unit[16]}`};
+    ${TextVariant('body2R')};
   `,
 };
 
@@ -46,7 +48,6 @@ export const Button = styled.button<StyledButtonProps>`
   cursor: pointer;
   border: none;
   white-space: nowrap;
-  ${TextVariant('body1Sb')};
   ${({ $size }) => buttonSizes[$size]};
   ${({ $variant }) => buttonVariants[$variant]};
   &:disabled {
