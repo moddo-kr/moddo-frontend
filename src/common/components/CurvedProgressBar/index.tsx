@@ -6,7 +6,7 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 import * as S from './index.style';
 import { useTheme } from 'styled-components';
-import ChangingProgressProvider from './ChangingProgressProvider';
+import ChangingProgressProvider from '@/common/utils/ChangingProgressProvider';
 
 interface CurvedProgressBar {
   percentage: number;
