@@ -12,12 +12,12 @@ export const TextVariant = (variant: TypographyKey) => css`
 `;
 
 interface StyledTextProps {
-  variant: TypographyKey;
-  color: ColorKey;
+  $variant: TypographyKey;
+  $color: ColorKey;
 }
 
 export const Text = styled.span<StyledTextProps>`
-  ${({ variant }) => TextVariant(variant)};
-  color: ${({ theme, color }) =>
-    getColorFromTheme(theme.color, color) ?? 'inherit'};
+  ${({ $variant }) => TextVariant($variant)};
+  color: ${({ theme, $color }) =>
+    getColorFromTheme(theme.color, $color) ?? 'inherit'};
 `;
