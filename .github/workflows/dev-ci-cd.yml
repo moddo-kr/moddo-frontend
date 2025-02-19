@@ -55,7 +55,7 @@ jobs:
 
   cd:
     runs-on: ubuntu-latest
-    # if: github.event_name == 'push'  # push일 때만 실행
+    if: github.event_name == 'push'  # push일 때만 실행
     needs: ci
     steps:
       # Step 1: AWS 인증
@@ -81,7 +81,3 @@ jobs:
       # Step 4: CloudFront 캐시 무효화 -> 캐시 서버가 새로운 배포 결과물을 저장할 수 있도록 배포 시마다 캐시 무효화 진행
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
-
-      # Step 5: CloudFront URL 확인 (테스트용)
-      - name: CloudFront URL Check
-        run: curl -I https://${{ secrets.AWS_CLOUDFRONT_URL }}
