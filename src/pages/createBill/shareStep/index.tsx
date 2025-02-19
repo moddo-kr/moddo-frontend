@@ -45,13 +45,9 @@ function ShareStep({ moveToPreviousStep }: ShareStepProps) {
         <S.LinkImg src={Link} alt="링크" />
         <S.HamImg src={LoginHamImg} alt="정산햄" />
       </S.ImageWrapper>
-      {/* <S.ButtonWrapper>
-        <ShareButton shareLink={DUMMY_LINK} />
-        <S.BottomLink to="/home">정산 내역 확인하기</S.BottomLink>
-      </S.ButtonWrapper> */}
       <BottomButtonContainer>
         <ButtonGroup direction="vertical">
-          <Button>링크 공유하기</Button>
+          <ShareButton shareLink={DUMMY_LINK} />
           <Button size="sm" variant="tertiary">
             정산 내역 확인하기
           </Button>
