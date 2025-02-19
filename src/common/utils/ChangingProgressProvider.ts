@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 interface ChangingProgressProviderProps<T = any> {
   values: T[];
@@ -14,29 +14,28 @@ class ChangingProgressProvider<T = any> extends React.Component<
   ChangingProgressProviderProps<T>,
   ChangingProgressProviderState
 > {
-  static defaultProps = {
-    interval: 100,
-  };
-
-  state: ChangingProgressProviderState = {
-    valuesIndex: 0,
-  };
-
   private intervalId?: number;
 
+  constructor(props: ChangingProgressProviderProps<T>) {
+    super(props);
+    this.state = {
+      valuesIndex: 0,
+    };
+  }
+
   componentDidMount() {
+    const { values, interval } = this.props;
     this.intervalId = window.setInterval(() => {
       this.setState((prevState) => {
         // 값이 배열의 마지막 인덱스에 도달하지 않았다면 계속 증가
-        if (prevState.valuesIndex < this.props.values.length - 1) {
+        if (prevState.valuesIndex < values.length - 1) {
           return { valuesIndex: prevState.valuesIndex + 1 };
-        } else {
-          // 마지막 값(percentage)에 도달하면 interval을 해제하고 멈춤
-          clearInterval(this.intervalId);
-          return { valuesIndex: prevState.valuesIndex };
         }
+        // 마지막 값(percentage)에 도달하면 interval을 해제하고 멈춤
+        clearInterval(this.intervalId);
+        return { valuesIndex: prevState.valuesIndex };
       });
-    }, this.props.interval!);
+    }, interval!);
   }
 
   componentWillUnmount() {
@@ -46,8 +45,15 @@ class ChangingProgressProvider<T = any> extends React.Component<
   }
 
   render() {
-    return this.props.children(this.props.values[this.state.valuesIndex]);
+    const { values, children } = this.props;
+    const { valuesIndex } = this.state;
+    return children(values[valuesIndex]);
   }
 }
+
+// defaultProps를 클래스 외부에서 할당
+(ChangingProgressProvider as any).defaultProps = {
+  interval: 100,
+};
 
 export default ChangingProgressProvider;

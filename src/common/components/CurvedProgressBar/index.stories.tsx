@@ -2,10 +2,10 @@ import { Meta, StoryObj } from '@storybook/react';
 import CurvedProgressBar from '.';
 
 const SAMPLE_PERCENTAGE = 30;
-const SAMPLE_TEXT = '기본 텍스트';
+const SAMPLE_TEXT = '진행률';
 
 const meta: Meta<typeof CurvedProgressBar> = {
-  title: 'Component/CurvedProgressBar',
+  title: 'Components/CurvedProgressBar',
   component: CurvedProgressBar,
   tags: ['autodocs'],
   argTypes: {
@@ -30,7 +30,7 @@ export const Default: Story = {
   render: (args) => (
     <CurvedProgressBar {...args}>
       <div>
-        `${args.children}: ${args.percentage}%`
+        {args.children}: {args.percentage}%
       </div>
     </CurvedProgressBar>
   ),

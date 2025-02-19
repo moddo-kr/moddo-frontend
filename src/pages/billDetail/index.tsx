@@ -1,21 +1,20 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
-import { ArrowLeft, Crown } from '@/assets/svgs/icon';
+import { ArrowLeft, Crown, DollarCircle } from '@/assets/svgs/icon';
 import Button from '@/common/components/Button';
 import Header from '@/common/components/Header';
 import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import * as S from './index.styles';
-import ExpenseTimeline from './components/ExpenseTimeline';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 import ModdoFace from '@/assets/pngs/moddoFace.png';
-import { DollarCircle } from '@/assets/svgs/icon';
+import * as S from './index.styles';
+import ExpenseTimeline from './components/ExpenseTimeline';
 
-const MEMBER_TOTAL: number = 6;
-const MEMBER_DONE: number = 3;
-const TOTAL_MONEY: number = 120000;
+const MEMBER_TOTAL = 6 as number;
+const MEMBER_DONE = 3 as number;
+const TOTAL_MONEY = 120000;
 
 function BillDetail() {
   const { unit } = useTheme();
@@ -25,7 +24,7 @@ function BillDetail() {
   const theme = useTheme();
   const percentage = (MEMBER_DONE / MEMBER_TOTAL) * 100;
   const crownColor =
-    MEMBER_DONE == MEMBER_TOTAL
+    MEMBER_DONE === MEMBER_TOTAL
       ? theme.color.primitive.base.white
       : theme.color.semantic.secondary.heavy;
   return (
@@ -46,7 +45,7 @@ function BillDetail() {
       />
       <S.Content>
         <CurvedProgressBar percentage={percentage}>
-          <S.ModdoImage src={ModdoFace}></S.ModdoImage>
+          <S.ModdoImage src={ModdoFace} />
           <S.ExpenseChip>
             <DollarCircle
               width="32"

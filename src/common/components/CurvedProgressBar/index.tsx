@@ -4,24 +4,24 @@ import {
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import * as S from './index.style';
 import { useTheme } from 'styled-components';
 import ChangingProgressProvider from '@/common/utils/ChangingProgressProvider';
+import * as S from './index.style';
 
-interface CurvedProgressBar {
+interface CurvedProgressBarProps {
   percentage: number;
   children?: ReactNode;
 }
 
-function CurvedProgressBar({ percentage, children }: CurvedProgressBar) {
+function CurvedProgressBar({ percentage, children }: CurvedProgressBarProps) {
   const theme = useTheme();
 
   return (
     <S.Wrapper>
       <ChangingProgressProvider values={[0, percentage]}>
-        {(percentage) => (
+        {(value) => (
           <CircularProgressbarWithChildren
-            value={percentage}
+            value={value}
             circleRatio={0.5}
             strokeWidth={11}
             styles={buildStyles({
