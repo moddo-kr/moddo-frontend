@@ -1,5 +1,6 @@
 import { SystemDanger } from '@/assets/svgs/icon';
 import NumberInput from '@/common/components/NumberInput';
+import Text from '@/common/components/Text';
 import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
 import * as S from './index.styles';
 
@@ -13,15 +14,18 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
     <S.MemberExpensesContainer>
       {members.map((member) => (
         <S.MemberContainer key={member.memberId}>
-          <S.ProfileWrapper>
-            <S.ProfileImg
-              src={member.profile}
-              alt={`${member.name} 프로필 이미지`}
-            />
-            <S.DeleteButtonWrapper onClick={() => onDelete(member.name)}>
-              <SystemDanger width="0.83331rem" />
-            </S.DeleteButtonWrapper>
-          </S.ProfileWrapper>
+          <S.ProfileContainer>
+            <S.ProfileWrapper>
+              <S.ProfileImg
+                src={member.profile}
+                alt={`${member.name} 프로필 이미지`}
+              />
+              <S.DeleteButtonWrapper onClick={() => onDelete(member.name)}>
+                <SystemDanger width="0.83331rem" />
+              </S.DeleteButtonWrapper>
+            </S.ProfileWrapper>
+            <Text variant="caption">{member.name}</Text>
+          </S.ProfileContainer>
           <NumberInput
             defaultValue={member.amount}
             readOnly

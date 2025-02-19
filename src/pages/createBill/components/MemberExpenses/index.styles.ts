@@ -17,6 +17,13 @@ export const MemberContainer = styled.div`
 
 /* 멤버 */
 
+export const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.unit[4]};
+`;
+
 export const ProfileImg = styled.img`
   width: ${({ theme }) => theme.unit[36]};
   height: ${({ theme }) => theme.unit[36]};
