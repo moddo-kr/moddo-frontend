@@ -41,4 +41,5 @@ export const Container = styled.div<StyledChipContainerProps>`
   border-radius: ${({ theme }) => theme.radius.circle};
   ${({ $size }) => chipSizes[$size]};
   ${({ $variant }) => chipVariants[$variant]};
+  white-space: nowrap;
 `;
