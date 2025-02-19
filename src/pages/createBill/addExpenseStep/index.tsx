@@ -1,3 +1,4 @@
+import { useLoaderData } from 'react-router';
 import { Close } from '@/assets/svgs/icon';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useCreateExpense from '@/common/queries/expense/useCreateExpense';
@@ -15,6 +16,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray();
   const mutation = useCreateExpense({ moveToNextStep });
+  const { groupToken } = useLoaderData();
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -46,7 +48,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           type="button"
           onClick={handleSubmit((data) =>
             // TODO : 그룹 토큰을 받아오는 로직 추가
-            mutation.mutate({ groupToken: 'group-token', data })
+            mutation.mutate({ groupToken, data })
           )}
           disabled={!allFormsValid}
         >

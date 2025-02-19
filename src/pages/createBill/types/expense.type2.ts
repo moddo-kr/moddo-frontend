@@ -1,4 +1,4 @@
-import { MemberRole } from '@/common/types/member.type';
+import { MemberRole, memberRole } from '@/common/types/member.type';
 import * as z from 'zod';
 
 /** 지출 폼의 참여자 */
@@ -7,6 +7,7 @@ export const ExpenseFormMemberSchema = z.object({
   amount: z.number().int(), // 회원별 정산 금액
   name: z.string(), // 회원 이름 (요청엔 포함되지 않음)
   profile: z.string(), // 회원 프로필 (요청엔 포함되지 않음)
+  role: z.enum(memberRole), // 회원 역할 (요청엔 포함되지 않음)
 });
 
 /** 지출 폼의 참여자 타입 */

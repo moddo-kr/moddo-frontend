@@ -44,6 +44,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
               name: member.name,
               amount: 0,
               profile: member.profile,
+              role: member.role,
             })),
           },
         ],
@@ -61,6 +62,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
         name: member.name,
         amount: 0,
         profile: member.profile,
+        role: member.role,
       })),
     };
   }, [groupInfo]);

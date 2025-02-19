@@ -48,6 +48,7 @@ function ExpenseCard({
                       name: member.name,
                       amount: member.amount,
                       profile: member.profile,
+                      role: member.role,
                     })),
                   },
                 });

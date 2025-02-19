@@ -9,7 +9,7 @@ import Text from '@/common/components/Text';
 import FormField from '@/pages/createBill/components/FormField';
 import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
 import MemberBottomSheet from '@/pages/createBill/components/MemberBottomSheet';
-import MemberChips from '@/pages/createBill/components/MemberChips';
+import MemberExpenses from '@/pages/createBill/components/MemberExpenses';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -105,7 +105,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 onClick: () => setOpenMemberSheet(true),
               }}
               renderInput={({ field }) => (
-                <MemberChips
+                <MemberExpenses
                   members={field.value}
                   onDelete={(name) => {
                     const newMembers = field.value.filter(
