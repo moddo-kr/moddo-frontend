@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { format } from 'date-fns';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
@@ -91,8 +92,10 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               name={`expenses.${index}.date`}
               renderInput={({ field }) => (
                 <BillDatePicker
-                  selected={field.value}
-                  onChange={(date) => field.onChange(date)}
+                  selected={new Date(field.value)}
+                  onChange={(date) =>
+                    field.onChange(format(date || new Date(), 'yyyy-MM-dd'))
+                  }
                 />
               )}
             />

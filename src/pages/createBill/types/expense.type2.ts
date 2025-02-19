@@ -6,7 +6,7 @@ export const ExpenseFormMemberSchema = z.object({
   memberId: z.number(), // 회원 고유번호
   amount: z.number().int(), // 회원별 정산 금액
   name: z.string(), // 회원 이름 (요청엔 포함되지 않음)
-  profile: z.string(), // 회원 프로필 (요청엔 포함되지 않음)
+  profile: z.string().optional(), // 회원 프로필 (요청엔 포함되지 않음)
   role: z.enum(memberRole), // 회원 역할 (요청엔 포함되지 않음)
 });
 
