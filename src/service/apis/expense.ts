@@ -22,9 +22,7 @@ const expense = {
     groupToken: string;
     data: ExpenseForm;
   }): Promise<void> =>
-    axiosInstance.post(`/expenses?groupToken=${groupToken}`, data, {
-      useMock: true,
-    }),
+    axiosInstance.post(`/expenses?groupToken=${groupToken}`, data),
   // DELETE deleteByExpenseId
   delete: ({
     groupToken,

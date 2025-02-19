@@ -15,8 +15,8 @@ interface AddExpenseStepProps
 function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray();
-  const mutation = useCreateExpense({ moveToNextStep });
   const { groupToken } = useLoaderData();
+  const mutation = useCreateExpense({ moveToNextStep, groupToken });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -47,7 +47,6 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
         <S.BottomButton
           type="button"
           onClick={handleSubmit((data) =>
-            // TODO : 그룹 토큰을 받아오는 로직 추가
             mutation.mutate({ groupToken, data })
           )}
           disabled={!allFormsValid}
