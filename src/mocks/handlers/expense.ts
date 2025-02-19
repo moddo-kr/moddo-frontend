@@ -1,5 +1,9 @@
 import { http, HttpResponse, passthrough } from 'msw';
-import { Expense } from '@/pages/createBill/types/expense.type';
+import {
+  Expense,
+  ExpenseForm,
+  SingleExpenseForm,
+} from '@/pages/createBill/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 
@@ -36,59 +40,59 @@ const dummyExpenseDetail = [
 
 const dummyExpenses: Expense[] = [];
 
-interface CreateExpensesRequestBody {
-  expenses: Expense[];
-}
-
 interface UpdateExpenseParams {
   expenseId: string;
 }
 
-interface UpdateExpenseRequestBody extends Omit<Expense, 'id'> {}
-
 const expenseHandlers = [
   // POST createExpenses
-  http.post<object, CreateExpensesRequestBody>(
-    '/api/v1/expenses',
-    async ({ request }) => {
-      if (!getIsMocked(request)) return passthrough();
+  http.post<object, ExpenseForm>('/api/v1/expenses', async ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
 
-      const url = new URL(request.url);
-      const groupToken = url.searchParams.get('groupToken');
+    const url = new URL(request.url);
+    const groupToken = url.searchParams.get('groupToken');
 
-      if (!groupToken) {
-        return HttpResponse.json(
-          { error: 'groupToken is required' },
-          { status: 400 }
-        );
-      }
-
-      const body = await request.json();
-      const { expenses } = body;
-
-      expenses.forEach((expense) => {
-        dummyExpenses.push({
-          id: dummyExpenses.length + 1,
-          amount: expense.amount,
-          content: expense.content,
-          date: expense.date,
-          memberExpenses: expense.memberExpenses.map((memberExpense) => ({
-            memberId: memberExpense.memberId,
-            // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환
-            name:
-              dummyGroupMembers.find(
-                (member) => member.id === memberExpense.memberId
-              )?.name ?? '',
-            amount: memberExpense.amount,
-          })),
-        });
-      });
-
-      return HttpResponse.json({
-        expenses: dummyExpenses,
-      });
+    if (!groupToken) {
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 400 }
+      );
     }
-  ),
+
+    const body = await request.json();
+    const { expenses } = body;
+
+    expenses.forEach((expense) => {
+      dummyExpenses.push({
+        id: dummyExpenses.length + 1,
+        amount: expense.amount,
+        content: expense.content,
+        date: expense.date,
+        memberExpenses: expense.memberExpenses.map((memberExpense) => ({
+          id: memberExpense.memberId,
+          // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환
+          name:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.name ?? '',
+          amount: memberExpense.amount,
+          role:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.role ?? 'PARTICIPANT',
+          profile:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.profile ?? '',
+        })),
+      });
+    });
+
+    return HttpResponse.json({
+      expenses: dummyExpenses,
+    });
+  }),
+
   // GET getAllExpense
   http.get('/api/v1/expenses', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
@@ -137,7 +141,7 @@ const expenseHandlers = [
   }),
 
   // PUT updateExpense
-  http.put<UpdateExpenseParams, UpdateExpenseRequestBody>(
+  http.put<UpdateExpenseParams, SingleExpenseForm>(
     '/api/v1/expenses/:expenseId',
     async ({ request, params }) => {
       if (!getIsMocked(request)) return passthrough();
@@ -173,12 +177,20 @@ const expenseHandlers = [
         content,
         date,
         memberExpenses: memberExpenses.map((memberExpense) => ({
-          memberId: memberExpense.memberId,
+          id: memberExpense.memberId,
           name:
             dummyGroupMembers.find(
               (member) => member.id === memberExpense.memberId
             )?.name ?? '',
           amount: memberExpense.amount,
+          role:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.role ?? 'PARTICIPANT',
+          profile:
+            dummyGroupMembers.find(
+              (member) => member.id === memberExpense.memberId
+            )?.profile ?? '',
         })),
       };
 

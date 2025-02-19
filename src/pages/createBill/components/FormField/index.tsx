@@ -8,6 +8,9 @@ import {
   UseFormRegisterReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
+import Button from '@/common/components/Button';
+import Text from '@/common/components/Text';
+import Input from '@/common/components/Input';
 import * as S from './index.styles';
 
 interface RenderInputProps {
@@ -45,16 +48,20 @@ function FormField({
   subButton,
 }: FormFieldProps) {
   return (
-    <S.FormField required={required}>
+    <S.FormField>
       <S.FormFieldHeader>
-        <S.FormFieldLabel>
+        <Text variant="body2Sb">
           {label}
-          {required && <S.FormFieldRequired>*</S.FormFieldRequired>}
-        </S.FormFieldLabel>
+          {required && (
+            <Text variant="body2R" color="semantic.state.danger">
+              {' *'}
+            </Text>
+          )}
+        </Text>
         {subButton && (
-          <S.FormFieldSubButton type="button" onClick={subButton.onClick}>
-            {subButton.label}
-          </S.FormFieldSubButton>
+          <Button variant="text" onClick={subButton.onClick}>
+            <Text variant="caption">{subButton.label}</Text>
+          </Button>
         )}
       </S.FormFieldHeader>
       {renderInput ? (
@@ -64,7 +71,7 @@ function FormField({
           render={renderInput}
         />
       ) : (
-        <S.FormFieldInput placeholder={placeholder} {...register} />
+        <Input placeholder={placeholder ?? ''} {...register} />
       )}
     </S.FormField>
   );

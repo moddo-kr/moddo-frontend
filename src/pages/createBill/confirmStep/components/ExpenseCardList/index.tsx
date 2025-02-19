@@ -1,12 +1,13 @@
 import { Fragment } from 'react/jsx-runtime';
 import { Expense } from '@/pages/createBill/types/expense.type';
+import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
 import categrizeExpensesByDateWithIndex from '../../utils/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';
 import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
-  moveToEditStep: (initialExpense: Expense) => void;
+  moveToEditStep: (context: BillContextRequired) => void;
 }
 
 function ExpenseCardList({ expenses, moveToEditStep }: ExpenseCardListProps) {

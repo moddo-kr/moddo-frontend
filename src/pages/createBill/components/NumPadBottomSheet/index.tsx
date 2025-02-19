@@ -2,6 +2,9 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
 import NumPad from '@/common/components/NumPad';
 import BottomSheet from '@/common/components/BottomSheet';
+import Button from '@/common/components/Button';
+import NumberInput from '@/common/components/NumberInput';
+import Text from '@/common/components/Text';
 import * as S from './index.styles';
 
 interface NumPadBottomSheetProps {
@@ -22,19 +25,22 @@ function NumPadBottomSheet({
 
   return (
     <>
-      <S.ValueWrapper onClick={() => setOpen(true)}>
-        <S.DisplayValue $isEmpty={initialValue === 0}>
-          {initialValue === 0 ? '금액입력' : initialValue.toLocaleString()}
-        </S.DisplayValue>
-        <S.DisplayValueUnit>원</S.DisplayValueUnit>
-      </S.ValueWrapper>
+      {/* <S.ValueWrapper onClick={() => setOpen(true)}> */}
+      {/* FIXME : placeholder가 보이지 않는 문제 해결 필요함 */}
+      <NumberInput
+        onClick={() => setOpen(true)}
+        defaultValue={initialValue ? initialValue.toLocaleString() : ''}
+        placeholder="금액 입력"
+        readOnly
+      />
+      {/* </S.ValueWrapper> */}
       <BottomSheet open={open} setOpen={setOpen}>
         <S.NumPadContainer>
           <S.Header>
-            <S.Description>결제 금액 입력</S.Description>
-            <button type="button" onClick={() => setOpen(false)}>
+            <Text variant="heading2">결제 금액 입력</Text>
+            <Button variant="text" onClick={() => setOpen(false)}>
               <Close width="1.5rem" />
-            </button>
+            </Button>
           </S.Header>
           <NumPad
             input={input}
@@ -42,15 +48,15 @@ function NumPadBottomSheet({
             onClose={() => setOpen(false)}
           />
           <S.ButtonWrapper>
-            <S.BottomButton
-              type="button"
+            <Button
+              disabled={input === 0}
               onClick={() => {
                 setValue(input);
                 setOpen(false);
               }}
             >
               완료
-            </S.BottomButton>
+            </Button>
           </S.ButtonWrapper>
         </S.NumPadContainer>
       </BottomSheet>

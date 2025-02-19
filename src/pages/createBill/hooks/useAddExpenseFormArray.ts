@@ -1,24 +1,25 @@
 import { useMemo, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Group } from '@/common/types/group.type';
 import {
-  Expense,
+  SingleExpenseForm,
   ExpenseFormSchema,
 } from '@/pages/createBill/types/expense.type';
 import group from '@/service/apis/group';
 
-const defaultValues: Omit<Expense, 'id'> = {
+const defaultValues: SingleExpenseForm = {
   amount: 0,
   content: '',
-  date: new Date(),
+  date: format(new Date(), 'yyyy-MM-dd'),
   memberExpenses: [],
 };
 
 /**
  * 지출 폼을 위한 커스텀 훅
  */
-const useAddExpenseFormArray = (initialExpense?: Expense) => {
+const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
   const [groupInfo, setGroupInfo] = useState<Group | null>(null);
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
@@ -42,6 +43,8 @@ const useAddExpenseFormArray = (initialExpense?: Expense) => {
               memberId: member.id,
               name: member.name,
               amount: 0,
+              profile: member.profile,
+              role: member.role,
             })),
           },
         ],
@@ -58,6 +61,8 @@ const useAddExpenseFormArray = (initialExpense?: Expense) => {
         memberId: member.id,
         name: member.name,
         amount: 0,
+        profile: member.profile,
+        role: member.role,
       })),
     };
   }, [groupInfo]);

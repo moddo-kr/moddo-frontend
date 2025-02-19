@@ -1,25 +1,27 @@
 import styled from 'styled-components';
-import { Card } from '@chakra-ui/react';
 
-export const FormCard = styled(Card.Root)`
-  width: 100%;
-  padding: 1.75rem 1.25rem;
+export const FormCard = styled.div`
   display: flex;
+  padding: 1.25rem;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: flex-start;
+  gap: ${({ theme }) => theme.unit[16]};
+  border-radius: ${({ theme }) => theme.radius.large};
+  border: 1px solid ${({ theme }) => theme.color.semantic.border.default};
+  background: ${({ theme }) => theme.color.primitive.base.white};
 `;
 
-export const FormCardTitleContainer = styled(Card.Title)`
+export const FormCardTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
+  width: 100%;
 `;
 
-export const FormCardTitle = styled.span`
-  font-size: 1.25rem;
-  font-weight: 700; // bold
-  color: #000000;
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.unit[24]};
+  width: 100%;
 `;
-
-export const FormDeleteButton = styled.button``;
