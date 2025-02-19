@@ -1,6 +1,10 @@
 import * as S from './index.style';
 
-function DefaultProgressBar(percentage: number) {
+interface DefaultProgressBar {
+  percentage: number;
+}
+
+function DefaultProgressBar({ percentage }: DefaultProgressBar) {
   return (
     <S.Trail>
       <S.Path percentage={percentage} />
