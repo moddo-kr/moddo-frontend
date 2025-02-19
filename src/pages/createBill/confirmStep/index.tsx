@@ -1,3 +1,4 @@
+import { useLoaderData } from 'react-router';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
@@ -14,8 +15,8 @@ function ConfirmStep({
   moveToPreviousStep,
   moveToStep,
 }: ConfirmStepProps) {
-  // TODO : groupToken 사용 방법 적용 필요함
-  const { data, isLoading } = useGetAllExpense('group-token');
+  const { groupToken } = useLoaderData();
+  const { data, isLoading } = useGetAllExpense(groupToken);
 
   const moveToEditStep = ({ id, initialExpense }: BillContextRequired) => {
     moveToStep?.('EDIT_EXPENSE', { id, initialExpense });

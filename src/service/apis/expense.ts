@@ -10,9 +10,7 @@ const expense = {
   // GET getAllExpense
   getAll: (groupToken: string): Promise<ExpenseList> =>
     axiosInstance
-      .get(`/expenses?groupToken=${groupToken}`, {
-        useMock: true,
-      })
+      .get(`/expenses?groupToken=${groupToken}`)
       .then((res) => res.data),
   // POST createExpenses
   create: ({
