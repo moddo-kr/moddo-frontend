@@ -33,6 +33,19 @@ const groupMembers = {
     );
     return response.data;
   },
+  // DELETE deleteGroupMember
+  delete: async ({
+    groupToken,
+    groupMemberId,
+  }: {
+    groupToken: string;
+    groupMemberId: number;
+  }) => {
+    const response = await axiosInstance.delete(
+      `/group-members/${groupMemberId}?groupToken=${groupToken}`
+    );
+    return response.data;
+  },
 };
 
 export default groupMembers;

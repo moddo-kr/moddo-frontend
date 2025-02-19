@@ -6,6 +6,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
 import { useLoaderData } from 'react-router';
 import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
+import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
 import MemberProfile from '../MemberProfile';
 import InputGroup from '../InputGroup';
 import Input from '../Input';
@@ -24,9 +25,10 @@ interface AddMemberProps {
   onDeleteMember?: (id: number) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
 }
 
-function AddMember({ members, setMembers, onDeleteMember }: AddMemberProps) {
+function AddMember({ members }: AddMemberProps) {
   const { groupToken } = useLoaderData();
-  const mutation = useAddGroupMember(groupToken);
+  const addMutation = useAddGroupMember(groupToken);
+  const deleteMutation = useDeleteGroupMember(groupToken);
   const { register, handleSubmit, clearErrors, formState, reset } = useForm({
     mode: 'onChange',
     resolver: zodResolver(MemberSchema),
@@ -38,7 +40,7 @@ function AddMember({ members, setMembers, onDeleteMember }: AddMemberProps) {
   /** 이름 입력 후 추가 핸들러 */
   const handleAddName = (data: { name: string }) => {
     const { name } = data;
-    mutation.mutate({
+    addMutation.mutate({
       groupToken,
       groupMemberData: {
         name,
@@ -53,13 +55,7 @@ function AddMember({ members, setMembers, onDeleteMember }: AddMemberProps) {
 
   /** 참여자 제거 핸들러 */
   const handleDeleteMember = (id: number) => {
-    // 멤버 삭제 핸들러가 있다면 실행
-    if (onDeleteMember) {
-      onDeleteMember(id);
-    }
-
-    // (필요한 경우) members 배열 직접 업데이트
-    setMembers?.(members.filter((member) => member.id !== id));
+    deleteMutation.mutate({ groupToken, groupMemberId: id });
   };
 
   return (
