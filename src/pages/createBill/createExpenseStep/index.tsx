@@ -21,10 +21,10 @@ interface CreateExpenseStepProps
 
 function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
-  const mutation = useCreateExpense({ moveToNextStep });
+  const { groupToken } = useLoaderData();
+  const mutation = useCreateExpense({ moveToNextStep, groupToken });
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { groupToken } = useLoaderData();
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
 
