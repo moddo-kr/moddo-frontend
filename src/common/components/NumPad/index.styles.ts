@@ -4,6 +4,7 @@ import { TextVariant } from '@/common/components/Text/index.styles';
 export const NumPadWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: ${({ theme }) => theme.unit[16]};
 `;
 
