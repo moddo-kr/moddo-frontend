@@ -61,6 +61,8 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               name: updatedMemberExpenses[0].name,
               remainder,
             });
+          } else {
+            setRemainderData(null);
           }
           // 전체 분배 금액 업데이트
           setValue(`expenses.${index}.memberExpenses`, updatedMemberExpenses, {
