@@ -58,7 +58,7 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
         paddingBottom="1.75rem"
         paddingX="1.25rem"
         gap="1.75rem"
-        width='100%'
+        width="100%"
       >
         <Text fontSize="1.25rem" fontWeight="700" color="#444950">
           참여자 추가

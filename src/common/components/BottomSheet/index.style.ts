@@ -16,9 +16,17 @@ export const BottomSheetWrapper = styled(animated.div)<{
       ? `${theme.unit[32]} ${theme.unit[20]} 0 ${theme.unit[20]}`
       : '0'};
 
-  /* padding-bottom은 isPadding이 true일 경우 활성화, false일 경우 기본값으로 설정 */
-  padding-bottom: ${({ pb, isPadding, theme }) =>
-    isPadding ? (pb ? `${theme.unit[pb]}` : `${theme.unit[20]}`) : '0'};
+  /* isPadding이 true일 경우 활성화, false일 경우 기본값으로 설정 */
+  padding-bottom: ${({ pb, isPadding, theme }) => {
+    if (!isPadding) {
+      return '0';
+    }
+    if (pb) {
+      return `${theme.unit[pb]}`;
+    }
+    return `${theme.unit[20]}`;
+  }};
+
   border-radius: ${({ theme }) =>
     `${theme.radius.default} ${theme.radius.default} 0 0`};
   z-index: 9999;

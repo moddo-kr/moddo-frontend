@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
 import NumPad from '@/common/components/NumPad';
-import * as S from './index.styles';
 import BottomSheet from '@/common/components/BottomSheet';
+import * as S from './index.styles';
 
 interface NumPadBottomSheetProps {
   initialValue: number;

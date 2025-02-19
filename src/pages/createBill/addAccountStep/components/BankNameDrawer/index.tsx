@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
-import * as S from './index.style';
 import BottomSheet from '@/common/components/BottomSheet';
+import * as S from './index.style';
 import { getBankImagesAndUrl } from '../../utils/BankList';
 
 interface BankNameDrawerProps {
@@ -33,13 +33,13 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
       >
         <S.DrawerHeader>은행 선택</S.DrawerHeader>
         <S.DrawerBody>
-          {bankList.map((bank, index) => (
+          {bankList.map((bank) => (
             <S.BankButton
-              key={index}
+              key={bank.bankName}
               onClick={() => setName(bank.bankName)}
               isSelected={name === bank.bankName}
             >
-              <S.BankImg src={bank.url}/>
+              <S.BankImg src={bank.url} />
               <S.BankName>{bank.bankName}</S.BankName>
             </S.BankButton>
           ))}

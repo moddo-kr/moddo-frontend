@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSpring, animated } from '@react-spring/web';
 import { Backdrop } from '../Modal/index.style';
 import * as S from './index.style';
-import { useSpring, animated } from '@react-spring/web';
 
 export interface BottomSheetProps {
   open: boolean;

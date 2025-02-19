@@ -16,7 +16,7 @@ const meta: Meta<typeof BottomSheet> = {
   args: {
     open: false,
     isPadding: false,
-    pb: undefined, 
+    pb: undefined,
   },
 };
 
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof BottomSheet>;
 
 const DefaultStory = (args: BottomSheetProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -36,13 +36,12 @@ const DefaultStory = (args: BottomSheetProps) => {
       <Button onClick={handleClick}>Toggle BottomSheet</Button>
       <BottomSheet {...args} open={open} setOpen={setOpen}>
         <div>바텀 시트 안의 내용은 이렇게 들어갑니다!</div>
-        <div>최대 너비는 600px입니다!</div> 
+        <div>최대 너비는 600px입니다!</div>
         <Button>바텀 시트 예시 버튼</Button>
       </BottomSheet>
     </>
   );
 };
-
 
 export const Default: Story = {
   args: {
