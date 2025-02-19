@@ -5,10 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      external: ['react-toastify'], // react-toastify를 외부 모듈로 처리
-    },
+  optimizeDeps: {
+    include: ['react-toastify'], // react-toastify를 의존성에 포함시켜 번들링을 보장
   },
   plugins: [
     react(),
