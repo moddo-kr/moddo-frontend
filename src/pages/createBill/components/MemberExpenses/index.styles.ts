@@ -9,9 +9,8 @@ export const MemberExpensesContainer = styled.div`
 
 export const MemberContainer = styled.div`
   display: flex;
-  padding-right: var(--unit-4, 0.25rem);
   align-items: center;
-  gap: var(--unit-64, 4rem);
+  gap: ${({ theme }) => theme.unit[64]};
   align-self: stretch;
 `;
 
