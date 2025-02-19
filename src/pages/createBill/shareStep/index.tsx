@@ -15,14 +15,6 @@ const DUMMY_LINK = 'http://localhost:3000/home';
 interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function ShareStep({ moveToPreviousStep }: ShareStepProps) {
-  // TODO : Dummy link 대신 API로 받아온 링크로 변경해야 함.
-  // NOTE : PC Safari에서는 권한 에러 발생함.
-  // useLayoutEffect(() => {
-  //   copyClipboard(DUMMY_LINK).then((isCopied) => {
-  //     if (isCopied) alert('링크가 복사되었습니다.');
-  //   });
-  // }, [DUMMY_LINK]);
-
   useEffect(() => {
     initKakaoSDK();
   }, []);
