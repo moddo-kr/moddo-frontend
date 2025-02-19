@@ -8,9 +8,7 @@ import axiosInstance from './axios';
 const group = {
   get: (groupToken: string): Promise<Group> =>
     axiosInstance
-      .get(`/group?groupToken=${groupToken}`, {
-        useMock: true,
-      })
+      .get(`/group?groupToken=${groupToken}`)
       .then((res) => res.data),
 
   post: async (groupData: CreateGroupData) => {
