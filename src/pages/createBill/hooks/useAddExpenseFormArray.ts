@@ -6,7 +6,7 @@ import { Group } from '@/common/types/group.type';
 import {
   SingleExpenseForm,
   ExpenseFormSchema,
-} from '@/pages/createBill/types/expense.type2';
+} from '@/pages/createBill/types/expense.type';
 import group from '@/service/apis/group';
 
 const defaultValues: SingleExpenseForm = {

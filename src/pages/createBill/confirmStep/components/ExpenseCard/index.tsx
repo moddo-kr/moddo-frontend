@@ -2,7 +2,7 @@ import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
 import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
-import { Expense } from '@/pages/createBill/types/expense.type2';
+import { Expense } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {

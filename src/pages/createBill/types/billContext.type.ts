@@ -1,4 +1,4 @@
-import { SingleExpenseForm } from './expense.type2';
+import { SingleExpenseForm } from './expense.type';
 
 export interface BillContext {
   id?: number; // 지출을 수정하기 위한 id

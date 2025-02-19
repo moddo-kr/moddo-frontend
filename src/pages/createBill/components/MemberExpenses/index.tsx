@@ -1,7 +1,7 @@
 import { SystemDanger } from '@/assets/svgs/icon';
 import NumberInput from '@/common/components/NumberInput';
 import Text from '@/common/components/Text';
-import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
+import { ExpenseFormMember } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 
 interface MemberExpensesProps {

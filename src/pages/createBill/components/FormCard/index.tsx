@@ -6,7 +6,7 @@ import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import {
   ExpenseFormMember,
   RemainderData,
-} from '@/pages/createBill/types/expense.type2';
+} from '@/pages/createBill/types/expense.type';
 import Alert from '@/common/components/Alert';
 import Button from '@/common/components/Button';
 import BillDatePicker from '@/common/components/DatePicker';

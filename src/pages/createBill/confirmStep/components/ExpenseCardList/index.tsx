@@ -1,5 +1,5 @@
 import { Fragment } from 'react/jsx-runtime';
-import { Expense } from '@/pages/createBill/types/expense.type2';
+import { Expense } from '@/pages/createBill/types/expense.type';
 import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
 import categrizeExpensesByDateWithIndex from '../../utils/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';

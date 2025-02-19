@@ -5,7 +5,7 @@ import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import FormCard from '@/pages/createBill/components/FormCard';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
-import { SingleExpenseForm } from '@/pages/createBill/types/expense.type2';
+import { SingleExpenseForm } from '@/pages/createBill/types/expense.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import * as S from './index.styles';
 
