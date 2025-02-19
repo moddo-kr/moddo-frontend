@@ -6,7 +6,7 @@ import { useSpring, animated } from '@react-spring/web';
 
 export interface BottomSheetProps {
   open: boolean;
-  setOpen: (open: false) => void;
+  setOpen: (open: boolean) => void;
   children: ReactNode;
   isPadding?: boolean;
   pb?: number;

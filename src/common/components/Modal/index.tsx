@@ -8,7 +8,7 @@ import Button from '../Button';
 export interface ModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   open: boolean;
-  setOpen: (open: false) => void;
+  setOpen: (open: boolean) => void;
   variant: 'default' | 'empty';
   /** variant : default인 경우에만 필요한 props */
   title?: string;
