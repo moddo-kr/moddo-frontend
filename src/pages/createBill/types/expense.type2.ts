@@ -51,3 +51,9 @@ export interface Expense {
 export interface ExpenseList {
   expenses: Expense[];
 }
+
+/* 지출별 남은 금액 데이터 타입 */
+export interface RemainderData {
+  name: string;
+  remainder: number;
+}

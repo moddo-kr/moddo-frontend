@@ -3,7 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
-import { ExpenseFormMember } from '@/pages/createBill/types/expense.type2';
+import {
+  ExpenseFormMember,
+  RemainderData,
+} from '@/pages/createBill/types/expense.type2';
+import Alert from '@/common/components/Alert';
 import Button from '@/common/components/Button';
 import BillDatePicker from '@/common/components/DatePicker';
 import Text from '@/common/components/Text';
@@ -24,6 +28,9 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
     const { register, watch, setValue, control } = useFormContext();
     const [openNumPad, setOpenNumPad] = useState(false);
     const [openMemberSheet, setOpenMemberSheet] = useState(false);
+    const [remainderData, setRemainderData] = useState<RemainderData | null>(
+      null
+    );
 
     const amount = watch(`expenses.${index}.amount`);
     const memberExpenses = watch(`expenses.${index}.memberExpenses`);
@@ -32,11 +39,14 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
       if (!amount || !memberExpenses) return;
       if (amount && memberExpenses && memberExpenses.length > 0) {
         // 지출 금액을 참여자 수에 맞게 분배
-        const distribution = distributeAmount(amount, memberExpenses.length);
+        const { distributeResult, remainder } = distributeAmount(
+          amount,
+          memberExpenses.length
+        );
         const updatedMemberExpenses = memberExpenses.map(
           (member: ExpenseFormMember, idx: number) => ({
             ...member,
-            amount: distribution[idx],
+            amount: distributeResult[idx],
           })
         );
 
@@ -45,6 +55,14 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
           JSON.stringify(updatedMemberExpenses) !==
           JSON.stringify(memberExpenses)
         ) {
+          // 남은 금액이 있는 경우 해당 금액을 가져가는 사람을 설정
+          if (remainder > 0) {
+            setRemainderData({
+              name: updatedMemberExpenses[0].name,
+              remainder,
+            });
+          }
+          // 전체 분배 금액 업데이트
           setValue(`expenses.${index}.memberExpenses`, updatedMemberExpenses, {
             shouldValidate: true,
             shouldDirty: true,
@@ -108,15 +126,23 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 onClick: () => setOpenMemberSheet(true),
               }}
               renderInput={({ field }) => (
-                <MemberExpenses
-                  members={field.value}
-                  onDelete={(name) => {
-                    const newMembers = field.value.filter(
-                      (member: ExpenseFormMember) => member.name !== name
-                    );
-                    field.onChange(newMembers);
-                  }}
-                />
+                <>
+                  {remainderData ? (
+                    <Alert
+                      type="info"
+                      message={`${remainderData.name}님에게 남은 ${remainderData.remainder}원이 부과됐어요.`}
+                    />
+                  ) : null}
+                  <MemberExpenses
+                    members={field.value}
+                    onDelete={(name) => {
+                      const newMembers = field.value.filter(
+                        (member: ExpenseFormMember) => member.name !== name
+                      );
+                      field.onChange(newMembers);
+                    }}
+                  />
+                </>
               )}
             />
           </S.FormContainer>
