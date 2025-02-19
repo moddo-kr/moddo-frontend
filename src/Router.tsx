@@ -53,12 +53,12 @@ const router = createBrowserRouter([
   {
     path: ROUTE.groupSetupName,
     element: <GroupNameSetup />,
-    loader: getGroupManagerAuth,
+    loader: checkAuth,
   },
   {
     path: ROUTE.groupSetupPassword,
     element: <PasswordSetup />,
-    loader: getGroupManagerAuth,
+    loader: checkAuth,
   },
   {
     path: ROUTE.groupSetupMember,
