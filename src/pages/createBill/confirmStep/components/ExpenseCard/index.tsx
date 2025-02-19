@@ -44,7 +44,7 @@ function ExpenseCard({
                     content,
                     date,
                     memberExpenses: memberExpenses.map((member) => ({
-                      memberId: member.id,
+                      id: member.id,
                       name: member.name,
                       amount: member.amount,
                       profile: member.profile,

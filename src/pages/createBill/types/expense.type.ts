@@ -3,7 +3,7 @@ import * as z from 'zod';
 
 /** 지출 폼의 참여자 */
 export const ExpenseFormMemberSchema = z.object({
-  memberId: z.number(), // 회원 고유번호
+  id: z.number(), // 회원 고유번호
   amount: z.number().int(), // 회원별 정산 금액
   name: z.string(), // 회원 이름 (요청엔 포함되지 않음)
   profile: z.string().optional(), // 회원 프로필 (요청엔 포함되지 않음)
@@ -39,7 +39,7 @@ export interface Expense {
   content: string;
   date: string;
   memberExpenses: {
-    id: number; // 회원 고유번호 (폼과 다른 점은 memberId가 id로 변경되었다는 것)
+    id: number;
     role: MemberRole; // 회원 역할 (폼에는 없음)
     name: string;
     amount: number;

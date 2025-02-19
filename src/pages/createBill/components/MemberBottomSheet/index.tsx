@@ -46,9 +46,9 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
     console.log('새로운 참여자 추가: ', name);
   };
 
-  const handleDeleteMember = (memberId: number) => {
+  const handleDeleteMember = (id: number) => {
     // TODO : 참여자 삭제 API 호출
-    console.log('참여자 삭제: ', memberId);
+    console.log('참여자 삭제: ', id);
   };
 
   return (

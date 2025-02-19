@@ -13,7 +13,7 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
   return (
     <S.MemberExpensesContainer>
       {members.map((member) => (
-        <S.MemberContainer key={member.memberId}>
+        <S.MemberContainer key={member.id}>
           <S.ProfileContainer>
             <S.ProfileWrapper>
               <S.ProfileImg
