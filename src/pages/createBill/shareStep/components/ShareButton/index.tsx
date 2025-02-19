@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Close } from '@/assets/svgs/icon';
+import { Close, Copy } from '@/assets/svgs/icon';
+import { Kakaotalk, Slack } from '@/assets/svgs/logo';
 import Button from '@/common/components/Button';
 import Modal from '@/common/components/Modal';
 import Text from '@/common/components/Text';
@@ -11,6 +12,12 @@ interface ShareButtonProps {
 
 function ShareButton({ shareLink }: ShareButtonProps) {
   const [openShareModal, setOpenShareModal] = useState<boolean>(false);
+
+  const handleCopyLink = () => {};
+
+  const handleShareKakao = () => {};
+
+  const handleShareSlack = () => {};
 
   const handleClickShareButton = () => {
     // 링크 복사하기
@@ -36,6 +43,17 @@ function ShareButton({ shareLink }: ShareButtonProps) {
                 <Close width="1.5rem" />
               </Button>
             </S.ModalTitle>
+            <S.ShareItemContainer>
+              <S.ShareButton type="button" onClick={handleShareKakao}>
+                <Kakaotalk width="3rem" />
+              </S.ShareButton>
+              <S.ShareButton type="button" onClick={handleShareSlack}>
+                <Slack width="1.5rem" />
+              </S.ShareButton>
+              <S.ShareButton type="button" onClick={handleCopyLink}>
+                <Copy width="1.5rem" />
+              </S.ShareButton>
+            </S.ShareItemContainer>
           </S.ShareModalContainer>
         </Modal>
       )}
