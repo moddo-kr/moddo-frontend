@@ -1,6 +1,10 @@
 import * as S from './index.style';
 
-function Divider(height: number = 8) {
+interface DividerProps {
+  height?: number;
+}
+
+function Divider({ height = 8 }: DividerProps) {
   return <S.Divider height={height} />;
 }
 
