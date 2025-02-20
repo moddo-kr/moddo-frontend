@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
-import { useNavigate } from 'react-router';
-// import { nanoid } from 'nanoid';
+import { useLoaderData, useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
 import { Member } from '@/common/types/member.type';
-import usePostCreateGroupMembers from '@/common/queries/groupMembers/usePostCreateGroupMembers';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
+import { ROUTE } from '@/common/constants/route';
 import * as S from '../index.styles';
 
 export interface ParticipantProfile {
@@ -28,19 +27,16 @@ const defaultMembers: Member[] = [
 
 function MemberSetup() {
   const navigate = useNavigate();
-  /**
-   * 비회원일때를 가정하여 총무를 members에 추가함
-   * @Todo 회원일 경우 store에서 총무를 members에 추가하기
-   */
-  const [members, setMembers] = useState<Member[]>(defaultMembers);
-  const { mutate: createGroupMembersMutate } = usePostCreateGroupMembers();
+  const { groupToken } = useLoaderData();
+  const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
 
-  const handleSubmitButton = async () => {
-    const groupMemberData = members
-      .filter((member) => member.role !== 'MANAGER')
-      .map((member) => ({ name: member.name }));
-    await createGroupMembersMutate(groupMemberData);
-  };
+  if (isLoading || isError) {
+    return <div>로딩중</div>;
+  }
+
+  if (!data) {
+    return <div>데이터가 없습니다.</div>;
+  }
 
   return (
     <>
@@ -65,9 +61,14 @@ function MemberSetup() {
             <br />
             참여자를 추가해주세요.
           </S.TitleText>
-          <AddMember members={members} setMembers={setMembers} />
+          {/* NOTE : 현재는 그룹 생성 직후에 모임에 총무 데이터가 없어 임의로 넣어줘야 합니다! */}
+          <AddMember members={[...data.members.reverse(), ...defaultMembers]} />
         </Flex>
-        <Button height={12} borderRadius={12} onClick={handleSubmitButton}>
+        <Button
+          height={12}
+          borderRadius={12}
+          onClick={() => navigate(ROUTE.createBill)}
+        >
           정산 시작!
         </Button>
       </Flex>

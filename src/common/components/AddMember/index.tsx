@@ -4,7 +4,9 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Text } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
-import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import { useLoaderData } from 'react-router';
+import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
+import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
 import MemberProfile from '../MemberProfile';
 import InputGroup from '../InputGroup';
 import Input from '../Input';
@@ -23,12 +25,10 @@ interface AddMemberProps {
   onDeleteMember?: (id: number) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
 }
 
-function AddMember({
-  members,
-  setMembers,
-  onAddName,
-  onDeleteMember,
-}: AddMemberProps) {
+function AddMember({ members }: AddMemberProps) {
+  const { groupToken } = useLoaderData();
+  const addMutation = useAddGroupMember(groupToken);
+  const deleteMutation = useDeleteGroupMember(groupToken);
   const { register, handleSubmit, clearErrors, formState, reset } = useForm({
     mode: 'onChange',
     resolver: zodResolver(MemberSchema),
@@ -38,24 +38,15 @@ function AddMember({
   });
 
   /** 이름 입력 후 추가 핸들러 */
-  const handleAddName = (data: any) => {
+  const handleAddName = (data: { name: string }) => {
     const { name } = data;
-    // 이름 추가 핸들러가 있다면 실행
-    if (onAddName) {
-      onAddName(name);
-    }
-
-    // 새로운 참여자 생성 후 (필요한 경우) members 배열 직접 업데이트
-    const newMember: Member = {
-      id: Date.now(),
-      name,
-      role: 'PARTICIPANT',
-      profile: defaultProfileImg,
-      isPaid: false,
-      paidAt: null,
-    };
-
-    setMembers?.([newMember, ...members]);
+    addMutation.mutate({
+      groupToken,
+      groupMemberData: {
+        name,
+        role: 'PARTICIPANT',
+      },
+    });
 
     // 초기화
     clearErrors('name');
@@ -64,13 +55,7 @@ function AddMember({
 
   /** 참여자 제거 핸들러 */
   const handleDeleteMember = (id: number) => {
-    // 멤버 삭제 핸들러가 있다면 실행
-    if (onDeleteMember) {
-      onDeleteMember(id);
-    }
-
-    // (필요한 경우) members 배열 직접 업데이트
-    setMembers?.(members.filter((member) => member.id !== id));
+    deleteMutation.mutate({ groupToken, groupMemberId: id });
   };
 
   return (

@@ -21,12 +21,12 @@ interface CreateExpenseStepProps
 
 function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
-  const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
-    useAddExpenseFormArray();
   const mutation = useCreateExpense({ moveToNextStep });
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const { groupToken } = useLoaderData();
+  const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
+    useAddExpenseFormArray();
 
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
@@ -81,7 +81,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
         title={
           <>
             <Text variant="heading2" color="semantic.orange.default">
-              DND 7조 첫모임
+              {groupInfo.groupName}
             </Text>
             {`의\n지출 내역을 입력해주세요.`}
           </>
