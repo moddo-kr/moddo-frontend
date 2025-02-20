@@ -4,16 +4,28 @@ import { Text, Stack } from '@chakra-ui/react';
 import AddMember from '@/common/components/AddMember';
 import BottomSheet from '@/common/components/BottomSheet';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
+import { Group } from '@/common/types/group.type';
 
 interface MemberBottomSheetProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   // groupId: number;
+  setGroupInfo: (groupInfo: Group) => void; // 참여자 정보가 바뀔 때 모아서 업데이트하는 함수
 }
 
-function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
+function MemberBottomSheet({
+  open,
+  setOpen,
+  setGroupInfo,
+}: MemberBottomSheetProps) {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
+
+  const onCloseHandler = () => {
+    if (data) {
+      setGroupInfo(data);
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -24,7 +36,7 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
   }
 
   return (
-    <BottomSheet open={open} setOpen={setOpen}>
+    <BottomSheet open={open} setOpen={setOpen} onCloseHandler={onCloseHandler}>
       <Stack
         paddingTop="2rem"
         paddingBottom="1.75rem"
