@@ -45,6 +45,9 @@ jobs:
 
       # Step 6: 빌드
       - name: Build
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_KAKAO_JAVASCRIPT_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_KEY }}
         run: yarn build
 
       # Step 7: 빌드 결과물 저장
