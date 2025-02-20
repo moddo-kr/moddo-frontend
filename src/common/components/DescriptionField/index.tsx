@@ -4,7 +4,7 @@ import * as S from './index.styles';
 
 interface DescriptionFieldProps {
   title: string | ReactElement;
-  sub: string;
+  sub?: string;
 }
 
 function DescriptionField({ title, sub }: DescriptionFieldProps) {
@@ -13,9 +13,11 @@ function DescriptionField({ title, sub }: DescriptionFieldProps) {
       <Text variant="heading2" color="semantic.text.strong">
         {title}
       </Text>
-      <Text variant="body1R" color="semantic.text.subtle">
-        {sub}
-      </Text>
+      {sub ? (
+        <Text variant="body1R" color="semantic.text.subtle">
+          {sub}
+        </Text>
+      ) : null}
     </S.Wrapper>
   );
 }
