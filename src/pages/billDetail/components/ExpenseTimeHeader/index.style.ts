@@ -22,6 +22,8 @@ export const ModdoImage = styled.img`
   width: 47%;
   margin-top: 18%;
   margin-bottom: ${({ theme }) => theme.unit[20]};
+  contain: content;
+  cursor: pointer;
 `;
 
 export const ExpenseChip = styled.div`
