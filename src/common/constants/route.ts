@@ -1,3 +1,5 @@
+export const BASE_URL = 'https://moddo.kr';
+
 export const ROUTE = {
   login: '/',
   loginSuccess: '/login/success',
