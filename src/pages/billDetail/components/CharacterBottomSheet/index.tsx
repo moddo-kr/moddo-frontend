@@ -1,4 +1,4 @@
-// import { useLoaderData } from 'react-router';
+import { useNavigate, generatePath, useLoaderData } from 'react-router';
 // eslint-disable-next-line import/no-absolute-path
 import characterImageUrl from '/pngs/angle-moddo.png';
 import Text from '@/common/components/Text';
@@ -7,6 +7,7 @@ import {
   CHARACTER_NAME,
   CHARACTER_IMAGE_SIZE,
 } from '@/common/constants/character';
+import { ROUTE } from '@/common/constants/route';
 import BottomSheet from '@/common/components/BottomSheet';
 import ButtonGroup from '@/common/components/ButtonGroup';
 import Button from '@/common/components/Button';
@@ -25,8 +26,9 @@ interface CharacterBottomSheetProps {
 }
 
 function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
-  // const { groupToken } = useLoaderData();
+  const { groupToken } = useLoaderData();
   // const { data } = useGetCharacter({ groupToken });
+  const navigate = useNavigate();
 
   return (
     <BottomSheet open={open} setOpen={setOpen}>
@@ -54,7 +56,15 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
           <Button variant="secondary" onClick={() => setOpen(false)}>
             닫기
           </Button>
-          <Button>캐릭터 보기</Button>
+          <Button
+            onClick={() =>
+              navigate(
+                generatePath(ROUTE.billDetailCharacterShare, { groupToken })
+              )
+            }
+          >
+            캐릭터 보기
+          </Button>
         </ButtonGroup>
       </S.BottomSheetContainer>
     </BottomSheet>
