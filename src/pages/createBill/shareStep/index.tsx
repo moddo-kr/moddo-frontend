@@ -1,27 +1,32 @@
 import { useEffect } from 'react';
+import { generatePath, useLoaderData, useNavigate } from 'react-router';
 import Link from '@/assets/pngs/Link.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import { ROUTE } from '@/common/constants/route';
 import DescriptionField from '@/common/components/DescriptionField';
 import Header from '@/common/components/Header';
 import Button from '@/common/components/Button';
 import ButtonGroup from '@/common/components/ButtonGroup';
 import Text from '@/common/components/Text';
 import initKakaoSDK from '@/common/utils/initKakaoSDK';
+import generateShareLink from '@/common/utils/generateShareLink';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import { BillContext } from '../types/billContext.type';
 import ShareButton from './components/ShareButton';
 import * as S from './index.styles';
 
-const DUMMY_LINK = 'http://localhost:3000/home';
-
 interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function ShareStep({ moveToPreviousStep }: ShareStepProps) {
+  const { groupToken } = useLoaderData();
+  const navigate = useNavigate();
   useEffect(() => {
     initKakaoSDK();
   }, []);
+
+  const shareLink = generateShareLink(groupToken);
 
   return (
     <>
@@ -47,8 +52,14 @@ function ShareStep({ moveToPreviousStep }: ShareStepProps) {
       </S.ImageWrapper>
       <BottomButtonContainer>
         <ButtonGroup direction="vertical">
-          <ShareButton shareLink={DUMMY_LINK} />
-          <Button size="sm" variant="tertiary">
+          <ShareButton shareLink={shareLink} />
+          <Button
+            size="sm"
+            variant="tertiary"
+            onClick={() =>
+              navigate(generatePath(ROUTE.billDetail, { groupToken }))
+            }
+          >
             정산 내역 확인하기
           </Button>
         </ButtonGroup>
