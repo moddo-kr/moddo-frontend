@@ -17,7 +17,7 @@ import {
 import StarChip from '@/common/components/StarChip';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
-import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
+// import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
 
