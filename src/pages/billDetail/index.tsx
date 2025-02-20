@@ -12,7 +12,11 @@ import * as S from './index.styles';
 import ExpenseTimeline from './components/ExpenseTimeline';
 
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
+import Divider from '@/common/components/Divider';
 
+/** Mock 데이터 */
+const MEMBER_TOTAL = 6 as number;
+const MEMBER_DONE = 3 as number;
 
 function BillDetail() {
   const { unit } = useTheme();
@@ -40,8 +44,11 @@ function BillDetail() {
         bgColor={theme.color.semantic.background.normal.alternative}
       />
       <S.Content>
-        <ExpenseTimeHeader />
-        
+        <ExpenseTimeHeader
+          totalMember={MEMBER_TOTAL}
+          paidMember={MEMBER_DONE}
+        />
+        <Divider />
         <S.TabListContainer>
           <TabsList activeTab={activeTab} setActiveTab={setActiveTab}>
             <Tab label="참여자별 정산" value="member" />
