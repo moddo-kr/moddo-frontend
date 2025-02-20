@@ -9,9 +9,11 @@ export const TitleContainer = styled.div`
 export const CharacterContainer = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow-y: auto;
+  flex: 1;
 `;
 
 // 다운로드 되는 회색 영역을 포함한 캐릭터 카드

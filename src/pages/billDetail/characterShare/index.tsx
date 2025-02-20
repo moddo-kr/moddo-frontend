@@ -18,6 +18,7 @@ import StarChip from '@/common/components/StarChip';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
 import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
 
 const data: CharacterData = {
@@ -93,11 +94,18 @@ function CharacterShare() {
             </Text>
           </S.CharacterCard>
         </S.CharacterCardContainer>
+        <Button
+          variant="text"
+          onClick={handleDownload}
+          style={{ marginBottom: unit[20] }}
+        >
+          <Download width={unit[20]} />
+          <Text>이미지 저장</Text>
+        </Button>
       </S.CharacterContainer>
-      <Button variant="text" onClick={handleDownload}>
-        <Download width={unit[20]} />
-        <Text>이미지 저장</Text>
-      </Button>
+      <BottomButtonContainer>
+        <Button>공유하기</Button>
+      </BottomButtonContainer>
     </>
   );
 }
