@@ -1,3 +1,4 @@
+import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
@@ -22,7 +23,8 @@ function EditExpenseStep({
 }: EditExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray(initialExpense);
-  const mutation = useUpdateExpense({ moveToNextStep });
+  const { groupToken } = useLoaderData();
+  const mutation = useUpdateExpense({ moveToNextStep, groupToken });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -53,9 +55,8 @@ function EditExpenseStep({
         <S.BottomButton
           type="button"
           onClick={handleSubmit((data) =>
-            // TODO : 그룹 토큰을 받아오는 로직 추가
             mutation.mutate({
-              groupToken: 'group-token',
+              groupToken,
               data: data.expenses[0],
               expenseId: id,
             })

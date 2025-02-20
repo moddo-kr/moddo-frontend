@@ -1,3 +1,4 @@
+import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
@@ -19,11 +20,12 @@ function ExpenseCard({
   memberExpenses,
   moveToEditStep,
 }: ExpenseCardProps) {
-  const mutation = useDeleteMutation();
+  const { groupToken } = useLoaderData();
+  const mutation = useDeleteMutation(groupToken);
 
   const handleDelete = () => {
     mutation.mutate({
-      groupToken: 'groupToken', // TODO : groupToken 추가 필요함
+      groupToken,
       expenseId: id,
     });
   };
@@ -43,13 +45,7 @@ function ExpenseCard({
                     amount,
                     content,
                     date,
-                    memberExpenses: memberExpenses.map((member) => ({
-                      memberId: member.id,
-                      name: member.name,
-                      amount: member.amount,
-                      profile: member.profile,
-                      role: member.role,
-                    })),
+                    memberExpenses,
                   },
                 });
               }}

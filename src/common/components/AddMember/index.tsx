@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,11 +17,6 @@ const MemberSchema = z.object({
 
 interface AddMemberProps {
   members: Member[]; // (required) 멤버 목록
-  setMembers?:
-    | Dispatch<SetStateAction<Member[]>>
-    | ((members: Member[]) => void); // (option) 멤버 목록을 직접 업데이트하는 함수
-  onAddName?: (name: string) => void; // (option) 이름 입력 후 추가하기 버튼을 처리하는 함수
-  onDeleteMember?: (id: number) => void; // (option) 멤버 삭제 버튼을 처리하는 함수
 }
 
 function AddMember({ members }: AddMemberProps) {
@@ -69,7 +63,12 @@ function AddMember({ members }: AddMemberProps) {
                 required: '이름을 입력해주세요',
               })}
             />
-            <Button variant="secondary" size="md" disabled={!formState.isValid}>
+            <Button
+              type="submit"
+              variant="secondary"
+              size="md"
+              disabled={!formState.isValid}
+            >
               추가하기
             </Button>
           </InputGroup>

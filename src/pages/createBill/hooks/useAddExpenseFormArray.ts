@@ -41,7 +41,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
           {
             ...defaultValues,
             memberExpenses: groupData.members.map((member) => ({
-              memberId: member.id,
+              id: member.id,
               name: member.name,
               amount: 0,
               profile: member.profile,
@@ -59,7 +59,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
     return {
       ...defaultValues,
       memberExpenses: groupInfo.members.map((member) => ({
-        memberId: member.id,
+        id: member.id,
         name: member.name,
         amount: 0,
         profile: member.profile,
