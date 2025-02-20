@@ -29,9 +29,7 @@ const expense = {
     groupToken: string;
     expenseId: number;
   }): Promise<void> =>
-    axiosInstance.delete(`/expenses/${expenseId}?groupToken=${groupToken}`, {
-      useMock: true,
-    }),
+    axiosInstance.delete(`/expenses/${expenseId}?groupToken=${groupToken}`),
   // PUT updateExpense
   update: ({
     groupToken,
