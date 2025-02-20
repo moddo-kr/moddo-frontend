@@ -9,8 +9,9 @@ import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 import ModdoFace from '@/assets/pngs/moddoFace.png';
-import * as S from './index.styles';
 import ExpenseTimeline from './components/ExpenseTimeline';
+import CharacterBottomSheet from './components/CharacterBottomSheet';
+import * as S from './index.styles';
 
 const MEMBER_TOTAL = 6 as number;
 const MEMBER_DONE = 3 as number;
@@ -20,6 +21,7 @@ function BillDetail() {
   const { unit } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData } = useLoaderData();
+  const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   // TODO : 필요하다면 useQuery의 initialData에 groupData를 넣어서 사용
   const theme = useTheme();
   const percentage = (MEMBER_DONE / MEMBER_TOTAL) * 100;
@@ -45,7 +47,11 @@ function BillDetail() {
       />
       <S.Content>
         <CurvedProgressBar percentage={percentage}>
-          <S.ModdoImage src={ModdoFace} />
+          {/* TODO : 캐릭터 바텀시트 오픈 트리거 위치 확인 */}
+          <S.ModdoImage
+            src={ModdoFace}
+            onClick={() => setOpenBottomSheet(true)}
+          />
           <S.ExpenseChip>
             <DollarCircle
               width="32"
@@ -78,6 +84,10 @@ function BillDetail() {
       <BottomButtonContainer>
         <Button>링크 공유하기</Button>
       </BottomButtonContainer>
+      <CharacterBottomSheet
+        open={openBottomSheet}
+        setOpen={setOpenBottomSheet}
+      />
     </>
   );
 }
