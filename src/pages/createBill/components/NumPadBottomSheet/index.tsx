@@ -25,15 +25,12 @@ function NumPadBottomSheet({
 
   return (
     <>
-      {/* <S.ValueWrapper onClick={() => setOpen(true)}> */}
-      {/* FIXME : placeholder가 보이지 않는 문제 해결 필요함 */}
       <NumberInput
         onClick={() => setOpen(true)}
         value={initialValue ? initialValue.toLocaleString() : ''}
         placeholder="금액 입력"
         readOnly
       />
-      {/* </S.ValueWrapper> */}
       <BottomSheet open={open} setOpen={setOpen}>
         <S.NumPadContainer>
           <S.Header>
