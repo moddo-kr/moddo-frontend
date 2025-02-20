@@ -20,16 +20,16 @@ import Text from '@/common/components/Text';
 import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
 import * as S from './index.styles';
 
-// const data: CharacterData = {
-//   name: 'angel',
-//   rarity: 2,
-//   imageUrl: characterImageUrl,
-//   imageBigUrl: characterImageUrl,
-// };
+const data: CharacterData = {
+  name: 'angel',
+  rarity: 2,
+  imageUrl: characterImageUrl,
+  imageBigUrl: characterImageUrl,
+};
 
 function CharacterShare() {
   // const { groupToken } = useLoaderData();
-  const { data, isLoading, isError } = useGetRandomCharacter();
+  // const { data, isLoading, isError } = useGetRandomCharacter();
   const navigate = useNavigate();
   const { unit } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
@@ -51,9 +51,9 @@ function CharacterShare() {
     }
   };
 
-  if (isLoading || isError || !data) {
-    return null;
-  }
+  // if (isLoading || isError || !data) {
+  //   return null;
+  // }
 
   return (
     <>
