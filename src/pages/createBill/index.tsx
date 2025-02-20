@@ -7,6 +7,7 @@ import AddAccountStep from './addAccountStep';
 import ShareStep from './shareStep';
 import AddExpenseStep from './addExpenseStep';
 import EditExpenseStep from './editExpenseStep';
+import QrStep from './qrStep';
 
 const funnelSteps: FunnelStep<BillContext>[] = [
   {
@@ -33,6 +34,10 @@ const funnelSteps: FunnelStep<BillContext>[] = [
   },
   {
     name: 'SHARE',
+    requiredFields: [],
+  },
+  {
+    name: 'QR',
     requiredFields: [],
   },
 ];
@@ -81,7 +86,14 @@ function CreateBill() {
         />
       );
     case 'SHARE':
-      return <ShareStep moveToPreviousStep={moveToPreviousStep} />;
+      return (
+        <ShareStep
+          moveToPreviousStep={moveToPreviousStep}
+          moveToNextStep={moveToNextStep}
+        />
+      );
+    case 'QR':
+      return <QrStep moveToPreviousStep={moveToPreviousStep} />;
     default:
       return null;
   }

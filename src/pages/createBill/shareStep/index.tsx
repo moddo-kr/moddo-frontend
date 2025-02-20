@@ -19,7 +19,7 @@ import * as S from './index.styles';
 
 interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
-function ShareStep({ moveToPreviousStep }: ShareStepProps) {
+function ShareStep({ moveToPreviousStep, moveToNextStep }: ShareStepProps) {
   const { groupToken } = useLoaderData();
   const navigate = useNavigate();
   useEffect(() => {
@@ -42,6 +42,9 @@ function ShareStep({ moveToPreviousStep }: ShareStepProps) {
           moveToPreviousStep?.();
         }}
         rightButtonContent={<Text>QR코드 만들기</Text>}
+        rightButtonOnClick={() => {
+          moveToNextStep?.();
+        }}
       />
       <DescriptionField
         title={`참여자에게 링크를\n공유하면 요청이 완료돼요!`}
