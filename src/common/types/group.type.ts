@@ -1,3 +1,4 @@
+import { Group } from '@chakra-ui/react';
 import { Member } from './member.type';
 
 export interface Group {
@@ -19,3 +20,12 @@ export interface AccountVariable {
   bank: string;
   accountNumber: string;
 }
+
+export interface GroupHeaderResponse {
+  groupName: string;
+  totalAmount: number;
+  deadline: Date;
+  bank: string;
+  accountNumber: string;
+}
+
