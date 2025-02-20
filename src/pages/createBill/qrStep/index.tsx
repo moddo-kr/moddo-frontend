@@ -1,4 +1,7 @@
+import { useLoaderData } from 'react-router';
+import { QRCodeSVG } from 'qrcode.react';
 import { ArrowLeft, Reset } from '@/assets/svgs/icon';
+import generateShareLink from '@/common/utils/generateShareLink';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import Header from '@/common/components/Header';
 import Button from '@/common/components/Button';
@@ -10,6 +13,10 @@ import * as S from './index.styles';
 interface QrStepProps extends BaseFunnelStepComponentProps<BillContext> {}
 
 function QrStep({ moveToPreviousStep }: QrStepProps) {
+  const { groupToken } = useLoaderData();
+
+  const shareLink = generateShareLink(groupToken);
+
   return (
     <>
       <Header
@@ -24,7 +31,12 @@ function QrStep({ moveToPreviousStep }: QrStepProps) {
       <DescriptionField
         title={`QR코드를 공유하면\n바로 정산에 참여할 수 있어요!`}
       />
-      <S.QrField>QR field</S.QrField>
+      <S.QrContainer>
+        <S.QrField>
+          {/* QR 코드 자체의 size = 160px */}
+          <QRCodeSVG size={160} value={shareLink} />
+        </S.QrField>
+      </S.QrContainer>
       <BottomButtonContainer>
         <Button>다운로드</Button>
       </BottomButtonContainer>
