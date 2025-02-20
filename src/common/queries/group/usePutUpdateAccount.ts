@@ -11,13 +11,20 @@ interface AccountData {
   accountNumber: string;
 }
 
-const usePutUpdateAccount = () => {
+const usePutUpdateAccount = (groupToken: string) => {
   const queryClient = useQueryClient();
 
-  return useMutation<AccountData, Error, AccountVariable>({
+  return useMutation<
+    AccountData,
+    Error,
+    {
+      accountData: AccountVariable;
+      groupToken: string;
+    }
+  >({
     mutationFn: (variable) => group.put(variable),
     onSuccess: (data) => {
-      queryClient.setQueryData(['groupAccount'], data);
+      queryClient.setQueryData(['groupAccount', groupToken], data);
     },
     onError: (error) => {
       console.error('Error updating account:', error);

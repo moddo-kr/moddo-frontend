@@ -16,14 +16,16 @@ const group = {
     return response.data;
   },
 
-  put: async (accountData: AccountVariable) => {
-    const groupToken = localStorage.getItem('groupToken');
+  put: async ({
+    accountData,
+    groupToken,
+  }: {
+    accountData: AccountVariable;
+    groupToken: string;
+  }) => {
     const response = await axiosInstance.put(
       `/group/account?groupToken=${groupToken}`,
-      accountData,
-      {
-        useMock: true,
-      }
+      accountData
     );
     console.log(response);
     return response.data;
