@@ -9,48 +9,50 @@ import Text from '@/common/components/Text';
 import * as S from './index.style';
 import { StatusContent, StatusType } from './index.type';
 import React from 'react';
+import { getFormatDate } from '../../utils/getFormatDate';
+import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
+import { useParams, useSearchParams } from 'react-router';
 
-const MEMBER_TOTAL = 6 as number;
-const MEMBER_DONE = 3 as number;
-const TOTAL_MONEY = 120000;
-const END_DATE = new Date('2025-02-21T02:10:05.448428');
-const BankNumber = '11012341234' as string;
+/** mockData */
+//const TOTAL_MONEY = 120000;
+//const END_DATE = new Date('2025-02-21T02:10:05.448428');
+//const BankNumber = '11012341234' as string;
 
-function ExpenseTimeHeader() {
+interface ExpenseTimeHeaderProps {
+  totalMember: number;
+  paidMember: number;
+}
+
+function ExpenseTimeHeader({
+  totalMember,
+  paidMember,
+}: ExpenseTimeHeaderProps) {
   const [status, setStatus] = useState<StatusType>('pending');
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-
+  const { groupToken } = useParams<{ groupToken: string }>();
   const theme = useTheme();
-  const percentage = (MEMBER_DONE / MEMBER_TOTAL) * 100;
-  const crownColor =
-    MEMBER_DONE === MEMBER_TOTAL
-      ? theme.color.primitive.base.white
-      : theme.color.semantic.secondary.heavy;
-
-  const getFormatDate = (date: Date) => {
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
-    // "MM-DD HH:mm" 형식으로 반환
-    return `${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-  };
+  /** API 호출 관련 로직 */
+  const {
+    data: headerData,
+    isLoading,
+    isError,
+  } = useGetGroupHeader(groupToken!);
 
   /** @Todo 커스텀 훅으로 분리 */
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const timeDifference = END_DATE.getTime() - now.getTime();
+      const endDate = new Date(headerData!.deadline);
+      const timeDifference = endDate.getTime() - now.getTime();
       // 타이머 종료
       if (timeDifference <= 0) {
         setHours(0);
         setMinutes(0);
         setSeconds(0);
-        if (MEMBER_TOTAL === MEMBER_DONE) {
+        if (totalMember === paidMember) {
           setStatus('success');
           setIsBubble(true);
         } else {
@@ -71,7 +73,24 @@ function ExpenseTimeHeader() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []); // 의존성 배열에 endDate 추가 -> endDate가 있어야 타이머가 동작
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
+  if (isError || !headerData) {
+    return <div>error...</div>;
+  }
+
+  /** 상수 정의 */
+
+  const percentage = (paidMember / totalMember) * 100;
+  const crownColor =
+    paidMember === totalMember
+      ? theme.color.primitive.base.white
+      : theme.color.semantic.secondary.heavy;
+  const endDate = new Date(headerData.deadline);
 
   const handleModdoButtonClick = () => {
     /** @Todo success 시의 action 추가 정의 */
@@ -87,14 +106,14 @@ function ExpenseTimeHeader() {
         title={
           <Flex direction="column">
             <Text color="semantic.orange.default" variant="heading2">
-              {getFormatDate(END_DATE)}까지
+              {getFormatDate(endDate)}까지
             </Text>
             <Text variant="heading2">정산을 완료해주세요</Text>
           </Flex>
         }
         sub={
           <Flex gap={theme.unit[4]} alignItems="center">
-            정산 계좌: {BankNumber}
+            정산 계좌: {headerData.accountNumber}
             <Copy width={theme.unit[16]} height={theme.unit[16]} />
           </Flex>
         }
@@ -111,16 +130,18 @@ function ExpenseTimeHeader() {
             style={{ paddingRight: `${theme.unit[8]}` }}
           />
           <Text as="p" variant="body1Sb" color="semantic.orange.default">
-            {MEMBER_DONE}
+            {paidMember}
           </Text>
-          {`/${MEMBER_TOTAL} 정산 완료`}
+          {`/${totalMember} 정산 완료`}
         </S.ExpenseChip>
         <Crown
           width={theme.unit[24]}
           fill={crownColor}
           style={{ position: 'absolute', top: '44.5%', right: '1.5%' }}
         />
-        <S.TotalMoney>{TOTAL_MONEY.toLocaleString('ko-KR')}원</S.TotalMoney>
+        <S.TotalMoney>
+          {((headerData?.totalAmount ?? 0)).toLocaleString('ko-KR')}원
+        </S.TotalMoney>
       </CurvedProgressBar>
       <Flex
         direction={'column'}
@@ -152,7 +173,7 @@ function ExpenseTimeHeader() {
                 )
               )}
             </Flex>
-            <Flex justifyContent="space-between" width="100%" pl={3} pr={3}>
+            <Flex justifyContent="space-between" width="100%" pl={2.5} pr={2.5}>
               {['시', '분', '초'].map((label) => (
                 <Text key={label} color="semantic.text.subtle">
                   {label}
