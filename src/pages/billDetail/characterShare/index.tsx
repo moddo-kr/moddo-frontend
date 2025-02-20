@@ -17,18 +17,19 @@ import {
 import StarChip from '@/common/components/StarChip';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
+import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
 import * as S from './index.styles';
 
-const DUMMY_CHARACTER_DATA: CharacterData = {
-  name: 'angel',
-  rarity: 2,
-  imageUrl: characterImageUrl,
-  imageBigUrl: characterImageUrl,
-};
+// const data: CharacterData = {
+//   name: 'angel',
+//   rarity: 2,
+//   imageUrl: characterImageUrl,
+//   imageBigUrl: characterImageUrl,
+// };
 
 function CharacterShare() {
   // const { groupToken } = useLoaderData();
-  // 캐릭터를 받아오는 로직
+  const { data, isLoading, isError } = useGetRandomCharacter();
   const navigate = useNavigate();
   const { unit } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
@@ -39,7 +40,7 @@ function CharacterShare() {
       toPng(imageRef.current, { width: 440, height: 440 })
         .then((dataUrl) => {
           // 이미지 다운로드
-          saveAs(dataUrl, `${DUMMY_CHARACTER_DATA.name}.png`);
+          saveAs(dataUrl, `${data.name}.png`);
         })
         .catch(() => {
           showToast({
@@ -49,6 +50,10 @@ function CharacterShare() {
         });
     }
   };
+
+  if (isLoading || isError || !data) {
+    return null;
+  }
 
   return (
     <>
@@ -65,21 +70,21 @@ function CharacterShare() {
       <S.CharacterContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
-            <StarChip star={DUMMY_CHARACTER_DATA.rarity} />
+            <StarChip star={data.rarity} />
             <S.CharacterImageContainer>
               <img
-                src={DUMMY_CHARACTER_DATA.imageBigUrl}
-                alt={CHARACTER_NAME[DUMMY_CHARACTER_DATA.name]}
+                src={data.imageBigUrl}
+                alt={CHARACTER_NAME[data.name]}
                 style={{
-                  ...CHARACTER_IMAGE_SIZE[DUMMY_CHARACTER_DATA.name].big,
+                  ...CHARACTER_IMAGE_SIZE[data.name].big,
                 }}
               />
             </S.CharacterImageContainer>
             <Text variant="heading2" color="semantic.text.strong">
-              {CHARACTER_NAME[DUMMY_CHARACTER_DATA.name]}
+              {CHARACTER_NAME[data.name]}
             </Text>
             <Text variant="body1R" color="semantic.text.subtle">
-              {CHARACTER_DESCRIPTION[DUMMY_CHARACTER_DATA.name]}
+              {CHARACTER_DESCRIPTION[data.name]}
             </Text>
           </S.CharacterCard>
         </S.CharacterCardContainer>
