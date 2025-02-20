@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 // eslint-disable-next-line import/no-absolute-path
 import characterImageUrl from '/pngs/angle-moddo.png';
-import { ArrowLeft } from '@/assets/svgs/icon';
+import { ArrowLeft, Download } from '@/assets/svgs/icon';
 import { CharacterData } from '@/common/types/character';
 import {
   CHARACTER_NAME,
@@ -37,6 +37,7 @@ function CharacterShare() {
   const handleDownload = () => {
     // 돔 요소를 이미지로 변환
     if (imageRef.current) {
+      // 440x440 사이즈로 이미지 다운로드
       toPng(imageRef.current, { width: 440, height: 440 })
         .then((dataUrl) => {
           // 이미지 다운로드
@@ -90,7 +91,8 @@ function CharacterShare() {
         </S.CharacterCardContainer>
       </S.CharacterContainer>
       <Button variant="text" onClick={handleDownload}>
-        이미지 저장
+        <Download width={unit[20]} />
+        <Text>이미지 저장</Text>
       </Button>
     </>
   );
