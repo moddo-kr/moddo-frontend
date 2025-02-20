@@ -13,7 +13,11 @@ interface CurvedProgressBarProps {
   children?: ReactNode;
 }
 
-function CurvedProgressBar({ percentage, children, ...rest }: CurvedProgressBarProps) {
+function CurvedProgressBar({
+  percentage,
+  children,
+  ...rest
+}: CurvedProgressBarProps) {
   const theme = useTheme();
 
   return (

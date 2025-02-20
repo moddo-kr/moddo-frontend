@@ -5,7 +5,11 @@ interface DividerProps {
 }
 
 function Divider({ height = 8 }: DividerProps) {
-  return <div><S.Divider height={height} /></div>;
+  return (
+    <div>
+      <S.Divider height={height} />
+    </div>
+  );
 }
 
 export default Divider;

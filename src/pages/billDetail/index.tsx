@@ -8,11 +8,11 @@ import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 
+import Divider from '@/common/components/Divider';
 import * as S from './index.styles';
 import ExpenseTimeline from './components/ExpenseTimeline';
 
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
-import Divider from '@/common/components/Divider';
 
 /** Mock 데이터 */
 const MEMBER_TOTAL = 6 as number;

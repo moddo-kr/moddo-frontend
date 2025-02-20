@@ -6,9 +6,9 @@ export type StatusType = 'pending' | 'success' | 'failure';
 export type StatusInfo = {
   message: string;
   image: string;
-}
+};
 
-export const StatusContent : Record<StatusType, StatusInfo> = {
+export const StatusContent: Record<StatusType, StatusInfo> = {
   pending: {
     message: '마감 전에 정산하면, 귀여운 캐릭터가 뿅!',
     image: ModdoFace,
@@ -21,4 +21,4 @@ export const StatusContent : Record<StatusType, StatusInfo> = {
     message: '정산 마감 시간이 초과되었어요',
     image: CryingModdoFace,
   },
-}
+};

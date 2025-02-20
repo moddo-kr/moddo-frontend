@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 
 import DescriptionField from '@/common/components/DescriptionField';
@@ -6,17 +6,16 @@ import { Flex } from '@chakra-ui/react';
 import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
+import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
+import { useParams } from 'react-router';
 import * as S from './index.style';
 import { StatusContent, StatusType } from './index.type';
-import React from 'react';
 import { getFormatDate } from '../../utils/getFormatDate';
-import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
-import { useParams, useSearchParams } from 'react-router';
 
 /** mockData */
-//const TOTAL_MONEY = 120000;
-//const END_DATE = new Date('2025-02-21T02:10:05.448428');
-//const BankNumber = '11012341234' as string;
+// const TOTAL_MONEY = 120000;
+// const END_DATE = new Date('2025-02-21T02:10:05.448428');
+// const BankNumber = '11012341234' as string;
 
 interface ExpenseTimeHeaderProps {
   totalMember: number;
@@ -43,6 +42,8 @@ function ExpenseTimeHeader({
 
   /** @Todo 커스텀 훅으로 분리 */
   useEffect(() => {
+    if (!headerData) return () => {};
+
     const interval = setInterval(() => {
       const now = new Date();
       const endDate = new Date(headerData!.deadline);
@@ -61,19 +62,20 @@ function ExpenseTimeHeader({
         }
         clearInterval(interval);
       } else {
-        const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-        const minutes = Math.floor(
+        const newHours = Math.floor(timeDifference / (1000 * 60 * 60));
+        const newMinutes = Math.floor(
           (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
         );
-        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        setHours(hours);
-        setMinutes(minutes);
-        setSeconds(seconds);
+        const newSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        setHours(newHours);
+        setMinutes(newMinutes);
+        setSeconds(newSeconds);
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []); // 의존성 배열에 endDate 추가 -> endDate가 있어야 타이머가 동작
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [headerData]);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -140,11 +142,11 @@ function ExpenseTimeHeader({
           style={{ position: 'absolute', top: '44.5%', right: '1.5%' }}
         />
         <S.TotalMoney>
-          {((headerData?.totalAmount ?? 0)).toLocaleString('ko-KR')}원
+          {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>
       </CurvedProgressBar>
       <Flex
-        direction={'column'}
+        direction="column"
         pl={theme.unit[20]}
         pr={theme.unit[20]}
         gap={theme.unit[12]}
@@ -153,10 +155,11 @@ function ExpenseTimeHeader({
           정산 마감까지 남은 시간
         </Text>
         <S.TimeBox>
-          <Flex direction="column" width={174} alignItems={'center'}>
+          <Flex direction="column" width={174} alignItems="center">
             <Flex justifyContent="center" alignItems="center">
               {([hours, minutes, seconds] as number[]).map(
                 (time, index, arr) => (
+                  // eslint-disable-next-line react/no-array-index-key
                   <React.Fragment key={index}>
                     <Text
                       variant="heading1"

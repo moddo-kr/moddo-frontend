@@ -67,13 +67,13 @@ export const TimeSep = styled.span`
 
 export const Bubble = styled.div`
   position: absolute;
-  height: ${({theme})=> theme.unit[40]};
+  height: ${({ theme }) => theme.unit[40]};
   top: 10%;
-  background: ${({theme})=> theme.color.semantic.icon.subtle};
-  border-radius: ${({theme})=> theme.radius.default};
-  color: ${({theme})=> theme.color.semantic.text.inverse};
+  background: ${({ theme }) => theme.color.semantic.icon.subtle};
+  border-radius: ${({ theme }) => theme.radius.default};
+  color: ${({ theme }) => theme.color.semantic.text.inverse};
   font-size: ${TextVariant('body1Sb')};
-  padding: ${({theme})=> `${theme.unit[10]} ${theme.unit[12]}`};
+  padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[12]}`};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,9 +83,9 @@ export const Bubble = styled.div`
     bottom: -10px; /* 꼬리가 말풍선 아래에 위치하도록 */
     left: 50%;
     transform: translateX(-50%);
-    border-width: ${({theme})=> `${theme.unit[14]} ${theme.unit[10]} 0`};
+    border-width: ${({ theme }) => `${theme.unit[14]} ${theme.unit[10]} 0`};
     border-style: solid;
-    border-color: ${({ theme }) =>
-      theme.color.semantic.icon.subtle} transparent transparent;
+    border-color: ${({ theme }) => theme.color.semantic.icon.subtle} transparent
+      transparent;
   }
 `;
