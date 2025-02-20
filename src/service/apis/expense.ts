@@ -10,9 +10,7 @@ const expense = {
   // GET getAllExpense
   getAll: (groupToken: string): Promise<ExpenseList> =>
     axiosInstance
-      .get(`/expenses?groupToken=${groupToken}`, {
-        useMock: true,
-      })
+      .get(`/expenses?groupToken=${groupToken}`)
       .then((res) => res.data),
   // POST createExpenses
   create: ({
@@ -22,9 +20,7 @@ const expense = {
     groupToken: string;
     data: ExpenseForm;
   }): Promise<void> =>
-    axiosInstance.post(`/expenses?groupToken=${groupToken}`, data, {
-      useMock: true,
-    }),
+    axiosInstance.post(`/expenses?groupToken=${groupToken}`, data),
   // DELETE deleteByExpenseId
   delete: ({
     groupToken,
@@ -33,9 +29,7 @@ const expense = {
     groupToken: string;
     expenseId: number;
   }): Promise<void> =>
-    axiosInstance.delete(`/expenses/${expenseId}?groupToken=${groupToken}`, {
-      useMock: true,
-    }),
+    axiosInstance.delete(`/expenses/${expenseId}?groupToken=${groupToken}`),
   // PUT updateExpense
   update: ({
     groupToken,
@@ -46,15 +40,11 @@ const expense = {
     expenseId: number;
     data: SingleExpenseForm;
   }): Promise<void> =>
-    axiosInstance.put(`/expenses/${expenseId}?groupToken=${groupToken}`, data, {
-      useMock: true,
-    }),
+    axiosInstance.put(`/expenses/${expenseId}?groupToken=${groupToken}`, data),
   // GET getExpenseDetailsByGroupId
   getDetail: (groupToken: string): Promise<ExpenseDetailList> =>
     axiosInstance
-      .get(`expenses/details?groupToken=${groupToken}`, {
-        useMock: true,
-      })
+      .get(`expenses/details?groupToken=${groupToken}`)
       .then((res) => res.data),
 };
 

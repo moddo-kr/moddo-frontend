@@ -1,3 +1,4 @@
+import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import { Button, Flex, Input, useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
@@ -14,10 +15,11 @@ function AddAccountStep({
   moveToPreviousStep,
   moveToNextStep,
 }: AddAccountStepProps) {
+  const { groupToken } = useLoaderData();
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
-  const { mutate: updateAccountMutate } = usePutUpdateAccount();
+  const { mutate: updateAccountMutate } = usePutUpdateAccount(groupToken);
 
   const handleBankInputClick = () => {
     onOpen();
@@ -25,7 +27,13 @@ function AddAccountStep({
 
   const handleNextButtonClick = () => {
     updateAccountMutate(
-      { bank: bankName, accountNumber },
+      {
+        accountData: {
+          bank: bankName,
+          accountNumber,
+        },
+        groupToken,
+      },
       {
         onSuccess: () => {
           moveToNextStep?.();
