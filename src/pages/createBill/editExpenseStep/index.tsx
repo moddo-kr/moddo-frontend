@@ -5,16 +5,18 @@ import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import FormCard from '@/pages/createBill/components/FormCard';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
-import { Expense } from '@/pages/createBill/types/expense.type';
+import { SingleExpenseForm } from '@/pages/createBill/types/expense.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import * as S from './index.styles';
 
 interface EditExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {
-  initialExpense: Expense;
+  id: number;
+  initialExpense: SingleExpenseForm;
 }
 
 function EditExpenseStep({
+  id,
   initialExpense,
   moveToNextStep,
 }: EditExpenseStepProps) {
@@ -55,7 +57,7 @@ function EditExpenseStep({
             mutation.mutate({
               groupToken: 'group-token',
               data: data.expenses[0],
-              expenseId: initialExpense.id,
+              expenseId: id,
             })
           )}
           disabled={!allFormsValid}

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { checkAuth, groupTokenUrlLoader } from '@/common/loaders';
 import { ROUTE } from '@/common/constants/route';
+import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
 import SelectGroup from '@/pages/selectGroup';
 import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
 import PasswordSetup from '@/pages/groupSetup/passwordSetup';
@@ -48,12 +49,12 @@ function AppRouter() {
     {
       path: ROUTE.groupSetupMember,
       element: <MemberSetup />,
-      loader: checkAuth,
+      loader: getGroupManagerAuth,
     },
     {
       path: ROUTE.createBill,
       element: <CreateBill />,
-      loader: checkAuth,
+      loader: getGroupManagerAuth,
     },
     {
       path: ROUTE.billDetail,
