@@ -69,7 +69,12 @@ function AddMember({ members }: AddMemberProps) {
                 required: '이름을 입력해주세요',
               })}
             />
-            <Button variant="secondary" size="md" disabled={!formState.isValid}>
+            <Button
+              type="submit"
+              variant="secondary"
+              size="md"
+              disabled={!formState.isValid}
+            >
               추가하기
             </Button>
           </InputGroup>
