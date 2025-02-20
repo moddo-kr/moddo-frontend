@@ -42,11 +42,15 @@ function CharacterShare() {
         .then((dataUrl) => {
           // 이미지 다운로드
           saveAs(dataUrl, `${data.name}.png`);
+          showToast({
+            type: 'success',
+            content: '이미지 저장 완료!',
+          });
         })
         .catch(() => {
           showToast({
             type: 'error',
-            content: 'QR코드 다운로드에 실패했어요.',
+            content: '이미지 저장 실패!',
           });
         });
     }
