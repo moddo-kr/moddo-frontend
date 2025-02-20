@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import expense from '@/service/apis/expense';
 
-const useDeleteMutation = () => {
+const useDeleteMutation = (groupToken: string) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: expense.delete,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : groupToken 추가 필요함
+        queryKey: ['expenses', groupToken], // TODO : groupToken 추가 필요함
       });
     },
   });

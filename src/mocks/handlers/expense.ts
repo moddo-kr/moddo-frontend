@@ -69,21 +69,18 @@ const expenseHandlers = [
         content: expense.content,
         date: expense.date,
         memberExpenses: expense.memberExpenses.map((memberExpense) => ({
-          id: memberExpense.memberId,
-          // groupmembers에서 id가 memberId와 일치하는 멤버를 찾아 반환
+          id: memberExpense.id,
+          // groupmembers에서 id가 일치하는 멤버를 찾아 반환
           name:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.name ?? '',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.name ?? '',
           amount: memberExpense.amount,
           role:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.role ?? 'PARTICIPANT',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.role ?? 'PARTICIPANT',
           profile:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.profile ?? '',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.profile ?? '',
         })),
       });
     });
@@ -177,20 +174,17 @@ const expenseHandlers = [
         content,
         date,
         memberExpenses: memberExpenses.map((memberExpense) => ({
-          id: memberExpense.memberId,
+          id: memberExpense.id,
           name:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.name ?? '',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.name ?? '',
           amount: memberExpense.amount,
           role:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.role ?? 'PARTICIPANT',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.role ?? 'PARTICIPANT',
           profile:
-            dummyGroupMembers.find(
-              (member) => member.id === memberExpense.memberId
-            )?.profile ?? '',
+            dummyGroupMembers.find((member) => member.id === memberExpense.id)
+              ?.profile ?? '',
         })),
       };
 

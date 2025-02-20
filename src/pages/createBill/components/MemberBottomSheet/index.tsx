@@ -1,36 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
+import { useLoaderData } from 'react-router';
 import { Text, Stack } from '@chakra-ui/react';
 import AddMember from '@/common/components/AddMember';
-import { Member } from '@/common/types/member.type';
-import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import BottomSheet from '@/common/components/BottomSheet';
-
-const DUMMY_MEMBERS: Member[] = [
-  {
-    id: 1,
-    role: 'MANAGER',
-    name: '김모또',
-    profile: defaultProfileImg,
-    isPaid: true,
-    paidAt: null,
-  },
-  {
-    id: 2,
-    role: 'PARTICIPANT',
-    name: '김반숙',
-    profile: defaultProfileImg,
-    isPaid: false,
-    paidAt: null,
-  },
-  {
-    id: 3,
-    role: 'PARTICIPANT',
-    name: '정에그',
-    profile: defaultProfileImg,
-    isPaid: false,
-    paidAt: null,
-  },
-];
+import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 
 interface MemberBottomSheetProps {
   open: boolean;
@@ -39,17 +12,16 @@ interface MemberBottomSheetProps {
 }
 
 function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
-  // TODO : 기존 모든 참여자를 불러오는 API 호출
+  const { groupToken } = useLoaderData();
+  const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
 
-  const handleAddName = (name: string) => {
-    // TODO : 새로운 참여자 추가 API 호출 (PUT addGroupMember)
-    console.log('새로운 참여자 추가: ', name);
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const handleDeleteMember = (memberId: number) => {
-    // TODO : 참여자 삭제 API 호출
-    console.log('참여자 삭제: ', memberId);
-  };
+  if (isError || !data) {
+    return <div>Error...</div>;
+  }
 
   return (
     <BottomSheet open={open} setOpen={setOpen}>
@@ -63,11 +35,7 @@ function MemberBottomSheet({ open, setOpen }: MemberBottomSheetProps) {
         <Text fontSize="1.25rem" fontWeight="700" color="#444950">
           참여자 추가
         </Text>
-        <AddMember
-          members={DUMMY_MEMBERS}
-          onAddName={handleAddName}
-          onDeleteMember={handleDeleteMember}
-        />
+        <AddMember members={data.members} />
       </Stack>
     </BottomSheet>
   );

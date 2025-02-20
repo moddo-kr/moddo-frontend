@@ -4,15 +4,20 @@ import expense from '@/service/apis/expense';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface UseCreateExpenseProps
-  extends Pick<BaseFunnelStepComponentProps<BillContext>, 'moveToNextStep'> {}
+  extends Pick<BaseFunnelStepComponentProps<BillContext>, 'moveToNextStep'> {
+  groupToken: string;
+}
 
-const useCreateExpense = ({ moveToNextStep }: UseCreateExpenseProps) => {
+const useCreateExpense = ({
+  moveToNextStep,
+  groupToken,
+}: UseCreateExpenseProps) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: expense.create,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
+        queryKey: ['expenses', groupToken],
       });
       moveToNextStep?.();
     },

@@ -4,15 +4,20 @@ import expense from '@/service/apis/expense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 
 interface UseUpdateExpenseProps
-  extends Pick<BaseFunnelStepComponentProps<BillContext>, 'moveToNextStep'> {}
+  extends Pick<BaseFunnelStepComponentProps<BillContext>, 'moveToNextStep'> {
+  groupToken: string;
+}
 
-const useUpdateExpense = ({ moveToNextStep }: UseUpdateExpenseProps) => {
+const useUpdateExpense = ({
+  moveToNextStep,
+  groupToken,
+}: UseUpdateExpenseProps) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: expense.update,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['expenses'], // TODO : GroupToken 추가 필요함
+        queryKey: ['expenses', groupToken],
       });
       moveToNextStep?.({ initialExpense: undefined }); // 초기화한 뒤에 다음 스텝으로 이동
     },
