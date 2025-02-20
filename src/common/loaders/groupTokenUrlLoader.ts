@@ -9,6 +9,7 @@ const groupTokenUrlLoader: LoaderFunction = async ({ params }) => {
   if (!groupToken) return redirect(ROUTE.home);
 
   // 그룹 정보 조회 API 호출 - 토큰 유효성 확인 및 데이터 조회
+  // 관리자 권한은 없어도 된다.
   const data = await group.get(groupToken);
 
   // 조회한 데이터가 없으면 리다이렉트
