@@ -40,9 +40,7 @@ const expense = {
     expenseId: number;
     data: SingleExpenseForm;
   }): Promise<void> =>
-    axiosInstance.put(`/expenses/${expenseId}?groupToken=${groupToken}`, data, {
-      useMock: true,
-    }),
+    axiosInstance.put(`/expenses/${expenseId}?groupToken=${groupToken}`, data),
   // GET getExpenseDetailsByGroupId
   getDetail: (groupToken: string): Promise<ExpenseDetailList> =>
     axiosInstance
