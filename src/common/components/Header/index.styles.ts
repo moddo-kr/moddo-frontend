@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HeaderArea = styled.header`
+export const HeaderArea = styled.header<{$bgColor?: string}>`
   display: flex;
   align-items: center;
   position: sticky;
@@ -13,6 +13,7 @@ export const HeaderArea = styled.header`
   min-width: 320px;
   max-height: 64px;
   height: 100%;
+  background-color: ${({$bgColor}) => $bgColor ? $bgColor : 'white'};
 `;
 
 export const LeftHeaderArea = styled(HeaderArea)`
