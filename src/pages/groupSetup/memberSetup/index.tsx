@@ -2,8 +2,6 @@ import { Button, Flex } from '@chakra-ui/react';
 import { useLoaderData, useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
 import AddMember from '@/common/components/AddMember';
-import { Member } from '@/common/types/member.type';
-import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { ROUTE } from '@/common/constants/route';
 import * as S from '../index.styles';
@@ -12,18 +10,6 @@ export interface ParticipantProfile {
   name: string;
   profileImgUrl: string;
 }
-
-// 비회원 총무 정보
-const defaultMembers: Member[] = [
-  {
-    id: Date.now(),
-    name: '김모또(총무)',
-    role: 'MANAGER',
-    profile: defaultProfileImg,
-    isPaid: true,
-    paidAt: null,
-  },
-];
 
 function MemberSetup() {
   const navigate = useNavigate();
@@ -61,8 +47,7 @@ function MemberSetup() {
             <br />
             참여자를 추가해주세요.
           </S.TitleText>
-          {/* NOTE : 현재는 그룹 생성 직후에 모임에 총무 데이터가 없어 임의로 넣어줘야 합니다! */}
-          <AddMember members={[...data.members.reverse(), ...defaultMembers]} />
+          <AddMember members={data.members.reverse()} />
         </Flex>
         <Button
           height={12}
