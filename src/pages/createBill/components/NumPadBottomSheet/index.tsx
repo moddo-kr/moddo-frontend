@@ -29,7 +29,7 @@ function NumPadBottomSheet({
       {/* FIXME : placeholder가 보이지 않는 문제 해결 필요함 */}
       <NumberInput
         onClick={() => setOpen(true)}
-        defaultValue={initialValue ? initialValue.toLocaleString() : ''}
+        value={initialValue ? initialValue.toLocaleString() : ''}
         placeholder="금액 입력"
         readOnly
       />
