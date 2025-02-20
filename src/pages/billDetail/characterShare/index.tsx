@@ -104,7 +104,8 @@ function CharacterShare() {
         </Button>
       </S.CharacterContainer>
       <BottomButtonContainer>
-        <Button>공유하기</Button>
+        {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
+        <Button onClick={() => navigate(-1)}>돌아가기</Button>
       </BottomButtonContainer>
     </>
   );
