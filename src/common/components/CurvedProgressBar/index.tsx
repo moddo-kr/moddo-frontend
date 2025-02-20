@@ -13,17 +13,17 @@ interface CurvedProgressBarProps {
   children?: ReactNode;
 }
 
-function CurvedProgressBar({ percentage, children }: CurvedProgressBarProps) {
+function CurvedProgressBar({ percentage, children, ...rest }: CurvedProgressBarProps) {
   const theme = useTheme();
 
   return (
-    <S.Wrapper>
+    <S.Wrapper {...rest}>
       <ChangingProgressProvider values={[0, percentage]}>
         {(value) => (
           <CircularProgressbarWithChildren
             value={value}
             circleRatio={0.5}
-            strokeWidth={11}
+            strokeWidth={10.5}
             styles={buildStyles({
               rotation: 1 / 2 + 1 / 4,
               strokeLinecap: 'round',
