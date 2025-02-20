@@ -24,27 +24,22 @@ export const CHARACTER_IMAGE_SIZE: Record<
   angel: {
     big: {
       width: '15rem',
-      height: '14.25rem',
     },
     small: {
       width: '12rem',
-      height: '9.70538rem',
     },
   },
   lucky: {
     big: {
       width: '12.5rem',
-      height: '12.5rem',
     },
     small: {
       width: '10rem',
-      height: '10rem',
     },
   },
   strawberry: {
     big: {
       width: '12.5rem',
-      height: '12.5rem',
     },
     small: {
       width: '10rem',
@@ -54,21 +49,25 @@ export const CHARACTER_IMAGE_SIZE: Record<
   sleep: {
     big: {
       width: '12.5rem',
-      height: '12.5rem',
     },
     small: {
       width: '10rem',
-      height: '10rem',
     },
   },
   magic: {
     big: {
-      width: '8.75rem',
       height: '13.72844rem',
     },
     small: {
-      width: '7rem',
       height: '10.98275rem',
     },
   },
+};
+
+export const CHARACTER_DESCRIPTION: Record<CharacterType, string> = {
+  angel: '정산의 수호천사 등장!',
+  lucky: '정산 성공! 좋은 일만 가득하길~',
+  strawberry: '정산 완료! 달콤한 하루 보내~',
+  sleep: '정산 끝났어? 이제 푹 잘 수 있겠네~',
+  magic: '정산? 아브라카다브라! 해결 완료~',
 };
