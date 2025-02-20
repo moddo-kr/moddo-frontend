@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Close } from '@/assets/svgs/icon';
 import NumPad from '@/common/components/NumPad';
 import BottomSheet from '@/common/components/BottomSheet';
@@ -20,8 +20,14 @@ function NumPadBottomSheet({
   setValue,
   setOpen,
 }: NumPadBottomSheetProps) {
-  // TODO : 입력 가능한 최댓값을 제한해야 할듯. - 500만원 이상은 입력 불가능하도록 처리하기
   const [input, setInput] = useState<number>(initialValue); // Numpad의 입력값을 관리하는 상태
+
+  useEffect(() => {
+    // 500만원 이상은 입력 불가능하도록 처리
+    if (input > 5_000_000) {
+      setInput(5_000_000);
+    }
+  }, [input]);
 
   return (
     <>
