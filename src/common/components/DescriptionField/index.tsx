@@ -4,7 +4,7 @@ import * as S from './index.styles';
 
 interface DescriptionFieldProps {
   title: string | ReactElement;
-  sub?: string;
+  sub?: string | ReactElement;
 }
 
 function DescriptionField({ title, sub }: DescriptionFieldProps) {
