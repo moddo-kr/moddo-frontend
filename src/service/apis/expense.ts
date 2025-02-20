@@ -44,9 +44,7 @@ const expense = {
   // GET getExpenseDetailsByGroupId
   getDetail: (groupToken: string): Promise<ExpenseDetailList> =>
     axiosInstance
-      .get(`expenses/details?groupToken=${groupToken}`, {
-        useMock: true,
-      })
+      .get(`expenses/details?groupToken=${groupToken}`)
       .then((res) => res.data),
 };
 
