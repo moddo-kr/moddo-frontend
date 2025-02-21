@@ -129,6 +129,7 @@ function ExpenseTimeHeader({
       ? theme.color.primitive.base.white
       : theme.color.semantic.secondary.heavy;
   const endDate = new Date(headerData.deadline);
+  const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
   const handleModdoButtonClick = () => {
     if (status === 'success') {
@@ -164,10 +165,10 @@ function ExpenseTimeHeader({
         }
         sub={
           <Flex gap={theme.unit[4]} alignItems="center">
-            정산 계좌: {headerData.accountNumber}
+            정산 계좌: {accountFormat}
             <Button
               variant="text"
-              onClick={() => handleCopyButtonClick(headerData.accountNumber)}
+              onClick={() => handleCopyButtonClick(accountFormat)}
             >
               <Copy width={theme.unit[16]} height={theme.unit[16]} />
             </Button>
