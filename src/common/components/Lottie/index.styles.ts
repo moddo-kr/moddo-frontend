@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { Onboarding } from '@/pages/onboarding';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 32%;
@@ -11,4 +12,17 @@ export const Wrapper = styled.div`
   z-index: 1000;
   position: absolute;
   top: 0;
+`;
+
+export const OnboardingWrapper = styled(Wrapper)`
+  width: 100%;
+  max-width: 100%;
+  top: -70%;
+`;
+
+export const Onboarding2Wrapper = styled.div`
+  position: absolute;
+  bottom: -300px;
+  max-width: 400px;
+
 `;

@@ -24,7 +24,7 @@ function Login() {
     } else if (!token) {
       getGuestToken();
     } else {
-      navigate(ROUTE.selectGroup);
+      navigate(ROUTE.onboarding);
     }
   };
 
@@ -81,9 +81,10 @@ function Login() {
             background: '#FEE500',
           }}
           onClick={() => handleLoginButtonClick('KAKAO')}
+          disabled={true}
         >
           <Kakao width={theme.unit[24]} />
-          <Text variant="body1Sb" color="semantic.text.strong">
+          <Text variant="body1Sb" color="semantic.text.strong" >
             카카오로 로그인
           </Text>
         </Button>
