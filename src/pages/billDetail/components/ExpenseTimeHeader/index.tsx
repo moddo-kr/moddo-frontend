@@ -173,6 +173,7 @@ function ExpenseTimeHeader({
             </Button>
           </Flex>
         }
+        bgColor="semantic.background.normal.alternative"
       />
       <div style={{ height: `${theme.unit[20]}` }} />
       <CurvedProgressBar percentage={percentage}>
