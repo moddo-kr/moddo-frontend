@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
+import BANK_LIST from '@/common/constants/banks';
 import * as S from './index.style';
-import { getBankImagesAndUrl } from '../../utils/BankList';
+// import { getBankImagesAndUrl } from '../../utils/BankList';
 
 interface BankNameDrawerProps {
   open: boolean;
@@ -12,7 +13,7 @@ interface BankNameDrawerProps {
 
 function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
   const [name, setName] = useState<string>('');
-  const bankList = getBankImagesAndUrl();
+  // const bankList = getBankImagesAndUrl();
 
   const handleSubmitButtonClick = () => {
     if (!name) return;
@@ -33,7 +34,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
       >
         <S.DrawerHeader>은행 선택</S.DrawerHeader>
         <S.DrawerBody>
-          {bankList.map((bank) => (
+          {BANK_LIST.map((bank) => (
             <S.BankButton
               key={bank.bankName}
               onClick={() => setName(bank.bankName)}
