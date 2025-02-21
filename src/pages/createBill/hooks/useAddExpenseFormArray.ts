@@ -79,7 +79,6 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
     formMethods,
     defaultFormValue,
     fieldArrayReturns,
-    setGroupInfo,
   };
 };
 
