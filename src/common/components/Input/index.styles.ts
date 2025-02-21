@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: ${({ theme }) => theme.unit[8]};
   width: 100%;
+  min-width: 0;
 `;
 
 export const LabelField = styled.div`
@@ -85,4 +86,9 @@ export const Input = styled.input`
   &::placeholder {
     opacity: 0.5;
   }
+  min-width: 0;
+`;
+
+export const IconWrapper = styled.div`
+  flex-shrink: 0;
 `;

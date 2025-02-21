@@ -5,7 +5,7 @@ export const ListContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-  padding: 0rem 1.25rem;
+  padding: 0rem 1.25rem 1.25rem 1.25rem;
   flex: 1;
   overflow-y: auto;
   background-color: ${({ theme }) =>

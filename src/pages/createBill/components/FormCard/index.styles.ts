@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const RefTarget = styled.div`
+  height: ${({ theme }) => theme.unit[24]};
+`;
+
 export const FormCard = styled.div`
   display: flex;
   padding: 1.25rem;
