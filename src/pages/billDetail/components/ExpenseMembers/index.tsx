@@ -5,9 +5,10 @@ import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGe
 import Text from '@/common/components/Text';
 import StatusChip from '@/common/components/StatusChip';
 import Button from '@/common/components/Button';
-import { ArrowDown, Receipt } from '@/assets/svgs/icon';
+import { ArrowDown, Close, Confirm, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
 import * as S from './index.style';
+import BottomSheet from '@/common/components/BottomSheet';
 
 interface ExpenseMembersProps {
   groupToken: string;
@@ -20,11 +21,10 @@ interface ExpenseMemberItemProps {
 }
 
 function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const theme = useTheme();
-  const handleArrowButtonClick = () => {
-    setIsDetailOpen(!isDetailOpen);
-  };
 
   return (
     <S.Container isPaid={member.isPaid}>
@@ -47,10 +47,66 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
           </S.SubProfileWrapper>
         </S.LeftWrapper>
         <S.RightWrapper>
-          <S.StatusChipButton>
+          <S.StatusChipButton onClick={() => setOpen(true)}>
             <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
           </S.StatusChipButton>
-          <Button variant="text" onClick={handleArrowButtonClick}>
+          {/* 정산 상태 변경 모달 */}
+          <BottomSheet open={open} setOpen={setOpen} isPadding={true} pb={16}>
+            <S.SheetContentWrapper>
+              <S.TextWrapper>
+                <Text variant="heading2" color={'semantic.text.default'}>
+                  정산 상태
+                </Text>
+                <Close
+                  width={theme.unit[24]}
+                  height={theme.unit[24]}
+                  onClick={() => setOpen(false)}
+                />
+              </S.TextWrapper>
+              <S.TextButtonWrapper onClick={() => setIsPaid(false)}>
+                <Text
+                  variant="title"
+                  color={
+                    isPaid
+                      ? 'semantic.text.disabled'
+                      : 'semantic.orange.default'
+                  }
+                >
+                  미입금
+                </Text>
+                <Confirm
+                  width={theme.unit[20]}
+                  height={theme.unit[20]}
+                  stroke={
+                    isPaid ? 'none' : `${theme.color.semantic.orange.default}`
+                  }
+                />
+              </S.TextButtonWrapper>
+              <S.TextButtonWrapper onClick={() => setIsPaid(true)}>
+                <Text
+                  variant="title"
+                  color={
+                    isPaid
+                      ? 'semantic.orange.default'
+                      : 'semantic.text.disabled'
+                  }
+                >
+                  입금완료
+                </Text>
+                <Confirm
+                  width={theme.unit[20]}
+                  height={theme.unit[20]}
+                  stroke={
+                    isPaid ? `${theme.color.semantic.orange.default}` : 'none'
+                  }
+                />
+              </S.TextButtonWrapper>
+              <Button variant="secondary" onClick={() => setOpen(!open)}>
+                닫기
+              </Button>
+            </S.SheetContentWrapper>
+          </BottomSheet>
+          <Button variant="text" onClick={() => setIsDetailOpen(!isDetailOpen)}>
             <div
               style={{
                 display: 'flex',

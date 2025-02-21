@@ -85,3 +85,22 @@ export const PlaceWrapper = styled.div`
   gap: ${({ theme }) => theme.unit[20]};
   align-items: center;
 `;
+
+export const SheetContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: ${({ theme }) => theme.unit[24]};
+  height: 16.25rem;
+  justify-content: space-between;
+`;
+
+export const TextWrapper = styled.button`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const TextButtonWrapper = styled(TextWrapper)`
+  cursor: pointer;
+`;
