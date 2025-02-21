@@ -28,8 +28,8 @@ function CharacterShare() {
     if (!data) return;
     // 돔 요소를 이미지로 변환
     if (imageRef.current) {
-      // 440x440 사이즈로 이미지 다운로드
-      toPng(imageRef.current, { width: 440, height: 440 })
+      // 390x390 사이즈로 이미지 다운로드
+      toPng(imageRef.current, { width: 390, height: 390 })
         .then((dataUrl) => {
           // 이미지 다운로드
           saveAs(dataUrl, `${data.name}.png`);
@@ -62,11 +62,12 @@ function CharacterShare() {
         leftButtonOnClick={() => {
           navigate(-1);
         }}
+        bgColor="#F1F3F5"
       />
-      <S.TitleContainer>
-        <Text variant="heading1">캐릭터를 획득했어요!</Text>
-      </S.TitleContainer>
       <S.CharacterContainer>
+        <S.TitleContainer>
+          <Text variant="heading1">캐릭터를 획득했어요!</Text>
+        </S.TitleContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
             <StarChip star={data.rarity} />
@@ -96,7 +97,7 @@ function CharacterShare() {
           <Text>이미지 저장</Text>
         </Button>
       </S.CharacterContainer>
-      <BottomButtonContainer>
+      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
         <Button onClick={() => navigate(-1)}>돌아가기</Button>
       </BottomButtonContainer>
