@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
@@ -9,6 +9,7 @@ import { ArrowDown, Close, Confirm, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
 import * as S from './index.style';
 import BottomSheet from '@/common/components/BottomSheet';
+import { set } from 'date-fns';
 
 interface ExpenseMembersProps {
   groupToken: string;
@@ -24,7 +25,32 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const theme = useTheme();
+
+  /** 상태 변경 함수 */
+  const handleTextButtonClick = (status: boolean) => {
+    setIsPaid(status);
+    if (status !== member.isPaid) {
+      setIsConfirm(true); // 상태가 바뀌면 확인 버튼 활성화
+    } else {
+      setIsConfirm(false); // 상태가 같으면 확인 버튼 비활성화
+    }
+  };
+
+  /** confim 버튼 클릭 시 api를 호출하는 함수 */
+  const handleChangeButtonSubmit = () => {
+    console.log('닫기 버튼 클릭');
+
+    resetState(); // 상태 초기화 및 BottomSheet 닫기
+  };
+
+  /** 모든 상태값 초기화 후에 바텀시트 닫기 */
+  const resetState = () => {
+    setIsPaid(member.isPaid); 
+    setIsConfirm(false);
+    setOpen(false);
+  };
 
   return (
     <S.Container isPaid={member.isPaid}>
@@ -50,8 +76,13 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
           <S.StatusChipButton onClick={() => setOpen(true)}>
             <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
           </S.StatusChipButton>
-          {/* 정산 상태 변경 모달 */}
-          <BottomSheet open={open} setOpen={setOpen} isPadding={true} pb={16}>
+          {/* 정산 상태 변경 바텀시트 */}
+          <BottomSheet
+            open={open}
+            setOpen={resetState}
+            isPadding={true}
+            pb={16}
+          >
             <S.SheetContentWrapper>
               <S.TextWrapper>
                 <Text variant="heading2" color={'semantic.text.default'}>
@@ -60,10 +91,10 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
                 <Close
                   width={theme.unit[24]}
                   height={theme.unit[24]}
-                  onClick={() => setOpen(false)}
+                  onClick={resetState}
                 />
               </S.TextWrapper>
-              <S.TextButtonWrapper onClick={() => setIsPaid(false)}>
+              <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
                 <Text
                   variant="title"
                   color={
@@ -82,11 +113,11 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
                   }
                 />
               </S.TextButtonWrapper>
-              <S.TextButtonWrapper onClick={() => setIsPaid(true)}>
+              <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
                 <Text
                   variant="title"
                   color={
-                    isPaid
+                    isPaid // 입금완료
                       ? 'semantic.orange.default'
                       : 'semantic.text.disabled'
                   }
@@ -101,8 +132,12 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
                   }
                 />
               </S.TextButtonWrapper>
-              <Button variant="secondary" onClick={() => setOpen(!open)}>
-                닫기
+              <Button
+                variant={isConfirm ? 'primary' : 'secondary'}
+                onClick={isConfirm ? resetState : handleChangeButtonSubmit}
+                disabled={!isConfirm}
+              >
+                {isConfirm ? '확인' : '닫기'}
               </Button>
             </S.SheetContentWrapper>
           </BottomSheet>
