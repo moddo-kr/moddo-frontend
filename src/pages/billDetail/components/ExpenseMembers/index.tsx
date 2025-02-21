@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
@@ -9,7 +9,7 @@ import { ArrowDown, Close, Confirm, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
 import * as S from './index.style';
 import BottomSheet from '@/common/components/BottomSheet';
-import { set } from 'date-fns';
+import useUpdatePaymentStatus from '@/common/queries/groupMembers/useUpdatePaymentStatus';
 
 interface ExpenseMembersProps {
   groupToken: string;
@@ -19,14 +19,20 @@ interface ExpenseMembersProps {
 interface ExpenseMemberItemProps {
   member: MemberExpense;
   color: string;
+  groupToken: string;
 }
 
-function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
+function ExpenseMemberItem({ member, color, groupToken }: ExpenseMemberItemProps) {
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const theme = useTheme();
+  const updatePaymentStatusMutation = useUpdatePaymentStatus({
+    groupToken: groupToken, // 만약 member에 groupToken이 없다면 상위 props에서 받아 전달하세요.
+    groupMemberId: member.id,
+    isPaid: isPaid,
+  });
 
   /** 상태 변경 함수 */
   const handleTextButtonClick = (status: boolean) => {
@@ -39,15 +45,15 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
   };
 
   /** confim 버튼 클릭 시 api를 호출하는 함수 */
-  const handleChangeButtonSubmit = () => {
-    console.log('닫기 버튼 클릭');
-
-    resetState(); // 상태 초기화 및 BottomSheet 닫기
+  const handleChangeButtonSubmit = async() => {
+    await updatePaymentStatusMutation.mutate();
+    setIsConfirm(false);
+    setOpen(false);
   };
 
   /** 모든 상태값 초기화 후에 바텀시트 닫기 */
   const resetState = () => {
-    setIsPaid(member.isPaid); 
+    setIsPaid(member.isPaid);
     setIsConfirm(false);
     setOpen(false);
   };
@@ -134,7 +140,7 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
               </S.TextButtonWrapper>
               <Button
                 variant={isConfirm ? 'primary' : 'secondary'}
-                onClick={isConfirm ? resetState : handleChangeButtonSubmit}
+                onClick={isConfirm ?  handleChangeButtonSubmit : resetState}
                 disabled={!isConfirm}
               >
                 {isConfirm ? '확인' : '닫기'}
@@ -206,6 +212,7 @@ function ExpenseMembers({ groupToken }: ExpenseMembersProps) {
           key={member.id}
           member={member}
           color={colors[index]}
+          groupToken={groupToken}
         />
       ))}
     </S.Wrapper>
