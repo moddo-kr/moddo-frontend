@@ -86,4 +86,9 @@ export const Input = styled.input`
   &::placeholder {
     opacity: 0.5;
   }
+  min-width: 0;
+`;
+
+export const IconWrapper = styled.div`
+  flex-shrink: 0;
 `;
