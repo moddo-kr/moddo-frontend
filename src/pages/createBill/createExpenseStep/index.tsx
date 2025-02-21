@@ -14,6 +14,7 @@ import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormAr
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import Modal from '@/common/components/Modal';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
 
 interface CreateExpenseStepProps
@@ -108,7 +109,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
           />
         ))}
       </S.BillFormList>
-      <S.ButtonWrapper>
+      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button
           type="button"
           onClick={handleSubmit((data) =>
@@ -118,7 +119,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
         >
           {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
         </Button>
-      </S.ButtonWrapper>
+      </BottomButtonContainer>
     </FormProvider>
   );
 }
