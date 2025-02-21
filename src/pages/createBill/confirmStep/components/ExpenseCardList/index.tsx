@@ -1,6 +1,7 @@
 import { Fragment } from 'react/jsx-runtime';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
+import Text from '@/common/components/Text';
 import categrizeExpensesByDateWithIndex from '../../utils/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';
 import * as S from './index.styles';
@@ -17,7 +18,7 @@ function ExpenseCardList({ expenses, moveToEditStep }: ExpenseCardListProps) {
     <S.ListContainer>
       {categorizedExpenses.map(([date, expensesArray]) => (
         <Fragment key={date}>
-          <S.Date>{date}</S.Date>
+          <Text variant="body1Sb">{date}</Text>
           {expensesArray.map((expense) => (
             <ExpenseCard
               key={expense.id}

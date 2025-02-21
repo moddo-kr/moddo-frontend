@@ -3,7 +3,6 @@ import { ColorKey, TypographyKey } from '@/styles/theme.type';
 import styled, { css } from 'styled-components';
 
 export const TextVariant = (variant: TypographyKey) => css`
-  font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: ${({ theme }) => theme.typography.fontSize[variant]};
   font-weight: ${({ theme }) => theme.typography.fontWeight[variant]};
   line-height: ${({ theme }) => theme.typography.lineHeight[variant]};

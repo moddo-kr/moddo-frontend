@@ -3,6 +3,10 @@ import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useGetAllExpense from '@/common/queries/expense/useGetAllExpense';
+import DescriptionField from '@/common/components/DescriptionField';
+import Text from '@/common/components/Text';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import Button from '@/common/components/Button';
 import ExpenseCardList from './components/ExpenseCardList';
 import getTotalExpense from '../utils/getTotalExpense';
 import { BillContext, BillContextRequired } from '../types/billContext.type';
@@ -36,32 +40,33 @@ function ConfirmStep({
         type="TitleCenter"
         leftButtonContent={<ArrowLeft width="1.5rem" />}
         leftButtonOnClick={moveToPreviousStep}
-        rightButtonContent={<S.AddExpenseButton>지출 추가</S.AddExpenseButton>}
+        rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
         rightButtonOnClick={() => moveToStep?.('ADD_EXPENSE')}
+        bgColor="#F1F3F5"
       />
-      <S.TopWrapper>
-        <S.TopMessage>{`지출 내역을\n확인해주세요`}</S.TopMessage>
-      </S.TopWrapper>
+      <DescriptionField
+        bgColor="semantic.background.normal.alternative"
+        title={`지출 내역을\n확인해주세요.`}
+      />
       <S.TotalExpenseWrapper>
-        <S.TotalExpense>누적 금액</S.TotalExpense>
-        <S.TotalExpenseAmount>
+        <Text variant="body1Sb">누적 금액</Text>
+        <Text variant="heading2" color="semantic.text.strong">
           {getTotalExpense(data.expenses).toLocaleString()}원
-        </S.TotalExpenseAmount>
+        </Text>
       </S.TotalExpenseWrapper>
       <ExpenseCardList
         expenses={data.expenses}
         moveToEditStep={moveToEditStep}
       />
-      <S.ButtonWrapper>
-        <S.BottomButton
-          type="button"
+      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
+        <Button
           onClick={() => {
             moveToNextStep?.();
           }}
         >
           확인했어요
-        </S.BottomButton>
-      </S.ButtonWrapper>
+        </Button>
+      </BottomButtonContainer>
     </>
   );
 }

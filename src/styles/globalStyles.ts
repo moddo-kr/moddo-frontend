@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
 
   @font-face {
     font-family: 'Pretendard';
-    src: url('/assets/fonts/PretendardVariable.woff2');
+    src: url('/fonts/PretendardVariable.woff2');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -41,6 +41,18 @@ const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
+  }
+
+  /* 모든 브라우저에서 number type input 버튼 제거 */
+  /* Chrome, Safari, Edge, Opera */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type='number'] {
+    appearance: textfield;
   }
 `;
 

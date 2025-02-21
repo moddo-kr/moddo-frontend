@@ -10,12 +10,14 @@ export const ExpenseCardWrapper = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  padding: 1.25rem;
+  padding: ${({ theme }) => `${theme.unit[18]} ${theme.unit[20]}`};
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
   border-radius: 1.25rem;
-  background: #faf6f3;
+  background-color: ${({ theme }) =>
+    theme.color.semantic.background.normal.default};
+  border: ${({ theme }) => `1px solid ${theme.color.semantic.border.default}`};
 `;
 
 export const TopWrapper = styled.div`
@@ -24,27 +26,9 @@ export const TopWrapper = styled.div`
   width: 100%;
 `;
 
-export const Index = styled.span`
-  color: #444950;
-  font-size: 1.125rem;
-  font-weight: 600;
-`;
-
 export const IconButtonsWrapper = styled.div`
   display: flex;
   gap: 0.75rem;
-`;
-
-export const IconButton = styled.button`
-  width: 1.25rem;
-  height: 1.25rem;
-`;
-
-export const Content = styled.span`
-  display: block;
-  color: #6f7379;
-  font-size: 1rem;
-  font-weight: 400;
 `;
 
 export const BottomWrapper = styled.div`
@@ -77,18 +61,6 @@ export const CollapseItem = styled(Accordion.Item)``;
 export const CollapseTrigger = styled(Accordion.ItemTrigger)`
   display: flex;
   justify-content: flex-end;
-`;
-
-export const TriggerText = styled.span`
-  color: #444950;
-  font-size: 0.875rem;
-  font-weight: 600;
-`;
-
-export const MemberCount = styled.span`
-  color: #ff802e;
-  font-size: 0.875rem;
-  font-weight: 600;
 `;
 
 export const CollapseContent = styled(Accordion.ItemContent)`

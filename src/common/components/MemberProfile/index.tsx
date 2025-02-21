@@ -1,10 +1,11 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import { SystemDanger } from '@/assets/svgs/icon';
 import { Member } from '@/common/types/member.type';
 import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useMemo } from 'react';
 import * as S from './index.style';
+import Text from '../Text';
 
 interface MemberProfileProps {
   member: Member;
@@ -41,9 +42,7 @@ function MemberProfile({
           $bgcolor={profileBgColor}
         />
       </S.ProfileWrapper>
-      <Text fontSize={12} lineHeight="1.5">
-        {member.name}
-      </Text>
+      <Text variant="caption">{member.name}</Text>
     </Flex>
   );
 }

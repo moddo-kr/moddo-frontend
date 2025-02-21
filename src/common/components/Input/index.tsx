@@ -41,7 +41,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           $disabled={disabled}
           className="input-wrapper"
         >
-          <S.Input ref={ref} disabled={disabled} {...props} />
+          <S.Input
+            autoComplete="off"
+            ref={ref}
+            disabled={disabled}
+            {...props}
+          />
           {icon}
         </S.Wrapper>
       </S.Container>

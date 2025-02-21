@@ -1,9 +1,15 @@
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { useTheme } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
+import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
+import DescriptionField from '@/common/components/DescriptionField';
+import Input from '@/common/components/Input';
+import Button from '@/common/components/Button';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import Text from '@/common/components/Text';
 import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
 import * as S from '../index.styles';
 import { useGroupSetupStore } from '../stores/useGroupSetupStore';
@@ -16,6 +22,7 @@ const passwordSchema = z.object({
 });
 
 function PasswordSetup() {
+  const { unit } = useTheme();
   const { groupName, password, setPassword } = useGroupSetupStore();
   const {
     register,
@@ -38,50 +45,37 @@ function PasswordSetup() {
   return (
     <>
       <Header
-        title=""
-        showIcon
-        type="TitleLeft"
-        handleBackButtonClick={() => navigate(-1)}
+        type="TitleCenter"
+        leftButtonContent={
+          <>
+            <ArrowLeft width={unit[24]} />
+            <Text>뒤로가기</Text>
+          </>
+        }
+        leftButtonOnClick={() => navigate(-1)}
       />
-      <Flex
-        direction="column"
-        justify="space-between"
-        mx="5"
-        height="100%"
-        mt="10px"
-        mb="32px"
-        flexGrow={1}
-      >
-        <Flex direction="column">
-          <S.TitleText>
-            {groupName} 모임의
-            <br />
-            비밀번호를 설정해주세요.
-          </S.TitleText>
-          <Input
-            borderRadius={12}
-            placeholder="4자리 숫자 입력"
-            fontSize={16}
-            type="number"
-            inputMode="numeric"
-            py={3}
-            height={12}
-            {...register('password')}
-            mb={4}
-          />
-          {errors.password && (
-            <S.ErrorText>* {errors.password?.message?.toString()}</S.ErrorText>
-          )}
-        </Flex>
-        <Button
-          height={12}
-          borderRadius={12}
-          onClick={handleSubmit(onNext)}
-          disabled={!isValid}
-        >
+      <DescriptionField
+        title={`${groupName}의\n비밀번호 4자리 숫자를 설정해주세요.`}
+        sub="모임 이름은 수정이 불가능해요. "
+      />
+      <S.PageContentWrapper>
+        <Input
+          placeholder="1234"
+          type="number"
+          inputMode="numeric"
+          {...register('password')}
+        />
+        {errors.password ? (
+          <Text as="p" variant="caption" color="semantic.state.danger">
+            {errors.password?.message?.toString()}
+          </Text>
+        ) : null}
+      </S.PageContentWrapper>
+      <BottomButtonContainer>
+        <Button onClick={handleSubmit(onNext)} disabled={!isValid}>
           다음
         </Button>
-      </Flex>
+      </BottomButtonContainer>
     </>
   );
 }

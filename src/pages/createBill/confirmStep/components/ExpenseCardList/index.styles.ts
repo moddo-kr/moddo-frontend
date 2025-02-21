@@ -8,10 +8,6 @@ export const ListContainer = styled.div`
   padding: 0rem 1.25rem;
   flex: 1;
   overflow-y: auto;
-`;
-
-export const Date = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #444950;
+  background-color: ${({ theme }) =>
+    theme.color.semantic.background.normal.alternative};
 `;

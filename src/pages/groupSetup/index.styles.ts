@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-export const ErrorText = styled.span`
-  margin: 0;
-  color: red;
-  font-size: 0.75rem;
-  font-weight: 400;
-`;
-
 export const TitleText = styled.h1`
   all: unset;
   display: flex;
@@ -17,4 +10,11 @@ export const TitleText = styled.h1`
   white-space: pre-wrap;
   font-size: 1.25rem; // 20px
   line-height: 1.75rem; // 28px
+`;
+
+export const PageContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: ${({ theme }) => `${theme.unit[28]} ${theme.unit[20]}`};
+  flex: 1;
 `;
