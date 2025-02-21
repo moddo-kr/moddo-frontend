@@ -13,6 +13,7 @@ import * as S from './index.styles';
 import ExpenseTimeline from './components/ExpenseTimeline';
 
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
+import ExpenseMembers from './components/ExpenseMembers';
 
 /** Mock 데이터 */
 const MEMBER_TOTAL = 6 as number;
@@ -58,7 +59,7 @@ function BillDetail() {
         {activeTab === 'expense' ? (
           <ExpenseTimeline groupToken={groupToken} />
         ) : (
-          <div>참여자별 정산</div>
+          <ExpenseMembers groupToken={groupToken} />
         )}
       </S.Content>
       <BottomButtonContainer>
