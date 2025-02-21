@@ -104,6 +104,7 @@ function ExpenseTimeHeader({
     setIsBubble(true);
     setTimeout(() => {
       setIsBubble(false);
+      onShareClick(); // 테스트용 로직
     }, 2000);
   };
 
