@@ -22,10 +22,12 @@ export const Button = styled.button<{ color?: string; bgColor?: string }>`
   }
 `;
 
-export const SelectGroupButton = styled(Button)`
-  margin-top: 0.5rem; // 8px
-  margin-left: 1.25rem; // 20px
-  font-weight: 600;
+export const SelectGroupButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.unit[4]};
+  background: transparent;
+  color: ${({ theme }) => theme.color.semantic.orange.default};
 `;
 
 export const MainHeader = styled.header`
@@ -34,7 +36,7 @@ export const MainHeader = styled.header`
   align-items: center;
   padding: 1rem 1.25rem; // 20px
   width: 100%;
-  background-color: #faf6f3;
+  background-color: ${({ theme }) => theme.color.semantic.background.normal};
 `;
 
 export const MainText = styled.h2`
@@ -51,11 +53,12 @@ export const SubText = styled.p`
 `;
 
 export const DescriptionImg = styled.img`
-  width: 10.75rem; // 172px;
+  width: 9.8rem;
   object-fit: contain;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 9%;
+  right: -0.2rem;
+  rotate: -2deg;
 `;
 
 export const Hr = styled.hr`
@@ -71,7 +74,7 @@ export const SettlementTitle = styled.h2`
 `;
 
 export const SettlementButton = styled(Button)<{ selected?: boolean }>`
-  background-color: ${({ selected }) => (selected ? '#FF802E' : '#F1F3F5')};
+  background-color: ${({ selected, theme }) => (selected ? theme.color.semantic.primary : '#F1F3F5')};
   color: ${({ selected }) => (selected ? 'white' : 'black')};
 `;
 
@@ -79,4 +82,31 @@ export const NoSettlementImg = styled.img`
   width: 33vw;
   max-width: 200px;
   object-fit: contain;
+`;
+
+export const BoxButton = styled.button`
+  display: flex;
+  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[20]}`};
+  position: relative;
+  height: 5rem;
+  background-color: ${({ theme }) => theme.color.semantic.orange.subtle};
+  border-radius: ${({ theme }) => theme.radius.default};
+
+  width: 100%;
+`;
+
+export const SmallImg = styled.img`
+  width: 2.75rem;
+  object-fit: contain;
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+`;
+
+export const BoxButtonWrapper = styled.div`
+  display: flex;
+  max-width: 37.5rem;
+  margin: ${({ theme }) =>
+    `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
+  gap: ${({ theme }) => theme.unit[8]};
 `;
