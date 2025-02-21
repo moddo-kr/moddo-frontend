@@ -32,16 +32,16 @@ export const OnboardingLottie2 = () => {
 
 export const OnboardingLottie3 = () => {
   return (
-    <S.OnboardingWrapper>
+    <S.Onboarding2Wrapper>
       <Lottie animationData={Onboarding3} />
-    </S.OnboardingWrapper>
+    </S.Onboarding2Wrapper>
   );
 };
 
 export const OnboardingLottie4 = () => {
   return (
-    <S.OnboardingWrapper>
+    <S.Onboarding2Wrapper>
       <Lottie animationData={Onboarding4} />
-    </S.OnboardingWrapper>
+    </S.Onboarding2Wrapper>
   );
 };
