@@ -1,9 +1,9 @@
 import { getGroupHeader } from '@/service/apis/group';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetGroupHeader = (groupId: string) => {
+export const useGetGroupHeader = (groupToken: string) => {
   return useQuery({
-    queryKey: ['groupHeader', groupId],
-    queryFn: () => getGroupHeader(groupId),
+    queryKey: ['groupHeader', groupToken],
+    queryFn: () => getGroupHeader(groupToken),
   });
 };
