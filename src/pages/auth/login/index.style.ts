@@ -9,12 +9,6 @@ export const TitleWrapper = styled.h1`
   margin-top: 10.5dvh;
 `;
 
-export const LogoImg = styled.img`
-  width: 10.625rem; // 170px
-  height: 4.125rem; // 66px
-  object-fit: contain;
-`;
-
 export const LoginImg = styled.img`
   width: 62vw;
   min-width: 240px;
@@ -60,4 +54,36 @@ export const BottomButton = styled.button<{
     filter: brightness(0.9);
     transition: filter 0.1s;
   }
+`;
+
+export const ImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 330px;
+`;
+
+export const EntranceImg = styled.img`
+  width: 60%;
+  max-width: 17.25rem;
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  top: 33%;
+`;
+
+export const LogoImg = styled.img`
+  width: 44%;
+  max-width: 12.625rem;
+  height: 4.125rem;
+  object-fit: contain;
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
