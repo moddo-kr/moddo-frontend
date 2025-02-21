@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Text from '@/common/components/Text';
 
 export const MemberExpensesContainer = styled.div`
   display: flex;
@@ -10,7 +11,11 @@ export const MemberExpensesContainer = styled.div`
 export const MemberContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[64]};
+  gap: clamp(
+    ${({ theme }) => theme.unit[24]},
+    10vw,
+    ${({ theme }) => theme.unit[64]}
+  );
   align-self: stretch;
 `;
 
@@ -21,6 +26,7 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${({ theme }) => theme.unit[4]};
+  flex-shrink: 0;
 `;
 
 export const ProfileImg = styled.img`
@@ -41,4 +47,9 @@ export const DeleteButtonWrapper = styled.div`
   position: absolute; // 자식 요소
   width: fit-content;
   height: fit-content;
+`;
+
+/* 이름 */
+export const NameText = styled(Text)`
+  white-space: nowrap;
 `;
