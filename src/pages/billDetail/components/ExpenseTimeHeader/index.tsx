@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 
 import DescriptionField from '@/common/components/DescriptionField';
@@ -11,30 +11,39 @@ import { useParams } from 'react-router';
 import * as S from './index.style';
 import { StatusContent, StatusType } from './index.type';
 import { getFormatDate } from '../../utils/getFormatDate';
-
-/** mockData */
-// const TOTAL_MONEY = 120000;
-// const END_DATE = new Date('2025-02-21T02:10:05.448428');
-// const BankNumber = '11012341234' as string;
+import Modal from '@/common/components/Modal';
+import copyClipboard from '@/common/utils/copyClipboard';
+import Button from '@/common/components/Button';
+import { showToast } from '@/common/components/Toast';
 
 interface ExpenseTimeHeaderProps {
   totalMember: number;
   paidMember: number;
   onShareClick: () => void;
+  status: StatusType;
+  setStatus: (status: StatusType) => void;
+  isChecked: boolean;
+  setIsChecked: (isChecked: boolean) => void;
 }
 
 function ExpenseTimeHeader({
   totalMember,
   paidMember,
   onShareClick,
+  status,
+  setStatus,
+  isChecked,
+  setIsChecked,
 }: ExpenseTimeHeaderProps) {
-  const [status, setStatus] = useState<StatusType>('pending');
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
   const { groupToken } = useParams<{ groupToken: string }>();
   const theme = useTheme();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
   /** API 호출 관련 로직 */
   const {
     data: headerData,
@@ -42,42 +51,66 @@ function ExpenseTimeHeader({
     isError,
   } = useGetGroupHeader(groupToken!);
 
-  /** @Todo 커스텀 훅으로 분리 */
-  useEffect(() => {
-    if (!headerData) return () => {};
+  // 타이머 업데이트 함수
+  const updateTimer = (timeDifference: number) => {
+    const newHours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const newMinutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const newSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    setHours(newHours);
+    setMinutes(newMinutes);
+    setSeconds(newSeconds);
+  };
 
-    const interval = setInterval(() => {
+  // 상태 업데이트 함수
+  const updateStatus = (status: StatusType) => {
+    setStatus(status);
+    setIsBubble(true);
+  };
+
+  // 외부에서 호출할 수 있는 stopTimer 함수
+  const stopTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current); // 타이머 멈추기
+    }
+  };
+
+  useEffect(() => {
+    if (!headerData) return;
+
+    intervalRef.current = setInterval(() => {
       const now = new Date();
       const endDate = new Date(headerData!.deadline);
       const timeDifference = endDate.getTime() - now.getTime();
-      // 타이머 종료
       if (timeDifference <= 0) {
+        if (status === 'success') return;
         setHours(0);
         setMinutes(0);
         setSeconds(0);
-        if (totalMember === paidMember) {
-          setStatus('success');
-          setIsBubble(true);
-        } else {
-          setStatus('failure');
-          setIsBubble(true);
-        }
-        clearInterval(interval);
+        updateStatus('failure');
+        stopTimer();
       } else {
-        const newHours = Math.floor(timeDifference / (1000 * 60 * 60));
-        const newMinutes = Math.floor(
-          (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const newSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        setHours(newHours);
-        setMinutes(newMinutes);
-        setSeconds(newSeconds);
+        if (totalMember === paidMember && !isChecked) {
+          setIsModalOpen(true);
+          setIsChecked(true);
+        }
+        updateTimer(timeDifference);
       }
     }, 1000);
 
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData]);
+    return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
+  }, [headerData, totalMember, paidMember, isChecked]);
+
+  const handleModalButtonClick = () => {
+    setIsModalOpen(false);
+    updateStatus('success');
+    setHours(0);
+    setMinutes(0);
+    setSeconds(0);
+    onShareClick();
+    stopTimer(); // 버튼 클릭 시 타이머 멈추기
+  };
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -100,12 +133,20 @@ function ExpenseTimeHeader({
     if (status === 'success') {
       onShareClick();
       return;
+    } else if (status === 'failure') {
+      return;
     }
     setIsBubble(true);
     setTimeout(() => {
       setIsBubble(false);
-      onShareClick(); // 테스트용 로직
     }, 2000);
+  };
+
+  const handleCopyButtonClick = async (text: string) => {
+    const isCopied = await copyClipboard(text);
+    if (isCopied) {
+      showToast({ type: 'success', content: '계좌번호가 복사되었습니다.' });
+    }
   };
 
   return (
@@ -122,7 +163,12 @@ function ExpenseTimeHeader({
         sub={
           <Flex gap={theme.unit[4]} alignItems="center">
             정산 계좌: {headerData.accountNumber}
-            <Copy width={theme.unit[16]} height={theme.unit[16]} />
+            <Button
+              variant="text"
+              onClick={() => handleCopyButtonClick(headerData.accountNumber)}
+            >
+              <Copy width={theme.unit[16]} height={theme.unit[16]} />
+            </Button>
           </Flex>
         }
       />
@@ -192,6 +238,17 @@ function ExpenseTimeHeader({
           </Flex>
         </S.TimeBox>
       </Flex>
+      <Modal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        variant="default"
+        title="모임원이 모두 입금했어요!"
+        subscribe="정산을 완료하고 캐릭터를 확인하시겠어요?"
+        cancel="미완료"
+        submit="완료"
+        onCancel={() => setIsModalOpen(false)}
+        onSubmit={handleModalButtonClick}
+      ></Modal>
     </S.Wrapper>
   );
 }
