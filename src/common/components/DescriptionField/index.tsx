@@ -1,15 +1,17 @@
 import { ReactElement } from 'react';
 import Text from '@/common/components/Text';
+import { ColorKey } from '@/styles/theme.type';
 import * as S from './index.styles';
 
 interface DescriptionFieldProps {
   title: string | ReactElement;
   sub?: string | ReactElement;
+  bgColor?: ColorKey;
 }
 
-function DescriptionField({ title, sub }: DescriptionFieldProps) {
+function DescriptionField({ title, sub, bgColor }: DescriptionFieldProps) {
   return (
-    <S.Wrapper>
+    <S.Wrapper $bgColor={bgColor}>
       <Text variant="heading2" color="semantic.text.strong">
         {title}
       </Text>
