@@ -50,8 +50,33 @@ function CharacterShare() {
   if (isLoading) return null;
 
   if (isError || !data) {
-    // 캐릭터가 아직 없는 경우에 대한 처리가 필요할 수도 있음
-    return null;
+    // NOTE : 임의로 만든 화면,,,
+    // 캐릭터가 없는 경우에 대한 처리가 필요합니다...
+    return (
+      <>
+        <Header
+          type="TitleCenter"
+          leftButtonContent={<ArrowLeft width={unit[24]} />}
+          leftButtonOnClick={() => {
+            navigate(-1);
+          }}
+          bgColor="#F1F3F5"
+        />
+        <S.CharacterContainer>
+          <S.TitleContainer>
+            <Text as="p" variant="heading1">
+              획득한 캐릭터가 없어요!
+            </Text>
+            <Text as="p" variant="body1R" color="semantic.text.subtle">
+              정산을 완료하면 캐릭터를 획득할 수 있어요!
+            </Text>
+          </S.TitleContainer>
+        </S.CharacterContainer>
+        <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
+          <Button onClick={() => navigate(-1)}>정산하러 가기</Button>
+        </BottomButtonContainer>
+      </>
+    );
   }
 
   return (
