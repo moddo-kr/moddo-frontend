@@ -1,15 +1,17 @@
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
 import { useLoaderData } from 'react-router';
 import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
 import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
+import Text from '../Text';
 import MemberProfile from '../MemberProfile';
 import InputGroup from '../InputGroup';
 import Input from '../Input';
 import Button from '../Button';
+import * as S from './index.styles';
 
 const MemberSchema = z.object({
   name: z.string().trim().min(1),
@@ -75,14 +77,13 @@ function AddMember({ members }: AddMemberProps) {
         </Flex>
       </form>
       <Flex direction="column" gap={2} mt={7}>
-        <Text
-          display="flex"
-          alignItems="center"
-          whiteSpace="pre-wrap"
-          fontWeight={600}
-        >
-          총 <Text>{members.length}</Text>명
-        </Text>
+        <S.MemberCount>
+          총{' '}
+          <Text variant="body1Sb" color="semantic.orange.default">
+            {members.length}
+          </Text>
+          명
+        </S.MemberCount>
         <Flex gap={3} flexWrap="wrap">
           {members.map((member, index) => (
             <MemberProfile
