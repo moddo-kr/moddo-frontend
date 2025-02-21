@@ -20,9 +20,11 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
                 src={member.profile}
                 alt={`${member.name} 프로필 이미지`}
               />
-              <S.DeleteButtonWrapper onClick={() => onDelete(member.name)}>
-                <SystemDanger width="0.83331rem" />
-              </S.DeleteButtonWrapper>
+              {members.length > 1 ? (
+                <S.DeleteButtonWrapper onClick={() => onDelete(member.name)}>
+                  <SystemDanger width="0.83331rem" />
+                </S.DeleteButtonWrapper>
+              ) : null}
             </S.ProfileWrapper>
             <Text variant="caption">{member.name}</Text>
           </S.ProfileContainer>
