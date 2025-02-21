@@ -47,7 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             {...props}
           />
-          {icon}
+          <S.IconWrapper>{icon}</S.IconWrapper>
         </S.Wrapper>
       </S.Container>
     );
