@@ -17,6 +17,7 @@ export { default as Download } from './Download';
 export { default as Dummy } from './Dummy';
 export { default as Menu } from './Menu';
 export { default as Next } from './Next';
+export { default as Receipt } from './Receipt';
 export { default as Reset } from './Reset';
 export { default as Star } from './Star';
 export { default as SystemDanger } from './SystemDanger';
