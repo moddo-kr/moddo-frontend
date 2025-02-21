@@ -50,7 +50,12 @@ function MemberSetup() {
         <AddMember members={data.members.reverse()} />
       </S.PageContentWrapper>
       <BottomButtonContainer>
-        <Button onClick={() => navigate(ROUTE.createBill)}>정산 시작!</Button>
+        <Button
+          disabled={data.members.length <= 1}
+          onClick={() => navigate(ROUTE.createBill)}
+        >
+          정산 시작!
+        </Button>
       </BottomButtonContainer>
     </>
   );
