@@ -8,13 +8,13 @@ import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
 import { useParams } from 'react-router';
-import * as S from './index.style';
-import { StatusContent, StatusType } from './index.type';
-import { getFormatDate } from '../../utils/getFormatDate';
 import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
+import { getFormatDate } from '../../utils/getFormatDate';
+import { StatusContent, StatusType } from './index.type';
+import * as S from './index.style';
 
 interface ExpenseTimeHeaderProps {
   totalMember: number;
@@ -43,7 +43,7 @@ function ExpenseTimeHeader({
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   /** API 호출 관련 로직 */
   const {
     data: headerData,
@@ -64,8 +64,8 @@ function ExpenseTimeHeader({
   };
 
   // 상태 업데이트 함수
-  const updateStatus = (status: StatusType) => {
-    setStatus(status);
+  const updateStatus = (statusValue: StatusType) => {
+    setStatus(statusValue);
     setIsBubble(true);
   };
 
@@ -77,7 +77,7 @@ function ExpenseTimeHeader({
   };
 
   useEffect(() => {
-    if (!headerData) return;
+    if (!headerData) return () => {};
 
     intervalRef.current = setInterval(() => {
       const now = new Date();
@@ -100,6 +100,7 @@ function ExpenseTimeHeader({
     }, 1000);
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerData, totalMember, paidMember, isChecked]);
 
   const handleModalButtonClick = () => {
@@ -133,7 +134,8 @@ function ExpenseTimeHeader({
     if (status === 'success') {
       onShareClick();
       return;
-    } else if (status === 'failure') {
+    }
+    if (status === 'failure') {
       return;
     }
     setIsBubble(true);
@@ -248,7 +250,7 @@ function ExpenseTimeHeader({
         submit="완료"
         onCancel={() => setIsModalOpen(false)}
         onSubmit={handleModalButtonClick}
-      ></Modal>
+      />
     </S.Wrapper>
   );
 }

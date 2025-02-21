@@ -7,9 +7,9 @@ import StatusChip from '@/common/components/StatusChip';
 import Button from '@/common/components/Button';
 import { ArrowDown, Close, Confirm, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
-import * as S from './index.style';
 import BottomSheet from '@/common/components/BottomSheet';
 import useUpdatePaymentStatus from '@/common/queries/groupMembers/useUpdatePaymentStatus';
+import * as S from './index.style';
 
 interface ExpenseMembersProps {
   groupToken: string;
@@ -24,16 +24,21 @@ interface ExpenseMemberItemProps {
   status: string;
 }
 
-function ExpenseMemberItem({ member, color, groupToken, status }: ExpenseMemberItemProps) {
+function ExpenseMemberItem({
+  member,
+  color,
+  groupToken,
+  status,
+}: ExpenseMemberItemProps) {
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const theme = useTheme();
   const updatePaymentStatusMutation = useUpdatePaymentStatus({
-    groupToken: groupToken, // 만약 member에 groupToken이 없다면 상위 props에서 받아 전달하세요.
+    groupToken, // 만약 member에 groupToken이 없다면 상위 props에서 받아 전달하세요.
     groupMemberId: member.id,
-    isPaid: isPaid,
+    isPaid,
   });
 
   /** 상태 변경 함수 */
@@ -49,7 +54,7 @@ function ExpenseMemberItem({ member, color, groupToken, status }: ExpenseMemberI
   };
 
   /** confim 버튼 클릭 시 api를 호출하는 함수 */
-  const handleChangeButtonSubmit = async() => {
+  const handleChangeButtonSubmit = async () => {
     await updatePaymentStatusMutation.mutate();
     setIsConfirm(false);
     setOpen(false);
@@ -90,12 +95,12 @@ function ExpenseMemberItem({ member, color, groupToken, status }: ExpenseMemberI
           <BottomSheet
             open={open && status !== 'success'}
             setOpen={resetState}
-            isPadding={true}
+            isPadding
             pb={16}
           >
             <S.SheetContentWrapper>
               <S.TextWrapper>
-                <Text variant="heading2" color={'semantic.text.default'}>
+                <Text variant="heading2" color="semantic.text.default">
                   정산 상태
                 </Text>
                 <Close
@@ -144,7 +149,7 @@ function ExpenseMemberItem({ member, color, groupToken, status }: ExpenseMemberI
               </S.TextButtonWrapper>
               <Button
                 variant={isConfirm ? 'primary' : 'secondary'}
-                onClick={isConfirm ?  handleChangeButtonSubmit : resetState}
+                onClick={isConfirm ? handleChangeButtonSubmit : resetState}
                 disabled={!isConfirm}
               >
                 {isConfirm ? '확인' : '닫기'}

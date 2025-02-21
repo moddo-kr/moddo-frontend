@@ -1,9 +1,9 @@
 import { Member, MemberData } from '@/common/types/member.type';
-import axiosInstance from './axios';
 import {
   UpdatePaymentStatusData,
   UpdatePaymentStatusVariable,
 } from '@/common/types/groupMember';
+import axiosInstance from './axios';
 
 export interface CreateGroupMembersVariable {
   name: string;
@@ -59,7 +59,7 @@ export const updatePaymentStatus = async ({
 }: UpdatePaymentStatusVariable): Promise<UpdatePaymentStatusData> => {
   const response = await axiosInstance.put(
     `/group-members/${groupMemberId}/payment?groupToken=${groupToken}`,
-    { isPaid: isPaid }
+    { isPaid }
   );
   return response.data;
 };

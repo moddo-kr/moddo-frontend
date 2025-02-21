@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData, useLocation, useNavigate } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Button from '@/common/components/Button';
@@ -8,17 +8,17 @@ import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Divider from '@/common/components/Divider';
+import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
+import { ROUTE } from '@/common/constants/route';
+import generateShareLink from '@/common/utils/generateShareLink';
 import ExpenseTimeline from './components/ExpenseTimeline';
 import CharacterBottomSheet from './components/CharacterBottomSheet';
 import * as S from './index.styles';
 
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
 import ExpenseMembers from './components/ExpenseMembers';
-import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
 import { StatusType } from './components/ExpenseTimeHeader/index.type';
-import { ROUTE } from '@/common/constants/route';
 import ShareButton from '../createBill/shareStep/components/ShareButton';
-import generateShareLink from '@/common/utils/generateShareLink';
 
 function BillDetail() {
   const { unit } = useTheme();
@@ -85,6 +85,7 @@ function BillDetail() {
         )}
       </S.Content>
       <BottomButtonContainer>
+        {/* eslint-disable-next-line */}
         {MEMBER_TOTAL === MEMBER_DONE && status === 'pending' ? (
           <Button onClick={() => setIsChecked(false)}>정산 완료하기</Button>
         ) : status === 'success' ? (
