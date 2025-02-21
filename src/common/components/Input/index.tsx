@@ -19,12 +19,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled = false,
       required = false,
       icon,
+      onClick,
       ...props
     },
     ref
   ) => {
     return (
-      <S.Container>
+      <S.Container onClick={onClick}>
         {label ? (
           <S.LabelField>
             <Text variant="body2R">{label}</Text>
