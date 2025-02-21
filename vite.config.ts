@@ -63,6 +63,9 @@ export default defineConfig({
         enabled: true, // 개발 모드에서 PWA 활성화
         type: 'module', // Service Worker 파일 타입
       },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10MB로 설정 (기본값은 2MB)
+      },
     }),
   ],
   resolve: {
