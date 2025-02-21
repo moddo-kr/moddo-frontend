@@ -48,6 +48,7 @@ export const ShortcutButton = styled.button<{ $isDanger?: boolean }>`
     $isDanger
       ? theme.color.semantic.state.danger
       : theme.color.semantic.text.default};
+  white-space: nowrap;
 `;
 
 export const NumCellWrapper = styled.div`
