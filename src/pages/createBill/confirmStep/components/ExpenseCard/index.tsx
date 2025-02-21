@@ -4,6 +4,8 @@ import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
 import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
 import { Expense } from '@/pages/createBill/types/expense.type';
+import Text from '@/common/components/Text';
+import Button from '@/common/components/Button';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
@@ -34,10 +36,10 @@ function ExpenseCard({
     <S.ExpenseCardWrapper>
       <S.Card>
         <S.TopWrapper>
-          <S.Index>{index + 1}차</S.Index>
+          <Text variant="title">{index + 1}차</Text>
           <S.IconButtonsWrapper>
-            <S.IconButton
-              type="button"
+            <Button
+              variant="text"
               onClick={() => {
                 moveToEditStep({
                   id,
@@ -51,26 +53,30 @@ function ExpenseCard({
               }}
             >
               <CarbonEdit />
-            </S.IconButton>
+            </Button>
             {index !== 0 ? (
-              <S.IconButton type="button" onClick={handleDelete}>
+              <Button variant="text" onClick={handleDelete}>
                 <Close />
-              </S.IconButton>
+              </Button>
             ) : null}
           </S.IconButtonsWrapper>
         </S.TopWrapper>
-        <S.Content>{content}</S.Content>
+        <Text variant="body1R">{content}</Text>
         <S.BottomWrapper>
           <S.Distribute>
-            <S.DistributeText>{amount.toLocaleString()}</S.DistributeText>
-            <S.DistributeText> 원</S.DistributeText>
+            <Text variant="heading2">{amount.toLocaleString()}</Text>
+            <Text variant="heading2">원</Text>
           </S.Distribute>
           <S.MemberCollapse collapsible variant="plain">
             <S.CollapseItem value="members">
               <S.CollapseTrigger>
-                <S.TriggerText>
-                  총 <S.MemberCount>{memberExpenses.length}</S.MemberCount>명
-                </S.TriggerText>
+                <Text variant="body2Sb">
+                  총{' '}
+                  <Text variant="body2Sb" color="semantic.orange.default">
+                    {memberExpenses.length}
+                  </Text>
+                  명
+                </Text>
                 <Next width="1.5rem" />
               </S.CollapseTrigger>
               <S.CollapseContent>
@@ -78,7 +84,10 @@ function ExpenseCard({
                   <Chip
                     key={`${index}-${member.id}`}
                     label={member.name}
-                    variant="secondary"
+                    variant={
+                      member.role === 'MANAGER' ? 'primary' : 'secondary'
+                    }
+                    size="sm"
                   />
                 ))}
               </S.CollapseContent>
