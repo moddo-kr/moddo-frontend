@@ -33,7 +33,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
     <FormProvider {...formMethods}>
       <Header
         type="TitleCenter"
-        leftButtonContent={<Close width="1.5rem" />}
+        leftButtonContent={<Close width={24} />}
         leftButtonOnClick={() => moveToNextStep?.()}
       />
       <DescriptionField
