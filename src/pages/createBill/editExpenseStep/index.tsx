@@ -21,7 +21,7 @@ function EditExpenseStep({
   initialExpense,
   moveToNextStep,
 }: EditExpenseStepProps) {
-  const { groupInfo, formMethods, fieldArrayReturns, setGroupInfo } =
+  const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray(initialExpense);
   const { groupToken } = useLoaderData();
   const mutation = useUpdateExpense({ moveToNextStep, groupToken });
@@ -48,12 +48,7 @@ function EditExpenseStep({
       </S.TopWrapper>
       <S.BillFormList>
         {fieldArrayReturns.fields.map((field, index) => (
-          <FormCard
-            key={field.id}
-            ref={null}
-            index={index}
-            setGroupInfo={setGroupInfo}
-          />
+          <FormCard key={field.id} ref={null} index={index} />
         ))}
       </S.BillFormList>
       <S.ButtonWrapper>
