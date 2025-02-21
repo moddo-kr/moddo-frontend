@@ -84,10 +84,11 @@ function AddMember({ members }: AddMemberProps) {
           총 <Text>{members.length}</Text>명
         </Text>
         <Flex gap={3} flexWrap="wrap">
-          {members.map((member) => (
+          {members.map((member, index) => (
             <MemberProfile
               key={member.id}
               member={member}
+              index={index}
               handleDeleteButtonClick={handleDeleteMember}
             />
           ))}
