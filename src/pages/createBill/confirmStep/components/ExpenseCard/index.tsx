@@ -52,11 +52,11 @@ function ExpenseCard({
                 });
               }}
             >
-              <CarbonEdit />
+              <CarbonEdit width={20} />
             </Button>
             {index !== 0 ? (
               <Button variant="text" onClick={handleDelete}>
-                <Close />
+                <Close width={20} />
               </Button>
             ) : null}
           </S.IconButtonsWrapper>
