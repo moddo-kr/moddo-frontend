@@ -1,3 +1,5 @@
+export { default as ActivePicker } from './ActivePicker';
+export { default as DefaultPicker } from './DefaultPicker';
 export { default as Add } from './Add';
 export { default as ArrowDown } from './ArrowDown';
 export { default as ArrowLeft } from './ArrowLeft';
