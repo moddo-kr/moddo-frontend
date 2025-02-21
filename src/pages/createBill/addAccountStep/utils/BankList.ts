@@ -4,11 +4,11 @@
  * bankName=경남.png -> 경남
  * */
 export const getBankImagesAndUrl = () => {
-  const files = import.meta.glob('/public/pngs/banks/bankName=*.png');
+  const files = import.meta.glob('/src/assets/pngs/banks/bankName=*.png');
 
   const bankNames = Object.keys(files).map((filePath) => {
     const bankName = filePath.split('=')[1].split('.')[0];
-    const url = `/public/pngs/banks/${filePath.split('/').pop()}`;
+    const url = `/src/assets/pngs/banks/${filePath.split('/').pop()}`;
     return { bankName, url };
   });
 

@@ -23,5 +23,5 @@ export const StatusChip = styled.div<StyledStatusChipProps>`
   padding: ${({ theme }) => `${theme.unit[4]} ${theme.unit[8]}`};
   border-radius: ${({ theme }) => theme.unit[6]};
   ${TextVariant('caption')};
-  ${({ $status }) => statusVariants[$status]}
+  ${({ $status }) => statusVariants[$status]};
 `;

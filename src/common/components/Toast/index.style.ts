@@ -14,7 +14,7 @@ export const Container = styled(ToastContainer)`
     background: ${({ theme }) =>
       theme.color.semantic.background.normal.inverse};
     gap: ${({ theme }) => theme.unit[8]};
-    bottom: ${({ theme }) => theme.unit[128]};
+    bottom: ${({ theme }) => theme.unit[72]};
   }
   .Toastify__toast-icon {
     width: ${({ theme }) => theme.unit[20]};

@@ -8,10 +8,10 @@ const SvgConfirm = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
   >
     <path
-      stroke="#444950"
+      stroke="current"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={1.6}
+      strokeWidth={2}
       d="M18.5 1 6.813 13 1.5 7.545"
     />
   </svg>
