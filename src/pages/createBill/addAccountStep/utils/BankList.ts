@@ -1,4 +1,5 @@
 /**
+ * @Todo 변경필요
  * 파일 경로에서 bankName과 URL을 매핑하여 배열 리턴
  * 파일 이름에서 bankName을 추출하고, URL을 매핑
  * bankName=경남.png -> 경남
