@@ -13,6 +13,7 @@ export interface HeaderProps {
   rightButtonOnClick?: () => void;
   type: 'TitleLeft' | 'TitleCenter';
   handleBackButtonClick?: () => void; // FIXME : 타입 오류를 방지하기 위해 남겨둠. 수정 필요함
+  bgColor?: string;
 }
 
 function Header({
@@ -24,13 +25,14 @@ function Header({
   rightButtonContent,
   leftButtonOnClick,
   rightButtonOnClick,
+  bgColor,
 }: HeaderProps) {
   const theme = useTheme();
 
   switch (type) {
     case 'TitleLeft':
       return (
-        <S.LeftHeaderArea>
+        <S.LeftHeaderArea $bgColor={bgColor}>
           <S.IconWrapper>
             {showIcon ? (
               <ArrowLeft
@@ -47,7 +49,7 @@ function Header({
       );
     case 'TitleCenter':
       return (
-        <S.CenterHeaderArea>
+        <S.CenterHeaderArea $bgColor={bgColor}>
           {leftButtonContent ? (
             <Button variant="text" onClick={leftButtonOnClick}>
               {leftButtonContent}

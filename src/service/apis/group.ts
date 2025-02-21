@@ -2,6 +2,7 @@ import {
   AccountVariable,
   CreateGroupData,
   Group,
+  GroupHeaderResponse,
 } from '@/common/types/group.type';
 import axiosInstance from './axios';
 
@@ -30,6 +31,14 @@ const group = {
     console.log(response);
     return response.data;
   },
+};
+
+export const getGroupHeader = (
+  groupToken: string
+): Promise<GroupHeaderResponse> => {
+  return axiosInstance
+    .get(`/group/header?groupToken=${groupToken}`)
+    .then((res) => res.data);
 };
 
 export default group;

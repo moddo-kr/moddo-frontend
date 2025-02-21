@@ -19,3 +19,11 @@ export interface AccountVariable {
   bank: string;
   accountNumber: string;
 }
+
+export interface GroupHeaderResponse {
+  groupName: string;
+  totalAmount: number;
+  deadline: Date;
+  bank: string;
+  accountNumber: string;
+}
