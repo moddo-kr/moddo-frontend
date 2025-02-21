@@ -4,13 +4,13 @@ import Text from '@/common/components/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
-import * as S from './index.style';
 import { useEffect, useState } from 'react';
 import { CoinLottie } from '@/common/components/Lottie';
 import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
 import theme from '@/styles/theme';
 import Button from '@/common/components/Button';
 import { Kakao } from '@/assets/svgs/icon';
+import * as S from './index.style';
 
 function Login() {
   const { refetch: getGuestToken } = useGetGuestToken();
@@ -63,7 +63,7 @@ function Login() {
     <Flex
       direction="column"
       alignItems="center"
-      justifyContent={'space-between'}
+      justifyContent="space-between"
       bgColor="#fff"
       flexGrow={1}
     >
@@ -81,10 +81,10 @@ function Login() {
             background: '#FEE500',
           }}
           onClick={() => handleLoginButtonClick('KAKAO')}
-          disabled={true}
+          disabled
         >
           <Kakao width={theme.unit[24]} />
-          <Text variant="body1Sb" color="semantic.text.strong" >
+          <Text variant="body1Sb" color="semantic.text.strong">
             카카오로 로그인
           </Text>
         </Button>

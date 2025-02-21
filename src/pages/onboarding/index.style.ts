@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { EntranceImg, ImgContainer } from '../auth/login/index.style';
 
 export const Wrapper = styled.div`
   display: flex;

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import * as S from './index.style';
 import Button from '@/common/components/Button';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
@@ -14,6 +13,7 @@ import {
 } from '@/common/components/Lottie';
 import Header from '@/common/components/Header';
 import Onboarding1 from '@/assets/pngs/Onboarding1.png';
+import * as S from './index.style';
 
 function Onboarding() {
   const [step, setStep] = useState<number>(0);
@@ -120,6 +120,7 @@ function Onboarding() {
         )}
         <S.BottomContainer step={step}>
           <S.StepIndicator>
+            {/* eslint-disable */}
             {Array.from({ length: 4 }).map((_, index) =>
               step === index ? (
                 <ActivePicker
@@ -135,6 +136,7 @@ function Onboarding() {
                 />
               )
             )}
+            {/* eslint-disable */}
           </S.StepIndicator>
           <Button onClick={handleNextClicked} style={{ width: '100%' }}>
             {step < 3 ? '다음' : '시작하기'}

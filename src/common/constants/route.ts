@@ -1,5 +1,3 @@
-import { on } from "events";
-
 export const BASE_URL = 'https://www.moddo.kr';
 
 export const ROUTE = {

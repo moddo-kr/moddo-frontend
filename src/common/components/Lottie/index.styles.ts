@@ -1,4 +1,3 @@
-import { Onboarding4 } from '@/assets/lottie/Onboarding_4.json';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -25,4 +24,3 @@ export const Onboarding2Wrapper = styled.div`
   bottom: -300px;
   max-width: 400px;
 `;
-
