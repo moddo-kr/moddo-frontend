@@ -11,7 +11,12 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   ({ variant = 'lg', ...props }, ref) => {
     return (
       <S.Container>
-        <S.NumberInput ref={ref} $variant={variant} {...props} />
+        <S.NumberInput
+          inputMode="none"
+          ref={ref}
+          $variant={variant}
+          {...props}
+        />
         <Text
           variant={variant === 'lg' ? 'title' : 'body1Sb'}
           color={

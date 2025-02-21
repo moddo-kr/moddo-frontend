@@ -32,7 +32,12 @@ function DatePicker({ selected, onChange, open }: DatePickerProps) {
         dateFormat="yyyy. MM. dd. (eee)"
         open={open}
         customInput={
-          <Input placeholder="" readOnly icon={<Calendar width={unit[24]} />} />
+          <Input
+            placeholder=""
+            inputMode="none"
+            readOnly
+            icon={<Calendar width={unit[24]} />}
+          />
         }
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <S.Header>
