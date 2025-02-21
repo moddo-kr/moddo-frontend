@@ -1,9 +1,3 @@
-/** colors 배열 안의 색을 리턴하는 함수 */
-export const getRandomColor = (index: number) => {
-  const color = colors[index % colors.length];
-  return color;
-};
-
 const colors = [
   '#ff9958',
   '#A59CC7',
@@ -16,3 +10,9 @@ const colors = [
   '#FDB456',
   '#FDEBA9',
 ];
+
+/** colors 배열 안의 색을 리턴하는 함수 */
+export const getRandomColor = (index: number) => {
+  const color = colors[index % colors.length];
+  return color;
+};

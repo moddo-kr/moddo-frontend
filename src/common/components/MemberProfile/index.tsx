@@ -15,10 +15,10 @@ interface MemberProfileProps {
 function MemberProfile({
   member,
   handleDeleteButtonClick,
-  index
+  index,
 }: MemberProfileProps) {
   // useMemo를 사용하여 부모 컴포넌트의 리렌더링에도 불필요하게 새로운 색상이 생성되지 않도록 함
-  const profileBgColor = useMemo(() => getRandomColor(index), []);
+  const profileBgColor = useMemo(() => getRandomColor(index), [index]);
 
   return (
     <Flex

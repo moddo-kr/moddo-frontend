@@ -1,6 +1,5 @@
-import { ProfileImg as MemberProfileImg } from '../../../../common/components/MemberProfile/index.style';
-
 import styled from 'styled-components';
+import { ProfileImg as MemberProfileImg } from '../../../../common/components/MemberProfile/index.style';
 
 export const Wrapper = styled.div`
   display: flex;

@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { getRandomColor } from '@/common/utils/getRandomColor';
-import * as S from './index.style';
 import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
 import Text from '@/common/components/Text';
 import StatusChip from '@/common/components/StatusChip';
 import Button from '@/common/components/Button';
 import { ArrowDown, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
+import * as S from './index.style';
 
 interface ExpenseMembersProps {
   groupToken: string;
@@ -50,10 +50,7 @@ function ExpenseMemberItem({ member, color }: ExpenseMemberItemProps) {
           <S.StatusChipButton>
             <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
           </S.StatusChipButton>
-          <Button
-            variant="text"
-            onClick={handleArrowButtonClick}
-          >
+          <Button variant="text" onClick={handleArrowButtonClick}>
             <div
               style={{
                 display: 'flex',
