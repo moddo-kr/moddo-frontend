@@ -11,6 +11,7 @@ import Login from '@/pages/auth/login';
 import LoginSuccess from '@/pages/auth/loginSuccess';
 import Home from '@/pages/home';
 import BillDetail from '@/pages/billDetail';
+import CharacterShare from './pages/billDetail/characterShare';
 
 function AppRouter() {
   const router = createBrowserRouter([
@@ -60,6 +61,11 @@ function AppRouter() {
       path: ROUTE.billDetail,
       element: <BillDetail />,
       loader: groupTokenUrlLoader,
+    },
+    {
+      path: ROUTE.billDetailCharacterShare,
+      element: <CharacterShare />,
+      loader: groupTokenUrlLoader, // TODO : 권한 확인하기
     },
   ]);
 

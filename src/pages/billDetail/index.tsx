@@ -7,10 +7,10 @@ import Header from '@/common/components/Header';
 import { TabsList, Tab } from '@/common/components/Tabs';
 import Text from '@/common/components/Text';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-
 import Divider from '@/common/components/Divider';
-import * as S from './index.styles';
 import ExpenseTimeline from './components/ExpenseTimeline';
+import CharacterBottomSheet from './components/CharacterBottomSheet';
+import * as S from './index.styles';
 
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
 import ExpenseMembers from './components/ExpenseMembers';
@@ -24,6 +24,7 @@ function BillDetail() {
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData } = useLoaderData();
 
+  const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   // TODO : 필요하다면 useQuery의 initialData에 groupData를 넣어서 사용
   const theme = useTheme();
 
@@ -48,6 +49,7 @@ function BillDetail() {
         <ExpenseTimeHeader
           totalMember={MEMBER_TOTAL}
           paidMember={MEMBER_DONE}
+          onShareClick={() => setOpenBottomSheet(true)}
         />
         <Divider />
         <S.TabListContainer>
@@ -65,6 +67,10 @@ function BillDetail() {
       <BottomButtonContainer>
         <Button>링크 공유하기</Button>
       </BottomButtonContainer>
+      <CharacterBottomSheet
+        open={openBottomSheet}
+        setOpen={setOpenBottomSheet}
+      />
     </>
   );
 }

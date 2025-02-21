@@ -9,4 +9,5 @@ export const Wrapper = styled.div<{ $direction: ButtonGroupDirection }>`
       : `grid-template-rows: repeat(auto-fit, minmax(0, auto));`} // 가능한 만큼의 행을 균등하게 분배
   gap: ${({ theme, $direction }) =>
     $direction === 'horizontal' ? theme.unit[12] : theme.unit[8]};
+  width: 100%;
 `;

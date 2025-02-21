@@ -20,11 +20,13 @@ import { getFormatDate } from '../../utils/getFormatDate';
 interface ExpenseTimeHeaderProps {
   totalMember: number;
   paidMember: number;
+  onShareClick: () => void;
 }
 
 function ExpenseTimeHeader({
   totalMember,
   paidMember,
+  onShareClick,
 }: ExpenseTimeHeaderProps) {
   const [status, setStatus] = useState<StatusType>('pending');
   const [hours, setHours] = useState<number>(0);
@@ -95,10 +97,14 @@ function ExpenseTimeHeader({
   const endDate = new Date(headerData.deadline);
 
   const handleModdoButtonClick = () => {
-    /** @Todo success 시의 action 추가 정의 */
+    if (status === 'success') {
+      onShareClick();
+      return;
+    }
     setIsBubble(true);
     setTimeout(() => {
       setIsBubble(false);
+      onShareClick(); // 테스트용 로직
     }, 2000);
   };
 
