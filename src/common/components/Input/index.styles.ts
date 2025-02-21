@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: ${({ theme }) => theme.unit[8]};
   width: 100%;
+  min-width: 0;
 `;
 
 export const LabelField = styled.div`
