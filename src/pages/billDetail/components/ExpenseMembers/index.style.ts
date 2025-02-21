@@ -56,6 +56,7 @@ export const StatusChipButton = styled.button`
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  z-index: 100;
 `;
 
 export const DetailContainer = styled.div<{ isOpen: boolean }>`
