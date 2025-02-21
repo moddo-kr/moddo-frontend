@@ -52,6 +52,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
       };
     },
   });
+
   const defaultFormValue = useMemo(() => {
     if (!groupInfo) {
       return defaultValues;
@@ -67,6 +68,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
       })),
     };
   }, [groupInfo]);
+
   const fieldArrayReturns = useFieldArray({
     control: formMethods.control,
     name: 'expenses',
@@ -77,6 +79,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
     formMethods,
     defaultFormValue,
     fieldArrayReturns,
+    setGroupInfo,
   };
 };
 

@@ -15,16 +15,18 @@ import FormField from '@/pages/createBill/components/FormField';
 import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
 import MemberBottomSheet from '@/pages/createBill/components/MemberBottomSheet';
 import MemberExpenses from '@/pages/createBill/components/MemberExpenses';
+import { Group } from '@/common/types/group.type';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
 interface FormCardProps {
   index: number;
   onDelete?: (index: number) => void; // 폼 삭제 버튼 클릭 시 호출되는 함수
+  setGroupInfo: (groupInfo: Group) => void; // 참여자 추가 시에 그룹 정보를 업데이트하는 함수
 }
 
 const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
-  ({ index, onDelete }, ref) => {
+  ({ index, onDelete, setGroupInfo }, ref) => {
     const { register, watch, setValue, control } = useFormContext();
     const [openNumPad, setOpenNumPad] = useState(false);
     const [openMemberSheet, setOpenMemberSheet] = useState(false);
@@ -152,6 +154,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
         <MemberBottomSheet
           open={openMemberSheet}
           setOpen={setOpenMemberSheet}
+          setGroupInfo={setGroupInfo}
         />
       </>
     );

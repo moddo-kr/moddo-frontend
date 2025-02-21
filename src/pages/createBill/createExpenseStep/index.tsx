@@ -25,8 +25,13 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const mutation = useCreateExpense({ moveToNextStep, groupToken });
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
-    useAddExpenseFormArray();
+  const {
+    groupInfo,
+    formMethods,
+    defaultFormValue,
+    fieldArrayReturns,
+    setGroupInfo,
+  } = useAddExpenseFormArray();
 
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
@@ -99,6 +104,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
             }
             index={index}
             onDelete={handleDeleteExpense}
+            setGroupInfo={setGroupInfo}
           />
         ))}
       </S.BillFormList>

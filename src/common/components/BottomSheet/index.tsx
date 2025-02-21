@@ -10,6 +10,7 @@ export interface BottomSheetProps {
   children: ReactNode;
   isPadding?: boolean;
   pb?: number;
+  onCloseHandler?: () => void;
 }
 
 function BottomSheet({
@@ -18,6 +19,7 @@ function BottomSheet({
   children,
   isPadding = false,
   pb,
+  onCloseHandler,
   ...rest
 }: BottomSheetProps) {
   const bottomSheetRoot = document.querySelector(
@@ -33,6 +35,7 @@ function BottomSheet({
   }, [open]);
 
   const onClose = () => {
+    onCloseHandler?.();
     setOpen(false);
   };
 
