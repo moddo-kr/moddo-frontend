@@ -3,39 +3,29 @@ import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { showToast } from '@/common/components/Toast';
 import Button from '@/common/components/Button';
-import { useNavigate } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-// eslint-disable-next-line import/no-absolute-path
-import characterImageUrl from '/pngs/angle-moddo.png';
 import { ArrowLeft, Download } from '@/assets/svgs/icon';
-import { CharacterData } from '@/common/types/character';
 import {
-  CHARACTER_NAME,
   CHARACTER_IMAGE_SIZE,
   CHARACTER_DESCRIPTION,
 } from '@/common/constants/character';
 import StarChip from '@/common/components/StarChip';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
-// import useGetRandomCharacter from '@/common/queries/image/useGetRandomCharacter';
+import useGetCharacter from '@/common/queries/image/useGetCharacter';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
 
-const data: CharacterData = {
-  name: 'angel',
-  rarity: 2,
-  imageUrl: characterImageUrl,
-  imageBigUrl: characterImageUrl,
-};
-
 function CharacterShare() {
-  // const { groupToken } = useLoaderData();
-  // const { data, isLoading, isError } = useGetRandomCharacter();
+  const { groupToken } = useLoaderData();
+  const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
   const { unit } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
+    if (!data) return;
     // 돔 요소를 이미지로 변환
     if (imageRef.current) {
       // 440x440 사이즈로 이미지 다운로드
@@ -57,9 +47,12 @@ function CharacterShare() {
     }
   };
 
-  // if (isLoading || isError || !data) {
-  //   return null;
-  // }
+  if (isLoading) return null;
+
+  if (isError || !data) {
+    // 캐릭터가 아직 없는 경우에 대한 처리가 필요할 수도 있음
+    return null;
+  }
 
   return (
     <>
@@ -80,14 +73,14 @@ function CharacterShare() {
             <S.CharacterImageContainer>
               <img
                 src={data.imageBigUrl}
-                alt={CHARACTER_NAME[data.name]}
+                alt={data.name}
                 style={{
                   ...CHARACTER_IMAGE_SIZE[data.name].big,
                 }}
               />
             </S.CharacterImageContainer>
             <Text variant="heading2" color="semantic.text.strong">
-              {CHARACTER_NAME[data.name]}
+              {data.name}
             </Text>
             <Text variant="body1R" color="semantic.text.subtle">
               {CHARACTER_DESCRIPTION[data.name]}

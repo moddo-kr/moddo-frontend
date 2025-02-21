@@ -1,13 +1,5 @@
 import { CharacterType } from '@/common/types/character';
 
-export const CHARACTER_NAME: Record<CharacterType, string> = {
-  angel: '천사 모또',
-  lucky: '러키 모또',
-  strawberry: '딸기 또또',
-  sleep: '잠꾸러기 또또',
-  magic: '마법사 또또',
-};
-
 export const CHARACTER_IMAGE_SIZE: Record<
   CharacterType,
   {
@@ -21,7 +13,7 @@ export const CHARACTER_IMAGE_SIZE: Record<
     };
   }
 > = {
-  angel: {
+  '천사 모또': {
     big: {
       width: '15rem',
     },
@@ -29,7 +21,7 @@ export const CHARACTER_IMAGE_SIZE: Record<
       width: '12rem',
     },
   },
-  lucky: {
+  '러키 모또': {
     big: {
       width: '12.5rem',
     },
@@ -37,7 +29,7 @@ export const CHARACTER_IMAGE_SIZE: Record<
       width: '10rem',
     },
   },
-  strawberry: {
+  '딸기 또또': {
     big: {
       width: '12.5rem',
     },
@@ -46,7 +38,7 @@ export const CHARACTER_IMAGE_SIZE: Record<
       height: '10rem',
     },
   },
-  sleep: {
+  '잠꾸러기 또또': {
     big: {
       width: '12.5rem',
     },
@@ -54,7 +46,7 @@ export const CHARACTER_IMAGE_SIZE: Record<
       width: '10rem',
     },
   },
-  magic: {
+  '마법사 또또': {
     big: {
       height: '13.72844rem',
     },
@@ -65,9 +57,9 @@ export const CHARACTER_IMAGE_SIZE: Record<
 };
 
 export const CHARACTER_DESCRIPTION: Record<CharacterType, string> = {
-  angel: '정산의 수호천사 등장!',
-  lucky: '정산 성공! 좋은 일만 가득하길~',
-  strawberry: '정산 완료! 달콤한 하루 보내~',
-  sleep: '정산 끝났어? 이제 푹 잘 수 있겠네~',
-  magic: '정산? 아브라카다브라! 해결 완료~',
+  '천사 모또': '정산의 수호천사 등장!',
+  '러키 모또': '정산 성공! 좋은 일만 가득하길~',
+  '딸기 또또': '정산 완료! 달콤한 하루 보내~',
+  '잠꾸러기 또또': '정산 끝났어? 이제 푹 잘 수 있겠네~',
+  '마법사 또또': '정산? 아브라카다브라! 해결 완료~',
 };

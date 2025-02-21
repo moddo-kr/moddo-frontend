@@ -7,7 +7,7 @@ import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
-import { useParams } from 'react-router';
+import { useLoaderData } from 'react-router';
 import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
@@ -39,7 +39,7 @@ function ExpenseTimeHeader({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-  const { groupToken } = useParams<{ groupToken: string }>();
+  const { groupToken } = useLoaderData();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
