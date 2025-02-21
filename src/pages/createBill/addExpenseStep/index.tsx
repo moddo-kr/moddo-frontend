@@ -7,6 +7,10 @@ import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormAr
 import { FormProvider } from 'react-hook-form';
 import Header from '@/common/components/Header';
 import FormCard from '@/pages/createBill/components/FormCard';
+import Button from '@/common/components/Button';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import DescriptionField from '@/common/components/DescriptionField';
+import Text from '@/common/components/Text';
 import * as S from './index.styles';
 
 interface AddExpenseStepProps
@@ -32,12 +36,17 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
         leftButtonContent={<Close width="1.5rem" />}
         leftButtonOnClick={() => moveToNextStep?.()}
       />
-      <S.TopWrapper>
-        <S.TopMessage>
-          <S.MoimName>{groupInfo.groupName}</S.MoimName>
-          {`의\n지출 내역을 입력해주세요.`}
-        </S.TopMessage>
-      </S.TopWrapper>
+      <DescriptionField
+        title={
+          <>
+            <Text variant="heading2" color="semantic.orange.default">
+              {groupInfo.groupName}
+            </Text>
+            {`의\n지출 내역을 입력해주세요.`}
+          </>
+        }
+        sub="총 지출 금액을 1/N로 나눌게요."
+      />
       <S.BillFormList>
         {fieldArrayReturns.fields.map((field, index) => (
           <FormCard
@@ -48,17 +57,16 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
           />
         ))}
       </S.BillFormList>
-      <S.ButtonWrapper>
-        <S.BottomButton
-          type="button"
+      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
+        <Button
           onClick={handleSubmit((data) =>
             mutation.mutate({ groupToken, data })
           )}
           disabled={!allFormsValid}
         >
           지출 추가
-        </S.BottomButton>
-      </S.ButtonWrapper>
+        </Button>
+      </BottomButtonContainer>
     </FormProvider>
   );
 }
