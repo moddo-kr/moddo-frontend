@@ -1,9 +1,14 @@
-import { Button, Flex } from '@chakra-ui/react';
 import { useLoaderData, useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
+import Text from '@/common/components/Text';
 import AddMember from '@/common/components/AddMember';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { ROUTE } from '@/common/constants/route';
+import { useTheme } from 'styled-components';
+import { ArrowLeft } from '@/assets/svgs/icon';
+import DescriptionField from '@/common/components/DescriptionField';
+import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import Button from '@/common/components/Button';
 import * as S from '../index.styles';
 
 export interface ParticipantProfile {
@@ -12,6 +17,7 @@ export interface ParticipantProfile {
 }
 
 function MemberSetup() {
+  const { unit } = useTheme();
   const navigate = useNavigate();
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
@@ -27,36 +33,25 @@ function MemberSetup() {
   return (
     <>
       <Header
-        title=""
-        showIcon
-        type="TitleLeft"
-        handleBackButtonClick={() => navigate(-1)}
+        type="TitleCenter"
+        leftButtonContent={
+          <>
+            <ArrowLeft width={unit[24]} />
+            <Text>뒤로가기</Text>
+          </>
+        }
+        leftButtonOnClick={() => navigate(-1)}
       />
-      <Flex
-        direction="column"
-        justify="space-between"
-        mx="5"
-        height="100%"
-        mt="10px"
-        mb="32px"
-        flexGrow={1}
-      >
-        <Flex direction="column">
-          <S.TitleText>
-            모임에 함께한
-            <br />
-            참여자를 추가해주세요.
-          </S.TitleText>
-          <AddMember members={data.members.reverse()} />
-        </Flex>
-        <Button
-          height={12}
-          borderRadius={12}
-          onClick={() => navigate(ROUTE.createBill)}
-        >
-          정산 시작!
-        </Button>
-      </Flex>
+      <DescriptionField
+        title={`모임에 함께한\n참여자를 추가해주세요.`}
+        sub="참여자는 지출 내역에서도 추가할 수 있어요!"
+      />
+      <S.PageContentWrapper>
+        <AddMember members={data.members.reverse()} />
+      </S.PageContentWrapper>
+      <BottomButtonContainer>
+        <Button onClick={() => navigate(ROUTE.createBill)}>정산 시작!</Button>
+      </BottomButtonContainer>
     </>
   );
 }
