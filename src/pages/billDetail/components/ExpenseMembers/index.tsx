@@ -13,6 +13,7 @@ import useUpdatePaymentStatus from '@/common/queries/groupMembers/useUpdatePayme
 
 interface ExpenseMembersProps {
   groupToken: string;
+  status: string;
 }
 
 // 개별 멤버 렌더링 컴포넌트
@@ -20,9 +21,10 @@ interface ExpenseMemberItemProps {
   member: MemberExpense;
   color: string;
   groupToken: string;
+  status: string;
 }
 
-function ExpenseMemberItem({ member, color, groupToken }: ExpenseMemberItemProps) {
+function ExpenseMemberItem({ member, color, groupToken, status }: ExpenseMemberItemProps) {
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
@@ -35,9 +37,11 @@ function ExpenseMemberItem({ member, color, groupToken }: ExpenseMemberItemProps
   });
 
   /** 상태 변경 함수 */
-  const handleTextButtonClick = (status: boolean) => {
-    setIsPaid(status);
-    if (status !== member.isPaid) {
+  const handleTextButtonClick = (paidUpdate: boolean) => {
+    if (status === 'success') return;
+
+    setIsPaid(paidUpdate);
+    if (paidUpdate !== member.isPaid) {
       setIsConfirm(true); // 상태가 바뀌면 확인 버튼 활성화
     } else {
       setIsConfirm(false); // 상태가 같으면 확인 버튼 비활성화
@@ -84,7 +88,7 @@ function ExpenseMemberItem({ member, color, groupToken }: ExpenseMemberItemProps
           </S.StatusChipButton>
           {/* 정산 상태 변경 바텀시트 */}
           <BottomSheet
-            open={open}
+            open={open && status !== 'success'}
             setOpen={resetState}
             isPadding={true}
             pb={16}
@@ -185,7 +189,7 @@ function ExpenseMemberItem({ member, color, groupToken }: ExpenseMemberItemProps
   );
 }
 
-function ExpenseMembers({ groupToken }: ExpenseMembersProps) {
+function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
   const {
     data: memberExpenseData,
     isLoading,
@@ -213,6 +217,7 @@ function ExpenseMembers({ groupToken }: ExpenseMembersProps) {
           member={member}
           color={colors[index]}
           groupToken={groupToken}
+          status={status}
         />
       ))}
     </S.Wrapper>
