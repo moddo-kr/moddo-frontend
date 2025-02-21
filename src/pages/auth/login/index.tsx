@@ -1,14 +1,20 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
 import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
 import * as S from './index.style';
+import { useEffect, useState } from 'react';
+import { CoinLottie } from '@/common/components/Lottie';
+import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
+import theme from '@/styles/theme';
 
 function Login() {
   const { refetch: getGuestToken } = useGetGuestToken();
   const navigate = useNavigate();
+  const [isEntrance, setIsEntrance] = useState(true);
 
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
@@ -20,6 +26,35 @@ function Login() {
       navigate(ROUTE.selectGroup);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsEntrance(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isEntrance) {
+    return (
+      <Flex
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        bgColor={theme.color.semantic.orange.subtle}
+        flexGrow={1}
+        gap={theme.unit[16]}
+      >
+        <S.TextContainer>
+        <S.LogoImg src={LogoImg} alt="logo" />
+        <Text variant='body1R' color='semantic.text.strong'>모또와 함께라면 정산 걱정 끝!</Text>
+        </S.TextContainer>
+        <S.ImgContainer>
+        <CoinLottie />
+        <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />
+        </S.ImgContainer>
+      </Flex>
+    );
+  }
 
   return (
     <Flex direction="column" alignItems="center" bgColor="#FAF6F3" flexGrow={1}>
