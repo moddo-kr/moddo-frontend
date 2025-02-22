@@ -1,24 +1,12 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
-// eslint-disable-next-line import/no-absolute-path
-import characterImageUrl from '/pngs/angle-moddo.png';
 import Text from '@/common/components/Text';
-import { CharacterData } from '@/common/types/character';
-import {
-  CHARACTER_NAME,
-  CHARACTER_IMAGE_SIZE,
-} from '@/common/constants/character';
+import { CHARACTER_IMAGE_SIZE } from '@/common/constants/character';
 import { ROUTE } from '@/common/constants/route';
 import BottomSheet from '@/common/components/BottomSheet';
 import ButtonGroup from '@/common/components/ButtonGroup';
 import Button from '@/common/components/Button';
+import useGetCharacter from '@/common/queries/image/useGetCharacter';
 import * as S from './index.styles';
-
-const DUMMY_CHARACTER_DATA: CharacterData = {
-  name: 'angel',
-  rarity: 2,
-  imageUrl: characterImageUrl,
-  imageBigUrl: characterImageUrl,
-};
 
 interface CharacterBottomSheetProps {
   open: boolean;
@@ -27,24 +15,31 @@ interface CharacterBottomSheetProps {
 
 function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
   const { groupToken } = useLoaderData();
-  // const { data } = useGetCharacter({ groupToken });
+  const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
+
+  if (isLoading) return null;
+
+  if (isError || !data) {
+    // 캐릭터가 아직 없는 경우에 대한 처리가 필요할 수도 있음
+    return null;
+  }
 
   return (
     <BottomSheet open={open} setOpen={setOpen}>
       <S.BottomSheetContainer>
         <S.CharacterImageContainer>
           <img
-            src={DUMMY_CHARACTER_DATA.imageUrl}
-            alt={CHARACTER_NAME[DUMMY_CHARACTER_DATA.name]}
+            src={data.imageUrl}
+            alt={data.name}
             style={{
-              ...CHARACTER_IMAGE_SIZE[DUMMY_CHARACTER_DATA.name].small,
+              ...CHARACTER_IMAGE_SIZE[data.name].small,
             }}
           />
         </S.CharacterImageContainer>
         <S.DescriptionContainer>
           <Text variant="heading2" color="semantic.text.strong">
-            두둥, {CHARACTER_NAME[DUMMY_CHARACTER_DATA.name]} 등장!
+            두둥, {data.name} 등장!
           </Text>
           <Text>
             모두가 시간 내에 정산을 완료했어요!

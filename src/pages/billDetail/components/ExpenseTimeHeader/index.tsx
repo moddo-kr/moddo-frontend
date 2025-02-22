@@ -7,7 +7,7 @@ import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
-import { useParams } from 'react-router';
+import { useLoaderData } from 'react-router';
 import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
@@ -39,7 +39,7 @@ function ExpenseTimeHeader({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-  const { groupToken } = useParams<{ groupToken: string }>();
+  const { groupToken } = useLoaderData();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -129,6 +129,7 @@ function ExpenseTimeHeader({
       ? theme.color.primitive.base.white
       : theme.color.semantic.secondary.heavy;
   const endDate = new Date(headerData.deadline);
+  const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
   const handleModdoButtonClick = () => {
     if (status === 'success') {
@@ -164,15 +165,16 @@ function ExpenseTimeHeader({
         }
         sub={
           <Flex gap={theme.unit[4]} alignItems="center">
-            정산 계좌: {headerData.accountNumber}
+            정산 계좌: {accountFormat}
             <Button
               variant="text"
-              onClick={() => handleCopyButtonClick(headerData.accountNumber)}
+              onClick={() => handleCopyButtonClick(accountFormat)}
             >
               <Copy width={theme.unit[16]} height={theme.unit[16]} />
             </Button>
           </Flex>
         }
+        bgColor="semantic.background.normal.alternative"
       />
       <div style={{ height: `${theme.unit[20]}` }} />
       <CurvedProgressBar percentage={percentage}>

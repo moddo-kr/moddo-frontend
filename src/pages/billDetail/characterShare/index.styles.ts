@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const TitleContainer = styled.div`
   width: 100%;
   text-align: center;
+  background-color: ${({ theme }) =>
+    theme.color.semantic.background.normal.alternative};
   padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[20]}`};
 `;
 
@@ -14,6 +16,8 @@ export const CharacterContainer = styled.div`
   justify-content: center;
   overflow-y: auto;
   flex: 1;
+  background-color: ${({ theme }) =>
+    theme.color.semantic.background.normal.alternative};
 `;
 
 // 다운로드 되는 회색 영역을 포함한 캐릭터 카드
