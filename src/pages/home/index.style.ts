@@ -111,3 +111,12 @@ export const BoxButtonWrapper = styled.div`
     `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
   gap: ${({ theme }) => theme.unit[8]};
 `;
+
+export const SettlementListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.unit[20]};
+  margin: ${({ theme }) => `${theme.unit[20]} 0`};
+  overflow-y: auto;
+  flex: 1;
+`;

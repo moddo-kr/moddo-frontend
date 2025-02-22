@@ -15,6 +15,7 @@ import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import Modal from '@/common/components/Modal';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import * as S from './index.styles';
 
 interface CreateExpenseStepProps
@@ -28,6 +29,8 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const navigate = useNavigate();
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
+
+  const { clearGroupSetup } = useGroupSetupStore();
 
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
@@ -47,6 +50,14 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   };
   const handleDeleteExpense = (index: number) => {
     fieldArrayReturns.remove(index);
+  };
+
+  /** submit 버튼 클릭 시 기존 모임 생성 정보를 메모리에서 삭제하는 함수 */
+  const handleModalSubmit = () => {
+    localStorage.removeItem('groupToken');
+    clearGroupSetup();
+    setOpen(false);
+    navigate(ROUTE.home);
   };
 
   if (!groupInfo) {
@@ -72,10 +83,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
           cancel="계속 입력"
           submit="끝내기"
           onCancel={() => setOpen(false)}
-          onSubmit={() => {
-            setOpen(false);
-            navigate(ROUTE.home);
-          }}
+          onSubmit={handleModalSubmit}
         />
       )}
       <DescriptionField

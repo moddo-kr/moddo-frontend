@@ -11,7 +11,40 @@ import { useState } from 'react';
 import CoinImg from '@/assets/pngs/CoinImg.png';
 import LinkMain from '@/assets/pngs/link_main.png';
 import CardMain from '@/assets/pngs/card_main.png';
+import Divider from '@/common/components/Divider';
 import * as S from './index.style';
+import HomeExpenseItem from './components/HomeExpenseItem';
+
+interface HomeExpenseItemType {
+  date: string;
+  groupName: string;
+  totalAmount: number;
+  paidMember: number;
+  totalMember: number;
+  id: number;
+}
+/**
+ * @Todo 진행중인 정산 내역 조회 API 함수 호출
+ * 우선 mock data로 대체
+ * */
+const settlementList: HomeExpenseItemType[] = [
+  {
+    id: 1,
+    date: '2025년 2월 22일',
+    groupName: 'DND 데모데이',
+    totalAmount: 120000,
+    paidMember: 3,
+    totalMember: 6,
+  },
+  {
+    id: 2,
+    date: '2025년 1월 14일',
+    groupName: 'DND 7조 첫모임',
+    totalAmount: 150000,
+    paidMember: 5,
+    totalMember: 6,
+  },
+];
 
 function Home() {
   const [settlementType, setSettlementType] = useState<'RECEIVE' | 'SEND'>(
@@ -27,16 +60,14 @@ function Home() {
     setSettlementType(type);
   };
 
-  /** @Todo 진행중인 정산 내역 조회 API 함수 호출 */
-  const settlementList = [];
-
   return (
-    <Flex direction="column" height="100dvh">
+    <Flex direction="column" flexGrow={1}>
       <S.MainHeader>
         <LogoIcon
           width={98}
           height={36}
           fill={theme.color.semantic.orange.default}
+          onClick={() => navigate(ROUTE.login)}
         />
         <Flex gap={4}>
           <Bell width={24} height={24} />
@@ -84,7 +115,7 @@ function Home() {
           <S.SmallImg src={CardMain} />
         </S.BoxButton>
       </S.BoxButtonWrapper>
-      <S.Hr />
+      <Divider />
       <Flex direction="column" gap={2} pt={5} flexGrow={1}>
         <S.SettlementTitle>진행중인 정산</S.SettlementTitle>
         <Flex justifyContent="space-between" px={5} py={3} alignItems="center">
@@ -107,10 +138,21 @@ function Home() {
             <Next width={theme.unit[24]} height={theme.unit[24]} />
           </Flex>
         </Flex>
-        {settlementList.length > 0 ? (
-          /** @Todo 정산리스트 컴포넌트 구현 */
-          <div>정산리스트</div>
-        ) : (
+        {settlementList.length > 0 && settlementType === 'RECEIVE' && (
+          <S.SettlementListWrapper>
+            {settlementList.map((data) => (
+              <HomeExpenseItem
+                key={data.id}
+                date={data.date}
+                groupName={data.groupName}
+                totalAmount={data.totalAmount}
+                paidMember={data.paidMember}
+                totalMember={data.totalMember}
+              />
+            ))}
+          </S.SettlementListWrapper>
+        )}
+        {settlementType === 'SEND' && (
           <Flex
             direction="column"
             py={15}

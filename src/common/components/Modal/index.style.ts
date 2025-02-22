@@ -28,6 +28,7 @@ export const ModalWrapper = styled.div`
   height: fit-content;
   max-width: 31rem;
   min-width: 16.563rem;
+  background: ${({ theme }) => theme.color.semantic.background.normal.default};
 `;
 
 export const DefaultWrapper = styled.div`
@@ -38,6 +39,7 @@ export const DefaultWrapper = styled.div`
   align-items: flex-start;
   height: 100%;
   width: 100%;
+  background: ${({ theme }) => theme.color.semantic.background.normal.default};
 `;
 
 export const TextWrapper = styled.div`

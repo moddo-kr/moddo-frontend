@@ -39,7 +39,6 @@ function SelectGroup() {
         justify="space-between"
         height="100%"
         pt="10px"
-        mb="32px"
         flexGrow={1}
         bgColor="#f1f3f5"
       >
