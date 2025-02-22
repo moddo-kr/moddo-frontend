@@ -1,3 +1,5 @@
+export { default as ActivePicker } from './ActivePicker';
+export { default as DefaultPicker } from './DefaultPicker';
 export { default as Add } from './Add';
 export { default as ArrowDown } from './ArrowDown';
 export { default as ArrowLeft } from './ArrowLeft';
@@ -15,6 +17,7 @@ export { default as DollarCircle } from './DollarCircle';
 export { default as Dot } from './Dot';
 export { default as Download } from './Download';
 export { default as Dummy } from './Dummy';
+export { default as Kakao } from './Kakao';
 export { default as Menu } from './Menu';
 export { default as Next } from './Next';
 export { default as Receipt } from './Receipt';

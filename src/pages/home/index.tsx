@@ -1,12 +1,16 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/assets/svgs';
-import MainHamImg from '@/assets/pngs/MainHamImg.png';
-import { Flex, Text } from '@chakra-ui/react';
-import { ArrowRight, Menu, Next } from '@/assets/svgs/icon';
+// import MainHamImg from '@/assets/pngs/MainHamImg.png';
+import MainHamImg2 from '@/assets/pngs/MainHamImg2.png';
+import { Flex } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
+import { ArrowRight, Bell, Menu, Next } from '@/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useState } from 'react';
 import CoinImg from '@/assets/pngs/CoinImg.png';
+import LinkMain from '@/assets/pngs/link_main.png';
+import CardMain from '@/assets/pngs/card_main.png';
 import * as S from './index.style';
 
 function Home() {
@@ -29,33 +33,57 @@ function Home() {
   return (
     <Flex direction="column" height="100dvh">
       <S.MainHeader>
-        <LogoIcon width={98} height={36} />
-        <Menu width={24} height={24} />
+        <LogoIcon
+          width={98}
+          height={36}
+          fill={theme.color.semantic.orange.default}
+        />
+        <Flex gap={4}>
+          <Bell width={24} height={24} />
+          <Menu width={24} height={24} />
+        </Flex>
       </S.MainHeader>
       <Flex
         direction="column"
         position="relative"
-        bgColor="#FAF6F3"
-        height="231px"
+        bgColor={theme.color.semantic.primary.default}
+        height="136px"
+        borderRadius={theme.radius.default}
+        margin={5}
+        px={5}
+        py={5}
       >
-        <Flex direction="column" gap={1} px={5} py={2.5}>
-          <S.MainText>즐거운 만남, 끝까지 즐겁게!</S.MainText>
-          <S.SubText>
-            참여자들이 빠르게 정산을 완료할수록
-            <br />
-            멋진 캐릭터를 얻을 수 있어요!
-          </S.SubText>
-        </Flex>
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
-          정산 시작하기
+          <Text variant="heading2">정산하기</Text>
           <ArrowRight
             width={theme.unit[20]}
             height={theme.unit[20]}
             fill={theme.color.semantic.orange.default}
           />
         </S.SelectGroupButton>
-        <S.DescriptionImg src={MainHamImg} alt="mainHamImg" />
+        <Flex direction="column" py={2.5}>
+          <Text variant="body2R" color="semantic.text.inverse">
+            모임은 즐겁게, 정산은 깔끔하게!
+            <br />
+            모또만 믿고 맡겨줘!
+          </Text>
+        </Flex>
+        <S.DescriptionImg src={MainHamImg2} alt="mainHamImg2" />
       </Flex>
+      <S.BoxButtonWrapper>
+        <S.BoxButton>
+          <Text variant="body1Sb" color="semantic.text.default">
+            링크 관리
+          </Text>
+          <S.SmallImg src={LinkMain} />
+        </S.BoxButton>
+        <S.BoxButton>
+          <Text variant="body1Sb" color="semantic.text.default">
+            캐릭터 도감
+          </Text>
+          <S.SmallImg src={CardMain} />
+        </S.BoxButton>
+      </S.BoxButtonWrapper>
       <S.Hr />
       <Flex direction="column" gap={2} pt={5} flexGrow={1}>
         <S.SettlementTitle>진행중인 정산</S.SettlementTitle>
@@ -89,15 +117,10 @@ function Home() {
             justifyContent="center"
             alignItems="center"
             flexGrow={1}
+            gap={6}
           >
             <S.NoSettlementImg src={CoinImg} alt="noSettlement" />
-            <Text
-              px={5}
-              py={2.5}
-              fontSize={16}
-              lineHeight={1.5}
-              color="#6F7379"
-            >
+            <Text variant="body2R" color="semantic.text.subtle">
               아직 진행중인 정산이 없어요.
             </Text>
           </Flex>

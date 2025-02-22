@@ -1,14 +1,21 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
-import LoginHamImg from '@/assets/pngs/LoginHamImg.png';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
+import { useEffect, useState } from 'react';
+import { CoinLottie } from '@/common/components/Lottie';
+import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
+import theme from '@/styles/theme';
+import Button from '@/common/components/Button';
+import { Kakao } from '@/assets/svgs/icon';
 import * as S from './index.style';
 
 function Login() {
   const { refetch: getGuestToken } = useGetGuestToken();
   const navigate = useNavigate();
+  const [isEntrance, setIsEntrance] = useState(true);
 
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
@@ -17,58 +24,88 @@ function Login() {
     } else if (!token) {
       getGuestToken();
     } else {
-      navigate(ROUTE.selectGroup);
+      navigate(ROUTE.onboarding);
     }
   };
 
-  return (
-    <Flex direction="column" alignItems="center" bgColor="#FAF6F3" flexGrow={1}>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsEntrance(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isEntrance) {
+    return (
       <Flex
         direction="column"
         alignItems="center"
         justifyContent="center"
-        gap={8}
+        bgColor={theme.color.semantic.orange.subtle}
+        flexGrow={1}
+        gap={theme.unit[16]}
       >
-        <S.TitleWrapper>
+        <S.TextContainer>
           <S.LogoImg src={LogoImg} alt="logo" />
-          <Text
-            fontSize={16}
-            lineHeight={1.5}
-            fontWeight={400}
-            color="#6F7379"
-            whiteSpace="nowrap"
-          >
-            모또에 모여 빠르고 즐겁게 정산을 할 수 있어요.
+          <Text variant="body1R" color="semantic.text.strong">
+            모또와 함께라면 정산 걱정 끝!
           </Text>
-        </S.TitleWrapper>
-        <S.LoginImg src={LoginHamImg} alt="loginImg" />
+        </S.TextContainer>
+        <S.ImgContainer>
+          <CoinLottie />
+          <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />
+        </S.ImgContainer>
       </Flex>
-      <S.BottomWrapper>
-        <S.BottomButton
-          $bgColor="#FAE100"
+    );
+  }
+
+  return (
+    <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="space-between"
+      bgColor="#fff"
+      flexGrow={1}
+    >
+      <S.ContentWrapper>
+        <S.TextContainer>
+          <S.LogoImg src={LogoImg} alt="logo" />
+          <Text variant="body1R" color="semantic.text.subtle">
+            모또와 함께라면 정산 걱정 끝!
+          </Text>
+        </S.TextContainer>
+      </S.ContentWrapper>
+      <S.ButtonWrapper>
+        <Button
+          style={{
+            background: '#FEE500',
+          }}
           onClick={() => handleLoginButtonClick('KAKAO')}
+          disabled
         >
-          카카오로 로그인
-        </S.BottomButton>
-        <S.BottomButton
-          $bgColor="#E2E2E2"
+          <Kakao width={theme.unit[24]} />
+          <Text variant="body1Sb" color="semantic.text.strong">
+            카카오로 로그인
+          </Text>
+        </Button>
+        <Button
+          variant="secondary"
           onClick={() => handleLoginButtonClick('GUEST')}
         >
-          비회원으로 진행
-        </S.BottomButton>
-        <Text
-          fontSize={12}
-          lineHeight={1.5}
-          textAlign="center"
-          color="#6F7379"
-          py={4}
-          height="fit-content"
-        >
-          회원가입 시 서비스 이용약관과
-          <br />
-          개인정보 수집 및 이용에 동의하게 됩니다.
-        </Text>
-      </S.BottomWrapper>
+          <Text variant="body1R" color="semantic.text.strong">
+            비회원으로 진행
+          </Text>
+        </Button>
+
+        <S.TextWrapper>
+          <Text color="semantic.text.subtle" variant="caption">
+            회원가입 시 서비스 이용약관과
+          </Text>
+          <Text color="semantic.text.subtle" variant="caption">
+            개인정보 수집 및 이용에 동의하게 됩니다.
+          </Text>
+        </S.TextWrapper>
+      </S.ButtonWrapper>
     </Flex>
   );
 }

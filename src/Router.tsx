@@ -12,6 +12,7 @@ import LoginSuccess from '@/pages/auth/loginSuccess';
 import Home from '@/pages/home';
 import BillDetail from '@/pages/billDetail';
 import CharacterShare from './pages/billDetail/characterShare';
+import Onboarding from './pages/onboarding';
 
 function AppRouter() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function AppRouter() {
     {
       path: ROUTE.login,
       element: <Login />,
+    },
+    {
+      path: ROUTE.onboarding,
+      element: <Onboarding />,
     },
     {
       path: ROUTE.loginSuccess,
