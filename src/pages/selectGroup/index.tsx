@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { Button, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import { Add, CheckCircle } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { ROUTE } from '@/common/constants/route';
-import * as S from './index.styles';
 import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
+import * as S from './index.styles';
 
 type SelectedValueType = 'CREATE' | 'RECENT';
 
@@ -56,7 +56,7 @@ function SelectGroup() {
               </Flex>
             }
             sub="새로운 정산을 시작하려면 새로 생성을 선택해주세요."
-            bgColor='semantic.primary.subtle'
+            bgColor="semantic.primary.subtle"
           />
 
           <Flex gap="2" direction="column" mx={5} mt={5}>
@@ -65,7 +65,7 @@ function SelectGroup() {
               onClick={() => navigate(ROUTE.groupSetupName)}
             >
               <Add width={30} />
-              <Text variant="body1Sb" color='semantic.text.inverse'>
+              <Text variant="body1Sb" color="semantic.text.inverse">
                 새로 생성
               </Text>
             </S.SelectButton>
@@ -79,7 +79,7 @@ function SelectGroup() {
                 height={30}
                 fill={theme.color.semantic.icon.disabled}
               />
-              <Text variant="body1Sb" color='semantic.text.subtle'>
+              <Text variant="body1Sb" color="semantic.text.subtle">
                 기존 모임이 없어요.
               </Text>
             </S.SelectButton>

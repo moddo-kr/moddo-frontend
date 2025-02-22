@@ -21,7 +21,8 @@ export const SelectButton = styled.button<{ selected: boolean }>`
     font-size: 22px;
   }
   height: 6rem;
-  background-color: ${({ theme, selected }) => selected ? theme.color.semantic.orange.default : '#fff'};
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.color.semantic.orange.default : '#fff'};
   border-radius: 12px;
   font-size: 20px;
   font-weight: 600;
@@ -30,5 +31,5 @@ export const SelectButton = styled.button<{ selected: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem; 
+  gap: 0.5rem;
 `;

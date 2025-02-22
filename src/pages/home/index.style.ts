@@ -74,7 +74,8 @@ export const SettlementTitle = styled.h2`
 `;
 
 export const SettlementButton = styled(Button)<{ selected?: boolean }>`
-  background-color: ${({ selected, theme }) => (selected ? theme.color.semantic.primary : '#F1F3F5')};
+  background-color: ${({ selected, theme }) =>
+    selected ? theme.color.semantic.primary : '#F1F3F5'};
   color: ${({ selected }) => (selected ? 'white' : 'black')};
 `;
 

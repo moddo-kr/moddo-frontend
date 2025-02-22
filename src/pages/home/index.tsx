@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { useState } from 'react';
 import CoinImg from '@/assets/pngs/CoinImg.png';
-import * as S from './index.style';
 import LinkMain from '@/assets/pngs/link_main.png';
 import CardMain from '@/assets/pngs/card_main.png';
+import * as S from './index.style';
 
 function Home() {
   const [settlementType, setSettlementType] = useState<'RECEIVE' | 'SEND'>(
@@ -62,7 +62,7 @@ function Home() {
           />
         </S.SelectGroupButton>
         <Flex direction="column" py={2.5}>
-          <Text variant='body2R' color='semantic.text.inverse'>
+          <Text variant="body2R" color="semantic.text.inverse">
             모임은 즐겁게, 정산은 깔끔하게!
             <br />
             모또만 믿고 맡겨줘!
@@ -71,8 +71,18 @@ function Home() {
         <S.DescriptionImg src={MainHamImg2} alt="mainHamImg2" />
       </Flex>
       <S.BoxButtonWrapper>
-      <S.BoxButton><Text variant='body1Sb' color='semantic.text.default'>링크 관리</Text><S.SmallImg src={LinkMain}/></S.BoxButton>
-      <S.BoxButton><Text variant='body1Sb' color='semantic.text.default'>캐릭터 도감</Text><S.SmallImg src={CardMain}/></S.BoxButton>
+        <S.BoxButton>
+          <Text variant="body1Sb" color="semantic.text.default">
+            링크 관리
+          </Text>
+          <S.SmallImg src={LinkMain} />
+        </S.BoxButton>
+        <S.BoxButton>
+          <Text variant="body1Sb" color="semantic.text.default">
+            캐릭터 도감
+          </Text>
+          <S.SmallImg src={CardMain} />
+        </S.BoxButton>
       </S.BoxButtonWrapper>
       <S.Hr />
       <Flex direction="column" gap={2} pt={5} flexGrow={1}>
