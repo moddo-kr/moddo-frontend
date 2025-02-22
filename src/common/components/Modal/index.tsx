@@ -24,7 +24,7 @@ export interface ModalProps
 function Modal({
   open = false,
   setOpen,
-  variant,
+  variant = 'default',
   title,
   subscribe,
   cancel,
