@@ -12,6 +12,8 @@ import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
+import * as SS from '@/common/test.styles';
+import ButtonGroup from '@/common/components/ButtonGroup';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -242,9 +244,8 @@ function ExpenseTimeHeader({
           </Flex>
         </S.TimeBox>
       </Flex>
-      <Modal
-        open={isModalOpen}
-        setOpen={setIsModalOpen}
+      {/* <Modal
+        
         variant="default"
         title="모임원이 모두 입금했어요!"
         subscribe="정산을 완료하고 캐릭터를 확인하시겠어요?"
@@ -252,7 +253,27 @@ function ExpenseTimeHeader({
         submit="완료"
         onCancel={() => setIsModalOpen(false)}
         onSubmit={handleModalButtonClick}
-      />
+      /> */}
+      <Modal open={isModalOpen} setOpen={setIsModalOpen} variant="empty">
+        <SS.DefaultWrapper>
+          <SS.TextWrapper>
+            <Text variant="title" color="semantic.text.strong">
+              모임원이 모두 입금했어요!
+            </Text>
+            <Text variant="body1R" color="semantic.text.strong">
+              정산을 완료하고 캐릭터를 확인하시겠어요?
+            </Text>
+          </SS.TextWrapper>
+          <SS.ButtonWrapper>
+            <ButtonGroup direction="horizontal">
+              <Button onClick={() => setIsModalOpen(false)} variant="secondary">
+                미완료
+              </Button>
+              <Button onClick={handleModalButtonClick}>완료</Button>
+            </ButtonGroup>
+          </SS.ButtonWrapper>
+        </SS.DefaultWrapper>
+      </Modal>
     </S.Wrapper>
   );
 }
