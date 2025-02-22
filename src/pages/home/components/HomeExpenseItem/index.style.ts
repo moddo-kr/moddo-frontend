@@ -14,7 +14,8 @@ export const Container = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.unit[14]};
   padding: ${({ theme }) => `${theme.unit[18]} ${theme.unit[20]}`};
-  background: ${({ theme }) => theme.color.semantic.background.normal.alternative};
+  background: ${({ theme }) =>
+    theme.color.semantic.background.normal.alternative};
   border-radius: ${({ theme }) => theme.radius.default};
   width: 100%;
   height: fit-content;
@@ -31,7 +32,7 @@ export const ProgressBarWrapper = styled.div`
   gap: ${({ theme }) => theme.unit[8]};
   align-items: flex-end;
   width: 100%;
-`;  
+`;
 
 export const ExpenseProgress = styled.div`
   display: flex;

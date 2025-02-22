@@ -15,8 +15,8 @@ import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import { BillContext } from '@/pages/createBill/types/billContext.type';
 import Modal from '@/common/components/Modal';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import * as S from './index.styles';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
+import * as S from './index.styles';
 
 interface CreateExpenseStepProps
   extends BaseFunnelStepComponentProps<BillContext> {}
@@ -29,7 +29,7 @@ function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
   const navigate = useNavigate();
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
-  
+
   const { clearGroupSetup } = useGroupSetupStore();
 
   useLayoutEffect(() => {

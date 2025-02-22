@@ -11,11 +11,11 @@ import { useState } from 'react';
 import CoinImg from '@/assets/pngs/CoinImg.png';
 import LinkMain from '@/assets/pngs/link_main.png';
 import CardMain from '@/assets/pngs/card_main.png';
+import Divider from '@/common/components/Divider';
 import * as S from './index.style';
 import HomeExpenseItem from './components/HomeExpenseItem';
-import Divider from '@/common/components/Divider';
 
-interface HomeExpenseItem {
+interface HomeExpenseItemType {
   date: string;
   groupName: string;
   totalAmount: number;
@@ -27,7 +27,7 @@ interface HomeExpenseItem {
  * @Todo 진행중인 정산 내역 조회 API 함수 호출
  * 우선 mock data로 대체
  * */
-const settlementList: HomeExpenseItem[] = [
+const settlementList: HomeExpenseItemType[] = [
   {
     id: 1,
     date: '2025년 2월 22일',

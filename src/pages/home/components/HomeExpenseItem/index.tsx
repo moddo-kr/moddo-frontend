@@ -1,9 +1,8 @@
-import { ExpenseChip } from '@/pages/billDetail/components/ExpenseTimeHeader/index.style';
-import * as S from './index.style';
 import { DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import DefaultProgressBar from '@/common/components/DefaultProgressBar';
+import * as S from './index.style';
 
 interface HomeExpenseItemProps {
   date: string;
@@ -52,7 +51,9 @@ function HomeExpenseItem({
                 fontSize: `${theme.unit[14]}`,
               }}
             >
-              <p style={{ color: `${theme.color.semantic.orange.default}` }}>{paidMember}</p>
+              <p style={{ color: `${theme.color.semantic.orange.default}` }}>
+                {paidMember}
+              </p>
               {`/${totalMember} 정산 완료`}
             </div>
           </S.ExpenseProgress>
