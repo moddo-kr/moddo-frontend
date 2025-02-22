@@ -5,6 +5,7 @@ interface GroupSetupState {
   password: string;
   setGroupName: (groupName: string) => void;
   setPassword: (password: string) => void;
+  clearGroupSetup: () => void;
 }
 
 export const useGroupSetupStore = create<GroupSetupState>((set) => ({
@@ -12,4 +13,5 @@ export const useGroupSetupStore = create<GroupSetupState>((set) => ({
   password: '',
   setGroupName: (groupName) => set({ groupName }),
   setPassword: (password) => set({ password }),
+  clearGroupSetup: () => set({ groupName: '', password: '' }),
 }));
