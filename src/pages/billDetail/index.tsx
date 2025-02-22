@@ -19,6 +19,7 @@ import ExpenseTimeHeader from './components/ExpenseTimeHeader';
 import ExpenseMembers from './components/ExpenseMembers';
 import { StatusType } from './components/ExpenseTimeHeader/index.type';
 import ShareButton from '../createBill/shareStep/components/ShareButton';
+import { useGroupSetupStore } from '../groupSetup/stores/useGroupSetupStore';
 
 function BillDetail() {
   const { unit } = useTheme();
@@ -30,6 +31,7 @@ function BillDetail() {
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { clearGroupSetup } = useGroupSetupStore();
 
   let MEMBER_TOTAL = 0;
   let MEMBER_DONE = 0;
@@ -40,6 +42,12 @@ function BillDetail() {
   }
 
   const shareLink = generateShareLink(groupToken);
+
+  const handleBackToHome = () => {
+    localStorage.removeItem('groupToken');
+    clearGroupSetup();
+    navigate(ROUTE.home);
+  };
 
   return (
     <>
@@ -89,7 +97,7 @@ function BillDetail() {
         {MEMBER_TOTAL === MEMBER_DONE && status === 'pending' ? (
           <Button onClick={() => setIsChecked(false)}>정산 완료하기</Button>
         ) : status === 'success' ? (
-          <Button onClick={() => navigate(ROUTE.home)}>홈으로 돌아가기</Button>
+          <Button onClick={handleBackToHome}>홈으로 돌아가기</Button>
         ) : (
           <ShareButton shareLink={shareLink} />
         )}
