@@ -26,7 +26,7 @@ export default defineConfig({
       manifest: {
         name: '모또(MODDO)',
         short_name: '모또',
-        description: '모임의 정산을 즐겁게 만들어주는 서비스, 모또',
+        description: '즐거운 만남, 정산까지 즐겁게! 모또',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone', // 독립형 앱처럼 실행

@@ -9,7 +9,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "preview": "vite preview",
     "svgr": "npx @svgr/cli -d src/assets/svgs --typescript --no-dimensions public/svgs",
-    "pwa": "pwa-assets-generator --preset minimal public/pwa/react.svg",
+    "pwa": "pwa-assets-generator --preset minimal public/pwa/moddo.svg",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run"
