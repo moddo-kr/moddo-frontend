@@ -120,10 +120,7 @@ function Home() {
             gap={6}
           >
             <S.NoSettlementImg src={CoinImg} alt="noSettlement" />
-            <Text
-              variant="body2R"
-              color='semantic.text.subtle'
-            >
+            <Text variant="body2R" color="semantic.text.subtle">
               아직 진행중인 정산이 없어요.
             </Text>
           </Flex>
