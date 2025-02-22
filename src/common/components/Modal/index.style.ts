@@ -19,7 +19,7 @@ export const ModalWrapper = styled.div`
   color: ${({ theme }) => theme.color.semantic.text.default};
   padding: ${({ theme }) => `${theme.unit[24]} ${theme.unit[20]}`};
   border-radius: ${({ theme }) => theme.radius.default};
-  z-index: 9999;
+  z-index: 10000;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -47,8 +47,10 @@ export const TextWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: ${({ theme }) => theme.unit[16]};
+  background: ${({ theme }) => theme.color.semantic.background.normal.default};
 `;
 
 export const ButtonWrapper = styled.div`
   width: 100%;
+  background: ${({ theme }) => theme.color.semantic.background.normal.default};
 `;
