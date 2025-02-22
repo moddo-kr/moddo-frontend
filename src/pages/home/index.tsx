@@ -67,6 +67,7 @@ function Home() {
           width={98}
           height={36}
           fill={theme.color.semantic.orange.default}
+          onClick={() => navigate(ROUTE.login)}
         />
         <Flex gap={4}>
           <Bell width={24} height={24} />
