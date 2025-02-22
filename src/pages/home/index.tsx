@@ -117,14 +117,12 @@ function Home() {
             justifyContent="center"
             alignItems="center"
             flexGrow={1}
+            gap={6}
           >
             <S.NoSettlementImg src={CoinImg} alt="noSettlement" />
             <Text
-              px={5}
-              py={2.5}
-              fontSize={16}
-              lineHeight={1.5}
-              color="#6F7379"
+              variant="body2R"
+              color='semantic.text.subtle'
             >
               아직 진행중인 정산이 없어요.
             </Text>
