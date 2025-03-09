@@ -38,7 +38,7 @@ jobs:
       - name: Add JIRA issue link to PR body
         if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
         run: |
-          PR_BODY=${{ github.event.pull_request.body }}
+          PR_BODY="${{ github.event.pull_request.body }}"
           JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
           JIRA_LINK="## 📝 관련 이슈\n\n🔗 [$JIRA_KEY](${{ vars.JIRA_BASE_URL }}/browse/$JIRA_KEY)"
           UPDATED_BODY="$JIRA_LINK\n\n$PR_BODY"
