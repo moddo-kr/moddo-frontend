@@ -2,12 +2,13 @@ name: Automate PR Reviews
 
 on:
   pull_request:
-    types: [opened, ready_for_review, synchronize] # PR 생성 시 또는 Draft 상태에서 '리뷰 가능' 상태로 전환될 때 트리거되는 액션
+    types: [opened, ready_for_review] # PR 생성 시 또는 Draft 상태에서 '리뷰 가능' 상태로 전환될 때 트리거되는 액션
 
 jobs:
   # PR 작성자를 Assignee로 지정하고 Reviewer를 지정하는 작업
   assign:
     runs-on: ubuntu-latest
+    if: github.event.action == 'opened' # PR 생성 시에만 실행
     permissions:
       pull-requests: write # Assignee와 Reviewer 할당을 위한 권한
     steps:
