@@ -39,10 +39,12 @@ jobs:
       - name: Add JIRA issue link to PR body
         if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
         run: |
-          PR_BODY="${{ github.event.pull_request.body }}"
+          PR_BODY=$(cat <<EOF
+          ${{ github.event.pull_request.body }}
+          EOF)
           JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
-          JIRA_LINK=$(echo -e "## 📝 관련 이슈\n\n[$JIRA_KEY](${{ vars.JIRA_BASE_URL }}/browse/$JIRA_KEY)")
-          UPDATED_BODY=$(echo -e "$JIRA_LINK\n\n$PR_BODY")
+          JIRA_LINK=$(printf "## 📝 관련 이슈\n\n[%s](%s/browse/%s)" "$JIRA_KEY" "${{ vars.JIRA_BASE_URL }}" "$JIRA_KEY")
+          UPDATED_BODY=$(printf "%s\n\n%s" "$JIRA_LINK" "$PR_BODY")
           curl -L \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
