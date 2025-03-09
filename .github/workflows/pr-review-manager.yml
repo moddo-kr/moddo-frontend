@@ -19,37 +19,34 @@ jobs:
           # - Settings > Secrets and Variables > Actions > Variables > Repository variables
           reviewers: ${{ vars.REVIEWERS }} # 리뷰할 수 있는 사람의 목록
 
-  # PR에 라벨을 추가하고 이슈를 이동하는 작업
-  automate-pr-review:
+  # 브랜치 이름에서 JIRA 이슈 키를 추출하여 PR 본문에 링크로 추가하는 작업
+  add-jira-link:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write # PR에 라벨을 추가하기 위한 권한
-      issues: read # 이슈 라벨을 읽어오기 위한 권한
+    if: github.event.action == 'opened'
     steps:
-      # 액션에 필요한 파일을 가져오기 위한 작업
-      - name: Checkout Action
-        uses: actions/checkout@v4 # https://github.com/actions/checkout
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
-          fetch-depth: 1 # 가장 최근 커밋만 가져오기
-          sparse-checkout: .github/actions # 액션 디렉토리만 가져오기
+      - name: Extract JIRA issue key from branch name
+        id: extract-jira-key
+        run: |
+          JIRA_KEY=$(echo ${{ github.ref_name }} | grep -oE 'MOD-[0-9]+')
+          echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
 
-      # Node.js 환경 설정
-      - name: Setup Node.js Environment
-        uses: ./.github/actions/setup-node
+      # PR 본문을 JSON 형식으로 파싱하기 위한 jq 설치
+      - name: Install jq
+        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
+        run: sudo apt-get update && sudo apt-get install -y jq
 
-      # PR에 라벨을 추가하는 작업
-      - name: Sync labels from linked issues
-        uses: ./.github/actions/sync-labels
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      # PR을 Review Pipeline로 이동하는 작업
-      - name: Move to Review Pipeline
-        if: ${{ !github.event.pull_request.draft }} # Draft 상태가 아닌 경우에만 실행
-        uses: ./.github/actions/zenhub-move-issue
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          zenhub_token: ${{ secrets.ZENHUB_TOKEN }}
-          workspace_id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
-          pipeline_id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
+      # https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-pull-request
+      - name: Add JIRA issue link to PR body
+        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
+        run: |
+          PR_BODY=${{ github.event.pull_request.body }}
+          JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
+          JIRA_LINK="## 📝 관련 이슈\n\n🔗 [$JIRA_KEY](${{ vars.JIRA_BASE_URL }}/browse/$JIRA_KEY)"
+          UPDATED_BODY="$JIRA_LINK\n\n$PR_BODY"
+          curl -L \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} \
+            -d "$(jq -n --arg body "$UPDATED_BODY" '{body: $body}')"
