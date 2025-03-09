@@ -40,8 +40,8 @@ jobs:
         run: |
           PR_BODY="${{ github.event.pull_request.body }}"
           JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
-          JIRA_LINK=$(echo -e "## 📝 관련 이슈\n\n🔗 [$JIRA_KEY](${{ vars.JIRA_BASE_URL }}/browse/$JIRA_KEY)\n\n")
-          UPDATED_BODY="$JIRA_LINK$PR_BODY"
+          JIRA_LINK=$(echo -e "## 📝 관련 이슈\n\n[$JIRA_KEY](${{ vars.JIRA_BASE_URL }}/browse/$JIRA_KEY)")
+          UPDATED_BODY=$(echo -e "$JIRA_LINK\n\n$PR_BODY")
           curl -L \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
