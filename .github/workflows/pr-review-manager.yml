@@ -8,7 +8,6 @@ jobs:
   # PR 작성자를 Assignee로 지정하고 Reviewer를 지정하는 작업
   assign:
     runs-on: ubuntu-latest
-    if: github.event.action == 'opened' # PR 생성 시에만 실행
     permissions:
       pull-requests: write # Assignee와 Reviewer 할당을 위한 권한
     steps:
@@ -23,6 +22,7 @@ jobs:
   # 브랜치 이름에서 JIRA 이슈 키를 추출하여 PR 본문에 링크로 추가하는 작업
   add-jira-link:
     runs-on: ubuntu-latest
+    if: github.event.action == 'opened' # PR 생성 시에만 실행
     steps:
       - name: Extract JIRA issue key from branch name
         id: extract-jira-key
