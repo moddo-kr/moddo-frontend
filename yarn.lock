@@ -2533,6 +2533,18 @@
     "@typescript-eslint/types" "8.23.0"
     eslint-visitor-keys "^4.2.0"
 
+"@use-funnel/core@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@use-funnel/core/-/core-0.0.10.tgz#9a2e028989761e49aa387497656079550a55750b"
+  integrity sha512-Ppk76LIB0g63YGOm2LzLQHGXYtbFPE0Cd+jiIKndyC/BhLpGUCikzq/JtRc0Xpkntf7AEENFzPBHsjlc96WjRg==
+
+"@use-funnel/react-router@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@use-funnel/react-router/-/react-router-0.0.2.tgz#1e0a35392222f7766c96d7f216268fb6dfb3af08"
+  integrity sha512-78sAqaWhKHX3gam+Ma3QnYmrxIXPcA3vnAYdBFXkF02geD9CzdPoMkIfveOAEaJEaTX8Tncb/jug5beEG/meaQ==
+  dependencies:
+    "@use-funnel/core" "^0.0.10"
+
 "@vite-pwa/assets-generator@^0.2.6":
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@vite-pwa/assets-generator/-/assets-generator-0.2.6.tgz#e8c8e47765f4af8724af9fed310a32a4584cc455"
