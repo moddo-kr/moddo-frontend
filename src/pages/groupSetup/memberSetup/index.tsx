@@ -50,7 +50,7 @@ function MemberSetup({ groupToken }: MemberSetupProps) {
         sub="참여자는 지출 내역에서도 추가할 수 있어요!"
       />
       <S.PageContentWrapper>
-        <AddMember members={data.members || []} />
+        <AddMember members={data.members || []} groupToken={groupToken}/>
       </S.PageContentWrapper>
       <BottomButtonContainer>
         <Button
