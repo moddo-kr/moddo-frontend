@@ -21,6 +21,10 @@ export const OnboardingWrapper = styled(Wrapper)`
 
 export const Onboarding2Wrapper = styled.div`
   position: absolute;
-  bottom: -300px;
+  bottom: -270px;
   max-width: 400px;
+`;
+
+export const Onboarding3Wrapper = styled(Onboarding2Wrapper)`
+  bottom: -300px;
 `;

@@ -63,7 +63,7 @@ export const OnboardingImgContainer = styled.div`
 `;
 
 export const OnboardingImg = styled.img`
-  width: 75%;
+  width: 70%;
   height: auto;
   margin-top: ${({ theme }) => theme.unit[8]};
 `;
@@ -78,7 +78,7 @@ export const Container2 = styled.div`
 
 export const Onboarding2Container = styled.div`
   position: relative;
-  width: 100%;
+  width: 83%;
   height: 100%;
   display: flex;
   flex-direction: column;

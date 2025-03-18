@@ -40,8 +40,8 @@ export function OnboardingLottie3() {
 
 export function OnboardingLottie4() {
   return (
-    <S.Onboarding2Wrapper>
+    <S.Onboarding3Wrapper>
       <Lottie animationData={Onboarding4} />
-    </S.Onboarding2Wrapper>
+    </S.Onboarding3Wrapper>
   );
 }
