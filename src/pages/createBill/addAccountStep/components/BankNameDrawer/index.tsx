@@ -36,16 +36,16 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
         <S.DrawerHeader>은행 선택</S.DrawerHeader>
         <S.DrawerBody>
           <S.GridContainer>
-          {BANK_LIST.map((bank) => (
-            <S.BankButton
-              key={bank.bankName}
-              onClick={() => setName(bank.bankName)}
-              isSelected={name === bank.bankName}
-            >
-              <S.BankImg src={bank.url} />
-              <S.BankName>{bank.bankName}</S.BankName>
-            </S.BankButton>
-          ))}
+            {BANK_LIST.map((bank) => (
+              <S.BankButton
+                key={bank.bankName}
+                onClick={() => setName(bank.bankName)}
+                isSelected={name === bank.bankName}
+              >
+                <S.BankImg src={bank.url} />
+                <S.BankName>{bank.bankName}</S.BankName>
+              </S.BankButton>
+            ))}
           </S.GridContainer>
         </S.DrawerBody>
         <S.SubmitButton onClick={handleSubmitButtonClick}>확인</S.SubmitButton>
