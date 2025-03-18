@@ -8,10 +8,15 @@ export const DrawerHeader = styled.h2`
 export const DrawerBody = styled.div`
   height: 370px;
   overflow-y: auto;
+  width: 100%;
+`;
+
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   gap: 8px;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  place-items: center;
 `;
 
 export const SubmitButton = styled.button`

@@ -31,9 +31,11 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
         px={5}
         height="70dvh"
         borderRadius={12}
+        width="100%"
       >
         <S.DrawerHeader>은행 선택</S.DrawerHeader>
         <S.DrawerBody>
+          <S.GridContainer>
           {BANK_LIST.map((bank) => (
             <S.BankButton
               key={bank.bankName}
@@ -44,6 +46,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
               <S.BankName>{bank.bankName}</S.BankName>
             </S.BankButton>
           ))}
+          </S.GridContainer>
         </S.DrawerBody>
         <S.SubmitButton onClick={handleSubmitButtonClick}>확인</S.SubmitButton>
       </Flex>
