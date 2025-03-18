@@ -9,20 +9,23 @@ import MemberSetup from './memberSetup';
 type NameSetupType = {
   groupName?: string;
   password?: string;
+  groupToken?: string;
 };
 // 비밀번호 입력 스텝에 필요한 context type
 type PasswordSetupType = {
   groupName: string;
   password?: string;
+  groupToken?: string;
 };
 // 참여자 입력 스텝에 필요한 context type
 type MemberSetupType = {
   groupName: string;
   password: string;
+  groupToken?: string;
 };
 
 function GroupSetup() {
-  const { mutate: createGroup } = usePostCreateGroup();
+  const { mutateAsync: createGroup } = usePostCreateGroup();
   const funnel = useFunnel<{
     name: NameSetupType;
     password: PasswordSetupType;
@@ -34,8 +37,6 @@ function GroupSetup() {
       context: {},
     },
   });
-
-  console.log('step:', funnel.step);
 
   return (
     <funnel.Render
@@ -51,15 +52,17 @@ function GroupSetup() {
       password={({ history, context }) => (
         <PasswordSetup
           groupName={context.groupName}
-          onNext={(password: string) => {
-            history.push('member', { password }); // 1️⃣ 에러가 남
-            // history.push('name', { password }); // 2️⃣ 에러가 나지 않음
-            // await createGroup({ name: context.groupName, password });
+          onNext={async (password: string) => {
+            const { groupToken } = await createGroup({
+              name: context.groupName,
+              password,
+            });
+            history.push('member', { password, groupToken });
           }}
         />
       )}
       // eslint-disable-next-line react/no-unstable-nested-components
-      member={({ context }) => <MemberSetup context={context} />}
+      member={({ context }) => <MemberSetup groupToken={context.groupToken} />}
     />
   );
 }
