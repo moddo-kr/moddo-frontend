@@ -3,10 +3,8 @@ import { checkAuth, groupTokenUrlLoader } from '@/common/loaders';
 import { ROUTE } from '@/common/constants/route';
 import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
 import SelectGroup from '@/pages/selectGroup';
-import GroupNameSetup from '@/pages/groupSetup/groupNameSetup';
-import PasswordSetup from '@/pages/groupSetup/passwordSetup';
+import GroupSetup from '@/pages/groupSetup';
 import CreateBill from '@/pages/createBill';
-import MemberSetup from '@/pages/groupSetup/memberSetup';
 import Login from '@/pages/auth/login';
 import LoginSuccess from '@/pages/auth/loginSuccess';
 import Home from '@/pages/home';
@@ -43,19 +41,9 @@ function AppRouter() {
       loader: checkAuth,
     },
     {
-      path: ROUTE.groupSetupName,
-      element: <GroupNameSetup />,
+      path: ROUTE.groupSetup,
+      element: <GroupSetup />,
       loader: checkAuth,
-    },
-    {
-      path: ROUTE.groupSetupPassword,
-      element: <PasswordSetup />,
-      loader: checkAuth,
-    },
-    {
-      path: ROUTE.groupSetupMember,
-      element: <MemberSetup />,
-      loader: getGroupManagerAuth,
     },
     {
       path: ROUTE.createBill,

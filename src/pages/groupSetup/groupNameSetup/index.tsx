@@ -6,8 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Text from '@/common/components/Text';
 import Header from '@/common/components/Header';
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
-import { ROUTE } from '@/common/constants/route';
 import DescriptionField from '@/common/components/DescriptionField';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
@@ -20,9 +18,12 @@ const groupNameSchema = z.object({
     .min(1, { message: '모임 이름을 1글자 이상 입력해주세요.' }),
 });
 
-function GroupNameSetup() {
+interface GroupNameSetupProps {
+  onNext: (groupName: string) => void;
+}
+
+function GroupNameSetup({ onNext }: GroupNameSetupProps) {
   const { unit } = useTheme();
-  const { groupName, setGroupName } = useGroupSetupStore();
   const navigate = useNavigate();
   const {
     register,
@@ -30,14 +31,8 @@ function GroupNameSetup() {
     formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(groupNameSchema),
-    defaultValues: { groupName },
     mode: 'onChange',
   });
-
-  const onNext = (data: { groupName: string }) => {
-    setGroupName(data.groupName);
-    navigate(ROUTE.groupSetupPassword);
-  };
 
   return (
     <>
@@ -64,7 +59,10 @@ function GroupNameSetup() {
         ) : null}
       </S.PageContentWrapper>
       <BottomButtonContainer>
-        <Button onClick={handleSubmit(onNext)} disabled={!isValid}>
+        <Button
+          onClick={handleSubmit((data) => onNext(data.groupName))}
+          disabled={!isValid}
+        >
           다음
         </Button>
       </BottomButtonContainer>

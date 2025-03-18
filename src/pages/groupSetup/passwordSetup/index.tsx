@@ -10,9 +10,7 @@ import Input from '@/common/components/Input';
 import Button from '@/common/components/Button';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Text from '@/common/components/Text';
-import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
 import * as S from '../index.styles';
-import { useGroupSetupStore } from '../stores/useGroupSetupStore';
 
 const passwordSchema = z.object({
   password: z
@@ -21,26 +19,23 @@ const passwordSchema = z.object({
     .regex(/^\d+$/, { message: '비밀번호는 숫자로만 입력해주세요.' }),
 });
 
-function PasswordSetup() {
+interface PasswordSetupProps {
+  groupName: string;
+  onNext: (password: string) => void;
+}
+
+function PasswordSetup({ groupName, onNext }: PasswordSetupProps) {
   const { unit } = useTheme();
-  const { groupName, password, setPassword } = useGroupSetupStore();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(passwordSchema),
-    defaultValues: { password },
     mode: 'onChange',
   });
 
   const navigate = useNavigate();
-  const { mutate: createGroup } = usePostCreateGroup();
-
-  const onNext = (data: { password: string }) => {
-    setPassword(data.password);
-    createGroup({ name: groupName, password });
-  };
 
   return (
     <>
@@ -72,7 +67,10 @@ function PasswordSetup() {
         ) : null}
       </S.PageContentWrapper>
       <BottomButtonContainer>
-        <Button onClick={handleSubmit(onNext)} disabled={!isValid}>
+        <Button
+          onClick={handleSubmit((data) => onNext(data.password))}
+          disabled={!isValid}
+        >
           다음
         </Button>
       </BottomButtonContainer>
