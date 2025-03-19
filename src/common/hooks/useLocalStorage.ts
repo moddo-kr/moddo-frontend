@@ -13,10 +13,13 @@ interface UseLocalStorageProps<T> {
  * @returns [value, setValue]
  */
 const useLocalStorage = <T>({ key, initialValue }: UseLocalStorageProps<T>) => {
-  const [value, setValue] = useState(() => {
+  const [value, setValue] = useState<T>(() => {
     const storageItem = localStorage.getItem(key);
     if (storageItem === null) {
       return initialValue;
+    }
+    if (typeof storageItem === 'string') {
+      return storageItem;
     }
     return JSON.parse(storageItem);
   });
@@ -24,6 +27,10 @@ const useLocalStorage = <T>({ key, initialValue }: UseLocalStorageProps<T>) => {
   useEffect(() => {
     if (value === null) {
       localStorage.removeItem(key);
+      return;
+    }
+    if (typeof value === 'string') {
+      localStorage.setItem(key, value);
       return;
     }
     localStorage.setItem(key, JSON.stringify(value));
