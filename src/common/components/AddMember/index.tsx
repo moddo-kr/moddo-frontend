@@ -3,7 +3,6 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
-// import { useLoaderData } from 'react-router';
 import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
 import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
 import Text from '../Text';
