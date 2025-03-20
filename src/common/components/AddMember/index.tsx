@@ -23,7 +23,6 @@ interface AddMemberProps {
 }
 
 function AddMember({ members, groupToken }: AddMemberProps) {
-  // const { groupToken } = useLoaderData();
   const addMutation = useAddGroupMember(groupToken);
   const deleteMutation = useDeleteGroupMember(groupToken);
   const { register, handleSubmit, clearErrors, formState, reset } = useForm({

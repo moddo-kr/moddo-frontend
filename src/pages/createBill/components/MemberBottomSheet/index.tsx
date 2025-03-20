@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useLoaderData } from 'react-router';
 import { Text, Stack } from '@chakra-ui/react';
-import AddMember from '@/common/components/AddMember';
 import BottomSheet from '@/common/components/BottomSheet';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { Group } from '@/common/types/group.type';
@@ -9,7 +8,6 @@ import { Group } from '@/common/types/group.type';
 interface MemberBottomSheetProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  // groupId: number;
   setGroupInfo: (groupInfo: Group) => void; // 참여자 정보가 바뀔 때 모아서 업데이트하는 함수
 }
 
@@ -47,7 +45,6 @@ function MemberBottomSheet({
         <Text fontSize="1.25rem" fontWeight="700" color="#444950">
           참여자 추가
         </Text>
-        <AddMember members={data.members} />
       </Stack>
     </BottomSheet>
   );

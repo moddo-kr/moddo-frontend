@@ -1,8 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { Close } from '@/assets/svgs/icon';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useCreateExpense from '@/common/queries/expense/useCreateExpense';
-import { BillContext } from '@/pages/createBill/types/billContext.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/common/components/Header';
@@ -13,14 +11,15 @@ import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
 import * as S from './index.styles';
 
-interface AddExpenseStepProps
-  extends BaseFunnelStepComponentProps<BillContext> {}
+interface AddExpenseStepProps {
+  onNext: () => void;
+}
 
-function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
+function AddExpenseStep({ onNext }: AddExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray();
   const { groupToken } = useLoaderData();
-  const mutation = useCreateExpense({ moveToNextStep, groupToken });
+  const mutation = useCreateExpense({ onNext, groupToken });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -34,7 +33,7 @@ function AddExpenseStep({ moveToNextStep }: AddExpenseStepProps) {
       <Header
         type="TitleCenter"
         leftButtonContent={<Close width={24} />}
-        leftButtonOnClick={() => moveToNextStep?.()}
+        leftButtonOnClick={onNext}
       />
       <DescriptionField
         title={

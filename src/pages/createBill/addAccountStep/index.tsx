@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
 import { ArrowDown, ArrowLeft } from '@/assets/svgs/icon';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
@@ -11,16 +10,14 @@ import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
 import BankNameDrawer from './components/BankNameDrawer';
-import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
 
-interface AddAccountStepProps
-  extends BaseFunnelStepComponentProps<BillContext> {}
+interface AddAccountStepProps {
+  onNext: () => void;
+  onBack: () => void;
+}
 
-function AddAccountStep({
-  moveToPreviousStep,
-  moveToNextStep,
-}: AddAccountStepProps) {
+function AddAccountStep({ onNext, onBack }: AddAccountStepProps) {
   const { groupToken } = useLoaderData();
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
@@ -41,9 +38,7 @@ function AddAccountStep({
         groupToken,
       },
       {
-        onSuccess: () => {
-          moveToNextStep?.();
-        },
+        onSuccess: onNext,
       }
     );
   };
@@ -58,7 +53,7 @@ function AddAccountStep({
             <Text>뒤로가기</Text>
           </>
         }
-        leftButtonOnClick={moveToPreviousStep}
+        leftButtonOnClick={onBack}
       />
       <DescriptionField title={`정산 받을 계좌를\n입력해주세요.`} />
       <S.PageContentWrapper>

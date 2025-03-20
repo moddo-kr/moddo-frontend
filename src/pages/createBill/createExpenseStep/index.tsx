@@ -7,24 +7,23 @@ import Button from '@/common/components/Button';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
 import DescriptionField from '@/common/components/DescriptionField';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useCreateExpense from '@/common/queries/expense/useCreateExpense';
 import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
-import { BillContext } from '@/pages/createBill/types/billContext.type';
 import Modal from '@/common/components/Modal';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import * as S from './index.styles';
 
-interface CreateExpenseStepProps
-  extends BaseFunnelStepComponentProps<BillContext> {}
+interface CreateExpenseStepProps {
+  onNext: () => void;
+}
 
-function CreateExpenseStep({ moveToNextStep }: CreateExpenseStepProps) {
+function CreateExpenseStep({ onNext }: CreateExpenseStepProps) {
   const lastFormCardRef = useRef<HTMLDivElement | null>(null);
   const { groupToken } = useLoaderData();
-  const mutation = useCreateExpense({ moveToNextStep, groupToken });
+  const mutation = useCreateExpense({ onNext, groupToken });
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =

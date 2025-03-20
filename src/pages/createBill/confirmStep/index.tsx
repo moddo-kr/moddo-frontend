@@ -1,7 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import useGetAllExpense from '@/common/queries/expense/useGetAllExpense';
 import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
@@ -9,24 +8,17 @@ import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
 import ExpenseCardList from './components/ExpenseCardList';
 import getTotalExpense from '../utils/getTotalExpense';
-import { BillContext } from '../types/billContext.type';
-import { SingleExpenseForm } from '../types/expense.type';
 import * as S from './index.styles';
+import { EditBillContext } from '../types/funnel.type';
 
-interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {
-  onEdit: (props: {
-    expenseId: number;
-    initialExpense: SingleExpenseForm;
-  }) => void;
+interface ConfirmStepProps {
+  onNext: () => void;
+  onBack: () => void;
+  onEdit: ({ expenseId, initialExpense }: EditBillContext) => void;
   onAdd: () => void;
 }
 
-function ConfirmStep({
-  moveToNextStep,
-  moveToPreviousStep,
-  onEdit,
-  onAdd,
-}: ConfirmStepProps) {
+function ConfirmStep({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   const { groupToken } = useLoaderData();
   const { data, isLoading } = useGetAllExpense(groupToken);
 
@@ -43,7 +35,7 @@ function ConfirmStep({
       <Header
         type="TitleCenter"
         leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={moveToPreviousStep}
+        leftButtonOnClick={onBack}
         rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
         rightButtonOnClick={onAdd}
         bgColor="#F1F3F5"
@@ -60,13 +52,7 @@ function ConfirmStep({
       </S.TotalExpenseWrapper>
       <ExpenseCardList expenses={data.expenses} onEdit={onEdit} />
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          onClick={() => {
-            moveToNextStep?.();
-          }}
-        >
-          확인했어요
-        </Button>
+        <Button onClick={onNext}>확인했어요</Button>
       </BottomButtonContainer>
     </>
   );
