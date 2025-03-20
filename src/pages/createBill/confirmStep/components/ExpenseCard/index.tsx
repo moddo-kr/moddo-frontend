@@ -2,20 +2,15 @@ import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
-import {
-  Expense,
-  SingleExpenseForm,
-} from '@/pages/createBill/types/expense.type';
+import { Expense } from '@/pages/createBill/types/expense.type';
+import { EditBillContext } from '@/pages/createBill/types/funnel.type';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
-  onEdit: (context: {
-    expenseId: number;
-    initialExpense: SingleExpenseForm;
-  }) => void;
+  onEdit: (context: EditBillContext) => void;
 }
 
 function ExpenseCard({

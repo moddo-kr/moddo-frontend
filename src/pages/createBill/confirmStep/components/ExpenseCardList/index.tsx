@@ -1,8 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
-import {
-  Expense,
-  SingleExpenseForm,
-} from '@/pages/createBill/types/expense.type';
+import { Expense } from '@/pages/createBill/types/expense.type';
+import { EditBillContext } from '@/pages/createBill/types/funnel.type';
 import Text from '@/common/components/Text';
 import categrizeExpensesByDateWithIndex from '../../utils/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';
@@ -10,10 +8,7 @@ import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
-  onEdit: (context: {
-    expenseId: number;
-    initialExpense: SingleExpenseForm;
-  }) => void;
+  onEdit: (context: EditBillContext) => void;
 }
 
 function ExpenseCardList({ expenses, onEdit }: ExpenseCardListProps) {

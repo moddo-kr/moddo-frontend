@@ -1,5 +1,4 @@
 import { useFunnel as useTossFunnel } from '@use-funnel/react-router';
-import { SingleExpenseForm } from './types/expense.type';
 import CreateExpenseStep from './createExpenseStep';
 import ConfirmStep from './confirmStep';
 import AddAccountStep from './addAccountStep';
@@ -7,7 +6,11 @@ import ShareStep from './shareStep';
 import AddExpenseStep from './addExpenseStep';
 import EditExpenseStep from './editExpenseStep';
 import QrStep from './qrStep';
-import { BillStepContext, EditBillStepContext } from './types/funnel.type';
+import {
+  BillStepContext,
+  EditBillContext,
+  EditBillStepContext,
+} from './types/funnel.type';
 
 function CreateBill() {
   const funnel = useTossFunnel<{
@@ -39,13 +42,7 @@ function CreateBill() {
       confirm={funnel.Render.with({
         events: {
           edit: (
-            {
-              expenseId,
-              initialExpense,
-            }: {
-              expenseId: number;
-              initialExpense: SingleExpenseForm;
-            },
+            { expenseId, initialExpense }: EditBillContext,
             { history }
           ) => {
             history.push('edit', { expenseId, initialExpense });
@@ -64,10 +61,7 @@ function CreateBill() {
           <ConfirmStep
             onBack={() => dispatch('back')}
             onNext={() => dispatch('next')}
-            onEdit={(props: {
-              expenseId: number;
-              initialExpense: SingleExpenseForm;
-            }) => {
+            onEdit={(props: EditBillContext) => {
               dispatch('edit', props);
             }}
             onAdd={() => dispatch('add')}
