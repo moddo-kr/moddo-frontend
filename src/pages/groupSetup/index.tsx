@@ -1,5 +1,4 @@
 import { useFunnel } from '@use-funnel/react-router';
-import { Member } from '@/common/types/member.type';
 import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
 import GroupNameSetup from './groupNameSetup';
 import PasswordSetup from './passwordSetup';
@@ -25,7 +24,7 @@ type MemberSetupType = {
 };
 
 function GroupSetup() {
-  const { mutateAsync: createGroup } = usePostCreateGroup();
+  const { mutateAsync: createGroup, isPending } = usePostCreateGroup();
   const funnel = useFunnel<{
     name: NameSetupType;
     password: PasswordSetupType;
@@ -53,16 +52,21 @@ function GroupSetup() {
         <PasswordSetup
           groupName={context.groupName}
           onNext={async (password: string) => {
-            const { groupToken } = await createGroup({
-              name: context.groupName,
-              password,
-            });
-            history.push('member', { password, groupToken });
+            if (isPending) return;
+            try {
+              await createGroup({
+                name: context.groupName,
+                password,
+              });
+              history.push('member', { password });
+            } catch {
+              // 실패 로직,,
+            }
           }}
         />
       )}
       // eslint-disable-next-line react/no-unstable-nested-components
-      member={({ context }) => <MemberSetup groupToken={context.groupToken} />}
+      member={() => <MemberSetup />}
     />
   );
 }
