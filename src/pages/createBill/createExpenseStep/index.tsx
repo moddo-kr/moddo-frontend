@@ -13,7 +13,6 @@ import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormAr
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
 import Modal from '@/common/components/Modal';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import { useGroupSetupStore } from '@/pages/groupSetup/stores/useGroupSetupStore';
 import * as S from './index.styles';
 
 interface CreateExpenseStepProps {
@@ -28,8 +27,6 @@ function CreateExpenseStep({ onNext }: CreateExpenseStepProps) {
   const navigate = useNavigate();
   const { groupInfo, formMethods, defaultFormValue, fieldArrayReturns } =
     useAddExpenseFormArray();
-
-  const { clearGroupSetup } = useGroupSetupStore();
 
   useLayoutEffect(() => {
     // form의 개수가 변경되면 (추가, 삭제) 마지막 form으로 스크롤 이동
@@ -54,7 +51,6 @@ function CreateExpenseStep({ onNext }: CreateExpenseStepProps) {
   /** submit 버튼 클릭 시 기존 모임 생성 정보를 메모리에서 삭제하는 함수 */
   const handleModalSubmit = () => {
     localStorage.removeItem('groupToken');
-    clearGroupSetup();
     setOpen(false);
     navigate(ROUTE.home);
   };
