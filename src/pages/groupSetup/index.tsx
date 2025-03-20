@@ -8,19 +8,16 @@ import MemberSetup from './memberSetup';
 type NameSetupType = {
   groupName?: string;
   password?: string;
-  groupToken?: string;
 };
 // 비밀번호 입력 스텝에 필요한 context type
 type PasswordSetupType = {
   groupName: string;
   password?: string;
-  groupToken?: string;
 };
 // 참여자 입력 스텝에 필요한 context type
 type MemberSetupType = {
   groupName: string;
   password: string;
-  groupToken?: string;
 };
 
 function GroupSetup() {
