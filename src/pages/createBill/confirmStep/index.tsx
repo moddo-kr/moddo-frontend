@@ -9,22 +9,26 @@ import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
 import ExpenseCardList from './components/ExpenseCardList';
 import getTotalExpense from '../utils/getTotalExpense';
-import { BillContext, BillContextRequired } from '../types/billContext.type';
+import { BillContext } from '../types/billContext.type';
+import { SingleExpenseForm } from '../types/expense.type';
 import * as S from './index.styles';
 
-interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {}
+interface ConfirmStepProps extends BaseFunnelStepComponentProps<BillContext> {
+  onEdit: (props: {
+    expenseId: number;
+    initialExpense: SingleExpenseForm;
+  }) => void;
+  onAdd: () => void;
+}
 
 function ConfirmStep({
   moveToNextStep,
   moveToPreviousStep,
-  moveToStep,
+  onEdit,
+  onAdd,
 }: ConfirmStepProps) {
   const { groupToken } = useLoaderData();
   const { data, isLoading } = useGetAllExpense(groupToken);
-
-  const moveToEditStep = ({ id, initialExpense }: BillContextRequired) => {
-    moveToStep?.('EDIT_EXPENSE', { id, initialExpense });
-  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -41,7 +45,7 @@ function ConfirmStep({
         leftButtonContent={<ArrowLeft width="1.5rem" />}
         leftButtonOnClick={moveToPreviousStep}
         rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
-        rightButtonOnClick={() => moveToStep?.('ADD_EXPENSE')}
+        rightButtonOnClick={onAdd}
         bgColor="#F1F3F5"
       />
       <DescriptionField
@@ -54,10 +58,7 @@ function ConfirmStep({
           {getTotalExpense(data.expenses).toLocaleString()}원
         </Text>
       </S.TotalExpenseWrapper>
-      <ExpenseCardList
-        expenses={data.expenses}
-        moveToEditStep={moveToEditStep}
-      />
+      <ExpenseCardList expenses={data.expenses} onEdit={onEdit} />
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button
           onClick={() => {
