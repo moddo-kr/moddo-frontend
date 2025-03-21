@@ -32,13 +32,13 @@ export const TitleTextWrapper = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{gap?: string}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
   width: 100%;
-  gap: 28%;
+  gap: ${({ gap}) => gap? gap : '0'};
 `;
 
 export const BottomContainer = styled.div<{ step: number }>`
@@ -54,7 +54,7 @@ export const BottomContainer = styled.div<{ step: number }>`
   padding-top: ${({ step }) => (step === 1 ? `1rem` : `3.625rem`)};
 `;
 
-export const OnboardingImgContainer = styled.div`
+export const OnboardingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,20 +68,8 @@ export const OnboardingImg = styled.img`
   margin-top: ${({ theme }) => theme.unit[8]};
 `;
 
-export const Container2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  width: 100%;
-`;
-
-export const Onboarding2Container = styled.div`
-  position: relative;
+export const ExtendedOnboardingContainer = styled(OnboardingContainer)`
   width: 83%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   top: -18%;
 `;
