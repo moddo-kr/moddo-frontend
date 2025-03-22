@@ -19,14 +19,12 @@ interface ExpenseMembersProps {
 // 개별 멤버 렌더링 컴포넌트
 interface ExpenseMemberItemProps {
   member: MemberExpense;
-  color: string;
   groupToken: string;
   status: string;
 }
 
 function ExpenseMemberItem({
   member,
-  color,
   groupToken,
   status,
 }: ExpenseMemberItemProps) {
@@ -71,11 +69,7 @@ function ExpenseMemberItem({
     <S.Container isPaid={member.isPaid}>
       <S.SummaryContainer>
         <S.LeftWrapper>
-          <S.ProfileImg
-            src={member.profile}
-            alt="profile"
-            $bgcolor={color || `${theme.color.semantic.orange.default}`}
-          />
+          <S.ProfileImg src={member.profile} alt="profile" />
           <S.SubProfileWrapper>
             <Text variant="body1Sb">
               <span style={{ color: theme.color.primitive.gray[500] }}>
