@@ -17,7 +17,7 @@ function MemberProfile({
   handleDeleteButtonClick,
 }: MemberProfileProps) {
   // useMemo를 사용하여 부모 컴포넌트의 리렌더링에도 불필요하게 새로운 색상이 생성되지 않도록 함
-  const profileBgColor = useMemo(() => getRandomColor(member.id), [member.id]);
+  // const profileBgColor = useMemo(() => getRandomColor(member.id), [member.id]);
 
   return (
     <Flex
@@ -35,9 +35,8 @@ function MemberProfile({
           </S.DeleteButton>
         )}
         <S.ProfileImg
-          src={defaultProfileImg}
+          src={member.profile || defaultProfileImg}
           alt="profile"
-          $bgcolor={profileBgColor}
         />
       </S.ProfileWrapper>
       <Text variant="caption">{member.name}</Text>
