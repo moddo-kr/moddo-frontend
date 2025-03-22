@@ -3,7 +3,6 @@ import { Flex } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
 import BANK_LIST from '@/common/constants/banks';
 import * as S from './index.style';
-// import { getBankImagesAndUrl } from '../../utils/BankList';
 
 interface BankNameDrawerProps {
   open: boolean;
@@ -13,7 +12,6 @@ interface BankNameDrawerProps {
 
 function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
   const [name, setName] = useState<string>('');
-  // const bankList = getBankImagesAndUrl();
 
   const handleSubmitButtonClick = () => {
     if (!name) return;

@@ -32,13 +32,13 @@ export const TitleTextWrapper = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div<{gap?: string}>`
+export const Container = styled.div<{ gap?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
   width: 100%;
-  gap: ${({ gap}) => gap? gap : '0'};
+  gap: ${({ gap }) => gap || '0'};
 `;
 
 export const BottomContainer = styled.div<{ step: number }>`

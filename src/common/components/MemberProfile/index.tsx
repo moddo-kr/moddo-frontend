@@ -2,8 +2,6 @@ import { Flex } from '@chakra-ui/react';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import { SystemDanger } from '@/assets/svgs/icon';
 import { Member } from '@/common/types/member.type';
-import { getRandomColor } from '@/common/utils/getRandomColor';
-import { useMemo } from 'react';
 import * as S from './index.style';
 import Text from '../Text';
 
@@ -16,9 +14,6 @@ function MemberProfile({
   member,
   handleDeleteButtonClick,
 }: MemberProfileProps) {
-  // useMemo를 사용하여 부모 컴포넌트의 리렌더링에도 불필요하게 새로운 색상이 생성되지 않도록 함
-  // const profileBgColor = useMemo(() => getRandomColor(member.id), [member.id]);
-
   return (
     <Flex
       key={member.id}
@@ -34,10 +29,7 @@ function MemberProfile({
             <SystemDanger width="1.1rem" height="1.1rem" />
           </S.DeleteButton>
         )}
-        <S.ProfileImg
-          src={member.profile || defaultProfileImg}
-          alt="profile"
-        />
+        <S.ProfileImg src={member.profile || defaultProfileImg} alt="profile" />
       </S.ProfileWrapper>
       <Text variant="caption">{member.name}</Text>
     </Flex>
