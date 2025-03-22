@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-export const ProfileImg = styled.img<{ $bgcolor: string }>`
+export const ProfileImg = styled.img`
   width: 3rem;
   height: 3rem;
   object-fit: contain;
-  background-color: ${({ $bgcolor }) => $bgcolor};
   border-radius: 50%;
 `;
 

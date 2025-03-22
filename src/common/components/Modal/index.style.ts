@@ -37,7 +37,7 @@ export const DefaultWrapper = styled.div`
   justify-content: space-between;
   gap: ${({ theme }) => theme.unit[28]};
   align-items: flex-start;
-  height: 100%;
+  height: fit-content;
   width: 100%;
   background: ${({ theme }) => theme.color.semantic.background.normal.default};
 `;

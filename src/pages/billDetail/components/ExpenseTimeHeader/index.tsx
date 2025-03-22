@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
-
 import DescriptionField from '@/common/components/DescriptionField';
 import { Flex } from '@chakra-ui/react';
 import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';

@@ -85,11 +85,10 @@ function AddMember({ members }: AddMemberProps) {
           명
         </S.MemberCount>
         <Flex gap={3} flexWrap="wrap">
-          {members.map((member, index) => (
+          {members.map((member) => (
             <MemberProfile
               key={member.id}
               member={member}
-              index={index}
               handleDeleteButtonClick={handleDeleteMember}
             />
           ))}

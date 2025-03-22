@@ -14,34 +14,34 @@ export function CoinLottie() {
   );
 }
 
-export function OnboardingLottie1() {
+export function OnboardingStep1Lottie() {
+  return (
+    <S.ExtendedWrapper>
+      <Lottie animationData={Onboarding1} />
+    </S.ExtendedWrapper>
+  );
+}
+
+export function OnboardingStep2Lottie() {
   return (
     <S.OnboardingWrapper>
-      <Lottie animationData={Onboarding1} />
+      <Lottie animationData={Onboarding2} />
     </S.OnboardingWrapper>
   );
 }
 
-export function OnboardingLottie2() {
+export function OnboardingStep3Lottie() {
   return (
-    <S.Onboarding2Wrapper>
-      <Lottie animationData={Onboarding2} />
-    </S.Onboarding2Wrapper>
-  );
-}
-
-export function OnboardingLottie3() {
-  return (
-    <S.Onboarding2Wrapper>
+    <S.OnboardingWrapper>
       <Lottie animationData={Onboarding3} />
-    </S.Onboarding2Wrapper>
+    </S.OnboardingWrapper>
   );
 }
 
-export function OnboardingLottie4() {
+export function OnboardingStep4Lottie() {
   return (
-    <S.Onboarding2Wrapper>
+    <S.OnboardingWrapper bottom={-18.75}>
       <Lottie animationData={Onboarding4} />
-    </S.Onboarding2Wrapper>
+    </S.OnboardingWrapper>
   );
 }

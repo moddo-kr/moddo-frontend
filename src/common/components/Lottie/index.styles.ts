@@ -13,14 +13,14 @@ export const Wrapper = styled.div`
   top: 0;
 `;
 
-export const OnboardingWrapper = styled(Wrapper)`
+export const ExtendedWrapper = styled(Wrapper)`
   width: 100%;
   max-width: 100%;
   top: -70%;
 `;
 
-export const Onboarding2Wrapper = styled.div`
+export const OnboardingWrapper = styled.div<{ bottom?: number }>`
   position: absolute;
-  bottom: -300px;
+  bottom: ${({ bottom }) => (bottom ? `${bottom}rem` : `-16.875rem`)};
   max-width: 400px;
 `;

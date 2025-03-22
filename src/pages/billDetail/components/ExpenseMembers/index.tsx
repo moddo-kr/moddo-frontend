@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
 import Text from '@/common/components/Text';
 import StatusChip from '@/common/components/StatusChip';
@@ -19,14 +18,12 @@ interface ExpenseMembersProps {
 // 개별 멤버 렌더링 컴포넌트
 interface ExpenseMemberItemProps {
   member: MemberExpense;
-  color: string;
   groupToken: string;
   status: string;
 }
 
 function ExpenseMemberItem({
   member,
-  color,
   groupToken,
   status,
 }: ExpenseMemberItemProps) {
@@ -71,11 +68,7 @@ function ExpenseMemberItem({
     <S.Container isPaid={member.isPaid}>
       <S.SummaryContainer>
         <S.LeftWrapper>
-          <S.ProfileImg
-            src={member.profile}
-            alt="profile"
-            $bgcolor={color || `${theme.color.semantic.orange.default}`}
-          />
+          <S.ProfileImg src={member.profile} alt="profile" />
           <S.SubProfileWrapper>
             <Text variant="body1Sb">
               <span style={{ color: theme.color.primitive.gray[500] }}>
@@ -201,12 +194,6 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
     isError,
   } = useGetMemberExpenseDetails(groupToken);
 
-  const colors = useMemo(() => {
-    return memberExpenseData
-      ? memberExpenseData.map((_, index: number) => getRandomColor(index))
-      : [];
-  }, [memberExpenseData]);
-
   if (isLoading) {
     return <div>loading...</div>;
   }
@@ -216,11 +203,10 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
 
   return (
     <S.Wrapper>
-      {memberExpenseData.map((member, index) => (
+      {memberExpenseData.map((member) => (
         <ExpenseMemberItem
           key={member.id}
           member={member}
-          color={colors[index]}
           groupToken={groupToken}
           status={status}
         />

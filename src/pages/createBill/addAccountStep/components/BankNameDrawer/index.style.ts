@@ -8,10 +8,18 @@ export const DrawerHeader = styled.h2`
 export const DrawerBody = styled.div`
   height: 370px;
   overflow-y: auto;
+  width: 100%;
+`;
+
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  @media (max-width: 385px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
   gap: 8px;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  place-items: center;
 `;
 
 export const SubmitButton = styled.button`
@@ -29,11 +37,17 @@ export const SubmitButton = styled.button`
 
 export const BankButton = styled.button<{ isSelected: boolean }>`
   width: 6.875rem; // 110px
+  @media (max-width: 385px) {
+    width: 6.25rem; // 100px
+  }
   height: 5.75rem; // 92px
   cursor: pointer;
   border-radius: 12px;
-  border: 2px solid ${({ isSelected }) => (isSelected ? '#FF802E' : 'none')};
-  background-color: #faf6f3;
+  border: 1.5px solid
+    ${({ isSelected, theme }) =>
+      isSelected ? `${theme.color.primitive.gray[100]}` : 'none'};
+  background-color: ${({ theme }) =>
+    theme.color.semantic.background.normal.alternative};
   padding: 1rem; // 20px
   display: flex;
   flex-direction: column;
@@ -43,7 +57,7 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
 
 export const BankImg = styled.img`
   width: 1.875rem;
-  height: auto;
+  height: fit-content;
 `;
 
 export const BankName = styled.p`
