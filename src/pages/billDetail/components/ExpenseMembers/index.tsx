@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { getRandomColor } from '@/common/utils/getRandomColor';
 import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
 import Text from '@/common/components/Text';
 import StatusChip from '@/common/components/StatusChip';
@@ -195,12 +194,6 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
     isError,
   } = useGetMemberExpenseDetails(groupToken);
 
-  const colors = useMemo(() => {
-    return memberExpenseData
-      ? memberExpenseData.map((_, index: number) => getRandomColor(index))
-      : [];
-  }, [memberExpenseData]);
-
   if (isLoading) {
     return <div>loading...</div>;
   }
@@ -210,11 +203,10 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
 
   return (
     <S.Wrapper>
-      {memberExpenseData.map((member, index) => (
+      {memberExpenseData.map((member) => (
         <ExpenseMemberItem
           key={member.id}
           member={member}
-          color={colors[index]}
           groupToken={groupToken}
           status={status}
         />
