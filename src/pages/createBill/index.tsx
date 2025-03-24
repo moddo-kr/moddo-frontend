@@ -1,4 +1,4 @@
-import { useFunnel as useTossFunnel } from '@use-funnel/react-router';
+import { useFunnel } from '@use-funnel/react-router';
 import CreateExpenseStep from './createExpenseStep';
 import ConfirmStep from './confirmStep';
 import AddAccountStep from './addAccountStep';
@@ -13,7 +13,7 @@ import {
 } from './types/funnel.type';
 
 function CreateBill() {
-  const funnel = useTossFunnel<{
+  const funnel = useFunnel<{
     create: BillStepContext;
     confirm: BillStepContext;
     account: BillStepContext;
