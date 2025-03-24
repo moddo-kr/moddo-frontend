@@ -7,9 +7,7 @@ export const ROUTE = {
   home: '/home',
   createBill: '/create-bill',
   selectGroup: '/selectGroup',
-  groupSetupName: '/groupSetup/groupName',
-  groupSetupPassword: '/groupSetup/password',
-  groupSetupMember: '/groupSetup/member',
+  groupSetup: '/groupSetup',
   billDetail: '/bill-detail/:groupToken',
   billDetailCharacterShare: '/bill-detail/:groupToken/character',
 } as const;

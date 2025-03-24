@@ -2,15 +2,15 @@ import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
-import { BillContextRequired } from '@/pages/createBill/types/billContext.type';
 import { Expense } from '@/pages/createBill/types/expense.type';
+import { EditBillContext } from '@/pages/createBill/types/funnel.type';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
-  moveToEditStep: (context: BillContextRequired) => void;
+  onEdit: (context: EditBillContext) => void;
 }
 
 function ExpenseCard({
@@ -20,7 +20,7 @@ function ExpenseCard({
   content,
   date,
   memberExpenses,
-  moveToEditStep,
+  onEdit,
 }: ExpenseCardProps) {
   const { groupToken } = useLoaderData();
   const mutation = useDeleteMutation(groupToken);
@@ -41,8 +41,8 @@ function ExpenseCard({
             <Button
               variant="text"
               onClick={() => {
-                moveToEditStep({
-                  id,
+                onEdit({
+                  expenseId: id,
                   initialExpense: {
                     amount,
                     content,

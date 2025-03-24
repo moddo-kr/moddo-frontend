@@ -12,14 +12,15 @@ import ButtonGroup from '@/common/components/ButtonGroup';
 import Text from '@/common/components/Text';
 import initKakaoSDK from '@/common/utils/initKakaoSDK';
 import generateShareLink from '@/common/utils/generateShareLink';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
-import { BillContext } from '../types/billContext.type';
 import ShareButton from './components/ShareButton';
 import * as S from './index.styles';
 
-interface ShareStepProps extends BaseFunnelStepComponentProps<BillContext> {}
+interface ShareStepProps {
+  onNext: () => void;
+  onBack: () => void;
+}
 
-function ShareStep({ moveToPreviousStep, moveToNextStep }: ShareStepProps) {
+function ShareStep({ onNext, onBack }: ShareStepProps) {
   const { groupToken } = useLoaderData();
   const navigate = useNavigate();
   useEffect(() => {
@@ -38,13 +39,9 @@ function ShareStep({ moveToPreviousStep, moveToNextStep }: ShareStepProps) {
             <Text>뒤로가기</Text>
           </>
         }
-        leftButtonOnClick={() => {
-          moveToPreviousStep?.();
-        }}
+        leftButtonOnClick={onBack}
         rightButtonContent={<Text>QR코드 만들기</Text>}
-        rightButtonOnClick={() => {
-          moveToNextStep?.();
-        }}
+        rightButtonOnClick={onNext}
       />
       <DescriptionField
         title={`참여자에게 링크를\n공유하면 요청이 완료돼요!`}

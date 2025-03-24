@@ -1,9 +1,11 @@
-import { useLoaderData, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
 import AddMember from '@/common/components/AddMember';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { ROUTE } from '@/common/constants/route';
+import useLocalStorage from '@/common/hooks/useLocalStorage';
+import { GROUP_TOKEN } from '@/common/constants/storageKey';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/assets/svgs/icon';
 import DescriptionField from '@/common/components/DescriptionField';
@@ -19,14 +21,17 @@ export interface ParticipantProfile {
 function MemberSetup() {
   const { unit } = useTheme();
   const navigate = useNavigate();
-  const { groupToken } = useLoaderData();
+  const [groupToken] = useLocalStorage<string>({
+    key: GROUP_TOKEN,
+    initialValue: '',
+  });
   const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
 
-  if (isLoading || isError) {
+  if (isLoading) {
     return <div>로딩중</div>;
   }
 
-  if (!data) {
+  if (!data || isError) {
     return <div>데이터가 없습니다.</div>;
   }
 
@@ -47,7 +52,10 @@ function MemberSetup() {
         sub="참여자는 지출 내역에서도 추가할 수 있어요!"
       />
       <S.PageContentWrapper>
-        <AddMember members={data.members.reverse()} />
+        <AddMember
+          members={data.members.reverse() || []}
+          groupToken={groupToken}
+        />
       </S.PageContentWrapper>
       <BottomButtonContainer>
         <Button

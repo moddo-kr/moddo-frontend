@@ -61,7 +61,7 @@ function SelectGroup() {
           <Flex gap="2" direction="column" mx={5} mt={5}>
             <S.SelectButton
               selected={selectedValue === 'CREATE'}
-              onClick={() => navigate(ROUTE.groupSetupName)}
+              onClick={() => navigate(ROUTE.groupSetup)}
             >
               <Add width={30} />
               <Text variant="body1Sb" color="semantic.text.inverse">

@@ -6,19 +6,19 @@ import saveAs from 'file-saver';
 import { ArrowLeft, Reset } from '@/assets/svgs/icon';
 import { showToast } from '@/common/components/Toast';
 import generateShareLink from '@/common/utils/generateShareLink';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import Header from '@/common/components/Header';
 import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import { BillContext } from '../types/billContext.type';
 import * as S from './index.styles';
 
-interface QrStepProps extends BaseFunnelStepComponentProps<BillContext> {}
+interface QrStepProps {
+  onBack: () => void;
+}
 
 const QR_IMAGE_FILE_NAME = 'moddo-share-qr.png';
 
-function QrStep({ moveToPreviousStep }: QrStepProps) {
+function QrStep({ onBack }: QrStepProps) {
   const imageRef = useRef<HTMLDivElement>(null);
   const { groupToken } = useLoaderData();
 
@@ -47,9 +47,7 @@ function QrStep({ moveToPreviousStep }: QrStepProps) {
         type="TitleCenter"
         title="QR코드"
         leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={() => {
-          moveToPreviousStep?.();
-        }}
+        leftButtonOnClick={onBack}
         rightButtonContent={<Reset width="1.5rem" />}
       />
       <DescriptionField
