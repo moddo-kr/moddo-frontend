@@ -31,7 +31,7 @@ function Login() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsEntrance(false);
-    }, 6000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 

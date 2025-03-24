@@ -3,7 +3,6 @@ import { Flex } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
 import BANK_LIST from '@/common/constants/banks';
 import * as S from './index.style';
-// import { getBankImagesAndUrl } from '../../utils/BankList';
 
 interface BankNameDrawerProps {
   open: boolean;
@@ -13,7 +12,6 @@ interface BankNameDrawerProps {
 
 function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
   const [name, setName] = useState<string>('');
-  // const bankList = getBankImagesAndUrl();
 
   const handleSubmitButtonClick = () => {
     if (!name) return;
@@ -31,19 +29,22 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
         px={5}
         height="70dvh"
         borderRadius={12}
+        width="100%"
       >
         <S.DrawerHeader>은행 선택</S.DrawerHeader>
         <S.DrawerBody>
-          {BANK_LIST.map((bank) => (
-            <S.BankButton
-              key={bank.bankName}
-              onClick={() => setName(bank.bankName)}
-              isSelected={name === bank.bankName}
-            >
-              <S.BankImg src={bank.url} />
-              <S.BankName>{bank.bankName}</S.BankName>
-            </S.BankButton>
-          ))}
+          <S.GridContainer>
+            {BANK_LIST.map((bank) => (
+              <S.BankButton
+                key={bank.bankName}
+                onClick={() => setName(bank.bankName)}
+                isSelected={name === bank.bankName}
+              >
+                <S.BankImg src={bank.url} />
+                <S.BankName>{bank.bankName}</S.BankName>
+              </S.BankButton>
+            ))}
+          </S.GridContainer>
         </S.DrawerBody>
         <S.SubmitButton onClick={handleSubmitButtonClick}>확인</S.SubmitButton>
       </Flex>

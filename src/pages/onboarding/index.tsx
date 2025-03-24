@@ -6,21 +6,21 @@ import { ActivePicker, DefaultPicker } from '@/assets/svgs/icon';
 import theme from '@/styles/theme';
 import Text from '@/common/components/Text';
 import {
-  OnboardingLottie1,
-  OnboardingLottie2,
-  OnboardingLottie3,
-  OnboardingLottie4,
+  OnboardingStep1Lottie,
+  OnboardingStep2Lottie,
+  OnboardingStep3Lottie,
+  OnboardingStep4Lottie,
 } from '@/common/components/Lottie';
 import Header from '@/common/components/Header';
 import Onboarding1 from '@/assets/pngs/Onboarding1.png';
 import * as S from './index.style';
 
 function Onboarding() {
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number>(1);
   const navigate = useNavigate();
 
   const handleNextClicked = () => {
-    if (step < 3) setStep(step + 1);
+    if (step < 4) setStep(step + 1);
     else navigate(ROUTE.home);
   };
 
@@ -37,8 +37,8 @@ function Onboarding() {
         bgColor={theme.color.semantic.orange.subtle}
       />
       <S.Wrapper>
-        {step === 0 && (
-          <S.Container>
+        {step === 1 && (
+          <S.Container gap="28%">
             <S.TextWrapper>
               <S.TitleTextWrapper>
                 <Text variant="heading1" color="semantic.text.strong">
@@ -52,14 +52,14 @@ function Onboarding() {
                 숫자에 강한 햄스터 모또에게 정산을 맡겨주세요!
               </Text>
             </S.TextWrapper>
-            <S.OnboardingImgContainer>
-              <OnboardingLottie1 />
+            <S.OnboardingContainer>
+              <OnboardingStep1Lottie />
               <S.OnboardingImg src={Onboarding1} alt="OnboardingImg1" />
-            </S.OnboardingImgContainer>
+            </S.OnboardingContainer>
           </S.Container>
         )}
-        {step === 1 && (
-          <S.Container2>
+        {step === 2 && (
+          <S.Container>
             <S.TextWrapper>
               <S.TitleTextWrapper>
                 <Text variant="heading1" color="semantic.text.strong">
@@ -73,13 +73,13 @@ function Onboarding() {
                 빠른 1/N 계산과 지출 내역 공유로 정산을 투명하게!
               </Text>
             </S.TextWrapper>
-            <S.Onboarding2Container>
-              <OnboardingLottie2 />
-            </S.Onboarding2Container>
-          </S.Container2>
+            <S.ExtendedOnboardingContainer>
+              <OnboardingStep2Lottie />
+            </S.ExtendedOnboardingContainer>
+          </S.Container>
         )}
-        {step === 2 && (
-          <S.Container2>
+        {step === 3 && (
+          <S.Container>
             <S.TextWrapper>
               <S.TitleTextWrapper>
                 <Text variant="heading1" color="semantic.text.strong">
@@ -93,13 +93,13 @@ function Onboarding() {
                 링크를 보낸 후 하루 안에 모두 송금을 완료해요!
               </Text>
             </S.TextWrapper>
-            <S.Onboarding2Container>
-              <OnboardingLottie3 />
-            </S.Onboarding2Container>
-          </S.Container2>
+            <S.ExtendedOnboardingContainer>
+              <OnboardingStep3Lottie />
+            </S.ExtendedOnboardingContainer>
+          </S.Container>
         )}
-        {step === 3 && (
-          <S.Container2>
+        {step === 4 && (
+          <S.Container>
             <S.TextWrapper>
               <S.TitleTextWrapper>
                 <Text variant="heading1" color="semantic.text.strong">
@@ -113,10 +113,10 @@ function Onboarding() {
                 정산 완료 후 얻은 귀여운 캐릭터를 공유해보세요.
               </Text>
             </S.TextWrapper>
-            <S.Onboarding2Container>
-              <OnboardingLottie4 />
-            </S.Onboarding2Container>
-          </S.Container2>
+            <S.ExtendedOnboardingContainer>
+              <OnboardingStep4Lottie />
+            </S.ExtendedOnboardingContainer>
+          </S.Container>
         )}
         <S.BottomContainer step={step}>
           <S.StepIndicator>
