@@ -13,7 +13,10 @@ const group = {
       .then((res) => res.data),
 
   post: async (groupData: CreateGroupData) => {
-    const response = await axiosInstance.post('/group', groupData);
+    const response = await axiosInstance.post<{ groupToken: string }>(
+      '/group',
+      groupData
+    );
     return response.data;
   },
 

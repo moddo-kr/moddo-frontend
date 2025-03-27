@@ -19,7 +19,6 @@ import ExpenseTimeHeader from './components/ExpenseTimeHeader';
 import ExpenseMembers from './components/ExpenseMembers';
 import { StatusType } from './components/ExpenseTimeHeader/index.type';
 import ShareButton from '../createBill/shareStep/components/ShareButton';
-import { useGroupSetupStore } from '../groupSetup/stores/useGroupSetupStore';
 
 function BillDetail() {
   const { unit } = useTheme();
@@ -31,7 +30,6 @@ function BillDetail() {
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { clearGroupSetup } = useGroupSetupStore();
 
   let MEMBER_TOTAL = 0;
   let MEMBER_DONE = 0;
@@ -45,7 +43,6 @@ function BillDetail() {
 
   const handleBackToHome = () => {
     localStorage.removeItem('groupToken');
-    clearGroupSetup();
     navigate(ROUTE.home);
   };
 

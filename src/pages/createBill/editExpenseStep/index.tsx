@@ -3,32 +3,30 @@ import { FormProvider } from 'react-hook-form';
 import { Close } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
 import FormCard from '@/pages/createBill/components/FormCard';
-import { BillContext } from '@/pages/createBill/types/billContext.type';
-import { SingleExpenseForm } from '@/pages/createBill/types/expense.type';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import * as S from './index.styles';
+import { EditBillContext } from '../types/funnel.type';
 
-interface EditExpenseStepProps
-  extends BaseFunnelStepComponentProps<BillContext> {
-  id: number;
-  initialExpense: SingleExpenseForm;
-}
+type EditExpenseStepProps = {
+  onNext: () => void;
+  onBack: () => void;
+} & EditBillContext;
 
 function EditExpenseStep({
-  id,
+  onNext,
+  onBack,
+  expenseId,
   initialExpense,
-  moveToNextStep,
 }: EditExpenseStepProps) {
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray(initialExpense);
   const { groupToken } = useLoaderData();
-  const mutation = useUpdateExpense({ moveToNextStep, groupToken });
+  const mutation = useUpdateExpense({ onNext, groupToken });
 
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
@@ -42,7 +40,7 @@ function EditExpenseStep({
       <Header
         type="TitleCenter"
         leftButtonContent={<Close width={24} />}
-        leftButtonOnClick={() => moveToNextStep?.()}
+        leftButtonOnClick={onBack}
       />
       <DescriptionField
         title={
@@ -66,7 +64,7 @@ function EditExpenseStep({
             mutation.mutate({
               groupToken,
               data: data.expenses[0],
-              expenseId: id,
+              expenseId,
             })
           )}
           disabled={!allFormsValid}

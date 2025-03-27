@@ -1,17 +1,12 @@
-import { BaseFunnelStepComponentProps } from '@/common/types/useFunnel.type';
-import { BillContext } from '@/pages/createBill/types/billContext.type';
-import expense from '@/service/apis/expense';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import expense from '@/service/apis/expense';
 
-interface UseCreateExpenseProps
-  extends Pick<BaseFunnelStepComponentProps<BillContext>, 'moveToNextStep'> {
+interface UseCreateExpenseProps {
+  onNext: () => void;
   groupToken: string;
 }
 
-const useCreateExpense = ({
-  moveToNextStep,
-  groupToken,
-}: UseCreateExpenseProps) => {
+const useCreateExpense = ({ groupToken, onNext }: UseCreateExpenseProps) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: expense.create,
@@ -19,7 +14,7 @@ const useCreateExpense = ({
       queryClient.invalidateQueries({
         queryKey: ['expenses', groupToken],
       });
-      moveToNextStep?.();
+      onNext();
     },
   });
 

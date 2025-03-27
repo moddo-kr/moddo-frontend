@@ -3,7 +3,6 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
-import { useLoaderData } from 'react-router';
 import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
 import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
 import Text from '../Text';
@@ -19,10 +18,10 @@ const MemberSchema = z.object({
 
 interface AddMemberProps {
   members: Member[]; // (required) 멤버 목록
+  groupToken: string;
 }
 
-function AddMember({ members }: AddMemberProps) {
-  const { groupToken } = useLoaderData();
+function AddMember({ members, groupToken }: AddMemberProps) {
   const addMutation = useAddGroupMember(groupToken);
   const deleteMutation = useDeleteGroupMember(groupToken);
   const { register, handleSubmit, clearErrors, formState, reset } = useForm({
