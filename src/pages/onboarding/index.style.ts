@@ -41,7 +41,7 @@ export const Container = styled.div<{ gap?: string }>`
   gap: ${({ gap }) => gap || '0'};
 `;
 
-export const BottomContainer = styled.div<{ step: number }>`
+export const BottomContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,14 +51,14 @@ export const BottomContainer = styled.div<{ step: number }>`
   width: 100%;
   background: ${({ theme }) => theme.color.semantic.orange.subtle};
   z-index: 100;
-  padding-top: ${({ step }) => (step === 1 ? `1rem` : `3.625rem`)};
+  padding-top: 1rem;
 `;
 
 export const OnboardingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90%;
   position: relative;
 `;
 
