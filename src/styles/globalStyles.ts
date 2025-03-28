@@ -54,6 +54,18 @@ const GlobalStyles = createGlobalStyle`
   input[type='number'] {
     appearance: textfield;
   }
+
+  .swiper {
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+  }
 `;
 
 export default GlobalStyles;
