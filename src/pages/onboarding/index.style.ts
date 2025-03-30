@@ -23,6 +23,7 @@ export const TextWrapper = styled.div`
   margin-top: ${({ theme }) => theme.unit[14]};
   padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[20]}`};
   gap: ${({ theme }) => theme.unit[4]};
+  white-space: nowrap;
 `;
 
 export const TitleTextWrapper = styled.div`
