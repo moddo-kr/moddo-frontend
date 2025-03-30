@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import theme from '@/styles/theme';
 
 const GlobalStyles = createGlobalStyle`
   ${normalize}
@@ -55,9 +56,10 @@ const GlobalStyles = createGlobalStyle`
     appearance: textfield;
   }
 
+  /* Swiper css */
   .swiper {
     display: flex;
-    max-width: 600px;
+    max-width: 37.5rem;
     flex-direction: column;
     flex: 1;
     width: 100%;
@@ -66,6 +68,21 @@ const GlobalStyles = createGlobalStyle`
   .swiper-slide {
     display: flex;
   }
+
+  .swiper-button-next, .swiper-button-prev {
+    margin: 0 10px;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: ${theme.unit[16]};
+    border-radius: ${theme.radius.default};
+  }
+
+  :root {
+    --swiper-navigation-size: ${theme.unit[40]};
+    --swiper-theme-color: ${theme.color.semantic.orange.default};
+  }
+
 `;
 
 export default GlobalStyles;
