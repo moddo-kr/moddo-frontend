@@ -19,8 +19,11 @@ export const ExtendedWrapper = styled(Wrapper)`
   top: -70%;
 `;
 
-export const OnboardingWrapper = styled.div<{ bottom?: number }>`
+export const OnboardingWrapper = styled.div`
   position: absolute;
-  bottom: ${({ bottom }) => (bottom ? `${bottom}rem` : `-16.875rem`)};
-  max-width: 400px;
+  width: 90%;
+  top: 70%; 
+  // 중앙 정렬 코드
+  left: 50%; 
+  transform: translate(-50%, -50%);
 `;
