@@ -11,9 +11,9 @@ import {
 } from '@/common/components/Lottie';
 import Header from '@/common/components/Header';
 import Onboarding1 from '@/assets/pngs/Onboarding1.png';
-import * as S from './index.style';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import * as S from './index.style';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -34,7 +34,7 @@ function Onboarding() {
           // install Swiper modules
           modules={[Navigation, Pagination]}
           navigation={!isTouchDevice}
-          pagination={true}
+          pagination
           allowTouchMove={isTouchDevice}
         >
           <SwiperSlide>
@@ -120,23 +120,6 @@ function Onboarding() {
           </SwiperSlide>
         </Swiper>
         <S.BottomContainer>
-          {/* <S.StepIndicator>
-            {Array.from({ length: 4 }).map((_, index) =>
-              step === index ? (
-                <ActivePicker
-                  key={index}
-                  width={theme.unit[12]}
-                  height={theme.unit[6]}
-                />
-              ) : (
-                <DefaultPicker
-                  key={index}
-                  width={theme.unit[6]}
-                  height={theme.unit[6]}
-                />
-              )
-            )}
-          </S.StepIndicator> */}
           <Button
             onClick={() => navigate(ROUTE.home)}
             style={{ width: '100%' }}

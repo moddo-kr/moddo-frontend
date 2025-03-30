@@ -22,8 +22,8 @@ export const ExtendedWrapper = styled(Wrapper)`
 export const OnboardingWrapper = styled.div`
   position: absolute;
   width: 90%;
-  top: 70%; 
+  top: 70%;
   // 중앙 정렬 코드
-  left: 50%; 
+  left: 50%;
   transform: translate(-50%, -50%);
 `;
