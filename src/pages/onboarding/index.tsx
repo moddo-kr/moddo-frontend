@@ -21,10 +21,9 @@ import * as S from './index.style';
 
 function Onboarding() {
   const navigate = useNavigate();
-  // 터치 가능한 디바이스인지 판별
-  const isTouchDevice =
-    typeof window !== 'undefined' &&
-    ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  /** 디바이스 크기가 태블릿 이하(768px)일 경우 swipe 가능 */
+  const isSwipeDevice =
+  typeof window !== 'undefined' && window.matchMedia("(max-width: 768px)").matches;
 
   return (
     <>
@@ -33,9 +32,9 @@ function Onboarding() {
         <Swiper
           // install Swiper modules
           modules={[Navigation, Pagination]}
-          navigation={!isTouchDevice}
+          navigation={!isSwipeDevice}
           pagination
-          allowTouchMove={isTouchDevice}
+          allowTouchMove={isSwipeDevice}
         >
           <SwiperSlide>
             <S.Container gap="28%">
