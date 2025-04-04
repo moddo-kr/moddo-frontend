@@ -11,13 +11,13 @@ import {
 } from '@/common/components/Lottie';
 import Header from '@/common/components/Header';
 import Onboarding1 from '@/assets/pngs/Onboarding1.png';
+/** swiper 관련 파일 */
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import * as S from './index.style';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import * as S from './index.style';
 
 function Onboarding() {
   const navigate = useNavigate();
