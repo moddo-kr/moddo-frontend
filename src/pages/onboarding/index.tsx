@@ -12,7 +12,7 @@ import {
 import Header from '@/common/components/Header';
 import Onboarding1 from '@/assets/pngs/Onboarding1.png';
 /** swiper 관련 파일 */
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -23,13 +23,14 @@ function Onboarding() {
   const navigate = useNavigate();
   /** 디바이스 크기가 태블릿 이하(768px)일 경우 swipe 가능 */
   const isSwipeDevice =
-  typeof window !== 'undefined' && window.matchMedia("(max-width: 768px)").matches;
+    typeof window !== 'undefined' &&
+    window.matchMedia('(max-width: 768px)').matches;
 
   return (
     <>
       <Header type="TitleCenter" bgColor={theme.color.semantic.orange.subtle} />
       <S.Wrapper>
-        <Swiper
+        <S.CustomSwiper
           // install Swiper modules
           modules={[Navigation, Pagination]}
           navigation={!isSwipeDevice}
@@ -117,7 +118,7 @@ function Onboarding() {
               </S.ExtendedOnboardingContainer>
             </S.Container>
           </SwiperSlide>
-        </Swiper>
+        </S.CustomSwiper>
         <S.BottomContainer>
           <Button
             onClick={() => navigate(ROUTE.home)}
