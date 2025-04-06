@@ -54,6 +54,7 @@ const GlobalStyles = createGlobalStyle`
   input[type='number'] {
     appearance: textfield;
   }
+
 `;
 
 export default GlobalStyles;
