@@ -13,13 +13,10 @@ const Login = lazy(() => import('@/pages/auth/login'));
 const LoginSuccess = lazy(() => import('@/pages/auth/loginSuccess'));
 const Onboarding = lazy(() => import('@/pages/onboarding'));
 const SelectGroup = lazy(() => import('@/pages/selectGroup'));
+const NotFound = lazy(() => import('@/pages/notFound'));
 
 function AppRouter() {
   const router = createBrowserRouter([
-    {
-      path: '*',
-      element: <Login />,
-    },
     {
       path: ROUTE.login,
       element: <Login />,
@@ -61,6 +58,10 @@ function AppRouter() {
       path: ROUTE.billDetailCharacterShare,
       element: <CharacterShare />,
       loader: groupTokenUrlLoader, // TODO : 권한 확인하기
+    },
+    {
+      path: '*',
+      element: <NotFound />,
     },
   ]);
 
