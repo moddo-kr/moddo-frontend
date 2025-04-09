@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import errorHam from '@/assets/pngs/error-ham.png';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
@@ -19,7 +18,7 @@ function ErrorPage() {
         </S.SubText>
       </S.DescriptionContainer>
       <Button>
-        <Link to="/home">홈으로 돌아가기</Link>
+        <a href="/home">홈으로 돌아가기</a>
       </Button>
     </S.Flex>
   );

@@ -5,19 +5,22 @@ import theme from '@/styles/theme';
 import Layout from '@/common/components/Layout';
 import AppRouter from '@/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import 'react-toastify/dist/ReactToastify.css';
 import Toast from './common/components/Toast';
+import ErrorBoundary from './common/utils/ErrorBoundary';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <ChakraProvider value={defaultSystem}>
       <ThemeProvider theme={theme}>
-        <Layout>
-          <GlobalStyles />
-          <AppRouter />
-          <ReactQueryDevtools />
-          <Toast />
-        </Layout>
+        <ErrorBoundary>
+          <Layout>
+            <GlobalStyles />
+            <AppRouter />
+            <ReactQueryDevtools />
+            <Toast />
+          </Layout>
+        </ErrorBoundary>
       </ThemeProvider>
     </ChakraProvider>
   );
