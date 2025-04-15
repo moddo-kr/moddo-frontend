@@ -9,22 +9,22 @@ const defaultHandlers: DefaultErrorHandler = {
 
 /**
  * API 에러를 처리하는 커스텀 훅입니다.
- * @param customHandlers - 훅을 사용하는 곳에서 정의한 에러 핸들러
- * @param nonBoundaryErrors - ErrorBoundary를 사용하지 않는 에러코드
+ * @param errorHandlers - 훅을 사용하는 곳에서 정의한 에러 핸들러
+ * @param noBoundaryErrors - ErrorBoundary를 사용하지 않는 에러코드
  * @description
- * 핸들러의 적용 순위는 customHandlers -> defaultHandlers입니다.
- * customHandlers에서 정의한 핸들러가 없을 경우 defaultHandlers의 핸들러가 호출됩니다.
+ * 핸들러의 적용 순위는 errorHandlers -> defaultHandlers입니다.
+ * errorHandlers에서 정의한 핸들러가 없을 경우 defaultHandlers의 핸들러가 호출됩니다.
  */
 const useApiError = <TError = Error>({
-  customHandlers,
-  nonBoundaryErrors,
+  errorHandlers,
+  noBoundaryErrors,
 }: {
-  customHandlers?: ErrorHandler;
-  nonBoundaryErrors?: number[];
+  errorHandlers?: ErrorHandler;
+  noBoundaryErrors?: number[];
 }) => {
   const handlers = useMemo(
-    () => ({ ...defaultHandlers, ...customHandlers }),
-    [customHandlers]
+    () => ({ ...defaultHandlers, ...errorHandlers }),
+    [errorHandlers]
   );
 
   // customErrorHandler를 우선 처리하고, defaultHandler를 처리합니다.
@@ -45,23 +45,23 @@ const useApiError = <TError = Error>({
     [handlers]
   );
 
-  // nonBoundaryErrors에 포함된 에러코드인지 확인합니다.
+  // noBoundaryErrors에 포함된 에러코드인지 확인합니다.
   // 해당 함수가 true를 반환하면 ErrorBoundary에서 에러를 처리합니다.
   // 기본값은 true입니다.
-  const isBoundaryError = useCallback(
+  const shouldThrowError = useCallback(
     (error: TError) => {
       if (isAxiosError(error)) {
         const status = error.response?.status;
         if (status) {
-          return !nonBoundaryErrors?.includes(status);
+          return !noBoundaryErrors?.includes(status);
         }
       }
       return true;
     },
-    [nonBoundaryErrors]
+    [noBoundaryErrors]
   );
 
-  return { handleError, isBoundaryError };
+  return { handleError, shouldThrowError };
 };
 
 export default useApiError;
