@@ -6,11 +6,12 @@ import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
+import { ROUTE } from '@/common/constants/route';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -42,13 +43,22 @@ function ExpenseTimeHeader({
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
 
   /** API 호출 관련 로직 */
-  const {
-    data: headerData,
-    isLoading,
-    isError,
-  } = useGetGroupHeader(groupToken!);
+  const { data: headerData, isLoading } = useGetGroupHeader(
+    groupToken,
+    {
+      401: () => {
+        showToast({
+          type: 'error',
+          content: '정산은 모임 참여자만 확인할 수 있어요.',
+        });
+        navigate(ROUTE.home);
+      },
+    },
+    [401]
+  );
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -116,8 +126,8 @@ function ExpenseTimeHeader({
     return <div>loading...</div>;
   }
 
-  if (isError || !headerData) {
-    return <div>error...</div>;
+  if (!headerData) {
+    return null;
   }
 
   /** 상수 정의 */
