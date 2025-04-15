@@ -1,24 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import expense from '@/service/apis/expense';
+import { ErrorHandlers, NoBoundaryErrors } from '@/common/types/error.type';
+import useMutationWithHandlers from '@/common/hooks/useMutationWithHanders';
 
-interface UseUpdateExpenseProps {
-  onNext: () => void;
-  groupToken: string;
-}
-
-const useUpdateExpense = ({ onNext, groupToken }: UseUpdateExpenseProps) => {
+const useUpdateExpense = (
+  groupToken: string,
+  errorHandlers: ErrorHandlers,
+  noBoundaryErrors: NoBoundaryErrors
+) => {
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+
+  return useMutationWithHandlers({
     mutationFn: expense.update,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['expenses', groupToken],
       });
-      onNext();
     },
+    errorHandlers,
+    noBoundaryErrors,
   });
-
-  return mutation;
 };
 
 export default useUpdateExpense;
