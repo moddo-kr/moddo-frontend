@@ -5,7 +5,7 @@ import {
   useQuery,
   UseQueryOptions,
 } from '@tanstack/react-query';
-import { ErrorHandler } from '@/common/types/error.type';
+import { ErrorHandlers } from '@/common/types/error.type';
 import useApiError from './useApiError';
 
 type UseQueryWithHandlersOptions<
@@ -14,7 +14,7 @@ type UseQueryWithHandlersOptions<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 > = UseQueryOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  errorHandlers: ErrorHandler;
+  errorHandlers: ErrorHandlers;
   noBoundaryErrors: number[];
 };
 

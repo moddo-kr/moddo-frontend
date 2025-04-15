@@ -1,8 +1,12 @@
 import { useCallback, useMemo } from 'react';
 import { isAxiosError } from 'axios';
-import { DefaultErrorHandler, ErrorHandler } from '@/common/types/error.type';
+import {
+  DefaultErrorHandlers,
+  ErrorHandlers,
+  NoBoundaryErrors,
+} from '@/common/types/error.type';
 
-const defaultHandlers: DefaultErrorHandler = {
+const defaultHandlers: DefaultErrorHandlers = {
   // 기본 설정의 throwOnError 옵션을 true로 설정했으므로 기본적으로 useApiError의 핸들러에서는 아무것도 하지 않습니다.
   default: () => {},
 };
@@ -19,15 +23,15 @@ const useApiError = <TError = Error>({
   errorHandlers,
   noBoundaryErrors,
 }: {
-  errorHandlers?: ErrorHandler;
-  noBoundaryErrors?: number[];
+  errorHandlers?: ErrorHandlers;
+  noBoundaryErrors?: NoBoundaryErrors;
 }) => {
   const handlers = useMemo(
     () => ({ ...defaultHandlers, ...errorHandlers }),
     [errorHandlers]
   );
 
-  // customErrorHandler를 우선 처리하고, defaultHandler를 처리합니다.
+  // customErrorHandlers를 우선 처리하고, defaultHandler를 처리합니다.
   const handleError = useCallback(
     (error: TError) => {
       if (isAxiosError(error)) {

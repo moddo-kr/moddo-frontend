@@ -1,7 +1,9 @@
-export type DefaultErrorHandler = {
+export type DefaultErrorHandlers = {
   [key: number]: () => void;
 } & {
   default: () => void;
 };
 
-export type ErrorHandler = Partial<DefaultErrorHandler>;
+export type ErrorHandlers = Partial<DefaultErrorHandlers>;
+
+export type NoBoundaryErrors = number[];

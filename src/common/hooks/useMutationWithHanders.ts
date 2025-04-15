@@ -3,7 +3,7 @@ import {
   useMutation,
   UseMutationOptions,
 } from '@tanstack/react-query';
-import { ErrorHandler } from '@/common/types/error.type';
+import { ErrorHandlers } from '@/common/types/error.type';
 import useApiError from './useApiError';
 
 type UseMutationWithHandlersOptions<
@@ -12,7 +12,7 @@ type UseMutationWithHandlersOptions<
   TVariables = void,
   TContext = unknown,
 > = UseMutationOptions<TData, TError, TVariables, TContext> & {
-  errorHandlers: ErrorHandler;
+  errorHandlers: ErrorHandlers;
   noBoundaryErrors: number[];
 };
 
