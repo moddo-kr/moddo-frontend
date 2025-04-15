@@ -35,7 +35,7 @@ function AddAccountStep({ onNext, onBack }: AddAccountStepProps) {
           type: 'error',
           content: '계좌는 총무만 등록할 수 있어요. 홈으로 이동할게요.',
         });
-        navigate(ROUTE.home);
+        navigate(ROUTE.home, { replace: true });
       },
     },
     [403]
