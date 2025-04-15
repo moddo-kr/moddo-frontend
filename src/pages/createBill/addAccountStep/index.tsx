@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
@@ -9,8 +9,10 @@ import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
+import { showToast } from '@/common/components/Toast';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './index.styles';
+import { ROUTE } from '@/common/constants/route';
 
 interface AddAccountStepProps {
   onNext: () => void;
@@ -19,10 +21,25 @@ interface AddAccountStepProps {
 
 function AddAccountStep({ onNext, onBack }: AddAccountStepProps) {
   const { groupToken } = useLoaderData();
+  const navigate = useNavigate();
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
-  const { mutate: updateAccountMutate } = usePutUpdateAccount(groupToken);
+  const { mutate: updateAccountMutate } = usePutUpdateAccount(
+    groupToken,
+    {
+      // CHECK - 에러 핸들링 방식 논의해보기
+      // 유저가 모임 총무가 아닐 경우에 발생하는 에러
+      403: () => {
+        showToast({
+          type: 'error',
+          content: '계좌는 총무만 등록할 수 있어요. 홈으로 이동할게요.',
+        });
+        navigate(ROUTE.home);
+      },
+    },
+    [403]
+  );
 
   const handleBankInputClick = () => {
     onOpen();
