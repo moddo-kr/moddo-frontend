@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { checkAuth, groupTokenUrlLoader } from '@/common/loaders';
 import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
-import RouteErrorBoundary from './common/utils/RouteErrorBoundary';
+import RouteErrorBoundary from '@/common/components/RouteErrorBoundary';
 
 const BillDetail = lazy(() => import('@/pages/billDetail'));
 const CharacterShare = lazy(() => import('@/pages/billDetail/characterShare'));
@@ -20,8 +20,11 @@ function AppRouter() {
   const router = createBrowserRouter([
     {
       path: '',
-      element: <Outlet />,
-      errorElement: <RouteErrorBoundary />,
+      element: (
+        <RouteErrorBoundary>
+          <Outlet />
+        </RouteErrorBoundary>
+      ),
       children: [
         {
           path: ROUTE.login,

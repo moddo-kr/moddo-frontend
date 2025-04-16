@@ -11,9 +11,9 @@ import theme from '@/styles/theme';
 import Layout from '@/common/components/Layout';
 import AppRouter from '@/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import Toast from './common/components/Toast';
-import ErrorBoundary from './common/utils/ErrorBoundary';
-import useApiError from './common/hooks/useApiError';
+import GlobalErrorBoundary from '@/common/components/GlobalErrorBoundary';
+import Toast from '@/common/components/Toast';
+import useApiError from '@/common/hooks/useApiError';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
   return (
     <ChakraProvider value={defaultSystem}>
       <ThemeProvider theme={theme}>
-        <ErrorBoundary>
+        <GlobalErrorBoundary>
           <QueryClientProvider client={queryClient}>
             <Layout>
               <GlobalStyles />
@@ -48,7 +48,7 @@ function App() {
               <Toast />
             </Layout>
           </QueryClientProvider>
-        </ErrorBoundary>
+        </GlobalErrorBoundary>
       </ThemeProvider>
     </ChakraProvider>
   );
