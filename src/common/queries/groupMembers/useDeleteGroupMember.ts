@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import groupMembers from '@/service/apis/groupMembers';
 import useMutationWithHandlers from '@/common/hooks/useMutationWithHanders';
 import { ErrorHandlers, NoBoundaryErrors } from '@/common/types/error.type';
