@@ -10,9 +10,9 @@ import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
 import { showToast } from '@/common/components/Toast';
+import { ROUTE } from '@/common/constants/route';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './index.styles';
-import { ROUTE } from '@/common/constants/route';
 
 interface AddAccountStepProps {
   onNext: () => void;
