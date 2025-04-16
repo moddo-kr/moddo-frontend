@@ -24,4 +24,5 @@ export const DescriptionContainer = styled.div`
 
 export const SubText = styled(Text)`
   text-align: center;
+  white-space: pre-line;
 `;
