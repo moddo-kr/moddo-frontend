@@ -33,11 +33,13 @@ function EditExpenseStep({
     groupToken,
     {
       // expenseId에 해당하는 지출 목록을 찾지 못한 경우
-      404: () =>
+      404: () => {
         showToast({
           type: 'error',
           content: '문제가 발생했어요. 지출 목록에서 다시 시도해 주세요.',
-        }),
+        });
+        onNext();
+      },
     },
     [404]
   );
@@ -56,7 +58,7 @@ function EditExpenseStep({
   );
 
   if (!groupInfo) {
-    throw new Error('모임 정보를 찾지 못했습니다.');
+    return null;
   }
 
   return (
