@@ -6,12 +6,12 @@ import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
 import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
-import { useLoaderData, useNavigate } from 'react-router';
+import { useLoaderData } from 'react-router';
 import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
-import { ROUTE } from '@/common/constants/route';
+import { BoundaryError } from '@/common/types/error.type';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -43,18 +43,19 @@ function ExpenseTimeHeader({
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const navigate = useNavigate();
 
   /** API 호출 관련 로직 */
+  // CHECK - groupTokenUrlLoader에서 받는 데이터와 동일한 것 아닌지...
   const { data: headerData, isLoading } = useGetGroupHeader(
     groupToken,
     {
+      // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
+      // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
       401: () => {
-        showToast({
-          type: 'error',
-          content: '정산은 모임 참여자만 확인할 수 있어요.',
+        throw new BoundaryError({
+          title: '접근할 수 없는 페이지예요',
+          description: '참여한 모임의 정산만 확인할 수 있어요.',
         });
-        navigate(ROUTE.home);
       },
     },
     [401]
