@@ -4,6 +4,7 @@ import { ROUTE } from '@/common/constants/route';
 import { checkAuth, groupTokenUrlLoader } from '@/common/loaders';
 import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
 import RouteErrorBoundary from '@/common/components/RouteErrorBoundary';
+import RouteErrorElement from '@/common/components/RouteErrorElement';
 
 const BillDetail = lazy(() => import('@/pages/billDetail'));
 const CharacterShare = lazy(() => import('@/pages/billDetail/characterShare'));
@@ -25,6 +26,7 @@ function AppRouter() {
           <Outlet />
         </RouteErrorBoundary>
       ),
+      errorElement: <RouteErrorElement />,
       children: [
         {
           path: ROUTE.login,
@@ -66,7 +68,7 @@ function AppRouter() {
         {
           path: ROUTE.billDetailCharacterShare,
           element: <CharacterShare />,
-          loader: groupTokenUrlLoader, // TODO : 권한 확인하기
+          loader: groupTokenUrlLoader,
         },
       ],
     },
