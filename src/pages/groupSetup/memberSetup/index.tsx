@@ -11,7 +11,7 @@ import { ArrowLeft } from '@/assets/svgs/icon';
 import DescriptionField from '@/common/components/DescriptionField';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
-import { showToast } from '@/common/components/Toast';
+import { BoundaryError } from '@/common/types/error.type';
 import * as S from '../index.styles';
 
 export interface ParticipantProfile {
@@ -29,17 +29,16 @@ function MemberSetup() {
   const { data, isLoading } = useGetGroupBasicInfo(
     groupToken,
     {
-      // CHECK - 에러 핸들링 방식 논의
       // 총무가 아닌 토큰으로 모임 정보를 요청하는 경우
-      403: () => {
-        showToast({
-          type: 'error',
-          content: '모임의 총무만 참여자를 추가할 수 있어요.',
+      // NOTE - API 문서에는 403 에러로 되어 있지만 실제로는 500 에러가 발생함
+      500: () => {
+        throw new BoundaryError({
+          title: '접근 권한이 없어요',
+          description: '모임의 총무만 참여자를 추가할 수 있어요.',
         });
-        navigate(ROUTE.home);
       },
     },
-    [403]
+    []
   );
 
   if (isLoading) {
