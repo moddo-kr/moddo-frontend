@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import notfoundHam from '@/assets/pngs/notfound-ham.png';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
+import { ROUTE } from '@/common/constants/route';
 import * as S from './index.style';
 
 function NotFoundPage() {
@@ -17,7 +18,7 @@ function NotFoundPage() {
         </S.SubText>
       </S.DescriptionContainer>
       <Button>
-        <Link to="/home">홈으로 돌아가기</Link>
+        <Link to={ROUTE.home}>홈으로 돌아가기</Link>
       </Button>
     </S.Flex>
   );
