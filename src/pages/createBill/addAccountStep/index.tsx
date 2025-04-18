@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
@@ -9,8 +9,7 @@ import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
-import { showToast } from '@/common/components/Toast';
-import { ROUTE } from '@/common/constants/route';
+import { BoundaryError } from '@/common/types/error.type';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './index.styles';
 
@@ -21,21 +20,19 @@ interface AddAccountStepProps {
 
 function AddAccountStep({ onNext, onBack }: AddAccountStepProps) {
   const { groupToken } = useLoaderData();
-  const navigate = useNavigate();
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
   const { mutate: updateAccountMutate } = usePutUpdateAccount(
     groupToken,
     {
-      // CHECK - 에러 핸들링 방식 논의해보기
+      // CHECK - 문서에는 403 에러로 되어 있지만, 실제로는 500 에러가 발생함
       // 유저가 모임 총무가 아닐 경우에 발생하는 에러
       403: () => {
-        showToast({
-          type: 'error',
-          content: '계좌는 총무만 등록할 수 있어요. 홈으로 이동할게요.',
+        throw new BoundaryError({
+          title: '접근 권한이 없어요.',
+          description: '계좌는 총무만 등록할 수 있어요.',
         });
-        navigate(ROUTE.home, { replace: true });
       },
     },
     [403]
