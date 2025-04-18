@@ -45,7 +45,6 @@ function ExpenseTimeHeader({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   /** API 호출 관련 로직 */
-  // CHECK - groupTokenUrlLoader에서 받는 데이터와 동일한 것 아닌지...
   const { data: headerData, isLoading } = useGetGroupHeader(
     groupToken,
     {
