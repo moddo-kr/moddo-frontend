@@ -19,7 +19,7 @@ const groupTokenUrlLoader: LoaderFunction = async ({ params }) => {
   } catch (error: unknown) {
     if (isAxiosError(error)) {
       // CHECK - 문서에는 401 에러로 되어있지만 실제로는 500 에러가 발생함
-      if (error.response?.status === 500) {
+      if (error.response?.status === 401) {
         throw new BoundaryError({
           title: '접근 권한이 없어요',
           description: '참여한 모임의 정산만 확인할 수 있어요.',
