@@ -25,6 +25,7 @@ function App() {
         defaultOptions: {
           mutations: {
             onError: handleMutationError,
+            throwOnError: true, // 기본적으로 RouteErrorBoundary로 에러를 던집니다.
           },
           queries: {
             throwOnError: true, // 기본적으로 RouteErrorBoundary로 에러를 던집니다.
