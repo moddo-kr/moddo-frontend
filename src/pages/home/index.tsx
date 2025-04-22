@@ -1,6 +1,5 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/assets/svgs';
-// import MainHamImg from '@/assets/pngs/MainHamImg.png';
 import MainHamImg2 from '@/assets/pngs/MainHamImg2.png';
 import { Flex } from '@chakra-ui/react';
 import Text from '@/common/components/Text';
@@ -106,13 +105,13 @@ function Home() {
           <Text variant="body1Sb" color="semantic.text.default">
             링크 관리
           </Text>
-          <S.SmallImg src={LinkMain} />
+          <S.SmallImg src={LinkMain} alt="linkMain" />
         </S.BoxButton>
         <S.BoxButton>
           <Text variant="body1Sb" color="semantic.text.default">
             캐릭터 도감
           </Text>
-          <S.SmallImg src={CardMain} />
+          <S.SmallImg src={CardMain} alt="cardMain" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
       <Divider />
