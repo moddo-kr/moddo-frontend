@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /login
-Allow: /onboarding
 Disallow: / 
+Sitemap: https://www.moddo.kr/sitemap.xml
