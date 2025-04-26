@@ -60,7 +60,7 @@ function AppRouter() {
     {
       path: ROUTE.billDetailCharacterShare,
       element: <CharacterShare />,
-      loader: groupTokenUrlLoader, // TODO : 권한 확인하기
+      loader: groupTokenUrlLoader,
     },
   ]);
 
