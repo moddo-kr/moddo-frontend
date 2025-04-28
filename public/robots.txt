@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
 Disallow: / 
+Allow: /$
 Sitemap: https://www.moddo.kr/sitemap.xml
