@@ -7,7 +7,7 @@ const useDeleteMutation = (groupToken: string) => {
     mutationFn: expense.delete,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['expenses', groupToken], // TODO : groupToken 추가 필요함
+        queryKey: ['expenses', groupToken],
       });
     },
   });

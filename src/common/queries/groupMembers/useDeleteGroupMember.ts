@@ -1,18 +1,23 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import groupMembers from '@/service/apis/groupMembers';
+import useMutationWithHandlers from '@/common/hooks/useMutationWithHanders';
+import { ErrorHandlers, IgnoreBoundaryErrors } from '@/common/types/error.type';
 
-const useDeleteGroupMember = (groupToken: string) => {
+const useDeleteGroupMember = (
+  groupToken: string,
+  errorHandlers: ErrorHandlers,
+  ignoreBoundaryErrors: IgnoreBoundaryErrors
+) => {
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+  const mutation = useMutationWithHandlers({
     mutationFn: groupMembers.delete,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['groupBasicInfo', groupToken],
       });
     },
-    onError: (error) => {
-      console.error('useDeleteGroupMember: ', error);
-    },
+    errorHandlers,
+    ignoreBoundaryErrors,
   });
 
   return mutation;
