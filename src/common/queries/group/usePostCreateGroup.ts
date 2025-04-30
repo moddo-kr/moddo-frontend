@@ -12,8 +12,5 @@ export const usePostCreateGroup = () => {
     onSuccess: (response) => {
       localStorage.setItem('groupToken', response?.groupToken);
     },
-    onError: (error) => {
-      console.error('Error:', error);
-    },
   });
 };
