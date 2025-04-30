@@ -4,6 +4,7 @@ import { Text, Stack } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { Group } from '@/common/types/group.type';
+import { BoundaryError } from '@/common/types/error.type';
 
 interface MemberBottomSheetProps {
   open: boolean;
@@ -17,7 +18,20 @@ function MemberBottomSheet({
   setGroupInfo,
 }: MemberBottomSheetProps) {
   const { groupToken } = useLoaderData();
-  const { data, isLoading, isError } = useGetGroupBasicInfo(groupToken);
+  const { data, isLoading, isError } = useGetGroupBasicInfo(
+    groupToken,
+    {
+      // 총무가 아닌 토큰으로 모임 정보를 요청하는 경우
+      // NOTE - API 문서에는 403 에러로 되어 있지만 실제로는 500 에러가 발생함
+      403: () => {
+        throw new BoundaryError({
+          title: '접근 권한이 없어요',
+          description: '모임의 총무만 참여자를 추가할 수 있어요.',
+        });
+      },
+    },
+    [403]
+  );
 
   const onCloseHandler = () => {
     if (data) {

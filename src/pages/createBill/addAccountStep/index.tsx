@@ -9,6 +9,7 @@ import { BottomButtonContainer } from '@/styles/bottomButton.styles';
 import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
+import { BoundaryError } from '@/common/types/error.type';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './index.styles';
 
@@ -22,7 +23,20 @@ function AddAccountStep({ onNext, onBack }: AddAccountStepProps) {
   const [bankName, setBankName] = useState<string>('');
   const [accountNumber, setAccountNumber] = useState<string>('');
   const { open, onOpen, onClose } = useDisclosure();
-  const { mutate: updateAccountMutate } = usePutUpdateAccount(groupToken);
+  const { mutate: updateAccountMutate } = usePutUpdateAccount(
+    groupToken,
+    {
+      // CHECK - 문서에는 403 에러로 되어 있지만, 실제로는 500 에러가 발생함
+      // 유저가 모임 총무가 아닐 경우에 발생하는 에러
+      403: () => {
+        throw new BoundaryError({
+          title: '접근 권한이 없어요.',
+          description: '계좌는 총무만 등록할 수 있어요.',
+        });
+      },
+    },
+    [403]
+  );
 
   const handleBankInputClick = () => {
     onOpen();
