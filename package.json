@@ -11,7 +11,7 @@
     "svgr": "npx @svgr/cli -d src/assets/svgs --typescript --no-dimensions public/svgs",
     "pwa": "pwa-assets-generator --preset minimal public/pwa/moddo.svg",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "STORYBOOK=true storybook build",
     "test": "vitest run"
   },
   "dependencies": {
