@@ -17,6 +17,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      strategies: 'generateSW',
       includeAssets: [
         '/pwa/favicon.ico',
         '/pwa/apple-touch-icon.png',
@@ -63,8 +64,24 @@ export default defineConfig({
         enabled: true, // 개발 모드에서 PWA 활성화
         type: 'module', // Service Worker 파일 타입
       },
+      /** 최신 상태가 바로 반영되도록 service worker 캐시 설정 변경 */
       workbox: {
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10MB로 설정 (기본값은 2MB)
+        skipWaiting: true, 
+        clientsClaim: true,
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:js|css|png|jpg|jpeg|svg)$/, 
+            handler: 'NetworkFirst', // 네트워크를 먼저 시도
+            options: {
+              cacheName: 'static-assets',
+              expiration: {
+                maxEntries: 60, // 최대 캐시 항목 수
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30일
+              },
+            },
+          },
+        ],
       },
     }),
   ],
