@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { putGroupAccount } from '@/service/apis/group';
 import { AccountVariable } from '@/common/types/group.type';
-import { ErrorHandlers, NoBoundaryErrors } from '@/common/types/error.type';
+import { ErrorHandlers, IgnoreBoundaryErrors } from '@/common/types/error.type';
 import useMutationWithHandlers from '@/common/hooks/useMutationWithHanders';
 
 interface AccountData {
@@ -16,7 +16,7 @@ interface AccountData {
 const usePutUpdateAccount = (
   groupToken: string,
   errorHandlers: ErrorHandlers,
-  noBoundaryErrors: NoBoundaryErrors
+  ignoreBoundaryErrors: IgnoreBoundaryErrors
 ) => {
   const queryClient = useQueryClient();
 
@@ -34,7 +34,7 @@ const usePutUpdateAccount = (
     },
     // CHECK - 실패 시 setQueryData를 복구하는 로직이 필요한지 확인
     errorHandlers,
-    noBoundaryErrors,
+    ignoreBoundaryErrors,
   });
 };
 

@@ -1,12 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import expense from '@/service/apis/expense';
-import { ErrorHandlers, NoBoundaryErrors } from '@/common/types/error.type';
+import { ErrorHandlers, IgnoreBoundaryErrors } from '@/common/types/error.type';
 import useMutationWithHandlers from '@/common/hooks/useMutationWithHanders';
 
 const useUpdateExpense = (
   groupToken: string,
   errorHandlers: ErrorHandlers,
-  noBoundaryErrors: NoBoundaryErrors
+  ignoreBoundaryErrors: IgnoreBoundaryErrors
 ) => {
   const queryClient = useQueryClient();
 
@@ -18,7 +18,7 @@ const useUpdateExpense = (
       });
     },
     errorHandlers,
-    noBoundaryErrors,
+    ignoreBoundaryErrors,
   });
 };
 

@@ -6,7 +6,7 @@ export type DefaultErrorHandlers = {
 
 export type ErrorHandlers = Partial<DefaultErrorHandlers>;
 
-export type NoBoundaryErrors = number[];
+export type IgnoreBoundaryErrors = number[];
 
 export class BoundaryError extends Error {
   title?: string;

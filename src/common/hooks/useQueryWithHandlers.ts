@@ -15,7 +15,7 @@ type UseQueryWithHandlersOptions<
   TQueryKey extends QueryKey = QueryKey,
 > = UseQueryOptions<TQueryFnData, TError, TData, TQueryKey> & {
   errorHandlers: ErrorHandlers;
-  noBoundaryErrors: number[];
+  ignoreBoundaryErrors: number[];
 };
 
 const useQueryWithHandlers = <
@@ -27,10 +27,10 @@ const useQueryWithHandlers = <
   options: UseQueryWithHandlersOptions<TQueryFnData, TError, TData, TQueryKey>,
   queryClient?: QueryClient
 ) => {
-  const { errorHandlers, noBoundaryErrors, ...restOptions } = options;
+  const { errorHandlers, ignoreBoundaryErrors, ...restOptions } = options;
   const { handleError, shouldThrowError } = useApiError<TError>({
     errorHandlers,
-    noBoundaryErrors,
+    ignoreBoundaryErrors,
   });
 
   const query = useQuery(

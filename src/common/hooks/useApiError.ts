@@ -3,7 +3,7 @@ import { isAxiosError } from 'axios';
 import {
   DefaultErrorHandlers,
   ErrorHandlers,
-  NoBoundaryErrors,
+  IgnoreBoundaryErrors,
 } from '@/common/types/error.type';
 
 const defaultHandlers: DefaultErrorHandlers = {
@@ -14,17 +14,17 @@ const defaultHandlers: DefaultErrorHandlers = {
 /**
  * API 에러를 처리하는 커스텀 훅입니다.
  * @param errorHandlers - 훅을 사용하는 곳에서 정의한 에러 핸들러
- * @param noBoundaryErrors - ErrorBoundary를 사용하지 않는 에러코드
+ * @param ignoreBoundaryErrors - ErrorBoundary를 사용하지 않는 에러코드
  * @description
  * 핸들러의 적용 순위는 errorHandlers -> defaultHandlers입니다.
  * errorHandlers에서 정의한 핸들러가 없을 경우 defaultHandlers의 핸들러가 호출됩니다.
  */
 const useApiError = <TError = Error>({
   errorHandlers,
-  noBoundaryErrors,
+  ignoreBoundaryErrors,
 }: {
   errorHandlers?: ErrorHandlers;
-  noBoundaryErrors?: NoBoundaryErrors;
+  ignoreBoundaryErrors?: IgnoreBoundaryErrors;
 }) => {
   const handlers = useMemo(
     () => ({ ...defaultHandlers, ...errorHandlers }),
@@ -49,7 +49,7 @@ const useApiError = <TError = Error>({
     [handlers]
   );
 
-  // noBoundaryErrors에 포함된 에러코드인지 확인합니다.
+  // ignoreBoundaryErrors에 포함된 에러코드인지 확인합니다.
   // 해당 함수가 true를 반환하면 ErrorBoundary에서 에러를 처리합니다.
   // 기본값은 true입니다.
   const shouldThrowError = useCallback(
@@ -57,12 +57,12 @@ const useApiError = <TError = Error>({
       if (isAxiosError(error)) {
         const status = error.response?.status;
         if (status) {
-          return !noBoundaryErrors?.includes(status);
+          return !ignoreBoundaryErrors?.includes(status);
         }
       }
       return true;
     },
-    [noBoundaryErrors]
+    [ignoreBoundaryErrors]
   );
 
   return { handleError, shouldThrowError };

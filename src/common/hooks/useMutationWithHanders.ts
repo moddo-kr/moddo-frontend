@@ -13,7 +13,7 @@ type UseMutationWithHandlersOptions<
   TContext = unknown,
 > = UseMutationOptions<TData, TError, TVariables, TContext> & {
   errorHandlers: ErrorHandlers;
-  noBoundaryErrors: number[];
+  ignoreBoundaryErrors: number[];
 };
 
 const useMutationWithHandlers = <
@@ -25,10 +25,10 @@ const useMutationWithHandlers = <
   options: UseMutationWithHandlersOptions<TData, TError, TVariables, TContext>,
   queryClient?: QueryClient
 ) => {
-  const { errorHandlers, noBoundaryErrors, ...restOptions } = options;
+  const { errorHandlers, ignoreBoundaryErrors, ...restOptions } = options;
   const { handleError, shouldThrowError } = useApiError<TError>({
     errorHandlers,
-    noBoundaryErrors,
+    ignoreBoundaryErrors,
   });
 
   return useMutation(
