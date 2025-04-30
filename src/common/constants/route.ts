@@ -6,8 +6,8 @@ export const ROUTE = {
   onboarding: '/onboarding',
   home: '/',
   createBill: '/create-bill',
-  selectGroup: '/selectGroup',
-  groupSetup: '/groupSetup',
+  selectGroup: '/select-group',
+  groupSetup: '/group-setup',
   billDetail: '/bill-detail/:groupToken',
   billDetailCharacterShare: '/bill-detail/:groupToken/character',
 } as const;

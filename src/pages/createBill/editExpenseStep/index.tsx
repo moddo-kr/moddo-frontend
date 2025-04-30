@@ -9,6 +9,7 @@ import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
 import Button from '@/common/components/Button';
 import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import { showToast } from '@/common/components/Toast';
 import * as S from './index.styles';
 import { EditBillContext } from '../types/funnel.type';
 
@@ -26,10 +27,35 @@ function EditExpenseStep({
   const { groupInfo, formMethods, fieldArrayReturns } =
     useAddExpenseFormArray(initialExpense);
   const { groupToken } = useLoaderData();
-  const mutation = useUpdateExpense({ onNext, groupToken });
-
   const { handleSubmit, formState } = formMethods;
   const allFormsValid = formState.isValid;
+  const mutation = useUpdateExpense(
+    groupToken,
+    {
+      // expenseId에 해당하는 지출 목록을 찾지 못한 경우
+      404: () => {
+        showToast({
+          type: 'error',
+          content: '문제가 발생했어요. 지출 목록에서 다시 시도해 주세요.',
+        });
+        onNext();
+      },
+    },
+    [404]
+  );
+
+  const updateHandler = handleSubmit((data) =>
+    mutation.mutate(
+      {
+        groupToken,
+        data: data.expenses[0],
+        expenseId,
+      },
+      {
+        onSuccess: onNext,
+      }
+    )
+  );
 
   if (!groupInfo) {
     return null;
@@ -59,16 +85,7 @@ function EditExpenseStep({
         ))}
       </S.BillFormList>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          onClick={handleSubmit((data) =>
-            mutation.mutate({
-              groupToken,
-              data: data.expenses[0],
-              expenseId,
-            })
-          )}
-          disabled={!allFormsValid}
-        >
+        <Button onClick={updateHandler} disabled={!allFormsValid}>
           수정 완료
         </Button>
       </BottomButtonContainer>

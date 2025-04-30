@@ -19,21 +19,20 @@ const group = {
     );
     return response.data;
   },
+};
 
-  put: async ({
-    accountData,
-    groupToken,
-  }: {
-    accountData: AccountVariable;
-    groupToken: string;
-  }) => {
-    const response = await axiosInstance.put(
-      `/group/account?groupToken=${groupToken}`,
-      accountData
-    );
-    console.log(response);
-    return response.data;
-  },
+export const putGroupAccount = async ({
+  accountData,
+  groupToken,
+}: {
+  accountData: AccountVariable;
+  groupToken: string;
+}) => {
+  const response = await axiosInstance.put(
+    `/group/account?groupToken=${groupToken}`,
+    accountData
+  );
+  return response.data;
 };
 
 export const getGroupHeader = (
