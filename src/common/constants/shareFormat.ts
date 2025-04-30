@@ -1,6 +1,5 @@
 import { ShareData } from '../types/share.type';
 
-// TODO : 실제 데이터로 변경 필요함.
 const TITLE = '즐거운 만남 끝까지 즐겁게, 모또';
 const DESCRIPTION = '정산을 요청했어요! 금액을 확인하고 정산해주세요.';
 
