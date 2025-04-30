@@ -1,10 +1,10 @@
 export const BASE_URL = 'https://www.moddo.kr';
 
 export const ROUTE = {
-  login: '/',
+  login: '/login',
   loginSuccess: '/login/success',
   onboarding: '/onboarding',
-  home: '/home',
+  home: '/',
   createBill: '/create-bill',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',

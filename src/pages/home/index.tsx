@@ -1,6 +1,5 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/assets/svgs';
-// import MainHamImg from '@/assets/pngs/MainHamImg.png';
 import MainHamImg2 from '@/assets/pngs/MainHamImg2.png';
 import { Flex } from '@chakra-ui/react';
 import Text from '@/common/components/Text';
@@ -99,20 +98,20 @@ function Home() {
             모또만 믿고 맡겨줘!
           </Text>
         </Flex>
-        <S.DescriptionImg src={MainHamImg2} alt="mainHamImg2" />
+        <S.DescriptionImg src={MainHamImg2} alt="" />
       </Flex>
       <S.BoxButtonWrapper>
         <S.BoxButton>
           <Text variant="body1Sb" color="semantic.text.default">
             링크 관리
           </Text>
-          <S.SmallImg src={LinkMain} />
+          <S.SmallImg src={LinkMain} alt="" />
         </S.BoxButton>
         <S.BoxButton>
           <Text variant="body1Sb" color="semantic.text.default">
             캐릭터 도감
           </Text>
-          <S.SmallImg src={CardMain} />
+          <S.SmallImg src={CardMain} alt="" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
       <Divider />
@@ -161,7 +160,7 @@ function Home() {
             flexGrow={1}
             gap={6}
           >
-            <S.NoSettlementImg src={CoinImg} alt="noSettlement" />
+            <S.NoSettlementImg src={CoinImg} alt="" />
             <Text variant="body2R" color="semantic.text.subtle">
               아직 진행중인 정산이 없어요.
             </Text>
