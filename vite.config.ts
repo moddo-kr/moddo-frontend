@@ -84,6 +84,14 @@ export default defineConfig(({ mode }) => {
                   },
                 },
               },
+              /** 사이트맵이 서비스워커에 캐시되지 않도록 설정 */
+              {
+                urlPattern: /^https:\/\/www\.moddo\.kr\/sitemap\.xml$/,
+                handler: 'NetworkOnly', // 캐시하지 않고 항상 네트워크 요청
+                options: {
+                  cacheName: 'sitemap-no-cache',
+                },
+              },
             ],
           },
         }),
