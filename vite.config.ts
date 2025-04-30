@@ -38,9 +38,6 @@ export default defineConfig(({ mode }) => {
             background_color: '#ffffff',
             display: 'standalone', // 독립형 앱처럼 실행
             lang: 'ko',
-            /**
-             * @Todo 아이콘 설정 바꾸기
-             */
             icons: [
               {
                 src: '/pwa/pwa-64x64.png',
