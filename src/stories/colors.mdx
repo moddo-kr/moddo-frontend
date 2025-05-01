@@ -5,29 +5,6 @@ import theme from '../styles/theme';
 
 # Colors
 
-## Semantic
-
-<ColorPalette>
-  {Object.entries(theme.color.semantic).map(([colorName, shades]) => {
-    const isNested = Object.values(shades).some(value => typeof value === 'object');
-
-    return isNested ? (
-      Object.entries(shades).map(([subKey, values]) => (
-        <ColorItem
-          key={`${colorName}-${subKey}`}
-          title={`${colorName}.${subKey}`}
-          subtitle={`theme.color.semantic.${colorName}.${subKey}`}
-          colors={values}
-        />
-      ))
-    ) : (
-      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.color.semantic.${colorName}`} colors={shades} />
-    );
-
-})}
-
-</ColorPalette>
-
 ## Primitives
 
 <ColorPalette>
@@ -39,12 +16,35 @@ import theme from '../styles/theme';
         <ColorItem
           key={`${colorName}-${subKey}`}
           title={`${colorName}.${subKey}`}
-          subtitle={`theme.color.primitive.${colorName}.${subKey}`}
+          subtitle={`primitive.${colorName}.${subKey}`}
           colors={values}
         />
       ))
     ) : (
-      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.color.primitive.${colorName}`} colors={shades} />
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`primitive.${colorName}`} colors={shades} />
+    );
+
+})}
+
+</ColorPalette>
+
+## Semantic
+
+<ColorPalette>
+  {Object.entries(theme.color.semantic).map(([colorName, shades]) => {
+    const isNested = Object.values(shades).some(value => typeof value === 'object');
+
+    return isNested ? (
+      Object.entries(shades).map(([subKey, values]) => (
+        <ColorItem
+          key={`${colorName}-${subKey}`}
+          title={`${colorName}.${subKey}`}
+          subtitle={`semantic.${colorName}.${subKey}`}
+          colors={values}
+        />
+      ))
+    ) : (
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`semantic.${colorName}`} colors={shades} />
     );
 
 })}
