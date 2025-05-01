@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  background: ${({ theme }) => theme.color.semantic.orange.subtle};
+  background: ${({ theme }) => theme.color.semantic.primary.subtle};
   overflow: hidden;
 `;
 
@@ -51,7 +51,7 @@ export const BottomContainer = styled.div`
   padding: ${({ theme }) =>
     `0 ${theme.unit[20]} ${theme.unit[16]} ${theme.unit[20]}`};
   width: 100%;
-  background: ${({ theme }) => theme.color.semantic.orange.subtle};
+  background: ${({ theme }) => theme.color.semantic.primary.subtle};
   z-index: 100;
   padding-top: 1rem;
 `;
@@ -78,7 +78,7 @@ export const ExtendedOnboardingContainer = styled(OnboardingContainer)`
 
 export const CustomSwiper = styled(Swiper)`
   --swiper-navigation-size: ${({ theme }) => theme.unit[40]};
-  --swiper-theme-color: ${({ theme }) => theme.color.semantic.orange.default};
+  --swiper-theme-color: ${({ theme }) => theme.color.semantic.primary.default};
 
   display: flex;
   max-width: 37.5rem;

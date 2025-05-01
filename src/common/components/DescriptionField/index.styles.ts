@@ -1,9 +1,9 @@
-import getColorFromTheme from '@/common/utils/getColorFromTheme';
-import { ColorKey } from '@/styles/theme.type';
+import getColor from '@/common/utils/getColor';
+import { ColorTokenType } from '@/styles/theme.type';
 import styled from 'styled-components';
 
 interface WrapperProps {
-  $bgColor?: ColorKey;
+  $bgColor?: ColorTokenType;
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -13,8 +13,5 @@ export const Wrapper = styled.div<WrapperProps>`
   gap: ${({ theme }) => theme.unit[4]};
   white-space: pre-line;
   background-color: ${({ theme, $bgColor }) =>
-    getColorFromTheme(
-      theme.color,
-      $bgColor || 'semantic.background.normal.default'
-    )};
+    getColor(theme.color, $bgColor || 'semantic.background.normal.default')};
 `;

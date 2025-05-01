@@ -38,7 +38,7 @@ export const StyledTitle: Story = {
   args: {
     title: (
       <>
-        <Text variant="heading2" color="semantic.orange.default">
+        <Text variant="heading2" color="semantic.primary.default">
           DND 7조 첫모임
         </Text>
         {`의\n지출 내역을 입력해주세요.`}

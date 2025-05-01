@@ -1,12 +1,12 @@
 import { ReactElement } from 'react';
 import Text from '@/common/components/Text';
-import { ColorKey } from '@/styles/theme.type';
+import { ColorTokenType } from '@/styles/theme.type';
 import * as S from './index.styles';
 
 interface DescriptionFieldProps {
   title: string | ReactElement;
   sub?: string | ReactElement;
-  bgColor?: ColorKey;
+  bgColor?: ColorTokenType;
 }
 
 function DescriptionField({ title, sub, bgColor }: DescriptionFieldProps) {

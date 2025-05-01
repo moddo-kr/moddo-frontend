@@ -28,7 +28,10 @@ function Onboarding() {
 
   return (
     <>
-      <Header type="TitleCenter" bgColor={theme.color.semantic.orange.subtle} />
+      <Header
+        type="TitleCenter"
+        bgColor={theme.color.semantic.primary.subtle}
+      />
       <S.Wrapper>
         <S.CustomSwiper
           // install Swiper modules

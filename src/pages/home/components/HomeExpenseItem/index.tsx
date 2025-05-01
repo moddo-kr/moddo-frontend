@@ -51,7 +51,7 @@ function HomeExpenseItem({
                 fontSize: `${theme.unit[14]}`,
               }}
             >
-              <p style={{ color: `${theme.color.semantic.orange.default}` }}>
+              <p style={{ color: `${theme.color.semantic.primary.default}` }}>
                 {paidMember}
               </p>
               {`/${totalMember} 정산 완료`}

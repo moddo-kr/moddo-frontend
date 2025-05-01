@@ -10,6 +10,6 @@ export const Trail = styled.div`
 export const Path = styled.div<{ percentage: number }>`
   width: ${({ percentage }) => `${percentage}%`};
   height: 100%;
-  background: ${({ theme }) => theme.color.semantic.orange.default};
+  background: ${({ theme }) => theme.color.semantic.primary.default};
   border-radius: ${({ theme }) => theme.radius.circle};
 `;

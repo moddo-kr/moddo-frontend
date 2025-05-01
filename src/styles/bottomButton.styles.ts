@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import getColorFromTheme from '@/common/utils/getColorFromTheme';
-import { ColorKey } from './theme.type';
+import getColor from '@/common/utils/getColor';
+import { ColorTokenType } from './theme.type';
 
 interface BottomButtonProps {
-  $bgColor?: ColorKey;
+  $bgColor?: ColorTokenType;
 }
 
 export const BottomButtonContainer = styled.div<BottomButtonProps>`
@@ -13,8 +13,5 @@ export const BottomButtonContainer = styled.div<BottomButtonProps>`
   padding: ${({ theme }) =>
     `0 ${theme.unit[20]} ${theme.unit[16]} ${theme.unit[20]}`};
   background: ${({ theme, $bgColor }) =>
-    getColorFromTheme(
-      theme.color,
-      $bgColor || 'semantic.background.normal.default'
-    )};
+    getColor(theme.color, $bgColor || 'semantic.background.normal.default')};
 `;

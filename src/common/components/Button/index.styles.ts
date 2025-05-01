@@ -9,7 +9,7 @@ interface StyledButtonProps {
 
 const buttonVariants = {
   primary: css`
-    background: ${({ theme }) => theme.color.semantic.orange.default};
+    background: ${({ theme }) => theme.color.semantic.primary.default};
     color: ${({ theme }) => theme.color.semantic.text.inverse};
   `,
   secondary: css`

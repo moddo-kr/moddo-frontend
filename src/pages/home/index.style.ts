@@ -27,7 +27,7 @@ export const SelectGroupButton = styled.button`
   align-items: center;
   gap: ${({ theme }) => theme.unit[4]};
   background: transparent;
-  color: ${({ theme }) => theme.color.semantic.orange.default};
+  color: ${({ theme }) => theme.color.semantic.primary.default};
 `;
 
 export const MainHeader = styled.header`
@@ -90,7 +90,7 @@ export const BoxButton = styled.button`
   padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[20]}`};
   position: relative;
   height: 5rem;
-  background-color: ${({ theme }) => theme.color.semantic.orange.subtle};
+  background-color: ${({ theme }) => theme.color.semantic.primary.subtle};
   border-radius: ${({ theme }) => theme.radius.default};
 
   width: 100%;

@@ -108,7 +108,7 @@ function ExpenseMemberItem({
                   color={
                     isPaid
                       ? 'semantic.text.disabled'
-                      : 'semantic.orange.default'
+                      : 'semantic.primary.default'
                   }
                 >
                   미입금
@@ -117,7 +117,7 @@ function ExpenseMemberItem({
                   width={theme.unit[20]}
                   height={theme.unit[20]}
                   stroke={
-                    isPaid ? 'none' : `${theme.color.semantic.orange.default}`
+                    isPaid ? 'none' : `${theme.color.semantic.primary.default}`
                   }
                 />
               </S.TextButtonWrapper>
@@ -126,7 +126,7 @@ function ExpenseMemberItem({
                   variant="title"
                   color={
                     isPaid // 입금완료
-                      ? 'semantic.orange.default'
+                      ? 'semantic.primary.default'
                       : 'semantic.text.disabled'
                   }
                 >
@@ -136,7 +136,7 @@ function ExpenseMemberItem({
                   width={theme.unit[20]}
                   height={theme.unit[20]}
                   stroke={
-                    isPaid ? `${theme.color.semantic.orange.default}` : 'none'
+                    isPaid ? `${theme.color.semantic.primary.default}` : 'none'
                   }
                 />
               </S.TextButtonWrapper>

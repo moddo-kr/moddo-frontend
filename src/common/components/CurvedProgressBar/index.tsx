@@ -32,7 +32,7 @@ function CurvedProgressBar({
               rotation: 1 / 2 + 1 / 4,
               strokeLinecap: 'round',
               trailColor: `${theme.color.semantic.secondary.strong}`,
-              pathColor: `${theme.color.semantic.orange.default}`,
+              pathColor: `${theme.color.semantic.primary.default}`,
             })}
           >
             {children}

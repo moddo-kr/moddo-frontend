@@ -87,10 +87,10 @@ export const DatePickerWrapper = styled.div`
   // 선택된 날짜
   .react-datepicker__day--selected {
     color: ${({ theme }) => theme.color.semantic.text.inverse};
-    background: ${({ theme }) => theme.color.semantic.orange.default};
+    background: ${({ theme }) => theme.color.semantic.primary.default};
     opacity: 1;
     &:hover {
-      background: ${({ theme }) => theme.color.semantic.orange.default};
+      background: ${({ theme }) => theme.color.semantic.primary.default};
       color: ${({ theme }) => theme.color.semantic.text.strong};
     }
   }

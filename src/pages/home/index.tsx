@@ -65,7 +65,7 @@ function Home() {
         <LogoIcon
           width={98}
           height={36}
-          fill={theme.color.semantic.orange.default}
+          fill={theme.color.semantic.primary.default}
           onClick={() => navigate(ROUTE.login)}
         />
         <Flex gap={4}>
@@ -88,7 +88,7 @@ function Home() {
           <ArrowRight
             width={theme.unit[20]}
             height={theme.unit[20]}
-            fill={theme.color.semantic.orange.default}
+            fill={theme.color.semantic.primary.default}
           />
         </S.SelectGroupButton>
         <Flex direction="column" py={2.5}>

@@ -22,7 +22,9 @@ export const SelectButton = styled.button<{ selected: boolean }>`
   }
   height: 6rem;
   background-color: ${({ theme, selected }) =>
-    selected ? theme.color.semantic.orange.default : '#fff'};
+    selected
+      ? theme.color.semantic.primary.default
+      : theme.color.semantic.background.normal.default};
   border-radius: 12px;
   font-size: 20px;
   font-weight: 600;
