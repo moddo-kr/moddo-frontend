@@ -75,7 +75,7 @@ export default defineConfig(({ mode }) => {
             runtimeCaching: [
               {
                 urlPattern: /\.(?:js|css|png|jpg|jpeg|svg)$/,
-                handler: 'NetworkFirst', // 네트워크를 먼저 시도
+                handler: 'StaleWhileRevalidate', // 네트워크를 먼저 시도
                 options: {
                   cacheName: 'static-assets',
                   expiration: {
