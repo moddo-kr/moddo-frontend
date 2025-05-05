@@ -72,7 +72,7 @@ function ExpenseCard({
               <S.CollapseTrigger>
                 <Text variant="body2Sb">
                   총{' '}
-                  <Text variant="body2Sb" color="semantic.orange.default">
+                  <Text variant="body2Sb" color="semantic.primary.default">
                     {memberExpenses.length}
                   </Text>
                   명

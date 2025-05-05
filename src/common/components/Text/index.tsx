@@ -1,11 +1,11 @@
 import { ElementType } from 'react';
-import { ColorKey, TypographyKey } from '@/styles/theme.type';
+import { ColorTokenType, TypographyKey } from '@/styles/theme.type';
 import * as S from './index.styles';
 
 interface TextProps {
   className?: string;
   variant?: TypographyKey;
-  color?: ColorKey;
+  color?: ColorTokenType;
   as?: ElementType;
   children: React.ReactNode;
 }

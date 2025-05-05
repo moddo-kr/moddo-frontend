@@ -1,5 +1,5 @@
-import getColorFromTheme from '@/common/utils/getColorFromTheme';
-import { ColorKey, TypographyKey } from '@/styles/theme.type';
+import getColor from '@/common/utils/getColor';
+import { ColorTokenType, TypographyKey } from '@/styles/theme.type';
 import styled, { css } from 'styled-components';
 
 export const TextVariant = (variant: TypographyKey) => css`
@@ -12,11 +12,10 @@ export const TextVariant = (variant: TypographyKey) => css`
 
 interface StyledTextProps {
   $variant: TypographyKey;
-  $color: ColorKey;
+  $color: ColorTokenType;
 }
 
 export const Text = styled.span<StyledTextProps>`
   ${({ $variant }) => TextVariant($variant)};
-  color: ${({ theme, $color }) =>
-    getColorFromTheme(theme.color, $color) ?? 'inherit'};
+  color: ${({ theme, $color }) => getColor(theme.color, $color) ?? 'inherit'};
 `;

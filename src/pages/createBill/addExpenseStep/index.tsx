@@ -38,7 +38,7 @@ function AddExpenseStep({ onNext }: AddExpenseStepProps) {
       <DescriptionField
         title={
           <>
-            <Text variant="heading2" color="semantic.orange.default">
+            <Text variant="heading2" color="semantic.primary.default">
               {groupInfo.groupName}
             </Text>
             {`의\n지출 내역을 입력해주세요.`}

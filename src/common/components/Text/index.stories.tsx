@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import theme from '@/styles/theme';
-import { ColorKey, TypographyKey } from '@/styles/theme.type';
+import { ColorTokenType, TypographyKey } from '@/styles/theme.type';
 import Text from '.';
 
 const SAMPLE_TEXT = '즐거운 만남, 끝까지 즐겁게 (*´▽`*), 모임 또모여 ‘모또’';
@@ -23,7 +23,7 @@ const meta: Meta<typeof Text> = {
         'semantic.text.inverse',
         'semantic.text.strong',
         'semantic.text.subtle',
-        'semantic.orange.default',
+        'semantic.primary.default',
         'semantic.state.danger',
         'semantic.state.info',
         'semantic.state.success',
@@ -34,7 +34,7 @@ const meta: Meta<typeof Text> = {
         'primitive.orange.500',
         'primitive.red.500',
         'primitive.yellow.500',
-      ] as ColorKey[],
+      ] as ColorTokenType[],
     },
     as: {
       control: 'select',

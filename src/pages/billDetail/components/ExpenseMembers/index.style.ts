@@ -15,7 +15,7 @@ export const Container = styled.div<{ isPaid: boolean }>`
   width: 100%;
   background: ${({ theme, isPaid }) =>
     isPaid
-      ? theme.color.semantic.orange.subtle
+      ? theme.color.semantic.primary.subtle
       : theme.color.semantic.background.normal.alternative};
   border-radius: ${({ theme }) => theme.radius.large};
   height: fit-content;

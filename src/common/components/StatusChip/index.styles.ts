@@ -5,7 +5,7 @@ import { PaymentStatus } from './index.type';
 const statusVariants = {
   paid: css`
     background: ${({ theme }) => theme.color.primitive.orange[100]};
-    color: ${({ theme }) => theme.color.semantic.orange.default};
+    color: ${({ theme }) => theme.color.semantic.primary.default};
   `,
   unpaid: css`
     background: ${({ theme }) =>

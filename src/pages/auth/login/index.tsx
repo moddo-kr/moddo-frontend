@@ -41,7 +41,7 @@ function Login() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        bgColor={theme.color.semantic.orange.subtle}
+        bgColor={theme.color.semantic.primary.subtle}
         flexGrow={1}
         gap={theme.unit[16]}
       >

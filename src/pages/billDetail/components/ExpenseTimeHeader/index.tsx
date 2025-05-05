@@ -166,7 +166,7 @@ function ExpenseTimeHeader({
       <DescriptionField
         title={
           <Flex direction="column">
-            <Text color="semantic.orange.default" variant="heading2">
+            <Text color="semantic.primary.default" variant="heading2">
               {getFormatDate(endDate)}까지
             </Text>
             <Text variant="heading2">정산을 완료해주세요</Text>
@@ -196,7 +196,7 @@ function ExpenseTimeHeader({
             width="32"
             style={{ paddingRight: `${theme.unit[8]}` }}
           />
-          <Text as="p" variant="body1Sb" color="semantic.orange.default">
+          <Text as="p" variant="body1Sb" color="semantic.primary.default">
             {paidMember}
           </Text>
           {`/${totalMember} 정산 완료`}

@@ -102,7 +102,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
       <Flex direction="column" gap={2} mt={7}>
         <S.MemberCount>
           총{' '}
-          <Text variant="body1Sb" color="semantic.orange.default">
+          <Text variant="body1Sb" color="semantic.primary.default">
             {members.length}
           </Text>
           명

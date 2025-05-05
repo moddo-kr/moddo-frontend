@@ -46,7 +46,7 @@ const StyledInputWrapper = {
   `,
   focused: css`
     border: ${({ theme }) =>
-      `2px solid ${theme.color.semantic.orange.default} !important`};
+      `2px solid ${theme.color.semantic.primary.default} !important`};
     background: ${({ theme }) =>
       `${theme.color.semantic.background.normal.default} !important`};
   `,
