@@ -1,7 +1,8 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import LoginSuccessImg from '@/assets/pngs/LoginSuccessImg.png';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
+import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 import { BottomButton, BottomWrapper } from '../login/index.style';
 
