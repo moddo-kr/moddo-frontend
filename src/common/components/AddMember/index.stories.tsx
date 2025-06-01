@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Member } from '@/common/types/member.type';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import AddMember from '.';
 
 const queryClient = new QueryClient();
@@ -36,11 +35,6 @@ const meta: Meta<typeof AddMember> = {
       <QueryClientProvider client={queryClient}>
         <Story />
       </QueryClientProvider>
-    ),
-    (Story) => (
-      <ChakraProvider value={defaultSystem}>
-        <Story />
-      </ChakraProvider>
     ),
   ],
 };

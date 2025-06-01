@@ -43,6 +43,19 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
+  /* NOTE : Chakra defaultSystem을 사용하지 않는 곳에서 button 기본 스타일을 제거하기 위함 */
+  button {
+    border-radius: 0;
+    text-align: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    color: inherit;
+    font: inherit;
+  }
+
   /* 모든 브라우저에서 number type input 버튼 제거 */
   /* Chrome, Safari, Edge, Opera */
   input[type='number']::-webkit-inner-spin-button,
