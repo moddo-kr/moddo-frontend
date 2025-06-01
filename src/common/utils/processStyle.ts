@@ -5,6 +5,8 @@ import type { ColorKey } from '@/styles/theme.type';
 import { numberRegex } from '@/common/utils/regex';
 import getColorFromTheme from '@/common/utils/getColorFromTheme';
 
+const UNIT_MULTIPLIER = 4;
+
 /**
  * Unit을 가져오는 함수
  * theme.unit에 정의된 토큰을 사용하는 경우 해당 토큰의 값을 반환
@@ -15,7 +17,7 @@ const getUnit = (value: string | number | undefined) => css`
     if (value === undefined) return '';
     if (typeof value === 'number' || numberRegex.test(value)) {
       const numValue = Number(value);
-      return theme.unit[numValue] || `${numValue}px`;
+      return theme.unit[numValue] || `${numValue * UNIT_MULTIPLIER}px`;
     }
     if (value in theme.unit) {
       return theme.unit[value as keyof typeof theme.unit];
@@ -72,6 +74,10 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   ${(props.pt ?? props.paddingTop) &&
   css`
     padding-top: ${getUnit(props.pt ?? props.paddingTop)};
+  `}
+  ${(props.pb ?? props.paddingBottom) &&
+  css`
+    padding-bottom: ${getUnit(props.pb ?? props.paddingBottom)};
   `}
   ${(props.pl ?? props.paddingLeft) &&
   css`

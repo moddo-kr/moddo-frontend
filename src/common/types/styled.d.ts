@@ -13,6 +13,7 @@ export interface SpacingProps
   extends Pick<
     CSSProperties,
     | 'paddingTop'
+    | 'paddingBottom'
     | 'paddingLeft'
     | 'paddingRight'
     | 'margin'
@@ -21,6 +22,7 @@ export interface SpacingProps
   > {
   // padding 축약형
   pt?: CSSProperties['paddingTop'];
+  pb?: CSSProperties['paddingBottom'];
   pl?: CSSProperties['paddingLeft'];
   pr?: CSSProperties['paddingRight'];
   px?: CSSProperties['paddingLeft'];
