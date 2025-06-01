@@ -33,6 +33,7 @@ jobs:
         id: chromatic
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true # Only run Chromatic on changed stories
 
       - name: Comment on PR
         uses: thollander/actions-comment-pull-request@v3
