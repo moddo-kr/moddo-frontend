@@ -73,6 +73,14 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     padding-top: ${getUnit(props.pt ?? props.paddingTop)};
   `}
+  ${(props.pl ?? props.paddingLeft) &&
+  css`
+    padding-left: ${getUnit(props.pl ?? props.paddingLeft)};
+  `}
+  ${(props.pr ?? props.paddingRight) &&
+  css`
+    padding-right: ${getUnit(props.pr ?? props.paddingRight)};
+  `}
   ${props.px &&
   css`
     padding-left: ${getUnit(props.px)};

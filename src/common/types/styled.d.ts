@@ -10,9 +10,19 @@ export interface SizeProps extends Pick<CSSProperties, 'width' | 'height'> {
 }
 
 export interface SpacingProps
-  extends Pick<CSSProperties, 'paddingTop' | 'margin' | 'marginTop' | 'gap'> {
+  extends Pick<
+    CSSProperties,
+    | 'paddingTop'
+    | 'paddingLeft'
+    | 'paddingRight'
+    | 'margin'
+    | 'marginTop'
+    | 'gap'
+  > {
   // padding 축약형
   pt?: CSSProperties['paddingTop'];
+  pl?: CSSProperties['paddingLeft'];
+  pr?: CSSProperties['paddingRight'];
   px?: CSSProperties['paddingLeft'];
   py?: CSSProperties['paddingTop'];
   // margin 축약형
