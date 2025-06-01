@@ -1,9 +1,9 @@
-import { Flex } from '@chakra-ui/react';
 import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
 import { SystemDanger } from '@/assets/svgs/icon';
+import Text from '@/common/components/Text';
+import Flex from '@/common/components/Flex';
 import { Member } from '@/common/types/member.type';
 import * as S from './index.style';
-import Text from '../Text';
 
 interface MemberProfileProps {
   member: Member;
