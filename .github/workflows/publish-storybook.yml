@@ -6,6 +6,7 @@ on:
     types: [opened, synchronize]
     branches:
       - develop
+      - refactor/remove-chakra-ui # Chakra UI 제거 작업을 위한 브랜치
     paths:
       - '**/stories/**'
       - '**/*.stories.tsx'
