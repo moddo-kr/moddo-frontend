@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router';
-import { CarbonEdit, Close, Next } from '@/assets/svgs/icon';
+import { CarbonEdit, Close } from '@/assets/svgs/icon';
 import Chip from '@/common/components/Chip';
 import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
 import { Expense } from '@/pages/createBill/types/expense.type';
@@ -67,9 +67,8 @@ function ExpenseCard({
             <Text variant="heading2">{amount.toLocaleString()}</Text>
             <Text variant="heading2">원</Text>
           </S.Distribute>
-          <S.MemberCollapse collapsible variant="plain">
-            <S.CollapseItem value="members">
-              <S.CollapseTrigger>
+            <S.CollapseItem>
+              <S.CollapseHeader>
                 <Text variant="body2Sb">
                   총{' '}
                   <Text variant="body2Sb" color="semantic.orange.default">
@@ -77,8 +76,7 @@ function ExpenseCard({
                   </Text>
                   명
                 </Text>
-                <Next width="1.5rem" />
-              </S.CollapseTrigger>
+              </S.CollapseHeader>
               <S.CollapseContent>
                 {memberExpenses.map((member) => (
                   <Chip
@@ -92,7 +90,6 @@ function ExpenseCard({
                 ))}
               </S.CollapseContent>
             </S.CollapseItem>
-          </S.MemberCollapse>
         </S.BottomWrapper>
       </S.Card>
     </S.ExpenseCardWrapper>
