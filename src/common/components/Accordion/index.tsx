@@ -1,8 +1,15 @@
 // Accordion component
 
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import * as S from './index.styles';
-import { ArrowDown } from '@/assets/svgs/icon';
+import { Next } from '@/assets/svgs/icon';
 import theme from '@/styles/theme';
 
 interface AccordionContextType {
@@ -24,36 +31,59 @@ const useAccordionContext = () => {
   return context;
 };
 
-function Accordion(children: ReactNode) {
+function Accordion({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <AccordionContext.Provider value={{ isOpen, toggle }}>
-      <div>{children}</div>
+      <S.AccordionWrapper>{children}</S.AccordionWrapper>
     </AccordionContext.Provider>
   );
 }
 
-function AccordionHeader(children: ReactNode) {
+function AccordionHeader({
+  children,
+  ...props
+}: { children: ReactNode } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { isOpen, toggle } = useAccordionContext();
   return (
-    <button onClick={toggle}>
+    <S.AccordionHeader onClick={toggle} {...props}>
       {children}
-      <ArrowDown
-        width={theme.unit[20]}
+      <Next
+        width={theme.unit[24]}
         style={{
           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-          transition: 'transform 0.3s ease-in-out',
+          transition: 'transform 0.2s ease-in-out',
         }}
       />
-    </button>
+    </S.AccordionHeader>
   );
 }
 
-function AccordionContent(children: ReactNode) {
+function AccordionContent({
+  children,
+  ...props
+}: { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
   const { isOpen } = useAccordionContext();
-  return <S.AccordionContent isOpen={isOpen}>{children}</S.AccordionContent>;
+  const [height, setHeight] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [isOpen]);
+  return (
+    <S.AccordionContent
+      isOpen={isOpen}
+      height={height}
+      ref={contentRef}
+      {...props}
+    >
+      {children}
+    </S.AccordionContent>
+  );
 }
 
 Accordion.Header = AccordionHeader;
