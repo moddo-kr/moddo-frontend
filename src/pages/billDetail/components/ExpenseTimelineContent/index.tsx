@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Next } from '@/assets/svgs/icon';
 import Button from '@/common/components/Button';
 import Chip from '@/common/components/Chip';
 import Text from '@/common/components/Text';
@@ -24,22 +23,16 @@ function ExpenseTimelineContent({ expense }: ExpenseTimelineContentProps) {
         </Text>
       </S.ContentTitle>
       <S.MemberChipContainer>
-        <Button variant="text" onClick={() => setIsExpanded(!isExpanded)}>
-          <Text>{expense.groupMembers.length}명</Text>
-          <Next
-            width={24}
-            style={{
-              transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-            }}
-          />
-        </Button>
-        {isExpanded && (
-          <S.MemberChipList>
-            {expense.groupMembers.map((name) => (
-              <Chip key={name} label={name} variant="disabled" size="sm" />
-            ))}
-          </S.MemberChipList>
-        )}
+        <S.MemberChipHeader>
+          <Button variant="text" onClick={() => setIsExpanded(!isExpanded)}>
+            <Text>{expense.groupMembers.length}명</Text>
+          </Button>
+        </S.MemberChipHeader>
+        <S.MemberChipList>
+          {expense.groupMembers.map((name) => (
+            <Chip key={name} label={name} variant="disabled" size="sm" />
+          ))}
+        </S.MemberChipList>
       </S.MemberChipContainer>
     </S.ExpenseContent>
   );
