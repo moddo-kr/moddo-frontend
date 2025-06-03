@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ProfileImg as MemberProfileImg } from '../../../../common/components/MemberProfile/index.style';
+import Accordion from '@/common/components/Accordion';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const Wrapper = styled.div`
   gap: ${({ theme }) => theme.unit[16]};
 `;
 
-export const Container = styled.div<{ isPaid: boolean }>`
+export const Container = styled(Accordion)<{ isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
   display: flex;
   flex-direction: column;
@@ -22,11 +23,12 @@ export const Container = styled.div<{ isPaid: boolean }>`
   flex: 1;
 `;
 
-export const SummaryContainer = styled.div`
+export const HeaderContainer = styled(Accordion.Header)``;
+
+export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  flex: none;
+  flex: 1;
 `;
 
 export const LeftWrapper = styled.div`
@@ -43,6 +45,7 @@ export const ProfileImg = styled(MemberProfileImg)`
 export const SubProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: ${({ theme }) => theme.unit[2]};
 `;
 
@@ -59,26 +62,18 @@ export const StatusChipButton = styled.button`
   z-index: 100;
 `;
 
-export const DetailContainer = styled.div<{ isOpen: boolean }>`
+export const ContentContainer = styled(Accordion.Content)`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.unit[12]};
-  /** CSS 전환 효과 */
-  max-height: ${({ isOpen }) => (isOpen ? '500px' : '0')};
-  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
-  transition:
-    max-height 0.2s ease-in-out,
-    opacity 0.2s ease-in-out,
-    padding-top 0.2s ease-in-out;
-  padding: ${({ theme }) => `0 ${theme.unit[12]}`};
-  padding-top: ${({ theme, isOpen }) => (isOpen ? theme.unit[12] : '0')};
 `;
 
 export const ExpensesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[12]} 0 ${theme.unit[12]}`};
 `;
 
 export const PlaceWrapper = styled.div`

@@ -4,7 +4,7 @@ import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGe
 import Text from '@/common/components/Text';
 import StatusChip from '@/common/components/StatusChip';
 import Button from '@/common/components/Button';
-import { ArrowDown, Close, Confirm, Receipt } from '@/assets/svgs/icon';
+import { Close, Confirm, Receipt } from '@/assets/svgs/icon';
 import { MemberExpense } from '@/common/types/memberExpense';
 import BottomSheet from '@/common/components/BottomSheet';
 import useUpdatePaymentStatus from '@/common/queries/groupMembers/useUpdatePaymentStatus';
@@ -27,7 +27,6 @@ function ExpenseMemberItem({
   groupToken,
   status,
 }: ExpenseMemberItemProps) {
-  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
@@ -66,111 +65,98 @@ function ExpenseMemberItem({
 
   return (
     <S.Container isPaid={member.isPaid}>
-      <S.SummaryContainer>
-        <S.LeftWrapper>
-          <S.ProfileImg src={member.profile} alt="profile" />
-          <S.SubProfileWrapper>
-            <Text variant="body1Sb">
-              <span style={{ color: theme.color.primitive.gray[500] }}>
-                {member.name}
-              </span>
-            </Text>
-            <Text variant="heading2" color="semantic.text.strong">
-              {member.totalAmount.toLocaleString()}원
-            </Text>
-          </S.SubProfileWrapper>
-        </S.LeftWrapper>
-        <S.RightWrapper>
-          <S.StatusChipButton onClick={() => setOpen(true)}>
-            <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
-          </S.StatusChipButton>
-          {/* 정산 상태 변경 바텀시트 */}
-          <BottomSheet
-            open={open && status !== 'success'}
-            setOpen={resetState}
-            isPadding
-            pb={16}
-          >
-            <S.SheetContentWrapper>
-              <S.TextWrapper>
-                <Text variant="heading2" color="semantic.text.default">
-                  정산 상태
-                </Text>
-                <Close
-                  width={theme.unit[24]}
-                  height={theme.unit[24]}
-                  onClick={resetState}
-                />
-              </S.TextWrapper>
-              <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid
-                      ? 'semantic.text.disabled'
-                      : 'semantic.orange.default'
-                  }
-                >
-                  미입금
-                </Text>
-                <Confirm
-                  width={theme.unit[20]}
-                  height={theme.unit[20]}
-                  stroke={
-                    isPaid ? 'none' : `${theme.color.semantic.orange.default}`
-                  }
-                />
-              </S.TextButtonWrapper>
-              <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid // 입금완료
-                      ? 'semantic.orange.default'
-                      : 'semantic.text.disabled'
-                  }
-                >
-                  입금완료
-                </Text>
-                <Confirm
-                  width={theme.unit[20]}
-                  height={theme.unit[20]}
-                  stroke={
-                    isPaid ? `${theme.color.semantic.orange.default}` : 'none'
-                  }
-                />
-              </S.TextButtonWrapper>
-              <Button
-                variant={isConfirm ? 'primary' : 'secondary'}
-                onClick={isConfirm ? handleChangeButtonSubmit : resetState}
-                disabled={!isConfirm}
-              >
-                {isConfirm ? '확인' : '닫기'}
-              </Button>
-            </S.SheetContentWrapper>
-          </BottomSheet>
-          <Button variant="text" onClick={() => setIsDetailOpen(!isDetailOpen)}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: theme.unit[24],
-                height: theme.unit[24],
-              }}
+      <S.HeaderContainer iconSize={32}>
+        <S.HeaderContent>
+          <S.LeftWrapper>
+            <S.ProfileImg src={member.profile} alt="profile" />
+            <S.SubProfileWrapper>
+              <Text variant="body1Sb">
+                <span style={{ color: theme.color.primitive.gray[500] }}>
+                  {member.name}
+                </span>
+              </Text>
+              <Text variant="heading2" color="semantic.text.strong">
+                {member.totalAmount.toLocaleString()}원
+              </Text>
+            </S.SubProfileWrapper>
+          </S.LeftWrapper>
+          <S.RightWrapper>
+            <S.StatusChipButton onClick={() => setOpen(true)}>
+              <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
+            </S.StatusChipButton>
+            {/* 정산 상태 변경 바텀시트 */}
+            <BottomSheet
+              open={open && status !== 'success'}
+              setOpen={resetState}
+              isPadding
+              pb={16}
             >
-              <ArrowDown
-                width={theme.unit[20]}
-                style={{
-                  transform: isDetailOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}
-              />
-            </div>
-          </Button>
-        </S.RightWrapper>
-      </S.SummaryContainer>
-      {/* 상세 내역 컨테이너: isDetailOpen && openIndex가 일치하면 보여줌 */}
-      <S.DetailContainer isOpen={isDetailOpen}>
+              <S.SheetContentWrapper>
+                <S.TextWrapper>
+                  <Text variant="heading2" color="semantic.text.default">
+                    정산 상태
+                  </Text>
+                  <Close
+                    width={theme.unit[24]}
+                    height={theme.unit[24]}
+                    onClick={resetState}
+                  />
+                </S.TextWrapper>
+                <S.TextButtonWrapper
+                  onClick={() => handleTextButtonClick(false)}
+                >
+                  <Text
+                    variant="title"
+                    color={
+                      isPaid
+                        ? 'semantic.text.disabled'
+                        : 'semantic.orange.default'
+                    }
+                  >
+                    미입금
+                  </Text>
+                  <Confirm
+                    width={theme.unit[20]}
+                    height={theme.unit[20]}
+                    stroke={
+                      isPaid ? 'none' : `${theme.color.semantic.orange.default}`
+                    }
+                  />
+                </S.TextButtonWrapper>
+                <S.TextButtonWrapper
+                  onClick={() => handleTextButtonClick(true)}
+                >
+                  <Text
+                    variant="title"
+                    color={
+                      isPaid // 입금완료
+                        ? 'semantic.orange.default'
+                        : 'semantic.text.disabled'
+                    }
+                  >
+                    입금완료
+                  </Text>
+                  <Confirm
+                    width={theme.unit[20]}
+                    height={theme.unit[20]}
+                    stroke={
+                      isPaid ? `${theme.color.semantic.orange.default}` : 'none'
+                    }
+                  />
+                </S.TextButtonWrapper>
+                <Button
+                  variant={isConfirm ? 'primary' : 'secondary'}
+                  onClick={isConfirm ? handleChangeButtonSubmit : resetState}
+                  disabled={!isConfirm}
+                >
+                  {isConfirm ? '확인' : '닫기'}
+                </Button>
+              </S.SheetContentWrapper>
+            </BottomSheet>
+          </S.RightWrapper>
+        </S.HeaderContent>
+      </S.HeaderContainer>
+      <S.ContentContainer>
         {member.expenses.map((expense) => (
           <S.ExpensesWrapper key={expense.content}>
             <S.PlaceWrapper>
@@ -182,7 +168,7 @@ function ExpenseMemberItem({
             </Text>
           </S.ExpensesWrapper>
         ))}
-      </S.DetailContainer>
+      </S.ContentContainer>
     </S.Container>
   );
 }
