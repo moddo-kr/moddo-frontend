@@ -31,27 +31,34 @@ const useAccordionContext = () => {
   return context;
 };
 
-function Accordion({ children }: { children: ReactNode }) {
+function Accordion({
+  children,
+  ...props
+}: { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <AccordionContext.Provider value={{ isOpen, toggle }}>
-      <S.AccordionWrapper>{children}</S.AccordionWrapper>
+      <S.AccordionWrapper {...props}>{children}</S.AccordionWrapper>
     </AccordionContext.Provider>
   );
 }
 
 function AccordionHeader({
+  iconSize = 24,
   children,
   ...props
-}: { children: ReactNode } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: {
+  iconSize?: number;
+  children: ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { isOpen, toggle } = useAccordionContext();
   return (
     <S.AccordionHeader onClick={toggle} {...props}>
       {children}
       <Next
-        width={theme.unit[24]}
+        width={theme.unit[iconSize]}
         style={{
           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
           transition: 'transform 0.2s ease-in-out',
