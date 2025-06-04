@@ -5,6 +5,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
 } from 'react';
@@ -15,6 +16,7 @@ import theme from '@/styles/theme';
 interface AccordionContextType {
   isOpen: boolean;
   toggle: () => void;
+  accordionId: string;
 }
 
 const AccordionContext = createContext<AccordionContextType | undefined>(
@@ -37,9 +39,10 @@ function Accordion({
 }: { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const accordionId = useId();
 
   return (
-    <AccordionContext.Provider value={{ isOpen, toggle }}>
+    <AccordionContext.Provider value={{ isOpen, toggle, accordionId }}>
       <S.AccordionWrapper {...props}>{children}</S.AccordionWrapper>
     </AccordionContext.Provider>
   );
@@ -53,9 +56,17 @@ function AccordionHeader({
   iconSize?: number;
   children: ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { isOpen, toggle } = useAccordionContext();
+  const { isOpen, toggle, accordionId } = useAccordionContext();
   return (
-    <S.AccordionHeader onClick={toggle} {...props}>
+    <S.AccordionHeader
+      role="heading"
+      aria-level={3}
+      aria-expanded={isOpen}
+      aria-controls={accordionId}
+      aria-disabled={true}
+      onClick={toggle}
+      {...props}
+    >
       {children}
       <Next
         width={theme.unit[iconSize]}
@@ -72,7 +83,7 @@ function AccordionContent({
   children,
   ...props
 }: { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
-  const { isOpen } = useAccordionContext();
+  const { isOpen, accordionId } = useAccordionContext();
   const [height, setHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -86,6 +97,7 @@ function AccordionContent({
       isOpen={isOpen}
       height={height}
       ref={contentRef}
+      id={accordionId}
       {...props}
     >
       {children}
