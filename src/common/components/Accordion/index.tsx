@@ -6,12 +6,13 @@ import {
   useContext,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-import * as S from './index.styles';
 import { Next } from '@/assets/svgs/icon';
 import theme from '@/styles/theme';
+import * as S from './index.styles';
 
 interface AccordionContextType {
   isOpen: boolean;
@@ -38,11 +39,19 @@ function Accordion({
   ...props
 }: { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
   const accordionId = useId();
 
+  const contextValue = useMemo(
+    () => ({
+      isOpen,
+      toggle: () => setIsOpen((prev) => !prev),
+      accordionId,
+    }),
+    [isOpen, accordionId]
+  );
+
   return (
-    <AccordionContext.Provider value={{ isOpen, toggle, accordionId }}>
+    <AccordionContext.Provider value={contextValue}>
       <S.AccordionWrapper {...props}>{children}</S.AccordionWrapper>
     </AccordionContext.Provider>
   );
@@ -59,15 +68,15 @@ function AccordionHeader({
   const { isOpen, toggle, accordionId } = useAccordionContext();
   return (
     <S.AccordionHeader
-      role="heading"
-      aria-level={3}
       aria-expanded={isOpen}
       aria-controls={accordionId}
-      aria-disabled={true}
+      aria-disabled
       onClick={toggle}
       {...props}
     >
-      {children}
+      <S.HeadingText role="heading" aria-level={3}>
+        {children}
+      </S.HeadingText>
       <Next
         width={theme.unit[iconSize]}
         style={{
