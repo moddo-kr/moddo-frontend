@@ -15,7 +15,7 @@ interface ExpenseMemberItemProps {
   status: string;
 }
 
-/**개별 멤버 렌더링 컴포넌트 */
+/** 개별 멤버 렌더링 컴포넌트 */
 function ExpenseMemberItem({
   member,
   groupToken,

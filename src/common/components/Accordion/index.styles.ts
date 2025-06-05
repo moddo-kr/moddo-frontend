@@ -17,6 +17,11 @@ export const AccordionHeader = styled.button`
   justify-content: space-between;
 `;
 
+export const HeadingText = styled.span`
+  all: unset;
+  display: contents;
+`;
+
 export const AccordionContent = styled.div<{ isOpen: boolean; height: number }>`
   max-height: ${({ isOpen, height }) => (isOpen ? `${height}px` : '0')};
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};

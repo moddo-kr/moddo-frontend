@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ProfileImg as MemberProfileImg } from '../../../../common/components/MemberProfile/index.style';
 import Accordion from '@/common/components/Accordion';
+import { ProfileImg as MemberProfileImg } from '../../../../common/components/MemberProfile/index.style';
 
 export const Container = styled(Accordion)<{ isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
@@ -66,7 +66,8 @@ export const ExpensesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[12]} 0 ${theme.unit[12]}`};
+  padding: ${({ theme }) =>
+    `${theme.unit[12]} ${theme.unit[12]} 0 ${theme.unit[12]}`};
 `;
 
 export const PlaceWrapper = styled.div`

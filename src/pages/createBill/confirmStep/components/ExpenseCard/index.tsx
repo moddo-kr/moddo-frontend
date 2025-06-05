@@ -67,29 +67,27 @@ function ExpenseCard({
             <Text variant="heading2">{amount.toLocaleString()}</Text>
             <Text variant="heading2">원</Text>
           </S.Distribute>
-            <S.CollapseItem>
-              <S.CollapseHeader>
-                <Text variant="body2Sb">
-                  총{' '}
-                  <Text variant="body2Sb" color="semantic.orange.default">
-                    {memberExpenses.length}
-                  </Text>
-                  명
+          <S.CollapseItem>
+            <S.CollapseHeader>
+              <Text variant="body2Sb">
+                총{' '}
+                <Text variant="body2Sb" color="semantic.orange.default">
+                  {memberExpenses.length}
                 </Text>
-              </S.CollapseHeader>
-              <S.CollapseContent>
-                {memberExpenses.map((member) => (
-                  <Chip
-                    key={`${index}-${member.id}`}
-                    label={member.name}
-                    variant={
-                      member.role === 'MANAGER' ? 'primary' : 'secondary'
-                    }
-                    size="sm"
-                  />
-                ))}
-              </S.CollapseContent>
-            </S.CollapseItem>
+                명
+              </Text>
+            </S.CollapseHeader>
+            <S.CollapseContent>
+              {memberExpenses.map((member) => (
+                <Chip
+                  key={`${index}-${member.id}`}
+                  label={member.name}
+                  variant={member.role === 'MANAGER' ? 'primary' : 'secondary'}
+                  size="sm"
+                />
+              ))}
+            </S.CollapseContent>
+          </S.CollapseItem>
         </S.BottomWrapper>
       </S.Card>
     </S.ExpenseCardWrapper>

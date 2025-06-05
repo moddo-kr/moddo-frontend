@@ -47,11 +47,11 @@ export const MultipleAccordionStory: Story = {
         width: '100%',
         maxWidth: '600px',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
-      {items.map((item, index) => (
-        <Accordion key={index}>
+      {items.map((item) => (
+        <Accordion key={item.title}>
           <Accordion.Header>{item.title}</Accordion.Header>
           <Accordion.Content>
             <div style={{ padding: '16px' }}>{item.content}</div>
@@ -61,4 +61,3 @@ export const MultipleAccordionStory: Story = {
     </div>
   ),
 };
-
