@@ -13,6 +13,8 @@ export const AccordionHeader = styled.button`
   width: 100%;
   height: fit-content;
   padding-block: ${({ theme }) => theme.unit[8]};
+  border: none;
+  justify-content: space-between;
 `;
 
 export const AccordionContent = styled.div<{ isOpen: boolean; height: number }>`

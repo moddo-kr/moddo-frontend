@@ -27,6 +27,7 @@ export const MemberChipHeader = styled(Accordion.Header)`
   display: flex;
   gap: ${({ theme }) => theme.unit[4]};
   padding: 0;
+  width: fit-content;
 `;
 
 export const MemberChipList = styled(Accordion.Content)`
