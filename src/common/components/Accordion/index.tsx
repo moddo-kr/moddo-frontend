@@ -103,7 +103,7 @@ function AccordionContent({
   }, [isOpen]);
   return (
     <S.AccordionContent
-      isOpen={isOpen}
+      $isOpen={isOpen}
       height={height}
       ref={contentRef}
       id={accordionId}
