@@ -26,7 +26,7 @@ function ExpenseMemberItem({
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const theme = useTheme();
   const updatePaymentStatusMutation = useUpdatePaymentStatus({
-    groupToken, // 만약 member에 groupToken이 없다면 상위 props에서 받아 전달하세요.
+    groupToken,
     groupMemberId: member.id,
     isPaid,
   });
