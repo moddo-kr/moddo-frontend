@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex } from '@chakra-ui/react';
 import { Member } from '@/common/types/member.type';
 import useAddGroupMember from '@/common/queries/groupMembers/useAddGroupMember';
 import useDeleteGroupMember from '@/common/queries/groupMembers/useDeleteGroupMember';
-import Text from '../Text';
-import MemberProfile from '../MemberProfile';
-import InputGroup from '../InputGroup';
-import Input from '../Input';
-import Button from '../Button';
+import Text from '@/common/components/Text';
+import MemberProfile from '@/common/components/MemberProfile';
+import InputGroup from '@/common/components/InputGroup';
+import Input from '@/common/components/Input';
+import Button from '@/common/components/Button';
+import Flex from '@/common/components/Flex';
 import * as S from './index.styles';
 
 const MemberSchema = z.object({

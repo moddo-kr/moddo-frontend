@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import { Add, CheckCircle } from '@/assets/svgs/icon';
 import Header from '@/common/components/Header';
 import { ROUTE } from '@/common/constants/route';
 import DescriptionField from '@/common/components/DescriptionField';
 import Text from '@/common/components/Text';
+import Flex from '@/common/components/Flex';
 import * as S from './index.styles';
 
 type SelectedValueType = 'CREATE' | 'RECENT';
