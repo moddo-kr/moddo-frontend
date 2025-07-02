@@ -1,7 +1,6 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/assets/svgs';
 import MainHamImg2 from '@/assets/pngs/MainHamImg2.png';
-import { Flex } from '@chakra-ui/react';
 import Text from '@/common/components/Text';
 import { ArrowRight, Bell, Menu, Next } from '@/assets/svgs/icon';
 import { useNavigate } from 'react-router';
@@ -11,6 +10,7 @@ import CoinImg from '@/assets/pngs/CoinImg.png';
 import LinkMain from '@/assets/pngs/link_main.png';
 import CardMain from '@/assets/pngs/card_main.png';
 import Divider from '@/common/components/Divider';
+import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 import HomeExpenseItem from './components/HomeExpenseItem';
 

@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useLoaderData } from 'react-router';
-import { Text, Stack } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { Group } from '@/common/types/group.type';
-import { BoundaryError } from '@/common/types/error.type';
+import Flex from '@/common/components/Flex';
 
 interface MemberBottomSheetProps {
   open: boolean;
@@ -49,17 +49,18 @@ function MemberBottomSheet({
 
   return (
     <BottomSheet open={open} setOpen={setOpen} onCloseHandler={onCloseHandler}>
-      <Stack
+      <Flex
+        direction="column"
         paddingTop="2rem"
         paddingBottom="1.75rem"
-        paddingX="1.25rem"
+        px="1.25rem"
         gap="1.75rem"
         width="100%"
       >
         <Text fontSize="1.25rem" fontWeight="700" color="#444950">
           참여자 추가
         </Text>
-      </Stack>
+      </Flex>
     </BottomSheet>
   );
 }

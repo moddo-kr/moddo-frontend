@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 import DescriptionField from '@/common/components/DescriptionField';
-import { Flex } from '@chakra-ui/react';
 import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
@@ -11,7 +10,7 @@ import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
-import { BoundaryError } from '@/common/types/error.type';
+import Flex from '@/common/components/Flex';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
