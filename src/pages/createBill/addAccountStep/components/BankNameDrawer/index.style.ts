@@ -43,9 +43,9 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
   height: 5.75rem; // 92px
   cursor: pointer;
   border-radius: 12px;
-  border: 1.5px solid
+  border: 2px solid
     ${({ isSelected, theme }) =>
-      isSelected ? `${theme.color.primitive.gray[100]}` : 'none'};
+      isSelected ? `${theme.color.semantic.orange.default}` : 'none'};
   background-color: ${({ theme }) =>
     theme.color.semantic.background.normal.alternative};
   padding: 1rem; // 20px

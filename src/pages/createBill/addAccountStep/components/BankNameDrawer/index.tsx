@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Flex } from '@chakra-ui/react';
 import BottomSheet from '@/common/components/BottomSheet';
 import BANK_LIST from '@/common/constants/banks';
+import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 
 interface BankNameDrawerProps {

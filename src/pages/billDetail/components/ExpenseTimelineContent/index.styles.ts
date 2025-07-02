@@ -1,3 +1,4 @@
+import Accordion from '@/common/components/Accordion';
 import styled from 'styled-components';
 
 export const ExpenseContent = styled.div`
@@ -18,11 +19,18 @@ export const ContentTitle = styled.div`
   align-items: center;
 `;
 
-export const MemberChipContainer = styled.div`
+export const MemberChipContainer = styled(Accordion)`
   width: 100%;
 `;
 
-export const MemberChipList = styled.div`
+export const MemberChipHeader = styled(Accordion.Header)`
+  display: flex;
+  gap: ${({ theme }) => theme.unit[4]};
+  padding: 0;
+  width: fit-content;
+`;
+
+export const MemberChipList = styled(Accordion.Content)`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.unit[6]};
