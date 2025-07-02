@@ -77,7 +77,7 @@ function BottomSheet({
         </animated.div>
         <S.BottomSheetWrapper
           style={springProps} // 애니메이션 스타일 적용
-          isPadding={isPadding}
+          $isPadding={isPadding}
           {...(pb && { pb })} // pd값이 존재할 때만 props로 넘겨줌
           {...rest}
         >

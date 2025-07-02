@@ -1,5 +1,5 @@
+import Accordion from '@/common/components/Accordion';
 import styled from 'styled-components';
-import { Accordion } from '@chakra-ui/react';
 
 export const ExpenseCardWrapper = styled.div`
   display: flex;
@@ -54,16 +54,14 @@ export const DistributeText = styled.span`
   font-weight: 700;
 `;
 
-export const MemberCollapse = styled(Accordion.Root)``;
+export const CollapseItem = styled(Accordion)``;
 
-export const CollapseItem = styled(Accordion.Item)``;
-
-export const CollapseTrigger = styled(Accordion.ItemTrigger)`
+export const CollapseHeader = styled(Accordion.Header)`
   display: flex;
   justify-content: flex-end;
 `;
 
-export const CollapseContent = styled(Accordion.ItemContent)`
+export const CollapseContent = styled(Accordion.Content)`
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;

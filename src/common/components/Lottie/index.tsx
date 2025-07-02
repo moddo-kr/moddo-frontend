@@ -40,7 +40,7 @@ export function OnboardingStep3Lottie() {
 
 export function OnboardingStep4Lottie() {
   return (
-    <S.OnboardingWrapper bottom={-18.75}>
+    <S.OnboardingWrapper>
       <Lottie animationData={Onboarding4} />
     </S.OnboardingWrapper>
   );

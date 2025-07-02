@@ -11,6 +11,7 @@ import Input from '@/common/components/Input';
 import Button from '@/common/components/Button';
 import Flex from '@/common/components/Flex';
 import * as S from './index.styles';
+import { showToast } from '../Toast';
 
 const MemberSchema = z.object({
   name: z.string().trim().min(1),
@@ -22,8 +23,19 @@ interface AddMemberProps {
 }
 
 function AddMember({ members, groupToken }: AddMemberProps) {
-  const addMutation = useAddGroupMember(groupToken);
-  const deleteMutation = useDeleteGroupMember(groupToken);
+  const deleteMutation = useDeleteGroupMember(
+    groupToken,
+    {
+      // 총무를 모임에서 제거하려고 할 때 발생하는 에러
+      400: () => {
+        showToast({
+          type: 'error',
+          content: '총무는 모임에서 제외할 수 없어요.',
+        });
+      },
+    },
+    [400]
+  );
   const { register, handleSubmit, clearErrors, formState, reset } = useForm({
     mode: 'onChange',
     resolver: zodResolver(MemberSchema),
@@ -31,6 +43,18 @@ function AddMember({ members, groupToken }: AddMemberProps) {
       name: '',
     },
   });
+  const addMutation = useAddGroupMember(
+    groupToken,
+    {
+      409: () =>
+        showToast({
+          type: 'error',
+          content:
+            '이미 같은 이름의 참여자가 있어요. 다른 이름으로 입력해 주세요.',
+        }),
+    },
+    [409]
+  );
 
   /** 이름 입력 후 추가 핸들러 */
   const handleAddName = (data: { name: string }) => {
