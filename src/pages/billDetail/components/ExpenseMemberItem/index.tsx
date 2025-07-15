@@ -75,7 +75,10 @@ function ExpenseMemberItem({
             </S.SubProfileWrapper>
           </S.LeftWrapper>
           <S.RightWrapper>
-            <S.StatusChipButton onClick={() => setOpen(true)}>
+            <S.StatusChipButton
+              onClick={() => setOpen(true)}
+              aria-label={`${member.name}의 정산 상태 변경`}
+            >
               <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
             </S.StatusChipButton>
             {/* 정산 상태 변경 바텀시트 */}

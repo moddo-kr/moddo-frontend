@@ -12,15 +12,20 @@ export interface SizeProps extends Pick<CSSProperties, 'width' | 'height'> {
 export interface SpacingProps
   extends Pick<
     CSSProperties,
+    | 'padding'
     | 'paddingTop'
     | 'paddingBottom'
     | 'paddingLeft'
     | 'paddingRight'
     | 'margin'
     | 'marginTop'
+    | 'marginBottom'
+    | 'marginLeft'
+    | 'marginRight'
     | 'gap'
   > {
   // padding 축약형
+  p?: CSSProperties['padding'];
   pt?: CSSProperties['paddingTop'];
   pb?: CSSProperties['paddingBottom'];
   pl?: CSSProperties['paddingLeft'];
@@ -28,8 +33,13 @@ export interface SpacingProps
   px?: CSSProperties['paddingLeft'];
   py?: CSSProperties['paddingTop'];
   // margin 축약형
+  m?: CSSProperties['margin'];
   mt?: CSSProperties['marginTop'];
+  mb?: CSSProperties['marginBottom'];
+  ml?: CSSProperties['marginLeft'];
+  mr?: CSSProperties['marginRight'];
   mx?: CSSProperties['marginLeft'];
+  my?: CSSProperties['marginTop'];
 }
 
 export interface ColorProps

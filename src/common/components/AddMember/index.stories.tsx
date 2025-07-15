@@ -12,7 +12,7 @@ const MEMBERS: Member[] = [
     name: '김모또',
     profile: 'https://api.dicebear.com/9.x/glass/svg?seed=Felix',
     isPaid: true,
-    paidAt: null,
+    paidAt: new Date('2025-07-15'),
   },
   {
     id: 2,

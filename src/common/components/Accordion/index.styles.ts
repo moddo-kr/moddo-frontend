@@ -24,9 +24,9 @@ export const HeadingText = styled.span`
 
 export const AccordionContent = styled.div<{
   $isOpen: boolean;
-  height: number;
+  $height: number;
 }>`
-  max-height: ${({ $isOpen, height }) => ($isOpen ? `${height}px` : '0')};
+  max-height: ${({ $isOpen, $height }) => ($isOpen ? `${$height}px` : '0')};
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   overflow: hidden;
   transition:

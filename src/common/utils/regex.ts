@@ -1,1 +1,1 @@
-export const numberRegex = /^d+$/;
+export const numberRegex = /^\d+$/;

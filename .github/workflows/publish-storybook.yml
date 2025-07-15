@@ -16,6 +16,8 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Checkout Action
         uses: actions/checkout@v4 # https://github.com/actions/checkout
