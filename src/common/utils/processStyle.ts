@@ -47,11 +47,11 @@ const getColor = (value: string | ColorKey | undefined) => css`
  */
 export const conditionalStyle = (
   cssProperty: keyof CSS.PropertiesHyphen,
-  shorthand?: any,
-  full?: any
+  shorthand?: string | number,
+  full?: string | number
 ) => {
   const value = shorthand ?? full ?? '';
-  return value ? `${cssProperty}: ${value};` : '';
+  return value !== '' ? `${cssProperty}: ${value};` : '';
 };
 
 /**
