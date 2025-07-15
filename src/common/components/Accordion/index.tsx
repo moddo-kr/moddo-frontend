@@ -70,7 +70,7 @@ function AccordionHeader({
     <S.AccordionHeader
       aria-expanded={isOpen}
       aria-controls={accordionId}
-      aria-disabled
+      aria-disabled={false}
       onClick={toggle}
       {...props}
     >
