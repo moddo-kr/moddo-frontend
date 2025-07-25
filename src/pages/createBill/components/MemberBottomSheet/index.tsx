@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useLoaderData } from 'react-router';
-import { Text } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
 import BottomSheet from '@/common/components/BottomSheet';
 import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
 import { Group } from '@/common/types/group.type';
@@ -57,9 +57,7 @@ function MemberBottomSheet({
         gap="1.75rem"
         width="100%"
       >
-        <Text fontSize="1.25rem" fontWeight="700" color="#444950">
-          참여자 추가
-        </Text>
+        <Text variant="heading2">참여자 추가</Text>
       </Flex>
     </BottomSheet>
   );
