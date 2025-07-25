@@ -74,7 +74,7 @@ function AccordionHeader({
       onClick={toggle}
       {...props}
     >
-      <S.HeadingText role="heading" aria-level={3}>
+      <S.HeadingText as="h3">
         {children}
       </S.HeadingText>
       <Next
