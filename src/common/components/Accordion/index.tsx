@@ -104,7 +104,7 @@ function AccordionContent({
   return (
     <S.AccordionContent
       $isOpen={isOpen}
-      height={height}
+      $height={height}
       ref={contentRef}
       id={accordionId}
       {...props}
