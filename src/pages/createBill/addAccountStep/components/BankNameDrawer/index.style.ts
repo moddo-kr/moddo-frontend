@@ -1,14 +1,17 @@
+import Button from '@/common/components/Button';
 import styled from 'styled-components';
 
 export const DrawerHeader = styled.h2`
   font-size: 1.25rem; // 20px
   font-weight: 700;
+  padding-bottom: 1.75rem;
 `;
 
 export const DrawerBody = styled.div`
-  height: 370px;
+  height: 55dvh;
   overflow-y: auto;
   width: 100%;
+  padding-bottom: 4rem;
 `;
 
 export const GridContainer = styled.div`
@@ -22,17 +25,35 @@ export const GridContainer = styled.div`
   place-items: center;
 `;
 
-export const SubmitButton = styled.button`
+export const FadeOverlay = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15dvh;
+  background: linear-gradient(to top, #fff 60%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1;
+`;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: fit-content;
   width: 100%;
-  padding: 1rem 0.9rem; // 16px 14px
-  border-radius: 2rem; // 32px
-  background-color: black;
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const SubmitButton = styled(Button)`
+  width: 100%;
   margin-bottom: 0.9rem; // 14px
   cursor: pointer;
+  position: relative;
+  margin-top: auto;
+  z-index: 1;
 `;
 
 export const BankButton = styled.button<{ isSelected: boolean }>`

@@ -23,9 +23,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
     <BottomSheet open={open} setOpen={onClose}>
       <Flex
         direction="column"
-        gap={7}
-        justify="space-between"
-        pt={8}
+        pt={32}
         px={5}
         height="70dvh"
         borderRadius={12}
@@ -45,8 +43,11 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
               </S.BankButton>
             ))}
           </S.GridContainer>
+          <S.FadeOverlay />
         </S.DrawerBody>
+        <S.ButtonWrapper>
         <S.SubmitButton onClick={handleSubmitButtonClick}>확인</S.SubmitButton>
+        </S.ButtonWrapper>
       </Flex>
     </BottomSheet>
   );
