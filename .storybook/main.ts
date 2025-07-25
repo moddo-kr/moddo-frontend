@@ -14,10 +14,6 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  refs: {
-    '@chakra-ui/react': {
-      disable: true, // chakra-ui 컴포넌트 스토리를 비활성화
-    },
-  },
+  refs: {},
 };
 export default config;

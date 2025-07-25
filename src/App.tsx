@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import {
   QueryCache,
   QueryClient,
@@ -38,20 +37,18 @@ function App() {
   );
 
   return (
-    <ChakraProvider value={defaultSystem}>
-      <ThemeProvider theme={theme}>
-        <GlobalErrorBoundary>
-          <QueryClientProvider client={queryClient}>
-            <Layout>
-              <GlobalStyles />
-              <AppRouter />
-              <ReactQueryDevtools />
-              <Toast />
-            </Layout>
-          </QueryClientProvider>
-        </GlobalErrorBoundary>
-      </ThemeProvider>
-    </ChakraProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <Layout>
+            <GlobalStyles />
+            <AppRouter />
+            <ReactQueryDevtools />
+            <Toast />
+          </Layout>
+        </QueryClientProvider>
+      </GlobalErrorBoundary>
+    </ThemeProvider>
   );
 }
 
