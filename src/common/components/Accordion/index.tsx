@@ -74,9 +74,7 @@ function AccordionHeader({
       onClick={toggle}
       {...props}
     >
-      <S.HeadingText as="h3">
-        {children}
-      </S.HeadingText>
+      <S.HeadingText as="h3">{children}</S.HeadingText>
       <Next
         width={theme.unit[iconSize]}
         style={{

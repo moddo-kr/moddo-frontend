@@ -46,7 +46,9 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
           <S.FadeOverlay />
         </S.DrawerBody>
         <S.ButtonWrapper>
-        <S.SubmitButton onClick={handleSubmitButtonClick}>확인</S.SubmitButton>
+          <S.SubmitButton onClick={handleSubmitButtonClick}>
+            확인
+          </S.SubmitButton>
         </S.ButtonWrapper>
       </Flex>
     </BottomSheet>
