@@ -1,6 +1,5 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
 import Header from '@/common/components/Header';
 import Text from '@/common/components/Text';
 import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
@@ -10,6 +9,7 @@ import Button from '@/common/components/Button';
 import DescriptionField from '@/common/components/DescriptionField';
 import Input from '@/common/components/Input';
 import { BoundaryError } from '@/common/types/error.type';
+import useDisclosure from '@/common/hooks/useDisclosure';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './index.styles';
 

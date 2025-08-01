@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
 import LoginSuccessImg from '@/assets/pngs/LoginSuccessImg.png';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
@@ -17,13 +17,7 @@ function LoginSuccess() {
       position="relative"
     >
       <S.TitleWrapper>
-        <Text
-          fontSize={20}
-          lineHeight={1.5}
-          fontWeight={700}
-          whiteSpace="pre-wrap"
-          textAlign="center"
-        >
+        <Text variant="heading2" textAlign="center">
           반가워요!
           <br />
           이제 정산을 시작해볼까요?
