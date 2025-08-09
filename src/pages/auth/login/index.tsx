@@ -20,7 +20,7 @@ function Login() {
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
-      console.log('카카오 로그인');
+      window.location.href = import.meta.env.VITE_KAKAO_REDIRECT_URL;
     } else if (!token) {
       getGuestToken();
     } else {
@@ -81,7 +81,7 @@ function Login() {
             background: '#FEE500',
           }}
           onClick={() => handleLoginButtonClick('KAKAO')}
-          disabled
+          
         >
           <Kakao width={theme.unit[24]} />
           <Text variant="body1Sb" color="semantic.text.strong">
