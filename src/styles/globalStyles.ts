@@ -43,6 +43,22 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
+  button {
+    border-radius: 0;
+    text-align: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    color: inherit;
+    font: inherit;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   /* 모든 브라우저에서 number type input 버튼 제거 */
   /* Chrome, Safari, Edge, Opera */
   input[type='number']::-webkit-inner-spin-button,

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CurvedProgressBar from '@/common/components/CurvedProgressBar';
 import DescriptionField from '@/common/components/DescriptionField';
-import { Flex } from '@chakra-ui/react';
 import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/common/components/Text';
@@ -11,7 +10,7 @@ import Modal from '@/common/components/Modal';
 import copyClipboard from '@/common/utils/copyClipboard';
 import Button from '@/common/components/Button';
 import { showToast } from '@/common/components/Toast';
-import { BoundaryError } from '@/common/types/error.type';
+import Flex from '@/common/components/Flex';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -50,12 +49,12 @@ function ExpenseTimeHeader({
     {
       // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
       // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
-      401: () => {
-        throw new BoundaryError({
-          title: '접근할 수 없는 페이지예요',
-          description: '참여한 모임의 정산만 확인할 수 있어요.',
-        });
-      },
+      // 401: () => {
+      //   throw new BoundaryError({
+      //     title: '접근할 수 없는 페이지예요',
+      //     description: '참여한 모임의 정산만 확인할 수 있어요.',
+      //   });
+      // },
     },
     [401]
   );

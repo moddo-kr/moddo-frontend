@@ -1,5 +1,4 @@
 import LogoImg from '@/assets/pngs/LogoImg.png';
-import { Flex } from '@chakra-ui/react';
 import Text from '@/common/components/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
@@ -10,6 +9,7 @@ import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
 import theme from '@/styles/theme';
 import Button from '@/common/components/Button';
 import { Kakao } from '@/assets/svgs/icon';
+import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 
 function Login() {

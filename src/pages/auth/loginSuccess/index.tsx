@@ -1,7 +1,8 @@
-import { Flex, Text } from '@chakra-ui/react';
+import Text from '@/common/components/Text';
 import LoginSuccessImg from '@/assets/pngs/LoginSuccessImg.png';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router';
+import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 import { BottomButton, BottomWrapper } from '../login/index.style';
 
@@ -16,13 +17,7 @@ function LoginSuccess() {
       position="relative"
     >
       <S.TitleWrapper>
-        <Text
-          fontSize={20}
-          lineHeight={1.5}
-          fontWeight={700}
-          whiteSpace="pre-wrap"
-          textAlign="center"
-        >
+        <Text variant="heading2" textAlign="center">
           반가워요!
           <br />
           이제 정산을 시작해볼까요?
