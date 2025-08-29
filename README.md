@@ -21,7 +21,7 @@
 ## 🐹 MODDO 소개
 
 <div align="center">
-  <h3>모또는 정산 담당자의 부담을 줄이기 위해 게이미피케이션 요소를 더하여 모임원의 적극적 정산 참여를 유도하는 서비스입니다.</h3>
+  <h3>모또는 정산 담당자의 부담을 줄이기 위해<br/>게이미피케이션 요소를 더하여 모임원의 적극적 정산 참여를 유도하는 서비스입니다.</h3>
   <br/>
   <img height="500" alt="image" src="https://github.com/user-attachments/assets/94c2a588-8d58-492a-9c95-5526206b7a00" />
   <br/><br/>
