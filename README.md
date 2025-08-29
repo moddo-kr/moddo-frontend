@@ -1,6 +1,21 @@
-# MODDO
+# 즐거운 만남, 정산까지 즐겁게! MODDO
+
+<div align="center">
+  <a href="https://www.moddo.kr">
+    <img src="https://custom-icon-badges.demolab.com/badge/MODDO-FF9958.svg?logo=arrow-up-right&logoSource=feather" alt="MODDO Link" />
+  </a>
+</div>
+
+---
 
 <img width="100%" alt="커버" src="https://github.com/user-attachments/assets/83eb48bd-2ece-4186-879f-40cc14014ad3" />
+
+## 🚩 Table of Content
+
+- <a href="#-moddo-소개">🐹 MODDO 소개</a>
+- <a href="#%EF%B8%8F-기술-스택">🛠️ 기술 스택</a>
+- <a href="#-디렉토리-구조">📂 디렉토리 구조</a>
+- <a href="#-frontend-팀-소개">🧡 Frontend 팀 소개</a>
 
 ## 🐹 MODDO 소개
 
@@ -24,6 +39,8 @@
   <h3>링크로 참여한 모두가 정산의 진행 상황을 확인할 수 있어요.<br/>정해진 시간 안에 정산을 완료하고 캐릭터를 획득해보세요!</h3>
   <br/>
   <img height="500" alt="image" src="https://github.com/user-attachments/assets/48b18382-063f-483b-bd11-72f85217bff5" />
+  <br/><br/>
+  <a href="https://www.moddo.kr">🐹 모또 사용해보러 가기 💨</a>
 </div>
 
 ## 🛠️ 기술 스택
@@ -58,7 +75,7 @@ src/
 └── styles/          # 테마, 글로벌 스타일
 ```
 
-## Frontend 팀 소개
+## 🧡 Frontend 팀 소개
 
 | <image width="100px" src="https://avatars.githubusercontent.com/u/87983309?v=4" alt="ongheong profile"/> | <image width="100px" src="https://avatars.githubusercontent.com/u/57761286?v=4" alt="yoouyeon profile"/> |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
