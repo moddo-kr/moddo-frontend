@@ -2,11 +2,29 @@
 
 <img width="100%" alt="커버" src="https://github.com/user-attachments/assets/83eb48bd-2ece-4186-879f-40cc14014ad3" />
 
-## 🐹 Frontend 팀 소개
+## 🐹 MODDO 소개
 
-| <image width="100px" src="https://avatars.githubusercontent.com/u/87983309?v=4" alt="ongheong profile"/> | <image width="100px" src="https://avatars.githubusercontent.com/u/57761286?v=4" alt="yoouyeon profile"/> |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [심여은 (ongheong)](https://github.com/ongheong)                                                         | [윤정연 (yoouyeon)](https://github.com/yoouyeon)                                                         |
+<div align="center">
+  <h3>모또는 정산 담당자의 부담을 줄이기 위해 게이미피케이션 요소를 더하여 모임원의 적극적 정산 참여를 유도하는 서비스입니다.</h3>
+  <br/>
+  <img height="500" alt="image" src="https://github.com/user-attachments/assets/94c2a588-8d58-492a-9c95-5526206b7a00" />
+  <br/><br/>
+  <h3>정산한 모임의 정보를 입력하고 참여자를 추가하세요.</h3>
+  <br/>
+  <img height="500" alt="image" src="https://github.com/user-attachments/assets/a27d2f61-2a66-494d-8bf5-73e273ce06ea" />
+  <br/><br/>
+  <h3>이제 모임의 지출을 정리할 시간! 차수별로 지출 내역을 입력해주세요.</h3>
+  <br/>
+  <img height="500" alt="image" src="https://github.com/user-attachments/assets/58750b62-f837-417d-bef7-bf418b8467f2" />
+  <br/><br/>
+  <h3>입력한 지출 내역을 확인하면 정산 요청 준비 완료!</h3>
+  <br/>
+  <img height="500" alt="image" src="https://github.com/user-attachments/assets/c8bbfd14-7109-4a60-be7c-b1e10d57e7f9" />
+  <br/><br/>
+  <h3>링크로 참여한 모두가 정산의 진행 상황을 확인할 수 있어요.<br/>정해진 시간 안에 정산을 완료하고 캐릭터를 획득해보세요!</h3>
+  <br/>
+  <img height="500" alt="image" src="https://github.com/user-attachments/assets/48b18382-063f-483b-bd11-72f85217bff5" />
+</div>
 
 ## 🛠️ 기술 스택
 
@@ -39,3 +57,9 @@ src/
 ├── stories/         # Storybook 스토리 문서
 └── styles/          # 테마, 글로벌 스타일
 ```
+
+## Frontend 팀 소개
+
+| <image width="100px" src="https://avatars.githubusercontent.com/u/87983309?v=4" alt="ongheong profile"/> | <image width="100px" src="https://avatars.githubusercontent.com/u/57761286?v=4" alt="yoouyeon profile"/> |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [심여은 (ongheong)](https://github.com/ongheong)                                                         | [윤정연 (yoouyeon)](https://github.com/yoouyeon)                                                         |
