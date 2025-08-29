@@ -13,8 +13,9 @@
 ## 🚩 Table of Content
 
 - <a href="#-moddo-소개">🐹 MODDO 소개</a>
-- <a href="#%EF%B8%8F-기술-스택">🛠️ 기술 스택</a>
+- <a href="#-기술-스택">🛠️ 기술 스택</a>
 - <a href="#-디렉토리-구조">📂 디렉토리 구조</a>
+<!-- - <a href="#-기술적-고민들">🤔 기술적 고민들</a> -->
 - <a href="#-frontend-팀-소개">🧡 Frontend 팀 소개</a>
 
 ## 🐹 MODDO 소개
@@ -74,6 +75,8 @@ src/
 ├── stories/         # Storybook 스토리 문서
 └── styles/          # 테마, 글로벌 스타일
 ```
+
+<!-- ## 🤔 기술적 고민들 -->
 
 ## 🧡 Frontend 팀 소개
 
