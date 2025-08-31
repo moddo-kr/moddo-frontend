@@ -12,6 +12,10 @@ import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
 import theme from '@/styles/theme';
 import * as S from './index.style';
 
+const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+
 function Login() {
   const { refetch: getGuestToken } = useGetGuestToken();
   const navigate = useNavigate();
@@ -20,7 +24,7 @@ function Login() {
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
-      console.log('카카오 로그인');
+      window.location.href = KAKAO_AUTH_URI;
     } else if (!token) {
       getGuestToken();
     } else {
@@ -81,7 +85,6 @@ function Login() {
             background: '#FEE500',
           }}
           onClick={() => handleLoginButtonClick('KAKAO')}
-          disabled
         >
           <Kakao width={theme.unit[24]} />
           <Text variant="body1Sb" color="semantic.text.strong">
