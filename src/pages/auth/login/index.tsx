@@ -1,15 +1,15 @@
-import LogoImg from '@/assets/pngs/LogoImg.png';
-import Text from '@/common/components/Text';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
+import LogoImg from '@/assets/pngs/LogoImg.png';
+import { Kakao } from '@/assets/svgs/icon';
+import Button from '@/common/components/Button';
+import Flex from '@/common/components/Flex';
+import { CoinLottie } from '@/common/components/Lottie';
+import Text from '@/common/components/Text';
 import { ROUTE } from '@/common/constants/route';
 import { useGetGuestToken } from '@/common/queries/auth/useGetGuestToken';
-import { useEffect, useState } from 'react';
-import { CoinLottie } from '@/common/components/Lottie';
-import EntranceModdo from '@/assets/pngs/EntranceModdo.png';
 import theme from '@/styles/theme';
-import Button from '@/common/components/Button';
-import { Kakao } from '@/assets/svgs/icon';
-import Flex from '@/common/components/Flex';
 import * as S from './index.style';
 
 function Login() {
