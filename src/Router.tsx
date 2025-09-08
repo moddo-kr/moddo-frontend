@@ -13,17 +13,18 @@ const GroupSetup = lazy(() => import('@/pages/groupSetup'));
 const Home = lazy(() => import('@/pages/home'));
 const Login = lazy(() => import('@/pages/auth/login'));
 const LoginSuccess = lazy(() => import('@/pages/auth/loginSuccess'));
-const Onboarding = lazy(() => import('@/pages/onboarding'));
 const SelectGroup = lazy(() => import('@/pages/selectGroup'));
 const NotFound = lazy(() => import('@/pages/notFound'));
 
 function AppRouter() {
   const router = createBrowserRouter([
     {
-      path: '',
+      id: 'root',
       element: (
         <RouteErrorBoundary>
-          <Outlet />
+          <Suspense fallback={<div>loading...</div>}>
+            <Outlet />
+          </Suspense>
         </RouteErrorBoundary>
       ),
       errorElement: <RouteErrorElement />,
@@ -33,28 +34,28 @@ function AppRouter() {
           element: <Login />,
         },
         {
-          path: ROUTE.onboarding,
-          element: <Onboarding />,
-        },
-        {
-          path: ROUTE.loginSuccess,
-          element: <LoginSuccess />,
-        },
-        {
-          path: ROUTE.home,
-          element: <Home />,
+          id: 'protected',
           loader: checkAuth,
+          children: [
+            {
+              path: ROUTE.loginSuccess,
+              element: <LoginSuccess />,
+            },
+            {
+              path: ROUTE.home,
+              element: <Home />,
+            },
+            {
+              path: ROUTE.selectGroup,
+              element: <SelectGroup />,
+            },
+            {
+              path: ROUTE.groupSetup,
+              element: <GroupSetup />,
+            },
+          ],
         },
-        {
-          path: ROUTE.selectGroup,
-          element: <SelectGroup />,
-          loader: checkAuth,
-        },
-        {
-          path: ROUTE.groupSetup,
-          element: <GroupSetup />,
-          loader: checkAuth,
-        },
+        // TODO : 로그인 기능으로 변경될 예정
         {
           path: ROUTE.createBill,
           element: <CreateBill />,
@@ -70,20 +71,15 @@ function AppRouter() {
           element: <CharacterShare />,
           loader: groupTokenUrlLoader,
         },
+        {
+          path: '*',
+          element: <NotFound />,
+        },
       ],
-    },
-    {
-      path: '*',
-      element: <NotFound />,
     },
   ]);
 
-  return (
-    // TODO : 로딩 페이지 추가하기
-    <Suspense fallback={<div>loading...</div>}>
-      <RouterProvider router={router} />
-    </Suspense>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default AppRouter;
