@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 import { ROUTE } from '@/common/constants/route';
 import { checkAuth, groupTokenUrlLoader } from '@/common/loaders';
-import getGroupManagerAuth from '@/common/loader/getGroupManagerAuth';
+import getGroupManagerAuth from '@/common/loaders/getGroupManagerAuth';
 import RouteErrorBoundary from '@/common/components/RouteErrorBoundary';
 import RouteErrorElement from '@/common/components/RouteErrorElement';
 
