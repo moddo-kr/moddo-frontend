@@ -11,8 +11,8 @@ import Button from '@/shared/ui/Button';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
 import Text from '@/shared/ui/Text';
 import initKakaoSDK from '@/shared/lib/initKakaoSDK';
-import generateShareLink from '@/shared/lib/generateShareLink';
-import ShareButton from '@/shared/ui/ShareButton';
+import ShareButton from '@/domains/sharing/ui/ShareButton';
+import generateShareLink from '@/domains/sharing/lib/generateShareLink';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {

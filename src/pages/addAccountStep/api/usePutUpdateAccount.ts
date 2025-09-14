@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { putGroupAccount } from '@/service/apis/group';
-import { AccountVariable } from '@/shared/types/group.type';
+import { AccountVariable } from '@/domains/group/model/group.type';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
 import useMutationWithHandlers from '@/shared/hooks/useMutationWithHanders';
 

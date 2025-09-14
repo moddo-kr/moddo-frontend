@@ -3,11 +3,11 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Group } from '@/shared/types/group.type';
+import { Group } from '@/domains/group/model/group.type';
 import {
   SingleExpenseForm,
   ExpenseFormSchema,
-} from '@/shared/types/expense.type';
+} from '@/domains/expense/model/expense.type';
 import group from '@/service/apis/group';
 
 const defaultValues: SingleExpenseForm = {

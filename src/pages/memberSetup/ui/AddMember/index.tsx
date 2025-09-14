@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Member } from '@/shared/types/member.type';
+import { Member } from '@/domains/group/model/member.type';
 import Text from '@/shared/ui/Text';
 import MemberProfile from '@/shared/ui/MemberProfile';
 import InputGroup from '@/shared/ui/InputGroup';

@@ -10,10 +10,9 @@ import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/ui/Divider';
 import { useGetMemberExpenseDetails } from '@/shared/api/memberExpense/useGetMemberExpenseDetails';
-
-import ShareButton from '@/shared/ui/ShareButton';
-import generateShareLink from '@/shared/lib/generateShareLink';
+import generateShareLink from '@/domains/sharing/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
+import ShareButton from '@/domains/sharing/ui/ShareButton';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import CharacterBottomSheet from './ui/CharacterBottomSheet';

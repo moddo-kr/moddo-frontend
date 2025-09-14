@@ -3,7 +3,7 @@ import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import FormCard from '@/shared/ui/FormCard';
-import useAddExpenseFormArray from '@/shared/hooks/useAddExpenseFormArray';
+import useAddExpenseFormArray from '@/domains/expense/lib/useAddExpenseFormArray';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';

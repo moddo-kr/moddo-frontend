@@ -2,7 +2,7 @@ import defaultProfileImg from '@/shared/assets/pngs/defaultProfileImg.png';
 import { SystemDanger } from '@/shared/assets/svgs/icon';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
-import { Member } from '@/shared/types/member.type';
+import { Member } from '@/domains/group/model/member.type';
 import * as S from './index.style';
 
 interface MemberProfileProps {

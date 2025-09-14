@@ -1,4 +1,4 @@
-import { ShareData } from '@/shared/types/share.type';
+import { ShareData } from '../model/share.type';
 
 const shareKakao = (shareData: ShareData) => {
   Kakao.Share.sendDefault({

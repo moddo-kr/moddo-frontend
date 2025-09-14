@@ -1,8 +1,8 @@
-import { Member, MemberData } from '@/shared/types/member.type';
+import { Member, MemberData } from '@/domains/group/model/member.type';
 import {
   UpdatePaymentStatusData,
   UpdatePaymentStatusVariable,
-} from '@/shared/types/groupMember.type';
+} from '@/domains/group/model/groupMember.type';
 import axiosInstance from './axios';
 
 export interface CreateGroupMembersVariable {

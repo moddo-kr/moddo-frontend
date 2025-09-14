@@ -1,5 +1,5 @@
 import { Fragment } from 'react/jsx-runtime';
-import { Expense } from '@/shared/types/expense.type';
+import { Expense } from '@/domains/expense/model/expense.type';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import Text from '@/shared/ui/Text';
 import categrizeExpensesByDateWithIndex from './lib/categrizeExpensesByDateWithIndex';

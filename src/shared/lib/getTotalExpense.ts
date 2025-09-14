@@ -1,4 +1,7 @@
-import { SingleExpenseForm, Expense } from '@/shared/types/expense.type';
+import {
+  SingleExpenseForm,
+  Expense,
+} from '@/domains/expense/model/expense.type';
 
 /**
  * 모든 지출의 누적 합을 반환합니다.

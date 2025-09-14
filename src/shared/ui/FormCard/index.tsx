@@ -2,7 +2,10 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/shared/assets/svgs/icon';
-import { ExpenseFormMember, RemainderData } from '@/shared/types/expense.type';
+import {
+  ExpenseFormMember,
+  RemainderData,
+} from '@/domains/expense/model/expense.type';
 import Alert from '@/shared/ui/Alert';
 import Button from '@/shared/ui/Button';
 import BillDatePicker from '@/shared/ui/DatePicker';

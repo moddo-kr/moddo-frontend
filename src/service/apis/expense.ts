@@ -3,7 +3,7 @@ import {
   SingleExpenseForm,
   ExpenseList,
   ExpenseDetailList,
-} from '@/shared/types/expense.type';
+} from '@/domains/expense/model/expense.type';
 import axiosInstance from './axios';
 
 const expense = {

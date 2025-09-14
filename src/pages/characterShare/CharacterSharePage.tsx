@@ -9,13 +9,13 @@ import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
-import useGetCharacter from '@/shared/api/image/useGetCharacter';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import {
   CHARACTER_DESCRIPTION,
   CHARACTER_IMAGE_SIZE,
-} from '@/shared/config/character';
-import StarChip from './ui/StarChip';
+} from '@/domains/character/config/character';
+import useGetCharacter from '@/domains/character/api/useGetCharacter';
+import StarChip from '../../domains/character/ui/StarChip';
 import * as S from './CharacterSharePage.styles';
 
 function CharacterSharePage() {

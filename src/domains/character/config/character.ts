@@ -1,4 +1,4 @@
-import { CharacterType } from '@/shared/types/character.type';
+import { CharacterType } from '@/domains/character/model/character.type';
 
 export const CHARACTER_IMAGE_SIZE: Record<
   CharacterType,

@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { UpdatePaymentStatusVariable } from '@/shared/types/groupMember.type';
+import { UpdatePaymentStatusVariable } from '@/domains/group/model/groupMember.type';
 import { updatePaymentStatus } from '@/service/apis/groupMembers';
 
 const useUpdatePaymentStatus = ({

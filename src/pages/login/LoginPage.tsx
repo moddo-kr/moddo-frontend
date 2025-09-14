@@ -9,7 +9,7 @@ import theme from '@/shared/styles/theme';
 import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
-import { useGetGuestToken } from './api/useGetGuestToken';
+import { useGetGuestToken } from '@/domains/auth/api/useGetGuestToken';
 import * as S from './LoginPage.style';
 
 function LoginPage() {

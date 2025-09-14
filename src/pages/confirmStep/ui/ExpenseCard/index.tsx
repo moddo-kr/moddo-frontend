@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close } from '@/shared/assets/svgs/icon';
 import Chip from '@/shared/ui/Chip';
-import { Expense } from '@/shared/types/expense.type';
+import { Expense } from '@/domains/expense/model/expense.type';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';

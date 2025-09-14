@@ -1,6 +1,10 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/lib/getIsMocked';
-import { Member, MemberData, MemberRole } from '@/shared/types/member.type';
+import {
+  Member,
+  MemberData,
+  MemberRole,
+} from '@/domains/group/model/member.type';
 import defaultProfileImg from '@/shared/assets/pngs/defaultProfileImg.png';
 
 /** 김모또는 고정 */

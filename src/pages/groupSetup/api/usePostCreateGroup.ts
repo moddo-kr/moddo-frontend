@@ -1,4 +1,4 @@
-import { CreateGroupData } from '@/shared/types/group.type';
+import { CreateGroupData } from '@/domains/group/model/group.type';
 import group from '@/service/apis/group';
 import { useMutation } from '@tanstack/react-query';
 

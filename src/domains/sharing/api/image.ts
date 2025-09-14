@@ -1,5 +1,5 @@
-import { CharacterData } from '@/shared/types/character.type';
-import axiosInstance from './axios';
+import { CharacterData } from '@/domains/character/model/character.type';
+import axiosInstance from '@/service/apis/axios';
 
 const image = {
   // GET GetCharacter

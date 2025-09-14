@@ -1,4 +1,4 @@
-import { SingleExpenseForm } from '@/shared/types/expense.type';
+import { SingleExpenseForm } from '@/domains/expense/model/expense.type';
 
 export type EditBillContext = {
   expenseId: number;
