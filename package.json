@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
+    "@feature-sliced/eslint-config": "^0.1.1",
     "@hookform/devtools": "^4.3.3",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
@@ -73,7 +74,8 @@
     "eslint-config-airbnb-typescript": "18.0.0",
     "eslint-config-prettier": "10.0.1",
     "eslint-import-resolver-typescript": "^3.7.0",
-    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-boundaries": "^5.0.1",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "7.37.4",
