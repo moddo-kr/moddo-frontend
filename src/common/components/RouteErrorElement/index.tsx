@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router';
 import { BoundaryError } from '@/common/types/error.type';
-import ErrorPage from '@/pages/error';
+import { ErrorPage } from '@/pages/error';
 
 function RouteErrorElement() {
   const error = useRouteError();

@@ -1,5 +1,5 @@
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
-import ErrorPage from '@/pages/error';
+import { ErrorPage } from '@/pages/error';
 import { BoundaryError } from '@/common/types/error.type';
 
 type FallbackPageProps = Omit<FallbackProps, 'error'> & {

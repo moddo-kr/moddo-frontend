@@ -35,7 +35,6 @@ function App() {
         }),
       })
   );
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalErrorBoundary>

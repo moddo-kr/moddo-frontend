@@ -6,16 +6,52 @@ import getGroupManagerAuth from '@/common/loaders/getGroupManagerAuth';
 import RouteErrorBoundary from '@/common/components/RouteErrorBoundary';
 import RouteErrorElement from '@/common/components/RouteErrorElement';
 
-const BillDetail = lazy(() => import('@/pages/billDetail'));
-const CharacterShare = lazy(() => import('@/pages/billDetail/characterShare'));
-const CreateBill = lazy(() => import('@/pages/createBill'));
-const GroupSetup = lazy(() => import('@/pages/groupSetup'));
-const Home = lazy(() => import('@/pages/home'));
-const Login = lazy(() => import('@/pages/auth/login'));
-const LoginSuccess = lazy(() => import('@/pages/auth/loginSuccess'));
-const Onboarding = lazy(() => import('@/pages/onboarding'));
-const SelectGroup = lazy(() => import('@/pages/selectGroup'));
-const NotFound = lazy(() => import('@/pages/notFound'));
+const BillDetail = lazy(() =>
+  import('@/pages/billDetail/').then(({ BillDetailPage }) => ({
+    default: BillDetailPage,
+  }))
+);
+const CharacterShare = lazy(() =>
+  import('@/pages/characterShare').then(({ CharacterSharePage }) => ({
+    default: CharacterSharePage,
+  }))
+);
+const CreateBill = lazy(() =>
+  import('@/pages/createBill').then(({ CreateBillPage }) => ({
+    default: CreateBillPage,
+  }))
+);
+const GroupSetup = lazy(() =>
+  import('@/pages/groupSetup').then(({ GroupSetupPage }) => ({
+    default: GroupSetupPage,
+  }))
+);
+const Home = lazy(() =>
+  import('@/pages/home').then(({ HomePage }) => ({ default: HomePage }))
+);
+const Login = lazy(() =>
+  import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
+);
+const LoginSuccess = lazy(() =>
+  import('@/pages/loginSuccess').then(({ LoginSuccessPage }) => ({
+    default: LoginSuccessPage,
+  }))
+);
+const Onboarding = lazy(() =>
+  import('@/pages/onboarding').then(({ OnboardingPage }) => ({
+    default: OnboardingPage,
+  }))
+);
+const SelectGroup = lazy(() =>
+  import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
+    default: SelectGroupPage,
+  }))
+);
+const NotFound = lazy(() =>
+  import('@/pages/notFound').then(({ NotFoundPage }) => ({
+    default: NotFoundPage,
+  }))
+);
 
 function AppRouter() {
   const router = createBrowserRouter([

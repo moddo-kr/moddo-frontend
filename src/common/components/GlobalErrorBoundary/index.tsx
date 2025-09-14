@@ -1,5 +1,5 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import ErrorPage from '@/pages/error';
+import { ErrorPage } from '@/pages/error';
 
 interface GlobalErrorBoundaryProps {
   children: React.ReactNode;
