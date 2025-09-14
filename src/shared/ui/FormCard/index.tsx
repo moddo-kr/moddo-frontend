@@ -7,11 +7,11 @@ import Alert from '@/shared/ui/Alert';
 import Button from '@/shared/ui/Button';
 import BillDatePicker from '@/shared/ui/DatePicker';
 import Text from '@/shared/ui/Text';
-import FormField from '@/shared/ui/FormField';
-import 'react-datepicker/dist/react-datepicker.css';
+import FormField from './ui/FormField';
 import distributeAmount from './lib/distributeExpense';
 import NumPadBottomSheet from './ui/NumPadBottomSheet';
 import MemberExpenses from '../MemberExpenses';
+import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
 interface FormCardProps {
