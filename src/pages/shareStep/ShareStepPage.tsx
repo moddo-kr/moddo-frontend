@@ -12,7 +12,7 @@ import ButtonGroup from '@/shared/components/ButtonGroup';
 import Text from '@/shared/components/Text';
 import initKakaoSDK from '@/shared/utils/initKakaoSDK';
 import generateShareLink from '@/shared/utils/generateShareLink';
-import ShareButton from './components/ShareButton';
+import ShareButton from '@/shared/components/ShareButton';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {

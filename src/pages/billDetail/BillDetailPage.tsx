@@ -10,6 +10,7 @@ import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/components/Divider';
 import { useGetMemberExpenseDetails } from '@/shared/queries/memberExpense/useGetMemberExpenseDetails';
 import { ROUTE } from '@/shared/constants/route';
+import ShareButton from '@/shared/components/ShareButton';
 import generateShareLink from '@/shared/utils/generateShareLink';
 import ExpenseTimeline from './components/ExpenseTimeline';
 import CharacterBottomSheet from './components/CharacterBottomSheet';
@@ -18,7 +19,6 @@ import * as S from './BillDetailPage.styles';
 import ExpenseTimeHeader from './components/ExpenseTimeHeader';
 import ExpenseMembers from './components/ExpenseMembers';
 import { StatusType } from './components/ExpenseTimeHeader/index.type';
-import ShareButton from '../shareStep/components/ShareButton';
 
 function BillDetailPage() {
   const { unit } = useTheme();
