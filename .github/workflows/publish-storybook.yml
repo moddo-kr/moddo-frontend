@@ -1,0 +1,44 @@
+name: Publish Storybook
+# https://www.chromatic.com/docs/github-actions/
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - develop
+      - refactor/remove-chakra-ui # Chakra UI 제거 작업을 위한 브랜치
+    paths:
+      - '**/stories/**'
+      - '**/*.stories.tsx'
+      - '**/*.stories.ts'
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: yarn install # 명시적으로 의존성 설치
+
+      - name: Setup Node.js Environment
+        uses: ./.github/actions/setup-node
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        id: chromatic
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true # Only run Chromatic on changed stories
+
+      - name: Comment on PR
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: '✨ **Storybook preview** : ${{ steps.chromatic.outputs.storybookUrl }}'

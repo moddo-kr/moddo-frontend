@@ -1,0 +1,54 @@
+name: Automate PR Reviews
+
+on:
+  pull_request:
+    types: [opened, ready_for_review] # PR 생성 시 또는 Draft 상태에서 '리뷰 가능' 상태로 전환될 때 트리거되는 액션
+
+jobs:
+  # PR 작성자를 Assignee로 지정하고 Reviewer를 지정하는 작업
+  assign:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # Assignee와 Reviewer 할당을 위한 권한
+    steps:
+      - uses: hkusu/review-assign-action@v1 # https://github.com/hkusu/review-assign-action
+        with:
+          # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
+          assignees: ${{ github.actor }} # PR 작성자를 assignee로 지정
+          # Repository Variables에 정의한 값
+          # - Settings > Secrets and Variables > Actions > Variables > Repository variables
+          reviewers: ${{ vars.REVIEWERS }} # 리뷰할 수 있는 사람의 목록
+
+  # 브랜치 이름에서 JIRA 이슈 키를 추출하여 PR 본문에 링크로 추가하는 작업
+  add-jira-link:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'opened' # PR 생성 시에만 실행
+    steps:
+      - name: Extract JIRA issue key from branch name
+        id: extract-jira-key
+        run: |
+          JIRA_KEY=$(echo ${{ github.head_ref }} | grep -oE 'MOD-[0-9]+' || echo "")
+          echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
+
+      # PR 본문을 JSON 형식으로 파싱하기 위한 jq 설치
+      - name: Install jq
+        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      # https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-pull-request
+      - name: Add JIRA issue link to PR body
+        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
+        run: |
+          PR_BODY=$(cat <<EOF
+          ${{ github.event.pull_request.body }}
+          EOF)
+          JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
+          JIRA_LINK=$(printf "## 📝 관련 이슈\n\n[%s](%s/browse/%s)" "$JIRA_KEY" "${{ vars.JIRA_BASE_URL }}" "$JIRA_KEY")
+          UPDATED_BODY=$(printf "%s\n\n%s" "$JIRA_LINK" "$PR_BODY")
+          curl -L \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} \
+            -d "$(jq -n --arg body "$UPDATED_BODY" '{body: $body}')"

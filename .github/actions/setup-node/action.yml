@@ -1,0 +1,23 @@
+name: Setup Node.js Environment
+description: Setup Node.js environment and install dependencies for Github Actions
+
+runs:
+  using: "composite"
+  steps:
+    # Step 1: node.js 환경 설정
+    # https://github.com/actions/setup-node
+    - name: setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    # Step 2: 의존성 설치
+    - name: install dependencies
+      run: yarn install
+      working-directory: .github/actions
+      shell: bash
+
+    # TODO: 캐싱 설정 추가
+    # https://github.com/actions/cache/blob/main/examples.md#node---yarn
+    # https://stackoverflow.com/questions/69365200/github-actions-how-to-cache-dependencies-between-workflow-runs-of-different-bra
+    # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
