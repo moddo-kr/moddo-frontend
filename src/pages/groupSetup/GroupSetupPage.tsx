@@ -1,8 +1,8 @@
 import { useFunnel } from '@use-funnel/react-router';
-import { usePostCreateGroup } from '@/shared/queries/group/usePostCreateGroup';
 import { GroupNameSetupPage } from '@/pages/groupNameSetup';
 import { PasswordSetupPage } from '@/pages/passwordSetup';
 import { MemberSetupPage } from '@/pages/memberSetup';
+import { usePostCreateGroup } from './api/usePostCreateGroup';
 
 // 모임 이름 입력 스텝에 필요한 context type
 type NameSetupType = {

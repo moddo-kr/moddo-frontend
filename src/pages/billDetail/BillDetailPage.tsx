@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
+
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Button from '@/shared/components/Button';
 import Header from '@/shared/components/Header';
-import { TabsList, Tab } from '@/shared/components/Tabs';
+
 import Text from '@/shared/components/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/components/Divider';
-import { useGetMemberExpenseDetails } from '@/shared/queries/memberExpense/useGetMemberExpenseDetails';
-import { ROUTE } from '@/shared/constants/route';
+import { useGetMemberExpenseDetails } from '@/shared/api/memberExpense/useGetMemberExpenseDetails';
+
 import ShareButton from '@/shared/components/ShareButton';
 import generateShareLink from '@/shared/utils/generateShareLink';
-import ExpenseTimeline from './components/ExpenseTimeline';
-import CharacterBottomSheet from './components/CharacterBottomSheet';
+import { ROUTE } from '@/shared/config/route';
+import { TabsList, Tab } from './ui/Tabs';
+import ExpenseTimeline from './ui/ExpenseTimeline';
+import CharacterBottomSheet from './ui/CharacterBottomSheet';
 import * as S from './BillDetailPage.styles';
 
-import ExpenseTimeHeader from './components/ExpenseTimeHeader';
-import ExpenseMembers from './components/ExpenseMembers';
-import { StatusType } from './components/ExpenseTimeHeader/index.type';
+import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
+import ExpenseMembers from './ui/ExpenseMembers';
+import { StatusType } from './ui/ExpenseTimeHeader/index.type';
 
 function BillDetailPage() {
   const { unit } = useTheme();

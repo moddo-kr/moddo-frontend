@@ -1,11 +1,11 @@
 import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close } from '@/shared/assets/svgs/icon';
 import Chip from '@/shared/components/Chip';
-import useDeleteMutation from '@/shared/queries/expense/useDeleteExpense';
 import { Expense } from '@/shared/types/expense.type';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import Text from '@/shared/components/Text';
 import Button from '@/shared/components/Button';
+import useDeleteMutation from './api/useDeleteExpense';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {

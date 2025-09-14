@@ -2,7 +2,6 @@ import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/components/Header';
-import useUpdateExpense from '@/shared/queries/expense/useUpdateExpense';
 import FormCard from '@/shared/components/FormCard';
 import useAddExpenseFormArray from '@/shared/hooks/useAddExpenseFormArray';
 import DescriptionField from '@/shared/components/DescriptionField';
@@ -11,6 +10,7 @@ import Button from '@/shared/components/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/components/Toast';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
+import useUpdateExpense from './api/useUpdateExpense';
 import * as S from './EditExpenseStepPage.styles';
 
 type EditExpenseStepProps = {

@@ -8,10 +8,7 @@ import { showToast } from '@/shared/components/Toast';
 import { ToastProps } from '@/shared/components/Toast/index.type';
 import copyClipboard from '@/shared/utils/copyClipboard';
 import shareKakao from '@/shared/utils/shareKakao';
-import {
-  shareDataFormat,
-  shareMessageFormat,
-} from '@/shared/constants/shareFormat';
+import { shareDataFormat, shareMessageFormat } from './config/shareFormat';
 import * as S from './index.styles';
 
 const toastMessage: Record<string, ToastProps> = {

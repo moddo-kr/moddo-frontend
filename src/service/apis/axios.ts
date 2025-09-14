@@ -1,5 +1,5 @@
-import { ROUTE } from '@/shared/constants/route';
 import axios, { AxiosHeaders } from 'axios';
+import { ROUTE } from '@/shared/config/route';
 
 const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,

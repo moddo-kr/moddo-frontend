@@ -1,8 +1,7 @@
 import LogoImg from '@/shared/assets/pngs/LogoImg.png';
 import Text from '@/shared/components/Text';
 import { useNavigate } from 'react-router';
-import { ROUTE } from '@/shared/constants/route';
-import { useGetGuestToken } from '@/shared/queries/auth/useGetGuestToken';
+import { ROUTE } from '@/shared/config/route';
 import { useEffect, useState } from 'react';
 import { CoinLottie } from '@/shared/components/Lottie';
 import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
@@ -10,6 +9,7 @@ import theme from '@/shared/styles/theme';
 import Button from '@/shared/components/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/components/Flex';
+import { useGetGuestToken } from './api/useGetGuestToken';
 import * as S from './LoginPage.style';
 
 function LoginPage() {

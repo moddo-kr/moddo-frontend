@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
 import { Add, CheckCircle } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/components/Header';
-import { ROUTE } from '@/shared/constants/route';
+import { ROUTE } from '@/shared/config/route';
 import DescriptionField from '@/shared/components/DescriptionField';
 import Text from '@/shared/components/Text';
 import Flex from '@/shared/components/Flex';

@@ -4,7 +4,7 @@ import Link from '@/shared/assets/pngs/Link.png';
 import LoginHamImg from '@/shared/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { ROUTE } from '@/shared/constants/route';
+import { ROUTE } from '@/shared/config/route';
 import DescriptionField from '@/shared/components/DescriptionField';
 import Header from '@/shared/components/Header';
 import Button from '@/shared/components/Button';

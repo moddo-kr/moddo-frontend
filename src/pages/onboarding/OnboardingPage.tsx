@@ -1,5 +1,5 @@
 import Button from '@/shared/components/Button';
-import { ROUTE } from '@/shared/constants/route';
+import { ROUTE } from '@/shared/config/route';
 import { useNavigate } from 'react-router';
 import theme from '@/shared/styles/theme';
 import Text from '@/shared/components/Text';

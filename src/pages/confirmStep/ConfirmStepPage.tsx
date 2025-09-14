@@ -1,13 +1,13 @@
 import { useLoaderData } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/components/Header';
-import useGetAllExpense from '@/shared/queries/expense/useGetAllExpense';
 import DescriptionField from '@/shared/components/DescriptionField';
 import Text from '@/shared/components/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/components/Button';
 import getTotalExpense from '@/shared/utils/getTotalExpense';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
+import useGetAllExpense from './api/useGetAllExpense';
 import ExpenseCardList from './components/ExpenseCardList';
 import * as S from './ConfirmStepPage.styles';
 

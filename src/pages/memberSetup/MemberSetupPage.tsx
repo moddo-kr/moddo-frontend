@@ -2,22 +2,24 @@ import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import Header from '@/shared/components/Header';
 import Text from '@/shared/components/Text';
-import AddMember from '@/shared/components/AddMember';
-import useGetGroupBasicInfo from '@/shared/queries/group/useGetGroupBasicInfo';
-import { ROUTE } from '@/shared/constants/route';
-import useLocalStorage from '@/shared/hooks/useLocalStorage';
-import { GROUP_TOKEN } from '@/shared/constants/storageKey';
+import { ROUTE } from '@/shared/config/route';
+
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import DescriptionField from '@/shared/components/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/components/Button';
 import { BoundaryError } from '@/shared/types/error.type';
+import useLocalStorage from './hooks/useLocalStorage';
+import useGetGroupBasicInfo from './api/useGetGroupBasicInfo';
+import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';
 
 export interface ParticipantProfile {
   name: string;
   profileImgUrl: string;
 }
+
+const GROUP_TOKEN = 'groupToken';
 
 function MemberSetupPage() {
   const { unit } = useTheme();

@@ -8,11 +8,11 @@ import Button from '@/shared/components/Button';
 import BillDatePicker from '@/shared/components/DatePicker';
 import Text from '@/shared/components/Text';
 import FormField from '@/shared/components/FormField';
-import NumPadBottomSheet from '@/shared/components/NumPadBottomSheet';
-import MemberExpenses from '@/shared/components/MemberExpenses';
 import 'react-datepicker/dist/react-datepicker.css';
-import * as S from './index.styles';
 import distributeAmount from './utils/distributeExpense';
+import NumPadBottomSheet from './ui/NumPadBottomSheet';
+import MemberExpenses from '../MemberExpenses';
+import * as S from './index.styles';
 
 interface FormCardProps {
   index: number;

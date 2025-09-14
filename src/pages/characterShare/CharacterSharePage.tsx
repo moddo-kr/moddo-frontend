@@ -6,15 +6,16 @@ import Button from '@/shared/components/Button';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
-import {
-  CHARACTER_IMAGE_SIZE,
-  CHARACTER_DESCRIPTION,
-} from '@/shared/constants/character';
-import StarChip from '@/shared/components/StarChip';
+
 import Header from '@/shared/components/Header';
 import Text from '@/shared/components/Text';
-import useGetCharacter from '@/shared/queries/image/useGetCharacter';
+import useGetCharacter from '@/shared/api/image/useGetCharacter';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import {
+  CHARACTER_DESCRIPTION,
+  CHARACTER_IMAGE_SIZE,
+} from '@/shared/config/character';
+import StarChip from './ui/StarChip';
 import * as S from './CharacterSharePage.styles';
 
 function CharacterSharePage() {

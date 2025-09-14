@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
-import useCreateExpense from '@/shared/queries/expense/useCreateExpense';
+import useCreateExpense from '@/shared/api/expense/useCreateExpense';
 import useAddExpenseFormArray from '@/shared/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/shared/components/Header';

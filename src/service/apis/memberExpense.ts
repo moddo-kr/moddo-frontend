@@ -1,4 +1,4 @@
-import { MemberExpense } from '@/shared/types/memberExpense';
+import { MemberExpense } from '@/shared/types/memberExpense.type';
 import axiosInstance from './axios';
 
 export const getMemberExpenseDetails = async (

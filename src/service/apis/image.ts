@@ -1,4 +1,4 @@
-import { CharacterData } from '@/shared/types/character';
+import { CharacterData } from '@/shared/types/character.type';
 import axiosInstance from './axios';
 
 const image = {

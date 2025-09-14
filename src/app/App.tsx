@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import GlobalStyles from '@/shared/styles/globalStyles';
 import theme from '@/shared/styles/theme';
-import Layout from '@/shared/components/Layout';
+import Layout from './Layout';
 import AppRouter from '@/app/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalErrorBoundary from '@/app/GlobalErrorBoundary';
