@@ -1,12 +1,12 @@
-name: DEV CI CD Preview
+name: PROD CI CD Preview
 
 on: # develop 브랜치에 pr, push 될 때마다 action이 실행됩니다.
   push:
     branches:
-      - develop
+      - main
   pull_request:
     branches:
-      - develop
+      - main
 
 jobs:
   ci:
