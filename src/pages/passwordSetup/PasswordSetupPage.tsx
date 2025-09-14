@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
-import { ArrowLeft } from '@/assets/svgs/icon';
-import Header from '@/common/components/Header';
-import DescriptionField from '@/common/components/DescriptionField';
-import Input from '@/common/components/Input';
-import Button from '@/common/components/Button';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import Text from '@/common/components/Text';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import Header from '@/shared/components/Header';
+import DescriptionField from '@/shared/components/DescriptionField';
+import Input from '@/shared/components/Input';
+import Button from '@/shared/components/Button';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import Text from '@/shared/components/Text';
 import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
 
 const passwordSchema = z.object({

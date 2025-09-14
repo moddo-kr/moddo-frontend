@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import Header from '@/common/components/Header';
-import Text from '@/common/components/Text';
-import AddMember from '@/common/components/AddMember';
-import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
-import { ROUTE } from '@/common/constants/route';
-import useLocalStorage from '@/common/hooks/useLocalStorage';
-import { GROUP_TOKEN } from '@/common/constants/storageKey';
-import { ArrowLeft } from '@/assets/svgs/icon';
-import DescriptionField from '@/common/components/DescriptionField';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import Button from '@/common/components/Button';
-import { BoundaryError } from '@/common/types/error.type';
+import Header from '@/shared/components/Header';
+import Text from '@/shared/components/Text';
+import AddMember from '@/shared/components/AddMember';
+import useGetGroupBasicInfo from '@/shared/queries/group/useGetGroupBasicInfo';
+import { ROUTE } from '@/shared/constants/route';
+import useLocalStorage from '@/shared/hooks/useLocalStorage';
+import { GROUP_TOKEN } from '@/shared/constants/storageKey';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import DescriptionField from '@/shared/components/DescriptionField';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import Button from '@/shared/components/Button';
+import { BoundaryError } from '@/shared/types/error.type';
 import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
 
 export interface ParticipantProfile {

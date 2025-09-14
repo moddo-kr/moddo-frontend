@@ -8,9 +8,9 @@ import {
   UseFormRegisterReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
-import Button from '@/common/components/Button';
-import Text from '@/common/components/Text';
-import Input from '@/common/components/Input';
+import Button from '@/shared/components/Button';
+import Text from '@/shared/components/Text';
+import Input from '@/shared/components/Input';
 import * as S from './index.styles';
 
 interface RenderInputProps {

@@ -1,15 +1,15 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
-import Header from '@/common/components/Header';
-import Text from '@/common/components/Text';
-import usePutUpdateAccount from '@/common/queries/group/usePutUpdateAccount';
-import { ArrowDown, ArrowLeft } from '@/assets/svgs/icon';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import Button from '@/common/components/Button';
-import DescriptionField from '@/common/components/DescriptionField';
-import Input from '@/common/components/Input';
-import { BoundaryError } from '@/common/types/error.type';
-import useDisclosure from '@/common/hooks/useDisclosure';
+import Header from '@/shared/components/Header';
+import Text from '@/shared/components/Text';
+import usePutUpdateAccount from '@/shared/queries/group/usePutUpdateAccount';
+import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import Button from '@/shared/components/Button';
+import DescriptionField from '@/shared/components/DescriptionField';
+import Input from '@/shared/components/Input';
+import { BoundaryError } from '@/shared/types/error.type';
+import useDisclosure from '@/shared/hooks/useDisclosure';
 import BankNameDrawer from './components/BankNameDrawer';
 import * as S from './AddAccountStepPage.styles';
 

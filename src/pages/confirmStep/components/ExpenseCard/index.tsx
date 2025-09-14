@@ -1,11 +1,11 @@
 import { useLoaderData } from 'react-router';
-import { CarbonEdit, Close } from '@/assets/svgs/icon';
-import Chip from '@/common/components/Chip';
-import useDeleteMutation from '@/common/queries/expense/useDeleteExpense';
+import { CarbonEdit, Close } from '@/shared/assets/svgs/icon';
+import Chip from '@/shared/components/Chip';
+import useDeleteMutation from '@/shared/queries/expense/useDeleteExpense';
 import { Expense } from '@/pages/createBill/types/expense.type';
 import { EditBillContext } from '@/pages/createBill/types/funnel.type';
-import Text from '@/common/components/Text';
-import Button from '@/common/components/Button';
+import Text from '@/shared/components/Text';
+import Button from '@/shared/components/Button';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {

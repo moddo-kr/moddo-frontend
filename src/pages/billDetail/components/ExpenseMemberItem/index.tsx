@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import Text from '@/common/components/Text';
-import StatusChip from '@/common/components/StatusChip';
-import Button from '@/common/components/Button';
-import { Close, Confirm, Receipt } from '@/assets/svgs/icon';
-import { MemberExpense } from '@/common/types/memberExpense';
-import BottomSheet from '@/common/components/BottomSheet';
-import useUpdatePaymentStatus from '@/common/queries/groupMembers/useUpdatePaymentStatus';
+import Text from '@/shared/components/Text';
+import StatusChip from '@/shared/components/StatusChip';
+import Button from '@/shared/components/Button';
+import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
+import { MemberExpense } from '@/shared/types/memberExpense';
+import BottomSheet from '@/shared/components/BottomSheet';
+import useUpdatePaymentStatus from '@/shared/queries/groupMembers/useUpdatePaymentStatus';
 import * as S from './index.style';
 
 interface ExpenseMemberItemProps {

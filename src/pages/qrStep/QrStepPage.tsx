@@ -3,13 +3,13 @@ import { useLoaderData } from 'react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { ArrowLeft, Reset } from '@/assets/svgs/icon';
-import { showToast } from '@/common/components/Toast';
-import generateShareLink from '@/common/utils/generateShareLink';
-import Header from '@/common/components/Header';
-import Button from '@/common/components/Button';
-import DescriptionField from '@/common/components/DescriptionField';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
+import { showToast } from '@/shared/components/Toast';
+import generateShareLink from '@/shared/utils/generateShareLink';
+import Header from '@/shared/components/Header';
+import Button from '@/shared/components/Button';
+import DescriptionField from '@/shared/components/DescriptionField';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './QrStepPage.styles';
 
 interface QrStepProps {

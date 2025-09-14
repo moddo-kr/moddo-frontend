@@ -1,16 +1,16 @@
 import { useTheme } from 'styled-components';
-import { LogoIcon } from '@/assets/svgs';
-import MainHamImg2 from '@/assets/pngs/MainHamImg2.png';
-import Text from '@/common/components/Text';
-import { ArrowRight, Bell, Menu, Next } from '@/assets/svgs/icon';
+import { LogoIcon } from '@/shared/assets/svgs';
+import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
+import Text from '@/shared/components/Text';
+import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
-import { ROUTE } from '@/common/constants/route';
+import { ROUTE } from '@/shared/constants/route';
 import { useState } from 'react';
-import CoinImg from '@/assets/pngs/CoinImg.png';
-import LinkMain from '@/assets/pngs/link_main.png';
-import CardMain from '@/assets/pngs/card_main.png';
-import Divider from '@/common/components/Divider';
-import Flex from '@/common/components/Flex';
+import CoinImg from '@/shared/assets/pngs/CoinImg.png';
+import LinkMain from '@/shared/assets/pngs/link_main.png';
+import CardMain from '@/shared/assets/pngs/card_main.png';
+import Divider from '@/shared/components/Divider';
+import Flex from '@/shared/components/Flex';
 import * as S from './HomePage.style';
 import HomeExpenseItem from './components/HomeExpenseItem';
 

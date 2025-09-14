@@ -1,4 +1,4 @@
-import Text from '@/common/components/Text';
+import Text from '@/shared/components/Text';
 import styled from 'styled-components';
 
 export const ErrorHamster = styled.img`

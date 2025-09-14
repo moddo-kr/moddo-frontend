@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Group } from '@/common/types/group.type';
+import { Group } from '@/shared/types/group.type';
 import {
   SingleExpenseForm,
   ExpenseFormSchema,

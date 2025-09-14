@@ -1,14 +1,14 @@
 import { useLoaderData } from 'react-router';
-import { Close } from '@/assets/svgs/icon';
-import useCreateExpense from '@/common/queries/expense/useCreateExpense';
+import { Close } from '@/shared/assets/svgs/icon';
+import useCreateExpense from '@/shared/queries/expense/useCreateExpense';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
-import Header from '@/common/components/Header';
+import Header from '@/shared/components/Header';
 import FormCard from '@/pages/createBill/components/FormCard';
-import Button from '@/common/components/Button';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import DescriptionField from '@/common/components/DescriptionField';
-import Text from '@/common/components/Text';
+import Button from '@/shared/components/Button';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import DescriptionField from '@/shared/components/DescriptionField';
+import Text from '@/shared/components/Text';
 import * as S from './AddExpenseStepPage.styles';
 
 interface AddExpenseStepProps {

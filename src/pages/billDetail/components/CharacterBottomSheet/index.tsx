@@ -1,11 +1,11 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
-import Text from '@/common/components/Text';
-import { CHARACTER_IMAGE_SIZE } from '@/common/constants/character';
-import { ROUTE } from '@/common/constants/route';
-import BottomSheet from '@/common/components/BottomSheet';
-import ButtonGroup from '@/common/components/ButtonGroup';
-import Button from '@/common/components/Button';
-import useGetCharacter from '@/common/queries/image/useGetCharacter';
+import Text from '@/shared/components/Text';
+import { CHARACTER_IMAGE_SIZE } from '@/shared/constants/character';
+import { ROUTE } from '@/shared/constants/route';
+import BottomSheet from '@/shared/components/BottomSheet';
+import ButtonGroup from '@/shared/components/ButtonGroup';
+import Button from '@/shared/components/Button';
+import useGetCharacter from '@/shared/queries/image/useGetCharacter';
 import * as S from './index.styles';
 
 interface CharacterBottomSheetProps {

@@ -1,0 +1,52 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import theme from '@/shared/styles/theme';
+
+<Meta title="Design Tokens/Colors" />
+
+# Colors
+
+## Semantic
+
+<ColorPalette>
+  {Object.entries(theme.color.semantic).map(([colorName, shades]) => {
+    const isNested = Object.values(shades).some(value => typeof value === 'object');
+
+    return isNested ? (
+      Object.entries(shades).map(([subKey, values]) => (
+        <ColorItem
+          key={`${colorName}-${subKey}`}
+          title={`${colorName}.${subKey}`}
+          subtitle={`theme.color.semantic.${colorName}.${subKey}`}
+          colors={values}
+        />
+      ))
+    ) : (
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.color.semantic.${colorName}`} colors={shades} />
+    );
+
+})}
+
+</ColorPalette>
+
+## Primitives
+
+<ColorPalette>
+  {Object.entries(theme.color.primitive).map(([colorName, shades]) => {
+    const isNested = Object.values(shades).some(value => typeof value === 'object');
+
+    return isNested ? (
+      Object.entries(shades).map(([subKey, values]) => (
+        <ColorItem
+          key={`${colorName}-${subKey}`}
+          title={`${colorName}.${subKey}`}
+          subtitle={`theme.color.primitive.${colorName}.${subKey}`}
+          colors={values}
+        />
+      ))
+    ) : (
+      <ColorItem key={colorName} title={`${colorName}`} subtitle={`theme.color.primitive.${colorName}`} colors={shades} />
+    );
+
+})}
+
+</ColorPalette>

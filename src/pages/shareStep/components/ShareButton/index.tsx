@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { Close, Copy } from '@/assets/svgs/icon';
-import { Kakaotalk, Slack } from '@/assets/svgs/logo';
-import Button from '@/common/components/Button';
-import Modal from '@/common/components/Modal';
-import Text from '@/common/components/Text';
-import { showToast } from '@/common/components/Toast';
-import { ToastProps } from '@/common/components/Toast/index.type';
-import copyClipboard from '@/common/utils/copyClipboard';
-import shareKakao from '@/common/utils/shareKakao';
+import { Close, Copy } from '@/shared/assets/svgs/icon';
+import { Kakaotalk, Slack } from '@/shared/assets/svgs/logo';
+import Button from '@/shared/components/Button';
+import Modal from '@/shared/components/Modal';
+import Text from '@/shared/components/Text';
+import { showToast } from '@/shared/components/Toast';
+import { ToastProps } from '@/shared/components/Toast/index.type';
+import copyClipboard from '@/shared/utils/copyClipboard';
+import shareKakao from '@/shared/utils/shareKakao';
 import {
   shareDataFormat,
   shareMessageFormat,
-} from '@/common/constants/shareFormat';
+} from '@/shared/constants/shareFormat';
 import * as S from './index.styles';
 
 const toastMessage: Record<string, ToastProps> = {

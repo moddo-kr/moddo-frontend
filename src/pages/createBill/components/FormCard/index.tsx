@@ -1,16 +1,16 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
-import { Close } from '@/assets/svgs/icon';
+import { Close } from '@/shared/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import {
   ExpenseFormMember,
   RemainderData,
 } from '@/pages/createBill/types/expense.type';
-import Alert from '@/common/components/Alert';
-import Button from '@/common/components/Button';
-import BillDatePicker from '@/common/components/DatePicker';
-import Text from '@/common/components/Text';
+import Alert from '@/shared/components/Alert';
+import Button from '@/shared/components/Button';
+import BillDatePicker from '@/shared/components/DatePicker';
+import Text from '@/shared/components/Text';
 import FormField from '@/pages/createBill/components/FormField';
 import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
 import MemberExpenses from '@/pages/createBill/components/MemberExpenses';

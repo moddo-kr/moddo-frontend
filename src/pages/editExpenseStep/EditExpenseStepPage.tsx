@@ -1,15 +1,15 @@
 import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
-import { Close } from '@/assets/svgs/icon';
-import Header from '@/common/components/Header';
-import useUpdateExpense from '@/common/queries/expense/useUpdateExpense';
+import { Close } from '@/shared/assets/svgs/icon';
+import Header from '@/shared/components/Header';
+import useUpdateExpense from '@/shared/queries/expense/useUpdateExpense';
 import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
-import DescriptionField from '@/common/components/DescriptionField';
-import Text from '@/common/components/Text';
-import Button from '@/common/components/Button';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import { showToast } from '@/common/components/Toast';
+import DescriptionField from '@/shared/components/DescriptionField';
+import Text from '@/shared/components/Text';
+import Button from '@/shared/components/Button';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import { showToast } from '@/shared/components/Toast';
 import * as S from './EditExpenseStepPage.styles';
 import { EditBillContext } from '../createBill/types/funnel.type';
 

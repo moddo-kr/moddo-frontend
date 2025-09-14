@@ -1,7 +1,7 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/utils/getIsMocked';
-import { Member, MemberData, MemberRole } from '@/common/types/member.type';
-import defaultProfileImg from '@/assets/pngs/defaultProfileImg.png';
+import { Member, MemberData, MemberRole } from '@/shared/types/member.type';
+import defaultProfileImg from '@/shared/assets/pngs/defaultProfileImg.png';
 
 /** 김모또는 고정 */
 export const dummyGroupMembers: Member[] = [

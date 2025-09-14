@@ -1,4 +1,4 @@
-import { ROUTE } from '@/common/constants/route';
+import { ROUTE } from '@/shared/constants/route';
 import axios, { AxiosHeaders } from 'axios';
 
 const axiosInstance = axios.create({

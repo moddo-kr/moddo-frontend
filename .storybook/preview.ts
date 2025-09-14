@@ -2,8 +2,8 @@ import type { Preview } from '@storybook/react';
 
 import { ThemeProvider } from 'styled-components';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
-import theme from '../src/styles/theme';
-import GlobalStyles from '../src/styles/globalStyles';
+import theme from '../src/shared/styles/theme';
+import GlobalStyles from '../src/shared/styles/globalStyles';
 
 const preview: Preview = {
   parameters: {

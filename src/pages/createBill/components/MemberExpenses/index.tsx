@@ -1,5 +1,5 @@
-import { SystemDanger } from '@/assets/svgs/icon';
-import NumberInput from '@/common/components/NumberInput';
+import { SystemDanger } from '@/shared/assets/svgs/icon';
+import NumberInput from '@/shared/components/NumberInput';
 import { ExpenseFormMember } from '@/pages/createBill/types/expense.type';
 import * as S from './index.styles';
 

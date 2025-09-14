@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CurvedProgressBar from '@/common/components/CurvedProgressBar';
-import DescriptionField from '@/common/components/DescriptionField';
-import { Copy, Crown, DollarCircle } from '@/assets/svgs/icon';
+import CurvedProgressBar from '@/shared/components/CurvedProgressBar';
+import DescriptionField from '@/shared/components/DescriptionField';
+import { Copy, Crown, DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
-import Text from '@/common/components/Text';
-import { useGetGroupHeader } from '@/common/queries/group/useGetGroupHeader'; //
+import Text from '@/shared/components/Text';
+import { useGetGroupHeader } from '@/shared/queries/group/useGetGroupHeader'; //
 import { useLoaderData } from 'react-router';
-import Modal from '@/common/components/Modal';
-import copyClipboard from '@/common/utils/copyClipboard';
-import Button from '@/common/components/Button';
-import { showToast } from '@/common/components/Toast';
-import Flex from '@/common/components/Flex';
+import Modal from '@/shared/components/Modal';
+import copyClipboard from '@/shared/utils/copyClipboard';
+import Button from '@/shared/components/Button';
+import { showToast } from '@/shared/components/Toast';
+import Flex from '@/shared/components/Flex';
 import { getFormatDate } from '../../utils/getFormatDate';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';

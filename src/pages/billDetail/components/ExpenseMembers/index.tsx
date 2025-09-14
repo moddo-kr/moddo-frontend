@@ -1,4 +1,4 @@
-import { useGetMemberExpenseDetails } from '@/common/queries/memberExpense/useGetMemberExpenseDetails';
+import { useGetMemberExpenseDetails } from '@/shared/queries/memberExpense/useGetMemberExpenseDetails';
 import * as S from './index.style';
 import ExpenseMemberItem from '../ExpenseMemberItem';
 

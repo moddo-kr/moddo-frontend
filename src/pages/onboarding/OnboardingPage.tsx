@@ -1,16 +1,16 @@
-import Button from '@/common/components/Button';
-import { ROUTE } from '@/common/constants/route';
+import Button from '@/shared/components/Button';
+import { ROUTE } from '@/shared/constants/route';
 import { useNavigate } from 'react-router';
-import theme from '@/styles/theme';
-import Text from '@/common/components/Text';
+import theme from '@/shared/styles/theme';
+import Text from '@/shared/components/Text';
 import {
   OnboardingStep1Lottie,
   OnboardingStep2Lottie,
   OnboardingStep3Lottie,
   OnboardingStep4Lottie,
-} from '@/common/components/Lottie';
-import Header from '@/common/components/Header';
-import Onboarding1 from '@/assets/pngs/Onboarding1.png';
+} from '@/shared/components/Lottie';
+import Header from '@/shared/components/Header';
+import Onboarding1 from '@/shared/assets/pngs/Onboarding1.png';
 /** swiper 관련 파일 */
 import { SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';

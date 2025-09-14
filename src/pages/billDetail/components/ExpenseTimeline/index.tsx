@@ -1,4 +1,4 @@
-import useGetExpenseDetail from '@/common/queries/expense/useGetExpenseDetail';
+import useGetExpenseDetail from '@/shared/queries/expense/useGetExpenseDetail';
 import ExpenseTimelineContent from '../ExpenseTimelineContent';
 import * as S from './index.styles';
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
-import { Add, CheckCircle } from '@/assets/svgs/icon';
-import Header from '@/common/components/Header';
-import { ROUTE } from '@/common/constants/route';
-import DescriptionField from '@/common/components/DescriptionField';
-import Text from '@/common/components/Text';
-import Flex from '@/common/components/Flex';
+import { Add, CheckCircle } from '@/shared/assets/svgs/icon';
+import Header from '@/shared/components/Header';
+import { ROUTE } from '@/shared/constants/route';
+import DescriptionField from '@/shared/components/DescriptionField';
+import Text from '@/shared/components/Text';
+import Flex from '@/shared/components/Flex';
 import * as S from './SelectGroupPage.styles';
 
 type SelectedValueType = 'CREATE' | 'RECENT';

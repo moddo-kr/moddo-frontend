@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useLoaderData } from 'react-router';
-import Text from '@/common/components/Text';
-import BottomSheet from '@/common/components/BottomSheet';
-import useGetGroupBasicInfo from '@/common/queries/group/useGetGroupBasicInfo';
-import { Group } from '@/common/types/group.type';
-import Flex from '@/common/components/Flex';
+import Text from '@/shared/components/Text';
+import BottomSheet from '@/shared/components/BottomSheet';
+import useGetGroupBasicInfo from '@/shared/queries/group/useGetGroupBasicInfo';
+import { Group } from '@/shared/types/group.type';
+import Flex from '@/shared/components/Flex';
 
 interface MemberBottomSheetProps {
   open: boolean;

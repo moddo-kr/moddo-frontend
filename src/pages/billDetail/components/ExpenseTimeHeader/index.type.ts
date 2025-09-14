@@ -1,5 +1,5 @@
-import ModdoFace from '@/assets/pngs/moddoFace.png';
-import CryingModdoFace from '@/assets/pngs/CryingModdoFace.png';
+import ModdoFace from '@/shared/assets/pngs/moddoFace.png';
+import CryingModdoFace from '@/shared/assets/pngs/CryingModdoFace.png';
 
 export type StatusType = 'pending' | 'success' | 'failure';
 

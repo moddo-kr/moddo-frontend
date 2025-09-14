@@ -1,4 +1,4 @@
-import { TextVariant } from '@/common/components/Text/index.styles';
+import { TextVariant } from '@/shared/components/Text/index.styles';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`

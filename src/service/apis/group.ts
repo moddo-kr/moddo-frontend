@@ -3,7 +3,7 @@ import {
   CreateGroupData,
   Group,
   GroupHeaderResponse,
-} from '@/common/types/group.type';
+} from '@/shared/types/group.type';
 import axiosInstance from './axios';
 
 const group = {

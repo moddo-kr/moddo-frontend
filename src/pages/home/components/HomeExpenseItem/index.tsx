@@ -1,7 +1,7 @@
-import { DollarCircle } from '@/assets/svgs/icon';
+import { DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
-import Text from '@/common/components/Text';
-import DefaultProgressBar from '@/common/components/DefaultProgressBar';
+import Text from '@/shared/components/Text';
+import DefaultProgressBar from '@/shared/components/DefaultProgressBar';
 import * as S from './index.style';
 
 interface HomeExpenseItemProps {

@@ -1,8 +1,8 @@
-import Text from '@/common/components/Text';
-import LoginSuccessImg from '@/assets/pngs/LoginSuccessImg.png';
-import { ROUTE } from '@/common/constants/route';
+import Text from '@/shared/components/Text';
+import LoginSuccessImg from '@/shared/assets/pngs/LoginSuccessImg.png';
+import { ROUTE } from '@/shared/constants/route';
 import { useNavigate } from 'react-router';
-import Flex from '@/common/components/Flex';
+import Flex from '@/shared/components/Flex';
 import * as S from './LoginSuccessPage.style';
 import { BottomButton, BottomWrapper } from '../login/LoginPage.style';
 

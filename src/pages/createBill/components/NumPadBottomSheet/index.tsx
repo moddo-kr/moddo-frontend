@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Close } from '@/assets/svgs/icon';
-import NumPad from '@/common/components/NumPad';
-import BottomSheet from '@/common/components/BottomSheet';
-import Button from '@/common/components/Button';
-import NumberInput from '@/common/components/NumberInput';
-import Text from '@/common/components/Text';
+import { Close } from '@/shared/assets/svgs/icon';
+import NumPad from '@/shared/components/NumPad';
+import BottomSheet from '@/shared/components/BottomSheet';
+import Button from '@/shared/components/Button';
+import NumberInput from '@/shared/components/NumberInput';
+import Text from '@/shared/components/Text';
 import * as S from './index.styles';
 
 interface NumPadBottomSheetProps {

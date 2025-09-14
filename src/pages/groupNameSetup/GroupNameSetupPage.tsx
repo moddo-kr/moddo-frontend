@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowLeft } from '@/assets/svgs/icon';
-import Text from '@/common/components/Text';
-import Header from '@/common/components/Header';
-import DescriptionField from '@/common/components/DescriptionField';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
-import Button from '@/common/components/Button';
-import Input from '@/common/components/Input';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import Text from '@/shared/components/Text';
+import Header from '@/shared/components/Header';
+import DescriptionField from '@/shared/components/DescriptionField';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import Button from '@/shared/components/Button';
+import Input from '@/shared/components/Input';
 import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
 
 const groupNameSchema = z.object({

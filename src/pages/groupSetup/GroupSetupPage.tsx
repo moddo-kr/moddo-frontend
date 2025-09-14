@@ -1,5 +1,5 @@
 import { useFunnel } from '@use-funnel/react-router';
-import { usePostCreateGroup } from '@/common/queries/group/usePostCreateGroup';
+import { usePostCreateGroup } from '@/shared/queries/group/usePostCreateGroup';
 import { GroupNameSetupPage } from '@/pages/groupNameSetup';
 import { PasswordSetupPage } from '@/pages/passwordSetup';
 import { MemberSetupPage } from '@/pages/memberSetup';

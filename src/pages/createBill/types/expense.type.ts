@@ -1,4 +1,4 @@
-import { MemberRole, memberRole } from '@/common/types/member.type';
+import { MemberRole, memberRole } from '@/shared/types/member.type';
 import * as z from 'zod';
 
 /** 지출 폼의 참여자 */

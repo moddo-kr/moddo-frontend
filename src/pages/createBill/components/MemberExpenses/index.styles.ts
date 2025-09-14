@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Text from '@/common/components/Text';
+import Text from '@/shared/components/Text';
 
 export const MemberExpensesContainer = styled.div`
   display: flex;

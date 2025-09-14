@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
-import notfoundHam from '@/assets/pngs/notfound-ham.png';
-import Text from '@/common/components/Text';
-import Button from '@/common/components/Button';
-import { ROUTE } from '@/common/constants/route';
+import notfoundHam from '@/shared/assets/pngs/notfound-ham.png';
+import Text from '@/shared/components/Text';
+import Button from '@/shared/components/Button';
+import { ROUTE } from '@/shared/constants/route';
 import * as S from './NotFoundPage.style';
 
 function NotFoundPage() {

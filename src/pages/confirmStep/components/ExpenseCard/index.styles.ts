@@ -1,4 +1,4 @@
-import Accordion from '@/common/components/Accordion';
+import Accordion from '@/shared/components/Accordion';
 import styled from 'styled-components';
 
 export const ExpenseCardWrapper = styled.div`

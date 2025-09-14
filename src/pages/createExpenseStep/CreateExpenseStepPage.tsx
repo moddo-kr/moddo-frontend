@@ -1,18 +1,18 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
-import { Close } from '@/assets/svgs/icon';
-import { ROUTE } from '@/common/constants/route';
-import Button from '@/common/components/Button';
-import Header from '@/common/components/Header';
-import Text from '@/common/components/Text';
-import DescriptionField from '@/common/components/DescriptionField';
-import useCreateExpense from '@/common/queries/expense/useCreateExpense';
+import { Close } from '@/shared/assets/svgs/icon';
+import { ROUTE } from '@/shared/constants/route';
+import Button from '@/shared/components/Button';
+import Header from '@/shared/components/Header';
+import Text from '@/shared/components/Text';
+import DescriptionField from '@/shared/components/DescriptionField';
+import useCreateExpense from '@/shared/queries/expense/useCreateExpense';
 import FormCard from '@/pages/createBill/components/FormCard';
 import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
 import getTotalExpense from '@/pages/createBill/utils/getTotalExpense';
-import Modal from '@/common/components/Modal';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+import Modal from '@/shared/components/Modal';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './CreateExpenseStepPage.styles';
 
 interface CreateExpenseStepProps {

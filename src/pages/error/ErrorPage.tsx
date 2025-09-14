@@ -1,7 +1,7 @@
-import errorHam from '@/assets/pngs/error-ham.png';
-import Text from '@/common/components/Text';
-import Button from '@/common/components/Button';
-import { ROUTE } from '@/common/constants/route';
+import errorHam from '@/shared/assets/pngs/error-ham.png';
+import Text from '@/shared/components/Text';
+import Button from '@/shared/components/Button';
+import { ROUTE } from '@/shared/constants/route';
 import * as S from './ErrorPage.style';
 
 interface ErrorPageProps {

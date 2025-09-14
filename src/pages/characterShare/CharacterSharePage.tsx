@@ -1,20 +1,20 @@
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { showToast } from '@/common/components/Toast';
-import Button from '@/common/components/Button';
+import { showToast } from '@/shared/components/Toast';
+import Button from '@/shared/components/Button';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { ArrowLeft, Download } from '@/assets/svgs/icon';
+import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import {
   CHARACTER_IMAGE_SIZE,
   CHARACTER_DESCRIPTION,
-} from '@/common/constants/character';
-import StarChip from '@/common/components/StarChip';
-import Header from '@/common/components/Header';
-import Text from '@/common/components/Text';
-import useGetCharacter from '@/common/queries/image/useGetCharacter';
-import { BottomButtonContainer } from '@/styles/bottomButton.styles';
+} from '@/shared/constants/character';
+import StarChip from '@/shared/components/StarChip';
+import Header from '@/shared/components/Header';
+import Text from '@/shared/components/Text';
+import useGetCharacter from '@/shared/queries/image/useGetCharacter';
+import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './CharacterSharePage.styles';
 
 function CharacterSharePage() {
