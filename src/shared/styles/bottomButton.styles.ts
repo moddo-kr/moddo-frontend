@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import getColorFromTheme from '@/shared/utils/getColorFromTheme';
+import getColorFromTheme from '@/shared/lib/getColorFromTheme';
 import { ColorKey } from './theme.type';
 
 interface BottomButtonProps {

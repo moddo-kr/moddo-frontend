@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 
-import Button from '@/shared/components/Button';
+import Button from '@/shared/ui/Button';
 import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
 import { MemberExpense } from '@/shared/types/memberExpense.type';
-import BottomSheet from '@/shared/components/BottomSheet';
+import BottomSheet from '@/shared/ui/BottomSheet';
 import useUpdatePaymentStatus from './api/useUpdatePaymentStatus';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';

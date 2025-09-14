@@ -5,14 +5,14 @@ import LoginHamImg from '@/shared/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
-import DescriptionField from '@/shared/components/DescriptionField';
-import Header from '@/shared/components/Header';
-import Button from '@/shared/components/Button';
-import ButtonGroup from '@/shared/components/ButtonGroup';
-import Text from '@/shared/components/Text';
-import initKakaoSDK from '@/shared/utils/initKakaoSDK';
-import generateShareLink from '@/shared/utils/generateShareLink';
-import ShareButton from '@/shared/components/ShareButton';
+import DescriptionField from '@/shared/ui/DescriptionField';
+import Header from '@/shared/ui/Header';
+import Button from '@/shared/ui/Button';
+import ButtonGroup from '@/shared/ui/ButtonGroup';
+import Text from '@/shared/ui/Text';
+import initKakaoSDK from '@/shared/lib/initKakaoSDK';
+import generateShareLink from '@/shared/lib/generateShareLink';
+import ShareButton from '@/shared/ui/ShareButton';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {

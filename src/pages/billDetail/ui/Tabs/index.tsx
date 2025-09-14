@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from 'react';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
 interface TabsListProps {

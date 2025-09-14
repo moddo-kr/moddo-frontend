@@ -4,11 +4,11 @@ import { QRCodeSVG } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
-import { showToast } from '@/shared/components/Toast';
-import generateShareLink from '@/shared/utils/generateShareLink';
-import Header from '@/shared/components/Header';
-import Button from '@/shared/components/Button';
-import DescriptionField from '@/shared/components/DescriptionField';
+import { showToast } from '@/shared/ui/Toast';
+import generateShareLink from '@/shared/lib/generateShareLink';
+import Header from '@/shared/ui/Header';
+import Button from '@/shared/ui/Button';
+import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './QrStepPage.styles';
 

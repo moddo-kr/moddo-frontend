@@ -1,6 +1,6 @@
 import errorHam from '@/shared/assets/pngs/error-ham.png';
-import Text from '@/shared/components/Text';
-import Button from '@/shared/components/Button';
+import Text from '@/shared/ui/Text';
+import Button from '@/shared/ui/Button';
 import { ROUTE } from '@/shared/config/route';
 import * as S from './ErrorPage.style';
 

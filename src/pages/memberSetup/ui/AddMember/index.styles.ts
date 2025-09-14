@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextVariant } from '@/shared/components/Text/index.styles';
+import { TextVariant } from '@/shared/ui/Text/index.styles';
 
 export const MemberCount = styled.div`
   display: flex;

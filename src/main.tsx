@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import enableMocking from './mocks/utils/enableMocking';
+import enableMocking from './mocks/lib/enableMocking';
 import App from './app/App';
 
 enableMocking().then(() => {

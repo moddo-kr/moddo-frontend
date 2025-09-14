@@ -1,5 +1,5 @@
 import { http, HttpResponse, passthrough } from 'msw';
-import getIsMocked from '@/mocks/utils/getIsMocked';
+import getIsMocked from '@/mocks/lib/getIsMocked';
 import { AccountVariable } from '@/shared/types/group.type';
 
 const dummyGroups = [

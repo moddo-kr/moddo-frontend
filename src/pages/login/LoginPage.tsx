@@ -1,14 +1,14 @@
 import LogoImg from '@/shared/assets/pngs/LogoImg.png';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
 import { useEffect, useState } from 'react';
-import { CoinLottie } from '@/shared/components/Lottie';
+import { CoinLottie } from '@/shared/ui/Lottie';
 import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
 import theme from '@/shared/styles/theme';
-import Button from '@/shared/components/Button';
+import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
-import Flex from '@/shared/components/Flex';
+import Flex from '@/shared/ui/Flex';
 import { useGetGuestToken } from './api/useGetGuestToken';
 import * as S from './LoginPage.style';
 

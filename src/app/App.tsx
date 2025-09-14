@@ -11,7 +11,7 @@ import Layout from './Layout';
 import AppRouter from '@/app/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalErrorBoundary from '@/app/GlobalErrorBoundary';
-import Toast from '@/shared/components/Toast';
+import Toast from '@/shared/ui/Toast';
 import useApiError from '@/shared/hooks/useApiError';
 import 'react-toastify/dist/ReactToastify.css';
 

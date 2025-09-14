@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import Header from '@/shared/components/Header';
-import Text from '@/shared/components/Text';
+import Header from '@/shared/ui/Header';
+import Text from '@/shared/ui/Text';
 import { ROUTE } from '@/shared/config/route';
 
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import DescriptionField from '@/shared/components/DescriptionField';
+import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/components/Button';
+import Button from '@/shared/ui/Button';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from './hooks/useLocalStorage';
 import useGetGroupBasicInfo from './api/useGetGroupBasicInfo';

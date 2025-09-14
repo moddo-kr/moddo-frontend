@@ -1,9 +1,9 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 
-import BottomSheet from '@/shared/components/BottomSheet';
-import ButtonGroup from '@/shared/components/ButtonGroup';
-import Button from '@/shared/components/Button';
+import BottomSheet from '@/shared/ui/BottomSheet';
+import ButtonGroup from '@/shared/ui/ButtonGroup';
+import Button from '@/shared/ui/Button';
 import useGetCharacter from '@/shared/api/image/useGetCharacter';
 import * as S from './index.styles';
 import { CHARACTER_IMAGE_SIZE } from '@/shared/config/character';

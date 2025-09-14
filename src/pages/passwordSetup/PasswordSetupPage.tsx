@@ -4,12 +4,12 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/components/Header';
-import DescriptionField from '@/shared/components/DescriptionField';
-import Input from '@/shared/components/Input';
-import Button from '@/shared/components/Button';
+import Header from '@/shared/ui/Header';
+import DescriptionField from '@/shared/ui/DescriptionField';
+import Input from '@/shared/ui/Input';
+import Button from '@/shared/ui/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import * as S from './PasswordSetupPage.styles';
 
 const passwordSchema = z.object({

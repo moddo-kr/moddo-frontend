@@ -3,16 +3,16 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/components/Button';
-import Header from '@/shared/components/Header';
+import Button from '@/shared/ui/Button';
+import Header from '@/shared/ui/Header';
 
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Divider from '@/shared/components/Divider';
+import Divider from '@/shared/ui/Divider';
 import { useGetMemberExpenseDetails } from '@/shared/api/memberExpense/useGetMemberExpenseDetails';
 
-import ShareButton from '@/shared/components/ShareButton';
-import generateShareLink from '@/shared/utils/generateShareLink';
+import ShareButton from '@/shared/ui/ShareButton';
+import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';

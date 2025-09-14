@@ -3,12 +3,12 @@ import { Close } from '@/shared/assets/svgs/icon';
 import useCreateExpense from '@/shared/api/expense/useCreateExpense';
 import useAddExpenseFormArray from '@/shared/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
-import Header from '@/shared/components/Header';
-import FormCard from '@/shared/components/FormCard';
-import Button from '@/shared/components/Button';
+import Header from '@/shared/ui/Header';
+import FormCard from '@/shared/ui/FormCard';
+import Button from '@/shared/ui/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import DescriptionField from '@/shared/components/DescriptionField';
-import Text from '@/shared/components/Text';
+import DescriptionField from '@/shared/ui/DescriptionField';
+import Text from '@/shared/ui/Text';
 import * as S from './AddExpenseStepPage.styles';
 
 interface AddExpenseStepProps {

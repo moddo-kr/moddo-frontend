@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Accordion from '@/shared/components/Accordion';
-import { ProfileImg as MemberProfileImg } from '@/shared/components/MemberProfile/index.style';
+import Accordion from '@/shared/ui/Accordion';
+import { ProfileImg as MemberProfileImg } from '@/shared/ui/MemberProfile/index.style';
 
 export const Container = styled(Accordion)<{ isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};

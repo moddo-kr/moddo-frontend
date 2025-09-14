@@ -1,14 +1,14 @@
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { showToast } from '@/shared/components/Toast';
-import Button from '@/shared/components/Button';
+import { showToast } from '@/shared/ui/Toast';
+import Button from '@/shared/ui/Button';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 
-import Header from '@/shared/components/Header';
-import Text from '@/shared/components/Text';
+import Header from '@/shared/ui/Header';
+import Text from '@/shared/ui/Text';
 import useGetCharacter from '@/shared/api/image/useGetCharacter';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import {

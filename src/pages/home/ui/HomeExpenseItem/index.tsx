@@ -1,6 +1,6 @@
 import { DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import DefaultProgressBar from '../DefaultProgressBar';
 import * as S from './index.style';
 

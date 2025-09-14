@@ -1,7 +1,7 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
-import Text from '@/shared/components/Text';
+import Text from '@/shared/ui/Text';
 import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
@@ -9,8 +9,8 @@ import { useState } from 'react';
 import CoinImg from '@/shared/assets/pngs/CoinImg.png';
 import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
-import Divider from '@/shared/components/Divider';
-import Flex from '@/shared/components/Flex';
+import Divider from '@/shared/ui/Divider';
+import Flex from '@/shared/ui/Flex';
 import HomeExpenseItem from './ui/HomeExpenseItem';
 import * as S from './HomePage.style';
 

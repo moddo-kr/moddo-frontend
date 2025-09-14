@@ -1,14 +1,14 @@
 import { useLoaderData } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/components/Header';
-import DescriptionField from '@/shared/components/DescriptionField';
-import Text from '@/shared/components/Text';
+import Header from '@/shared/ui/Header';
+import DescriptionField from '@/shared/ui/DescriptionField';
+import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/components/Button';
-import getTotalExpense from '@/shared/utils/getTotalExpense';
+import Button from '@/shared/ui/Button';
+import getTotalExpense from '@/shared/lib/getTotalExpense';
 import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import useGetAllExpense from './api/useGetAllExpense';
-import ExpenseCardList from './components/ExpenseCardList';
+import ExpenseCardList from './ui/ExpenseCardList';
 import * as S from './ConfirmStepPage.styles';
 
 interface ConfirmStepProps {

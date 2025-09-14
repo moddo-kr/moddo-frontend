@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { TextVariant } from '@/shared/components/Text/index.styles';
+import { TextVariant } from '@/shared/ui/Text/index.styles';
 import { PaymentStatus } from './index.type';
 
 const statusVariants = {

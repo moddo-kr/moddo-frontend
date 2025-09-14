@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import BottomSheet from '@/shared/components/BottomSheet';
-import Flex from '@/shared/components/Flex';
+import BottomSheet from '@/shared/ui/BottomSheet';
+import Flex from '@/shared/ui/Flex';
 import BANK_LIST from './config/banks';
 import * as S from './index.style';
 

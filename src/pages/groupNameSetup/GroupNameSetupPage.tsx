@@ -4,12 +4,12 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/components/Text';
-import Header from '@/shared/components/Header';
-import DescriptionField from '@/shared/components/DescriptionField';
+import Text from '@/shared/ui/Text';
+import Header from '@/shared/ui/Header';
+import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/components/Button';
-import Input from '@/shared/components/Input';
+import Button from '@/shared/ui/Button';
+import Input from '@/shared/ui/Input';
 import * as S from './GroupNameSetupPage.styles';
 
 const groupNameSchema = z.object({

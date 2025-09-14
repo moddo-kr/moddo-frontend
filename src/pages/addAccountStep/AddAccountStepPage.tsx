@@ -1,12 +1,12 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
-import Header from '@/shared/components/Header';
-import Text from '@/shared/components/Text';
+import Header from '@/shared/ui/Header';
+import Text from '@/shared/ui/Text';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/components/Button';
-import DescriptionField from '@/shared/components/DescriptionField';
-import Input from '@/shared/components/Input';
+import Button from '@/shared/ui/Button';
+import DescriptionField from '@/shared/ui/DescriptionField';
+import Input from '@/shared/ui/Input';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from './api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
