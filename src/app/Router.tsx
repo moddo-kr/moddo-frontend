@@ -32,11 +32,6 @@ const Home = lazy(() =>
 const Login = lazy(() =>
   import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
 );
-const LoginSuccess = lazy(() =>
-  import('@/pages/loginSuccess').then(({ LoginSuccessPage }) => ({
-    default: LoginSuccessPage,
-  }))
-);
 const Onboarding = lazy(() =>
   import('@/pages/onboarding').then(({ OnboardingPage }) => ({
     default: OnboardingPage,
@@ -71,10 +66,6 @@ function AppRouter() {
         {
           path: ROUTE.onboarding,
           element: <Onboarding />,
-        },
-        {
-          path: ROUTE.loginSuccess,
-          element: <LoginSuccess />,
         },
         {
           path: ROUTE.home,

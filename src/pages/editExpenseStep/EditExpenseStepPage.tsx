@@ -10,8 +10,8 @@ import Text from '@/shared/components/Text';
 import Button from '@/shared/components/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/components/Toast';
+import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import * as S from './EditExpenseStepPage.styles';
-import { EditBillContext } from '../../shared/types/createBillFunnel.type';
 
 type EditExpenseStepProps = {
   onNext: () => void;

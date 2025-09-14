@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/shared/assets/svgs/icon';
-import distributeAmount from '@/pages/createBill/utils/distributeExpense';
 import { ExpenseFormMember, RemainderData } from '@/shared/types/expense.type';
 import Alert from '@/shared/components/Alert';
 import Button from '@/shared/components/Button';
@@ -13,6 +12,7 @@ import NumPadBottomSheet from '@/shared/components/NumPadBottomSheet';
 import MemberExpenses from '@/shared/components/MemberExpenses';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
+import distributeAmount from './utils/distributeExpense';
 
 interface FormCardProps {
   index: number;

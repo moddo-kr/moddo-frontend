@@ -11,8 +11,8 @@ import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
 import Divider from '@/shared/components/Divider';
 import Flex from '@/shared/components/Flex';
-import * as S from './HomePage.style';
 import HomeExpenseItem from './components/HomeExpenseItem';
+import * as S from './HomePage.style';
 
 interface HomeExpenseItemType {
   date: string;
