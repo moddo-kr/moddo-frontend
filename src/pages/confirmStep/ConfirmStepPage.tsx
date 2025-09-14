@@ -6,10 +6,10 @@ import DescriptionField from '@/shared/components/DescriptionField';
 import Text from '@/shared/components/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/components/Button';
+import getTotalExpense from '@/shared/utils/getTotalExpense';
+import { EditBillContext } from '@/shared/types/createBillFunnel.type';
 import ExpenseCardList from './components/ExpenseCardList';
-import getTotalExpense from '../createBill/utils/getTotalExpense';
 import * as S from './ConfirmStepPage.styles';
-import { EditBillContext } from '../createBill/types/funnel.type';
 
 interface ConfirmStepProps {
   onNext: () => void;

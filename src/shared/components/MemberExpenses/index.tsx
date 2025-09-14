@@ -1,6 +1,6 @@
 import { SystemDanger } from '@/shared/assets/svgs/icon';
 import NumberInput from '@/shared/components/NumberInput';
-import { ExpenseFormMember } from '@/pages/createBill/types/expense.type';
+import { ExpenseFormMember } from '@/shared/types/expense.type';
 import * as S from './index.styles';
 
 interface MemberExpensesProps {

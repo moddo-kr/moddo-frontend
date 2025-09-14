@@ -3,7 +3,7 @@ import {
   Expense,
   ExpenseForm,
   SingleExpenseForm,
-} from '@/pages/createBill/types/expense.type';
+} from '@/shared/types/expense.type';
 import getIsMocked from '@/mocks/utils/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 

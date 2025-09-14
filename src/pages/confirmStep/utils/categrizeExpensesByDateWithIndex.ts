@@ -1,5 +1,5 @@
 import { format, parse } from 'date-fns';
-import { Expense } from '@/pages/createBill/types/expense.type';
+import { Expense } from '@/shared/types/expense.type';
 
 const dateFormat = 'yyyy년 M월 d일';
 

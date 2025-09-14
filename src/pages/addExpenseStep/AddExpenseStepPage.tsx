@@ -1,10 +1,10 @@
 import { useLoaderData } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
 import useCreateExpense from '@/shared/queries/expense/useCreateExpense';
-import useAddExpenseFormArray from '@/pages/createBill/hooks/useAddExpenseFormArray';
+import useAddExpenseFormArray from '@/shared/hooks/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/shared/components/Header';
-import FormCard from '@/pages/createBill/components/FormCard';
+import FormCard from '@/shared/components/FormCard';
 import Button from '@/shared/components/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import DescriptionField from '@/shared/components/DescriptionField';

@@ -1,4 +1,4 @@
-import { SingleExpenseForm } from './expense.type';
+import { SingleExpenseForm } from '@/shared/types/expense.type';
 
 export type EditBillContext = {
   expenseId: number;

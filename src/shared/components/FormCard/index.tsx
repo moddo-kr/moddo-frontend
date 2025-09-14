@@ -3,17 +3,14 @@ import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/shared/assets/svgs/icon';
 import distributeAmount from '@/pages/createBill/utils/distributeExpense';
-import {
-  ExpenseFormMember,
-  RemainderData,
-} from '@/pages/createBill/types/expense.type';
+import { ExpenseFormMember, RemainderData } from '@/shared/types/expense.type';
 import Alert from '@/shared/components/Alert';
 import Button from '@/shared/components/Button';
 import BillDatePicker from '@/shared/components/DatePicker';
 import Text from '@/shared/components/Text';
-import FormField from '@/pages/createBill/components/FormField';
-import NumPadBottomSheet from '@/pages/createBill/components/NumPadBottomSheet';
-import MemberExpenses from '@/pages/createBill/components/MemberExpenses';
+import FormField from '@/shared/components/FormField';
+import NumPadBottomSheet from '@/shared/components/NumPadBottomSheet';
+import MemberExpenses from '@/shared/components/MemberExpenses';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -149,11 +146,6 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
             />
           </S.FormContainer>
         </S.FormCard>
-        {/* // <MemberBottomSheet
-      //   open={openMemberSheet}
-      //   setOpen={setOpenMemberSheet}
-      //   setGroupInfo={setGroupInfo}
-      // /> */}
       </>
     );
   }
