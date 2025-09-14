@@ -12,7 +12,7 @@ import DescriptionField from '@/shared/components/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/components/Button';
 import { BoundaryError } from '@/shared/types/error.type';
-import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
+import * as S from './MemberSetupPage.styles';
 
 export interface ParticipantProfile {
   name: string;

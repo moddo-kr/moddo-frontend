@@ -10,7 +10,7 @@ import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Text from '@/shared/components/Text';
-import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
+import * as S from './PasswordSetupPage.styles';
 
 const passwordSchema = z.object({
   password: z

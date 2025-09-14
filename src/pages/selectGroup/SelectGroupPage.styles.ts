@@ -1,9 +1,4 @@
 import styled from 'styled-components';
-import { TitleText } from '@/pages/groupSetup/GroupSetupPage.styles';
-
-export const H1 = styled(TitleText)`
-  padding-bottom: 5.5rem; // 88px
-`;
 
 export const SmallContent = styled.span`
   font-size: 1rem;

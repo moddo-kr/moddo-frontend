@@ -10,7 +10,7 @@ import DescriptionField from '@/shared/components/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
-import * as S from '@/pages/groupSetup/GroupSetupPage.styles';
+import * as S from './GroupNameSetupPage.styles';
 
 const groupNameSchema = z.object({
   groupName: z
