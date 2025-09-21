@@ -11,7 +11,7 @@ import Modal from '@/shared/ui/Modal';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
-import useCreateExpense from '@/entities/expense/api/useCreateExpense';
+import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './CreateExpenseStepPage.styles';
 

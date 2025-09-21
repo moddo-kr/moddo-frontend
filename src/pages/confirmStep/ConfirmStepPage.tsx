@@ -7,7 +7,7 @@ import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
-import useGetAllExpense from '../../entities/expense/api/useGetAllExpense';
+import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
 import ExpenseCardList from './ui/ExpenseCardList';
 import * as S from './ConfirmStepPage.styles';
 

@@ -10,7 +10,7 @@ import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/ui/Toast';
 import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
-import useUpdateExpense from '@/entities/expense/api/useUpdateExpense';
+import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';
 import * as S from './EditExpenseStepPage.styles';
 
 type EditExpenseStepProps = {

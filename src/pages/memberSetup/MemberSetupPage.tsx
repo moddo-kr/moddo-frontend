@@ -9,7 +9,7 @@ import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
 import { BoundaryError } from '@/shared/types/error.type';
-import useGetGroupBasicInfo from '@/entities/member/api/useGetGroupBasicInfo';
+import useGetGroupBasicInfo from '@/features/group-creation/api/useGetGroupBasicInfo';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
 import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';

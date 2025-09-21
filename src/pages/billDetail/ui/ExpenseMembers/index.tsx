@@ -1,4 +1,4 @@
-import { useGetMemberExpenseDetails } from '@/entities/expense/api/useGetMemberExpenseDetails';
+import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import ExpenseMemberItem from '@/pages/billDetail/ui/ExpenseMemberItem';
 import * as S from './index.style';
 

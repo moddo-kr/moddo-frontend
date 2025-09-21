@@ -8,7 +8,7 @@ import Button from '@/shared/ui/Button';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Input from '@/shared/ui/Input';
 import { BoundaryError } from '@/shared/types/error.type';
-import usePutUpdateAccount from '@/entities/expense/api/usePutUpdateAccount';
+import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
 import BankNameDrawer from './ui/BankNameDrawer';
 import * as S from './AddAccountStepPage.styles';

@@ -9,7 +9,7 @@ import copyClipboard from '@/shared/lib/copyClipboard';
 import Button from '@/shared/ui/Button';
 import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
-import { useGetGroupHeader } from '@/entities/settlement/api/useGetGroupHeader';
+import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import CurvedProgressBar from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';

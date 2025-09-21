@@ -14,7 +14,7 @@ import {
   CHARACTER_IMAGE_SIZE,
 } from '@/entities/character/config/character';
 import StarChip from '@/features/character-management/ui/StarChip';
-import useGetCharacter from '@/entities/character/api/useGetCharacter';
+import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 
 function CharacterSharePage() {

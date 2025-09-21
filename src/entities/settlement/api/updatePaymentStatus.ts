@@ -1,8 +1,8 @@
+import axiosInstance from '@/shared/api/axios';
 import {
   UpdatePaymentStatusData,
   UpdatePaymentStatusVariable,
-} from '@/entities/member/model/groupMember.type';
-import axiosInstance from '@/shared/api/axios';
+} from '@/entities/settlement/model/groupMember.type';
 
 export const updatePaymentStatus = async ({
   groupToken,

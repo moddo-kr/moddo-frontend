@@ -7,7 +7,7 @@ import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/ui/Divider';
-import { useGetMemberExpenseDetails } from '@/entities/expense/api/useGetMemberExpenseDetails';
+import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';

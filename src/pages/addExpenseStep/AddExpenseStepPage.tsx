@@ -7,7 +7,7 @@ import Button from '@/shared/ui/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
-import useCreateExpense from '@/entities/expense/api/useCreateExpense';
+import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './AddExpenseStepPage.styles';
 
