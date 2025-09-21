@@ -11,9 +11,9 @@ import { useGetMemberExpenseDetails } from '@/entities/expense/api/useGetMemberE
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';
+import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
-import CharacterBottomSheet from './ui/CharacterBottomSheet';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
 import { StatusType } from './ui/ExpenseTimeHeader/index.type';

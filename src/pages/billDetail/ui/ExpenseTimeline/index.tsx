@@ -1,5 +1,5 @@
 import ExpenseTimelineContent from '../ExpenseTimelineContent';
-import useGetExpenseDetail from './api/useGetExpenseDetail';
+import useGetExpenseDetail from '../../../../entities/expense/api/useGetExpenseDetail';
 import * as S from './index.styles';
 
 interface ExpenseTimelineProps {
