@@ -1,4 +1,4 @@
-export interface MemberExpense {
+export interface MemberSettlement {
   id: number;
   role: string;
   name: string;
@@ -10,8 +10,4 @@ export interface MemberExpense {
     content: string;
     amount: number;
   }[];
-}
-
-export interface MemberExpenseData {
-  memberExpenseData: MemberExpense[];
 }

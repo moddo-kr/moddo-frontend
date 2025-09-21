@@ -6,13 +6,13 @@ import Button from '@/shared/ui/Button';
 import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
 
 import BottomSheet from '@/shared/ui/BottomSheet';
-import { MemberExpense } from '@/entities/expense/lib/memberExpense.type';
-import useUpdatePaymentStatus from '../../../../features/settlement-details/api/useUpdatePaymentStatus';
+import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
+import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';
 
 interface ExpenseMemberItemProps {
-  member: MemberExpense;
+  member: MemberSettlement;
   groupToken: string;
   status: string;
 }

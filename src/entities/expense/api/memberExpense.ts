@@ -1,9 +1,9 @@
 import axiosInstance from '@/shared/api/axios';
-import { MemberExpense } from '@/entities/expense/lib/memberExpense.type';
+import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 
 export const getMemberExpenseDetails = async (
   groupToken: string
-): Promise<MemberExpense[]> => {
+): Promise<MemberSettlement[]> => {
   const response = await axiosInstance.get(
     `/member-expenses?groupToken=${groupToken}`
   );
