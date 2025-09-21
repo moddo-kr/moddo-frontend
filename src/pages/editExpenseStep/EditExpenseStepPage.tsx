@@ -2,14 +2,14 @@ import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
-import FormCard from '@/shared/ui/FormCard';
-import useAddExpenseFormArray from '@/domains/expense/lib/useAddExpenseFormArray';
+import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/ui/Toast';
-import { EditBillContext } from '@/shared/types/createBillFunnel.type';
+import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from './api/useUpdateExpense';
 import * as S from './EditExpenseStepPage.styles';
 

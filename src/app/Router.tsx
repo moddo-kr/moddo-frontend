@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
-import getGroupManagerAuth from '@/shared/api/getGroupManagerAuth';
 import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
-import checkAuth from '@/shared/api/checkAuth';
-import groupTokenUrlLoader from '@/shared/api/groupTokenUrlLoader';
+import checkAuth from '@/entities/auth/lib/checkAuth';
+import getGroupManagerAuth from '@/entities/auth/lib/getGroupManagerAuth';
+import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
 
 const BillDetail = lazy(() =>
   import('@/pages/billDetail/').then(({ BillDetailPage }) => ({

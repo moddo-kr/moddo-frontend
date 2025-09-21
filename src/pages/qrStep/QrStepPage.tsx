@@ -9,7 +9,7 @@ import Header from '@/shared/ui/Header';
 import Button from '@/shared/ui/Button';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import generateShareLink from '@/domains/sharing/lib/generateShareLink';
+import generateShareLink from '@/shared/lib/generateShareLink';
 import * as S from './QrStepPage.styles';
 
 interface QrStepProps {

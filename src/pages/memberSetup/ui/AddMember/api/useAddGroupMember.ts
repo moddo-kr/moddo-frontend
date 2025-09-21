@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
-import groupMembers from '@/service/apis/groupMembers';
 import useMutationWithHandlers from '@/shared/hooks/useMutationWithHanders';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
+import groupMembers from '@/entities/group/api/groupMembers';
 
 const useAddGroupMember = (
   groupToken: string,

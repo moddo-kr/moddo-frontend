@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import expense from '@/service/apis/expense';
+import expense from '@/entities/expense/api/expense';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
 import useMutationWithHandlers from '@/shared/hooks/useMutationWithHanders';
 

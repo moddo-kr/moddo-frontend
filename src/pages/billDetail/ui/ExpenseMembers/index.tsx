@@ -1,6 +1,6 @@
-import { useGetMemberExpenseDetails } from '@/shared/api/memberExpense/useGetMemberExpenseDetails';
+import { useGetMemberExpenseDetails } from '@/entities/expense/api/useGetMemberExpenseDetails';
+import ExpenseMemberItem from '@/pages/billDetail/ui/ExpenseMemberItem';
 import * as S from './index.style';
-import ExpenseMemberItem from '../ExpenseMemberItem';
 
 interface ExpenseMembersProps {
   groupToken: string;

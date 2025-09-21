@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Member } from '@/domains/group/model/member.type';
+import { Member } from '@/entities/member/model/member.type';
 import AddMember from '.';
 
 const queryClient = new QueryClient();

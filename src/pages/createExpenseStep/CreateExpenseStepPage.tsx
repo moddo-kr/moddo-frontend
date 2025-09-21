@@ -2,18 +2,17 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
-
 import Button from '@/shared/ui/Button';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import DescriptionField from '@/shared/ui/DescriptionField';
-import useCreateExpense from '@/shared/api/expense/useCreateExpense';
-import FormCard from '@/shared/ui/FormCard';
-import useAddExpenseFormArray from '@/domains/expense/lib/useAddExpenseFormArray';
-import getTotalExpense from '@/shared/lib/getTotalExpense';
+import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import Modal from '@/shared/ui/Modal';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
+import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
+import useCreateExpense from '@/entities/expense/api/useCreateExpense';
+import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './CreateExpenseStepPage.styles';
 
 interface CreateExpenseStepProps {

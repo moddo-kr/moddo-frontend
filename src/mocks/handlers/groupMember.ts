@@ -4,7 +4,7 @@ import {
   Member,
   MemberData,
   MemberRole,
-} from '@/domains/group/model/member.type';
+} from '@/entities/member/model/member.type';
 import defaultProfileImg from '@/shared/assets/pngs/defaultProfileImg.png';
 
 /** 김모또는 고정 */

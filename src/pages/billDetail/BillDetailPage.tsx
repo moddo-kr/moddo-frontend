@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Button from '@/shared/ui/Button';
 import Header from '@/shared/ui/Header';
-
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/ui/Divider';
-import { useGetMemberExpenseDetails } from '@/shared/api/memberExpense/useGetMemberExpenseDetails';
-import generateShareLink from '@/domains/sharing/lib/generateShareLink';
+import { useGetMemberExpenseDetails } from '@/entities/expense/api/useGetMemberExpenseDetails';
+import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
-import ShareButton from '@/domains/sharing/ui/ShareButton';
+import ShareButton from '@/shared/ui/ShareButton';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import CharacterBottomSheet from './ui/CharacterBottomSheet';
-import * as S from './BillDetailPage.styles';
-
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
 import { StatusType } from './ui/ExpenseTimeHeader/index.type';
+import * as S from './BillDetailPage.styles';
 
 function BillDetailPage() {
   const { unit } = useTheme();

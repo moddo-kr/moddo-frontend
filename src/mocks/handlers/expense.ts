@@ -3,7 +3,7 @@ import {
   Expense,
   ExpenseForm,
   SingleExpenseForm,
-} from '@/domains/expense/model/expense.type';
+} from '@/entities/expense/model/expense.type';
 import getIsMocked from '@/mocks/lib/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 

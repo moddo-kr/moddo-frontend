@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '@/shared/ui/Button';
 import Chip from '@/shared/ui/Chip';
 import Text from '@/shared/ui/Text';
-import { ExpenseDetail } from '@/domains/expense/model/expense.type';
+import { ExpenseDetail } from '@/entities/expense/model/expense.type';
 import * as S from './index.styles';
 
 interface ExpenseTimelineContentProps {

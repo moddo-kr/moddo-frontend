@@ -1,5 +1,5 @@
-import { CreateGroupData } from '@/domains/group/model/group.type';
-import group from '@/service/apis/group';
+import { CreateGroupData } from '@/entities/group/model/group.type';
+import group from '@/entities/group/api/group';
 import { useMutation } from '@tanstack/react-query';
 
 interface CreateGroupVariables {

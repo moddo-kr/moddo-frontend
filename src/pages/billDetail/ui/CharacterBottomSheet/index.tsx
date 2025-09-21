@@ -3,9 +3,9 @@ import Text from '@/shared/ui/Text';
 import BottomSheet from '@/shared/ui/BottomSheet';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
 import Button from '@/shared/ui/Button';
-import { CHARACTER_IMAGE_SIZE } from '@/domains/character/config/character';
+import useGetCharacter from '@/entities/character/api/useGetCharacter';
+import { CHARACTER_IMAGE_SIZE } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
-import useGetCharacter from '@/domains/character/api/useGetCharacter';
 import * as S from './index.styles';
 
 interface CharacterBottomSheetProps {

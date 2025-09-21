@@ -4,8 +4,9 @@ import Text from '@/shared/ui/Text';
 
 import Button from '@/shared/ui/Button';
 import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
-import { MemberExpense } from '@/shared/types/memberExpense.type';
+
 import BottomSheet from '@/shared/ui/BottomSheet';
+import { MemberExpense } from '@/entities/expense/lib/memberExpense.type';
 import useUpdatePaymentStatus from './api/useUpdatePaymentStatus';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';

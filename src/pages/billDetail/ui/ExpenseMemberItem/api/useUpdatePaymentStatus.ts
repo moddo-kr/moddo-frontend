@@ -1,6 +1,6 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { UpdatePaymentStatusVariable } from '@/domains/group/model/groupMember.type';
-import { updatePaymentStatus } from '@/service/apis/groupMembers';
+import { UpdatePaymentStatusVariable } from '@/entities/member/model/groupMember.type';
+import { updatePaymentStatus } from '@/entities/settlement/api/updatePaymentStatus';
 
 const useUpdatePaymentStatus = ({
   groupToken,

@@ -3,7 +3,7 @@ import {
   BillStepContext,
   EditBillContext,
   EditBillStepContext,
-} from '../../shared/types/createBillFunnel.type';
+} from '@/features/expense-management/lib/createBillFunnel.type';
 import { CreateExpenseStepPage } from '../createExpenseStep';
 import { ConfirmStepPage } from '../confirmStep';
 import { AddExpenseStepPage } from '../addExpenseStep';

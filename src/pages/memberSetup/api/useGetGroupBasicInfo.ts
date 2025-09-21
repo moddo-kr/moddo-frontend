@@ -1,4 +1,4 @@
-import group from '@/service/apis/group';
+import group from '@/entities/group/api/group';
 import useQueryWithHandlers from '@/shared/hooks/useQueryWithHandlers';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
 

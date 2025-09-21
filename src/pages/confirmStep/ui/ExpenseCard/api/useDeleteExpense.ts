@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import expense from '@/service/apis/expense';
+import expense from '@/entities/expense/api/expense';
 
 const useDeleteMutation = (groupToken: string) => {
   const queryClient = useQueryClient();

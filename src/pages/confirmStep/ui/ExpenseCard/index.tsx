@@ -1,10 +1,10 @@
 import { useLoaderData } from 'react-router';
 import { CarbonEdit, Close } from '@/shared/assets/svgs/icon';
 import Chip from '@/shared/ui/Chip';
-import { Expense } from '@/domains/expense/model/expense.type';
-import { EditBillContext } from '@/shared/types/createBillFunnel.type';
+import { Expense } from '@/entities/expense/model/expense.type';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';
+import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
 import useDeleteMutation from './api/useDeleteExpense';
 import * as S from './index.styles';
 
