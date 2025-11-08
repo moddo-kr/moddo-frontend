@@ -1,6 +1,6 @@
 import { http, HttpResponse, passthrough } from 'msw';
-import getIsMocked from '@/mocks/utils/getIsMocked';
-import { AccountVariable } from '@/common/types/group.type';
+import getIsMocked from '@/mocks/lib/getIsMocked';
+import { AccountVariable } from '@/entities/group/model/group.type';
 
 const dummyGroups = [
   {

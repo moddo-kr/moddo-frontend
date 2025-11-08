@@ -8,6 +8,7 @@ module.exports = {
     'airbnb/hooks',
     'airbnb-typescript',
     'plugin:react/recommended',
+    // '@feature-sliced',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended', // jsx-a11y 규칙은 웹 접근성을 준수하기 위함
@@ -102,7 +103,13 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.cjs', 'public/**', 'src/assets/svgs/**', '**/*.stories.tsx', '**/*.stories.ts'], 
+      files: [
+        '.eslintrc.cjs',
+        'public/**',
+        'src/shared/assets/**',
+        '**/*.stories.tsx',
+        '**/*.stories.ts',
+      ],
       parserOptions: {
         project: './tsconfig.app.json',
       },
