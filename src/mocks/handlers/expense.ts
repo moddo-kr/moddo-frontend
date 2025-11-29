@@ -3,8 +3,8 @@ import {
   Expense,
   ExpenseForm,
   SingleExpenseForm,
-} from '@/pages/createBill/types/expense.type';
-import getIsMocked from '@/mocks/utils/getIsMocked';
+} from '@/entities/expense/model/expense.type';
+import getIsMocked from '@/mocks/lib/getIsMocked';
 import { dummyGroupMembers } from './groupMember';
 
 const dummyExpenseDetail = [

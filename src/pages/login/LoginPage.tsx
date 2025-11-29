@@ -1,0 +1,116 @@
+import LogoImg from '@/shared/assets/pngs/LogoImg.png';
+import Text from '@/shared/ui/Text';
+import { useNavigate } from 'react-router';
+import { ROUTE } from '@/shared/config/route';
+import { useEffect, useState } from 'react';
+import { CoinLottie } from '@/shared/ui/Lottie';
+import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
+import theme from '@/shared/styles/theme';
+import Button from '@/shared/ui/Button';
+import { Kakao } from '@/shared/assets/svgs/icon';
+import Flex from '@/shared/ui/Flex';
+import { useGetGuestToken } from '@/entities/auth/api/useGetGuestToken';
+import * as S from './LoginPage.style';
+
+const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+
+function LoginPage() {
+  const { refetch: getGuestToken } = useGetGuestToken();
+  const navigate = useNavigate();
+  const [isEntrance, setIsEntrance] = useState(true);
+
+  const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
+    const token = localStorage.getItem('accessToken');
+    if (loginType === 'KAKAO') {
+      window.location.href = KAKAO_AUTH_URI;
+    } else if (!token) {
+      getGuestToken();
+    } else {
+      navigate(ROUTE.onboarding);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsEntrance(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isEntrance) {
+    return (
+      <Flex
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        bgColor={theme.color.semantic.orange.subtle}
+        flexGrow={1}
+        gap={theme.unit[16]}
+      >
+        <S.TextContainer>
+          <S.LogoImg src={LogoImg} alt="logo" />
+          <Text variant="body1R" color="semantic.text.strong">
+            모또와 함께라면 정산 걱정 끝!
+          </Text>
+        </S.TextContainer>
+        <S.ImgContainer>
+          <CoinLottie />
+          <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />
+        </S.ImgContainer>
+      </Flex>
+    );
+  }
+
+  return (
+    <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="space-between"
+      bgColor="#fff"
+      flexGrow={1}
+    >
+      <S.ContentWrapper>
+        <S.TextContainer>
+          <S.LogoImg src={LogoImg} alt="logo" />
+          <Text variant="body1R" color="semantic.text.subtle">
+            모또와 함께라면 정산 걱정 끝!
+          </Text>
+        </S.TextContainer>
+      </S.ContentWrapper>
+      <S.ButtonWrapper>
+        <Button
+          style={{
+            background: '#FEE500',
+          }}
+          onClick={() => handleLoginButtonClick('KAKAO')}
+        >
+          <Kakao width={theme.unit[24]} />
+          <Text variant="body1Sb" color="semantic.text.strong">
+            카카오로 로그인
+          </Text>
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => handleLoginButtonClick('GUEST')}
+        >
+          <Text variant="body1R" color="semantic.text.strong">
+            비회원으로 진행
+          </Text>
+        </Button>
+
+        <S.TextWrapper>
+          <Text color="semantic.text.subtle" variant="caption">
+            회원가입 시 서비스 이용약관과
+          </Text>
+          <Text color="semantic.text.subtle" variant="caption">
+            개인정보 수집 및 이용에 동의하게 됩니다.
+          </Text>
+        </S.TextWrapper>
+      </S.ButtonWrapper>
+    </Flex>
+  );
+}
+
+export default LoginPage;
