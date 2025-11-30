@@ -33,6 +33,11 @@ const Home = lazy(() =>
 const Login = lazy(() =>
   import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
 );
+const Onboarding = lazy(() =>
+  import('@/pages/onboarding').then(({ OnboardingPage }) => ({
+    default: OnboardingPage,
+  }))
+);
 const SelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
@@ -65,6 +70,10 @@ function AppRouter() {
           id: 'protected',
           loader: checkAuth,
           children: [
+            {
+              path: ROUTE.onboarding,
+              element: <Onboarding />,
+            },
             {
               path: ROUTE.home,
               element: <Home />,
