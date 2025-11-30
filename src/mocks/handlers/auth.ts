@@ -19,7 +19,7 @@ const authHandlers = [
 
     return HttpResponse.json({
       authenticated: true,
-      user: { id: import.meta.env.VITE_MOCK_ACCESS_TOKEN },
+      user: { id: 'mock-test-user-id' },
     });
   }),
 ];
