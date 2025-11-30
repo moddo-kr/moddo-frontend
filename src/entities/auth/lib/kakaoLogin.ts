@@ -1,6 +1,10 @@
 const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
+if (!KAKAO_CLIENT_ID || !KAKAO_REDIRECT_URI) {
+  throw new Error('카카오 OAuth에 필요한 환경 변수가 설정되지 않았습니다.');
+}
+
 function kakaoLogin(url?: string) {
   const defaultRedirectUrl = window.location.origin;
   const redirectUrl = url || defaultRedirectUrl;
