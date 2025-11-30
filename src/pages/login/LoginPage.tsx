@@ -10,11 +10,8 @@ import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
 import { useGetGuestToken } from '@/entities/auth/api/useGetGuestToken';
+import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
 import * as S from './LoginPage.style';
-
-const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
-const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
-const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 function LoginPage() {
   const { refetch: getGuestToken } = useGetGuestToken();
@@ -24,7 +21,7 @@ function LoginPage() {
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
-      window.location.href = KAKAO_AUTH_URI;
+      kakaoLogin();
     } else if (!token) {
       getGuestToken();
     } else {
