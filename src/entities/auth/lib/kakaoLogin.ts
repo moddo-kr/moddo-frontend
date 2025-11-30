@@ -2,8 +2,6 @@ const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 function kakaoLogin(url?: string) {
-  if (!window) return;
-
   const defaultRedirectUrl = window.location.origin;
   const redirectUrl = url || defaultRedirectUrl;
 
