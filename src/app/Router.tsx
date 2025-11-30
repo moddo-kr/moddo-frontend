@@ -69,6 +69,7 @@ function AppRouter() {
         {
           id: 'protected',
           loader: checkAuth,
+          element: <Outlet />,
           children: [
             {
               path: ROUTE.onboarding,
