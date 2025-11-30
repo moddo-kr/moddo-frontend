@@ -11,6 +11,17 @@ const authHandlers = [
       isMember: false,
     });
   }),
+  http.get('/api/v1/user/auth/check', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    console.log('유저 인증 체크 API 호출 - Mocked Response');
+
+    return HttpResponse.json({
+      authenticated: true,
+      user: { id: import.meta.env.VITE_MOCK_ACCESS_TOKEN },
+    });
+  }),
 ];
 
 export default authHandlers;
