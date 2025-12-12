@@ -8,7 +8,7 @@ import {
   SingleExpenseForm,
   ExpenseFormSchema,
 } from '@/entities/expense/model/expense.type';
-import group from '@/entities/group/api/group';
+import { getGroupDetail } from '@/entities/group/api/group';
 
 const defaultValues: SingleExpenseForm = {
   amount: 0,
@@ -27,7 +27,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
     defaultValues: async () => {
-      const groupData = await group.get(groupToken);
+      const groupData = await getGroupDetail(groupToken);
       setGroupInfo(groupData);
       // 기본 데이터가 있는 경우 (ex. 수정)
       if (initialExpense) {

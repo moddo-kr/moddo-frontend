@@ -1,4 +1,4 @@
-import group from '@/entities/group/api/group';
+import { getGroupDetail } from '@/entities/group/api/group';
 import useQueryWithHandlers from '@/shared/hooks/useQueryWithHandlers';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
 
@@ -9,7 +9,7 @@ const useGetGroupBasicInfo = (
 ) => {
   return useQueryWithHandlers({
     queryKey: ['groupBasicInfo', groupToken],
-    queryFn: () => group.get(groupToken),
+    queryFn: () => getGroupDetail(groupToken),
     errorHandlers,
     ignoreBoundaryErrors,
   });

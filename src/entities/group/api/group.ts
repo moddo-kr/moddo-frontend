@@ -6,19 +6,17 @@ import {
   GroupHeaderResponse,
 } from '@/entities/group/model/group.type';
 
-const group = {
-  get: (groupToken: string): Promise<Group> =>
-    axiosInstance
-      .get(`/group?groupToken=${groupToken}`)
-      .then((res) => res.data),
+export const getGroupDetail = async (groupToken: string): Promise<Group> => {
+  const response = await axiosInstance.get(`/group?groupToken=${groupToken}`);
+  return response.data;
+};
 
-  post: async (groupData: CreateGroupData) => {
-    const response = await axiosInstance.post<{ groupToken: string }>(
-      '/group',
-      groupData
-    );
-    return response.data;
-  },
+export const createGroup = async (groupData: CreateGroupData) => {
+  const response = await axiosInstance.post<{ groupToken: string }>(
+    '/group',
+    groupData
+  );
+  return response.data;
 };
 
 export const putGroupAccount = async ({
@@ -42,5 +40,3 @@ export const getGroupHeader = (
     .get(`/group/header?groupToken=${groupToken}`)
     .then((res) => res.data);
 };
-
-export default group;
