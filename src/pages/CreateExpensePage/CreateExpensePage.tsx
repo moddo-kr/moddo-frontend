@@ -1,9 +1,9 @@
 import { useFunnel } from '@use-funnel/react-router';
 import {
-  BillStepContext,
-  EditBillContext,
-  EditBillStepContext,
-} from '@/features/expense-management/lib/createBillFunnel.type';
+  EditExpenseContext,
+  ExpenseStepContext,
+  EditExpenseStepContext,
+} from '@/features/expense-management/lib/createExpenseFunnel.type';
 import { CreateExpenseStepPage } from '../createExpenseStep';
 import { ConfirmStepPage } from '../confirmStep';
 import { AddExpenseStepPage } from '../addExpenseStep';
@@ -12,17 +12,17 @@ import { AddAccountStepPage } from '../addAccountStep';
 import { ShareStepPage } from '../shareStep';
 import { QrStepPage } from '../qrStep';
 
-function CreateBillPage() {
+function CreateExpensePage() {
   const funnel = useFunnel<{
-    create: BillStepContext;
-    confirm: BillStepContext;
-    account: BillStepContext;
-    share: BillStepContext;
-    qr: BillStepContext;
-    add: BillStepContext;
-    edit: EditBillStepContext;
+    create: ExpenseStepContext;
+    confirm: ExpenseStepContext;
+    account: ExpenseStepContext;
+    share: ExpenseStepContext;
+    qr: ExpenseStepContext;
+    add: ExpenseStepContext;
+    edit: EditExpenseStepContext;
   }>({
-    id: 'create-bill',
+    id: 'create-expense',
     initial: {
       step: 'create',
       context: {
@@ -30,6 +30,7 @@ function CreateBillPage() {
       },
     },
   });
+
   return (
     <funnel.Render
       // eslint-disable-next-line react/no-unstable-nested-components
@@ -42,7 +43,7 @@ function CreateBillPage() {
       confirm={funnel.Render.with({
         events: {
           edit: (
-            { expenseId, initialExpense }: EditBillContext,
+            { expenseId, initialExpense }: EditExpenseContext,
             { history }
           ) => {
             history.push('edit', { expenseId, initialExpense });
@@ -61,7 +62,7 @@ function CreateBillPage() {
           <ConfirmStepPage
             onBack={() => dispatch('back')}
             onNext={() => dispatch('next')}
-            onEdit={(props: EditBillContext) => {
+            onEdit={(props: EditExpenseContext) => {
               dispatch('edit', props);
             }}
             onAdd={() => dispatch('add')}
@@ -101,4 +102,4 @@ function CreateBillPage() {
   );
 }
 
-export default CreateBillPage;
+export default CreateExpensePage;

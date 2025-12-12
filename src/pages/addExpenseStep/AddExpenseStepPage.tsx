@@ -46,11 +46,11 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
         }
         sub="총 지출 금액을 1/N로 나눌게요."
       />
-      <S.BillFormList>
+      <S.ExpenseFormList>
         {fieldArrayReturns.fields.map((field, index) => (
           <FormCard key={field.id} ref={null} index={index} />
         ))}
-      </S.BillFormList>
+      </S.ExpenseFormList>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button
           onClick={handleSubmit((data) =>

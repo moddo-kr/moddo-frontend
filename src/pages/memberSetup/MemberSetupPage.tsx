@@ -76,7 +76,7 @@ function MemberSetupPage() {
       <BottomButtonContainer>
         <Button
           disabled={data.members.length <= 1}
-          onClick={() => navigate(ROUTE.createBill)}
+          onClick={() => navigate(ROUTE.createExpense)}
         >
           정산 시작!
         </Button>

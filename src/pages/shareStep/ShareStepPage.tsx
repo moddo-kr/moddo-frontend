@@ -57,7 +57,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
             size="sm"
             variant="tertiary"
             onClick={() =>
-              navigate(generatePath(ROUTE.billDetail, { groupToken }))
+              navigate(generatePath(ROUTE.expenseDetail, { groupToken }))
             }
           >
             정산 내역 확인하기

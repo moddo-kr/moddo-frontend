@@ -6,7 +6,7 @@ import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
-import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
 import ExpenseCardList from './ui/ExpenseCardList';
 import * as S from './ConfirmStepPage.styles';
@@ -14,7 +14,7 @@ import * as S from './ConfirmStepPage.styles';
 interface ConfirmStepProps {
   onNext: () => void;
   onBack: () => void;
-  onEdit: ({ expenseId, initialExpense }: EditBillContext) => void;
+  onEdit: ({ expenseId, initialExpense }: EditExpenseContext) => void;
   onAdd: () => void;
 }
 

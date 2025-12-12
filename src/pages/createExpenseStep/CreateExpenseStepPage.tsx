@@ -92,7 +92,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
         }
         sub="총 지출 금액을 1/N로 나눌게요."
       />
-      <S.BillFormList>
+      <S.ExpenseFormList>
         {fieldArrayReturns.fields.map((field, index) => (
           <FormCard
             key={field.id}
@@ -105,7 +105,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
             onDelete={handleDeleteExpense}
           />
         ))}
-      </S.BillFormList>
+      </S.ExpenseFormList>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button
           type="button"

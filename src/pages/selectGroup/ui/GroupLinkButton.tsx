@@ -8,7 +8,7 @@ import * as S from './GroupLinkButton.styles';
 function GroupLinkButton({ group }: { group: Group }) {
   const { groupName, members } = group;
   return (
-    <S.LinkButton to={ROUTE.createBill}>
+    <S.LinkButton to={ROUTE.createExpense}>
       <Flex direction="column" gap={8}>
         <Text variant="body1Sb">{groupName}</Text>
         <Flex gap={4}>

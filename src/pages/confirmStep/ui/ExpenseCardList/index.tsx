@@ -1,14 +1,14 @@
 import { Fragment } from 'react/jsx-runtime';
 import { Expense } from '@/entities/expense/model/expense.type';
 import Text from '@/shared/ui/Text';
-import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import categrizeExpensesByDateWithIndex from './lib/categrizeExpensesByDateWithIndex';
 import ExpenseCard from '../ExpenseCard';
 import * as S from './index.styles';
 
 interface ExpenseCardListProps {
   expenses: Expense[];
-  onEdit: (context: EditBillContext) => void;
+  onEdit: (context: EditExpenseContext) => void;
 }
 
 function ExpenseCardList({ expenses, onEdit }: ExpenseCardListProps) {

@@ -8,7 +8,7 @@ import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/ui/Toast';
-import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';
 import * as S from './EditExpenseStepPage.styles';
@@ -16,7 +16,7 @@ import * as S from './EditExpenseStepPage.styles';
 type EditExpenseStepProps = {
   onNext: () => void;
   onBack: () => void;
-} & EditBillContext;
+} & EditExpenseContext;
 
 function EditExpenseStepPage({
   onNext,
@@ -79,11 +79,11 @@ function EditExpenseStepPage({
         }
         sub="총 지출 금액을 1/N로 나눌게요."
       />
-      <S.BillFormList>
+      <S.ExpenseFormList>
         {fieldArrayReturns.fields.map((field, index) => (
           <FormCard key={field.id} ref={null} index={index} />
         ))}
-      </S.BillFormList>
+      </S.ExpenseFormList>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button onClick={updateHandler} disabled={!allFormsValid}>
           수정 완료
