@@ -6,7 +6,7 @@ import * as S from './CreateGroupLinkButton.styles';
 
 function CreateGroupLinkButton() {
   return (
-    <S.LinkButton to={ROUTE.groupSetup}>
+    <S.LinkButton to={ROUTE.groupSetup} aria-label="새로운 모임 생성">
       <Flex
         justifyContent="center"
         direction="column"
