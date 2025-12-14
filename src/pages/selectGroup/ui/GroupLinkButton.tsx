@@ -13,7 +13,7 @@ function GroupLinkButton({ group }: { group: Group }) {
       <Flex direction="column" gap={8}>
         <Text variant="body1Sb">{groupName}</Text>
         <Flex gap={4}>
-          {members.map((member) => (
+          {members?.map((member) => (
             <NameChip
               key={member.id}
               label={member.name}
