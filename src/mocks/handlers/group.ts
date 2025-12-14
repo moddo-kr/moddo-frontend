@@ -1,20 +1,80 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/lib/getIsMocked';
-import { AccountVariable } from '@/entities/group/model/group.type';
+import { AccountVariable, Group } from '@/entities/group/model/group.type';
 
-const dummyGroups = [
+const dummyGroups: Group[] = [
   {
-    id: 1,
+    id: '1',
     groupName: '강남역 모각코',
     members: [
-      { id: 1, name: '김모또', role: 'MANAGER' },
-      { id: 2, name: '박완숙', role: 'PARTICIPANT' },
-      { id: 3, name: '정에그', role: 'PARTICIPANT' },
+      {
+        id: 1,
+        name: '김모또',
+        role: 'MANAGER',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 2,
+        name: '박완숙',
+        role: 'PARTICIPANT',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 3,
+        name: '정에그',
+        role: 'PARTICIPANT',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
+    ],
+  },
+  {
+    id: '2',
+    groupName: '서교동 모각코',
+    members: [
+      {
+        id: 1,
+        role: 'MANAGER',
+        name: '김모또',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 4,
+        role: 'PARTICIPANT',
+        name: '안맥북',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 5,
+        role: 'PARTICIPANT',
+        name: '박삼성',
+        profile: '',
+        isPaid: false,
+        paidAt: null,
+      },
     ],
   },
 ];
 
 const groupHandlers = [
+  // GET GetGroupList
+  http.get('/api/v1/groups', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    return HttpResponse.json({
+      groups: dummyGroups,
+    });
+  }),
+
   // GET GetGroupOne
   http.get(`/api/v1/group`, ({ request }) => {
     if (!getIsMocked(request)) return passthrough();

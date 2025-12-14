@@ -6,6 +6,11 @@ import {
   GroupHeaderResponse,
 } from '@/entities/group/model/group.type';
 
+export const getGroupList = async (): Promise<Group[]> => {
+  const response = await axiosInstance.get('/groups', { useMock: true }); // NOTE : API 경로 확인 필요
+  return response.data.groups;
+};
+
 export const getGroupDetail = async (groupToken: string): Promise<Group> => {
   const response = await axiosInstance.get(`/group?groupToken=${groupToken}`);
   return response.data;
