@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const EmptyButton = styled.div`
+export const EmptyBox = styled.div`
   width: 100%;
   @media (min-width: 600px) {
     font-size: 22px;

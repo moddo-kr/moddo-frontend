@@ -2,11 +2,11 @@ import { CheckCircle } from '@/shared/assets/svgs/icon';
 import theme from '@/shared/styles/theme';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
-import * as S from './EmptyButton.styles';
+import * as S from './EmptyBox.styles';
 
-function EmptyButton() {
+function EmptyBox() {
   return (
-    <S.EmptyButton>
+    <S.EmptyBox>
       <Flex
         justifyContent="center"
         direction="column"
@@ -22,8 +22,8 @@ function EmptyButton() {
           기존 모임이 없어요.
         </Text>
       </Flex>
-    </S.EmptyButton>
+    </S.EmptyBox>
   );
 }
 
-export default EmptyButton;
+export default EmptyBox;

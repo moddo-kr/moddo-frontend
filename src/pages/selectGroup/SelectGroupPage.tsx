@@ -4,7 +4,7 @@ import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
-import { CreateGroupLinkButton, EmptyButton, GroupLinkButton } from './ui';
+import { CreateGroupLinkButton, EmptyBox, GroupLinkButton } from './ui';
 
 function SelectGroupPage() {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ function SelectGroupPage() {
                 <GroupLinkButton key={group.id} group={group} />
               ))
             ) : (
-              <EmptyButton />
+              <EmptyBox />
             )}
           </Flex>
         </main>
