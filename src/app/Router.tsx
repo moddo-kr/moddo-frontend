@@ -5,7 +5,7 @@ import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
-import createExpensePageTokenLoader from '@/pages/CreateExpensePage/createExpensePageTokenLoader';
+import createExpensePageTokenLoader from '@/pages/CreateExpensePage/lib/createExpensePageTokenLoader';
 
 const ExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
