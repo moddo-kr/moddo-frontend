@@ -5,7 +5,7 @@ import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
-import createExpensePageTokenLoader from '@/pages/CreateExpensePage/lib/createExpensePageTokenLoader';
+import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
 
 const ExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
@@ -90,7 +90,7 @@ function AppRouter() {
             {
               path: ROUTE.createExpense,
               element: <CreateExpense />,
-              loader: createExpensePageTokenLoader,
+              loader: createExpensePageGuardLoader,
             },
           ],
         },
