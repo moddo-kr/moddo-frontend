@@ -4,8 +4,8 @@ import { ROUTE } from '@/shared/config/route';
 import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
-import getGroupManagerAuth from '@/entities/auth/lib/getGroupManagerAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
+import createExpensePageTokenLoader from '@/pages/CreateExpensePage/createExpensePageTokenLoader';
 
 const ExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
@@ -87,14 +87,14 @@ function AppRouter() {
               path: ROUTE.groupSetup,
               element: <GroupSetup />,
             },
+            {
+              path: ROUTE.createExpense,
+              element: <CreateExpense />,
+              loader: createExpensePageTokenLoader,
+            },
           ],
         },
         // TODO : 로그인 기능으로 변경될 예정
-        {
-          path: ROUTE.createExpense,
-          element: <CreateExpense />,
-          loader: getGroupManagerAuth,
-        },
         {
           path: ROUTE.expenseDetail,
           element: <ExpenseDetail />,

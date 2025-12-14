@@ -4,7 +4,7 @@ export const ROUTE = {
   login: '/login',
   onboarding: '/onboarding',
   home: '/',
-  createExpense: '/create-expense',
+  createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',
   expenseDetail: '/expense-detail/:groupToken',
