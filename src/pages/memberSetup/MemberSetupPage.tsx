@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router';
+import { generatePath, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { ROUTE } from '@/shared/config/route';
-
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
@@ -76,7 +75,9 @@ function MemberSetupPage() {
       <BottomButtonContainer>
         <Button
           disabled={data.members.length <= 1}
-          onClick={() => navigate(ROUTE.createExpense)}
+          onClick={() =>
+            navigate(generatePath(ROUTE.createExpense, { groupToken }))
+          }
         >
           정산 시작!
         </Button>

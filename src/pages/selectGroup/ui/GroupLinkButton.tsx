@@ -1,3 +1,4 @@
+import { generatePath } from 'react-router';
 import { Group } from '@/entities/group/model/group.type';
 import { ROUTE } from '@/shared/config/route';
 import Flex from '@/shared/ui/Flex';
@@ -6,9 +7,9 @@ import NameChip from '@/shared/ui/NameChip';
 import * as S from './GroupLinkButton.styles';
 
 function GroupLinkButton({ group }: { group: Group }) {
-  const { groupName, members } = group;
+  const { groupName, members, id: groupToken } = group;
   return (
-    <S.LinkButton to={ROUTE.createExpense}>
+    <S.LinkButton to={generatePath(ROUTE.createExpense, { groupToken })}>
       <Flex direction="column" gap={8}>
         <Text variant="body1Sb">{groupName}</Text>
         <Flex gap={4}>
