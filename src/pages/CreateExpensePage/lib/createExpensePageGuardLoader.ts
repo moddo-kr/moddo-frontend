@@ -37,8 +37,6 @@ const createExpensePageGuardLoader: LoaderFunction = async ({ params }) => {
     // 그 외에는 에러를 그대로 던진다
     throw new BoundaryError({});
   }
-
-  return { groupToken };
 };
 
 export default createExpensePageGuardLoader;
