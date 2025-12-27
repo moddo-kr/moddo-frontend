@@ -1,9 +1,12 @@
 import type { Preview } from '@storybook/react';
-
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import { ThemeProvider } from 'styled-components';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import theme from '../src/shared/styles/theme';
 import GlobalStyles from '../src/shared/styles/globalStyles';
+
+// Initialize MSW
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -26,6 +29,9 @@ const preview: Preview = {
       GlobalStyles,
     }),
   ],
+
+  // Provide the MSW addon loader globally
+  loaders: [mswLoader],
 };
 
 export default preview;
