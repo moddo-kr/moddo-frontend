@@ -29,10 +29,8 @@ export const ModdoImage = styled.img`
 export const ExpenseChip = styled.div`
   display: flex;
   background: ${({ theme }) => theme.color.semantic.primary.default};
-  color: ${({ theme }) => theme.color.semantic.text.inverse};
   border-radius: ${({ theme }) => theme.radius.circle};
   padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
-  font-size: ${TextVariant('body1Sb')};
 `;
 
 export const TotalMoney = styled.span`
@@ -54,6 +52,13 @@ export const TimeBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const Timer = styled.div`
+  display: grid;
+  width: '174px';
+  grid-template-columns: repeat(5, auto);
+  place-items: center;
 `;
 
 export const TimeSep = styled.span`
