@@ -39,7 +39,9 @@ export const getGroupHeader = (
   groupToken: string
 ): Promise<GroupHeaderResponse> => {
   return axiosInstance
-    .get(`/group/header?groupToken=${groupToken}`)
+    .get(`/group/header?groupToken=${groupToken}`, {
+      useMock: true,
+    })
     .then((res) => res.data);
 };
 
