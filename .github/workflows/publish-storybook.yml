@@ -38,7 +38,23 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true # Only run Chromatic on changed stories
 
-      - name: Comment on PR
+      - name: Comment on PR (with snapshot changes)
+        if: steps.chromatic.outputs.changeCount != '0'
         uses: thollander/actions-comment-pull-request@v3
         with:
-          message: '✨ **Storybook preview** : ${{ steps.chromatic.outputs.storybookUrl }}'
+          message: |
+            ✨ Storybook
+            👉 ${{ steps.chromatic.outputs.storybookUrl }}
+
+            📸 변경된 스냅샷
+            👉 ${{ steps.chromatic.outputs.buildUrl }}
+
+      - name: Comment on PR (no snapshot changes)
+        if: steps.chromatic.outputs.changeCount == '0'
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: |
+            ✨ Storybook
+            👉 ${{ steps.chromatic.outputs.storybookUrl }}
+
+            ✅ 스냅샷 변경 없음
