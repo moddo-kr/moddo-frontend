@@ -1,18 +1,42 @@
 import { useNavigate } from 'react-router';
+import { useTheme } from 'styled-components';
+import useGetExpensesLinks from '@/features/expense-management/api/useGetExpensesLinks';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
 import Button from '@/shared/ui/Button';
 import Flex from '@/shared/ui/Flex';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
-
-const DUMMY_LINKS = [
-  { name: '서교동 모각코', link: 'https://moddo.kr' },
-  { name: '합정동 모각디', link: 'https://moddo.kr' },
-];
+import LinkBox from './ui/LinkBox';
 
 function MyLinksPage() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const { data, isLoading } = useGetExpensesLinks({}, []);
+
+  if (isLoading) {
+    <>
+      <Header
+        type="TitleCenter"
+        title="링크 관리"
+        leftButtonContent={<ArrowLeft width={24} />}
+        leftButtonOnClick={() => navigate(-1)}
+        bgColor={theme.color.semantic.background.normal.alternative}
+      />
+      <Flex
+        pt={24}
+        pb={22}
+        px={20}
+        height="100%"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        bgColor={theme.color.semantic.background.normal.alternative}
+      >
+        로딩중...
+      </Flex>
+    </>;
+  }
 
   return (
     <>
@@ -21,9 +45,27 @@ function MyLinksPage() {
         title="링크 관리"
         leftButtonContent={<ArrowLeft width={24} />}
         leftButtonOnClick={() => navigate(-1)}
+        bgColor={theme.color.semantic.background.normal.alternative}
       />
-      {DUMMY_LINKS && DUMMY_LINKS.length > 0 ? (
-        <div>..</div>
+      {data?.links && data.links.length > 0 ? (
+        <Flex
+          pt={24}
+          pb={22}
+          px={20}
+          gap={8}
+          height="100%"
+          direction="column"
+          bgColor={theme.color.semantic.background.normal.alternative}
+        >
+          {data.links.map((link) => (
+            <LinkBox
+              key={link.id}
+              id={link.id}
+              name={link.name}
+              url={link.url}
+            />
+          ))}
+        </Flex>
       ) : (
         <Flex
           pt={24}
@@ -34,6 +76,7 @@ function MyLinksPage() {
           direction="column"
           justifyContent="center"
           alignItems="center"
+          bgColor={theme.color.semantic.background.normal.alternative}
         >
           <Text
             textAlign="center"

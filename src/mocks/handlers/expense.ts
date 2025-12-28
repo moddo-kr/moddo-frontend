@@ -219,12 +219,12 @@ const expenseHandlers = [
       links: [
         {
           id: 1,
-          url: 'https://moddo.kr',
+          url: 'here.is.a.link.If the link gets longer, it becomes ellipsis',
           name: '서교동 모각코',
         },
         {
           id: 2,
-          url: 'https://moddo.kr',
+          url: 'here.is.link.as.well',
           name: '합정동 모각디',
         },
       ],
