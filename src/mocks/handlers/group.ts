@@ -83,10 +83,10 @@ const groupHandlers = [
     const groupToken = url.searchParams.get('groupToken');
 
     if (!groupToken) {
-      return HttpResponse.json({
-        error: 'groupToken is required',
-        status: 401,
-      });
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 401 }
+      );
     }
 
     return HttpResponse.json({
@@ -120,10 +120,10 @@ const groupHandlers = [
       const groupToken = url.searchParams.get('groupToken');
 
       if (!groupToken) {
-        return HttpResponse.json({
-          error: 'groupToken is required',
-          status: 401,
-        });
+        return HttpResponse.json(
+          { error: 'groupToken is required' },
+          { status: 401 }
+        );
       }
 
       const body = await request.json();
