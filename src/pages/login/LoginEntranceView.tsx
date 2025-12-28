@@ -16,7 +16,7 @@ function LoginEntranceView() {
       justifyContent="center"
       bgColor={theme.color.semantic.orange.subtle}
       flexGrow={1}
-      gap={theme.unit[16]}
+      gap={16}
     >
       <Flex direction="column" alignItems="center">
         <S.LogoImg src={LogoImg} alt="logo" />
