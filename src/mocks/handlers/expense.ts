@@ -210,6 +210,26 @@ const expenseHandlers = [
       expenses: dummyExpenseDetail,
     });
   }),
+
+  // GET getExpenseLinks
+  http.get('/api/v1/expenses/links', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    return HttpResponse.json({
+      links: [
+        {
+          id: 1,
+          url: 'https://moddo.kr',
+          name: '서교동 모각코',
+        },
+        {
+          id: 2,
+          url: 'https://moddo.kr',
+          name: '합정동 모각디',
+        },
+      ],
+    });
+  }),
 ];
 
 export default expenseHandlers;
