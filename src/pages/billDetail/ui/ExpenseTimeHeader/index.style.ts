@@ -56,7 +56,7 @@ export const TimeBox = styled.div`
 
 export const Timer = styled.div`
   display: grid;
-  width: '174px';
+  width: 174px;
   grid-template-columns: repeat(5, auto);
   place-items: center;
 `;
