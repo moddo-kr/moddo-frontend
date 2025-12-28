@@ -101,13 +101,13 @@ function HomePage() {
         <S.DescriptionImg src={MainHamImg2} alt="" />
       </Flex>
       <S.BoxButtonWrapper>
-        <S.BoxButton>
+        <S.BoxButton to={ROUTE.myLinks}>
           <Text variant="body1Sb" color="semantic.text.default">
             링크 관리
           </Text>
           <S.SmallImg src={LinkMain} alt="" />
         </S.BoxButton>
-        <S.BoxButton>
+        <S.BoxButton to="/">
           <Text variant="body1Sb" color="semantic.text.default">
             캐릭터 도감
           </Text>
