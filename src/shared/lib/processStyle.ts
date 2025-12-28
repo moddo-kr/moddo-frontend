@@ -73,6 +73,10 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     height: ${getUnit(props.height)};
   `}
+  ${props.minHeight &&
+  css`
+    min-height: ${getUnit(props.minHeight)};
+  `}
 
   /* Spacing Props */
   ${(props.pt ?? props.paddingTop) &&
@@ -164,6 +168,10 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   ${props.flex &&
   css`
     flex: ${props.flex};
+  `}
+  ${props.boxSizing &&
+  css`
+    box-sizing: ${props.boxSizing};
   `}
 
   /* Font props */

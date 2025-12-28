@@ -6,7 +6,7 @@ declare module 'styled-components' {
 }
 
 export interface SizeProps
-  extends Pick<CSSProperties, 'width' | 'height' | 'minWidth'> {
+  extends Pick<CSSProperties, 'width' | 'height' | 'minWidth' | 'minHeight'> {
   // 필요한 경우 추가
 }
 
@@ -61,7 +61,7 @@ export interface PositionProps extends Pick<CSSProperties, 'position'> {
 }
 
 export interface LayoutProps
-  extends Pick<CSSProperties, 'overflow' | 'display' | 'flex'> {}
+  extends Pick<CSSProperties, 'overflow' | 'display' | 'flex' | 'boxSizing'> {}
 
 export interface FontProps extends Pick<CSSProperties, 'fontSize'> {
   // 필요한 경우 추가
