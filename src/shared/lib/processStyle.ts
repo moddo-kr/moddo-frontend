@@ -65,6 +65,10 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     width: ${getUnit(props.width)};
   `}
+  ${props.minWidth &&
+  css`
+    min-width: ${getUnit(props.minWidth)};
+  `}
   ${props.height &&
   css`
     height: ${getUnit(props.height)};
@@ -148,10 +152,37 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     background-color: ${getColor(props.bgColor ?? props.backgroundColor)};
   `}
+  /* Layout props */
+  ${props.overflow &&
+  css`
+    overflow: ${props.overflow};
+  `}
+  ${props.display &&
+  css`
+    display: ${props.display};
+  `}
+  ${props.flex &&
+  css`
+    flex: ${props.flex};
+  `}
 
   /* Font props */
   ${props.fontSize &&
   css`
     font-size: ${getUnit(props.fontSize)};
+  `} 
+  
+  /* Text props */
+  ${props.textAlign &&
+  css`
+    text-align: ${props.textAlign};
+  `}
+  ${props.whiteSpace &&
+  css`
+    white-space: ${props.whiteSpace};
+  `}
+  ${props.textOverflow &&
+  css`
+    text-overflow: ${props.textOverflow};
   `}
 `;

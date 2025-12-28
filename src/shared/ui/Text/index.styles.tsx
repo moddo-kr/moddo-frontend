@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 import getColorFromTheme from '@/shared/lib/getColorFromTheme';
 import { ColorKey, TypographyKey } from '@/shared/styles/theme.type';
 import styled, { css } from 'styled-components';
+import { processStyleProps } from '@/shared/lib/processStyle';
 
 export const TextVariant = (variant: TypographyKey) => css`
   font-size: ${({ theme }) => theme.typography.fontSize[variant]};
@@ -22,4 +23,5 @@ export const Text = styled.span<StyledTextProps>`
   text-align: ${({ $textAlign }) => $textAlign || 'left'};
   color: ${({ theme, $color }) =>
     getColorFromTheme(theme.color, $color) ?? 'inherit'};
+  ${(props) => processStyleProps(props)};
 `;

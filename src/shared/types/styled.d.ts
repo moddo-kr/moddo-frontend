@@ -5,7 +5,8 @@ declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
 }
 
-export interface SizeProps extends Pick<CSSProperties, 'width' | 'height'> {
+export interface SizeProps
+  extends Pick<CSSProperties, 'width' | 'height' | 'minWidth'> {
   // 필요한 경우 추가
 }
 
@@ -59,16 +60,24 @@ export interface PositionProps extends Pick<CSSProperties, 'position'> {
   // 필요한 경우 추가
 }
 
+export interface LayoutProps
+  extends Pick<CSSProperties, 'overflow' | 'display' | 'flex'> {}
+
 export interface FontProps extends Pick<CSSProperties, 'fontSize'> {
   // 필요한 경우 추가
 }
+
+export interface TextProps
+  extends Pick<CSSProperties, 'whiteSpace' | 'textOverflow' | 'textAlign'> {}
 
 export type BaseStyledProps = SpacingProps &
   SizeProps &
   ColorProps &
   BorderProps &
   PositionProps &
-  FontProps;
+  LayoutProps &
+  FontProps &
+  TextProps;
 
 /* Flex */
 export interface FlexLayoutStyledProps

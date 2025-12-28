@@ -1,32 +1,25 @@
-import { CSSProperties, ElementType } from 'react';
+import { ElementType, HTMLAttributes } from 'react';
 import { ColorKey, TypographyKey } from '@/shared/styles/theme.type';
+import { BaseStyledProps } from '@/shared/types/styled';
 import * as S from './index.styles';
 
-interface TextProps {
-  className?: string;
+interface TextProps
+  extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
+    BaseStyledProps {
   variant?: TypographyKey;
-  color?: ColorKey;
   as?: ElementType;
-  children: React.ReactNode;
-  textAlign?: CSSProperties['textAlign'];
+  color?: ColorKey;
 }
 
 function Text({
-  className,
   variant = 'body1R',
   color,
   as = 'span',
-  textAlign,
   children,
+  ...props
 }: TextProps) {
   return (
-    <S.Text
-      as={as}
-      className={className}
-      $variant={variant}
-      $color={color}
-      $textAlign={textAlign}
-    >
+    <S.Text as={as} $variant={variant} $color={color} {...props}>
       {children}
     </S.Text>
   );
