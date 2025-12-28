@@ -27,10 +27,11 @@ function MyLinksPage() {
         pt={24}
         pb={22}
         px={20}
-        height="100%"
-        direction="column"
+        flex={1}
         justifyContent="center"
         alignItems="center"
+        height="auto"
+        direction="column"
         bgColor={theme.color.semantic.background.normal.alternative}
       >
         로딩중...
@@ -53,7 +54,8 @@ function MyLinksPage() {
           pb={22}
           px={20}
           gap={8}
-          height="100%"
+          flex={1}
+          height="auto"
           direction="column"
           bgColor={theme.color.semantic.background.normal.alternative}
         >
@@ -72,10 +74,11 @@ function MyLinksPage() {
           pb={22}
           px={20}
           gap={24}
-          height="100%"
-          direction="column"
+          flex={1}
           justifyContent="center"
           alignItems="center"
+          height="auto"
+          direction="column"
           bgColor={theme.color.semantic.background.normal.alternative}
         >
           <Text
