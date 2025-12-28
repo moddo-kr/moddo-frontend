@@ -32,33 +32,24 @@ function SelectGroupPage() {
         showIcon
         type="TitleLeft"
         handleBackButtonClick={() => navigate(-1)}
-        bgColor="#f1f3f5"
+        bgColor="semantic.background.normal.alternative"
       />
       <Flex
         direction="column"
         justify="space-between"
         height="100%"
-        pt="10px"
+        pt="6"
         flexGrow={1}
-        bgColor="#f1f3f5"
+        bgColor="semantic.background.normal.alternative"
       >
         <main>
           <DescriptionField
-            title={
-              <Flex direction="column">
-                <Text variant="heading2" color="semantic.text.strong">
-                  정산을 시작하려는
-                </Text>
-                <Text variant="heading2" color="semantic.text.strong">
-                  모임을 선택해 주세요.
-                </Text>
-              </Flex>
-            }
+            title={`정산을 시작하려는\n모임을 선택해 주세요.`}
             sub="새로운 정산을 시작하려면 새로 생성을 선택해주세요."
             bgColor="semantic.primary.subtle"
           />
 
-          <Flex gap="2" direction="column" mx={5} mt={5}>
+          <Flex gap={8} direction="column" mx={20} mt={20}>
             <S.SelectButton
               selected={selectedValue === 'CREATE'}
               onClick={() => navigate(ROUTE.groupSetup)}
