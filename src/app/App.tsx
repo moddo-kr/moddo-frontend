@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider } from '@tanstack/react-query';
 import GlobalStyles from '@/shared/styles/globalStyles';
