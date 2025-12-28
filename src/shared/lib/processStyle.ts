@@ -120,6 +120,18 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     border-radius: ${getUnit(props.borderRadius)};
   `}
+  ${props.borderWidth &&
+  css`
+    border-width: ${getUnit(props.borderWidth)};
+  `}
+  ${props.borderColor &&
+  css`
+    border-color: ${getColor(props.borderColor)};
+  `}
+  ${props.borderStyle &&
+  css`
+    border-style: ${props.borderStyle};
+  `}
 
   /* Position props */
   ${props.position &&

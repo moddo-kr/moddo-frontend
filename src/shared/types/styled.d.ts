@@ -47,7 +47,11 @@ export interface ColorProps
   bgColor?: CSSProperties['backgroundColor'];
 }
 
-export interface BorderProps extends Pick<CSSProperties, 'borderRadius'> {
+export interface BorderProps
+  extends Pick<
+    CSSProperties,
+    'borderRadius' | 'borderWidth' | 'borderColor' | 'borderStyle'
+  > {
   // 필요한 경우 추가
 }
 
