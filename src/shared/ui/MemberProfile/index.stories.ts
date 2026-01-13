@@ -13,26 +13,16 @@ type Story = StoryObj<typeof MemberProfile>;
 
 export const ManagerProfile: Story = {
   args: {
-    member: {
-      id: 1,
-      name: '모또',
-      profile: '',
-      role: 'MANAGER',
-      isPaid: false,
-      paidAt: undefined,
-    },
+    id: 1,
+    name: '모또',
+    canDelete: false,
   },
 };
 
 export const ParticipantProfile: Story = {
   args: {
-    member: {
-      id: 1,
-      name: '모또',
-      profile: '',
-      role: 'PARTICIPANT',
-      isPaid: false,
-      paidAt: undefined,
-    },
+    id: 1,
+    name: '모또',
+    canDelete: true,
   },
 };

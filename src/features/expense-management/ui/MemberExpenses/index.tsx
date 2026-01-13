@@ -15,7 +15,10 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
         <S.MemberContainer key={member.id}>
           <S.ProfileContainer>
             <MemberProfile
-              member={member}
+              id={member.id}
+              name={member.name}
+              profile={member.profile}
+              canDelete
               handleDeleteButtonClick={() => onDelete(member.name)}
             />
           </S.ProfileContainer>

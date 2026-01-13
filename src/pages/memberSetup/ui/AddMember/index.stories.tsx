@@ -20,7 +20,7 @@ const MEMBERS: Member[] = [
     name: '날달걀',
     profile: 'https://api.dicebear.com/9.x/glass/svg?seed=Aneka',
     isPaid: false,
-    paidAt: undefined,
+    paidAt: null,
   },
 ];
 

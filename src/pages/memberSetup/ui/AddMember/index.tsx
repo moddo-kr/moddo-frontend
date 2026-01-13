@@ -109,7 +109,10 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           {members.map((member) => (
             <MemberProfile
               key={member.id}
-              member={member}
+              id={member.id}
+              name={member.name}
+              profile={member.profile}
+              canDelete={member.role !== 'MANAGER'}
               handleDeleteButtonClick={handleDeleteMember}
             />
           ))}
