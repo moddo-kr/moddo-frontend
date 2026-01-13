@@ -15,5 +15,7 @@ type Story = StoryObj<typeof BankNameDrawer>;
 export const Default: Story = {
   args: {
     open: true,
+    onClose: () => {},
+    setBankName: () => {},
   },
 };
