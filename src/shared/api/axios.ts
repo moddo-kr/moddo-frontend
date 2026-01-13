@@ -2,7 +2,7 @@ import axios, { AxiosHeaders } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/functions/v1`,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -25,6 +25,13 @@ axiosInstance.interceptors.request.use(
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
         'X-Mock-Request': 'true',
+      });
+    }
+    // SUPABASE용 apikey 헤더 추가 (필요 시)
+    else if (newConfig.url?.endsWith('user/guest/token')) {
+      newConfig.headers = AxiosHeaders.from({
+        ...newConfig.headers,
+        apikey: import.meta.env.VITE_SUPABASE_PUBLIC_KEY,
       });
     }
     return newConfig;
