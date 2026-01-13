@@ -28,7 +28,7 @@ axiosInstance.interceptors.request.use(
       });
     }
     // SUPABASE용 apikey 헤더 추가 (필요 시)
-    else if (newConfig.url?.endsWith('user/guest/token')) {
+    else if (newConfig.url?.split('?')[0].endsWith('user/guest/token')) {
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
         apikey: import.meta.env.VITE_SUPABASE_PUBLIC_KEY,
