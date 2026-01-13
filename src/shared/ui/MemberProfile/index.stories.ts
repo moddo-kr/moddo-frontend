@@ -16,6 +16,9 @@ export const ManagerProfile: Story = {
     id: 1,
     name: '모또',
     canDelete: false,
+    handleDeleteButtonClick: () => {
+      alert('삭제 버튼 클릭됨');
+    },
   },
 };
 
@@ -24,5 +27,8 @@ export const ParticipantProfile: Story = {
     id: 1,
     name: '모또',
     canDelete: true,
+    handleDeleteButtonClick: () => {
+      alert('삭제 버튼 클릭됨');
+    },
   },
 };
