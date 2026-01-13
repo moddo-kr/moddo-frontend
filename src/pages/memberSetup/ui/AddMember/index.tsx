@@ -80,26 +80,24 @@ function AddMember({ members, groupToken }: AddMemberProps) {
   return (
     <Flex direction="column" height="fit-content">
       <form onSubmit={handleSubmit(handleAddName)}>
-        <Flex gap={2} alignItems="center">
-          <InputGroup>
-            <Input
-              placeholder="이정산"
-              {...register('name', {
-                required: '이름을 입력해주세요',
-              })}
-            />
-            <Button
-              type="submit"
-              variant="secondary"
-              size="md"
-              disabled={!formState.isValid}
-            >
-              추가하기
-            </Button>
-          </InputGroup>
-        </Flex>
+        <InputGroup>
+          <Input
+            placeholder="이정산"
+            {...register('name', {
+              required: '이름을 입력해주세요',
+            })}
+          />
+          <Button
+            type="submit"
+            variant="secondary"
+            size="md"
+            disabled={!formState.isValid}
+          >
+            추가하기
+          </Button>
+        </InputGroup>
       </form>
-      <Flex direction="column" gap={2} mt={7}>
+      <Flex direction="column" gap={8} mt={28}>
         <S.MemberCount>
           총{' '}
           <Text variant="body1Sb" color="semantic.orange.default">
@@ -107,11 +105,14 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           </Text>
           명
         </S.MemberCount>
-        <Flex gap={3} flexWrap="wrap">
+        <Flex gap={12} flexWrap="wrap">
           {members.map((member) => (
             <MemberProfile
               key={member.id}
-              member={member}
+              id={member.id}
+              name={member.name}
+              profile={member.profile}
+              canDelete={member.role !== 'MANAGER'}
               handleDeleteButtonClick={handleDeleteMember}
             />
           ))}

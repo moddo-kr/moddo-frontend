@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Accordion from '@/shared/ui/Accordion';
-import { ProfileImg as MemberProfileImg } from '@/shared/ui/MemberProfile/index.style';
 
 export const Container = styled(Accordion)<{ isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
@@ -28,11 +27,6 @@ export const LeftWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.unit[8]};
-`;
-
-export const ProfileImg = styled(MemberProfileImg)`
-  width: ${({ theme }) => theme.unit[48]};
-  height: ${({ theme }) => theme.unit[48]};
 `;
 
 export const SubProfileWrapper = styled.div`

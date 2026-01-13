@@ -9,6 +9,7 @@ interface TextProps {
   as?: ElementType;
   children: React.ReactNode;
   textAlign?: CSSProperties['textAlign'];
+  style?: CSSProperties;
 }
 
 function Text({
@@ -18,6 +19,7 @@ function Text({
   as = 'span',
   textAlign,
   children,
+  style,
 }: TextProps) {
   return (
     <S.Text
@@ -26,6 +28,7 @@ function Text({
       $variant={variant}
       $color={color}
       $textAlign={textAlign}
+      style={style}
     >
       {children}
     </S.Text>
