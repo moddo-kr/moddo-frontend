@@ -30,6 +30,9 @@ const meta: Meta<typeof AddMember> = {
   title: 'UI/AddMember',
   component: AddMember,
   tags: ['autodocs'],
+  parameters: {
+    chromatic: { disableSnapshot: false },
+  },
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>

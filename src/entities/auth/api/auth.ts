@@ -8,6 +8,8 @@ export interface GuestTokenData {
 }
 
 export const getGuestToken = async (): Promise<GuestTokenData> => {
-  const response = await axiosInstance.get('/user/guest/token');
+  const response = await axiosInstance.get('/user/guest/token', {
+    useMock: true,
+  });
   return response.data;
 };

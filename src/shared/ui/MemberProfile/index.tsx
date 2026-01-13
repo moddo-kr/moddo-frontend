@@ -17,11 +17,11 @@ function MemberProfile({
   return (
     <Flex
       key={member.id}
-      gap={1}
+      gap={4}
       direction="column"
       alignItems="center"
       width="fit-content"
-      py={2}
+      py={8}
     >
       <S.ProfileWrapper>
         {member.role !== 'MANAGER' && (
