@@ -6,9 +6,9 @@ export interface Member {
   id: number;
   role: MemberRole;
   name: string;
-  profile: string;
-  isPaid: boolean;
-  paidAt: Date | null;
+  profile?: string;
+  isPaid?: boolean;
+  paidAt?: Date;
 }
 
 export interface MemberData {

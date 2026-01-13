@@ -19,7 +19,7 @@ export const ManagerProfile: Story = {
       profile: '',
       role: 'MANAGER',
       isPaid: false,
-      paidAt: null,
+      paidAt: undefined,
     },
   },
 };
@@ -32,7 +32,7 @@ export const ParticipantProfile: Story = {
       profile: '',
       role: 'PARTICIPANT',
       isPaid: false,
-      paidAt: null,
+      paidAt: undefined,
     },
   },
 };
