@@ -3,12 +3,6 @@ import { ROUTE } from '@/shared/config/route';
 import { useNavigate } from 'react-router';
 import theme from '@/shared/styles/theme';
 import Text from '@/shared/ui/Text';
-import {
-  OnboardingStep1Lottie,
-  OnboardingStep2Lottie,
-  OnboardingStep3Lottie,
-  OnboardingStep4Lottie,
-} from '@/shared/ui/Lottie';
 import Header from '@/shared/ui/Header';
 import Onboarding1 from '@/shared/assets/pngs/Onboarding1.png';
 /** swiper 관련 파일 */
@@ -17,6 +11,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import {
+  LottieStep1,
+  LottieStep2,
+  LottieStep3,
+  LottieStep4,
+} from './ui/Lottie';
 import * as S from './OnboardingPage.style';
 
 function OnboardingPage() {
@@ -53,7 +53,7 @@ function OnboardingPage() {
                 </Text>
               </S.TextWrapper>
               <S.OnboardingContainer>
-                <OnboardingStep1Lottie />
+                <LottieStep1 />
                 <S.OnboardingImg src={Onboarding1} alt="OnboardingImg1" />
               </S.OnboardingContainer>
             </S.Container>
@@ -74,7 +74,7 @@ function OnboardingPage() {
                 </Text>
               </S.TextWrapper>
               <S.ExtendedOnboardingContainer>
-                <OnboardingStep2Lottie />
+                <LottieStep2 />
               </S.ExtendedOnboardingContainer>
             </S.Container>
           </SwiperSlide>
@@ -94,7 +94,7 @@ function OnboardingPage() {
                 </Text>
               </S.TextWrapper>
               <S.ExtendedOnboardingContainer>
-                <OnboardingStep3Lottie />
+                <LottieStep3 />
               </S.ExtendedOnboardingContainer>
             </S.Container>
           </SwiperSlide>
@@ -114,7 +114,7 @@ function OnboardingPage() {
                 </Text>
               </S.TextWrapper>
               <S.ExtendedOnboardingContainer>
-                <OnboardingStep4Lottie />
+                <LottieStep4 />
               </S.ExtendedOnboardingContainer>
             </S.Container>
           </SwiperSlide>
