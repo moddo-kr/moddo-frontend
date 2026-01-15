@@ -7,6 +7,7 @@ import theme from '@/shared/styles/theme';
 import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
+import { showToast } from '@/shared/ui/Toast';
 import { useGetGuestToken } from '@/entities/auth/api/useGetGuestToken';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
@@ -19,7 +20,7 @@ function LoginPage() {
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
     const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
-      console.log('카카오 로그인');
+      showToast({ type: 'info', content: '준비 중이에요', autoClose: 1000 }); // 1초
     } else if (!token) {
       getGuestToken();
     } else {
@@ -60,7 +61,6 @@ function LoginPage() {
             background: '#FEE500',
           }}
           onClick={() => handleLoginButtonClick('KAKAO')}
-          disabled
         >
           <Kakao width={theme.unit[24]} />
           <Text variant="body1Sb" color="semantic.text.strong">
