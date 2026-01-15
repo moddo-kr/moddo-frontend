@@ -34,7 +34,7 @@ const getUnit = (value: string | number | undefined) => css`
 const getColor = (value: string | ColorKey | undefined) => css`
   ${({ theme }) => {
     if (value === undefined) return '';
-    if (typeof value === 'string' && value in theme.color) {
+    if (typeof value === 'string') {
       return getColorFromTheme(theme.color, value as ColorKey) || value;
     }
     return value;
