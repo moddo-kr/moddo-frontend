@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Button from '@/shared/ui/Button';
+import { ColorKey } from '@/shared/styles/theme.type';
 import * as S from '@/shared/ui/Header/index.styles';
 
 export interface HeaderProps {
@@ -13,7 +14,7 @@ export interface HeaderProps {
   rightButtonOnClick?: () => void;
   type: 'TitleLeft' | 'TitleCenter';
   handleBackButtonClick?: () => void; // FIXME : 타입 오류를 방지하기 위해 남겨둠. 수정 필요함
-  bgColor?: string;
+  bgColor?: ColorKey;
 }
 
 function Header({

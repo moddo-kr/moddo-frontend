@@ -1,6 +1,8 @@
+import getColorFromTheme from '@/shared/lib/getColorFromTheme';
+import { ColorKey } from '@/shared/styles/theme.type';
 import styled from 'styled-components';
 
-export const HeaderArea = styled.header<{ $bgColor?: string }>`
+export const HeaderArea = styled.header<{ $bgColor?: ColorKey }>`
   display: flex;
   align-items: center;
   position: sticky;
@@ -13,7 +15,8 @@ export const HeaderArea = styled.header<{ $bgColor?: string }>`
   min-width: 320px;
   max-height: 64px;
   height: 100%;
-  background-color: ${({ $bgColor }) => $bgColor || 'white'};
+  background-color: ${({ theme, $bgColor }) =>
+    $bgColor ? getColorFromTheme(theme.color, $bgColor) : 'white'};
 `;
 
 export const LeftHeaderArea = styled(HeaderArea)`
