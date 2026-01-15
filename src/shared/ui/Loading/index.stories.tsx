@@ -17,3 +17,11 @@ export const Default: Story = {
     </div>
   ),
 };
+
+export const HideDdoDdo: Story = {
+  render: () => (
+    <div>
+      <Loading hideImage />
+    </div>
+  ),
+};

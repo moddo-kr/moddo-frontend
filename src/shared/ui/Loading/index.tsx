@@ -4,7 +4,11 @@ import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
 import RawLoadingDdoddo from '@/shared/assets/lotties/loading-ddoddo.json';
 
-function Loading() {
+interface LoadingProps {
+  hideImage?: boolean;
+}
+
+function Loading({ hideImage = false }: LoadingProps) {
   const theme = useTheme();
 
   return (
@@ -16,7 +20,7 @@ function Loading() {
       justifyContent="center"
       gap={4}
     >
-      <Lottie animationData={RawLoadingDdoddo} />
+      {!hideImage && <Lottie animationData={RawLoadingDdoddo} />}
       <Flex direction="column" alignItems="center" gap={4}>
         <Text variant="heading2" color="semantic.text.strong">
           LOADING...
