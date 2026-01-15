@@ -6,6 +6,7 @@ import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
 import getGroupManagerAuth from '@/entities/auth/lib/getGroupManagerAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
+import Loading from '@/shared/ui/Loading';
 
 const BillDetail = lazy(() =>
   import('@/pages/billDetail/').then(({ BillDetailPage }) => ({
@@ -107,8 +108,7 @@ function AppRouter() {
   ]);
 
   return (
-    // TODO : 로딩 페이지 추가하기
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <RouterProvider router={router} />
     </Suspense>
   );
