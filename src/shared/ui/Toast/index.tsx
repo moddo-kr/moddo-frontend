@@ -9,7 +9,7 @@ import { Container } from './index.style';
 import { ToastProps } from './index.type';
 
 /** 기존 toastContainer에서 사용되는 옵션 */
-const toastOptions: ToastContainerProps = {
+const defaultToastOptions: ToastContainerProps = {
   position: 'bottom-center',
   autoClose: 500, // 500ms
   hideProgressBar: true,
@@ -23,9 +23,14 @@ const toastOptions: ToastContainerProps = {
 /**
  * toast를 호출하는 함수
  *
- * ex) showToast({type: 'success', content: '성공!'});
+ * ex) showToast({type: 'success', content: '성공!', autoClose: 1000});
  */
-export function showToast({ type, content }: ToastProps) {
+export function showToast({ type, content, autoClose }: ToastProps) {
+  const toastOptions = {
+    ...defaultToastOptions,
+    ...(autoClose !== undefined ? { autoClose } : {}),
+  };
+
   switch (type) {
     case 'info':
       toast.info(content, {
