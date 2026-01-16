@@ -1,7 +1,6 @@
 import Button from '@/shared/ui/Button';
 import { ROUTE } from '@/shared/config/route';
 import { useNavigate } from 'react-router';
-import theme from '@/shared/styles/theme';
 import Text from '@/shared/ui/Text';
 import Header from '@/shared/ui/Header';
 import Onboarding1 from '@/shared/assets/pngs/Onboarding1.png';
@@ -28,7 +27,7 @@ function OnboardingPage() {
 
   return (
     <>
-      <Header type="TitleCenter" bgColor={theme.color.semantic.orange.subtle} />
+      <Header type="TitleCenter" bgColor="semantic.orange.subtle" />
       <S.Wrapper>
         <S.CustomSwiper
           // install Swiper modules
