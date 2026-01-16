@@ -20,9 +20,10 @@ const MemberSchema = z.object({
 interface AddMemberProps {
   members: Member[]; // (required) 멤버 목록
   groupToken: string;
+  isFetching: boolean;
 }
 
-function AddMember({ members, groupToken }: AddMemberProps) {
+function AddMember({ members, groupToken, isFetching }: AddMemberProps) {
   const deleteMutation = useDeleteGroupMember(
     groupToken,
     {
@@ -77,6 +78,9 @@ function AddMember({ members, groupToken }: AddMemberProps) {
     deleteMutation.mutate({ groupToken, groupMemberId: id });
   };
 
+  const isProcessing =
+    isFetching || deleteMutation.isPending || addMutation.isPending;
+
   return (
     <Flex direction="column" height="fit-content">
       <form onSubmit={handleSubmit(handleAddName)}>
@@ -91,7 +95,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
             type="submit"
             variant="secondary"
             size="md"
-            disabled={!formState.isValid}
+            disabled={!formState.isValid || addMutation.isPending}
           >
             추가하기
           </Button>
@@ -105,7 +109,14 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           </Text>
           명
         </S.MemberCount>
-        <Flex gap={12} flexWrap="wrap">
+        <Flex
+          gap={12}
+          flexWrap="wrap"
+          style={{
+            opacity: isProcessing ? 0.5 : 1,
+            transition: 'opacity 0.2s',
+          }} // 처리중일 때 살짝 흐리게 처리
+        >
           {members.map((member) => (
             <MemberProfile
               key={member.id}
