@@ -12,6 +12,7 @@ import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
+import AsyncBoundary from '@/shared/ui/AsyncBoundary';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -25,7 +26,6 @@ function BillDetailPage() {
   const { groupToken, groupData } = useLoaderData();
   const [status, setStatus] = useState<StatusType>('pending');
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
-  const theme = useTheme();
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -63,18 +63,20 @@ function BillDetailPage() {
             관리
           </Text>
         }
-        bgColor={theme.color.semantic.background.normal.alternative}
+        bgColor="semantic.background.normal.alternative"
       />
       <S.Content>
-        <ExpenseTimeHeader
-          totalMember={MEMBER_TOTAL}
-          paidMember={MEMBER_DONE}
-          onShareClick={() => setOpenBottomSheet(true)}
-          status={status}
-          setStatus={setStatus}
-          isChecked={isChecked}
-          setIsChecked={setIsChecked}
-        />
+        <AsyncBoundary>
+          <ExpenseTimeHeader
+            totalMember={MEMBER_TOTAL}
+            paidMember={MEMBER_DONE}
+            onShareClick={() => setOpenBottomSheet(true)}
+            status={status}
+            setStatus={setStatus}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
+        </AsyncBoundary>
         <Divider />
         <S.TabListContainer>
           <TabsList activeTab={activeTab} setActiveTab={setActiveTab}>
@@ -83,9 +85,13 @@ function BillDetailPage() {
           </TabsList>
         </S.TabListContainer>
         {activeTab === 'expense' ? (
-          <ExpenseTimeline groupToken={groupToken} />
+          <AsyncBoundary>
+            <ExpenseTimeline groupToken={groupToken} />
+          </AsyncBoundary>
         ) : (
-          <ExpenseMembers groupToken={groupToken} status={status} />
+          <AsyncBoundary>
+            <ExpenseMembers groupToken={groupToken} status={status} />
+          </AsyncBoundary>
         )}
       </S.Content>
       <BottomButtonContainer>

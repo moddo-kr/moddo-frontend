@@ -9,7 +9,7 @@ import copyClipboard from '@/shared/lib/copyClipboard';
 import Button from '@/shared/ui/Button';
 import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
-import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { useGetGroupHeaderSuspense } from '@/features/settlement-details/api/useGetGroupHeaderSuspense';
 import CurvedProgressBar from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -44,20 +44,16 @@ function ExpenseTimeHeader({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   /** API 호출 관련 로직 */
-  const { data: headerData, isLoading } = useGetGroupHeader(
-    groupToken,
-    {
-      // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
-      // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
-      // 401: () => {
-      //   throw new BoundaryError({
-      //     title: '접근할 수 없는 페이지예요',
-      //     description: '참여한 모임의 정산만 확인할 수 있어요.',
-      //   });
-      // },
-    },
-    [401]
-  );
+  const { data: headerData } = useGetGroupHeaderSuspense(groupToken, {
+    // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
+    // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
+    // 401: () => {
+    //   throw new BoundaryError({
+    //     title: '접근할 수 없는 페이지예요',
+    //     description: '참여한 모임의 정산만 확인할 수 있어요.',
+    //   });
+    // },
+  });
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -121,16 +117,7 @@ function ExpenseTimeHeader({
     stopTimer(); // 버튼 클릭 시 타이머 멈추기
   };
 
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
-  if (!headerData) {
-    return null;
-  }
-
   /** 상수 정의 */
-
   const percentage = (paidMember / totalMember) * 100;
   const crownColor =
     paidMember === totalMember

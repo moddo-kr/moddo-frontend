@@ -1,4 +1,4 @@
-import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
+import { useGetMemberExpenseDetailsSuspense } from '@/features/expense-management/api/useGetMemberExpenseDetailsSuspense';
 import ExpenseMemberItem from '@/pages/billDetail/ui/ExpenseMemberItem';
 import * as S from './index.style';
 
@@ -8,18 +8,8 @@ interface ExpenseMembersProps {
 }
 
 function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
-  const {
-    data: memberExpenseData,
-    isLoading,
-    isError,
-  } = useGetMemberExpenseDetails(groupToken);
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-  if (isError || !memberExpenseData) {
-    return <div>error...</div>;
-  }
+  const { data: memberExpenseData } =
+    useGetMemberExpenseDetailsSuspense(groupToken);
 
   return (
     <S.Wrapper>

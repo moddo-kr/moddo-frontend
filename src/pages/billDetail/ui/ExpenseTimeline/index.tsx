@@ -1,5 +1,5 @@
+import useGetExpenseDetailSuspense from '@/features/expense-management/api/useGetExpenseDetailSuspense';
 import ExpenseTimelineContent from '../ExpenseTimelineContent';
-import useGetExpenseDetail from '../../../../features/expense-management/api/useGetExpenseDetail';
 import * as S from './index.styles';
 
 interface ExpenseTimelineProps {
@@ -7,15 +7,7 @@ interface ExpenseTimelineProps {
 }
 
 function ExpenseTimeline({ groupToken }: ExpenseTimelineProps) {
-  const { data, isLoading, isError } = useGetExpenseDetail(groupToken);
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
-  if (isError || !data || !data.expenses) {
-    return <div>error...</div>;
-  }
+  const { data } = useGetExpenseDetailSuspense(groupToken);
 
   return (
     <S.TimelineContainer>
