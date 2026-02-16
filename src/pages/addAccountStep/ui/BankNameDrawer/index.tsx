@@ -24,7 +24,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
       <Flex
         direction="column"
         pt={32}
-        px={5}
+        px={20}
         height="70dvh"
         borderRadius={12}
         width="100%"

@@ -172,19 +172,18 @@ function ExpenseTimeHeader({
           </Flex>
         }
         sub={
-          <Flex gap={theme.unit[4]} alignItems="center">
+          <Flex gap={4} alignItems="center">
             정산 계좌: {accountFormat}
             <Button
               variant="text"
               onClick={() => handleCopyButtonClick(accountFormat)}
             >
-              <Copy width={theme.unit[16]} height={theme.unit[16]} />
+              <Copy width={16} height={16} />
             </Button>
           </Flex>
         }
         bgColor="semantic.background.normal.alternative"
       />
-      <div style={{ height: `${theme.unit[20]}` }} />
       <CurvedProgressBar percentage={percentage}>
         <S.ModdoButton onClick={handleModdoButtonClick}>
           <S.ModdoImage src={StatusContent[status].image} />
@@ -195,10 +194,13 @@ function ExpenseTimeHeader({
             width="32"
             style={{ paddingRight: `${theme.unit[8]}` }}
           />
-          <Text as="p" variant="body1Sb" color="semantic.orange.default">
+          <Text variant="body1Sb" color="semantic.orange.default">
             {paidMember}
           </Text>
-          {`/${totalMember} 정산 완료`}
+          <Text
+            variant="body1Sb"
+            color="semantic.text.inverse"
+          >{`/${totalMember} 정산 완료`}</Text>
         </S.ExpenseChip>
         <Crown
           width={theme.unit[24]}
@@ -209,45 +211,38 @@ function ExpenseTimeHeader({
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>
       </CurvedProgressBar>
-      <Flex
-        direction="column"
-        pl={theme.unit[20]}
-        pr={theme.unit[20]}
-        gap={theme.unit[12]}
-      >
+      <Flex direction="column" px={20} gap={12}>
         <Text variant="body1Sb" color="semantic.text.strong">
           정산 마감까지 남은 시간
         </Text>
         <S.TimeBox>
-          <Flex direction="column" width={174} alignItems="center">
-            <Flex justifyContent="center" alignItems="center">
-              {([hours, minutes, seconds] as number[]).map(
-                (time, index, arr) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <React.Fragment key={index}>
-                    <Text
-                      variant="heading1"
-                      color={
-                        status === 'failure'
-                          ? 'semantic.state.danger'
-                          : 'semantic.text.strong'
-                      }
-                    >
-                      {String(time).padStart(2, '0')}
-                    </Text>
-                    {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}
-                  </React.Fragment>
-                )
-              )}
-            </Flex>
-            <Flex justifyContent="space-between" width="100%" pl={2.5} pr={2.5}>
-              {['시', '분', '초'].map((label) => (
-                <Text key={label} color="semantic.text.subtle">
-                  {label}
+          <S.Timer>
+            {([hours, minutes, seconds] as number[]).map((time, index, arr) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <React.Fragment key={index}>
+                <Text
+                  variant="heading1"
+                  color={
+                    status === 'failure'
+                      ? 'semantic.state.danger'
+                      : 'semantic.text.strong'
+                  }
+                >
+                  {String(time).padStart(2, '0')}
                 </Text>
-              ))}
-            </Flex>
-          </Flex>
+                {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}
+              </React.Fragment>
+            ))}
+            {['시', '분', '초'].map((label, idx) => (
+              <Text
+                key={label}
+                color="semantic.text.subtle"
+                style={{ gridColumn: idx * 2 + 1 }}
+              >
+                {label}
+              </Text>
+            ))}
+          </S.Timer>
         </S.TimeBox>
       </Flex>
       <Modal
