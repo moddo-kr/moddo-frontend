@@ -68,7 +68,7 @@ function HomePage() {
           fill={theme.color.semantic.orange.default}
           onClick={() => navigate(ROUTE.login)}
         />
-        <Flex gap={4}>
+        <Flex gap={16}>
           <Bell width={24} height={24} />
           <Menu width={24} height={24} />
         </Flex>
@@ -79,9 +79,9 @@ function HomePage() {
         bgColor={theme.color.semantic.primary.default}
         height="136px"
         borderRadius={theme.radius.default}
-        margin={5}
-        px={5}
-        py={5}
+        margin={20}
+        px={20}
+        py={18}
       >
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
           <Text variant="heading2">정산하기</Text>
@@ -91,13 +91,15 @@ function HomePage() {
             fill={theme.color.semantic.orange.default}
           />
         </S.SelectGroupButton>
-        <Flex direction="column" py={2.5}>
-          <Text variant="body2R" color="semantic.text.inverse">
-            모임은 즐겁게, 정산은 깔끔하게!
-            <br />
-            모또만 믿고 맡겨줘!
-          </Text>
-        </Flex>
+        <Text
+          variant="body2R"
+          color="semantic.text.inverse"
+          style={{ display: 'inline-block', marginTop: theme.unit[4] }}
+        >
+          모임은 즐겁게, 정산은 깔끔하게!
+          <br />
+          모또만 믿고 맡겨줘!
+        </Text>
         <S.DescriptionImg src={MainHamImg2} alt="" />
       </Flex>
       <S.BoxButtonWrapper>
@@ -115,10 +117,15 @@ function HomePage() {
         </S.BoxButton>
       </S.BoxButtonWrapper>
       <Divider />
-      <Flex direction="column" gap={2} pt={5} flexGrow={1}>
+      <Flex direction="column" pt={16} flexGrow={1}>
         <S.SettlementTitle>진행중인 정산</S.SettlementTitle>
-        <Flex justifyContent="space-between" px={5} py={3} alignItems="center">
-          <Flex gap={2}>
+        <Flex
+          justifyContent="space-between"
+          px={20}
+          height={48}
+          alignItems="center"
+        >
+          <Flex gap={8}>
             <S.SettlementButton
               selected={settlementType === 'RECEIVE'}
               onClick={() => handleSettlementTypeButtonClick('RECEIVE')}
@@ -132,8 +139,10 @@ function HomePage() {
               보낼 정산
             </S.SettlementButton>
           </Flex>
-          <Flex alignItems="center" fontSize={14}>
-            최신순
+          <Flex alignItems="center">
+            <Text variant="body2R" color="semantic.text.subtle">
+              최신순
+            </Text>
             <Next width={theme.unit[24]} height={theme.unit[24]} />
           </Flex>
         </Flex>
@@ -154,11 +163,11 @@ function HomePage() {
         {settlementType === 'SEND' && (
           <Flex
             direction="column"
-            py={15}
+            py={20}
             justifyContent="center"
             alignItems="center"
             flexGrow={1}
-            gap={6}
+            gap={20}
           >
             <S.NoSettlementImg src={CoinImg} alt="" />
             <Text variant="body2R" color="semantic.text.subtle">
