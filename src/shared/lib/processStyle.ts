@@ -65,9 +65,17 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     width: ${getUnit(props.width)};
   `}
+  ${props.minWidth &&
+  css`
+    min-width: ${getUnit(props.minWidth)};
+  `}
   ${props.height &&
   css`
     height: ${getUnit(props.height)};
+  `}
+  ${props.minHeight &&
+  css`
+    min-height: ${getUnit(props.minHeight)};
   `}
 
   /* Spacing Props */
@@ -120,6 +128,18 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     border-radius: ${getUnit(props.borderRadius)};
   `}
+  ${props.borderWidth &&
+  css`
+    border-width: ${getUnit(props.borderWidth)};
+  `}
+  ${props.borderColor &&
+  css`
+    border-color: ${getColor(props.borderColor)};
+  `}
+  ${props.borderStyle &&
+  css`
+    border-style: ${props.borderStyle};
+  `}
 
   /* Position props */
   ${props.position &&
@@ -136,10 +156,41 @@ export const processStyleProps = (props: BaseStyledProps) => css`
   css`
     background-color: ${getColor(props.bgColor ?? props.backgroundColor)};
   `}
+  /* Layout props */
+  ${props.overflow &&
+  css`
+    overflow: ${props.overflow};
+  `}
+  ${props.display &&
+  css`
+    display: ${props.display};
+  `}
+  ${props.flex &&
+  css`
+    flex: ${props.flex};
+  `}
+  ${props.boxSizing &&
+  css`
+    box-sizing: ${props.boxSizing};
+  `}
 
   /* Font props */
   ${props.fontSize &&
   css`
     font-size: ${getUnit(props.fontSize)};
+  `} 
+  
+  /* Text props */
+  ${props.textAlign &&
+  css`
+    text-align: ${props.textAlign};
+  `}
+  ${props.whiteSpace &&
+  css`
+    white-space: ${props.whiteSpace};
+  `}
+  ${props.textOverflow &&
+  css`
+    text-overflow: ${props.textOverflow};
   `}
 `;

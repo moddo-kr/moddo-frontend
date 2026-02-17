@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import styled from 'styled-components';
 
 /** @Todo Button 공통 컴포넌트 제작 */
@@ -85,7 +86,7 @@ export const NoSettlementImg = styled.img`
   object-fit: contain;
 `;
 
-export const BoxButton = styled.button`
+export const BoxButton = styled(Link)`
   display: flex;
   padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[20]}`};
   position: relative;

@@ -38,6 +38,11 @@ const Onboarding = lazy(() =>
     default: OnboardingPage,
   }))
 );
+const MyLinks = lazy(() =>
+  import('@/pages/myLinks').then(({ MyLinksPage }) => ({
+    default: MyLinksPage,
+  }))
+);
 const SelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
@@ -78,6 +83,10 @@ function AppRouter() {
             {
               path: ROUTE.home,
               element: <Home />,
+            },
+            {
+              path: ROUTE.myLinks,
+              element: <MyLinks />,
             },
             {
               path: ROUTE.selectGroup,

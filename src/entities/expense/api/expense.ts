@@ -3,6 +3,7 @@ import {
   SingleExpenseForm,
   ExpenseList,
   ExpenseDetailList,
+  ExpenseLinkList,
 } from '@/entities/expense/model/expense.type';
 import axiosInstance from '@/shared/api/axios';
 
@@ -45,6 +46,13 @@ const expense = {
   getDetail: (groupToken: string): Promise<ExpenseDetailList> =>
     axiosInstance
       .get(`expenses/details?groupToken=${groupToken}`)
+      .then((res) => res.data),
+
+  // GET links (링크 관리 페이지에서 조회되는 데이터)
+  // NOTE : API 명세서에 없는 데이터이므로 요청 url 변경 가능성 있음
+  getLinks: (): Promise<ExpenseLinkList> =>
+    axiosInstance
+      .get(`/expenses/links`, { useMock: true })
       .then((res) => res.data),
 };
 

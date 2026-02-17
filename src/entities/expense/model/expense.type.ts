@@ -70,3 +70,14 @@ export interface ExpenseDetail {
 export interface ExpenseDetailList {
   expenses: ExpenseDetail[];
 }
+
+/* 링크 관리 페이지 - 링크 목록 조회 타입 */
+export interface ExpenseLink {
+  id: number;
+  url: string;
+  name: string;
+}
+
+export interface ExpenseLinkList {
+  links: ExpenseLink[];
+}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TextVariant } from '@/shared/ui/Text/index.styles';
 
 export const HeaderArea = styled.header<{ $bgColor?: string }>`
   display: flex;
@@ -26,9 +27,7 @@ export const CenterHeaderArea = styled(HeaderArea)`
 
 export const TitleArea = styled.h2`
   all: unset;
-  font-size: 1rem; // 16px
-  font-weight: 400;
-  line-height: 1;
+  ${TextVariant('body1Sb')};
   white-space: nowrap;
   text-align: center;
 `;
