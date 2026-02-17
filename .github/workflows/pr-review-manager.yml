@@ -23,6 +23,8 @@ jobs:
   add-jira-link:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' # PR 생성 시에만 실행
+    permissions:
+      pull-requests: write
     steps:
       - name: Extract JIRA issue key from branch name
         id: extract-jira-key
