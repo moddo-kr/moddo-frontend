@@ -2,7 +2,11 @@ import axios, { AxiosHeaders } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}/functions/v1`,
+  // 환경변수에서 서버 URL을 가져오고, 기본값으로 빈 문자열을 사용하도록 설정
+  // 의도적으로 상대경로를 사용해야 하는 경우(예: 스토리북)를 위해서 빈 문자열도 사용할 수 있도록 함
+  baseURL: import.meta.env.VITE_SERVER_URL
+    ? `${import.meta.env.VITE_SERVER_URL}/functions/v1`
+    : '',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -21,7 +25,7 @@ axiosInstance.interceptors.request.use(
     }
     /** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
     if (newConfig.useMock) {
-      newConfig.baseURL = 'http://localhost:3000/api/v1';
+      newConfig.baseURL = '/api/v1';
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
         'X-Mock-Request': 'true',
