@@ -32,11 +32,6 @@ jobs:
           JIRA_KEY=$(echo "$HEAD_REF" | grep -oE 'MD-[0-9]+' || echo "")
            echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
 
-      # PR 본문을 JSON 형식으로 파싱하기 위한 jq 설치
-      - name: Install jq
-        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
-        run: sudo apt-get update && sudo apt-get install -y jq
-
       - name: Add JIRA issue link to Comment
         if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
         uses: thollander/actions-comment-pull-request@v3
