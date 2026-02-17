@@ -32,7 +32,7 @@ jobs:
           HEAD_REF: ${{ github.head_ref }} # PR의 브랜치 이름
         run: |
           JIRA_KEY=$(echo "$HEAD_REF" | grep -oE 'MD-[0-9]+' || echo "")
-           echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
+          echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
 
       - name: Add JIRA issue link to Comment
         if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
