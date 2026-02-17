@@ -1,6 +1,7 @@
 import { DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
+import Flex from '@/shared/ui/Flex';
 import DefaultProgressBar from '../DefaultProgressBar';
 import * as S from './index.style';
 
@@ -43,19 +44,14 @@ function HomeExpenseItem({
               width={`${theme.unit[28]}`}
               style={{ paddingRight: `${theme.unit[4]}` }}
             />
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-end',
-                fontSize: `${theme.unit[14]}`,
-              }}
-            >
-              <p style={{ color: `${theme.color.semantic.orange.default}` }}>
+            <Flex>
+              <Text color="semantic.orange.default" variant="body2Sb">
                 {paidMember}
-              </p>
-              {`/${totalMember} 정산 완료`}
-            </div>
+              </Text>
+              <Text variant="body2Sb" color="semantic.text.subtle">
+                {`/${totalMember} 정산 완료`}
+              </Text>
+            </Flex>
           </S.ExpenseProgress>
         </S.ProgressBarWrapper>
       </S.Container>

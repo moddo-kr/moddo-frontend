@@ -3,15 +3,14 @@ import Text from '@/shared/ui/Text';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
 import { useEffect, useState } from 'react';
-import { CoinLottie } from '@/shared/ui/Lottie';
-import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
 import theme from '@/shared/styles/theme';
 import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
 import { useGetGuestToken } from '@/entities/auth/api/useGetGuestToken';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
-import * as S from './LoginPage.style';
+import LoginEntranceView from './LoginEntranceView';
+import * as S from './LoginPage.styles';
 
 function LoginPage() {
   const { refetch: getGuestToken } = useGetGuestToken();
@@ -37,27 +36,7 @@ function LoginPage() {
   }, []);
 
   if (isEntrance) {
-    return (
-      <Flex
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        bgColor={theme.color.semantic.orange.subtle}
-        flexGrow={1}
-        gap={theme.unit[16]}
-      >
-        <S.TextContainer>
-          <S.LogoImg src={LogoImg} alt="logo" />
-          <Text variant="body1R" color="semantic.text.strong">
-            모또와 함께라면 정산 걱정 끝!
-          </Text>
-        </S.TextContainer>
-        <S.ImgContainer>
-          <CoinLottie />
-          <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />
-        </S.ImgContainer>
-      </Flex>
-    );
+    return <LoginEntranceView />;
   }
 
   return (
@@ -76,7 +55,7 @@ function LoginPage() {
           </Text>
         </S.TextContainer>
       </S.ContentWrapper>
-      <S.ButtonWrapper>
+      <S.BottomWrapper>
         <Button
           style={{
             background: '#FEE500',
@@ -105,7 +84,7 @@ function LoginPage() {
             개인정보 수집 및 이용에 동의하게 됩니다.
           </Text>
         </S.TextWrapper>
-      </S.ButtonWrapper>
+      </S.BottomWrapper>
     </Flex>
   );
 }
