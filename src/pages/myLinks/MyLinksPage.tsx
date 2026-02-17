@@ -15,28 +15,30 @@ function MyLinksPage() {
   const { data, isLoading } = useGetExpensesLinks({}, []);
 
   if (isLoading) {
-    <>
-      <Header
-        type="TitleCenter"
-        title="링크 관리"
-        leftButtonContent={<ArrowLeft width={24} />}
-        leftButtonOnClick={() => navigate(-1)}
-        bgColor={theme.color.semantic.background.normal.alternative}
-      />
-      <Flex
-        pt={24}
-        pb={22}
-        px={20}
-        flex={1}
-        justifyContent="center"
-        alignItems="center"
-        height="auto"
-        direction="column"
-        bgColor={theme.color.semantic.background.normal.alternative}
-      >
-        로딩중...
-      </Flex>
-    </>;
+    return (
+      <>
+        <Header
+          type="TitleCenter"
+          title="링크 관리"
+          leftButtonContent={<ArrowLeft width={24} />}
+          leftButtonOnClick={() => navigate(-1)}
+          bgColor={theme.color.semantic.background.normal.alternative}
+        />
+        <Flex
+          pt={24}
+          pb={22}
+          px={20}
+          flex={1}
+          justifyContent="center"
+          alignItems="center"
+          height="auto"
+          direction="column"
+          bgColor={theme.color.semantic.background.normal.alternative}
+        >
+          로딩중...
+        </Flex>
+      </>
+    );
   }
 
   return (
