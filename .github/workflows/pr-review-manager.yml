@@ -26,9 +26,11 @@ jobs:
     steps:
       - name: Extract JIRA issue key from branch name
         id: extract-jira-key
+        env:
+          HEAD_REF: ${{ github.head_ref }} # PR의 브랜치 이름
         run: |
-          JIRA_KEY=$(echo ${{ github.head_ref }} | grep -oE 'MD-[0-9]+' || echo "")
-          echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
+          JIRA_KEY=$(echo "$HEAD_REF" | grep -oE 'MD-[0-9]+' || echo "")
+           echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
 
       # PR 본문을 JSON 형식으로 파싱하기 위한 jq 설치
       - name: Install jq
