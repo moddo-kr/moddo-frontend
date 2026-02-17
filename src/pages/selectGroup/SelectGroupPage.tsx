@@ -13,10 +13,6 @@ function SelectGroupPage() {
     return <div>로딩중</div>;
   }
 
-  if (!groupList) {
-    return null;
-  }
-
   return (
     <>
       {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
@@ -44,7 +40,7 @@ function SelectGroupPage() {
 
           <Flex direction="column" mx={5} mt={5} gap={8}>
             <CreateGroupLinkButton />
-            {groupList.length !== 0 ? (
+            {groupList && groupList.length !== 0 ? (
               groupList.map((group) => (
                 <GroupLinkButton key={group.id} group={group} />
               ))
