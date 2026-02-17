@@ -26,6 +26,11 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # 가장 최근 커밋만 가져오기
+
       - name: Extract JIRA issue key from branch name
         id: extract-jira-key
         env:
