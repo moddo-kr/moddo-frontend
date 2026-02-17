@@ -40,7 +40,7 @@ const meta: Meta<typeof SelectGroupPage> = {
                 {
                   id: 2,
                   name: '김모또',
-                  role: 'MEMBER',
+                  role: 'PARTICIPANT',
                   profile: '',
                   isPaid: false,
                   paidAt: null,

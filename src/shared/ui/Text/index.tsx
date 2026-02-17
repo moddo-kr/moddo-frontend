@@ -1,4 +1,4 @@
-import { ElementType, HTMLAttributes } from 'react';
+import { CSSProperties, ElementType, HTMLAttributes } from 'react';
 import { ColorKey, TypographyKey } from '@/shared/styles/theme.type';
 import { BaseStyledProps } from '@/shared/types/styled';
 import * as S from './index.styles';
