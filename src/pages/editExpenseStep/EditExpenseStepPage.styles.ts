@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BillFormList = styled.form`
+export const ExpenseFormList = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.unit[24]};

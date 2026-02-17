@@ -53,9 +53,7 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
           </Button>
           <Button
             onClick={() =>
-              navigate(
-                generatePath(ROUTE.billDetailCharacterShare, { groupToken })
-              )
+              navigate(generatePath(ROUTE.characterShare, { groupToken }))
             }
           >
             캐릭터 보기

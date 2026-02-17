@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Group } from '@/entities/group/model/group.type';
 import SelectGroupPage from './SelectGroupPage';
 
 /**
@@ -21,14 +22,33 @@ const meta: Meta<typeof SelectGroupPage> = {
     chromatic: { disableSnapshot: true },
     msw: {
       handlers: [
-        http.get('http://localhost:3000/api/v1/group/header', () => {
-          return HttpResponse.json({
-            groupName: '모또 정기모임',
-            totalAmount: 150000,
-            deadline: '2025-12-26T23:59:59Z',
-            bank: '국민은행',
-            accountNumber: '123456-78-910111',
-          });
+        http.get('/api/v1/groups', () => {
+          console.log('msw handler called');
+          const result: Group[] = [
+            {
+              id: '12345',
+              groupName: '모또 정기모임',
+              members: [
+                {
+                  id: 1,
+                  name: '김모또',
+                  role: 'MANAGER',
+                  profile: '',
+                  isPaid: true,
+                  paidAt: new Date(),
+                },
+                {
+                  id: 2,
+                  name: '김모또',
+                  role: 'MEMBER',
+                  profile: '',
+                  isPaid: false,
+                  paidAt: null,
+                },
+              ],
+            },
+          ];
+          return HttpResponse.json({ groups: result });
         }),
       ],
     },

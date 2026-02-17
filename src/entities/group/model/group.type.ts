@@ -1,6 +1,7 @@
 import { Member } from '@/entities/member/model/member.type';
 
 export interface Group {
+  id: string;
   groupName: string;
   members: Member[];
 }

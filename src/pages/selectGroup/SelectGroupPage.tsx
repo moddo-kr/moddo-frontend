@@ -1,28 +1,17 @@
-import { useState } from 'react';
-import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
-import { Add, CheckCircle } from '@/shared/assets/svgs/icon';
+import { useGetGroupList } from '@/entities/group/api/groupQueries';
 import Header from '@/shared/ui/Header';
-import { ROUTE } from '@/shared/config/route';
 import DescriptionField from '@/shared/ui/DescriptionField';
-import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
-import * as S from './SelectGroupPage.styles';
-
-type SelectedValueType = 'CREATE' | 'RECENT';
+import { CreateGroupLinkButton, EmptyBox, GroupLinkButton } from './ui';
 
 function SelectGroupPage() {
-  const [selectedValue, setSelectedValue] =
-    useState<SelectedValueType>('CREATE');
-  const theme = useTheme();
   const navigate = useNavigate();
+  const { data: groupList, isLoading } = useGetGroupList({}, []);
 
-  const handleButtonClick = (value: SelectedValueType) => {
-    if (selectedValue === value) {
-      return;
-    }
-    setSelectedValue(value);
-  };
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
 
   return (
     <>
@@ -49,30 +38,15 @@ function SelectGroupPage() {
             bgColor="semantic.primary.subtle"
           />
 
-          <Flex gap={8} direction="column" mx={20} mt={20}>
-            <S.SelectButton
-              selected={selectedValue === 'CREATE'}
-              onClick={() => navigate(ROUTE.groupSetup)}
-            >
-              <Add width={30} />
-              <Text variant="body1Sb" color="semantic.text.inverse">
-                새로 생성
-              </Text>
-            </S.SelectButton>
-            <S.SelectButton
-              selected={selectedValue === 'RECENT'}
-              onClick={() => handleButtonClick('RECENT')}
-              disabled
-            >
-              <CheckCircle
-                width={30}
-                height={30}
-                fill={theme.color.semantic.icon.disabled}
-              />
-              <Text variant="body1Sb" color="semantic.text.subtle">
-                기존 모임이 없어요.
-              </Text>
-            </S.SelectButton>
+          <Flex direction="column" mx={5} mt={5} gap={8}>
+            <CreateGroupLinkButton />
+            {groupList && groupList.length !== 0 ? (
+              groupList.map((group) => (
+                <GroupLinkButton key={group.id} group={group} />
+              ))
+            ) : (
+              <EmptyBox />
+            )}
           </Flex>
         </main>
       </Flex>

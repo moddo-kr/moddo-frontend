@@ -4,12 +4,12 @@ import { ROUTE } from '@/shared/config/route';
 import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
-import getGroupManagerAuth from '@/entities/auth/lib/getGroupManagerAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
+import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
 
-const BillDetail = lazy(() =>
-  import('@/pages/billDetail/').then(({ BillDetailPage }) => ({
-    default: BillDetailPage,
+const ExpenseDetail = lazy(() =>
+  import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
+    default: ExpenseDetailPage,
   }))
 );
 const CharacterShare = lazy(() =>
@@ -17,9 +17,9 @@ const CharacterShare = lazy(() =>
     default: CharacterSharePage,
   }))
 );
-const CreateBill = lazy(() =>
-  import('@/pages/createBill').then(({ CreateBillPage }) => ({
-    default: CreateBillPage,
+const CreateExpense = lazy(() =>
+  import('@/pages/CreateExpensePage').then(({ CreateExpensePage }) => ({
+    default: CreateExpensePage,
   }))
 );
 const GroupSetup = lazy(() =>
@@ -87,21 +87,21 @@ function AppRouter() {
               path: ROUTE.groupSetup,
               element: <GroupSetup />,
             },
+            {
+              path: ROUTE.createExpense,
+              element: <CreateExpense />,
+              loader: createExpensePageGuardLoader,
+            },
           ],
         },
         // TODO : 로그인 기능으로 변경될 예정
         {
-          path: ROUTE.createBill,
-          element: <CreateBill />,
-          loader: getGroupManagerAuth,
-        },
-        {
-          path: ROUTE.billDetail,
-          element: <BillDetail />,
+          path: ROUTE.expenseDetail,
+          element: <ExpenseDetail />,
           loader: groupTokenUrlLoader,
         },
         {
-          path: ROUTE.billDetailCharacterShare,
+          path: ROUTE.characterShare,
           element: <CharacterShare />,
           loader: groupTokenUrlLoader,
         },

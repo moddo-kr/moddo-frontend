@@ -17,9 +17,9 @@ import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
 import { StatusType } from './ui/ExpenseTimeHeader/index.type';
-import * as S from './BillDetailPage.styles';
+import * as S from './ExpenseDetailPage.styles';
 
-function BillDetailPage() {
+function ExpenseDetailPage() {
   const { unit } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData } = useLoaderData();
@@ -106,4 +106,4 @@ function BillDetailPage() {
   );
 }
 
-export default BillDetailPage;
+export default ExpenseDetailPage;

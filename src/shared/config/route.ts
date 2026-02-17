@@ -4,9 +4,9 @@ export const ROUTE = {
   login: '/login',
   onboarding: '/onboarding',
   home: '/',
-  createBill: '/create-bill',
+  createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',
-  billDetail: '/bill-detail/:groupToken',
-  billDetailCharacterShare: '/bill-detail/:groupToken/character',
+  expenseDetail: '/expense-detail/:groupToken',
+  characterShare: '/expense-detail/:groupToken/character',
 } as const;

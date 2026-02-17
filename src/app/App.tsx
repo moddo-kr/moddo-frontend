@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider } from '@tanstack/react-query';
 import GlobalStyles from '@/shared/styles/globalStyles';
@@ -7,19 +6,11 @@ import AppRouter from '@/app/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalErrorBoundary from '@/app/GlobalErrorBoundary';
 import Toast from '@/shared/ui/Toast';
-import useApiError from '@/shared/hooks/useApiError';
-import { queryClient, setupQueryClient } from '@/shared/api/queryClient';
+import { queryClient } from '@/shared/api/queryClient';
 import Layout from './Layout';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { handleError: handleQueryError } = useApiError({});
-  const { handleError: handleMutationError } = useApiError({});
-
-  useEffect(() => {
-    setupQueryClient(handleQueryError, handleMutationError);
-  }, [handleMutationError, handleQueryError]);
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalErrorBoundary>

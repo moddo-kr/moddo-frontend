@@ -1,15 +1,14 @@
-import { useNavigate } from 'react-router';
+import { generatePath, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
+import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { ROUTE } from '@/shared/config/route';
-
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
 import { BoundaryError } from '@/shared/types/error.type';
-import useGetGroupBasicInfo from '@/features/group-creation/api/useGetGroupBasicInfo';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
 import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';
@@ -28,7 +27,7 @@ function MemberSetupPage() {
     key: GROUP_TOKEN,
     initialValue: '',
   });
-  const { data, isLoading } = useGetGroupBasicInfo(
+  const { data, isLoading } = useGetGroupDetail(
     groupToken,
     {
       // 총무가 아닌 토큰으로 모임 정보를 요청하는 경우
@@ -76,7 +75,9 @@ function MemberSetupPage() {
       <BottomButtonContainer>
         <Button
           disabled={data.members.length <= 1}
-          onClick={() => navigate(ROUTE.createBill)}
+          onClick={() =>
+            navigate(generatePath(ROUTE.createExpense, { groupToken }))
+          }
         >
           정산 시작!
         </Button>

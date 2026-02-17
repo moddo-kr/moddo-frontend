@@ -6,19 +6,24 @@ import {
   GroupHeaderResponse,
 } from '@/entities/group/model/group.type';
 
-const group = {
-  get: (groupToken: string): Promise<Group> =>
-    axiosInstance
-      .get(`/group?groupToken=${groupToken}`)
-      .then((res) => res.data),
+export const getGroupList = async (): Promise<Group[]> => {
+  const response = await axiosInstance.get('/groups', { useMock: true }); // NOTE : API 경로 확인 필요
+  return response.data.groups;
+};
 
-  post: async (groupData: CreateGroupData) => {
-    const response = await axiosInstance.post<{ groupToken: string }>(
-      '/group',
-      groupData
-    );
-    return response.data;
-  },
+export const getGroupDetail = async (groupToken: string): Promise<Group> => {
+  const response = await axiosInstance.get('/group', {
+    params: { groupToken },
+  });
+  return response.data;
+};
+
+export const createGroup = async (groupData: CreateGroupData) => {
+  const response = await axiosInstance.post<{ groupToken: string }>(
+    '/group',
+    groupData
+  );
+  return response.data;
 };
 
 export const putGroupAccount = async ({
@@ -42,5 +47,3 @@ export const getGroupHeader = (
     .get(`/group/header?groupToken=${groupToken}`)
     .then((res) => res.data);
 };
-
-export default group;

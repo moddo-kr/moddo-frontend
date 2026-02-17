@@ -1,5 +1,5 @@
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
-import ExpenseMemberItem from '@/pages/billDetail/ui/ExpenseMemberItem';
+import ExpenseMemberItem from '@/pages/expenseDetail/ui/ExpenseMemberItem';
 import * as S from './index.style';
 
 interface ExpenseMembersProps {

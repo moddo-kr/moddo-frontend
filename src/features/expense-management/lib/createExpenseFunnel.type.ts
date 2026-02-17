@@ -1,17 +1,17 @@
 import { SingleExpenseForm } from '@/entities/expense/model/expense.type';
 
-export type EditBillContext = {
+export type EditExpenseContext = {
   expenseId: number;
   initialExpense: SingleExpenseForm;
 };
 
-export type BillStepContext = {
+export type ExpenseStepContext = {
   isExpenseCreated: boolean;
   expenseId?: number;
   initialExpense?: SingleExpenseForm;
 };
 
-export type EditBillStepContext = {
+export type EditExpenseStepContext = {
   isExpenseCreated: boolean;
   expenseId: number;
   initialExpense: SingleExpenseForm;

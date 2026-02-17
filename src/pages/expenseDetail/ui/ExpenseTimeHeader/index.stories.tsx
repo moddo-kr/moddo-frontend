@@ -22,7 +22,7 @@ const meta: Meta<typeof ExpenseTimeHeader> = {
     chromatic: { disableSnapshot: false },
     msw: {
       handlers: [
-        http.get('http://localhost:3000/api/v1/group/header', () => {
+        http.get('/group/header', () => {
           return HttpResponse.json({
             groupName: '모또 정기모임',
             totalAmount: 150000,

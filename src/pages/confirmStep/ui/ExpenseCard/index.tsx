@@ -4,13 +4,13 @@ import Chip from '@/shared/ui/Chip';
 import { Expense } from '@/entities/expense/model/expense.type';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';
-import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useDeleteMutation from './api/useDeleteExpense';
 import * as S from './index.styles';
 
 interface ExpenseCardProps extends Expense {
   index: number;
-  onEdit: (context: EditBillContext) => void;
+  onEdit: (context: EditExpenseContext) => void;
 }
 
 function ExpenseCard({

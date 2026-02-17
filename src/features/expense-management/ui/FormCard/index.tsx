@@ -8,7 +8,7 @@ import {
 } from '@/entities/expense/model/expense.type';
 import Alert from '@/shared/ui/Alert';
 import Button from '@/shared/ui/Button';
-import BillDatePicker from '@/shared/ui/DatePicker';
+import ExpenseDatePicker from '@/shared/ui/DatePicker';
 import Text from '@/shared/ui/Text';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
@@ -111,7 +111,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.date`}
               renderInput={({ field }) => (
-                <BillDatePicker
+                <ExpenseDatePicker
                   selected={new Date(field.value)}
                   onChange={(date) =>
                     field.onChange(format(date || new Date(), 'yyyy-MM-dd'))

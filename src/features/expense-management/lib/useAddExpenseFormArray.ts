@@ -1,14 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import { format } from 'date-fns';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Group } from '@/entities/group/model/group.type';
 import {
   SingleExpenseForm,
   ExpenseFormSchema,
 } from '@/entities/expense/model/expense.type';
-import group from '@/entities/group/api/group';
+import { Group } from '@/entities/group/model/group.type';
 
 const defaultValues: SingleExpenseForm = {
   amount: 0,
@@ -21,14 +20,11 @@ const defaultValues: SingleExpenseForm = {
  * 지출 폼을 위한 커스텀 훅
  */
 const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
-  const { groupToken } = useLoaderData();
-  const [groupInfo, setGroupInfo] = useState<Group | null>(null);
+  const { groupData } = useLoaderData() as { groupData: Group };
   const formMethods = useForm({
     resolver: zodResolver(ExpenseFormSchema),
     mode: 'onChange', // 폼들의 필수 입력값이 모두 입력되었을 때 '다음' 버튼을 활성화시키기 위함
     defaultValues: async () => {
-      const groupData = await group.get(groupToken);
-      setGroupInfo(groupData);
       // 기본 데이터가 있는 경우 (ex. 수정)
       if (initialExpense) {
         return {
@@ -54,12 +50,12 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
   });
 
   const defaultFormValue = useMemo(() => {
-    if (!groupInfo) {
+    if (!groupData) {
       return defaultValues;
     }
     return {
       ...defaultValues,
-      memberExpenses: groupInfo.members.map((member) => ({
+      memberExpenses: groupData.members.map((member) => ({
         id: member.id,
         name: member.name,
         amount: 0,
@@ -67,7 +63,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
         role: member.role,
       })),
     };
-  }, [groupInfo]);
+  }, [groupData]);
 
   const fieldArrayReturns = useFieldArray({
     control: formMethods.control,
@@ -75,7 +71,7 @@ const useAddExpenseFormArray = (initialExpense?: SingleExpenseForm) => {
   });
 
   return {
-    groupInfo,
+    groupInfo: groupData,
     formMethods,
     defaultFormValue,
     fieldArrayReturns,
