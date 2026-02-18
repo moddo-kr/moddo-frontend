@@ -48,6 +48,11 @@ const LazyMyPage = lazy(() =>
     default: MyPage,
   }))
 );
+const LazyMyEditPage = lazy(() =>
+  import('@/pages/my-edit').then(({ MyEditPage }) => ({
+    default: MyEditPage,
+  }))
+);
 const LazySelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
@@ -96,6 +101,10 @@ function AppRouter() {
             {
               path: ROUTE.my,
               element: <LazyMyPage />,
+            },
+            {
+              path: ROUTE.myEdit,
+              element: <LazyMyEditPage />,
             },
             {
               path: ROUTE.selectGroup,

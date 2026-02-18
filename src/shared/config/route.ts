@@ -6,6 +6,7 @@ export const ROUTE = {
   home: '/',
   myLinks: '/my-links',
   my: '/my',
+  myEdit: '/my/edit',
   createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',
