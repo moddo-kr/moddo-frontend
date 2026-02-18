@@ -13,6 +13,8 @@ import Divider from '@/shared/ui/Divider';
 import Flex from '@/shared/ui/Flex';
 import HomeExpenseItem from './ui/HomeExpenseItem';
 import * as S from './HomePage.style';
+import Button from '@/shared/ui/Button';
+import Header from '@/shared/ui/Header';
 
 interface HomeExpenseItemType {
   date: string;
@@ -26,10 +28,10 @@ interface HomeExpenseItemType {
  * @Todo 진행중인 정산 내역 조회 API 함수 호출
  * 우선 mock data로 대체
  * */
-const settlementList: HomeExpenseItemType[] = [
+const settlementListMock: HomeExpenseItemType[] = [
   {
     id: 1,
-    date: '2025년 2월 22일',
+    date: '2026년 2월 22일',
     groupName: 'DND 데모데이',
     totalAmount: 120000,
     paidMember: 3,
@@ -37,7 +39,7 @@ const settlementList: HomeExpenseItemType[] = [
   },
   {
     id: 2,
-    date: '2025년 1월 14일',
+    date: '2026년 1월 14일',
     groupName: 'DND 7조 첫모임',
     totalAmount: 150000,
     paidMember: 5,
@@ -45,34 +47,57 @@ const settlementList: HomeExpenseItemType[] = [
   },
 ];
 
-function HomePage() {
-  const [settlementType, setSettlementType] = useState<'RECEIVE' | 'SEND'>(
-    'RECEIVE'
-  );
-  const navigate = useNavigate();
-  const theme = useTheme();
+type SettlementType = 'RECEIVE' | 'SEND';
 
-  const handleSettlementTypeButtonClick = (type: 'RECEIVE' | 'SEND') => {
-    if (settlementType === type) {
-      return;
-    }
-    setSettlementType(type);
-  };
+function HomePage() {
 
   return (
     <Flex direction="column" flexGrow={1}>
-      <S.MainHeader>
-        <LogoIcon
-          width={98}
-          height={36}
-          fill={theme.color.semantic.orange.default}
-          onClick={() => navigate(ROUTE.login)}
-        />
-        <Flex gap={16}>
-          <Bell width={24} height={24} />
-          <Menu width={24} height={24} />
-        </Flex>
-      </S.MainHeader>
+      <MainHeader />
+      <SettlementBanner />
+      <Divider />
+      <SettlementList />
+    </Flex>
+  );
+}
+
+function MainHeader() {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  return (
+    <Header
+        type="TitleCenter"
+        leftButtonContent={
+          <Button variant="text" onClick={() => navigate(ROUTE.login)}>
+            <LogoIcon
+              width={98}
+              height={36}
+              fill={theme.color.semantic.orange.default}
+            />
+          </Button>
+        }
+        rightButtonContent={
+          <Flex gap={16}>
+            {/** @Todo 알림 기능 개발 후 변경 */}
+            <Button variant="text">
+              <Bell width={24} height={24} />
+            </Button>
+            {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
+            <Button variant="text">
+              <Menu width={24} height={24} />
+            </Button>
+          </Flex>
+        }
+        bgColor="semantic.background.normal.alternative"
+      />
+  );
+}
+
+function SettlementBanner() {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  return (
+    <>
       <Flex
         direction="column"
         position="relative"
@@ -116,66 +141,98 @@ function HomePage() {
           <S.SmallImg src={CardMain} alt="" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
-      <Divider />
-      <Flex direction="column" pt={16} flexGrow={1}>
-        <S.SettlementTitle>진행 중인 정산</S.SettlementTitle>
-        <Flex
-          justifyContent="space-between"
-          px={20}
-          height={48}
-          alignItems="center"
-        >
-          <Flex gap={8}>
-            <S.SettlementButton
-              selected={settlementType === 'RECEIVE'}
-              onClick={() => handleSettlementTypeButtonClick('RECEIVE')}
-            >
-              완료된 정산
-            </S.SettlementButton>
-            <S.SettlementButton
-              selected={settlementType === 'SEND'}
-              onClick={() => handleSettlementTypeButtonClick('SEND')}
-            >
-              보낼 정산
-            </S.SettlementButton>
-          </Flex>
-          <Flex alignItems="center">
-            <Text variant="body2R" color="semantic.text.subtle">
-              최신순
-            </Text>
-            <Next width={theme.unit[24]} height={theme.unit[24]} />
-          </Flex>
-        </Flex>
-        {settlementList.length > 0 && settlementType === 'RECEIVE' && (
-          <S.SettlementListWrapper>
-            {settlementList.map((data) => (
-              <HomeExpenseItem
-                key={data.id}
-                date={data.date}
-                groupName={data.groupName}
-                totalAmount={data.totalAmount}
-                paidMember={data.paidMember}
-                totalMember={data.totalMember}
-              />
-            ))}
-          </S.SettlementListWrapper>
-        )}
-        {settlementType === 'SEND' && (
-          <Flex
-            direction="column"
-            py={20}
-            justifyContent="center"
-            alignItems="center"
-            flexGrow={1}
-            gap={20}
+    </>
+  );
+}
+
+function SettlementList() {
+  const [settlementType, setSettlementType] =
+    useState<SettlementType>('RECEIVE');
+  const [sortToggle, setSortToggle] = useState<boolean>(false);
+  const theme = useTheme();
+
+  const handleSettlementTypeButtonClick = (type: SettlementType) => {
+    if (settlementType === type) {
+      return;
+    }
+    setSettlementType(type);
+  };
+
+  const handleSortOptionClick = () => {
+    setSortToggle(!sortToggle);
+  };
+
+  const settlementList = sortToggle
+    ? [...settlementListMock].reverse()
+    : settlementListMock;
+
+  return (
+    <Flex direction="column" pt={16} flexGrow={1}>
+      <S.SettlementTitle>진행 중인 정산</S.SettlementTitle>
+      <Flex
+        justifyContent="space-between"
+        px={20}
+        height={48}
+        alignItems="center"
+      >
+        <Flex gap={8}>
+          <S.SettlementButton
+            selected={settlementType === 'RECEIVE'}
+            onClick={() => handleSettlementTypeButtonClick('RECEIVE')}
           >
-            <S.NoSettlementImg src={CoinImg} alt="" />
-            <Text variant="body2R" color="semantic.text.subtle">
-              아직 진행중인 정산이 없어요.
-            </Text>
-          </Flex>
-        )}
+            완료된 정산
+          </S.SettlementButton>
+          <S.SettlementButton
+            selected={settlementType === 'SEND'}
+            onClick={() => handleSettlementTypeButtonClick('SEND')}
+          >
+            보낼 정산
+          </S.SettlementButton>
+        </Flex>
+        {/** @Todo Select 컴포넌트 개발 후 변경 */}
+        <Button variant="text" onClick={handleSortOptionClick}>
+          <Text variant="body2R" color="semantic.text.subtle">
+            {sortToggle ? '오래된순' : '최신순'}
+          </Text>
+          <Next
+            width={theme.unit[24]}
+            height={theme.unit[24]}
+            style={{
+              transform: `rotate(${sortToggle ? 180 : 0}deg)`,
+              transition: 'transform 0.2s ease',
+            }}
+          />
+        </Button>
       </Flex>
+      {settlementList.length > 0 && settlementType === 'RECEIVE' && (
+        <S.SettlementListWrapper>
+          {settlementList.map((data) => (
+            <HomeExpenseItem
+              key={data.id}
+              date={data.date}
+              groupName={data.groupName}
+              totalAmount={data.totalAmount}
+              paidMember={data.paidMember}
+              totalMember={data.totalMember}
+            />
+          ))}
+        </S.SettlementListWrapper>
+      )}
+      {settlementType === 'SEND' && (
+        <Flex
+          direction="column"
+          py={20}
+          justifyContent="center"
+          alignItems="center"
+          flexGrow={1}
+          gap={20}
+        >
+          <S.NoSettlementImg src={CoinImg} alt="" />
+          <Text variant="body2R" color="semantic.text.subtle">
+            아직 진행중인 정산이 없어요.
+          </Text>
+        </Flex>
+      )}
     </Flex>
   );
 }
