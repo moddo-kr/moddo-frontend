@@ -14,7 +14,7 @@ export const HeaderArea = styled.header<{ $bgColor?: string }>`
   min-width: 320px;
   max-height: 64px;
   height: 100%;
-  background-color: ${({ $bgColor }) => $bgColor || 'inherit'};
+  background-color: ${({ $bgColor }) => $bgColor || 'white'};
 `;
 
 export const LeftHeaderArea = styled(HeaderArea)`
