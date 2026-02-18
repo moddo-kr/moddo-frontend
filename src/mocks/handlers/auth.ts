@@ -30,7 +30,6 @@ const authHandlers = [
 
     const mockUserInfo: User = {
       id: 1,
-      profileImageUrl: '',
       name: '김모또',
       email: 'moddo@kakao.com',
     };
