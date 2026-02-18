@@ -5,11 +5,12 @@ interface ChipProps {
   label: string;
   variant?: ChipVariant;
   size?: ChipSize;
+  onClick?: () => void;
 }
 
-function Chip({ label, variant = 'primary', size = 'md' }: ChipProps) {
+function Chip({ label, variant = 'primary', size = 'md', onClick }: ChipProps) {
   return (
-    <S.Container $variant={variant} $size={size}>
+    <S.Container $variant={variant} $size={size} onClick={onClick}>
       {label}
     </S.Container>
   );
