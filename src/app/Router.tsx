@@ -7,38 +7,38 @@ import checkAuth from '@/entities/auth/lib/checkAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
 import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
 
-const ExpenseDetail = lazy(() =>
+const LazyExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
     default: ExpenseDetailPage,
   }))
 );
-const CharacterShare = lazy(() =>
+const LazyCharacterShare = lazy(() =>
   import('@/pages/characterShare').then(({ CharacterSharePage }) => ({
     default: CharacterSharePage,
   }))
 );
-const CreateExpense = lazy(() =>
+const LazyCreateExpense = lazy(() =>
   import('@/pages/CreateExpensePage').then(({ CreateExpensePage }) => ({
     default: CreateExpensePage,
   }))
 );
-const GroupSetup = lazy(() =>
+const LazyGroupSetup = lazy(() =>
   import('@/pages/groupSetup').then(({ GroupSetupPage }) => ({
     default: GroupSetupPage,
   }))
 );
-const Home = lazy(() =>
+const LazyHome = lazy(() =>
   import('@/pages/home').then(({ HomePage }) => ({ default: HomePage }))
 );
-const Login = lazy(() =>
+const LazyLogin = lazy(() =>
   import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
 );
-const Onboarding = lazy(() =>
+const LazyOnboarding = lazy(() =>
   import('@/pages/onboarding').then(({ OnboardingPage }) => ({
     default: OnboardingPage,
   }))
 );
-const MyLinks = lazy(() =>
+const LazyMyLinks = lazy(() =>
   import('@/pages/myLinks').then(({ MyLinksPage }) => ({
     default: MyLinksPage,
   }))
@@ -48,12 +48,12 @@ const LazyMyPage = lazy(() =>
     default: MyPage,
   }))
 );
-const SelectGroup = lazy(() =>
+const LazySelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
   }))
 );
-const NotFound = lazy(() =>
+const LazyNotFound = lazy(() =>
   import('@/pages/notFound').then(({ NotFoundPage }) => ({
     default: NotFoundPage,
   }))
@@ -74,7 +74,7 @@ function AppRouter() {
       children: [
         {
           path: ROUTE.login,
-          element: <Login />,
+          element: <LazyLogin />,
         },
         {
           id: 'protected',
@@ -83,15 +83,15 @@ function AppRouter() {
           children: [
             {
               path: ROUTE.onboarding,
-              element: <Onboarding />,
+              element: <LazyOnboarding />,
             },
             {
               path: ROUTE.home,
-              element: <Home />,
+              element: <LazyHome />,
             },
             {
               path: ROUTE.myLinks,
-              element: <MyLinks />,
+              element: <LazyMyLinks />,
             },
             {
               path: ROUTE.my,
@@ -99,15 +99,15 @@ function AppRouter() {
             },
             {
               path: ROUTE.selectGroup,
-              element: <SelectGroup />,
+              element: <LazySelectGroup />,
             },
             {
               path: ROUTE.groupSetup,
-              element: <GroupSetup />,
+              element: <LazyGroupSetup />,
             },
             {
               path: ROUTE.createExpense,
-              element: <CreateExpense />,
+              element: <LazyCreateExpense />,
               loader: createExpensePageGuardLoader,
             },
           ],
@@ -115,17 +115,17 @@ function AppRouter() {
         // TODO : 로그인 기능으로 변경될 예정
         {
           path: ROUTE.expenseDetail,
-          element: <ExpenseDetail />,
+          element: <LazyExpenseDetail />,
           loader: groupTokenUrlLoader,
         },
         {
           path: ROUTE.characterShare,
-          element: <CharacterShare />,
+          element: <LazyCharacterShare />,
           loader: groupTokenUrlLoader,
         },
         {
           path: '*',
-          element: <NotFound />,
+          element: <LazyNotFound />,
         },
       ],
     },
