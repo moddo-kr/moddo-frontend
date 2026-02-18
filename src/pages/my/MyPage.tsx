@@ -1,9 +1,11 @@
+import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { Menu } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import { ROUTE } from '@/shared/config/route';
 import { MyProfile } from '@/entities/auth/ui';
+import * as S from './MyPage.styles';
 
 function MyPage() {
   const navigate = useNavigate();
@@ -19,7 +21,9 @@ function MyPage() {
         rightButtonOnClick={() => navigate(ROUTE.myEdit)}
         bgColor={color.semantic.background.normal.alternative}
       />
-      <MyProfile />
+      <Suspense fallback={<S.ProfileContainer>Loading...</S.ProfileContainer>}>
+        <MyProfile />
+      </Suspense>
     </>
   );
 }
