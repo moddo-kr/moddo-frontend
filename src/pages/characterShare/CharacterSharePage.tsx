@@ -21,7 +21,7 @@ function CharacterSharePage() {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
-  const { unit } = useTheme();
+  const { unit, color } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
@@ -60,7 +60,7 @@ function CharacterSharePage() {
           leftButtonOnClick={() => {
             navigate(-1);
           }}
-          bgColor="#F1F3F5"
+          bgColor={color.semantic.background.normal.alternative}
         />
         <S.CharacterContainer>
           <S.TitleContainer>
@@ -87,7 +87,7 @@ function CharacterSharePage() {
         leftButtonOnClick={() => {
           navigate(-1);
         }}
-        bgColor="#F1F3F5"
+        bgColor="semantic.background.normal.alternative"
       />
       <S.CharacterContainer>
         <S.TitleContainer>
