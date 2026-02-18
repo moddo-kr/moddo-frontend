@@ -111,14 +111,14 @@ function HomePage() {
         </S.BoxButton>
         <S.BoxButton to="/">
           <Text variant="body1Sb" color="semantic.text.default">
-            캐릭터 도감
+            입금 관리
           </Text>
           <S.SmallImg src={CardMain} alt="" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
       <Divider />
       <Flex direction="column" pt={16} flexGrow={1}>
-        <S.SettlementTitle>진행중인 정산</S.SettlementTitle>
+        <S.SettlementTitle>진행 중인 정산</S.SettlementTitle>
         <Flex
           justifyContent="space-between"
           px={20}
@@ -130,7 +130,7 @@ function HomePage() {
               selected={settlementType === 'RECEIVE'}
               onClick={() => handleSettlementTypeButtonClick('RECEIVE')}
             >
-              받을 정산
+              완료된 정산
             </S.SettlementButton>
             <S.SettlementButton
               selected={settlementType === 'SEND'}
