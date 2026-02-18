@@ -43,6 +43,11 @@ const MyLinks = lazy(() =>
     default: MyLinksPage,
   }))
 );
+const PaymentManagement = lazy(() =>
+  import('@/pages/paymentManagement').then(({ PaymentManagementPage }) => ({
+    default: PaymentManagementPage,
+  }))
+);
 const SelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
@@ -89,6 +94,10 @@ function AppRouter() {
               element: <MyLinks />,
             },
             {
+              path: ROUTE.paymentManagement,
+              element: <PaymentManagement />,
+            },
+            {
               path: ROUTE.selectGroup,
               element: <SelectGroup />,
             },
@@ -114,6 +123,7 @@ function AppRouter() {
           element: <CharacterShare />,
           loader: groupTokenUrlLoader,
         },
+        
         {
           path: '*',
           element: <NotFound />,

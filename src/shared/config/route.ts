@@ -5,6 +5,7 @@ export const ROUTE = {
   onboarding: '/onboarding',
   home: '/',
   myLinks: '/my-links',
+  paymentManagement: '/payment-management',
   createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',

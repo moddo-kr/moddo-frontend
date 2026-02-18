@@ -134,7 +134,7 @@ function SettlementBanner() {
           </Text>
           <S.SmallImg src={LinkMain} alt="" />
         </S.BoxButton>
-        <S.BoxButton to="/">
+        <S.BoxButton to={ROUTE.paymentManagement}>
           <Text variant="body1Sb" color="semantic.text.default">
             입금 관리
           </Text>
