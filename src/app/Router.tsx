@@ -43,6 +43,11 @@ const MyLinks = lazy(() =>
     default: MyLinksPage,
   }))
 );
+const LazyMyPage = lazy(() =>
+  import('@/pages/my').then(({ MyPage }) => ({
+    default: MyPage,
+  }))
+);
 const SelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
@@ -87,6 +92,10 @@ function AppRouter() {
             {
               path: ROUTE.myLinks,
               element: <MyLinks />,
+            },
+            {
+              path: ROUTE.my,
+              element: <LazyMyPage />,
             },
             {
               path: ROUTE.selectGroup,
