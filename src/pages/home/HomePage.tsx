@@ -15,6 +15,7 @@ import HomeExpenseItem from './ui/HomeExpenseItem';
 import * as S from './HomePage.style';
 import Button from '@/shared/ui/Button';
 import Header from '@/shared/ui/Header';
+import Chip from '@/shared/ui/Chip';
 
 interface HomeExpenseItemType {
   date: string;
@@ -47,7 +48,7 @@ const settlementListMock: HomeExpenseItemType[] = [
   },
 ];
 
-type SettlementType = 'RECEIVE' | 'SEND';
+type SettlementType = 'IN_PROGRESS' | 'COMPLETED';
 
 function HomePage() {
 
@@ -147,7 +148,7 @@ function SettlementBanner() {
 
 function SettlementList() {
   const [settlementType, setSettlementType] =
-    useState<SettlementType>('RECEIVE');
+    useState<SettlementType>('IN_PROGRESS');
   const [sortToggle, setSortToggle] = useState<boolean>(false);
   const theme = useTheme();
 
@@ -168,7 +169,9 @@ function SettlementList() {
 
   return (
     <Flex direction="column" pt={16} flexGrow={1}>
-      <S.SettlementTitle>진행 중인 정산</S.SettlementTitle>
+      <Flex pl={20} py={8}>
+      <Text variant="heading2">정산 내역</Text>
+      </Flex>
       <Flex
         justifyContent="space-between"
         px={20}
@@ -176,18 +179,16 @@ function SettlementList() {
         alignItems="center"
       >
         <Flex gap={8}>
-          <S.SettlementButton
-            selected={settlementType === 'RECEIVE'}
-            onClick={() => handleSettlementTypeButtonClick('RECEIVE')}
-          >
-            완료된 정산
-          </S.SettlementButton>
-          <S.SettlementButton
-            selected={settlementType === 'SEND'}
-            onClick={() => handleSettlementTypeButtonClick('SEND')}
-          >
-            보낼 정산
-          </S.SettlementButton>
+          <Chip
+            variant={settlementType === 'IN_PROGRESS' ? 'primary' : 'secondary'}
+            onClick={() => handleSettlementTypeButtonClick('IN_PROGRESS')}
+            label="진행 중인 정산"
+          />
+          <Chip
+            variant={settlementType === 'COMPLETED' ? 'primary' : 'secondary'}
+            onClick={() => handleSettlementTypeButtonClick('COMPLETED')}
+            label="완료된 정산"
+          />
         </Flex>
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
         <Button variant="text" onClick={handleSortOptionClick}>
@@ -204,7 +205,7 @@ function SettlementList() {
           />
         </Button>
       </Flex>
-      {settlementList.length > 0 && settlementType === 'RECEIVE' && (
+      {settlementList.length > 0 && settlementType === 'IN_PROGRESS' && (
         <S.SettlementListWrapper>
           {settlementList.map((data) => (
             <HomeExpenseItem
@@ -218,7 +219,7 @@ function SettlementList() {
           ))}
         </S.SettlementListWrapper>
       )}
-      {settlementType === 'SEND' && (
+      {settlementType === 'COMPLETED' && (
         <Flex
           direction="column"
           py={20}
