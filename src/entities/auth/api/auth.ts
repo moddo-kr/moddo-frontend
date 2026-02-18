@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
+import { User } from '../model/user.type';
 
 // CHECK - 게스트 토큰 정책 제거 가능성 있음
 export interface GuestTokenData {
@@ -19,5 +20,13 @@ export const getAuth = async () => {
   const response = await axiosInstance.get('/user/auth/check', {
     useMock: true,
   });
+  return response.data;
+};
+
+export const getUserInfo = async () => {
+  const response = await axiosInstance.get<User>('/user/info', {
+    useMock: true,
+  });
+
   return response.data;
 };
