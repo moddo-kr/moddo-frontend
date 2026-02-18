@@ -21,7 +21,7 @@ function MyPage() {
         rightButtonOnClick={() => navigate(ROUTE.myEdit)}
         bgColor={color.semantic.background.normal.alternative}
       />
-      <Suspense fallback={<S.ProfileContainer>Loading...</S.ProfileContainer>}>
+      <Suspense fallback={<S.ProfileContainer>로딩 중...</S.ProfileContainer>}>
         <MyProfile />
       </Suspense>
     </>
