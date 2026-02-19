@@ -8,7 +8,7 @@ function CharacterList() {
   return (
     <S.CharacterList>
       {characterCollection.map((character) => (
-        <CharacterItem key={character.name} character={character} />
+        <CharacterItem key={character.id} character={character} />
       ))}
     </S.CharacterList>
   );
