@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 import { Menu } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import { ROUTE } from '@/shared/config/route';
-import { MyProfile } from '@/entities/auth/ui';
+import { MyProfile } from '@/features/user-profile/ui';
 import * as S from './MyPage.styles';
 
 function MyPage() {
