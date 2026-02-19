@@ -23,8 +23,8 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       newConfig.headers.Authorization = accessToken;
     }
-    /** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
-    if (newConfig.useMock) {
+    /** 개발 환경에서 useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
+    if (import.meta.env.MODE === 'development' && newConfig.useMock) {
       newConfig.baseURL = '/api/v1';
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
