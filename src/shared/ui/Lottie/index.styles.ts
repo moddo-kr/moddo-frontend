@@ -12,18 +12,3 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 0;
 `;
-
-export const ExtendedWrapper = styled(Wrapper)`
-  width: 100%;
-  max-width: 100%;
-  top: -70%;
-`;
-
-export const OnboardingWrapper = styled.div`
-  position: absolute;
-  width: 90%;
-  top: 70%;
-  // 중앙 정렬 코드
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
