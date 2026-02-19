@@ -11,7 +11,7 @@ function CharacterSection() {
           캐릭터 도감
         </Text>
       </S.TitleWrapper>
-      <Suspense fallback={<S.CharacterGrid>로딩중</S.CharacterGrid>}>
+      <Suspense fallback={<S.CharacterGrid>로딩 중...</S.CharacterGrid>}>
         <CharacterGrid />
       </Suspense>
     </S.Container>
