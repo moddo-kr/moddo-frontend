@@ -4,11 +4,11 @@ import { Certified } from '@/shared/assets/svgs/icon';
 import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
-function EmptyCharacterCard() {
+function LockedCharacterCard() {
   return (
-    <S.EmptyCardContainer>
+    <S.LockedCharacterCard aria-label="잠긴 캐릭터">
       <Certified width={62} />
-    </S.EmptyCardContainer>
+    </S.LockedCharacterCard>
   );
 }
 
@@ -35,7 +35,7 @@ interface CharacterItemProps {
 }
 
 function CharacterItem({ character }: CharacterItemProps) {
-  if (!character.isUnlocked) return <EmptyCharacterCard />;
+  if (!character.isUnlocked) return <LockedCharacterCard />;
   return <CharacterCard character={character} />;
 }
 

@@ -21,7 +21,7 @@ export const CardContainer = styled(CardContainerBase)`
   border: 1px solid ${({ theme }) => theme.color.semantic.orange.subtle};
 `;
 
-export const EmptyCardContainer = styled(CardContainerBase)`
+export const LockedCharacterCard = styled(CardContainerBase)`
   justify-content: center;
   padding-top: ${({ theme }) => theme.unit[28]};
   padding-bottom: ${({ theme }) => theme.unit[36]};
