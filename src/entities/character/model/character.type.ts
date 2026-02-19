@@ -11,3 +11,13 @@ export interface CharacterData {
   imageUrl: string;
   imageBigUrl: string;
 }
+
+export interface CharacterItemData extends CharacterData {
+  id: number;
+  isUnlocked: boolean;
+  unlockedAt: string | null;
+}
+
+export interface CharacterItemsResponse {
+  characters: CharacterItemData[];
+}
