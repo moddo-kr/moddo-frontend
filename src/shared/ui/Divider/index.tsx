@@ -1,6 +1,7 @@
+import { HTMLAttributes } from 'react';
 import * as S from './index.style';
 
-interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   height?: number;
 }
 
