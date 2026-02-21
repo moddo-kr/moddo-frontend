@@ -11,7 +11,7 @@ export const useLogout = () => {
     mutationFn: logout,
     onSuccess: () => {
       queryClient.clear();
-      navigate(ROUTE.login);
+      navigate(ROUTE.login, { replace: true });
     },
   });
 };

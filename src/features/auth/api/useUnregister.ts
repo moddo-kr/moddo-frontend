@@ -11,7 +11,7 @@ export const useUnregister = () => {
     mutationFn: unregister,
     onSuccess: () => {
       queryClient.clear();
-      navigate(ROUTE.login);
+      navigate(ROUTE.login, { replace: true });
     },
   });
 };
