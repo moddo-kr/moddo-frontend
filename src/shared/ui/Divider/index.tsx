@@ -1,15 +1,11 @@
 import * as S from './index.style';
 
-interface DividerProps {
+interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number;
 }
 
-function Divider({ height = 8 }: DividerProps) {
-  return (
-    <div>
-      <S.Divider height={height} />
-    </div>
-  );
+function Divider({ height = 8, ...props }: DividerProps) {
+  return <S.Divider height={height} {...props} />;
 }
 
 export default Divider;
