@@ -1,3 +1,4 @@
+import { User } from '@/entities/auth/model/user.type';
 import { http, HttpResponse, passthrough } from 'msw';
 
 const authHandlers = [
@@ -21,6 +22,33 @@ const authHandlers = [
       authenticated: true,
       user: { id: 'mock-test-user-id' },
     });
+  }),
+
+  http.get('/api/v1/user/info', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    const mockUserInfo: User = {
+      id: 1,
+      name: '김모또',
+      email: 'moddo@kakao.com',
+    };
+    return HttpResponse.json(mockUserInfo);
+  }),
+
+  http.post('/api/v1/user/logout', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  // 회원 탈퇴 API
+  http.delete('/api/v1/users/me', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    return new HttpResponse(null, { status: 204 });
   }),
 ];
 

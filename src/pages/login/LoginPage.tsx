@@ -24,7 +24,7 @@ function LoginPage() {
     } else if (!token) {
       getGuestToken();
     } else {
-      navigate(ROUTE.onboarding);
+      navigate(ROUTE.home);
     }
   };
 

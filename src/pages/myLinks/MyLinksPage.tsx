@@ -11,7 +11,7 @@ import LinkBox from './ui/LinkBox';
 
 function MyLinksPage() {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { color } = useTheme();
   const { data, isLoading } = useGetExpensesLinks({}, []);
 
   if (isLoading) {
@@ -22,7 +22,7 @@ function MyLinksPage() {
           title="링크 관리"
           leftButtonContent={<ArrowLeft width={24} />}
           leftButtonOnClick={() => navigate(-1)}
-          bgColor={theme.color.semantic.background.normal.alternative}
+          bgColor={color.semantic.background.normal.alternative}
         />
         <Flex
           pt={24}
@@ -33,7 +33,7 @@ function MyLinksPage() {
           alignItems="center"
           height="auto"
           direction="column"
-          bgColor={theme.color.semantic.background.normal.alternative}
+          bgColor={color.semantic.background.normal.alternative}
         >
           로딩중...
         </Flex>
@@ -48,7 +48,7 @@ function MyLinksPage() {
         title="링크 관리"
         leftButtonContent={<ArrowLeft width={24} />}
         leftButtonOnClick={() => navigate(-1)}
-        bgColor={theme.color.semantic.background.normal.alternative}
+        bgColor="semantic.background.normal.alternative"
       />
       {data?.links && data.links.length > 0 ? (
         <Flex
@@ -59,7 +59,7 @@ function MyLinksPage() {
           flex={1}
           height="auto"
           direction="column"
-          bgColor={theme.color.semantic.background.normal.alternative}
+          bgColor={color.semantic.background.normal.alternative}
         >
           {data.links.map((link) => (
             <LinkBox
@@ -81,7 +81,7 @@ function MyLinksPage() {
           alignItems="center"
           height="auto"
           direction="column"
-          bgColor={theme.color.semantic.background.normal.alternative}
+          bgColor={color.semantic.background.normal.alternative}
         >
           <Text
             textAlign="center"

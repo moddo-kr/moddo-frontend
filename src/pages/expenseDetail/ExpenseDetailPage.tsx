@@ -20,12 +20,11 @@ import { StatusType } from './ui/ExpenseTimeHeader/index.type';
 import * as S from './ExpenseDetailPage.styles';
 
 function ExpenseDetailPage() {
-  const { unit } = useTheme();
+  const { unit, color } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData } = useLoaderData();
   const [status, setStatus] = useState<StatusType>('pending');
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
-  const theme = useTheme();
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -63,7 +62,7 @@ function ExpenseDetailPage() {
             관리
           </Text>
         }
-        bgColor={theme.color.semantic.background.normal.alternative}
+        bgColor={color.semantic.background.normal.alternative}
       />
       <S.Content>
         <ExpenseTimeHeader
