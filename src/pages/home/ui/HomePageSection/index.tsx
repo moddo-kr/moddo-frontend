@@ -57,24 +57,19 @@ export function MainHeader() {
     <Header
       type="TitleCenter"
       leftButtonContent={
-        <Button variant="text" onClick={() => navigate(ROUTE.login)}>
-          <LogoIcon
-            width={98}
-            height={36}
-            fill={theme.color.semantic.orange.default}
-          />
-        </Button>
+        <LogoIcon
+          width={98}
+          height={36}
+          fill={theme.color.semantic.orange.default}
+        />
       }
+      // leftButtonOnClick={() => navigate(ROUTE.login)}
       rightButtonContent={
         <Flex gap={16}>
           {/** @Todo 알림 기능 개발 후 변경 */}
-          <Button variant="text">
-            <Bell width={24} height={24} />
-          </Button>
+          <Bell width={24} height={24} />
           {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
-          <Button variant="text">
-            <Menu width={24} height={24} />
-          </Button>
+          <Menu width={24} height={24} />
         </Flex>
       }
       bgColor="semantic.background.normal.alternative"
