@@ -8,6 +8,7 @@ export { default as Bell } from './Bell';
 export { default as BtnShortcut } from './BtnShortcut';
 export { default as Calendar } from './Calendar';
 export { default as CarbonEdit } from './CarbonEdit';
+export { default as Certified } from './Certified';
 export { default as CheckCircle } from './CheckCircle';
 export { default as Close } from './Close';
 export { default as Confirm } from './Confirm';
