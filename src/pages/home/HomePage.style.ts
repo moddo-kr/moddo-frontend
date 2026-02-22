@@ -1,13 +1,4 @@
-import { Link } from 'react-router';
 import styled from 'styled-components';
-
-export const SelectGroupButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
-  background: transparent;
-  color: ${({ theme }) => theme.color.semantic.orange.default};
-`;
 
 export const MainText = styled.h2`
   font-size: 1.25rem; // 20px
@@ -20,55 +11,4 @@ export const SubText = styled.p`
   font-weight: 400;
   white-space: pre-wrap;
   line-height: 1.5;
-`;
-
-export const DescriptionImg = styled.img`
-  width: 9.8rem;
-  object-fit: contain;
-  position: absolute;
-  top: 9%;
-  right: -0.2rem;
-  rotate: -2deg;
-`;
-
-export const NoSettlementImg = styled.img`
-  width: 33vw;
-  max-width: 200px;
-  object-fit: contain;
-`;
-
-export const BoxButton = styled(Link)`
-  display: flex;
-  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[20]}`};
-  position: relative;
-  height: 5rem;
-  background-color: ${({ theme }) => theme.color.semantic.orange.subtle};
-  border-radius: ${({ theme }) => theme.radius.default};
-
-  width: 100%;
-`;
-
-export const SmallImg = styled.img`
-  width: 2.75rem;
-  object-fit: contain;
-  position: absolute;
-  right: 1rem;
-  bottom: 0.5rem;
-`;
-
-export const BoxButtonWrapper = styled.div`
-  display: flex;
-  max-width: 37.5rem;
-  margin: ${({ theme }) =>
-    `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
-  gap: ${({ theme }) => theme.unit[8]};
-`;
-
-export const SettlementListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.unit[20]};
-  margin: ${({ theme }) => `${theme.unit[20]} 0`};
-  overflow-y: auto;
-  flex: 1;
 `;
