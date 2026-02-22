@@ -33,11 +33,6 @@ const LazyHome = lazy(() =>
 const LazyLogin = lazy(() =>
   import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
 );
-const LazyOnboarding = lazy(() =>
-  import('@/pages/onboarding').then(({ OnboardingPage }) => ({
-    default: OnboardingPage,
-  }))
-);
 const LazyMyLinks = lazy(() =>
   import('@/pages/myLinks').then(({ MyLinksPage }) => ({
     default: MyLinksPage,
@@ -86,10 +81,6 @@ function AppRouter() {
           loader: checkAuth,
           element: <Outlet />,
           children: [
-            {
-              path: ROUTE.onboarding,
-              element: <LazyOnboarding />,
-            },
             {
               path: ROUTE.home,
               element: <LazyHome />,
