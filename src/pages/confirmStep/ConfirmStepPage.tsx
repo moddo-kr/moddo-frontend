@@ -1,4 +1,5 @@
 import { useLoaderData } from 'react-router';
+import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
@@ -21,6 +22,7 @@ interface ConfirmStepProps {
 function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   const { groupToken } = useLoaderData();
   const { data, isLoading } = useGetAllExpense(groupToken);
+  const { color } = useTheme();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -38,7 +40,7 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         leftButtonOnClick={onBack}
         rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
         rightButtonOnClick={onAdd}
-        bgColor="#F1F3F5"
+        bgColor={color.semantic.background.normal.alternative}
       />
       <DescriptionField
         bgColor="semantic.background.normal.alternative"

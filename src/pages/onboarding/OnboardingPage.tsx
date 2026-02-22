@@ -1,7 +1,7 @@
+import { useTheme } from 'styled-components';
 import Button from '@/shared/ui/Button';
 import { ROUTE } from '@/shared/config/route';
 import { useNavigate } from 'react-router';
-import theme from '@/shared/styles/theme';
 import Text from '@/shared/ui/Text';
 import {
   OnboardingStep1Lottie,
@@ -21,6 +21,8 @@ import * as S from './OnboardingPage.style';
 
 function OnboardingPage() {
   const navigate = useNavigate();
+  const { color } = useTheme();
+
   /** 디바이스 크기가 태블릿 이하(768px)일 경우 swipe 가능 */
   const isSwipeDevice =
     typeof window !== 'undefined' &&
@@ -28,7 +30,7 @@ function OnboardingPage() {
 
   return (
     <>
-      <Header type="TitleCenter" bgColor={theme.color.semantic.orange.subtle} />
+      <Header type="TitleCenter" bgColor={color.semantic.orange.subtle} />
       <S.Wrapper>
         <S.CustomSwiper
           // install Swiper modules
