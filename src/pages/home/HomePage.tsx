@@ -51,7 +51,6 @@ const settlementListMock: HomeExpenseItemType[] = [
 type SettlementType = 'IN_PROGRESS' | 'COMPLETED';
 
 function HomePage() {
-
   return (
     <Flex direction="column" flexGrow={1}>
       <MainHeader />
@@ -67,30 +66,30 @@ function MainHeader() {
   const theme = useTheme();
   return (
     <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <Button variant="text" onClick={() => navigate(ROUTE.login)}>
-            <LogoIcon
-              width={98}
-              height={36}
-              fill={theme.color.semantic.orange.default}
-            />
+      type="TitleCenter"
+      leftButtonContent={
+        <Button variant="text" onClick={() => navigate(ROUTE.login)}>
+          <LogoIcon
+            width={98}
+            height={36}
+            fill={theme.color.semantic.orange.default}
+          />
+        </Button>
+      }
+      rightButtonContent={
+        <Flex gap={16}>
+          {/** @Todo 알림 기능 개발 후 변경 */}
+          <Button variant="text">
+            <Bell width={24} height={24} />
           </Button>
-        }
-        rightButtonContent={
-          <Flex gap={16}>
-            {/** @Todo 알림 기능 개발 후 변경 */}
-            <Button variant="text">
-              <Bell width={24} height={24} />
-            </Button>
-            {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
-            <Button variant="text">
-              <Menu width={24} height={24} />
-            </Button>
-          </Flex>
-        }
-        bgColor="semantic.background.normal.alternative"
-      />
+          {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
+          <Button variant="text">
+            <Menu width={24} height={24} />
+          </Button>
+        </Flex>
+      }
+      bgColor="semantic.background.normal.alternative"
+    />
   );
 }
 
@@ -170,7 +169,7 @@ function SettlementList() {
   return (
     <Flex direction="column" pt={16} flexGrow={1}>
       <Flex pl={20} py={8}>
-      <Text variant="heading2">정산 내역</Text>
+        <Text variant="heading2">정산 내역</Text>
       </Flex>
       <Flex
         justifyContent="space-between"
