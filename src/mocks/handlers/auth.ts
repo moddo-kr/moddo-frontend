@@ -35,6 +35,21 @@ const authHandlers = [
     };
     return HttpResponse.json(mockUserInfo);
   }),
+
+  http.post('/api/v1/user/logout', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  // 회원 탈퇴 API
+  http.delete('/api/v1/users/me', ({ request }) => {
+    const isMocked = request.headers.get('X-Mock-Request');
+    if (!isMocked || isMocked !== 'true') return passthrough();
+
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];
 
 export default authHandlers;
