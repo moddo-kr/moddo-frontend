@@ -11,11 +11,11 @@ import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
 
 import Flex from '@/shared/ui/Flex';
-import HomeExpenseItem from '../HomeExpenseItem';
-import * as S from './index.style';
 import Button from '@/shared/ui/Button';
 import Header from '@/shared/ui/Header';
 import Chip from '@/shared/ui/Chip';
+import * as S from './index.style';
+import HomeExpenseItem from '../HomeExpenseItem';
 
 type SettlementType = 'IN_PROGRESS' | 'COMPLETED';
 
@@ -51,7 +51,6 @@ const settlementListMock: HomeExpenseItemType[] = [
 ];
 
 export function MainHeader() {
-  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <Header

@@ -42,5 +42,5 @@ export const Container = styled.div<StyledChipContainerProps>`
   ${({ $size }) => chipSizes[$size]};
   ${({ $variant }) => chipVariants[$variant]};
   white-space: nowrap;
-  cursor: ${({ onClick }) => onClick ? 'pointer' : 'default'};
+  cursor: ${({ onClick }) => (onClick ? 'pointer' : 'default')};
 `;

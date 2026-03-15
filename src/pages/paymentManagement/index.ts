@@ -1,1 +1,1 @@
-export {default as PaymentManagementPage} from './PaymentManagementPage';
+export { default as PaymentManagementPage } from './PaymentManagementPage';
