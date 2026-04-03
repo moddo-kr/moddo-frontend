@@ -20,6 +20,9 @@ jobs:
           node-version: 20
           cache: 'yarn'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install Dependencies
         # 락파일을 엄격하게 지키며 설치
         run: yarn install --frozen-lockfile
