@@ -1,0 +1,43 @@
+# 개발서버 CI 워크플로우
+name: Dev CI
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          # 의존성이 변경될 때마다 새로운 캐시 생성
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          # 캐시 키가 정확히 일치하지 않을 경우, 일치하는 최신 캐시 검색
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Check Lint
+        run: yarn lint
+
+      - name: Run Unit Test
+        run: yarn test
+
+      - name: Build
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_KAKAO_JAVASCRIPT_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_KEY }}
+          VITE_SUPABASE_PUBLIC_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_KEY }}
+        run: yarn build
