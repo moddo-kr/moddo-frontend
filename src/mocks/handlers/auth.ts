@@ -24,7 +24,7 @@ const authHandlers = [
     });
   }),
 
-  http.get('/api/v1/user/info', ({ request }) => {
+  http.get('/api/v1/user', ({ request }) => {
     const isMocked = request.headers.get('X-Mock-Request');
     if (!isMocked || isMocked !== 'true') return passthrough();
 

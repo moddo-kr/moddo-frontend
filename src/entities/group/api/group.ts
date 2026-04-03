@@ -40,10 +40,11 @@ export const putGroupAccount = async ({
   return response.data;
 };
 
+// NOTE : 기존에 groupToken을 전달하는 방식에서 settlementCode를 전달하는 방식으로 변경함
 export const getGroupHeader = (
-  groupToken: string
+  settlementCode: string
 ): Promise<GroupHeaderResponse> => {
   return axiosInstance
-    .get(`/group/header?groupToken=${groupToken}`)
+    .get(`/groups/${settlementCode}/header`)
     .then((res) => res.data);
 };
