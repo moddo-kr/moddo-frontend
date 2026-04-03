@@ -8,7 +8,7 @@ import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
 import BottomSheet from '@/shared/ui/BottomSheet';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
-import MemberProfileImage from '@/shared/ui/MemberProfileImage';
+import ProfileImage from '@/shared/ui/ProfileImage';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';
 
@@ -65,7 +65,7 @@ function ExpenseMemberItem({
       <S.HeaderContainer iconSize={32}>
         <S.HeaderContent>
           <S.LeftWrapper>
-            <MemberProfileImage src={member.profile} size="md" />
+            <ProfileImage src={member.profile} size="40" />
             <S.SubProfileWrapper>
               <Text variant="body1Sb">
                 <span style={{ color: theme.color.primitive.gray[500] }}>
