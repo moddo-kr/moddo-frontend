@@ -14,20 +14,18 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Cache node modules
-        uses: actions/cache@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: node_modules
-          # 의존성이 변경될 때마다 새로운 캐시 생성
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-          # 캐시 키가 정확히 일치하지 않을 경우, 일치하는 최신 캐시 검색
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+          node-version: 20
+          cache: 'yarn'
 
       - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
+        # 락파일을 엄격하게 지키며 설치
+        run: yarn install --frozen-lockfile
+
+      - name: Check Prettier
+        run: yarn prettier:check
 
       - name: Check Lint
         run: yarn lint
