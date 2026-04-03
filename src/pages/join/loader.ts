@@ -19,7 +19,10 @@ async function joinLoader({ params }: LoaderFunctionArgs) {
     queryFn: getUserInfo,
   });
 
-  if (!user) return redirect(`/login?returnUrl=/join/${groupToken}`);
+  if (!user) {
+    const returnUrl = encodeURIComponent(`/join/${groupToken}`);
+    return redirect(`/login?returnUrl=${returnUrl}`);
+  }
 
   // 2. 표시할 프로필 목록 조회
   const profiles = await queryClient.ensureQueryData({
@@ -28,7 +31,8 @@ async function joinLoader({ params }: LoaderFunctionArgs) {
   });
 
   // 3. 본인 프로필을 선택했는지 확인
-  const myProfile = profiles.find((profile) => profile.userId === user.id) ?? null;
+  const myProfile =
+    profiles.find((profile) => profile.userId === user.id) ?? null;
   if (myProfile) return redirect(`/expense-detail/${groupToken}`);
 
   return { profiles };

@@ -22,15 +22,19 @@ async function expenseDetailLoader({ params }: LoaderFunctionArgs) {
       queryKey: ['userInfo'],
       queryFn: getUserInfo,
     });
-    if (!user)
-      return redirect(`/login?returnUrl=/expense-detail/${groupToken}`);
+    // TODO: 로그인 페이지에서 성공 후 returnUrl 처리 필요함
+    if (!user) {
+      const returnUrl = encodeURIComponent(`/expense-detail/${groupToken}`);
+      return redirect(`/login?returnUrl=${returnUrl}`);
+    }
 
     // 2. 프로필 선택 여부 확인
     const profiles = await queryClient.ensureQueryData({
       queryKey: ['profiles', groupToken],
       queryFn: () => getProfiles(groupToken),
     });
-    const myProfile = profiles.find((profile) => profile.userId === user.id) ?? null;
+    const myProfile =
+      profiles.find((profile) => profile.userId === user.id) ?? null;
     if (!myProfile) return redirect(`/join/${groupToken}`);
 
     const groupData = await queryClient.ensureQueryData({
