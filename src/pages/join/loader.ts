@@ -14,6 +14,7 @@ async function joinLoader({ params }: LoaderFunctionArgs) {
   if (!groupToken) return redirect(ROUTE.home);
 
   // 1. 로그인 여부 확인
+  // TODO: getUserInfo 401 발생 시 axiosInstance 인터셉터가 window.location.href로 처리해 returnUrl이 무시됨. 인터셉터를 React Router redirect 방식으로 교체 필요. (https://moddo2.atlassian.net/browse/MD-25)
   const user = await queryClient.ensureQueryData({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
