@@ -1,12 +1,23 @@
 import axios, { AxiosHeaders } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL
+  ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
+  : '';
+
 const axiosInstance = axios.create({
   // 환경변수에서 서버 URL을 가져오고, 기본값으로 빈 문자열을 사용하도록 설정
   // 의도적으로 상대경로를 사용해야 하는 경우(예: 스토리북)를 위해서 빈 문자열도 사용할 수 있도록 함
-  baseURL: import.meta.env.VITE_SERVER_URL
-    ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
-    : '',
+  baseURL: BASE_URL,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// 토큰 재발급 전용 클라이언트 - response interceptor 없이 사용해 재발급 시 무한 루프 방지
+const refreshClient = axios.create({
+  baseURL: BASE_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -41,12 +52,13 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // isRetry: 재발급 요청 자체가 401을 반환할 경우 무한 루프 방지
+    // isRetry: 재시도한 원래 요청이 다시 401을 반환할 경우 무한 루프 방지
     if (error.response?.status === 401 && !originalRequest.isRetry) {
       originalRequest.isRetry = true;
 
       try {
-        await axiosInstance.put('/user/reissue/token');
+        // refreshClient 사용: response interceptor가 없어 재발급 요청 자체가 인터셉터를 타지 않음
+        await refreshClient.put('/user/reissue/token');
         return await axiosInstance(originalRequest); // 원래 요청 재시도
       } catch {
         // 재발급 실패 시 로그인 페이지로 redirect
