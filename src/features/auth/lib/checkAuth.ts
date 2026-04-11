@@ -2,7 +2,7 @@ import { redirect } from 'react-router';
 import type { LoaderFunctionArgs } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
 import { queryClient } from '@/shared/api/queryClient';
-import { getAuth } from '../api/auth';
+import { getAuth } from '@/entities/auth/api/auth';
 
 /**
  * 페이지에 접근하기 전에 실행되는 함수
