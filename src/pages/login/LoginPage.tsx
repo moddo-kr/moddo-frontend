@@ -1,7 +1,6 @@
 import LogoImg from '@/shared/assets/pngs/LogoImg.png';
 import Text from '@/shared/ui/Text';
-import { useNavigate } from 'react-router';
-import { ROUTE } from '@/shared/config/route';
+import { useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import theme from '@/shared/styles/theme';
 import Button from '@/shared/ui/Button';
@@ -14,17 +13,16 @@ import * as S from './LoginPage.styles';
 
 function LoginPage() {
   const { refetch: getGuestToken } = useGetGuestToken();
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [isEntrance, setIsEntrance] = useState(true);
 
   const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
-    const token = localStorage.getItem('accessToken');
     if (loginType === 'KAKAO') {
-      kakaoLogin();
-    } else if (!token) {
-      getGuestToken();
+      const redirectPathAfterLogin =
+        searchParams.get('redirectTo') ?? undefined;
+      kakaoLogin(redirectPathAfterLogin);
     } else {
-      navigate(ROUTE.home);
+      getGuestToken();
     }
   };
 
