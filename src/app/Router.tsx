@@ -4,6 +4,7 @@ import { ROUTE } from '@/shared/config/route';
 import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/features/auth/lib/checkAuth';
+import checkAlreadyAuthLoader from '@/features/auth/lib/checkAlreadyAuthLoader';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
 import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
 
@@ -80,6 +81,7 @@ function AppRouter() {
         {
           path: ROUTE.login,
           element: <LazyLogin />,
+          loader: checkAlreadyAuthLoader,
         },
         {
           id: 'protected',
