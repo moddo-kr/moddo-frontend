@@ -17,9 +17,7 @@ export const getGuestToken = async (): Promise<GuestTokenData> => {
 // ==========
 
 export const getAuth = async () => {
-  const response = await axiosInstance.get('/user/auth/check', {
-    useMock: true,
-  });
+  const response = await axiosInstance.get('/auth/check');
   return response.data;
 };
 
