@@ -33,20 +33,29 @@ axiosInstance.interceptors.request.use(
 );
 
 /**
- * accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션
- * @Todo accessToken, refreshToken 저장 방식 수정 후 로직 추가
- * refreshToken 여부 확인 후 재발급 or 로그인 페이지 리다이렉션 로직 추가
+ * 401 응답 시 refreshToken으로 재발급 시도
+ * 재발급 성공 시 원래 요청 재시도, 실패 시 로그인 페이지로 redirect
  */
 axiosInstance.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  async function (error) {
-    if (error.response && error.response.status === 401) {
-      alert('세션이 만료되었습니다. 재로그인해주세요');
-      window.location.href = ROUTE.login;
-      localStorage.removeItem('accessToken');
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // isRetry: 재발급 요청 자체가 401을 반환할 경우 무한 루프 방지
+    if (error.response?.status === 401 && !originalRequest.isRetry) {
+      originalRequest.isRetry = true;
+
+      try {
+        await axiosInstance.put('/user/reissue/token');
+        return await axiosInstance(originalRequest); // 원래 요청 재시도
+      } catch {
+        // 재발급 실패 시 로그인 페이지로 redirect
+        // 로그인 페이지로 redirect할 때, 현재 페이지 경로를 쿼리 파라미터로 전달해서 로그인 후 원래 페이지로 돌아올 수 있도록 함
+        const redirectTo = encodeURIComponent(window.location.pathname);
+        window.location.href = `${ROUTE.login}?redirectTo=${redirectTo}`;
+      }
     }
+
     return Promise.reject(error);
   }
 );
