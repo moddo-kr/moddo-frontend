@@ -9,22 +9,22 @@ import Button from '@/shared/ui/Button';
 import * as S from './index.styles';
 
 function MyProfile() {
-  const { data: profile } = useGetUserInfo();
+  const { data: user } = useGetUserInfo();
   const navigate = useNavigate();
   const theme = useTheme();
 
   return (
     <S.ProfileContainer>
-      <MemberProfileImage size="sm" src={profile?.profileImageUrl} />
+      <MemberProfileImage size="sm" src={user?.profile} />
       <Flex direction="column" flex={1} gap={4}>
-        <Text variant="body1Sb">{profile.name}</Text>
+        <Text variant="body1Sb">{user.name}</Text>
         {/* TODO: 디자인 시스템 정비 후 다시 디자인 확인이 필요합니다 (Opacity를 계속 쓰는지?) */}
         <Text
           variant="body2R"
           color="semantic.text.default"
           style={{ opacity: 0.5 }}
         >
-          {profile.email}
+          {user.email}
         </Text>
       </Flex>
       {/* TODO: 현 피그마 디자인은 Chip이 Button으로 쓰이고 있는 상황이라 우선 button 컴포넌트 기준으로 구현했습니다. 디자인시스템 정리 후 다시 확인이 필요합니다! */}

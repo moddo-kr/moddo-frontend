@@ -29,7 +29,6 @@ const authHandlers = [
     if (!isMocked || isMocked !== 'true') return passthrough();
 
     const mockUserInfo: User = {
-      id: 1,
       name: '김모또',
       email: 'moddo@kakao.com',
     };
