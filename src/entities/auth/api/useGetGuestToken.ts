@@ -9,12 +9,8 @@ export const useGetGuestToken = () => {
     queryKey: ['guestToken'],
     queryFn: async () => {
       const response = await getGuestToken();
-      if (response?.accessToken) {
-        localStorage.setItem('accessToken', `Bearer ${response?.accessToken}`);
-        navigate(ROUTE.selectGroup);
-        return response;
-      }
-      throw new Error('Access Token not found');
+      navigate(ROUTE.selectGroup);
+      return response;
     },
     enabled: false, // refetch가 호출될 때만 실행되도록 설정
   });
