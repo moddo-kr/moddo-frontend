@@ -13,6 +13,12 @@ function MyProfile() {
   const navigate = useNavigate();
   const theme = useTheme();
 
+  // suspense로 감싸져 있긴 초기에 없는 경우의 에러를 방지하기 위해 null guard를 추가했습니다.
+  // ref: https://github.com/moddo-kr/moddo-frontend/pull/30#discussion_r3068041167
+  if (!user) {
+    return null;
+  }
+
   return (
     <S.ProfileContainer>
       <MemberProfileImage size="sm" src={user?.profile} />
