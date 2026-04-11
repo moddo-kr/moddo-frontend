@@ -1,28 +1,30 @@
 import LogoImg from '@/shared/assets/pngs/LogoImg.png';
 import Text from '@/shared/ui/Text';
-import { useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import theme from '@/shared/styles/theme';
 import Button from '@/shared/ui/Button';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
-import { useGetGuestToken } from '@/entities/auth/api/useGetGuestToken';
+import { getGuestToken } from '@/entities/auth/api/auth';
+import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 
 function LoginPage() {
-  const { refetch: getGuestToken } = useGetGuestToken();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isEntrance, setIsEntrance] = useState(true);
 
-  const handleLoginButtonClick = (loginType: 'KAKAO' | 'GUEST') => {
+  const handleLoginButtonClick = async (loginType: 'KAKAO' | 'GUEST') => {
     if (loginType === 'KAKAO') {
       const redirectPathAfterLogin =
         searchParams.get('redirectTo') ?? undefined;
       kakaoLogin(redirectPathAfterLogin);
     } else {
-      getGuestToken();
+      await getGuestToken();
+      navigate(ROUTE.selectGroup);
     }
   };
 
