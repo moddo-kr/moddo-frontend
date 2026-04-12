@@ -165,7 +165,9 @@ export function SettlementList() {
           {settlementList.map((item) => (
             <HomeExpenseItem
               key={item.groupId}
-              date={format(new Date(item.createdAt), 'yyyy년 M월 d일', { locale: ko })}
+              date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
+                locale: ko,
+              })}
               groupName={item.name}
               totalAmount={item.totalAmount}
               paidMember={item.completedMemberCount}
