@@ -16,7 +16,7 @@ function PaymentManagementPage() {
   const navigate = useNavigate();
   const { color } = useTheme();
 
-  const { data } = useGetPayments();
+  const { data, isLoading, isError } = useGetPayments();
 
   const sections = useMemo(
     () =>
@@ -25,6 +25,36 @@ function PaymentManagementPage() {
         : [],
     [data?.paymentRequests]
   );
+
+  if (isLoading) {
+    return (
+      <>
+        <Header
+          type="TitleCenter"
+          title="입금 관리"
+          leftButtonContent={<ArrowLeft width={24} />}
+          leftButtonOnClick={() => navigate(-1)}
+          bgColor={color.semantic.background.normal.default}
+        />
+        {/* 로딩 UI */}
+      </>
+    );
+  }
+
+  if (isError) {
+    return (
+      <>
+        <Header
+          type="TitleCenter"
+          title="입금 관리"
+          leftButtonContent={<ArrowLeft width={24} />}
+          leftButtonOnClick={() => navigate(-1)}
+          bgColor={color.semantic.background.normal.default}
+        />
+        {/* 에러 UI */}
+      </>
+    );
+  }
 
   const handleReject = (_payment: PaymentRequest) => {
     // TODO: 입금 거절 API 연동
