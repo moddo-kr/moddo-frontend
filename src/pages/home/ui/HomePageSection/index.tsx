@@ -12,7 +12,7 @@ import CardMain from '@/shared/assets/pngs/card_main.png';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import useGetSettlementList from '@/features/home/api/useGetSettlementList';
-import type { SettlementStatus } from '@/entities/group/model/group.type';
+import type { SettlementSort, SettlementStatus } from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
 import Button from '@/shared/ui/Button';
@@ -104,7 +104,7 @@ export function SettlementBanner() {
 export function SettlementList() {
   const [settlementType, setSettlementType] =
     useState<SettlementType>('IN_PROGRESS');
-  const [sortToggle, setSortToggle] = useState<boolean>(false);
+  const [sort, setSort] = useState<SettlementSort>('LATEST');
   const theme = useTheme();
 
   const handleSettlementTypeButtonClick = (type: SettlementType) => {
@@ -115,10 +115,9 @@ export function SettlementList() {
   };
 
   const handleSortOptionClick = () => {
-    setSortToggle(!sortToggle);
+    setSort((prev) => (prev === 'LATEST' ? 'OLDEST' : 'LATEST'));
   };
 
-  const sort = sortToggle ? 'OLDEST' : 'LATEST';
   const { data } = useGetSettlementList(settlementType, sort);
   const settlementList = data ?? [];
 
@@ -148,13 +147,13 @@ export function SettlementList() {
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
         <Button variant="text" onClick={handleSortOptionClick}>
           <Text variant="body2R" color="semantic.text.subtle">
-            {sortToggle ? '오래된순' : '최신순'}
+            {sort === 'OLDEST' ? '오래된순' : '최신순'}
           </Text>
           <Next
             width={theme.unit[24]}
             height={theme.unit[24]}
             style={{
-              transform: `rotate(${sortToggle ? 180 : 0}deg)`,
+              transform: `rotate(${sort === 'OLDEST' ? 180 : 0}deg)`,
               transition: 'transform 0.2s ease',
             }}
           />
