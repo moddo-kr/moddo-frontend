@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
+import { parseDate } from '@/shared/lib/parseDate';
 import {
   CharacterItemData,
   CharacterItemsRawResponse,
@@ -8,6 +9,6 @@ export const getCharacterCollection = (): Promise<CharacterItemData[]> =>
   axiosInstance.get<CharacterItemsRawResponse>('/collections').then((res) =>
     res.data.collections.map((item) => ({
       ...item,
-      acquiredAt: item.acquiredAt ? new Date(item.acquiredAt) : null,
+      acquiredAt: parseDate(item.acquiredAt),
     }))
   );
