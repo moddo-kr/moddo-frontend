@@ -10,3 +10,15 @@ export interface PaymentRequest {
 export interface PaymentList {
   paymentRequests: PaymentRequest[];
 }
+
+export type PaymentStatus = 'APPROVED' | 'REJECTED';
+
+export interface PaymentActionResult {
+  id: number;
+  settlementId: number;
+  requestMemberId: number;
+  targetUserId: number;
+  requestedAt: string;
+  processedAt: string;
+  status: PaymentStatus;
+}
