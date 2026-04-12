@@ -14,10 +14,19 @@ export interface CharacterData {
 
 export interface CharacterItemData extends CharacterData {
   id: number;
-  isUnlocked: boolean;
-  unlockedAt: string | null;
+  acquiredAt: Date | null;
+}
+
+// API 원시 응답 타입 (JSON 파싱 직후, 변환 전)
+interface CharacterItemRaw extends CharacterData {
+  id: number;
+  acquiredAt: string | null;
 }
 
 export interface CharacterItemsResponse {
-  characters: CharacterItemData[];
+  collections: CharacterItemData[];
+}
+
+export interface CharacterItemsRawResponse {
+  collections: CharacterItemRaw[];
 }
