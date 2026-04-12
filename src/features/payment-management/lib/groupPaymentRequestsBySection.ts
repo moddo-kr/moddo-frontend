@@ -23,7 +23,7 @@ export interface PaymentSection {
   items: PaymentRequest[];
 }
 
-export function groupPaymentRequestsBySection(
+export function groupPaymentRequestsByDate(
   payments: PaymentRequest[]
 ): PaymentSection[] {
   const paymentMapByDay = payments.reduce((acc, payment) => {
