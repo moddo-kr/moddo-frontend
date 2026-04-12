@@ -9,6 +9,10 @@ import { useState } from 'react';
 import CoinImg from '@/shared/assets/pngs/CoinImg.png';
 import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale/ko';
+import useGetSettlementList from '@/features/home/api/useGetSettlementList';
+import type { SettlementStatus } from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
 import Button from '@/shared/ui/Button';
@@ -17,38 +21,7 @@ import Chip from '@/shared/ui/Chip';
 import * as S from './index.style';
 import HomeExpenseItem from '../HomeExpenseItem';
 
-type SettlementType = 'IN_PROGRESS' | 'COMPLETED';
-
-interface HomeExpenseItemType {
-  date: string;
-  groupName: string;
-  totalAmount: number;
-  paidMember: number;
-  totalMember: number;
-  id: number;
-}
-/**
- * @Todo 진행중인 정산 내역 조회 API 함수 호출
- * 우선 mock data로 대체
- * */
-const settlementListMock: HomeExpenseItemType[] = [
-  {
-    id: 1,
-    date: '2026년 2월 22일',
-    groupName: 'DND 데모데이',
-    totalAmount: 120000,
-    paidMember: 3,
-    totalMember: 6,
-  },
-  {
-    id: 2,
-    date: '2026년 1월 14일',
-    groupName: 'DND 7조 첫모임',
-    totalAmount: 150000,
-    paidMember: 5,
-    totalMember: 6,
-  },
-];
+type SettlementType = SettlementStatus;
 
 export function MainHeader() {
   const theme = useTheme();
@@ -145,9 +118,9 @@ export function SettlementList() {
     setSortToggle(!sortToggle);
   };
 
-  const settlementList = sortToggle
-    ? [...settlementListMock].reverse()
-    : settlementListMock;
+  const sort = sortToggle ? 'OLDEST' : 'LATEST';
+  const { data } = useGetSettlementList(settlementType, sort);
+  const settlementList = data ?? [];
 
   return (
     <Flex direction="column" pt={16} flexGrow={1}>
@@ -187,21 +160,20 @@ export function SettlementList() {
           />
         </Button>
       </Flex>
-      {settlementList.length > 0 && settlementType === 'IN_PROGRESS' && (
+      {settlementList.length > 0 ? (
         <S.SettlementListWrapper>
-          {settlementList.map((data) => (
+          {settlementList.map((item) => (
             <HomeExpenseItem
-              key={data.id}
-              date={data.date}
-              groupName={data.groupName}
-              totalAmount={data.totalAmount}
-              paidMember={data.paidMember}
-              totalMember={data.totalMember}
+              key={item.groupId}
+              date={format(new Date(item.createdAt), 'yyyy년 M월 d일', { locale: ko })}
+              groupName={item.name}
+              totalAmount={item.totalAmount}
+              paidMember={item.completedMemberCount}
+              totalMember={item.totalMemberCount}
             />
           ))}
         </S.SettlementListWrapper>
-      )}
-      {settlementType === 'COMPLETED' && (
+      ) : (
         <Flex
           direction="column"
           py={20}
