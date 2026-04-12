@@ -21,10 +21,6 @@ interface CharacterItemRaw extends CharacterData {
   acquiredAt: string | null;
 }
 
-export interface CharacterItemsResponse {
-  collections: CharacterItemData[];
-}
-
 export interface CharacterItemsRawResponse {
   collections: CharacterItemRaw[];
 }

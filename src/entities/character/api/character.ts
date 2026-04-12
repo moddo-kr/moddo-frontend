@@ -1,13 +1,13 @@
 import axiosInstance from '@/shared/api/axios';
 import {
+  CharacterItemData,
   CharacterItemsRawResponse,
-  CharacterItemsResponse,
 } from '../model/character.type';
 
-export const getCharacterCollection = (): Promise<CharacterItemsResponse> =>
-  axiosInstance.get<CharacterItemsRawResponse>('/collections').then((res) => ({
-    collections: res.data.collections.map((item) => ({
+export const getCharacterCollection = (): Promise<CharacterItemData[]> =>
+  axiosInstance.get<CharacterItemsRawResponse>('/collections').then((res) =>
+    res.data.collections.map((item) => ({
       ...item,
       acquiredAt: item.acquiredAt ? new Date(item.acquiredAt) : null,
-    })),
-  }));
+    }))
+  );
