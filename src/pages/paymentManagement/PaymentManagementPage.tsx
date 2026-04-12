@@ -36,7 +36,17 @@ function PaymentManagementPage() {
           leftButtonOnClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.default}
         />
-        {/* 로딩 UI */}
+        <Flex
+          pt={24}
+          px={20}
+          flex={1}
+          direction="column"
+          bgColor={color.semantic.background.normal.default}
+        >
+          <Text variant="body1R" color="semantic.text.subtle">
+            입금 내역을 불러오는 중입니다.
+          </Text>
+        </Flex>
       </>
     );
   }
@@ -51,7 +61,17 @@ function PaymentManagementPage() {
           leftButtonOnClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.default}
         />
-        {/* 에러 UI */}
+        <Flex
+          pt={24}
+          px={20}
+          flex={1}
+          direction="column"
+          bgColor={color.semantic.background.normal.default}
+        >
+          <Text variant="body1R" color="semantic.text.subtle">
+            입금 내역을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.
+          </Text>
+        </Flex>
       </>
     );
   }
