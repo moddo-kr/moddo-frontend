@@ -9,10 +9,7 @@ import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import {
-  CHARACTER_DESCRIPTION,
-  CHARACTER_IMAGE_SIZE,
-} from '@/entities/character/config/character';
+import { CHARACTER_DATA } from '@/entities/character/config/character';
 import StarChip from '@/features/character-management/ui/StarChip';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
@@ -101,7 +98,7 @@ function CharacterSharePage() {
                 src={data.imageBigUrl}
                 alt={data.name}
                 style={{
-                  ...CHARACTER_IMAGE_SIZE[data.name].big,
+                  ...CHARACTER_DATA[data.name].imageSize.big,
                 }}
               />
             </S.CharacterImageContainer>
@@ -109,7 +106,7 @@ function CharacterSharePage() {
               {data.name}
             </Text>
             <Text variant="body1R" color="semantic.text.subtle">
-              {CHARACTER_DESCRIPTION[data.name]}
+              {CHARACTER_DATA[data.name].description}
             </Text>
           </S.CharacterCard>
         </S.CharacterCardContainer>

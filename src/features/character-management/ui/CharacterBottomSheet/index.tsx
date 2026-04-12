@@ -3,7 +3,7 @@ import Text from '@/shared/ui/Text';
 import BottomSheet from '@/shared/ui/BottomSheet';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
 import Button from '@/shared/ui/Button';
-import { CHARACTER_IMAGE_SIZE } from '@/entities/character/config/character';
+import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './index.styles';
@@ -33,7 +33,7 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
             src={data.imageUrl}
             alt={data.name}
             style={{
-              ...CHARACTER_IMAGE_SIZE[data.name].small,
+              ...CHARACTER_DATA[data.name].imageSize.small,
             }}
           />
         </S.CharacterImageContainer>

@@ -1,9 +1,7 @@
-export type CharacterType =
-  | '천사 모또'
-  | '러키 모또'
-  | '딸기 또또'
-  | '잠꾸러기 또또'
-  | '마법사 또또';
+import { CHARACTER_DATA } from '@/entities/character/config/character';
+
+// 새 캐릭터 추가 시 CHARACTER_DATA에만 추가하면 타입이 자동으로 확장됨
+export type CharacterType = keyof typeof CHARACTER_DATA;
 
 export interface CharacterData {
   name: CharacterType;
