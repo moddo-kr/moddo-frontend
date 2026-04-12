@@ -8,8 +8,9 @@ const SECTION_LABEL = {
 } as const;
 
 const DATE_FORMAT = 'M/d(eee)';
+const DATE_KEY_FORMAT = 'yyyy-MM-dd';
 
-function getSectionLabel(requestedAt: string): string {
+export function getSectionLabel(requestedAt: string): string {
   const date = new Date(requestedAt);
   const today = startOfDay(new Date());
   if (isSameDay(date, today)) return SECTION_LABEL.TODAY;
@@ -18,23 +19,23 @@ function getSectionLabel(requestedAt: string): string {
 }
 
 export interface PaymentSection {
-  label: string;
+  date: string;
   items: PaymentRequest[];
 }
 
 export function groupPaymentRequestsBySection(
   payments: PaymentRequest[]
 ): PaymentSection[] {
-  // 날짜별로 그룹화 및 라벨 생성
+  // 정규화된 날짜(yyyy-MM-dd)를 키로 그룹화
   const paymentMapByDay = payments.reduce((acc, payment) => {
-    const label = getSectionLabel(payment.requestedAt);
-    const list = acc.get(label) ?? [];
-    acc.set(label, [...list, payment]);
+    const key = format(new Date(payment.requestedAt), DATE_KEY_FORMAT);
+    const list = acc.get(key) ?? [];
+    acc.set(key, [...list, payment]);
     return acc;
   }, new Map<string, PaymentRequest[]>());
   // map을 배열로 변환하여 반환
-  return [...paymentMapByDay.entries()].map(([label, items]) => ({
-    label,
+  return [...paymentMapByDay.entries()].map(([date, items]) => ({
+    date,
     items,
   }));
 }
