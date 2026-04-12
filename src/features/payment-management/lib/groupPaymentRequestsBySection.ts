@@ -19,23 +19,23 @@ export function getSectionLabel(requestedAt: string): string {
 }
 
 export interface PaymentSection {
-  date: string;
+  label: string;
   items: PaymentRequest[];
 }
 
 export function groupPaymentRequestsBySection(
   payments: PaymentRequest[]
 ): PaymentSection[] {
-  // 정규화된 날짜(yyyy-MM-dd)를 키로 그룹화
   const paymentMapByDay = payments.reduce((acc, payment) => {
-    const key = format(new Date(payment.requestedAt), DATE_KEY_FORMAT);
-    const list = acc.get(key) ?? [];
-    acc.set(key, [...list, payment]);
+    const dayKey = format(new Date(payment.requestedAt), DATE_KEY_FORMAT);
+    const section = acc.get(dayKey) ?? {
+      label: getSectionLabel(payment.requestedAt),
+      items: [],
+    };
+    section.items.push(payment);
+    acc.set(dayKey, section);
     return acc;
-  }, new Map<string, PaymentRequest[]>());
-  // map을 배열로 변환하여 반환
-  return [...paymentMapByDay.entries()].map(([date, items]) => ({
-    date,
-    items,
-  }));
+  }, new Map<string, PaymentSection>());
+
+  return [...paymentMapByDay.values()];
 }

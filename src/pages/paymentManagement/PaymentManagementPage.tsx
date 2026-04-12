@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import useGetPayments from '@/features/payment-management/api/useGetPayments';
-import { groupPaymentRequestsBySection, getSectionLabel } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
+import { groupPaymentRequestsBySection } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
 import PaymentAlert from '@/features/payment-management/ui/PaymentAlert';
 import Header from '@/shared/ui/Header';
 import { useNavigate } from 'react-router';
@@ -54,10 +54,10 @@ function PaymentManagementPage() {
           bgColor={color.semantic.background.normal.default}
         >
           <Flex direction="column" gap={36}>
-            {sections.map(({ date, items }) => (
-              <Flex key={date} direction="column" gap={16}>
+            {sections.map(({ label, items }) => (
+              <Flex key={label} direction="column" gap={16}>
                 <Text variant="title" color="semantic.text.strong">
-                  {getSectionLabel(items[0].requestedAt)}
+                  {label}
                 </Text>
                 <Flex direction="column" gap={20}>
                   {items.map((payment) => (
