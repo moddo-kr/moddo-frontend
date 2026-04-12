@@ -32,10 +32,6 @@ export interface MemberProfileRaw extends Omit<MemberProfile, 'paidAt'> {
   paidAt: string | null;
 }
 
-export interface MemberProfileData {
-  members: MemberProfile[];
-}
-
 export interface MemberProfileRawData {
   members: MemberProfileRaw[];
 }
