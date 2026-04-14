@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders } from 'axios';
+import axios, { AxiosHeaders, isAxiosError } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
 // 개발 환경에서는 Vite proxy(/api/v1)를 경유해 cross-origin 쿠키 차단을 우회 (참고: vite.config.ts의 server.proxy 설정)
@@ -60,11 +60,17 @@ axiosInstance.interceptors.response.use(
         // refreshClient 사용: response interceptor가 없어 재발급 요청 자체가 인터셉터를 타지 않음
         await refreshClient.put('/user/reissue/token');
         return await axiosInstance(originalRequest); // 원래 요청 재시도
-      } catch {
-        // 재발급 실패 시 로그인 페이지로 redirect
+      } catch (refreshError: unknown) {
+        // 실제 인증 실패(401)일 때만 로그인으로 redirect
         // 로그인 페이지로 redirect할 때, 현재 페이지 경로를 쿼리 파라미터로 전달해서 로그인 후 원래 페이지로 돌아올 수 있도록 함
-        const redirectTo = encodeURIComponent(window.location.pathname);
-        window.location.href = `${ROUTE.login}?redirectTo=${redirectTo}`;
+        if (
+          isAxiosError(refreshError) &&
+          refreshError?.response?.status === 401
+        ) {
+          const redirectTo = encodeURIComponent(window.location.pathname);
+          window.location.href = `${ROUTE.login}?redirectTo=${redirectTo}`;
+        }
+        return Promise.reject(refreshError);
       }
     }
 
