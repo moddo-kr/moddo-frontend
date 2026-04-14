@@ -1,8 +1,8 @@
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
-import MemberProfileImage from '@/shared/ui/MemberProfileImage';
 import Button from '@/shared/ui/Button';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
+import ProfileImage from '@/shared/ui/ProfileImage';
 
 export interface PaymentAlertProps {
   payment: PaymentRequest;
@@ -13,7 +13,7 @@ export interface PaymentAlertProps {
 function PaymentAlert({ payment, onReject, onConfirm }: PaymentAlertProps) {
   return (
     <Flex direction="row" alignItems="center" gap={8} width="100%">
-      <MemberProfileImage src={payment.profileUrl} size="md" />
+      <ProfileImage src={payment.profileUrl} size="40" />
       <Flex direction="column" alignItems="flex-start" gap={2} flex={1}>
         <Text
           variant="body1Sb"
