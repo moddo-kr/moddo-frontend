@@ -19,6 +19,7 @@ const buttonVariants = {
   tertiary: css`
     background: transparent;
     color: ${({ theme }) => theme.color.semantic.text.strong};
+    border: 1px solid ${({ theme }) => theme.color.semantic.border.default};
   `,
   text: css`
     background: transparent;
@@ -35,7 +36,7 @@ const buttonSizes = {
   `,
   sm: css`
     padding: ${({ theme }) => `${theme.unit[8]} ${theme.unit[16]}`};
-    ${TextVariant('body2R')};
+    ${TextVariant('body2Sb')};
   `,
 };
 
