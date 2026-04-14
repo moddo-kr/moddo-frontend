@@ -4,6 +4,7 @@ export const ROUTE = {
   login: '/login',
   home: '/',
   myLinks: '/my-links',
+  paymentManagement: '/payment-management',
   my: '/my',
   myEdit: '/my/edit',
   createExpense: '/create-expense/:groupToken',

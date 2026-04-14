@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
   // 환경변수에서 서버 URL을 가져오고, 기본값으로 빈 문자열을 사용하도록 설정
   // 의도적으로 상대경로를 사용해야 하는 경우(예: 스토리북)를 위해서 빈 문자열도 사용할 수 있도록 함
   baseURL: import.meta.env.VITE_SERVER_URL
-    ? `${import.meta.env.VITE_SERVER_URL}/functions/v1`
+    ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
     : '',
   withCredentials: true,
   headers: {
@@ -29,13 +29,6 @@ axiosInstance.interceptors.request.use(
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
         'X-Mock-Request': 'true',
-      });
-    }
-    // SUPABASE용 apikey 헤더 추가 (필요 시)
-    else if (newConfig.url?.split('?')[0].endsWith('user/guest/token')) {
-      newConfig.headers = AxiosHeaders.from({
-        ...newConfig.headers,
-        apikey: import.meta.env.VITE_SUPABASE_PUBLIC_KEY,
       });
     }
     return newConfig;
