@@ -103,15 +103,17 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '0.0.0.0',
       port: 3000,
-      proxy: {
-        '/api/v1': {
-          target: env.VITE_SERVER_URL,
-          changeOrigin: true,
-          cookieDomainRewrite: {
-            [new URL(env.VITE_SERVER_URL).hostname]: 'localhost',
+      ...(env.VITE_SERVER_URL && {
+        proxy: {
+          '/api/v1': {
+            target: env.VITE_SERVER_URL,
+            changeOrigin: true,
+            cookieDomainRewrite: {
+              [new URL(env.VITE_SERVER_URL).hostname]: 'localhost',
+            },
           },
         },
-      },
+      }),
     },
   };
 });
