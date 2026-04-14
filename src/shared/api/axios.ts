@@ -18,6 +18,9 @@ const axiosInstance = axios.create({
 // 토큰 재발급 전용 클라이언트 - response interceptor 없이 사용해 재발급 시 무한 루프 방지
 const refreshClient = axios.create({
   baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_URL
+    ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
+    : '',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
