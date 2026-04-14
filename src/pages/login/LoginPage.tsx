@@ -9,6 +9,7 @@ import Flex from '@/shared/ui/Flex';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
+import { queryClient } from '@/shared/api/queryClient';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 
@@ -24,6 +25,7 @@ function LoginPage() {
       kakaoLogin(redirectPathAfterLogin);
     } else {
       await getGuestToken();
+      queryClient.removeQueries({ queryKey: ['auth', 'user'] });
       navigate(ROUTE.selectGroup);
     }
   };
