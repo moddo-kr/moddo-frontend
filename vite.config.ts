@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
   // Storybook 빌드인지 확인
   const isStorybook = process.env.STORYBOOK === 'true';
 
@@ -102,6 +103,15 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '0.0.0.0',
       port: 3000,
+      proxy: {
+        '/api/v1': {
+          target: env.VITE_SERVER_URL,
+          changeOrigin: true,
+          cookieDomainRewrite: {
+            [new URL(env.VITE_SERVER_URL).hostname]: 'localhost',
+          },
+        },
+      },
     },
   };
 });

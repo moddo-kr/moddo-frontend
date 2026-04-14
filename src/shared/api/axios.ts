@@ -1,13 +1,13 @@
 import axios, { AxiosHeaders } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
-const BASE_URL = import.meta.env.VITE_SERVER_URL
-  ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
-  : '';
+// 개발 환경에서는 Vite proxy(/api/v1)를 경유해 cross-origin 쿠키 차단을 우회 (참고: vite.config.ts의 server.proxy 설정)
+// 프로덕션에서는 VITE_SERVER_URL로 직접 요청
+const BASE_URL = import.meta.env.DEV
+  ? '/api/v1'
+  : `${import.meta.env.VITE_SERVER_URL ?? ''}/api/v1`;
 
 const axiosInstance = axios.create({
-  // 환경변수에서 서버 URL을 가져오고, 기본값으로 빈 문자열을 사용하도록 설정
-  // 의도적으로 상대경로를 사용해야 하는 경우(예: 스토리북)를 위해서 빈 문자열도 사용할 수 있도록 함
   baseURL: BASE_URL,
   withCredentials: true,
   headers: {
@@ -18,9 +18,6 @@ const axiosInstance = axios.create({
 // 토큰 재발급 전용 클라이언트 - response interceptor 없이 사용해 재발급 시 무한 루프 방지
 const refreshClient = axios.create({
   baseURL: BASE_URL,
-  baseURL: import.meta.env.VITE_SERVER_URL
-    ? `${import.meta.env.VITE_SERVER_URL}/api/v1`
-    : '',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
