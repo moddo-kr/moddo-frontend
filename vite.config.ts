@@ -6,6 +6,13 @@ import { VitePWA } from 'vite-plugin-pwa';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
+  const parsedServerUrl = (() => {
+    try {
+      return env.VITE_SERVER_URL ? new URL(env.VITE_SERVER_URL) : null;
+    } catch {
+      return null;
+    }
+  })();
   // Storybook 빌드인지 확인
   const isStorybook = process.env.STORYBOOK === 'true';
 
@@ -103,14 +110,12 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '0.0.0.0',
       port: 3000,
-      ...(env.VITE_SERVER_URL && {
+      ...(parsedServerUrl && {
         proxy: {
           '/api/v1': {
-            target: env.VITE_SERVER_URL,
+            target: parsedServerUrl.origin,
             changeOrigin: true,
-            cookieDomainRewrite: {
-              [new URL(env.VITE_SERVER_URL).hostname]: 'localhost',
-            },
+            cookieDomainRewrite: { '*': 'localhost' },
           },
         },
       }),
