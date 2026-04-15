@@ -10,6 +10,7 @@ import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
 import { queryClient } from '@/shared/api/queryClient';
+import { showToast } from '@/shared/ui/Toast';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 
@@ -24,9 +25,16 @@ function LoginPage() {
         searchParams.get('redirectTo') ?? undefined;
       kakaoLogin(redirectPathAfterLogin);
     } else {
-      await getGuestToken();
-      queryClient.removeQueries({ queryKey: ['auth', 'user'] });
-      navigate(ROUTE.selectGroup);
+      try {
+        await getGuestToken();
+        queryClient.removeQueries({ queryKey: ['auth', 'user'] });
+        navigate(ROUTE.selectGroup);
+      } catch {
+        showToast({
+          type: 'error',
+          content: '비회원 로그인에 실패했습니다. 다시 시도해주세요.',
+        });
+      }
     }
   };
 
