@@ -1,4 +1,13 @@
-if git diff --name-only HEAD@{1} HEAD | grep -q 'yarn.lock'; then
+prev_head="$1"
+new_head="$2"
+is_branch_checkout="$3"
+
+# 브랜치 체크아웃이 아닌 경우 스킵
+if [ "$is_branch_checkout" != "1" ]; then
+  exit 0
+fi
+
+if git diff --name-only "$prev_head" "$new_head" -- yarn.lock | grep -q '^yarn.lock$'; then
   echo "[post-checkout] yarn.lock이 변경되었습니다. yarn install 실행..."
   yarn install
 else
