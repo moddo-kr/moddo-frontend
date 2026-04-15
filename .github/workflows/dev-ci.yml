@@ -25,6 +25,8 @@ jobs:
 
       - name: Install Dependencies
         # 락파일을 엄격하게 지키며 설치
+        env:
+          HUSKY: 0 # CI 환경에서는 git 훅이 불필요하므로 husky 비활성화
         run: yarn install --frozen-lockfile
 
       - name: Check Prettier
