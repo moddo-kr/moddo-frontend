@@ -33,6 +33,8 @@ jobs:
         # Cache node modules 단계에서 설정된 출력이 캐시 히트를 발생시키지 않는다면
         if: steps.cache.outputs.cache-hit != 'true'
         # yarn install을 실행하여 새로운 캐시 키를 생성함
+        env:
+          HUSKY: 0 # CI 환경에서는 git 훅이 불필요하므로 husky 비활성화
         run: yarn install
 
       # Step 4: 코드 품질 검사
