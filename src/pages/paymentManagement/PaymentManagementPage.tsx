@@ -19,6 +19,8 @@ function PaymentManagementPage() {
   const { color } = useTheme();
 
   const { data, isLoading, isError } = useGetPayments();
+  const { mutate: approvePayment } = useApprovePayment();
+  const { mutate: rejectPayment } = useRejectPayment();
 
   const paymentSections = useMemo(
     () =>
@@ -77,9 +79,6 @@ function PaymentManagementPage() {
       </>
     );
   }
-
-  const { mutate: approvePayment } = useApprovePayment();
-  const { mutate: rejectPayment } = useRejectPayment();
 
   const handleReject = (payment: PaymentRequest) => {
     rejectPayment(payment.paymentRequestId);
