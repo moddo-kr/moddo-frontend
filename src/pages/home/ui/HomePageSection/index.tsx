@@ -12,7 +12,10 @@ import CardMain from '@/shared/assets/pngs/card_main.png';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import useGetSettlementList from '@/features/home/api/useGetSettlementList';
-import type { SettlementSort, SettlementStatus } from '@/entities/group/model/group.type';
+import type {
+  SettlementSort,
+  SettlementStatus,
+} from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
 import Button from '@/shared/ui/Button';
@@ -118,7 +121,10 @@ export function SettlementList() {
     setSort((prev) => (prev === 'LATEST' ? 'OLDEST' : 'LATEST'));
   };
 
-  const { data } = useGetSettlementList(settlementType, sort);
+  const { data, isLoading, isError } = useGetSettlementList(
+    settlementType,
+    sort
+  );
   const settlementList = data ?? [];
 
   return (
@@ -159,7 +165,33 @@ export function SettlementList() {
           />
         </Button>
       </Flex>
-      {settlementList.length > 0 ? (
+      {isLoading ? (
+        <Flex
+          direction="column"
+          py={20}
+          justifyContent="center"
+          alignItems="center"
+          flexGrow={1}
+          gap={20}
+        >
+          <Text variant="body2R" color="semantic.text.subtle">
+            정산 내역을 불러오는 중이에요.
+          </Text>
+        </Flex>
+      ) : isError ? (
+        <Flex
+          direction="column"
+          py={20}
+          justifyContent="center"
+          alignItems="center"
+          flexGrow={1}
+          gap={20}
+        >
+          <Text variant="body2R" color="semantic.text.subtle">
+            정산 내역을 불러오지 못했어요.
+          </Text>
+        </Flex>
+      ) : settlementList.length > 0 ? (
         <S.SettlementListWrapper>
           {settlementList.map((item) => (
             <HomeExpenseItem
