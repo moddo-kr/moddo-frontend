@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import useGetPayments from '@/features/payment-management/api/useGetPayments';
+import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
+import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { groupPaymentRequestsByDate } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
 import PaymentAlert from '@/features/payment-management/ui/PaymentAlert';
 import Header from '@/shared/ui/Header';
@@ -17,6 +19,8 @@ function PaymentManagementPage() {
   const { color } = useTheme();
 
   const { data, isLoading, isError } = useGetPayments();
+  const { mutate: approvePayment } = useApprovePayment();
+  const { mutate: rejectPayment } = useRejectPayment();
 
   const paymentSections = useMemo(
     () =>
@@ -76,12 +80,12 @@ function PaymentManagementPage() {
     );
   }
 
-  const handleReject = (_payment: PaymentRequest) => {
-    // TODO: 입금 거절 API 연동
+  const handleReject = (payment: PaymentRequest) => {
+    rejectPayment(payment.paymentRequestId);
   };
 
-  const handleConfirm = (_payment: PaymentRequest) => {
-    // TODO: 입금 확인 API 연동
+  const handleConfirm = (payment: PaymentRequest) => {
+    approvePayment(payment.paymentRequestId);
   };
 
   return (
