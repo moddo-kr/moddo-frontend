@@ -104,6 +104,88 @@ export function SettlementBanner() {
   );
 }
 
+type SettlementContentProps = {
+  isLoading: boolean;
+  isError: boolean;
+  settlementList: NonNullable<ReturnType<typeof useGetSettlementList>['data']>;
+  settlementType: SettlementType;
+};
+
+function SettlementContent({
+  isLoading,
+  isError,
+  settlementList,
+  settlementType,
+}: SettlementContentProps) {
+  if (isLoading) {
+    return (
+      <Flex
+        direction="column"
+        py={20}
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        gap={20}
+      >
+        <Text variant="body2R" color="semantic.text.subtle">
+          정산 내역을 불러오는 중이에요.
+        </Text>
+      </Flex>
+    );
+  }
+  if (isError) {
+    return (
+      <Flex
+        direction="column"
+        py={20}
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        gap={20}
+      >
+        <Text variant="body2R" color="semantic.text.subtle">
+          정산 내역을 불러오지 못했어요.
+        </Text>
+      </Flex>
+    );
+  }
+  if (settlementList.length > 0) {
+    return (
+      <S.SettlementListWrapper>
+        {settlementList.map((item) => (
+          <HomeExpenseItem
+            key={item.groupId}
+            date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
+              locale: ko,
+            })}
+            groupName={item.name}
+            totalAmount={item.totalAmount}
+            paidMember={item.completedMemberCount}
+            totalMember={item.totalMemberCount}
+          />
+        ))}
+      </S.SettlementListWrapper>
+    );
+  }
+  return (
+    <Flex
+      direction="column"
+      py={20}
+      justifyContent="center"
+      alignItems="center"
+      flexGrow={1}
+      gap={20}
+    >
+      <S.NoSettlementImg src={CoinImg} alt="" />
+      <Text variant="body2R" color="semantic.text.subtle">
+        {settlementType === 'IN_PROGRESS'
+          ? '아직 진행중인 정산이 없어요.'
+          : '완료된 정산이 없어요.'}
+      </Text>
+    </Flex>
+  );
+}
+
 export function SettlementList() {
   const [settlementType, setSettlementType] =
     useState<SettlementType>('IN_PROGRESS');
@@ -126,76 +208,6 @@ export function SettlementList() {
     sort
   );
   const settlementList = data ?? [];
-
-  const renderSettlementContent = () => {
-    if (isLoading) {
-      return (
-        <Flex
-          direction="column"
-          py={20}
-          justifyContent="center"
-          alignItems="center"
-          flexGrow={1}
-          gap={20}
-        >
-          <Text variant="body2R" color="semantic.text.subtle">
-            정산 내역을 불러오는 중이에요.
-          </Text>
-        </Flex>
-      );
-    }
-    if (isError) {
-      return (
-        <Flex
-          direction="column"
-          py={20}
-          justifyContent="center"
-          alignItems="center"
-          flexGrow={1}
-          gap={20}
-        >
-          <Text variant="body2R" color="semantic.text.subtle">
-            정산 내역을 불러오지 못했어요.
-          </Text>
-        </Flex>
-      );
-    }
-    if (settlementList.length > 0) {
-      return (
-        <S.SettlementListWrapper>
-          {settlementList.map((item) => (
-            <HomeExpenseItem
-              key={item.groupId}
-              date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
-                locale: ko,
-              })}
-              groupName={item.name}
-              totalAmount={item.totalAmount}
-              paidMember={item.completedMemberCount}
-              totalMember={item.totalMemberCount}
-            />
-          ))}
-        </S.SettlementListWrapper>
-      );
-    }
-    return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
-        <S.NoSettlementImg src={CoinImg} alt="" />
-        <Text variant="body2R" color="semantic.text.subtle">
-          {settlementType === 'IN_PROGRESS'
-            ? '아직 진행중인 정산이 없어요.'
-            : '완료된 정산이 없어요.'}
-        </Text>
-      </Flex>
-    );
-  };
 
   return (
     <Flex direction="column" pt={16} flexGrow={1}>
@@ -235,7 +247,12 @@ export function SettlementList() {
           />
         </Button>
       </Flex>
-      {renderSettlementContent()}
+      <SettlementContent
+        isLoading={isLoading}
+        isError={isError}
+        settlementList={settlementList}
+        settlementType={settlementType}
+      />
     </Flex>
   );
 }
