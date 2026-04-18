@@ -217,7 +217,9 @@ export function SettlementList() {
         >
           <S.NoSettlementImg src={CoinImg} alt="" />
           <Text variant="body2R" color="semantic.text.subtle">
-            아직 진행중인 정산이 없어요.
+            {settlementType === 'IN_PROGRESS'
+              ? '아직 진행중인 정산이 없어요.'
+              : '완료된 정산이 없어요.'}
           </Text>
         </Flex>
       )}
