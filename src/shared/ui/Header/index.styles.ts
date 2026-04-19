@@ -58,14 +58,3 @@ export const TrailingArea = styled.div`
   align-items: center;
   gap: 1rem;
 `;
-
-// 아이콘 버튼 래퍼
-export const IconButton = styled.button`
-  all: unset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  height: fit-content;
-  cursor: pointer;
-`;

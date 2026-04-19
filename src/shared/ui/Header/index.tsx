@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import Button from '@/shared/ui/Button';
 import * as S from '@/shared/ui/Header/index.styles';
 
 // 공통 trailing(우측) 영역
@@ -13,13 +14,14 @@ interface TrailingProps {
 
 // default: heading 영역(뒤로가기 등) + 중앙 타이틀 + trailing — 서브 페이지용
 interface DefaultHeaderProps extends TrailingProps {
-  type: 'default';
-  title?: string;
+  type?: 'default';
+  title?: string | ReactElement;
   showHeading?: boolean;
   headingIcon?: ReactElement;
   headingLabel?: string;
   headingSubIcon?: ReactElement;
   onHeadingIconClick?: () => void;
+  onHeadingSubIconClick?: () => void;
   bgColor?: string;
 }
 
@@ -47,80 +49,69 @@ function TrailingSection({
     <S.TrailingArea>
       {trailingLabel && <span>{trailingLabel}</span>}
       {trailingIcon && (
-        <S.IconButton onClick={onTrailingIconClick}>
+        <Button variant="text" onClick={onTrailingIconClick}>
           {trailingIcon}
-        </S.IconButton>
+        </Button>
       )}
       {trailingSubIcon && (
-        <S.IconButton onClick={onTrailingSubIconClick}>
+        <Button variant="text" onClick={onTrailingSubIconClick}>
           {trailingSubIcon}
-        </S.IconButton>
+        </Button>
       )}
     </S.TrailingArea>
   );
 }
 
-function Header(props: HeaderProps) {
-  const {
-    type,
-    title,
-    bgColor,
-    showTrailing,
-    trailingLabel,
-    trailingIcon,
-    trailingSubIcon,
-    onTrailingIconClick,
-    onTrailingSubIconClick,
-  } = props;
-
-  const trailingProps: TrailingProps = {
-    showTrailing,
-    trailingLabel,
-    trailingIcon,
-    trailingSubIcon,
-    onTrailingIconClick,
-    onTrailingSubIconClick,
-  };
-
-  switch (type) {
-    case 'default': {
-      const {
-        showHeading = true,
-        headingIcon,
-        headingLabel,
-        headingSubIcon,
-        onHeadingIconClick,
-      } = props;
-
-      return (
-        <S.DefaultHeaderArea $bgColor={bgColor}>
-          {showHeading && (headingIcon || headingLabel || headingSubIcon) ? (
-            <S.HeadingArea>
-              {headingIcon && (
-                <S.IconButton onClick={onHeadingIconClick}>
-                  {headingIcon}
-                </S.IconButton>
-              )}
-              {headingSubIcon && <S.IconButton>{headingSubIcon}</S.IconButton>}
-              {headingLabel && <span>{headingLabel}</span>}
-            </S.HeadingArea>
-          ) : (
-            <div />
+function DefaultHeader({
+  bgColor,
+  showHeading = true,
+  headingIcon,
+  headingLabel,
+  headingSubIcon,
+  onHeadingIconClick,
+  onHeadingSubIconClick,
+  ...trailingProps
+}: DefaultHeaderProps) {
+  return (
+    <S.DefaultHeaderArea $bgColor={bgColor}>
+      {showHeading ? (
+        <S.HeadingArea>
+          {headingIcon && (
+            <Button variant="text" onClick={onHeadingIconClick}>
+              {headingIcon}
+            </Button>
           )}
-          <S.DefaultTitleArea>{title}</S.DefaultTitleArea>
-          <TrailingSection {...trailingProps} />
-        </S.DefaultHeaderArea>
-      );
-    }
+          {headingSubIcon && (
+            <Button variant="text" onClick={onHeadingSubIconClick}>
+              {headingSubIcon}
+            </Button>
+          )}
+          {headingLabel && <span>{headingLabel}</span>}
+        </S.HeadingArea>
+      ) : (
+        <S.HeadingArea aria-hidden />
+      )}
+      <S.DefaultTitleArea>{title}</S.DefaultTitleArea>
+      <TrailingSection {...trailingProps} />
+    </S.DefaultHeaderArea>
+  );
+}
+
+function Depth1Header({ title, bgColor, ...trailingProps }: Depth1HeaderProps) {
+  return (
+    <S.Depth1HeaderArea $bgColor={bgColor}>
+      <S.Depth1TitleArea>{title}</S.Depth1TitleArea>
+      <TrailingSection {...trailingProps} />
+    </S.Depth1HeaderArea>
+  );
+}
+
+function Header({ type, ...rest }: HeaderProps) {
+  switch (type) {
     case '1depth':
-      return (
-        <S.Depth1HeaderArea $bgColor={bgColor}>
-          <S.Depth1TitleArea>{title}</S.Depth1TitleArea>
-          <TrailingSection {...trailingProps} />
-        </S.Depth1HeaderArea>
-      );
+      return <Depth1Header type={type} {...rest} />;
     default:
-      return null;
+      return <DefaultHeader type={type} {...rest} />;
   }
 }
 
