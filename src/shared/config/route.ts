@@ -10,6 +10,7 @@ export const ROUTE = {
   createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',
+  join: '/join/:groupToken',
   expenseDetail: '/expense-detail/:groupToken',
   characterShare: '/expense-detail/:groupToken/character',
 } as const;

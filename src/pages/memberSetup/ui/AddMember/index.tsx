@@ -3,7 +3,7 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
 import Text from '@/shared/ui/Text';
-import MemberProfile from '@/shared/ui/MemberProfile';
+import Profile from '@/shared/ui/Profile';
 import InputGroup from '@/shared/ui/InputGroup';
 import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
@@ -107,13 +107,13 @@ function AddMember({ members, groupToken }: AddMemberProps) {
         </S.MemberCount>
         <Flex gap={12} flexWrap="wrap">
           {members.map((member) => (
-            <MemberProfile
+            <Profile
               key={member.id}
               id={member.id}
               name={member.name}
-              profile={member.profile}
-              canDelete={member.role !== 'MANAGER'}
-              handleDeleteButtonClick={handleDeleteMember}
+              imageSrc={member.profile}
+              type={member.role === 'MANAGER' ? 'default' : 'delete'}
+              onDelete={handleDeleteMember}
             />
           ))}
         </Flex>

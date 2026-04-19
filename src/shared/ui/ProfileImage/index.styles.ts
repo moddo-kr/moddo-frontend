@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 interface ProfileImgProps {
-  $size: 'sm' | 'md' | 'lg';
+  $size: '36' | '40' | '48' | '68';
 }
 
 const sizeMap = {
-  sm: '2.25rem',
-  md: '2.5rem',
-  lg: '4.25rem',
+  '36': '2.25rem',
+  '40': '2.5rem',
+  '48': '3rem',
+  '68': '4.25rem',
 } as const;
 
 export const Image = styled.img<ProfileImgProps>`

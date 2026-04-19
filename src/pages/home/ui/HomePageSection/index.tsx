@@ -9,6 +9,13 @@ import { useState } from 'react';
 import CoinImg from '@/shared/assets/pngs/CoinImg.png';
 import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale/ko';
+import useGetSettlementList from '@/features/home/api/useGetSettlementList';
+import type {
+  SettlementSort,
+  SettlementStatus,
+} from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
 import Button from '@/shared/ui/Button';
@@ -17,38 +24,7 @@ import Chip from '@/shared/ui/Chip';
 import * as S from './index.style';
 import HomeExpenseItem from '../HomeExpenseItem';
 
-type SettlementType = 'IN_PROGRESS' | 'COMPLETED';
-
-interface HomeExpenseItemType {
-  date: string;
-  groupName: string;
-  totalAmount: number;
-  paidMember: number;
-  totalMember: number;
-  id: number;
-}
-/**
- * @Todo 진행중인 정산 내역 조회 API 함수 호출
- * 우선 mock data로 대체
- * */
-const settlementListMock: HomeExpenseItemType[] = [
-  {
-    id: 1,
-    date: '2026년 2월 22일',
-    groupName: 'DND 데모데이',
-    totalAmount: 120000,
-    paidMember: 3,
-    totalMember: 6,
-  },
-  {
-    id: 2,
-    date: '2026년 1월 14일',
-    groupName: 'DND 7조 첫모임',
-    totalAmount: 150000,
-    paidMember: 5,
-    totalMember: 6,
-  },
-];
+type SettlementType = SettlementStatus;
 
 export function MainHeader() {
   const theme = useTheme();
@@ -128,10 +104,92 @@ export function SettlementBanner() {
   );
 }
 
+type SettlementContentProps = {
+  isLoading: boolean;
+  isError: boolean;
+  settlementList: NonNullable<ReturnType<typeof useGetSettlementList>['data']>;
+  settlementType: SettlementType;
+};
+
+function SettlementContent({
+  isLoading,
+  isError,
+  settlementList,
+  settlementType,
+}: SettlementContentProps) {
+  if (isLoading) {
+    return (
+      <Flex
+        direction="column"
+        py={20}
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        gap={20}
+      >
+        <Text variant="body2R" color="semantic.text.subtle">
+          정산 내역을 불러오는 중이에요.
+        </Text>
+      </Flex>
+    );
+  }
+  if (isError) {
+    return (
+      <Flex
+        direction="column"
+        py={20}
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        gap={20}
+      >
+        <Text variant="body2R" color="semantic.text.subtle">
+          정산 내역을 불러오지 못했어요.
+        </Text>
+      </Flex>
+    );
+  }
+  if (settlementList.length > 0) {
+    return (
+      <S.SettlementListWrapper>
+        {settlementList.map((item) => (
+          <HomeExpenseItem
+            key={item.groupId}
+            date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
+              locale: ko,
+            })}
+            groupName={item.name}
+            totalAmount={item.totalAmount}
+            paidMember={item.completedMemberCount}
+            totalMember={item.totalMemberCount}
+          />
+        ))}
+      </S.SettlementListWrapper>
+    );
+  }
+  return (
+    <Flex
+      direction="column"
+      py={20}
+      justifyContent="center"
+      alignItems="center"
+      flexGrow={1}
+      gap={20}
+    >
+      <S.NoSettlementImg src={CoinImg} alt="" />
+      <Text variant="body2R" color="semantic.text.subtle">
+        {settlementType === 'IN_PROGRESS'
+          ? '아직 진행중인 정산이 없어요.'
+          : '완료된 정산이 없어요.'}
+      </Text>
+    </Flex>
+  );
+}
+
 export function SettlementList() {
   const [settlementType, setSettlementType] =
     useState<SettlementType>('IN_PROGRESS');
-  const [sortToggle, setSortToggle] = useState<boolean>(false);
+  const [sort, setSort] = useState<SettlementSort>('LATEST');
   const theme = useTheme();
 
   const handleSettlementTypeButtonClick = (type: SettlementType) => {
@@ -142,12 +200,14 @@ export function SettlementList() {
   };
 
   const handleSortOptionClick = () => {
-    setSortToggle(!sortToggle);
+    setSort((prev) => (prev === 'LATEST' ? 'OLDEST' : 'LATEST'));
   };
 
-  const settlementList = sortToggle
-    ? [...settlementListMock].reverse()
-    : settlementListMock;
+  const { data, isLoading, isError } = useGetSettlementList(
+    settlementType,
+    sort
+  );
+  const settlementList = data ?? [];
 
   return (
     <Flex direction="column" pt={16} flexGrow={1}>
@@ -175,47 +235,24 @@ export function SettlementList() {
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
         <Button variant="text" onClick={handleSortOptionClick}>
           <Text variant="body2R" color="semantic.text.subtle">
-            {sortToggle ? '오래된순' : '최신순'}
+            {sort === 'OLDEST' ? '오래된순' : '최신순'}
           </Text>
           <Next
             width={theme.unit[24]}
             height={theme.unit[24]}
             style={{
-              transform: `rotate(${sortToggle ? 180 : 0}deg)`,
+              transform: `rotate(${sort === 'OLDEST' ? 180 : 0}deg)`,
               transition: 'transform 0.2s ease',
             }}
           />
         </Button>
       </Flex>
-      {settlementList.length > 0 && settlementType === 'IN_PROGRESS' && (
-        <S.SettlementListWrapper>
-          {settlementList.map((data) => (
-            <HomeExpenseItem
-              key={data.id}
-              date={data.date}
-              groupName={data.groupName}
-              totalAmount={data.totalAmount}
-              paidMember={data.paidMember}
-              totalMember={data.totalMember}
-            />
-          ))}
-        </S.SettlementListWrapper>
-      )}
-      {settlementType === 'COMPLETED' && (
-        <Flex
-          direction="column"
-          py={20}
-          justifyContent="center"
-          alignItems="center"
-          flexGrow={1}
-          gap={20}
-        >
-          <S.NoSettlementImg src={CoinImg} alt="" />
-          <Text variant="body2R" color="semantic.text.subtle">
-            아직 진행중인 정산이 없어요.
-          </Text>
-        </Flex>
-      )}
+      <SettlementContent
+        isLoading={isLoading}
+        isError={isError}
+        settlementList={settlementList}
+        settlementType={settlementType}
+      />
     </Flex>
   );
 }

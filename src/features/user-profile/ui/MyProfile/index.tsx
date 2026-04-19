@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { useGetUserInfo } from '@/entities/auth/api/useGetUserInfo';
 import { ROUTE } from '@/shared/config/route';
-import MemberProfileImage from '@/shared/ui/MemberProfileImage';
+import ProfileImage from '@/shared/ui/ProfileImage';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
 import Button from '@/shared/ui/Button';
@@ -21,7 +21,7 @@ function MyProfile() {
 
   return (
     <S.ProfileContainer>
-      <MemberProfileImage size="sm" src={user?.profile} />
+      <ProfileImage size="36" src={user?.profile} />
       <Flex direction="column" flex={1} gap={4}>
         <Text variant="body1Sb">{user.name}</Text>
         {/* TODO: 디자인 시스템 정비 후 다시 디자인 확인이 필요합니다 (Opacity를 계속 쓰는지?) */}

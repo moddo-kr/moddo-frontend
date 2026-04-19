@@ -4,6 +4,9 @@ import {
   CreateGroupData,
   Group,
   GroupHeaderResponse,
+  SettlementGroup,
+  SettlementSort,
+  SettlementStatus,
 } from '@/entities/group/model/group.type';
 
 export const getGroupList = async (): Promise<Group[]> => {
@@ -40,10 +43,21 @@ export const putGroupAccount = async ({
   return response.data;
 };
 
+// NOTE : 기존에 groupToken을 전달하는 방식에서 settlementCode를 전달하는 방식으로 변경함
 export const getGroupHeader = (
-  groupToken: string
+  settlementCode: string
 ): Promise<GroupHeaderResponse> => {
   return axiosInstance
-    .get(`/group/header?groupToken=${groupToken}`)
+    .get(`/groups/${settlementCode}/header`)
+    .then((res) => res.data);
+};
+
+export const getSettlementList = (
+  status: SettlementStatus,
+  sort: SettlementSort,
+  limit = 100
+): Promise<SettlementGroup[]> => {
+  return axiosInstance
+    .get('/groups', { params: { status, sort, limit } })
     .then((res) => res.data);
 };
