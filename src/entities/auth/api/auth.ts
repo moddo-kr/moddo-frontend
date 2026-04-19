@@ -24,7 +24,7 @@ export const getAuth = async () => {
 };
 
 export const getUserInfo = async () => {
-  const response = await axiosInstance.get<User>('/user/info', {
+  const response = await axiosInstance.get<User>('/user', {
     useMock: true,
   });
 

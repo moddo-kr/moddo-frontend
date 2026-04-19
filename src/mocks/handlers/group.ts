@@ -65,6 +65,36 @@ const dummyGroups: Group[] = [
   },
 ];
 
+const dummyMemberList = [
+  {
+    id: 1,
+    role: 'MANAGER',
+    name: '김모또',
+    profile: '',
+    userId: null as number | null,
+    isPaid: false,
+    paidAt: null,
+  },
+  {
+    id: 2,
+    role: 'PARTICIPANT',
+    name: '박완숙',
+    profile: '',
+    userId: null as number | null,
+    isPaid: false,
+    paidAt: null,
+  },
+  {
+    id: 3,
+    role: 'PARTICIPANT',
+    name: '정에그',
+    profile: '',
+    userId: 3,
+    isPaid: false,
+    paidAt: null,
+  },
+];
+
 const groupHandlers = [
   // GET GetGroupList
   http.get('/api/v1/groups', ({ request }) => {
@@ -75,7 +105,18 @@ const groupHandlers = [
     });
   }),
 
+  // GET GetGroupHeader (path 방식)
+  // 모임 상단 조회
+  http.get('/api/v1/groups/:groupToken/header', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    return HttpResponse.json({
+      ...dummyGroups[0],
+    });
+  }),
+
   // GET GetGroupOne
+  // TODO: /api/v1/groups/:groupToken/header 로 대체 예정, 삭제 필요
   http.get(`/api/v1/group`, ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
@@ -138,6 +179,40 @@ const groupHandlers = [
         bank,
         accountNumber,
       });
+    }
+  ),
+
+  // GET /api/v1/groups/:settlementCode/members
+  http.get('/api/v1/groups/:settlementCode/members', ({ request, params }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const { settlementCode } = params;
+
+    if (!settlementCode) {
+      return HttpResponse.json(
+        { error: 'settlementCode is required' },
+        { status: 400 }
+      );
+    }
+
+    return HttpResponse.json({ members: dummyMemberList });
+  }),
+
+  http.post<{ settlementCode: string }, { memberId: number }>(
+    '/api/v1/groups/:settlementCode/members/assign',
+    async ({ request, params }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      const { settlementCode } = params;
+      const { memberId } = await request.json();
+
+      console.log(`settlementCode: ${settlementCode}, memberId: ${memberId}`);
+
+      // mock user id: 1 (auth.ts 참고)
+      const target = dummyMemberList.find((m) => m.id === memberId);
+      if (target) target.userId = 1;
+
+      return HttpResponse.json({ success: true }, { status: 200 });
     }
   ),
 ];

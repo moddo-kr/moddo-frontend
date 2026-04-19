@@ -6,6 +6,8 @@ import RouteErrorElement from '@/app/RouteErrorElement';
 import checkAuth from '@/entities/auth/lib/checkAuth';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
 import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
+import joinLoader from '@/pages/join/loader';
+import expenseDetailLoader from '@/pages/expenseDetail/loader';
 
 const LazyExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
@@ -56,6 +58,11 @@ const LazyMyEditPage = lazy(() =>
 const LazySelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
+  }))
+);
+const LazyJoinPage = lazy(() =>
+  import('@/pages/join').then(({ JoinPage }) => ({
+    default: JoinPage,
   }))
 );
 const LazyNotFound = lazy(() =>
@@ -123,9 +130,14 @@ function AppRouter() {
         },
         // TODO : 로그인 기능으로 변경될 예정
         {
+          path: ROUTE.join,
+          element: <LazyJoinPage />,
+          loader: joinLoader,
+        },
+        {
           path: ROUTE.expenseDetail,
           element: <LazyExpenseDetail />,
-          loader: groupTokenUrlLoader,
+          loader: expenseDetailLoader,
         },
         {
           path: ROUTE.characterShare,
