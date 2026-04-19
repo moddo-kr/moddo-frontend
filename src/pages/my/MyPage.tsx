@@ -14,12 +14,11 @@ function MyPage() {
 
   return (
     <>
-      {/* TODO: 디자인 시스템 정리 + 헤더 컴포넌트 정비 후에 다시 스타일링이 필요합니다. */}
       <Header
-        type="TitleCenter"
+        type="1depth"
         title="마이페이지"
-        rightButtonContent={<Menu width={24} />}
-        rightButtonOnClick={() => navigate(ROUTE.myEdit)}
+        trailingIcon={<Menu width={24} />}
+        onTrailingIconClick={() => navigate(ROUTE.myEdit)}
         bgColor={color.semantic.background.normal.alternative}
       />
       <Suspense fallback={<S.ProfileContainer>로딩 중...</S.ProfileContainer>}>

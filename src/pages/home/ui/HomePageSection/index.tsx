@@ -30,23 +30,16 @@ export function MainHeader() {
   const theme = useTheme();
   return (
     <Header
-      type="TitleCenter"
-      leftButtonContent={
+      type="1depth"
+      title={
         <LogoIcon
           width={98}
           height={36}
           fill={theme.color.semantic.orange.default}
         />
       }
-      // leftButtonOnClick={() => navigate(ROUTE.login)}
-      rightButtonContent={
-        <Flex gap={16}>
-          {/** @Todo 알림 기능 개발 후 변경 */}
-          <Bell width={24} height={24} />
-          {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
-          <Menu width={24} height={24} />
-        </Flex>
-      }
+      trailingIcon={<Bell width={24} height={24} />}
+      trailingSubIcon={<Menu width={24} height={24} />}
       bgColor="semantic.background.normal.alternative"
     />
   );
