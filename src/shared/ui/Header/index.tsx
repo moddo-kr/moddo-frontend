@@ -14,7 +14,7 @@ interface TrailingProps {
 // default: heading 영역(뒤로가기 등) + 중앙 타이틀 + trailing — 서브 페이지용
 interface DefaultHeaderProps extends TrailingProps {
   type: 'default';
-  title: string;
+  title?: string;
   showHeading?: boolean;
   headingIcon?: ReactElement;
   headingLabel?: string;
@@ -26,7 +26,7 @@ interface DefaultHeaderProps extends TrailingProps {
 // 1depth: 좌측 큰 타이틀/커스텀 요소 + trailing — 홈, 마이페이지 등 최상위 페이지용
 interface Depth1HeaderProps extends TrailingProps {
   type: '1depth';
-  title: string | ReactElement;
+  title?: string | ReactElement;
   bgColor?: string;
 }
 
