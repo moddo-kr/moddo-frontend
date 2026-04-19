@@ -28,6 +28,7 @@ type SettlementType = SettlementStatus;
 
 export function MainHeader() {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Header
       type="1depth"
@@ -40,6 +41,7 @@ export function MainHeader() {
       }
       trailingIcon={<Bell width={24} height={24} />}
       trailingSubIcon={<Menu width={24} height={24} />}
+      onTrailingSubIconClick={() => navigate(ROUTE.my)}
       bgColor="semantic.background.normal.alternative"
     />
   );
