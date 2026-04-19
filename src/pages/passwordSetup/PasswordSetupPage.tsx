@@ -40,14 +40,11 @@ function PasswordSetupPage({ groupName, onNext }: PasswordSetupProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={() => navigate(-1)}
+        type="default"
+        title=""
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title={`${groupName}의\n비밀번호 4자리 숫자를 설정해주세요.`}

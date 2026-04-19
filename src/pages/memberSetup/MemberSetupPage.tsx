@@ -2,7 +2,6 @@ import { generatePath, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
 import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
 import { ROUTE } from '@/shared/config/route';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import DescriptionField from '@/shared/ui/DescriptionField';
@@ -53,14 +52,11 @@ function MemberSetupPage() {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={() => navigate(-1)}
+        type="default"
+        title=""
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title={`모임에 함께한\n참여자를 추가해주세요.`}
