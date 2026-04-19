@@ -35,11 +35,12 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={onBack}
-        rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
-        rightButtonOnClick={onAdd}
+        type="default"
+        title=""
+        headingIcon={<ArrowLeft width="1.5rem" />}
+        onHeadingIconClick={onBack}
+        trailingIcon={<Text variant="body1Sb">지출 추가</Text>}
+        onTrailingIconClick={onAdd}
         bgColor={color.semantic.background.normal.alternative}
       />
       <DescriptionField

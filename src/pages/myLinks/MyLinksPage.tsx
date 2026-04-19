@@ -18,10 +18,10 @@ function MyLinksPage() {
     return (
       <>
         <Header
-          type="TitleCenter"
+          type="default"
           title="링크 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
+          headingIcon={<ArrowLeft width={24} />}
+          onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.alternative}
         />
         <Flex
@@ -44,10 +44,10 @@ function MyLinksPage() {
   return (
     <>
       <Header
-        type="TitleCenter"
+        type="default"
         title="링크 관리"
-        leftButtonContent={<ArrowLeft width={24} />}
-        leftButtonOnClick={() => navigate(-1)}
+        headingIcon={<ArrowLeft width={24} />}
+        onHeadingIconClick={() => navigate(-1)}
         bgColor="semantic.background.normal.alternative"
       />
       {data?.links && data.links.length > 0 ? (
