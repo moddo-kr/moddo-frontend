@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { Menu } from '@/shared/assets/svgs/icon';
+import { Bell, Menu } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import { ROUTE } from '@/shared/config/route';
 import { CharacterSection } from '@/features/character-management/ui';
@@ -17,8 +17,9 @@ function MyPage() {
       <Header
         type="1depth"
         title="마이페이지"
-        trailingIcon={<Menu width={24} />}
-        onTrailingIconClick={() => navigate(ROUTE.myEdit)}
+        trailingIcon={<Bell width={24} height={24} />}
+        trailingSubIcon={<Menu width={24} />}
+        onTrailingSubIconClick={() => navigate(ROUTE.home)}
         bgColor={color.semantic.background.normal.alternative}
       />
       <Suspense fallback={<S.ProfileContainer>로딩 중...</S.ProfileContainer>}>
