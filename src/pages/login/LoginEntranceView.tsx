@@ -1,9 +1,9 @@
 import { useTheme } from 'styled-components';
-import LogoImg from '@/shared/assets/pngs/LogoImg.png';
 import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
 import Flex from '@/shared/ui/Flex';
-import { CoinLottie } from '@/shared/ui/Lottie';
 import Text from '@/shared/ui/Text';
+import { LogoIcon } from '@/shared/assets/svgs';
+import Header from '@/shared/ui/Header';
 import * as S from './LoginEntranceView.styles';
 
 // 로그인 페이지 전에 잠시 보여지는 진입 페이지
@@ -18,14 +18,18 @@ function LoginEntranceView() {
       flexGrow={1}
       gap={16}
     >
+      <Header type="1depth" bgColor={theme.color.semantic.orange.subtle} />
       <Flex direction="column" alignItems="center">
-        <S.LogoImg src={LogoImg} alt="logo" />
-        <Text variant="body1R" color="semantic.text.strong">
+        <LogoIcon
+          width={187}
+          height={66}
+          fill={theme.color.semantic.orange.default}
+        />
+        <Text variant="body1R" color="semantic.text.subtle">
           모또와 함께라면 정산 걱정 끝!
         </Text>
       </Flex>
       <S.ImgContainer>
-        <CoinLottie />
         <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />
       </S.ImgContainer>
     </Flex>
