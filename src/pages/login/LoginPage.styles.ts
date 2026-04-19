@@ -20,7 +20,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 70%;
+  margin-top: 40vh;
 `;
 
 export const ButtonWrapper = styled.div`
