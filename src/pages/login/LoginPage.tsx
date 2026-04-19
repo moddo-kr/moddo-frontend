@@ -18,6 +18,7 @@ function LoginPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isEntrance, setIsEntrance] = useState(true);
+  const [isGuestLoginPending, setIsGuestLoginPending] = useState(false);
 
   const handleLoginButtonClick = async (loginType: 'KAKAO' | 'GUEST') => {
     if (loginType === 'KAKAO') {
@@ -25,6 +26,8 @@ function LoginPage() {
         searchParams.get('redirectTo') ?? undefined;
       kakaoLogin(redirectPathAfterLogin);
     } else {
+      if (isGuestLoginPending) return;
+      setIsGuestLoginPending(true);
       try {
         await getGuestToken();
         queryClient.removeQueries({ queryKey: ['auth', 'user'] });
@@ -34,6 +37,8 @@ function LoginPage() {
           type: 'error',
           content: '비회원 로그인에 실패했습니다. 다시 시도해주세요.',
         });
+      } finally {
+        setIsGuestLoginPending(false);
       }
     }
   };
@@ -79,6 +84,7 @@ function LoginPage() {
         </Button>
         <Button
           variant="secondary"
+          disabled={isGuestLoginPending}
           onClick={() => handleLoginButtonClick('GUEST')}
         >
           <Text variant="body1R" color="semantic.text.strong">
