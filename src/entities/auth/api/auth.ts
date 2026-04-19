@@ -1,5 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
-import { User } from '../model/user.type';
+import { AuthCheckResponse, User } from '../model/user.type';
 
 // CHECK - 게스트 토큰 정책 제거 가능성 있음
 export interface GuestTokenData {
@@ -16,8 +16,8 @@ export const getGuestToken = async (): Promise<GuestTokenData> => {
 
 // ==========
 
-export const getAuth = async () => {
-  const response = await axiosInstance.get('/auth/check');
+export const getAuth = async (): Promise<AuthCheckResponse> => {
+  const response = await axiosInstance.get<AuthCheckResponse>('/auth/check');
   return response.data;
 };
 
