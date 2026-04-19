@@ -1,71 +1,123 @@
 import { ReactElement } from 'react';
-import { useTheme } from 'styled-components';
-import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
 import * as S from '@/shared/ui/Header/index.styles';
 
-export interface HeaderProps {
-  title?: string;
-  showIcon?: boolean; // FIXME : 타입 오류를 방지하기 위해 남겨둠. 수정 필요함
-  leftButtonContent?: ReactElement;
-  rightButtonContent?: ReactElement;
-  leftButtonOnClick?: () => void;
-  rightButtonOnClick?: () => void;
-  type: 'TitleLeft' | 'TitleCenter';
-  handleBackButtonClick?: () => void; // FIXME : 타입 오류를 방지하기 위해 남겨둠. 수정 필요함
+// 공통 trailing(우측) 영역
+interface TrailingProps {
+  showTrailing?: boolean;
+  trailingLabel?: string;
+  trailingIcon?: ReactElement;
+  trailingSubIcon?: ReactElement;
+  onTrailingIconClick?: () => void;
+  onTrailingSubIconClick?: () => void;
+}
+
+// default: heading 영역(뒤로가기 등) + 중앙 타이틀 + trailing — 서브 페이지용
+interface DefaultHeaderProps extends TrailingProps {
+  type: 'default';
+  title: string;
+  showHeading?: boolean;
+  headingIcon?: ReactElement;
+  headingLabel?: string;
+  headingSubIcon?: ReactElement;
+  onHeadingIconClick?: () => void;
   bgColor?: string;
 }
 
-function Header({
-  title,
-  showIcon,
-  type,
-  handleBackButtonClick,
-  leftButtonContent,
-  rightButtonContent,
-  leftButtonOnClick,
-  rightButtonOnClick,
-  bgColor,
-}: HeaderProps) {
-  const theme = useTheme();
+// 1depth: 좌측 큰 타이틀/커스텀 요소 + trailing — 홈, 마이페이지 등 최상위 페이지용
+interface Depth1HeaderProps extends TrailingProps {
+  type: '1depth';
+  title: string | ReactElement;
+  bgColor?: string;
+}
+
+export type HeaderProps = DefaultHeaderProps | Depth1HeaderProps;
+
+function TrailingSection({
+  showTrailing = true,
+  trailingLabel,
+  trailingIcon,
+  trailingSubIcon,
+  onTrailingIconClick,
+  onTrailingSubIconClick,
+}: TrailingProps) {
+  if (!showTrailing) return null;
+  if (!trailingLabel && !trailingIcon && !trailingSubIcon) return null;
+
+  return (
+    <S.TrailingArea>
+      {trailingLabel && <span>{trailingLabel}</span>}
+      {trailingIcon && (
+        <S.IconButton onClick={onTrailingIconClick}>
+          {trailingIcon}
+        </S.IconButton>
+      )}
+      {trailingSubIcon && (
+        <S.IconButton onClick={onTrailingSubIconClick}>
+          {trailingSubIcon}
+        </S.IconButton>
+      )}
+    </S.TrailingArea>
+  );
+}
+
+function Header(props: HeaderProps) {
+  const {
+    type,
+    title,
+    bgColor,
+    showTrailing,
+    trailingLabel,
+    trailingIcon,
+    trailingSubIcon,
+    onTrailingIconClick,
+    onTrailingSubIconClick,
+  } = props;
+
+  const trailingProps: TrailingProps = {
+    showTrailing,
+    trailingLabel,
+    trailingIcon,
+    trailingSubIcon,
+    onTrailingIconClick,
+    onTrailingSubIconClick,
+  };
 
   switch (type) {
-    case 'TitleLeft':
+    case 'default': {
+      const {
+        showHeading = true,
+        headingIcon,
+        headingLabel,
+        headingSubIcon,
+        onHeadingIconClick,
+      } = props;
+
       return (
-        <S.LeftHeaderArea $bgColor={bgColor}>
-          <S.IconWrapper>
-            {showIcon ? (
-              <ArrowLeft
-                onClick={handleBackButtonClick}
-                width={theme.unit[24]}
-                height={theme.unit[24]}
-              />
-            ) : (
-              <S.DummyIcon />
-            )}
-          </S.IconWrapper>
-          <S.TitleArea>{title}</S.TitleArea>
-        </S.LeftHeaderArea>
+        <S.DefaultHeaderArea $bgColor={bgColor}>
+          {showHeading && (headingIcon || headingLabel || headingSubIcon) ? (
+            <S.HeadingArea>
+              {headingIcon && (
+                <S.IconButton onClick={onHeadingIconClick}>
+                  {headingIcon}
+                </S.IconButton>
+              )}
+              {headingSubIcon && <S.IconButton>{headingSubIcon}</S.IconButton>}
+              {headingLabel && <span>{headingLabel}</span>}
+            </S.HeadingArea>
+          ) : (
+            <div />
+          )}
+          <S.DefaultTitleArea>{title}</S.DefaultTitleArea>
+          <TrailingSection {...trailingProps} />
+        </S.DefaultHeaderArea>
       );
-    case 'TitleCenter':
+    }
+    case '1depth':
       return (
-        <S.CenterHeaderArea $bgColor={bgColor}>
-          {leftButtonContent ? (
-            <Button variant="text" onClick={leftButtonOnClick}>
-              {leftButtonContent}
-            </Button>
-          ) : (
-            <S.DummyIcon />
-          )}
-          <S.CenterTitleArea>{title}</S.CenterTitleArea>
-          {rightButtonContent ? (
-            <Button variant="text" onClick={rightButtonOnClick}>
-              {rightButtonContent}
-            </Button>
-          ) : (
-            <S.DummyIcon />
-          )}
-        </S.CenterHeaderArea>
+        <S.Depth1HeaderArea $bgColor={bgColor}>
+          <S.Depth1TitleArea>{title}</S.Depth1TitleArea>
+          <TrailingSection {...trailingProps} />
+        </S.Depth1HeaderArea>
       );
     default:
       return null;
