@@ -27,6 +27,11 @@ export interface MemberProfile {
   paidAt: Date | null;
 }
 
-export interface MemberProfileData {
-  members: MemberProfile[];
+// API 원시 응답 타입 (JSON 파싱 직후, 변환 전)
+export interface MemberProfileRaw extends Omit<MemberProfile, 'paidAt'> {
+  paidAt: string | null;
+}
+
+export interface MemberProfileRawData {
+  members: MemberProfileRaw[];
 }

@@ -1,9 +1,14 @@
 import axiosInstance from '@/shared/api/axios';
-import { CharacterItemsResponse } from '../model/character.type';
+import { parseDate } from '@/shared/lib/parseDate';
+import {
+  CharacterItemData,
+  CharacterItemsRawResponse,
+} from '../model/character.type';
 
-export const getCharacterCollection = () =>
-  axiosInstance
-    .get<CharacterItemsResponse>('/character/collection', {
-      useMock: true,
-    })
-    .then((res) => res.data);
+export const getCharacterCollection = (): Promise<CharacterItemData[]> =>
+  axiosInstance.get<CharacterItemsRawResponse>('/collections').then((res) =>
+    res.data.collections.map((item) => ({
+      ...item,
+      acquiredAt: parseDate(item.acquiredAt),
+    }))
+  );
