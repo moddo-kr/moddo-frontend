@@ -1,7 +1,7 @@
 // 정산 상세 페이지 전 거치는 로더
 // TODO : 기존 groupToken들을 사용하는 방식을 settlementCode를 사용하는 방식으로 변경했음. 동작 확인 필요함.
 
-import { getUserInfo } from '@/entities/auth/api/auth';
+import { getAuth } from '@/entities/auth/api/auth';
 import { getGroupHeader } from '@/entities/group/api/group';
 import { getProfiles } from '@/entities/member/api/getProfiles';
 import { queryClient } from '@/shared/api/queryClient';
@@ -18,13 +18,13 @@ async function expenseDetailLoader({ params }: LoaderFunctionArgs) {
 
   try {
     // 1. 로그인 여부 확인
-    // TODO: getUserInfo 401 발생 시 axiosInstance 인터셉터가 window.location.href로 처리해 returnUrl이 무시됨. 인터셉터를 React Router redirect 방식으로 교체 필요. (https://moddo2.atlassian.net/browse/MD-25)
-    const user = await queryClient.ensureQueryData({
-      queryKey: ['userInfo'],
-      queryFn: getUserInfo,
+    // TODO: getAuth 401 발생 시 axiosInstance 인터셉터가 window.location.href로 처리해 returnUrl이 무시됨. 인터셉터를 React Router redirect 방식으로 교체 필요. (https://moddo2.atlassian.net/browse/MD-27)
+    const auth = await queryClient.ensureQueryData({
+      queryKey: ['auth', 'user'],
+      queryFn: getAuth,
     });
     // TODO: 로그인 페이지에서 성공 후 returnUrl 처리 필요함
-    if (!user) {
+    if (!auth?.authenticated) {
       const returnUrl = encodeURIComponent(`/expense-detail/${groupToken}`);
       return redirect(`/login?returnUrl=${returnUrl}`);
     }
@@ -35,7 +35,7 @@ async function expenseDetailLoader({ params }: LoaderFunctionArgs) {
       queryFn: () => getProfiles(groupToken),
     });
     const myProfile =
-      profiles.find((profile) => profile.userId === user.id) ?? null;
+      profiles.find((profile) => profile.userId === auth.user?.id) ?? null;
     if (!myProfile) return redirect(`/join/${groupToken}`);
 
     const groupData = await queryClient.ensureQueryData({
