@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
 import { useGetGroupList } from '@/entities/group/api/groupQueries';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Flex from '@/shared/ui/Flex';
@@ -17,10 +18,11 @@ function SelectGroupPage() {
     <>
       {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
       <Header
-        title="뒤로가기"
-        showIcon
-        type="TitleLeft"
-        handleBackButtonClick={() => navigate(-1)}
+        type="default"
+        title=""
+        headingIcon={<ArrowLeft width={24} height={24} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
         bgColor="semantic.background.normal.alternative"
       />
       <Flex

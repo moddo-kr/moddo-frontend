@@ -64,9 +64,10 @@ function EditExpenseStepPage({
   return (
     <FormProvider {...formMethods}>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<Close width={24} />}
-        leftButtonOnClick={onBack}
+        type="default"
+        title=""
+        headingIcon={<Close width={24} />}
+        onHeadingIconClick={onBack}
       />
       <DescriptionField
         title={

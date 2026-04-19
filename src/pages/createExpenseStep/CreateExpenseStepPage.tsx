@@ -62,11 +62,12 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
   return (
     <FormProvider {...formMethods}>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<Close width="1.5rem" />}
-        rightButtonContent={<Text>지출 추가</Text>}
-        rightButtonOnClick={handleAddExpense}
-        leftButtonOnClick={() => setOpen(true)}
+        type="default"
+        title=""
+        headingIcon={<Close width="1.5rem" />}
+        onHeadingIconClick={() => setOpen(true)}
+        trailingIcon={<Text>지출 추가</Text>}
+        onTrailingIconClick={handleAddExpense}
       />
       {open && (
         <Modal

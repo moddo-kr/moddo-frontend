@@ -31,9 +31,10 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
   return (
     <FormProvider {...formMethods}>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<Close width={24} />}
-        leftButtonOnClick={onNext}
+        type="default"
+        title=""
+        headingIcon={<Close width={24} />}
+        onHeadingIconClick={onNext}
       />
       <DescriptionField
         title={

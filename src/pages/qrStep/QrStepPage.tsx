@@ -44,11 +44,11 @@ function QrStepPage({ onBack }: QrStepProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
+        type="default"
         title="QR코드"
-        leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={onBack}
-        rightButtonContent={<Reset width="1.5rem" />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
+        onHeadingIconClick={onBack}
+        trailingIcon={<Reset width="1.5rem" />}
       />
       <DescriptionField
         title={`QR코드를 공유하면\n바로 정산에 참여할 수 있어요!`}
