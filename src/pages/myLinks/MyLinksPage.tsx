@@ -22,7 +22,7 @@ function MyLinksPage() {
           title="링크 관리"
           headingIcon={<ArrowLeft width={24} />}
           onHeadingIconClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.alternative}
+          bgColor={color.semantic.primary.subtle}
         />
         <Flex
           pt={24}
@@ -48,7 +48,7 @@ function MyLinksPage() {
         title="링크 관리"
         headingIcon={<ArrowLeft width={24} />}
         onHeadingIconClick={() => navigate(-1)}
-        bgColor="semantic.background.normal.alternative"
+        bgColor={color.semantic.primary.subtle}
       />
       {data?.links && data.links.length > 0 ? (
         <Flex

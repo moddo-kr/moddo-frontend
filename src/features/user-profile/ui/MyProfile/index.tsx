@@ -16,7 +16,7 @@ function MyProfile() {
   return (
     <S.ProfileContainer>
       <MemberProfileImage size="sm" src={profile?.profileImageUrl} />
-      <Flex direction="column" flex={1} gap={4}>
+      <Flex direction="column" flex={1}>
         <Text variant="body1Sb">{profile.name}</Text>
         {/* TODO: 디자인 시스템 정비 후 다시 디자인 확인이 필요합니다 (Opacity를 계속 쓰는지?) */}
         <Text

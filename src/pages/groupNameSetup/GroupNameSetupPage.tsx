@@ -40,7 +40,6 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
         type="default"
         title=""
         headingIcon={<ArrowLeft width={unit[24]} />}
-        headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField

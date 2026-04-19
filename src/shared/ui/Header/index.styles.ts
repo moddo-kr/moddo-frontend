@@ -9,7 +9,7 @@ export const HeaderArea = styled.header<{ $bgColor?: string }>`
   top: 0;
   left: 0;
   z-index: 998;
-  padding: 1.75rem 1.375rem;
+  padding: 1rem 1.25rem; // px로 변환하면 16px 20px
   width: 100%;
   min-width: 320px;
   max-height: 64px;
@@ -38,8 +38,11 @@ export const Depth1HeaderArea = styled(HeaderArea)`
 
 export const Depth1TitleArea = styled.h2`
   all: unset;
-  ${TextVariant('heading2')};
+  ${TextVariant('heading1')};
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.color.primitive.gray[600]};
 `;
 
 // heading 영역 (default 전용, 좌측)
@@ -53,7 +56,7 @@ export const HeadingArea = styled.div`
 export const TrailingArea = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 // 아이콘 버튼 래퍼
