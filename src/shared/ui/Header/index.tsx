@@ -63,6 +63,7 @@ function TrailingSection({
 }
 
 function DefaultHeader({
+  title,
   bgColor,
   showHeading = true,
   headingIcon,

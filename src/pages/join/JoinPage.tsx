@@ -3,7 +3,6 @@ import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { useTheme } from 'styled-components';
 import { MemberProfile } from '@/entities/member/model/member.type';
@@ -44,14 +43,9 @@ function JoinPage() {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={() => navigate(-1)}
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title="정산에 참여할 프로필을 선택하세요."
