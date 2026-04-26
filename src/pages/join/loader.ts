@@ -1,7 +1,7 @@
 // 정산 참여 페이지 전 거치는 로더
 // TODO : 기존 groupToken들을 사용하는 방식을 settlementCode를 사용하는 방식으로 변경해야 함.
 
-import { getUserInfo } from '@/entities/auth/api/auth';
+import { getAuth } from '@/entities/auth/api/auth';
 import { getProfiles } from '@/entities/member/api/getProfiles';
 import { queryClient } from '@/shared/api/queryClient';
 import { ROUTE } from '@/shared/config/route';
@@ -14,13 +14,13 @@ async function joinLoader({ params }: LoaderFunctionArgs) {
   if (!groupToken) return redirect(ROUTE.home);
 
   // 1. 로그인 여부 확인
-  // TODO: getUserInfo 401 발생 시 axiosInstance 인터셉터가 window.location.href로 처리해 returnUrl이 무시됨. 인터셉터를 React Router redirect 방식으로 교체 필요. (https://moddo2.atlassian.net/browse/MD-25)
-  const user = await queryClient.ensureQueryData({
-    queryKey: ['userInfo'],
-    queryFn: getUserInfo,
+  // TODO: getAuth 401 발생 시 axiosInstance 인터셉터가 window.location.href로 처리해 returnUrl이 무시됨. 인터셉터를 React Router redirect 방식으로 교체 필요. (https://moddo2.atlassian.net/browse/MD-27)
+  const auth = await queryClient.ensureQueryData({
+    queryKey: ['auth', 'user'],
+    queryFn: getAuth,
   });
 
-  if (!user) {
+  if (!auth?.authenticated) {
     const returnUrl = encodeURIComponent(`/join/${groupToken}`);
     return redirect(`/login?returnUrl=${returnUrl}`);
   }
@@ -33,7 +33,7 @@ async function joinLoader({ params }: LoaderFunctionArgs) {
 
   // 3. 본인 프로필을 선택했는지 확인
   const myProfile =
-    profiles.find((profile) => profile.userId === user.id) ?? null;
+    profiles.find((profile) => profile.userId === auth.user?.id) ?? null;
   if (myProfile) return redirect(`/expense-detail/${groupToken}`);
 
   return { profiles };

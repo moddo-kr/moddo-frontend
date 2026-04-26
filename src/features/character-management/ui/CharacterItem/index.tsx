@@ -17,14 +17,14 @@ interface CharacterCardProps {
 }
 
 function CharacterCard({ character }: CharacterCardProps) {
-  const { imageUrl, name, unlockedAt } = character;
+  const { imageUrl, name, acquiredAt } = character;
 
   return (
     <S.CardContainer>
       <S.CharacterImage src={imageUrl} alt={name} />
       <Text variant="body2Sb">{name}</Text>
       <Text variant="caption">
-        {unlockedAt ? format(new Date(unlockedAt), 'yyyy.MM.dd') : null}
+        {acquiredAt ? format(acquiredAt, 'yyyy.MM.dd') : null}
       </Text>
     </S.CardContainer>
   );
@@ -35,7 +35,7 @@ interface CharacterItemProps {
 }
 
 function CharacterItem({ character }: CharacterItemProps) {
-  if (!character.isUnlocked) return <LockedCharacterCard />;
+  if (!character.acquiredAt) return <LockedCharacterCard />;
   return <CharacterCard character={character} />;
 }
 

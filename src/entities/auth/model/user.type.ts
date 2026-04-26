@@ -1,6 +1,14 @@
 export interface User {
-  id: number;
   email: string;
   name: string;
-  profileImageUrl?: string;
+  profile?: string;
+}
+
+export interface AuthCheckResponse {
+  authenticated: boolean;
+  user?: {
+    id: number;
+    role: string;
+  };
+  reason?: string;
 }
