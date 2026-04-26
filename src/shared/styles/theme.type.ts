@@ -1,4 +1,4 @@
-import { FlattenKeys } from '@/shared/types/utility.type';
+import { TokenPath } from '@/shared/types/utility.type';
 
 // ============================================
 // 📦 Theme Type
@@ -16,7 +16,7 @@ export type ColorType = {
   semantic: SemanticColorType;
 };
 
-export type ColorKey = FlattenKeys<ColorType>;
+export type ColorKey = TokenPath<ColorType>;
 
 export type UnitType = Record<number | 'max', string>;
 
