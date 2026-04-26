@@ -19,6 +19,8 @@ function MyEditPage() {
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         trailingIcon={<Menu width="1.5rem" />}
+        // TODO: 사이드 메뉴 핸들러 연결 필요
+        onTrailingIconClick={() => {}}
       />
       {/* TODO: 이용 약관 페이지 추가 여부를 결정하고, 이용 약관 페이지를 생성한 다음 버튼 표시  */}
       {/* <TermsLink /> */}
