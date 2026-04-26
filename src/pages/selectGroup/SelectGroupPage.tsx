@@ -28,7 +28,7 @@ function SelectGroupPage() {
         title=""
         headingIcon={<ArrowLeft width={24} height={24} />}
         onHeadingIconClick={() => navigate(-1)}
-        bgColor="semantic.primary.subtle"
+        bgColor={color.semantic.primary.subtle}
       />
       <Flex
         direction="column"
