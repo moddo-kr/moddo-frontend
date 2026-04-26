@@ -20,11 +20,7 @@ function LoginEntranceView() {
     >
       <Header type="1depth" bgColor={theme.color.semantic.orange.subtle} />
       <Flex direction="column" alignItems="center">
-        <LogoIcon
-          width={187}
-          height={66}
-          fill={theme.color.semantic.orange.default}
-        />
+        <LogoIcon width={187} fill={theme.color.semantic.orange.default} />
         <Text variant="body1R" color="semantic.text.subtle">
           모또와 함께라면 정산 걱정 끝!
         </Text>
