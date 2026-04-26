@@ -17,6 +17,9 @@ const payment = {
     axiosInstance
       .patch(`/payments/${paymentRequestId}/reject`)
       .then((res) => res.data),
+
+  create: (code: string): Promise<PaymentActionResult> =>
+    axiosInstance.post(`/groups/${code}/payments`).then((res) => res.data),
 };
 
 export default payment;

@@ -11,7 +11,7 @@ export interface PaymentList {
   paymentRequests: PaymentRequest[];
 }
 
-export type PaymentStatus = 'APPROVED' | 'REJECTED';
+export type PaymentStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
 export interface PaymentActionResult {
   id: number;
@@ -19,6 +19,6 @@ export interface PaymentActionResult {
   requestMemberId: number;
   targetUserId: number;
   requestedAt: string;
-  processedAt: string;
+  processedAt: string | null;
   status: PaymentStatus;
 }
