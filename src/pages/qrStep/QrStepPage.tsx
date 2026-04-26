@@ -49,6 +49,8 @@ function QrStepPage({ onBack }: QrStepProps) {
         headingIcon={<ArrowLeft width="1.5rem" />}
         onHeadingIconClick={onBack}
         trailingIcon={<Reset width="1.5rem" />}
+        // TODO: QR코드 리셋 핸들러 연결 필요
+        onTrailingIconClick={() => {}}
       />
       <DescriptionField
         title={`QR코드를 공유하면\n바로 정산에 참여할 수 있어요!`}
