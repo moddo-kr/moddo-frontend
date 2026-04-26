@@ -82,7 +82,7 @@ function CharacterSharePage() {
         title=""
         headingIcon={<ArrowLeft width={unit[24]} />}
         onHeadingIconClick={() => navigate(-1)}
-        bgColor="semantic.background.normal.alternative"
+        bgColor={color.semantic.background.normal.alternative}
       />
       <S.CharacterContainer>
         <S.TitleContainer>
