@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import theme from '../src/shared/styles/theme';
 import GlobalStyles from '../src/shared/styles/globalStyles';
+import '../src/shared/design-system/tokens/build/token.css';
 
 // Initialize MSW
 initialize();
@@ -20,6 +21,11 @@ const preview: Preview = {
   },
 
   decorators: [
+    (Story) => (
+      <div data-theme="light">
+        <Story />
+      </div>
+    ),
     withThemeFromJSXProvider({
       themes: {
         light: theme,

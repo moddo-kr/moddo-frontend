@@ -1,0 +1,195 @@
+import { Meta } from '@storybook/blocks';
+import { semanticTypographyTokenValues } from '@/shared/design-system/tokens/semantic/typography';
+import { atomicTypographyTokens } from '@/shared/design-system/tokens/atomic/typography';
+import { getTypographyToken } from '@/shared/design-system/lib/getTypographyToken';
+
+<Meta title="Design Tokens/Typography" />
+
+export const tableStyle = { width: '100%', borderCollapse: 'collapse' };
+export const thStyle = { textAlign: 'left', padding: '8px 12px', fontWeight: 600, borderBottom: '2px solid var(--color-border-alternative)' };
+export const tdStyle = { padding: '8px 12px', borderBottom: '1px solid var(--color-border-alternative)', verticalAlign: 'middle' };
+export const previewCardStyle = {
+  backgroundColor: 'var(--color-fill-neutral)',
+  borderRadius: 'var(--radius-lg)',
+  padding: 40,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 12,
+  marginBottom: 24,
+};
+
+export function getStyleLabel(semanticKey, withCategory = false) {
+  const parts = semanticKey.split('.').slice(1); // remove 'typography' prefix
+  if (withCategory) return parts.join('-');
+  return parts.slice(1).join('.');
+}
+
+export function getCssVarKey(semanticKey) {
+  return semanticKey.replace(/^typography\./, '').replace(/\./g, '-');
+}
+
+export function getCategoryEntries(category) {
+  return Object.entries(semanticTypographyTokenValues).filter(([key]) =>
+    key.startsWith(`typography.${category}.`)
+  );
+}
+
+# Typography
+
+## Font Family
+
+<div style={previewCardStyle}>
+    <span className="sb-unstyled" style={{
+        fontFamily: 'var(--font-sans)',
+        fontSize: '3.125rem',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        color: 'var(--color-fg-strong)',
+    }}>
+        프리텐다드 Pretendard
+    </span>
+</div>
+
+## Heading
+
+<div style={previewCardStyle}>
+  {getCategoryEntries('heading').map(([key]) => (
+    <span className="sb-unstyled" key={key} style={{ ...getTypographyToken(key), color: 'var(--color-fg-strong)' }}>
+        {getStyleLabel(key, true)}
+    </span>
+  ))}
+</div>
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Style</th>
+      <th style={thStyle}>Size</th>
+      <th style={thStyle}>Weight</th>
+      <th style={thStyle}>Line Height</th>
+      <th style={thStyle}>Letter Spacing</th>
+    </tr>
+  </thead>
+  <tbody>
+    {getCategoryEntries('heading').map(([key, atomicKey]) => {
+      const token = atomicTypographyTokens[atomicKey];
+      return (
+        <tr key={key}>
+          <td style={tdStyle}><code>{getStyleLabel(key)}</code></td>
+          <td style={tdStyle}>{token.fontSize}px</td>
+          <td style={tdStyle}>{token.fontWeight}</td>
+          <td style={tdStyle}>{token.lineHeight}</td>
+          <td style={tdStyle}>{token.letterSpacing}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+## Title
+
+<div style={previewCardStyle}>
+  {getCategoryEntries('title').map(([key]) => (
+    <span className="sb-unstyled" key={key} style={{ ...getTypographyToken(key), color: 'var(--color-fg-strong)' }}>
+        {getStyleLabel(key, true)}
+    </span>
+  ))}
+</div>
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Style</th>
+      <th style={thStyle}>Size</th>
+      <th style={thStyle}>Weight</th>
+      <th style={thStyle}>Line Height</th>
+      <th style={thStyle}>Letter Spacing</th>
+    </tr>
+  </thead>
+  <tbody>
+    {getCategoryEntries('title').map(([key, atomicKey]) => {
+      const token = atomicTypographyTokens[atomicKey];
+      return (
+        <tr key={key}>
+          <td style={tdStyle}><code>{getStyleLabel(key)}</code></td>
+          <td style={tdStyle}>{token.fontSize}px</td>
+          <td style={tdStyle}>{token.fontWeight}</td>
+          <td style={tdStyle}>{token.lineHeight}</td>
+          <td style={tdStyle}>{token.letterSpacing}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+## Body
+
+<div style={previewCardStyle}>
+  {getCategoryEntries('body').map(([key]) => (
+    <span className="sb-unstyled" key={key} style={{ ...getTypographyToken(key), color: 'var(--color-fg-strong)' }}>
+        {getStyleLabel(key, true)}
+    </span>
+  ))}
+</div>
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Style</th>
+      <th style={thStyle}>Size</th>
+      <th style={thStyle}>Weight</th>
+      <th style={thStyle}>Line Height</th>
+      <th style={thStyle}>Letter Spacing</th>
+    </tr>
+  </thead>
+  <tbody>
+    {getCategoryEntries('body').map(([key, atomicKey]) => {
+      const token = atomicTypographyTokens[atomicKey];
+      return (
+        <tr key={key}>
+          <td style={tdStyle}><code>{getStyleLabel(key)}</code></td>
+          <td style={tdStyle}>{token.fontSize}px</td>
+          <td style={tdStyle}>{token.fontWeight}</td>
+          <td style={tdStyle}>{token.lineHeight}</td>
+          <td style={tdStyle}>{token.letterSpacing}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+## Caption
+
+<div style={previewCardStyle}>
+  {getCategoryEntries('caption').map(([key]) => (
+    <span className="sb-unstyled" key={key} style={{ ...getTypographyToken(key), color: 'var(--color-fg-strong)' }}>
+        {getStyleLabel(key, true)}
+    </span>
+  ))}
+</div>
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Style</th>
+      <th style={thStyle}>Size</th>
+      <th style={thStyle}>Weight</th>
+      <th style={thStyle}>Line Height</th>
+      <th style={thStyle}>Letter Spacing</th>
+    </tr>
+  </thead>
+  <tbody>
+    {getCategoryEntries('caption').map(([key, atomicKey]) => {
+      const token = atomicTypographyTokens[atomicKey];
+      return (
+        <tr key={key}>
+          <td style={tdStyle}><code>{getStyleLabel(key)}</code></td>
+          <td style={tdStyle}>{token.fontSize}px</td>
+          <td style={tdStyle}>{token.fontWeight}</td>
+          <td style={tdStyle}>{token.lineHeight}</td>
+          <td style={tdStyle}>{token.letterSpacing}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
