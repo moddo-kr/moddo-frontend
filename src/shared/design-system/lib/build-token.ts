@@ -4,5 +4,5 @@ import { fileURLToPath } from 'url';
 import { buildThemeCss } from './buildThemeCss';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
-const outputPath = resolve(currentDir, '../tokens/build/theme.css');
+const outputPath = resolve(currentDir, '../tokens/build/token.css');
 writeFileSync(outputPath, buildThemeCss());

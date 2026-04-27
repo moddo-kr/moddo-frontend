@@ -1,4 +1,4 @@
-[data-theme='light'] {
+:root {
   /* Spacing scale */
   --spacing-2: 2px;
   --spacing-4: 4px;
@@ -101,51 +101,51 @@
   --text-heading-medium: 24px;
   --font-weight-heading-medium: 700;
   --leading-heading-medium: 150%;
-  --tracking-heading-medium: 0;
+  --tracking-heading-medium: 0%;
   --text-heading-small: 20px;
   --font-weight-heading-small: 700;
   --leading-heading-small: 150%;
-  --tracking-heading-small: 0;
+  --tracking-heading-small: 0%;
   --text-title-medium: 20px;
   --font-weight-title-medium: 600;
   --leading-title-medium: 150%;
-  --tracking-title-medium: 0;
+  --tracking-title-medium: 0%;
   --text-title-small: 18px;
   --font-weight-title-small: 600;
   --leading-title-small: 150%;
-  --tracking-title-small: 0;
+  --tracking-title-small: 0%;
   --text-body-medium: 16px;
   --font-weight-body-medium: 400;
   --leading-body-medium: 150%;
-  --tracking-body-medium: 0;
+  --tracking-body-medium: 0%;
   --text-body-small: 14px;
   --font-weight-body-small: 400;
   --leading-body-small: 150%;
-  --tracking-body-small: 0;
+  --tracking-body-small: 0%;
   --text-body-medium-semibold: 16px;
   --font-weight-body-medium-semibold: 600;
   --leading-body-medium-semibold: 150%;
-  --tracking-body-medium-semibold: 0;
+  --tracking-body-medium-semibold: 0%;
   --text-body-small-medium: 14px;
   --font-weight-body-small-medium: 500;
   --leading-body-small-medium: 150%;
-  --tracking-body-small-medium: 0;
+  --tracking-body-small-medium: 0%;
   --text-body-small-semibold: 14px;
   --font-weight-body-small-semibold: 600;
   --leading-body-small-semibold: 150%;
-  --tracking-body-small-semibold: 0;
+  --tracking-body-small-semibold: 0%;
   --text-caption-small: 13px;
   --font-weight-caption-small: 400;
   --leading-caption-small: 140%;
-  --tracking-caption-small: 0;
+  --tracking-caption-small: 0%;
   --text-caption-small-medium: 13px;
   --font-weight-caption-small-medium: 500;
   --leading-caption-small-medium: 140%;
-  --tracking-caption-small-medium: 0;
+  --tracking-caption-small-medium: 0%;
   --text-caption-xsmall: 12px;
   --font-weight-caption-xsmall: 400;
   --leading-caption-xsmall: 140%;
-  --tracking-caption-xsmall: 0;
+  --tracking-caption-xsmall: 0%;
 
   /* Shadow */
   --shadow-1: 0px 2px 4px 0px #00000014;

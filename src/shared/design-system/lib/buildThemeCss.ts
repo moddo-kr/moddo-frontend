@@ -58,7 +58,7 @@ function buildTypographySection(): string {
       cssVarLine(`text-${cssKey}`, `${token.fontSize}px`),
       cssVarLine(`font-weight-${cssKey}`, token.fontWeight),
       cssVarLine(`leading-${cssKey}`, token.lineHeight),
-      cssVarLine(`tracking-${cssKey}`, parseFloat(token.letterSpacing)),
+      cssVarLine(`tracking-${cssKey}`, token.letterSpacing),
     ];
   });
 
@@ -109,7 +109,7 @@ function buildColorSection(): string {
 
 function buildThemeCss(): string {
   return [
-    `[data-theme='light'] {`,
+    `:root {`,
     `  /* Spacing scale */`,
     buildSpacingScaleSection(),
     ``,

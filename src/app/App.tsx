@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalErrorBoundary from '@/app/GlobalErrorBoundary';
 import Toast from '@/shared/ui/Toast';
 import { queryClient } from '@/shared/api/queryClient';
+import '@/shared/design-system/tokens/build/token.css';
 import Layout from './Layout';
 import 'react-toastify/dist/ReactToastify.css';
 
