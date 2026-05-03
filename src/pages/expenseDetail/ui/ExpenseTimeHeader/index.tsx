@@ -84,6 +84,22 @@ function ExpenseTimeHeader({
     }
   };
 
+  const prevPaidMemberRef = useRef(paidMember);
+
+  // 모든 멤버가 입금 완료된 "순간"에만 모달 표시
+  useEffect(() => {
+    if (
+      totalMember > 0 &&
+      paidMember === totalMember &&
+      prevPaidMemberRef.current < totalMember &&
+      !isChecked
+    ) {
+      setIsModalOpen(true);
+      setIsChecked(true);
+    }
+    prevPaidMemberRef.current = paidMember;
+  }, [paidMember, totalMember, isChecked, setIsChecked]);
+
   useEffect(() => {
     if (!headerData) return () => {};
 
@@ -99,26 +115,22 @@ function ExpenseTimeHeader({
         updateStatus('failure');
         stopTimer();
       } else {
-        if (totalMember === paidMember && !isChecked) {
-          setIsModalOpen(true);
-          setIsChecked(true);
-        }
         updateTimer(timeDifference);
       }
     }, 1000);
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData, totalMember, paidMember, isChecked]);
+  }, [headerData]);
 
   const handleModalButtonClick = () => {
+    stopTimer();
     setIsModalOpen(false);
     updateStatus('success');
     setHours(0);
     setMinutes(0);
     setSeconds(0);
     onShareClick();
-    stopTimer(); // 버튼 클릭 시 타이머 멈추기
   };
 
   if (isLoading) {
