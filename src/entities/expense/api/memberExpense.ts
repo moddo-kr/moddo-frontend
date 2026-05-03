@@ -5,7 +5,7 @@ export const getMemberExpenseDetails = async (
   groupToken: string
 ): Promise<MemberSettlement[]> => {
   const response = await axiosInstance.get(
-    `/member-expenses?groupToken=${groupToken}`
+    `/groups/${groupToken}/member-expenses`
   );
   return response.data.memberExpenses;
 };
