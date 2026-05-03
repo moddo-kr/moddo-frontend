@@ -22,7 +22,7 @@ const meta: Meta<typeof SelectGroupPage> = {
     chromatic: { disableSnapshot: true },
     msw: {
       handlers: [
-        http.get('/api/v1/groups/code', () => {
+        http.get('/api/v1/groups', () => {
           const result: Group[] = [
             {
               id: 12345,
@@ -49,7 +49,7 @@ const meta: Meta<typeof SelectGroupPage> = {
               ],
             },
           ];
-          return HttpResponse.json(result);
+          return HttpResponse.json({ groups: result });
         }),
       ],
     },
