@@ -10,8 +10,8 @@ import {
 } from '@/entities/group/model/group.type';
 
 export const getGroupList = async (): Promise<Group[]> => {
-  const response = await axiosInstance.get('/groups', { useMock: true }); // NOTE : API 경로 확인 필요
-  return response.data.groups;
+  const response = await axiosInstance.get('/groups/code');
+  return response.data;
 };
 
 export const getGroupDetail = async (groupToken: string): Promise<Group> => {
