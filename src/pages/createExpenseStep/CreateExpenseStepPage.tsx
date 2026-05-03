@@ -114,7 +114,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
           )}
           disabled={!allFormsValid}
         >
-          {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
+          {`총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`}
         </Button>
       </BottomButtonContainer>
     </FormProvider>
