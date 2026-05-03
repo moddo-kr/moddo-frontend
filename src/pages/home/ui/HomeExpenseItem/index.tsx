@@ -1,5 +1,6 @@
 import { DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
 import DefaultProgressBar from '../DefaultProgressBar';
@@ -7,6 +8,7 @@ import * as S from './index.style';
 
 interface HomeExpenseItemProps {
   date: string;
+  groupCode: string;
   groupName: string;
   totalAmount: number;
   paidMember: number;
@@ -15,16 +17,22 @@ interface HomeExpenseItemProps {
 
 function HomeExpenseItem({
   date,
+  groupCode,
   groupName,
   totalAmount,
   paidMember,
   totalMember,
 }: HomeExpenseItemProps) {
   const theme = useTheme();
+  const navigate = useNavigate();
   const percentage = (paidMember / totalMember) * 100;
 
+  // TODO: 디자이너 확인 후 클릭 시 정산 상세 페이지 이동 UX 확정 필요
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      onClick={() => navigate(`/expense-detail/${groupCode}`)}
+      style={{ cursor: 'pointer' }}
+    >
       <Text variant="body1Sb" color="semantic.text.default">
         {date}
       </Text>
