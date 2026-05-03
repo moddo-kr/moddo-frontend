@@ -3,8 +3,11 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Button from '@/shared/ui/Button';
+import ButtonGroup from '@/shared/ui/ButtonGroup';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
+import Flex from '@/shared/ui/Flex';
+import Modal from '@/shared/ui/Modal';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/ui/Divider';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
@@ -12,6 +15,8 @@ import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
+import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
+import { showToast } from '@/shared/ui/Toast';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -22,12 +27,26 @@ import * as S from './ExpenseDetailPage.styles';
 function ExpenseDetailPage() {
   const { unit, color } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
-  const { groupToken, groupData } = useLoaderData();
+  const { groupToken, groupData, myProfile } = useLoaderData();
   const [status, setStatus] = useState<StatusType>('pending');
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { mutate: createPaymentRequest } = useCreatePaymentRequest();
+
+  const handlePaymentRequest = () => {
+    createPaymentRequest(groupToken, {
+      onSuccess: () => {
+        setIsPaymentModalOpen(false);
+        showToast({
+          type: 'success',
+          content: '입금 확인 요청이 전송되었습니다.',
+        });
+      },
+    });
+  };
 
   let MEMBER_TOTAL = 0;
   let MEMBER_DONE = 0;
@@ -84,19 +103,64 @@ function ExpenseDetailPage() {
         )}
       </S.Content>
       <BottomButtonContainer>
-        {/* eslint-disable-next-line */}
-        {MEMBER_TOTAL === MEMBER_DONE && status === 'pending' ? (
+        {/* eslint-disable no-nested-ternary */}
+        {MEMBER_TOTAL === MEMBER_DONE &&
+        status === 'pending' &&
+        myProfile.role === 'MANAGER' ? (
           <Button onClick={() => setIsChecked(false)}>정산 완료하기</Button>
+        ) : status === 'pending' && myProfile.role === 'PARTICIPANT' ? (
+          <Button onClick={() => setIsPaymentModalOpen(true)}>
+            입금 확인 요청
+          </Button>
         ) : status === 'success' ? (
           <Button onClick={handleBackToHome}>홈으로 돌아가기</Button>
         ) : (
           <ShareButton shareLink={shareLink} />
         )}
+        {/* eslint-enable no-nested-ternary */}
       </BottomButtonContainer>
       <CharacterBottomSheet
         open={openBottomSheet}
         setOpen={setOpenBottomSheet}
       />
+      <Modal
+        open={isPaymentModalOpen}
+        setOpen={setIsPaymentModalOpen}
+        variant="empty"
+      >
+        <Flex direction="column" gap={28} style={{ width: '100%' }}>
+          <Flex direction="column" gap={16}>
+            <Text
+              variant="title"
+              color="semantic.text.strong"
+              style={{ whiteSpace: 'pre-line' }}
+            >
+              <Text variant="title" color="semantic.orange.default" as="span">
+                {myProfile.name}
+              </Text>
+              {'님의\n정산 입금을 알릴게요.'}
+            </Text>
+            <Text
+              variant="body1R"
+              color="semantic.text.strong"
+              style={{ whiteSpace: 'pre-line' }}
+            >
+              {
+                '총무에게 입금 확인 요청 알림이 전송됩니다.\n입금을 완료했을 때만 눌러주세요.'
+              }
+            </Text>
+          </Flex>
+          <ButtonGroup direction="horizontal">
+            <Button
+              variant="secondary"
+              onClick={() => setIsPaymentModalOpen(false)}
+            >
+              취소
+            </Button>
+            <Button onClick={handlePaymentRequest}>알림 보내기</Button>
+          </ButtonGroup>
+        </Flex>
+      </Modal>
     </>
   );
 }
