@@ -4,7 +4,7 @@ import { AccountVariable, Group } from '@/entities/group/model/group.type';
 
 const dummyGroups: Group[] = [
   {
-    id: '1',
+    id: 1,
     groupName: '강남역 모각코',
     members: [
       {
@@ -12,6 +12,7 @@ const dummyGroups: Group[] = [
         name: '김모또',
         role: 'MANAGER',
         profile: '',
+        userId: 1,
         isPaid: false,
         paidAt: null,
       },
@@ -20,6 +21,7 @@ const dummyGroups: Group[] = [
         name: '박완숙',
         role: 'PARTICIPANT',
         profile: '',
+        userId: 2,
         isPaid: false,
         paidAt: null,
       },
@@ -28,13 +30,14 @@ const dummyGroups: Group[] = [
         name: '정에그',
         role: 'PARTICIPANT',
         profile: '',
+        userId: 3,
         isPaid: false,
         paidAt: null,
       },
     ],
   },
   {
-    id: '2',
+    id: 2,
     groupName: '서교동 모각코',
     members: [
       {
@@ -42,6 +45,7 @@ const dummyGroups: Group[] = [
         role: 'MANAGER',
         name: '김모또',
         profile: '',
+        userId: 1,
         isPaid: false,
         paidAt: null,
       },
@@ -50,6 +54,7 @@ const dummyGroups: Group[] = [
         role: 'PARTICIPANT',
         name: '안맥북',
         profile: '',
+        userId: 4,
         isPaid: false,
         paidAt: null,
       },
@@ -58,6 +63,7 @@ const dummyGroups: Group[] = [
         role: 'PARTICIPANT',
         name: '박삼성',
         profile: '',
+        userId: 5,
         isPaid: false,
         paidAt: null,
       },
