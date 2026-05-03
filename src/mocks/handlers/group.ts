@@ -102,15 +102,6 @@ const dummyMemberList = [
 ];
 
 const groupHandlers = [
-  // GET GetGroupList
-  http.get('/api/v1/groups', ({ request }) => {
-    if (!getIsMocked(request)) return passthrough();
-
-    return HttpResponse.json({
-      groups: dummyGroups,
-    });
-  }),
-
   // GET GetGroupHeader (path 방식)
   // 모임 상단 조회
   http.get('/api/v1/groups/:groupToken/header', ({ request }) => {

@@ -1,8 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { http, HttpResponse } from 'msw';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Group } from '@/entities/group/model/group.type';
 import SelectGroupPage from './SelectGroupPage';
 
 /**
@@ -20,39 +18,6 @@ const meta: Meta<typeof SelectGroupPage> = {
   component: SelectGroupPage,
   parameters: {
     chromatic: { disableSnapshot: true },
-    msw: {
-      handlers: [
-        http.get('/api/v1/groups', () => {
-          const result: Group[] = [
-            {
-              id: 12345,
-              groupName: '모또 정기모임',
-              members: [
-                {
-                  id: 1,
-                  name: '김모또',
-                  role: 'MANAGER',
-                  profile: '',
-                  userId: 1,
-                  isPaid: true,
-                  paidAt: '2026-04-19T14:06:14',
-                },
-                {
-                  id: 2,
-                  name: '김모또',
-                  role: 'PARTICIPANT',
-                  profile: '',
-                  userId: 2,
-                  isPaid: false,
-                  paidAt: null,
-                },
-              ],
-            },
-          ];
-          return HttpResponse.json({ groups: result });
-        }),
-      ],
-    },
   },
   decorators: [
     (Story) => {

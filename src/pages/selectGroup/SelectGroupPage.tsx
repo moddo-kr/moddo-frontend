@@ -1,20 +1,14 @@
 import { useNavigate } from 'react-router';
-import { useGetGroupList } from '@/entities/group/api/groupQueries';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Flex from '@/shared/ui/Flex';
 import { useTheme } from 'styled-components';
-import { CreateGroupLinkButton, EmptyBox, GroupLinkButton } from './ui';
+import { CreateGroupLinkButton, EmptyBox } from './ui';
 
 function SelectGroupPage() {
   const navigate = useNavigate();
-  const { data: groupList, isLoading } = useGetGroupList({}, []);
   const { color } = useTheme();
-
-  if (isLoading) {
-    return <div>로딩중</div>;
-  }
 
   return (
     <Flex
@@ -46,13 +40,7 @@ function SelectGroupPage() {
 
           <Flex direction="column" mx={5} mt={5} gap={8}>
             <CreateGroupLinkButton />
-            {groupList && groupList.length !== 0 ? (
-              groupList.map((group) => (
-                <GroupLinkButton key={group.id} group={group} />
-              ))
-            ) : (
-              <EmptyBox />
-            )}
+            <EmptyBox />
           </Flex>
         </main>
       </Flex>
