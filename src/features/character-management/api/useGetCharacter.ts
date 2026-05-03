@@ -5,8 +5,6 @@ const useGetCharacter = (groupToken: string) => {
   return useQuery({
     queryKey: ['randomCharacter', groupToken],
     queryFn: () => image.getCharacter(groupToken),
-    throwOnError: false,
-    retry: false,
   });
 };
 
