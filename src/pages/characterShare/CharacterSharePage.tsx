@@ -53,7 +53,6 @@ function CharacterSharePage() {
       <>
         <Header
           type="default"
-          title=""
           headingIcon={<ArrowLeft width={unit[24]} />}
           onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.alternative}
@@ -79,7 +78,6 @@ function CharacterSharePage() {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width={unit[24]} />}
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.background.normal.alternative}

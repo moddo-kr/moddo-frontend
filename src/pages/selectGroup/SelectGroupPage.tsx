@@ -25,7 +25,6 @@ function SelectGroupPage() {
       {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width={24} height={24} />}
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.primary.subtle}

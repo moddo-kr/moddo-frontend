@@ -36,7 +36,6 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width="1.5rem" />}
         onHeadingIconClick={onBack}
         trailingIcon={<Text variant="body1Sb">지출 추가</Text>}

@@ -48,7 +48,6 @@ function ExpenseDetailPage() {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width={unit[24]} />}
         headingLabel={groupData.groupName}
         onHeadingIconClick={() => {

@@ -33,7 +33,6 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}

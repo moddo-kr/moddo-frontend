@@ -32,7 +32,6 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
     <FormProvider {...formMethods}>
       <Header
         type="default"
-        title=""
         headingIcon={<Close width={24} />}
         onHeadingIconClick={onNext}
       />

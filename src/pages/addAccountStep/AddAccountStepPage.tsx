@@ -60,7 +60,6 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width={24} />}
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}

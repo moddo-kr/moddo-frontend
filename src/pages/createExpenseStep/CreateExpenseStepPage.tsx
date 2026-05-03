@@ -63,7 +63,6 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
     <FormProvider {...formMethods}>
       <Header
         type="default"
-        title=""
         headingIcon={<Close width="1.5rem" />}
         onHeadingIconClick={() => setOpen(true)}
         trailingIcon={<Text>지출 추가</Text>}

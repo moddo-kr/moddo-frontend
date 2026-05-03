@@ -14,7 +14,6 @@ function MyEditPage() {
     <>
       <Header
         type="default"
-        title=""
         headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
