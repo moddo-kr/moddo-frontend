@@ -32,16 +32,12 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width="1.5rem" />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={onBack}
-        rightButtonContent={<Text>QR코드 만들기</Text>}
-        rightButtonOnClick={onNext}
+        type="default"
+        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={onBack}
+        trailingIcon={<Text>QR코드 만들기</Text>}
+        onTrailingIconClick={onNext}
       />
       <DescriptionField
         title={`참여자에게 링크를\n공유하면 요청이 완료돼요!`}

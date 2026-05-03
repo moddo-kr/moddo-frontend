@@ -34,10 +34,11 @@ function PaymentManagementPage() {
     return (
       <>
         <Header
-          type="TitleCenter"
+          type="default"
           title="입금 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
+          headingIcon={<ArrowLeft width={24} />}
+          headingLabel="뒤로가기"
+          onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.default}
         />
         <Flex
@@ -59,10 +60,11 @@ function PaymentManagementPage() {
     return (
       <>
         <Header
-          type="TitleCenter"
+          type="default"
           title="입금 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
+          headingIcon={<ArrowLeft width={24} />}
+          headingLabel="뒤로가기"
+          onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.default}
         />
         <Flex
@@ -91,10 +93,10 @@ function PaymentManagementPage() {
   return (
     <>
       <Header
-        type="TitleCenter"
+        type="default"
         title="입금 관리"
-        leftButtonContent={<ArrowLeft width={24} />}
-        leftButtonOnClick={() => navigate(-1)}
+        headingIcon={<ArrowLeft width={24} />}
+        onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.background.normal.default}
       />
       {paymentSections.length > 0 ? (

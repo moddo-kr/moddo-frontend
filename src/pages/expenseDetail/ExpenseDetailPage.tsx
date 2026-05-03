@@ -47,17 +47,13 @@ function ExpenseDetailPage() {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text variant="body1R">{groupData.groupName}</Text>
-          </>
-        }
-        leftButtonOnClick={() => {
+        type="default"
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingLabel={groupData.groupName}
+        onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
-        rightButtonContent={
+        trailingIcon={
           <Text variant="body1R" color="semantic.text.subtle">
             관리
           </Text>

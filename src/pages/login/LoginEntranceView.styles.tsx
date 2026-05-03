@@ -15,7 +15,6 @@ export const EntranceImg = styled.img`
   height: auto;
   object-fit: contain;
   position: absolute;
-  top: 33%;
 `;
 
 export const LogoImg = styled.img`

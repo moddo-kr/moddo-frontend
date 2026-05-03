@@ -7,7 +7,8 @@ import NameChip from '@/shared/ui/NameChip';
 import * as S from './GroupLinkButton.styles';
 
 function GroupLinkButton({ group }: { group: Group }) {
-  const { groupName, members, id: groupToken } = group;
+  const { groupName, members, id } = group;
+  const groupToken = String(id);
   return (
     <S.LinkButton to={generatePath(ROUTE.createExpense, { groupToken })}>
       <Flex direction="column" gap={8}>

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { Menu } from '@/shared/assets/svgs/icon';
+import { Bell, Menu } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import { ROUTE } from '@/shared/config/route';
 import { CharacterSection } from '@/features/character-management/ui';
@@ -14,12 +14,12 @@ function MyPage() {
 
   return (
     <>
-      {/* TODO: 디자인 시스템 정리 + 헤더 컴포넌트 정비 후에 다시 스타일링이 필요합니다. */}
       <Header
-        type="TitleCenter"
+        type="1depth"
         title="마이페이지"
-        rightButtonContent={<Menu width={24} />}
-        rightButtonOnClick={() => navigate(ROUTE.myEdit)}
+        trailingIcon={<Bell width={24} height={24} />}
+        trailingSubIcon={<Menu width={24} />}
+        onTrailingSubIconClick={() => navigate(ROUTE.home)}
         bgColor={color.semantic.background.normal.alternative}
       />
       <Suspense fallback={<S.ProfileContainer>로딩 중...</S.ProfileContainer>}>

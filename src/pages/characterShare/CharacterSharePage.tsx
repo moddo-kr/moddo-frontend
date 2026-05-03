@@ -52,11 +52,9 @@ function CharacterSharePage() {
     return (
       <>
         <Header
-          type="TitleCenter"
-          leftButtonContent={<ArrowLeft width={unit[24]} />}
-          leftButtonOnClick={() => {
-            navigate(-1);
-          }}
+          type="default"
+          headingIcon={<ArrowLeft width={unit[24]} />}
+          onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.alternative}
         />
         <S.CharacterContainer>
@@ -79,12 +77,10 @@ function CharacterSharePage() {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<ArrowLeft width={unit[24]} />}
-        leftButtonOnClick={() => {
-          navigate(-1);
-        }}
-        bgColor="semantic.background.normal.alternative"
+        type="default"
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        onHeadingIconClick={() => navigate(-1)}
+        bgColor={color.semantic.background.normal.alternative}
       />
       <S.CharacterContainer>
         <S.TitleContainer>
