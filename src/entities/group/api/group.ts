@@ -18,7 +18,7 @@ export const getGroupDetail = async (groupToken: string): Promise<Group> => {
 
 export const createGroup = async (groupData: CreateGroupData) => {
   const response = await axiosInstance.post<{ groupToken: string }>(
-    '/group',
+    '/groups',
     groupData
   );
   return response.data;
