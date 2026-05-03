@@ -10,9 +10,7 @@ import {
 } from '@/entities/group/model/group.type';
 
 export const getGroupDetail = async (groupToken: string): Promise<Group> => {
-  const response = await axiosInstance.get('/group', {
-    params: { groupToken },
-  });
+  const response = await axiosInstance.get(`/groups/${groupToken}`);
   return response.data;
 };
 
