@@ -43,7 +43,7 @@ export function MainHeader() {
       // TODO: 알림 기능 개발 후 onTrailingIconClick 핸들러 연결
       trailingSubIcon={<Menu width={24} height={24} />}
       onTrailingSubIconClick={() => navigate(ROUTE.my)}
-      bgColor="semantic.background.normal.alternative"
+      bgColor={theme.color.semantic.background.normal.default}
     />
   );
 }
