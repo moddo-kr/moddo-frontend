@@ -30,7 +30,7 @@ export const putGroupAccount = async ({
   groupToken: string;
 }) => {
   const response = await axiosInstance.put(
-    `/group/account?groupToken=${groupToken}`,
+    `/groups/${groupToken}/account`,
     accountData
   );
   return response.data;
