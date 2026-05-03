@@ -60,6 +60,8 @@ function ExpenseMemberItem({
     setOpen(false);
   };
 
+  // TODO: role에 따라 상태 변경 버튼 클릭 가능 여부 체크
+
   return (
     <S.Container isPaid={member.isPaid}>
       <S.HeaderContainer iconSize={32}>
