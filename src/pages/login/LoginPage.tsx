@@ -1,4 +1,3 @@
-import LogoImg from '@/shared/assets/pngs/LogoImg.png';
 import Text from '@/shared/ui/Text';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
@@ -9,6 +8,7 @@ import Flex from '@/shared/ui/Flex';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
+import { LogoIcon } from '@/shared/assets/svgs';
 import { queryClient } from '@/shared/api/queryClient';
 import { showToast } from '@/shared/ui/Toast';
 import LoginEntranceView from './LoginEntranceView';
@@ -64,7 +64,11 @@ function LoginPage() {
     >
       <S.ContentWrapper>
         <S.TextContainer>
-          <S.LogoImg src={LogoImg} alt="logo" />
+          <LogoIcon
+            width={187}
+            height={66}
+            fill={theme.color.semantic.orange.default}
+          />
           <Text variant="body1R" color="semantic.text.subtle">
             모또와 함께라면 정산 걱정 끝!
           </Text>

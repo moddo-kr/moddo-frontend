@@ -1,27 +1,33 @@
 import { useNavigate } from 'react-router';
 import { useGetGroupList } from '@/entities/group/api/groupQueries';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Flex from '@/shared/ui/Flex';
+import { useTheme } from 'styled-components';
 import { CreateGroupLinkButton, EmptyBox, GroupLinkButton } from './ui';
 
 function SelectGroupPage() {
   const navigate = useNavigate();
   const { data: groupList, isLoading } = useGetGroupList({}, []);
+  const { color } = useTheme();
 
   if (isLoading) {
     return <div>로딩중</div>;
   }
 
   return (
-    <>
+    <Flex
+      direction="column"
+      height="100%"
+      bgColor={color.semantic.primary.subtle}
+    >
       {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
       <Header
-        title="뒤로가기"
-        showIcon
-        type="TitleLeft"
-        handleBackButtonClick={() => navigate(-1)}
-        bgColor="semantic.background.normal.alternative"
+        type="default"
+        headingIcon={<ArrowLeft width={24} height={24} />}
+        onHeadingIconClick={() => navigate(-1)}
+        bgColor={color.semantic.primary.subtle}
       />
       <Flex
         direction="column"
@@ -50,7 +56,7 @@ function SelectGroupPage() {
           </Flex>
         </main>
       </Flex>
-    </>
+    </Flex>
   );
 }
 

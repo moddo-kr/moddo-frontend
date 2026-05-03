@@ -15,12 +15,12 @@ export const TextContainer = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 40vh;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -29,7 +29,7 @@ export const ButtonWrapper = styled.div`
   gap: ${({ theme }) => theme.unit[12]};
   width: 100%;
   padding: ${({ theme }) =>
-    `0 ${theme.unit[20]} ${theme.unit[16]} ${theme.unit[20]}`};
+    `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
 `;
 
 export const TextWrapper = styled.div`

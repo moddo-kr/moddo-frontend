@@ -1,7 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Button from '@/shared/ui/Button';
@@ -60,14 +59,10 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={24} />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={onBack}
+        type="default"
+        headingIcon={<ArrowLeft width={24} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={onBack}
       />
       <DescriptionField title={`정산 받을 계좌를\n입력해주세요.`} />
       <S.PageContentWrapper>

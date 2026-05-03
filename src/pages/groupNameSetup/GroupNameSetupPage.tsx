@@ -37,14 +37,10 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
   return (
     <>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
-        }
-        leftButtonOnClick={() => navigate(-1)}
+        type="default"
+        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title={`생성할 모임의\n이름을 입력해주세요.`}

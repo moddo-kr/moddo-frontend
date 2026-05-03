@@ -28,25 +28,21 @@ type SettlementType = SettlementStatus;
 
 export function MainHeader() {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Header
-      type="TitleCenter"
-      leftButtonContent={
+      type="1depth"
+      title={
         <LogoIcon
           width={98}
           height={36}
           fill={theme.color.semantic.orange.default}
         />
       }
-      // leftButtonOnClick={() => navigate(ROUTE.login)}
-      rightButtonContent={
-        <Flex gap={16}>
-          {/** @Todo 알림 기능 개발 후 변경 */}
-          <Bell width={24} height={24} />
-          {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
-          <Menu width={24} height={24} />
-        </Flex>
-      }
+      trailingIcon={<Bell width={24} height={24} />}
+      // TODO: 알림 기능 개발 후 onTrailingIconClick 핸들러 연결
+      trailingSubIcon={<Menu width={24} height={24} />}
+      onTrailingSubIconClick={() => navigate(ROUTE.my)}
       bgColor="semantic.background.normal.alternative"
     />
   );

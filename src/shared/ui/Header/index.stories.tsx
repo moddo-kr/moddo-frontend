@@ -4,33 +4,44 @@ import Header, { HeaderProps } from '.';
 const meta: Meta<typeof Header> = {
   title: 'Components/Header',
   component: Header,
-  argTypes: {
-    title: { control: 'text' },
-    showIcon: { control: 'boolean' },
-    type: {
-      control: 'radio',
-      options: ['TitleLeft', 'TitleCenter'],
-    },
-    handleBackButtonClick: { action: 'clicked' },
-  },
 };
 
 export default meta;
 
-const Template: StoryFn<HeaderProps> = (args) => <Header {...args} />;
+/** 1depth — 텍스트 타이틀 */
+export const Depth1Text: StoryFn<HeaderProps> = () => (
+  <Header type="1depth" title="마이페이지" />
+);
 
-/** TitleLeft 스토리 */
-export const TitleLeft = Template.bind({});
-TitleLeft.args = {
-  title: '모임 선택',
-  showIcon: true,
-  type: 'TitleLeft',
-};
+/** 1depth — trailing 포함 */
+export const Depth1WithTrailing: StoryFn<HeaderProps> = () => (
+  <Header
+    type="1depth"
+    title="마이페이지"
+    trailingIcon={<span>icon</span>}
+    trailingSubIcon={<span>sub</span>}
+  />
+);
 
-/** TitleCenter 스토리 */
-export const TitleCenter = Template.bind({});
-TitleCenter.args = {
-  title: '모임 선택',
-  showIcon: true,
-  type: 'TitleCenter',
-};
+/** default — heading + trailing */
+export const DefaultWithHeading: StoryFn<HeaderProps> = () => (
+  <Header
+    type="default"
+    title="모임 선택"
+    headingIcon={<span>←</span>}
+    headingLabel="뒤로가기"
+    onHeadingIconClick={() => alert('back')}
+  />
+);
+
+/** default — heading + trailing 모두 포함 */
+export const DefaultFull: StoryFn<HeaderProps> = () => (
+  <Header
+    type="default"
+    title="QR코드"
+    headingIcon={<span>←</span>}
+    onHeadingIconClick={() => alert('back')}
+    trailingIcon={<span>icon</span>}
+    trailingLabel="관리"
+  />
+);

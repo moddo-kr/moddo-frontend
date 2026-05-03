@@ -7,8 +7,9 @@ export interface Member {
   role: MemberRole;
   name: string;
   profile: string;
+  userId: number;
   isPaid: boolean;
-  paidAt: Date | null;
+  paidAt: string | null;
 }
 
 export interface MemberData {
