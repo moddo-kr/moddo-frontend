@@ -10,7 +10,7 @@ export const updatePaymentStatus = async ({
   isPaid,
 }: UpdatePaymentStatusVariable): Promise<UpdatePaymentStatusData> => {
   const response = await axiosInstance.put(
-    `/group-members/${groupMemberId}/payment?groupToken=${groupToken}`,
+    `/groups/${groupToken}/members/${groupMemberId}/payment`,
     { isPaid }
   );
   return response.data;
