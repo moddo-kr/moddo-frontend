@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
@@ -16,6 +16,7 @@ import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
+import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { showToast } from '@/shared/ui/Toast';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
@@ -28,11 +29,29 @@ function ExpenseDetailPage() {
   const { unit, color } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData, myProfile } = useLoaderData();
-  const [status, setStatus] = useState<StatusType>('pending');
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
+  const { data: headerData } = useGetGroupHeader(groupToken, {}, [401]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  // TODO: GroupHeaderResponse에 completedAt 필드를 추가하여 서버에서 정산 완료 여부를 직접 내려받도록 개선 필요
+  const derivedStatus = useMemo<StatusType>(() => {
+    if (!memberExpenseDetails || !headerData) return 'pending';
+
+    const allPaid = memberExpenseDetails.every((member) => member.isPaid);
+    const isExpired = new Date(headerData.deadline).getTime() < Date.now();
+    if (allPaid) return 'success';
+    if (isExpired) return 'failure';
+
+    return 'pending';
+  }, [memberExpenseDetails, headerData]);
+
+  const [status, setStatus] = useState<StatusType>('pending');
+
+  useEffect(() => {
+    setStatus(derivedStatus);
+  }, [derivedStatus]);
   const navigate = useNavigate();
   const { mutate: createPaymentRequest } = useCreatePaymentRequest();
 

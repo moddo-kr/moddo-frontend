@@ -102,14 +102,13 @@ function ExpenseTimeHeader({
   }, [paidMember, totalMember, isChecked, setIsChecked]);
 
   useEffect(() => {
-    if (!headerData) return () => {};
+    if (!headerData || status !== 'pending') return () => {};
 
     intervalRef.current = setInterval(() => {
       const now = new Date();
       const endDate = new Date(headerData!.deadline);
       const timeDifference = endDate.getTime() - now.getTime();
       if (timeDifference <= 0) {
-        if (status === 'success') return;
         setHours(0);
         setMinutes(0);
         setSeconds(0);
@@ -122,7 +121,7 @@ function ExpenseTimeHeader({
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData]);
+  }, [headerData, status]);
 
   const handleModalButtonClick = () => {
     stopTimer();
