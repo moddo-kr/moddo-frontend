@@ -4,6 +4,7 @@ import {
   CreateGroupData,
   Group,
   GroupHeaderResponse,
+  GroupListItem,
   SettlementGroup,
   SettlementSort,
   SettlementStatus,
@@ -53,4 +54,8 @@ export const getSettlementList = (
   return axiosInstance
     .get('/groups', { params: { status, sort, limit } })
     .then((res) => res.data);
+};
+
+export const getGroupList = (): Promise<GroupListItem[]> => {
+  return axiosInstance.get('/groups/list').then((res) => res.data);
 };
