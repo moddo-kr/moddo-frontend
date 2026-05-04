@@ -17,6 +17,7 @@ interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
+    id: idProp,
     label,
     required = false,
     placeholder,
@@ -29,7 +30,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   },
   ref
 ) {
-  const inputId = useId();
+  const generatedId = useId();
+  const inputId = idProp ?? generatedId;
   const isDisabled = state === 'disabled';
   const isPrice = variant === 'price';
 
