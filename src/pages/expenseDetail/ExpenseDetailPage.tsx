@@ -13,7 +13,6 @@ import Divider from '@/shared/ui/Divider';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
-import ShareButton from '@/shared/ui/ShareButton';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
@@ -23,6 +22,7 @@ import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
 import { StatusType } from './ui/ExpenseTimeHeader/index.type';
+import BottomAction from './ui/BottomAction';
 import * as S from './ExpenseDetailPage.styles';
 
 function ExpenseDetailPage() {
@@ -120,21 +120,16 @@ function ExpenseDetailPage() {
         )}
       </S.Content>
       <BottomButtonContainer>
-        {/* eslint-disable no-nested-ternary */}
-        {MEMBER_TOTAL === MEMBER_DONE &&
-        status === 'pending' &&
-        myProfile.role === 'MANAGER' ? (
-          <Button onClick={() => setIsChecked(false)}>정산 완료하기</Button>
-        ) : status === 'pending' && myProfile.role === 'PARTICIPANT' ? (
-          <Button onClick={() => setIsPaymentModalOpen(true)}>
-            입금 확인 요청
-          </Button>
-        ) : status === 'success' ? (
-          <Button onClick={handleBackToHome}>홈으로 돌아가기</Button>
-        ) : (
-          <ShareButton shareLink={shareLink} />
-        )}
-        {/* eslint-enable no-nested-ternary */}
+        <BottomAction
+          status={status}
+          myProfile={myProfile}
+          memberTotal={MEMBER_TOTAL}
+          memberDone={MEMBER_DONE}
+          shareLink={shareLink}
+          onSettleClick={() => setIsChecked(false)}
+          onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
+          onBackToHome={handleBackToHome}
+        />
       </BottomButtonContainer>
       <CharacterBottomSheet
         open={openBottomSheet}
