@@ -1,4 +1,4 @@
-import Accordion from '@/shared/ui/Accordion';
+import { Accordion } from '@/shared/design-system/ui';
 import styled from 'styled-components';
 
 export const ExpenseContent = styled.div`
