@@ -4,7 +4,7 @@ import useGetGroupLinks from '@/features/expense-management/api/useGetExpensesLi
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
 import generateShareLink from '@/shared/lib/generateShareLink';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
@@ -95,7 +95,7 @@ function MyLinksPage() {
           </Text>
           <Button
             variant="primary"
-            size="md"
+            size="medium"
             onClick={() => navigate(ROUTE.groupSetup)}
           >
             모임 생성하기

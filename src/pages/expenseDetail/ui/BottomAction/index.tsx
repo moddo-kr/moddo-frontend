@@ -1,4 +1,4 @@
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import ShareButton from '@/shared/ui/ShareButton';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { StatusType } from '../ExpenseTimeHeader/index.type';

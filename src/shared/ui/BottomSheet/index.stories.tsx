@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import BottomSheet, { BottomSheetProps } from '.';
 
 const meta: Meta<typeof BottomSheet> = {

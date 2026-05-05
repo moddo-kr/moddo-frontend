@@ -1,5 +1,5 @@
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
 import ProfileImage from '@/shared/ui/ProfileImage';
@@ -30,7 +30,7 @@ function PaymentAlert({ payment, onReject, onConfirm }: PaymentAlertProps) {
         <Button
           type="button"
           variant="tertiary"
-          size="sm"
+          size="small"
           onClick={() => onReject?.(payment)}
         >
           거절
@@ -38,7 +38,7 @@ function PaymentAlert({ payment, onReject, onConfirm }: PaymentAlertProps) {
         <Button
           type="button"
           variant="primary"
-          size="sm"
+          size="small"
           onClick={() => onConfirm?.(payment)}
         >
           입금확인

@@ -6,7 +6,7 @@ import Text from '@/shared/ui/Text';
 import Profile from '@/shared/ui/Profile';
 import InputGroup from '@/shared/ui/InputGroup';
 import Input from '@/shared/ui/Input';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import { showToast } from '@/shared/ui/Toast';
 import useAddGroupMember from './api/useAddGroupMember';
@@ -90,7 +90,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           <Button
             type="submit"
             variant="secondary"
-            size="md"
+            size="medium"
             disabled={!formState.isValid}
           >
             추가하기

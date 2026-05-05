@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Close } from '@/shared/assets/svgs/icon';
 import BottomSheet from '@/shared/ui/BottomSheet';
-import Button from '@/shared/ui/Button';
-import { TextButton } from '@/shared/design-system/ui';
+import { Button, TextButton } from '@/shared/design-system/ui';
 import NumberInput from '@/features/expense-management/ui/NumberInput';
 import Text from '@/shared/ui/Text';
 import * as S from './index.styles';

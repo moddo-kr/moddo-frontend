@@ -5,7 +5,7 @@ import Header from '@/shared/ui/Header';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/ui/Toast';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';

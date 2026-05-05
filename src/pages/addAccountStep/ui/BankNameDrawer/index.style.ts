@@ -1,4 +1,4 @@
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import styled from 'styled-components';
 
 export const DrawerHeader = styled.h2`

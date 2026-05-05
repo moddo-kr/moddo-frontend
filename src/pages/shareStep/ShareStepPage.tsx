@@ -7,7 +7,7 @@ import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Header from '@/shared/ui/Header';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
 import Text from '@/shared/ui/Text';
 import initKakaoSDK from '@/shared/lib/initKakaoSDK';
@@ -50,7 +50,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         <ButtonGroup direction="vertical">
           <ShareButton shareLink={shareLink} />
           <Button
-            size="sm"
+            size="small"
             variant="tertiary"
             onClick={() =>
               navigate(generatePath(ROUTE.expenseDetail, { groupToken }))
