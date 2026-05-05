@@ -1,8 +1,7 @@
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
-import { Button } from '@/shared/design-system/ui';
+import { Button, ProfileImage } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
-import ProfileImage from '@/shared/ui/ProfileImage';
 
 export interface PaymentAlertProps {
   payment: PaymentRequest;
