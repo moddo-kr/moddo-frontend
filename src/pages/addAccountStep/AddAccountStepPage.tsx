@@ -4,9 +4,8 @@ import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button } from '@/shared/design-system/ui';
+import { Button, Input } from '@/shared/design-system/ui';
 import DescriptionField from '@/shared/ui/DescriptionField';
-import Input from '@/shared/ui/Input';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
@@ -75,7 +74,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           placeholder="은행 선택"
           value={bankName}
           onClick={handleBankInputClick}
-          icon={<ArrowDown width={24} />}
+          trailingIcon={<ArrowDown width={24} />}
           readOnly
         />
         <BankNameDrawer

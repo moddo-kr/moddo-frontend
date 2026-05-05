@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Input from '@/shared/ui/Input';
-import { Button } from '@/shared/design-system/ui';
+import { Button, Input } from '@/shared/design-system/ui';
 import InputGroup from '.';
 
 const SAMPLE_PLACEHOLDER = 'placeholder';
