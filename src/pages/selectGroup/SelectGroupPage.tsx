@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { DescriptionField } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
-import DescriptionField from '@/shared/ui/DescriptionField';
 import Flex from '@/shared/ui/Flex';
 import { useTheme } from 'styled-components';
 import { CreateGroupLinkButton, EmptyBox } from './ui';
@@ -35,7 +35,6 @@ function SelectGroupPage() {
           <DescriptionField
             title={`정산을 시작하려는\n모임을 선택해 주세요.`}
             sub="새로운 정산을 시작하려면 새로 생성을 선택해주세요."
-            bgColor="semantic.primary.subtle"
           />
 
           <Flex direction="column" mx={5} mt={5} gap={8}>
