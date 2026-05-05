@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
 
-import { Button } from '@/shared/design-system/ui';
+import { Button, ProfileImage } from '@/shared/design-system/ui';
 import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
 
 import BottomSheet from '@/shared/ui/BottomSheet';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
-import ProfileImage from '@/shared/ui/ProfileImage';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';
 

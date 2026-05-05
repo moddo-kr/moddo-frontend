@@ -2,10 +2,9 @@ import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { useGetUserInfo } from '@/entities/auth/api/useGetUserInfo';
 import { ROUTE } from '@/shared/config/route';
-import ProfileImage from '@/shared/ui/ProfileImage';
+import { Button, ProfileImage } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
-import { Button } from '@/shared/design-system/ui';
 import * as S from './index.styles';
 
 function MyProfile() {
