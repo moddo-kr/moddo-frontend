@@ -24,6 +24,9 @@ interface PasswordSetupProps {
   onNext: (password: string) => void;
 }
 
+/**
+ * @deprecated 비밀번호 설정 페이지 기획에서 삭제
+ */
 function PasswordSetupPage({ groupName, onNext }: PasswordSetupProps) {
   const { unit } = useTheme();
   const {

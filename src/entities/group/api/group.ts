@@ -9,21 +9,14 @@ import {
   SettlementStatus,
 } from '@/entities/group/model/group.type';
 
-export const getGroupList = async (): Promise<Group[]> => {
-  const response = await axiosInstance.get('/groups', { useMock: true }); // NOTE : API 경로 확인 필요
-  return response.data.groups;
-};
-
 export const getGroupDetail = async (groupToken: string): Promise<Group> => {
-  const response = await axiosInstance.get('/group', {
-    params: { groupToken },
-  });
+  const response = await axiosInstance.get(`/groups/${groupToken}`);
   return response.data;
 };
 
 export const createGroup = async (groupData: CreateGroupData) => {
   const response = await axiosInstance.post<{ groupToken: string }>(
-    '/group',
+    '/groups',
     groupData
   );
   return response.data;
@@ -37,7 +30,7 @@ export const putGroupAccount = async ({
   groupToken: string;
 }) => {
   const response = await axiosInstance.put(
-    `/group/account?groupToken=${groupToken}`,
+    `/groups/${groupToken}/account`,
     accountData
   );
   return response.data;

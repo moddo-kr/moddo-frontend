@@ -86,16 +86,6 @@ function LoginPage() {
             카카오로 로그인
           </Text>
         </Button>
-        <Button
-          variant="secondary"
-          disabled={isGuestLoginPending}
-          onClick={() => handleLoginButtonClick('GUEST')}
-        >
-          <Text variant="body1R" color="semantic.text.strong">
-            비회원으로 진행
-          </Text>
-        </Button>
-
         <S.TextWrapper>
           <Text color="semantic.text.subtle" variant="caption">
             회원가입 시 서비스 이용약관과

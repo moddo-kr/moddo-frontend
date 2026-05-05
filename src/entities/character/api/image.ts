@@ -5,7 +5,7 @@ const image = {
   // GET GetCharacter
   getCharacter: (groupToken: string): Promise<CharacterData> =>
     axiosInstance
-      .get(`/character?groupToken=${groupToken}`)
+      .get(`/groups/${groupToken}/character`)
       .then((res) => res.data),
 };
 

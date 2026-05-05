@@ -13,7 +13,6 @@ export interface GroupTokenUrlLoaderData {
 
 export interface CreateGroupData {
   name: string;
-  password: string;
 }
 
 export interface AccountVariable {
