@@ -7,7 +7,7 @@ import { ROUTE } from '@/shared/config/route';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
 import AddMember from './ui/AddMember';

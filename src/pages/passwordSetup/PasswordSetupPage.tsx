@@ -7,7 +7,7 @@ import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Input from '@/shared/ui/Input';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Text from '@/shared/ui/Text';
 import * as S from './PasswordSetupPage.styles';

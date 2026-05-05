@@ -3,7 +3,7 @@ import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/shared/ui/Header';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';

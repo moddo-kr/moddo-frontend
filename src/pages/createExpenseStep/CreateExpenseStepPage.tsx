@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import DescriptionField from '@/shared/ui/DescriptionField';

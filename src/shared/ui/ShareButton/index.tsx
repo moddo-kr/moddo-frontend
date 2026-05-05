@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Close, Copy } from '@/shared/assets/svgs/icon';
 import { Kakaotalk, Slack } from '@/shared/assets/svgs/logo';
-import Button from '@/shared/ui/Button';
+import { Button, TextButton } from '@/shared/design-system/ui';
 import Modal from '@/shared/ui/Modal';
 import Text from '@/shared/ui/Text';
 import { showToast } from '@/shared/ui/Toast';
@@ -89,9 +89,9 @@ function ShareButton({ shareLink }: ShareButtonProps) {
               <Text variant="title" color="semantic.text.strong">
                 링크 공유하기
               </Text>
-              <Button variant="text" onClick={() => setOpenShareModal(false)}>
+              <TextButton onClick={() => setOpenShareModal(false)}>
                 <Close width="1.5rem" />
-              </Button>
+              </TextButton>
             </S.ModalTitle>
             <S.ShareItemContainer>
               <S.ShareButton type="button" onClick={handleShareKakaoButton}>

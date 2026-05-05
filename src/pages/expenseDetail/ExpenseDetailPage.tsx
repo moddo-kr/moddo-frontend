@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';

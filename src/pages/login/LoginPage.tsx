@@ -3,7 +3,7 @@ import Text from '@/shared/ui/Text';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import theme from '@/shared/styles/theme';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
 import { getGuestToken } from '@/entities/auth/api/auth';

@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import useGetExpensesLinks from '@/features/expense-management/api/useGetExpensesLinks';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
@@ -94,7 +94,7 @@ function MyLinksPage() {
           </Text>
           <Button
             variant="primary"
-            size="md"
+            size="medium"
             onClick={() => navigate(ROUTE.groupSetup)}
           >
             모임 생성하기

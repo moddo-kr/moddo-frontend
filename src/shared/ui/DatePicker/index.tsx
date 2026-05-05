@@ -3,7 +3,7 @@ import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowRight, Calendar } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -41,13 +41,13 @@ function DatePicker({ selected, onChange, open }: DatePickerProps) {
         }
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <S.Header>
-            <Button variant="text" onClick={decreaseMonth} type="button">
+            <TextButton onClick={decreaseMonth} type="button">
               <ArrowLeft width={unit[24]} />
-            </Button>
+            </TextButton>
             <Text variant="body1Sb">{format(date, 'yyyy년 M월')}</Text>
-            <Button variant="text" onClick={increaseMonth} type="button">
+            <TextButton onClick={increaseMonth} type="button">
               <ArrowRight width={unit[24]} />
-            </Button>
+            </TextButton>
           </S.Header>
         )}
       />

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import * as S from '@/shared/ui/Header/index.styles';
 
 export interface HeaderProps {
@@ -51,17 +51,17 @@ function Header({
       return (
         <S.CenterHeaderArea $bgColor={bgColor}>
           {leftButtonContent ? (
-            <Button variant="text" onClick={leftButtonOnClick}>
+            <TextButton onClick={leftButtonOnClick}>
               {leftButtonContent}
-            </Button>
+            </TextButton>
           ) : (
             <S.DummyIcon />
           )}
           <S.CenterTitleArea>{title}</S.CenterTitleArea>
           {rightButtonContent ? (
-            <Button variant="text" onClick={rightButtonOnClick}>
+            <TextButton onClick={rightButtonOnClick}>
               {rightButtonContent}
-            </Button>
+            </TextButton>
           ) : (
             <S.DummyIcon />
           )}

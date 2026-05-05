@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
 
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
 
 import BottomSheet from '@/shared/ui/BottomSheet';

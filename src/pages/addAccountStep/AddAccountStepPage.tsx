@@ -4,7 +4,7 @@ import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import DescriptionField from '@/shared/ui/DescriptionField';
 import Input from '@/shared/ui/Input';
 import { BoundaryError } from '@/shared/types/error.type';

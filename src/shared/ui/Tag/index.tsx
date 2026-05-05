@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components';
 import { Close } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
@@ -15,9 +15,9 @@ function Tag({ label, onClose }: TagProps) {
   return (
     <S.Container>
       <Text variant="caption">{label}</Text>
-      <Button variant="text" onClick={onClose}>
+      <TextButton onClick={onClose}>
         <Close width={unit[16]} fill={color.semantic.icon.default} />
-      </Button>
+      </TextButton>
     </S.Container>
   );
 }
