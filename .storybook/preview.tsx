@@ -21,11 +21,6 @@ const preview: Preview = {
   },
 
   decorators: [
-    (Story) => (
-      <div data-theme="light">
-        <Story />
-      </div>
-    ),
     withThemeFromJSXProvider({
       themes: {
         light: theme,
