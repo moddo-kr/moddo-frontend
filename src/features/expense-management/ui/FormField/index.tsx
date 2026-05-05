@@ -8,7 +8,7 @@ import {
   UseFormRegisterReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import Input from '@/shared/ui/Input';
 import * as S from './index.styles';
@@ -59,9 +59,9 @@ function FormField({
           )}
         </Text>
         {subButton && (
-          <Button variant="text" onClick={subButton.onClick}>
+          <TextButton onClick={subButton.onClick}>
             <Text variant="caption">{subButton.label}</Text>
-          </Button>
+          </TextButton>
         )}
       </S.FormFieldHeader>
       {renderInput ? (

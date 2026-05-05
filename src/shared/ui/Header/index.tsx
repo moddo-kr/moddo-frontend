@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import * as S from '@/shared/ui/Header/index.styles';
 
 // 공통 trailing(우측) 영역
@@ -49,14 +49,12 @@ function TrailingSection({
     <S.TrailingArea>
       {trailingLabel && <span>{trailingLabel}</span>}
       {trailingIcon && (
-        <Button variant="text" onClick={onTrailingIconClick}>
-          {trailingIcon}
-        </Button>
+        <TextButton onClick={onTrailingIconClick}>{trailingIcon}</TextButton>
       )}
       {trailingSubIcon && (
-        <Button variant="text" onClick={onTrailingSubIconClick}>
+        <TextButton onClick={onTrailingSubIconClick}>
           {trailingSubIcon}
-        </Button>
+        </TextButton>
       )}
     </S.TrailingArea>
   );
@@ -78,14 +76,12 @@ function DefaultHeader({
       {showHeading ? (
         <S.HeadingArea>
           {headingIcon && (
-            <Button variant="text" onClick={onHeadingIconClick}>
-              {headingIcon}
-            </Button>
+            <TextButton onClick={onHeadingIconClick}>{headingIcon}</TextButton>
           )}
           {headingSubIcon && (
-            <Button variant="text" onClick={onHeadingSubIconClick}>
+            <TextButton onClick={onHeadingSubIconClick}>
               {headingSubIcon}
-            </Button>
+            </TextButton>
           )}
           {headingLabel && <span>{headingLabel}</span>}
         </S.HeadingArea>

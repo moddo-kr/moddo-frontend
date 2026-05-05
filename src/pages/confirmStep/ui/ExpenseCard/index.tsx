@@ -3,7 +3,7 @@ import { CarbonEdit, Close } from '@/shared/assets/svgs/icon';
 import Chip from '@/shared/ui/Chip';
 import { Expense } from '@/entities/expense/model/expense.type';
 import Text from '@/shared/ui/Text';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useDeleteMutation from './api/useDeleteExpense';
 import * as S from './index.styles';
@@ -38,8 +38,7 @@ function ExpenseCard({
         <S.TopWrapper>
           <Text variant="title">{index + 1}차</Text>
           <S.IconButtonsWrapper>
-            <Button
-              variant="text"
+            <TextButton
               onClick={() => {
                 onEdit({
                   expenseId: id,
@@ -53,11 +52,11 @@ function ExpenseCard({
               }}
             >
               <CarbonEdit width={20} />
-            </Button>
+            </TextButton>
             {index !== 0 ? (
-              <Button variant="text" onClick={handleDelete}>
+              <TextButton onClick={handleDelete}>
                 <Close width={20} />
-              </Button>
+              </TextButton>
             ) : null}
           </S.IconButtonsWrapper>
         </S.TopWrapper>

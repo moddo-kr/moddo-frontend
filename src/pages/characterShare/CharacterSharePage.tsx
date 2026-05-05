@@ -3,6 +3,7 @@ import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { showToast } from '@/shared/ui/Toast';
 import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
@@ -106,14 +107,10 @@ function CharacterSharePage() {
             </Text>
           </S.CharacterCard>
         </S.CharacterCardContainer>
-        <Button
-          variant="text"
-          onClick={handleDownload}
-          style={{ marginBottom: unit[20] }}
-        >
+        <TextButton onClick={handleDownload} style={{ marginBottom: unit[20] }}>
           <Download width={unit[20]} />
           <Text>이미지 저장</Text>
-        </Button>
+        </TextButton>
       </S.CharacterContainer>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
