@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Close } from '@/shared/assets/svgs/icon';
 import BottomSheet from '@/shared/ui/BottomSheet';
 import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import NumberInput from '@/features/expense-management/ui/NumberInput';
 import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
@@ -41,9 +42,9 @@ function NumPadBottomSheet({
         <S.NumPadContainer>
           <S.Header>
             <Text variant="heading2">결제 금액 입력</Text>
-            <Button variant="text" onClick={() => setOpen(false)}>
+            <TextButton onClick={() => setOpen(false)}>
               <Close width="1.5rem" />
-            </Button>
+            </TextButton>
           </S.Header>
           <NumPad
             input={input}

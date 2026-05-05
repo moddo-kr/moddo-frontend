@@ -6,7 +6,7 @@ import Text from '@/shared/ui/Text';
 import { useLoaderData } from 'react-router';
 import Modal from '@/shared/ui/Modal';
 import copyClipboard from '@/shared/lib/copyClipboard';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
@@ -174,12 +174,9 @@ function ExpenseTimeHeader({
         sub={
           <Flex gap={4} alignItems="center">
             정산 계좌: {accountFormat}
-            <Button
-              variant="text"
-              onClick={() => handleCopyButtonClick(accountFormat)}
-            >
+            <TextButton onClick={() => handleCopyButtonClick(accountFormat)}>
               <Copy width={16} height={16} />
-            </Button>
+            </TextButton>
           </Flex>
         }
         bgColor="semantic.background.normal.alternative"

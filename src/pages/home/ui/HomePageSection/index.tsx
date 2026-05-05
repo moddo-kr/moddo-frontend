@@ -18,7 +18,7 @@ import type {
 } from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Chip from '@/shared/ui/Chip';
 import * as S from './index.style';
@@ -233,7 +233,7 @@ export function SettlementList() {
           />
         </Flex>
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
-        <Button variant="text" onClick={handleSortOptionClick}>
+        <TextButton onClick={handleSortOptionClick}>
           <Text variant="body2R" color="semantic.text.subtle">
             {sort === 'OLDEST' ? '오래된순' : '최신순'}
           </Text>
@@ -245,7 +245,7 @@ export function SettlementList() {
               transition: 'transform 0.2s ease',
             }}
           />
-        </Button>
+        </TextButton>
       </Flex>
       <SettlementContent
         isLoading={isLoading}
