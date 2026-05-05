@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Accordion from './index';
+import { Accordion } from './Accordion';
 
 const meta: Meta<typeof Accordion> = {
-  title: 'Components/Accordion',
+  title: 'Design System/Accordion',
   component: Accordion,
   tags: ['autodocs'],
 };
@@ -11,18 +11,9 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 const items = [
-  {
-    title: 'Accordion 1',
-    content: 'Accordion 1 content',
-  },
-  {
-    title: 'Accordion 2',
-    content: 'Accordion 2 content',
-  },
-  {
-    title: 'Accordion 3',
-    content: 'Accordion 3 content',
-  },
+  { title: 'Accordion 1', content: 'Accordion 1 content' },
+  { title: 'Accordion 2', content: 'Accordion 2 content' },
+  { title: 'Accordion 3', content: 'Accordion 3 content' },
 ];
 
 export const SingleAccordionStory: Story = {

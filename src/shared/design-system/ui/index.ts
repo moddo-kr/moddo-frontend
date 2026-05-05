@@ -1,3 +1,4 @@
+export { Accordion, useAccordionContext } from './Accordion';
 export { ActionArea } from './ActionArea';
 export { Alert } from './Alert';
 export { BottomSafeArea } from './BottomSafeArea';
