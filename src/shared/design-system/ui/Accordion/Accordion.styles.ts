@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const AccordionWrapper = styled.div`
   display: flex;
@@ -9,10 +10,10 @@ export const AccordionWrapper = styled.div`
 export const AccordionHeader = styled.button`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[12]};
+  gap: ${getToken('gap.5')};
   width: 100%;
   height: fit-content;
-  padding-block: ${({ theme }) => theme.unit[8]};
+  padding-block: ${getToken('padding.3')};
   border: none;
   justify-content: space-between;
 `;
