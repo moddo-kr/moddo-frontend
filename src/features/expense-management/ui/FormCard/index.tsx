@@ -6,8 +6,7 @@ import {
   ExpenseFormMember,
   RemainderData,
 } from '@/entities/expense/model/expense.type';
-import { Alert, TextButton } from '@/shared/design-system/ui';
-import ExpenseDatePicker from '@/shared/ui/DatePicker';
+import { Alert, DatePicker, TextButton } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
@@ -110,7 +109,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.date`}
               renderInput={({ field }) => (
-                <ExpenseDatePicker
+                <DatePicker
                   selected={new Date(field.value)}
                   onChange={(date) =>
                     field.onChange(format(date || new Date(), 'yyyy-MM-dd'))
