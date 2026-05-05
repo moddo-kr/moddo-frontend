@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import {
   SystemInfo,
   SystemDanger,
@@ -15,7 +16,7 @@ interface AlertProps {
   message: string;
 }
 
-const icons: Record<AlertState, React.ReactNode> = {
+const icons: Record<AlertState, ReactNode> = {
   info: <SystemInfo width="100%" height="100%" />,
   success: <SystemSuccess width="100%" height="100%" />,
   warning: <SystemWarning width="100%" height="100%" />,
