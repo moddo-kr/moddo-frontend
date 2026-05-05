@@ -1,11 +1,8 @@
 import axios, { AxiosHeaders, isAxiosError } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
-// 개발 환경에서는 Vite proxy(/api/v1)를 경유해 cross-origin 쿠키 차단을 우회 (참고: vite.config.ts의 server.proxy 설정)
-// 프로덕션에서는 VITE_SERVER_URL로 직접 요청
-const BASE_URL = import.meta.env.DEV
-  ? '/api/v1'
-  : `${import.meta.env.VITE_SERVER_URL ?? ''}/api/v1`;
+// 개발: Vite proxy, 프로덕션: Cloudflare Pages proxy (_redirects)
+const BASE_URL = '/api/v1';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
