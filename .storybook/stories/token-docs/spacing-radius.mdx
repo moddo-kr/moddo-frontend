@@ -1,0 +1,136 @@
+import { Meta } from '@storybook/blocks';
+import { semanticSpacingTokenValues } from '@/shared/design-system/tokens/semantic/spacing';
+import { semanticRadiusTokenValues } from '@/shared/design-system/tokens/semantic/radius';
+import { atomicShadowTokens } from '@/shared/design-system/tokens/atomic/shadow';
+
+<Meta title="Design Tokens/Spacing & Radius" />
+
+export const tableStyle = { width: '100%', borderCollapse: 'collapse' };
+export const thStyle = { textAlign: 'left', padding: '8px 12px', fontWeight: 600, borderBottom: '2px solid var(--color-border-alternative)' };
+export const tdStyle = { padding: '8px 12px', borderBottom: '1px solid var(--color-border-alternative)' };
+
+# Spacing & Radius
+
+## Spacing
+
+### Gap
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Token</th>
+      <th style={thStyle}>Value</th>
+      <th style={thStyle}>CSS Variable</th>
+      <th style={thStyle}>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(semanticSpacingTokenValues)
+      .filter(([key]) => key.startsWith('gap.'))
+      .map(([key, value]) => (
+        <tr key={key}>
+          <td style={tdStyle}><code>{key}</code></td>
+          <td style={tdStyle}>{value}px</td>
+          <td style={tdStyle}><code>{`--spacing-${key.replace('.', '-')}`}</code></td>
+          <td style={tdStyle}>
+            <div style={{ width: value, height: 16, backgroundColor: 'var(--color-fill-primary-normal)', borderRadius: 2 }} />
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+### Padding
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Token</th>
+      <th style={thStyle}>Value</th>
+      <th style={thStyle}>CSS Variable</th>
+      <th style={thStyle}>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(semanticSpacingTokenValues)
+      .filter(([key]) => key.startsWith('padding.'))
+      .map(([key, value]) => (
+        <tr key={key}>
+          <td style={tdStyle}><code>{key}</code></td>
+          <td style={tdStyle}>{value}px</td>
+          <td style={tdStyle}><code>{`--spacing-${key.replace('.', '-')}`}</code></td>
+          <td style={tdStyle}>
+            <div style={{ width: value, height: 16, backgroundColor: 'var(--color-fill-primary-normal)', borderRadius: 2 }} />
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+## Radius
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Token</th>
+      <th style={thStyle}>Value</th>
+      <th style={thStyle}>CSS Variable</th>
+      <th style={thStyle}>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(semanticRadiusTokenValues).map(([key, value]) => (
+      <tr key={key}>
+        <td style={tdStyle}><code>{key}</code></td>
+        <td style={tdStyle}>{value}px</td>
+        <td style={tdStyle}><code>{`--${key.replace('.', '-')}`}</code></td>
+        <td style={tdStyle}>
+          <div style={{
+            width: 48,
+            height: 48,
+            backgroundColor: 'var(--color-fill-primary-normal)',
+            borderRadius: `var(--${key.replace('.', '-')})`,
+          }} />
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Shadow
+
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thStyle}>Token</th>
+      <th style={thStyle}>Value</th>
+      <th style={thStyle}>CSS Variable</th>
+      <th style={thStyle}>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(atomicShadowTokens).map(([key, { x, y, blur, spread, color }]) => {
+      const cssVar = `--${key.replace(/shadow(\d+)/, 'shadow-$1')}`;
+      const value = `${x}px ${y}px ${blur}px ${spread}px ${color}`;
+      return (
+        <tr key={key}>
+          <td style={tdStyle}><code>{key}</code></td>
+          <td style={tdStyle}><code>{value}</code></td>
+          <td style={tdStyle}><code>{cssVar}</code></td>
+          <td style={tdStyle}>
+            <div style={{
+              width: 48,
+              height: 48,
+              backgroundColor: 'var(--color-fill-normal)',
+              border: '1px solid var(--color-border-alternative)',
+              borderRadius: 'var(--radius-md)',
+              boxShadow: `var(${cssVar})`,
+            }} />
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
