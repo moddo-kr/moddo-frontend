@@ -6,7 +6,7 @@ import {
   ExpenseFormMember,
   RemainderData,
 } from '@/entities/expense/model/expense.type';
-import Alert from '@/shared/ui/Alert';
+import { Alert } from '@/shared/design-system/ui';
 import Button from '@/shared/ui/Button';
 import ExpenseDatePicker from '@/shared/ui/DatePicker';
 import Text from '@/shared/ui/Text';
@@ -131,7 +131,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 <>
                   {remainderData ? (
                     <Alert
-                      type="info"
+                      state="info"
                       message={`${remainderData.name}님에게 남은 ${remainderData.remainder}원이 부과됐어요.`}
                     />
                   ) : null}
