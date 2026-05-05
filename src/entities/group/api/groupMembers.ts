@@ -1,21 +1,22 @@
 import axiosInstance from '@/shared/api/axios';
-import { Member, MemberData } from '@/entities/member/model/member.type';
+import { Member, MemberRole } from '@/entities/member/model/member.type';
 
 export interface CreateGroupMembersVariable {
   name: string;
+  role: MemberRole;
 }
 
 const groupMembers = {
-  // PUT addGroupMember
-  put: async ({
+  // POST addGroupMember
+  post: async ({
     groupMemberData,
     groupToken,
   }: {
-    groupMemberData: MemberData;
+    groupMemberData: CreateGroupMembersVariable;
     groupToken: string;
   }) => {
-    const response = await axiosInstance.put<Member>(
-      `/group-members?groupToken=${groupToken}`,
+    const response = await axiosInstance.post<Member>(
+      `/groups/${groupToken}/members`,
       groupMemberData
     );
     return response.data;
@@ -29,7 +30,7 @@ const groupMembers = {
     groupMemberId: number;
   }) => {
     const response = await axiosInstance.delete(
-      `/group-members/${groupMemberId}?groupToken=${groupToken}`
+      `/groups/${groupToken}/members/${groupMemberId}`
     );
     return response.data;
   },

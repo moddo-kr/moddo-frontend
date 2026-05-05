@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import useGetExpensesLinks from '@/features/expense-management/api/useGetExpensesLinks';
+import useGetGroupLinks from '@/features/expense-management/api/useGetExpensesLinks';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
+import generateShareLink from '@/shared/lib/generateShareLink';
 import Button from '@/shared/ui/Button';
 import Flex from '@/shared/ui/Flex';
 import Header from '@/shared/ui/Header';
@@ -12,7 +13,7 @@ import LinkBox from './ui/LinkBox';
 function MyLinksPage() {
   const navigate = useNavigate();
   const { color } = useTheme();
-  const { data, isLoading } = useGetExpensesLinks({}, []);
+  const { data: groupList, isLoading } = useGetGroupLinks({}, []);
 
   if (isLoading) {
     return (
@@ -50,7 +51,7 @@ function MyLinksPage() {
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.primary.subtle}
       />
-      {data?.links && data.links.length > 0 ? (
+      {groupList && groupList.length > 0 ? (
         <Flex
           pt={24}
           pb={22}
@@ -61,12 +62,12 @@ function MyLinksPage() {
           direction="column"
           bgColor={color.semantic.background.normal.alternative}
         >
-          {data.links.map((link) => (
+          {groupList.map((group) => (
             <LinkBox
-              key={link.id}
-              id={link.id}
-              name={link.name}
-              url={link.url}
+              key={group.settlementId}
+              id={group.settlementId}
+              name={group.name}
+              url={generateShareLink(group.groupCode)}
             />
           ))}
         </Flex>

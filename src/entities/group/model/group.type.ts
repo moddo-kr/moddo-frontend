@@ -28,6 +28,15 @@ export interface GroupHeaderResponse {
   accountNumber: string;
 }
 
+export interface GroupListItem {
+  settlementId: number;
+  name: string;
+  groupCode: string;
+  createdAt: string;
+  completedAt: string | null;
+  members: Member[];
+}
+
 export type SettlementStatus = 'ALL' | 'IN_PROGRESS' | 'COMPLETED';
 export type SettlementSort = 'LATEST' | 'OLDEST';
 

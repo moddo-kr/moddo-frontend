@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://www.moddo.kr';
+export const BASE_URL = window.location.origin;
 
 export const ROUTE = {
   login: '/login',
