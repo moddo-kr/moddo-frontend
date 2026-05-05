@@ -1,5 +1,8 @@
-import Accordion, { useAccordionContext } from '@/shared/ui/Accordion';
-import { NameChip } from '@/shared/design-system/ui';
+import {
+  Accordion,
+  useAccordionContext,
+  NameChip,
+} from '@/shared/design-system/ui';
 import SvgCarbonEdit from '@/shared/assets/svgs/icon/CarbonEdit';
 import SvgNext from '@/shared/assets/svgs/icon/Next';
 import * as S from './SettlementSummary.styles';
