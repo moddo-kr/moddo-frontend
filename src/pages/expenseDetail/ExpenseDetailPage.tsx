@@ -37,15 +37,13 @@ function ExpenseDetailPage() {
 
   // TODO: GroupHeaderResponse에 completedAt 필드를 추가하여 서버에서 정산 완료 여부를 직접 내려받도록 개선 필요
   const derivedStatus = useMemo<StatusType>(() => {
-    if (!memberExpenseDetails || !headerData) return 'pending';
+    if (!headerData) return 'pending';
 
-    const allPaid = memberExpenseDetails.every((member) => member.isPaid);
     const isExpired = new Date(headerData.deadline).getTime() < Date.now();
-    if (allPaid) return 'success';
     if (isExpired) return 'failure';
 
     return 'pending';
-  }, [memberExpenseDetails, headerData]);
+  }, [headerData]);
 
   const [status, setStatus] = useState<StatusType>('pending');
 
