@@ -84,21 +84,13 @@ function ExpenseTimeHeader({
     }
   };
 
-  const prevPaidMemberRef = useRef(paidMember);
-
   // TODO: isChecked를 sessionStorage/localStorage로 관리하여 새로고침 시에도 모달이 다시 뜨지 않도록 개선 필요 (groupToken별 키 사용)
   // 모든 멤버가 입금 완료된 "순간"에만 모달 표시
   useEffect(() => {
-    if (
-      totalMember > 0 &&
-      paidMember === totalMember &&
-      prevPaidMemberRef.current < totalMember &&
-      !isChecked
-    ) {
+    if (totalMember > 0 && paidMember === totalMember && !isChecked) {
       setIsModalOpen(true);
       setIsChecked(true);
     }
-    prevPaidMemberRef.current = paidMember;
   }, [paidMember, totalMember, isChecked, setIsChecked]);
 
   useEffect(() => {
