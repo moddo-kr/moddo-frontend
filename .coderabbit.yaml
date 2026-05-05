@@ -12,7 +12,6 @@ reviews:
   # 기본값: chill
   profile: chill
 
-  # 모든 리뷰 코멘트가 해결되고, pre-merge 체크에 오류가 없을 때 자동으로 승인 처리
   # 코드래빗이 리뷰 시 request changes 요청하지 않도록 설정
   request_changes_workflow: false
 
