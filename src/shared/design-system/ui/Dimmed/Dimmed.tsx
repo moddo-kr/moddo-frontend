@@ -8,7 +8,7 @@ interface DimmedProps {
 function Dimmed(props: DimmedProps) {
   const { onClick } = props;
 
-  return <S.Overlay onClick={onClick} />;
+  return <S.Overlay onClick={onClick} aria-hidden="true" />;
 }
 
 export { Dimmed };
