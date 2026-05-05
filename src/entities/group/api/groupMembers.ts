@@ -1,8 +1,9 @@
 import axiosInstance from '@/shared/api/axios';
-import { Member } from '@/entities/member/model/member.type';
+import { Member, MemberRole } from '@/entities/member/model/member.type';
 
 export interface CreateGroupMembersVariable {
   name: string;
+  role: MemberRole;
 }
 
 const groupMembers = {
