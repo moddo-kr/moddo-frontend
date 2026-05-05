@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Accordion from '@/shared/ui/Accordion';
+import { Accordion } from '@/shared/design-system/ui';
 
 export const Container = styled(Accordion)<{ isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
