@@ -50,6 +50,7 @@ export const Showcase: Story = {
         required
         value="모임 이름 입력 완료"
         placeholder="placeholder"
+        readOnly
       />
     </div>
   ),
@@ -67,6 +68,7 @@ export const PriceVariant: Story = {
         placeholder="금액입력"
         variant="price"
         value="1,000,000"
+        readOnly
       />
     </div>
   ),
