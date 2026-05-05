@@ -9,6 +9,7 @@ import BottomSheet from '@/shared/ui/BottomSheet';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
 import ProfileImage from '@/shared/ui/ProfileImage';
+import { useLoaderData } from 'react-router';
 import * as S from './index.style';
 import StatusChip from './ui/StatusChip';
 
@@ -27,6 +28,7 @@ function ExpenseMemberItem({
   const [open, setOpen] = useState<boolean>(false);
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const { myProfile } = useLoaderData();
   const theme = useTheme();
   const updatePaymentStatusMutation = useUpdatePaymentStatus({
     groupToken,
@@ -60,6 +62,11 @@ function ExpenseMemberItem({
     setOpen(false);
   };
 
+  // TODO: role에 따라 상태 변경 버튼 클릭 가능 여부 체크
+  const handleStatusChipClick = () => {
+    if (myProfile.role === 'MANAGER') setOpen(true);
+  };
+
   return (
     <S.Container isPaid={member.isPaid}>
       <S.HeaderContainer iconSize={32}>
@@ -79,7 +86,7 @@ function ExpenseMemberItem({
           </S.LeftWrapper>
           <S.RightWrapper>
             <S.StatusChipButton
-              onClick={() => setOpen(true)}
+              onClick={handleStatusChipClick}
               aria-label={`${member.name}의 정산 상태 변경`}
             >
               <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />

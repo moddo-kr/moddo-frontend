@@ -43,7 +43,7 @@ export function MainHeader() {
       // TODO: 알림 기능 개발 후 onTrailingIconClick 핸들러 연결
       trailingSubIcon={<Menu width={24} height={24} />}
       onTrailingSubIconClick={() => navigate(ROUTE.my)}
-      bgColor="semantic.background.normal.alternative"
+      bgColor={theme.color.semantic.background.normal.default}
     />
   );
 }
@@ -145,40 +145,42 @@ function SettlementContent({
       </Flex>
     );
   }
-  if (settlementList.length > 0) {
+  if (settlementList.length === 0) {
     return (
-      <S.SettlementListWrapper>
-        {settlementList.map((item) => (
-          <HomeExpenseItem
-            key={item.groupId}
-            date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
-              locale: ko,
-            })}
-            groupName={item.name}
-            totalAmount={item.totalAmount}
-            paidMember={item.completedMemberCount}
-            totalMember={item.totalMemberCount}
-          />
-        ))}
-      </S.SettlementListWrapper>
+      <Flex
+        direction="column"
+        py={20}
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        gap={20}
+      >
+        <S.NoSettlementImg src={CoinImg} alt="" />
+        <Text variant="body2R" color="semantic.text.subtle">
+          {settlementType === 'IN_PROGRESS'
+            ? '아직 진행중인 정산이 없어요.'
+            : '완료된 정산이 없어요.'}
+        </Text>
+      </Flex>
     );
   }
+
   return (
-    <Flex
-      direction="column"
-      py={20}
-      justifyContent="center"
-      alignItems="center"
-      flexGrow={1}
-      gap={20}
-    >
-      <S.NoSettlementImg src={CoinImg} alt="" />
-      <Text variant="body2R" color="semantic.text.subtle">
-        {settlementType === 'IN_PROGRESS'
-          ? '아직 진행중인 정산이 없어요.'
-          : '완료된 정산이 없어요.'}
-      </Text>
-    </Flex>
+    <S.SettlementListWrapper>
+      {settlementList.map((item) => (
+        <HomeExpenseItem
+          key={item.groupId}
+          groupCode={item.groupCode}
+          date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
+            locale: ko,
+          })}
+          groupName={item.name}
+          totalAmount={item.totalAmount}
+          paidMember={item.completedMemberCount}
+          totalMember={item.totalMemberCount}
+        />
+      ))}
+    </S.SettlementListWrapper>
   );
 }
 
