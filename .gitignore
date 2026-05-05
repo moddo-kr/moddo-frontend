@@ -30,4 +30,6 @@ dist-ssr
 dev-dist/
 *storybook.log
 
-.claude/
+.claude/settings.local.json
+AGENTS.md
+CLAUDE.md
