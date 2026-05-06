@@ -38,7 +38,7 @@ function TabList({ activeTab, onTabChange, children }: TabListProps) {
 
   return (
     <TabListContext.Provider value={contextValue}>
-      <S.TabList>{children}</S.TabList>
+      <S.TabList role="tablist">{children}</S.TabList>
     </TabListContext.Provider>
   );
 }
@@ -50,6 +50,8 @@ function Tab({ label, value }: TabProps) {
   return (
     <S.Tab
       type="button"
+      role="tab"
+      aria-selected={isActive}
       $isActive={isActive}
       onClick={() => onTabChange(value)}
     >
