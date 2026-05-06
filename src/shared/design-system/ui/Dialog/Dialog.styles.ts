@@ -10,8 +10,8 @@ export const Container = styled.div`
   /* HACK: py 24px에 해당하는 padding 토큰 없음. gap.8(24px)을 임시 사용. */
   padding: ${getToken('gap.8')} ${getToken('padding.6')};
   width: 100%;
-  /* HACK: 330px에 해당하는 너비 토큰 없음. */
-  min-width: 330px;
+  /* 데스크톱 대응 시 미디어쿼리로 확장 검토 필요. */
+  max-width: 330px;
 `;
 
 export const TextSection = styled.div`
