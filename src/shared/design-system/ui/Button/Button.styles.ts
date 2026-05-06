@@ -1,22 +1,10 @@
 import styled, { css } from 'styled-components';
-import { getToken, getTypographyToken } from '@/shared/design-system';
+import { getToken, applyTypography } from '@/shared/design-system';
 
 interface StyledButtonProps {
   $variant: 'primary' | 'secondary' | 'tertiary' | 'black';
   $size: 'medium' | 'small' | 'xsmall';
 }
-
-const applyTypography = (key: Parameters<typeof getTypographyToken>[0]) => {
-  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
-    getTypographyToken(key);
-  return css`
-    font-family: ${fontFamily};
-    font-size: ${fontSize};
-    font-weight: ${fontWeight};
-    line-height: ${lineHeight};
-    letter-spacing: ${letterSpacing};
-  `;
-};
 
 const sizeStyles = {
   medium: css`

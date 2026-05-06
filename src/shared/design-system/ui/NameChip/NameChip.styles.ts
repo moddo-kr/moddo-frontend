@@ -1,39 +1,22 @@
 import styled, { css } from 'styled-components';
-import { getToken, getTypographyToken } from '@/shared/design-system';
+import {
+  getToken,
+  getTypographyToken,
+  applyTypography,
+} from '@/shared/design-system';
 
 interface StyledNameChipProps {
   $variant: 'selected' | 'unselected' | 'disabled' | 'red';
   $size: 'm' | 's';
 }
 
-const applyTypography = (key: Parameters<typeof getTypographyToken>[0]) => {
-  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
-    getTypographyToken(key);
-
-  return css`
-    font-family: ${fontFamily};
-    font-size: ${fontSize};
-    font-weight: ${fontWeight};
-    line-height: ${lineHeight};
-    letter-spacing: ${letterSpacing};
-  `;
-};
-
 // HACK: s size는 12px Medium이지만 해당 semantic token 없음.
-// 그래서 caption.xsmall(12px Regular)에 caption.small-medium의 font-weight(Medium)를 override해 적용.
-const sTypography = (() => {
-  const { fontFamily, fontSize, lineHeight, letterSpacing } =
-    getTypographyToken('typography.caption.xsmall');
-  const { fontWeight } = getTypographyToken('typography.caption.small-medium');
-
-  return css`
-    font-family: ${fontFamily};
-    font-size: ${fontSize};
-    font-weight: ${fontWeight};
-    line-height: ${lineHeight};
-    letter-spacing: ${letterSpacing};
-  `;
-})();
+// caption.xsmall을 적용한 뒤 caption.small-medium의 font-weight만 override해 적용.
+const sTypography = css`
+  ${applyTypography('typography.caption.xsmall')}
+  font-weight: ${getTypographyToken('typography.caption.small-medium')
+    .fontWeight};
+`;
 
 const sizeStyles = {
   m: css`

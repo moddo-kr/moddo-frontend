@@ -1,18 +1,5 @@
-import styled, { css } from 'styled-components';
-import { getToken, getTypographyToken } from '@/shared/design-system';
-
-const applyTypography = (key: Parameters<typeof getTypographyToken>[0]) => {
-  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
-    getTypographyToken(key);
-
-  return css`
-    font-family: ${fontFamily};
-    font-size: ${fontSize};
-    font-weight: ${fontWeight};
-    line-height: ${lineHeight};
-    letter-spacing: ${letterSpacing};
-  `;
-};
+import styled from 'styled-components';
+import { getToken, applyTypography } from '@/shared/design-system';
 
 export const Container = styled.div`
   display: inline-flex;

@@ -1,19 +1,6 @@
 import styled, { css } from 'styled-components';
-import { getToken, getTypographyToken } from '@/shared/design-system';
+import { getToken, applyTypography } from '@/shared/design-system';
 import type { InputState, InputVariant } from './Input';
-
-const applyTypography = (key: Parameters<typeof getTypographyToken>[0]) => {
-  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
-    getTypographyToken(key);
-
-  return css`
-    font-family: ${fontFamily};
-    font-size: ${fontSize};
-    font-weight: ${fontWeight};
-    line-height: ${lineHeight};
-    letter-spacing: ${letterSpacing};
-  `;
-};
 
 const defaultWrapperStateStyles = {
   default: css`
