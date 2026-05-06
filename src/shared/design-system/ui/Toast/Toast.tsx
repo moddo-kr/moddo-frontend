@@ -33,7 +33,7 @@ function Toast({ type, message }: ToastProps) {
 
   return (
     <S.Container role={role} aria-atomic="true">
-      <S.IconWrapper>
+      <S.IconWrapper aria-hidden="true">
         <Icon width="100%" height="100%" />
       </S.IconWrapper>
       <S.Message>{message}</S.Message>
