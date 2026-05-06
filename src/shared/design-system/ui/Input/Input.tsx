@@ -49,10 +49,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           id={inputId}
           $variant={variant}
           placeholder={placeholder}
+          required={required}
+          {...rest}
           value={value}
           onChange={onChange}
           disabled={isDisabled}
-          {...rest}
         />
         {isPrice && <S.PriceUnit>원</S.PriceUnit>}
         {!isPrice && trailingIcon && (
