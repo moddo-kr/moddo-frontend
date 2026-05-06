@@ -72,7 +72,8 @@ export const DropdownPanel = styled.div`
 
 export const OptionItem = styled.button`
   display: flex;
-  align-items: space-between;
+  align-items: center;
+  justify-content: space-between;
   gap: ${getToken('gap.6')};
   width: 100%;
   padding: ${getToken('padding.3')};
