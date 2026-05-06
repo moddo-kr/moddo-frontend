@@ -18,7 +18,8 @@ function Select({ options, value, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const selectedLabel = options.find((o) => o.value === value)?.label ?? '';
+  // 선택 전 placeholder 문구가 필요해지면 placeholder prop 추가 검토.
+  const selectedLabel = options.find((o) => o.value === value)?.label ?? '선택';
 
   useEffect(() => {
     if (!isOpen) {
