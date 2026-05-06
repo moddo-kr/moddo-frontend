@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId } from 'react';
 import SvgNext from '@/shared/assets/svgs/icon/Next';
 import SvgConfirm from '@/shared/assets/svgs/icon/Confirm';
 import * as S from './Select.styles';
@@ -17,6 +17,7 @@ interface SelectProps {
 function Select({ options, value, onChange }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const listboxId = useId();
 
   // 선택 전 placeholder 문구가 필요해지면 placeholder prop 추가 검토.
   const selectedLabel = options.find((o) => o.value === value)?.label ?? '선택';
@@ -57,6 +58,7 @@ function Select({ options, value, onChange }: SelectProps) {
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
+        aria-controls={isOpen ? listboxId : undefined}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <S.TriggerLabel>{selectedLabel}</S.TriggerLabel>
@@ -65,7 +67,7 @@ function Select({ options, value, onChange }: SelectProps) {
         </S.ChevronWrapper>
       </S.Trigger>
       {isOpen && (
-        <S.DropdownPanel role="listbox">
+        <S.DropdownPanel id={listboxId} role="listbox">
           {options.map((option) => (
             <S.OptionItem
               key={option.value}
