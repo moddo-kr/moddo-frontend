@@ -20,7 +20,8 @@ export const TextSection = styled.div`
   gap: ${getToken('gap.4')};
 `;
 
-export const Title = styled.span`
+export const Title = styled.h2`
+  margin: 0;
   ${applyTypography('typography.title.medium')}
   color: ${getToken('fg.strong')};
 `;
