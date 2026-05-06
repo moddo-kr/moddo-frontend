@@ -30,7 +30,7 @@ function Profile({
   const imageSize = profileImageSizeMap[size];
 
   return (
-    <S.Container>
+    <S.Container aria-disabled={type === 'disabled' ? true : undefined}>
       <S.ImageWrapper $size={size}>
         <ProfileImage src={src} size={imageSize} />
         {type === 'delete' && (
