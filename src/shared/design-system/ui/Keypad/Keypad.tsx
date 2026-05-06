@@ -38,7 +38,12 @@ function Keypad({ onPress }: KeypadProps) {
   return (
     <S.Grid>
       {KEYPAD_KEYS.map((key) => (
-        <S.KeyButton key={key} type="button" onClick={() => onPress(key)}>
+        <S.KeyButton
+          key={key}
+          type="button"
+          onClick={() => onPress(key)}
+          aria-label={key === 'delete' ? '삭제' : undefined}
+        >
           {key === 'delete' && <SvgBtnShortcut width={24} height={24} />}
           {key === 'cancel' && <S.CancelText>취소</S.CancelText>}
           {key !== 'delete' && key !== 'cancel' && (
