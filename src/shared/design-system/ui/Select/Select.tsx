@@ -21,16 +21,29 @@ function Select({ options, value, onChange }: SelectProps) {
   const selectedLabel = options.find((o) => o.value === value)?.label ?? '';
 
   useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
     function handleOutsideClick(e: MouseEvent) {
       if (!containerRef.current?.contains(e.target as Node)) {
         setIsOpen(false);
       }
     }
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    }
+
     document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [isOpen]);
 
   function handleOptionClick(optionValue: string) {
     onChange(optionValue);
@@ -39,18 +52,25 @@ function Select({ options, value, onChange }: SelectProps) {
 
   return (
     <S.Container ref={containerRef}>
-      <S.Trigger type="button" onClick={() => setIsOpen((prev) => !prev)}>
+      <S.Trigger
+        type="button"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         <S.TriggerLabel>{selectedLabel}</S.TriggerLabel>
         <S.ChevronWrapper $isOpen={isOpen}>
           <SvgNext width={24} height={24} />
         </S.ChevronWrapper>
       </S.Trigger>
       {isOpen && (
-        <S.DropdownPanel>
+        <S.DropdownPanel role="listbox">
           {options.map((option) => (
             <S.OptionItem
               key={option.value}
               type="button"
+              role="option"
+              aria-selected={option.value === value}
               onClick={() => handleOptionClick(option.value)}
             >
               <S.OptionLabel $isSelected={option.value === value}>
