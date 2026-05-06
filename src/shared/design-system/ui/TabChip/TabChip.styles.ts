@@ -29,4 +29,10 @@ export const TabChip = styled.button<{ $isActive: boolean }>`
   font-weight: ${typo.fontWeight};
   line-height: ${typo.lineHeight};
   letter-spacing: ${typo.letterSpacing};
+
+  /* HACK: focus ring에 대응하는 semantic token 없음, fill.inverse.neutral 사용 */
+  &:focus-visible {
+    outline: 2px solid ${getToken('fill.inverse.neutral')};
+    outline-offset: 2px;
+  }
 `;
