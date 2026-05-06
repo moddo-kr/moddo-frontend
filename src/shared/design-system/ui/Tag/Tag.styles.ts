@@ -14,7 +14,7 @@ export const Container = styled.div`
   height: 2rem;
 `;
 
-export const Label = styled.p`
+export const Label = styled.span`
   ${applyTypography('typography.caption.xsmall')}
   color: ${getToken('fg.neutral')};
 `;
