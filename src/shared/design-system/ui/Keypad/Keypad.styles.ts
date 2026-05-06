@@ -12,7 +12,8 @@ export const KeyButton = styled.button`
   align-items: center;
   justify-content: center;
   height: 4rem;
-  min-width: 116px;
+  width: 100%;
+  min-width: 0;
   padding: ${getToken('padding.4')} ${getToken('padding.5')};
   overflow: hidden;
   background: transparent;
