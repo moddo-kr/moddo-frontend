@@ -34,4 +34,11 @@ export const CloseButton = styled.button`
   color: ${getToken('fg.neutral')};
   width: 0.75rem;
   height: 0.75rem;
+
+  /* HACK: focus ring에 대응하는 semantic token 없음, fg.neutral 사용 */
+  &:focus-visible {
+    outline: 2px solid ${getToken('fg.neutral')};
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 `;
