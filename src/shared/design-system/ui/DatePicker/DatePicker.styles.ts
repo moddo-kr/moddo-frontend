@@ -132,6 +132,11 @@ export const Wrapper = styled.div`
   }
 
   .react-datepicker__day--keyboard-selected {
-    background: transparent;
+    background: ${getToken('fill.normal-pressed')};
+  }
+
+  .react-datepicker__day--keyboard-selected:focus-visible {
+    outline: 2px solid ${getToken('fg.primary.normal')};
+    outline-offset: 1px;
   }
 `;
