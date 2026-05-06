@@ -34,8 +34,13 @@ function Profile({
       <S.ImageWrapper $size={size}>
         <ProfileImage src={src} size={imageSize} />
         {type === 'delete' && (
-          <S.DeleteButton type="button" $size={size} onClick={onDelete}>
-            <SvgSystemDanger width="100%" height="100%" />
+          <S.DeleteButton
+            type="button"
+            $size={size}
+            onClick={onDelete}
+            aria-label={`${label} 삭제`}
+          >
+            <SvgSystemDanger width="100%" height="100%" aria-hidden="true" />
           </S.DeleteButton>
         )}
         {type === 'checked' && (
