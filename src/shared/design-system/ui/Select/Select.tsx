@@ -33,6 +33,14 @@ function Select({ options, value, onChange }: SelectProps) {
       }
     }
 
+    function handleFocusOut(e: FocusEvent) {
+      const nextTarget = e.relatedTarget as Node | null;
+
+      if (!nextTarget || !containerRef.current?.contains(nextTarget)) {
+        setIsOpen(false);
+      }
+    }
+
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setIsOpen(false);
@@ -40,9 +48,11 @@ function Select({ options, value, onChange }: SelectProps) {
     }
 
     document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('focusout', handleFocusOut);
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('focusout', handleFocusOut);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
