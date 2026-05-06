@@ -31,4 +31,10 @@ export const Tab = styled.button<{ $isActive: boolean }>`
     $isActive ? getToken('fg.normal') : getToken('fg.normal-disable')};
 
   white-space: nowrap;
+
+  /* HACK: focus ring에 대응하는 semantic token 없음, fg.normal 사용 */
+  &:focus-visible {
+    outline: 2px solid ${getToken('fg.normal')};
+    outline-offset: 2px;
+  }
 `;
