@@ -20,10 +20,19 @@ const iconMap = {
   error: SystemDanger,
 } as const;
 
+const ariaRoleMap: Record<ToastType, 'alert' | 'status'> = {
+  success: 'status',
+  info: 'status',
+  warning: 'alert',
+  error: 'alert',
+};
+
 function Toast({ type, message }: ToastProps) {
   const Icon = iconMap[type];
+  const role = ariaRoleMap[type];
+
   return (
-    <S.Container>
+    <S.Container role={role} aria-atomic="true">
       <S.IconWrapper>
         <Icon width="100%" height="100%" />
       </S.IconWrapper>
