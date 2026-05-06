@@ -20,6 +20,10 @@ export const Label = styled.span`
 `;
 
 export const CloseButton = styled.button`
+  /* HACK: 현재 버튼 터치 영역이 WCAG 2.5.8(AA) 최솟값 미달으로 접근성 이슈가 있음
+     터치 타겟 확장은 디자이너와 논의 후 반영.
+     Review: https://github.com/moddo-kr/moddo-frontend/pull/42#discussion_r3194789904
+  */
   display: flex;
   align-items: center;
   justify-content: center;
