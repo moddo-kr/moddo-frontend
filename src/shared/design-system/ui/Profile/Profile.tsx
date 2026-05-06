@@ -45,7 +45,7 @@ function Profile({
         )}
         {type === 'checked' && (
           <S.CheckedIcon $size={size}>
-            <SvgSystemSuccess width="100%" height="100%" />
+            <SvgSystemSuccess width="100%" height="100%" aria-hidden="true" />
           </S.CheckedIcon>
         )}
         {type === 'disabled' && <S.DimOverlay />}
