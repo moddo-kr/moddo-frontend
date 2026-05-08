@@ -43,7 +43,7 @@ function LinkBox({ name, url }: ExpenseLink) {
         >
           {url}
         </Text>
-        <TextButton onClick={() => copyLink(url)}>
+        <TextButton aria-label="링크 복사" onClick={() => copyLink(url)}>
           <Copy width={theme.unit[16]} height={theme.unit[16]} />
         </TextButton>
       </Flex>
