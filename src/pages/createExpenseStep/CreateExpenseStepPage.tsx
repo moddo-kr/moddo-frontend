@@ -63,6 +63,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
       <Header
         type="default"
         headingIcon={<Close width="1.5rem" />}
+        headingIconAriaLabel="지출 입력 종료"
         onHeadingIconClick={() => setOpen(true)}
         trailingIcon={<Text>지출 추가</Text>}
         onTrailingIconClick={handleAddExpense}

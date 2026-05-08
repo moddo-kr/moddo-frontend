@@ -86,6 +86,7 @@ function ExpenseDetailPage() {
         type="default"
         headingIcon={<ArrowLeft width={unit[24]} />}
         headingLabel={groupData.groupName}
+        headingIconAriaLabel="홈으로 이동"
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}

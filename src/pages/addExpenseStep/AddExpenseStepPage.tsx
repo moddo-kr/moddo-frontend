@@ -32,6 +32,7 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
       <Header
         type="default"
         headingIcon={<Close width={24} />}
+        headingIconAriaLabel="지출 입력 완료"
         onHeadingIconClick={onNext}
       />
       <DescriptionField

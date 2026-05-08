@@ -54,6 +54,7 @@ function CharacterSharePage() {
         <Header
           type="default"
           headingIcon={<ArrowLeft width={unit[24]} />}
+          headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.background.normal.alternative}
         />
@@ -79,6 +80,7 @@ function CharacterSharePage() {
       <Header
         type="default"
         headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.background.normal.alternative}
       />

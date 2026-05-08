@@ -40,8 +40,10 @@ export function MainHeader() {
         />
       }
       trailingIcon={<Bell width={24} height={24} />}
+      trailingIconAriaLabel="알림"
       // TODO: 알림 기능 개발 후 onTrailingIconClick 핸들러 연결
       trailingSubIcon={<Menu width={24} height={24} />}
+      trailingSubIconAriaLabel="마이페이지로 이동"
       onTrailingSubIconClick={() => navigate(ROUTE.my)}
       bgColor={theme.color.semantic.background.normal.default}
     />

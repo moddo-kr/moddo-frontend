@@ -20,6 +20,7 @@ function SelectGroupPage() {
       <Header
         type="default"
         headingIcon={<ArrowLeft width={24} height={24} />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.primary.subtle}
       />

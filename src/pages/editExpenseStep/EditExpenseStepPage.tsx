@@ -65,6 +65,7 @@ function EditExpenseStepPage({
       <Header
         type="default"
         headingIcon={<Close width={24} />}
+        headingIconAriaLabel="지출 수정 취소"
         onHeadingIconClick={onBack}
       />
       <DescriptionField

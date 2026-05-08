@@ -8,6 +8,8 @@ interface TrailingProps {
   trailingLabel?: string;
   trailingIcon?: ReactElement;
   trailingSubIcon?: ReactElement;
+  trailingIconAriaLabel?: string;
+  trailingSubIconAriaLabel?: string;
   onTrailingIconClick?: () => void;
   onTrailingSubIconClick?: () => void;
 }
@@ -20,6 +22,8 @@ interface DefaultHeaderProps extends TrailingProps {
   headingIcon?: ReactElement;
   headingLabel?: string;
   headingSubIcon?: ReactElement;
+  headingIconAriaLabel?: string;
+  headingSubIconAriaLabel?: string;
   onHeadingIconClick?: () => void;
   onHeadingSubIconClick?: () => void;
   bgColor?: string;
@@ -39,6 +43,8 @@ function TrailingSection({
   trailingLabel,
   trailingIcon,
   trailingSubIcon,
+  trailingIconAriaLabel,
+  trailingSubIconAriaLabel,
   onTrailingIconClick,
   onTrailingSubIconClick,
 }: TrailingProps) {
@@ -49,10 +55,18 @@ function TrailingSection({
     <S.TrailingArea>
       {trailingLabel && <span>{trailingLabel}</span>}
       {trailingIcon && (
-        <TextButton onClick={onTrailingIconClick}>{trailingIcon}</TextButton>
+        <TextButton
+          aria-label={trailingIconAriaLabel ?? trailingLabel}
+          onClick={onTrailingIconClick}
+        >
+          {trailingIcon}
+        </TextButton>
       )}
       {trailingSubIcon && (
-        <TextButton onClick={onTrailingSubIconClick}>
+        <TextButton
+          aria-label={trailingSubIconAriaLabel}
+          onClick={onTrailingSubIconClick}
+        >
           {trailingSubIcon}
         </TextButton>
       )}
@@ -67,6 +81,8 @@ function DefaultHeader({
   headingIcon,
   headingLabel,
   headingSubIcon,
+  headingIconAriaLabel,
+  headingSubIconAriaLabel,
   onHeadingIconClick,
   onHeadingSubIconClick,
   ...trailingProps
@@ -76,10 +92,18 @@ function DefaultHeader({
       {showHeading ? (
         <S.HeadingArea>
           {headingIcon && (
-            <TextButton onClick={onHeadingIconClick}>{headingIcon}</TextButton>
+            <TextButton
+              aria-label={headingIconAriaLabel ?? headingLabel}
+              onClick={onHeadingIconClick}
+            >
+              {headingIcon}
+            </TextButton>
           )}
           {headingSubIcon && (
-            <TextButton onClick={onHeadingSubIconClick}>
+            <TextButton
+              aria-label={headingSubIconAriaLabel}
+              onClick={onHeadingSubIconClick}
+            >
               {headingSubIcon}
             </TextButton>
           )}

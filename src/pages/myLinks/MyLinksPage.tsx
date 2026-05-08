@@ -22,6 +22,7 @@ function MyLinksPage() {
           type="default"
           title="링크 관리"
           headingIcon={<ArrowLeft width={24} />}
+          headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.primary.subtle}
         />
@@ -48,6 +49,7 @@ function MyLinksPage() {
         type="default"
         title="링크 관리"
         headingIcon={<ArrowLeft width={24} />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.primary.subtle}
       />
