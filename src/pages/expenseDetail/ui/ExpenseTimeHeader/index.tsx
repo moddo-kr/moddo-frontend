@@ -177,7 +177,10 @@ function ExpenseTimeHeader({
         sub={
           <Flex gap={4} alignItems="center">
             정산 계좌: {accountFormat}
-            <TextButton onClick={() => handleCopyButtonClick(accountFormat)}>
+            <TextButton
+              aria-label="계좌번호 복사"
+              onClick={() => handleCopyButtonClick(accountFormat)}
+            >
               <Copy width={16} height={16} />
             </TextButton>
           </Flex>
