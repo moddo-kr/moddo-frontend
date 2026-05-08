@@ -77,7 +77,10 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
           <S.FormCardTitleContainer>
             <Text variant="title">{index + 1}차</Text>
             {index > 0 ? (
-              <TextButton onClick={() => onDelete?.(index)}>
+              <TextButton
+                aria-label="지출 입력 폼 삭제"
+                onClick={() => onDelete?.(index)}
+              >
                 <Close width="1.5rem" />
               </TextButton>
             ) : null}

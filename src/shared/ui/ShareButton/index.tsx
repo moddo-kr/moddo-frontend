@@ -89,18 +89,33 @@ function ShareButton({ shareLink }: ShareButtonProps) {
               <Text variant="title" color="semantic.text.strong">
                 링크 공유하기
               </Text>
-              <TextButton onClick={() => setOpenShareModal(false)}>
+              <TextButton
+                aria-label="공유 모달 닫기"
+                onClick={() => setOpenShareModal(false)}
+              >
                 <Close width="1.5rem" />
               </TextButton>
             </S.ModalTitle>
             <S.ShareItemContainer>
-              <S.ShareButton type="button" onClick={handleShareKakaoButton}>
+              <S.ShareButton
+                type="button"
+                aria-label="카카오톡으로 공유"
+                onClick={handleShareKakaoButton}
+              >
                 <Kakaotalk width="3rem" />
               </S.ShareButton>
-              <S.ShareButton type="button" onClick={handleShareSlackButton}>
+              <S.ShareButton
+                type="button"
+                aria-label="Slack으로 공유"
+                onClick={handleShareSlackButton}
+              >
                 <Slack width="1.5rem" />
               </S.ShareButton>
-              <S.ShareButton type="button" onClick={handleLinkCopyButton}>
+              <S.ShareButton
+                type="button"
+                aria-label="링크 복사"
+                onClick={handleLinkCopyButton}
+              >
                 <Copy width="1.5rem" />
               </S.ShareButton>
             </S.ShareItemContainer>

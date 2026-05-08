@@ -41,7 +41,10 @@ function NumPadBottomSheet({
         <S.NumPadContainer>
           <S.Header>
             <Text variant="heading2">결제 금액 입력</Text>
-            <TextButton onClick={() => setOpen(false)}>
+            <TextButton
+              aria-label="금액 입력 닫기"
+              onClick={() => setOpen(false)}
+            >
               <Close width="1.5rem" />
             </TextButton>
           </S.Header>
