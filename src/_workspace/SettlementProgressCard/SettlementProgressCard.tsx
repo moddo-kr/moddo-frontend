@@ -14,7 +14,10 @@ function SettlementProgressCard({
   paidCount,
   totalCount,
 }: SettlementProgressCardProps) {
-  const progress = totalCount > 0 ? (paidCount / totalCount) * 100 : 0;
+  const progress =
+    totalCount > 0
+      ? Math.min(100, Math.max(0, (paidCount / totalCount) * 100))
+      : 0;
 
   return (
     <S.Container>
