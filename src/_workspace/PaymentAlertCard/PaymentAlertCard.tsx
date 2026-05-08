@@ -22,7 +22,7 @@ function PaymentAlertCard({
         <ProfileImage size="40" src={src} />
         <S.TextGroup>
           <S.Nickname>{nickname}</S.Nickname>
-          <S.Amount>{amount}원</S.Amount>
+          <S.Amount>{amount.toLocaleString('ko-KR')}원</S.Amount>
         </S.TextGroup>
       </S.LeftSection>
       <S.ButtonGroup>
