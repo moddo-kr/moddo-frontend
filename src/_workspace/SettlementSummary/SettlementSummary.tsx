@@ -46,9 +46,15 @@ function SettlementSummary({
     <S.Container>
       <S.TitleRow>
         <S.TitleText>{title}</S.TitleText>
-        <S.EditButton type="button" onClick={onEdit}>
-          <SvgCarbonEdit width={20} height={20} />
-        </S.EditButton>
+        {onEdit && (
+          <S.EditButton
+            type="button"
+            onClick={onEdit}
+            aria-label="정산 요약 편집"
+          >
+            <SvgCarbonEdit width={20} height={20} />
+          </S.EditButton>
+        )}
       </S.TitleRow>
       <S.TextGroup>
         <S.PlaceName>{placeName}</S.PlaceName>
