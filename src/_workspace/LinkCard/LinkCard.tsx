@@ -13,7 +13,7 @@ function LinkCard({ label, link, onCopy }: LinkCardProps) {
       <S.Label>{label}</S.Label>
       <S.LinkField>
         <S.LinkText>{link}</S.LinkText>
-        <S.CopyButton type="button" onClick={onCopy}>
+        <S.CopyButton type="button" onClick={onCopy} aria-label="링크 복사">
           <SvgCopy width={16} height={16} />
         </S.CopyButton>
       </S.LinkField>
