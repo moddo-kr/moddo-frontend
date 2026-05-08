@@ -38,6 +38,7 @@ export const ProgressBar = styled.div`
   position: relative;
   width: 100%;
   height: 0.5rem;
+  overflow: hidden;
 `;
 
 export const ProgressTrack = styled.div`
