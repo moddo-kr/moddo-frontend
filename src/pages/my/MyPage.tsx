@@ -18,7 +18,7 @@ function MyPage() {
         type="1depth"
         title="마이페이지"
         trailingIcon={<Bell width={24} height={24} />}
-        trailingIconAriaLabel="알림"
+        // trailingIconAriaLabel="알림"
         trailingSubIcon={<Menu width={24} />}
         trailingSubIconAriaLabel="홈으로 이동"
         onTrailingSubIconClick={() => navigate(ROUTE.home)}
