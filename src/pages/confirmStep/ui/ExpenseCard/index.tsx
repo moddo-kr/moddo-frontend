@@ -39,6 +39,7 @@ function ExpenseCard({
           <Text variant="title">{index + 1}차</Text>
           <S.IconButtonsWrapper>
             <TextButton
+              aria-label="지출 수정"
               onClick={() => {
                 onEdit({
                   expenseId: id,
@@ -54,7 +55,7 @@ function ExpenseCard({
               <CarbonEdit width={20} />
             </TextButton>
             {index !== 0 ? (
-              <TextButton onClick={handleDelete}>
+              <TextButton aria-label="지출 삭제" onClick={handleDelete}>
                 <Close width={20} />
               </TextButton>
             ) : null}
