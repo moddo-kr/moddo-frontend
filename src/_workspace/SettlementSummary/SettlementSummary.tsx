@@ -8,6 +8,7 @@ import SvgNext from '@/shared/assets/svgs/icon/Next';
 import * as S from './SettlementSummary.styles';
 
 interface SettlementSummaryMember {
+  id: number;
   name: string;
   isHighlighted?: boolean;
 }
@@ -59,7 +60,7 @@ function SettlementSummary({
           <S.MemberChipList>
             {members.map((member) => (
               <NameChip
-                key={member.name}
+                key={member.id}
                 label={member.name}
                 size="s"
                 variant={member.isHighlighted ? 'selected' : 'unselected'}

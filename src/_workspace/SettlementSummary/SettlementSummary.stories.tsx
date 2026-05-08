@@ -11,12 +11,12 @@ const meta: Meta<SettlementSummaryProps> = {
     placeName: '투썸플레이스',
     amount: 120000,
     members: [
-      { name: '김모또(총무)', isHighlighted: true },
-      { name: '박또또' },
-      { name: '이모또' },
-      { name: '최또또' },
-      { name: '정모또' },
-      { name: '한또또' },
+      { id: 1, name: '김모또(총무)', isHighlighted: true },
+      { id: 2, name: '박또또' },
+      { id: 3, name: '이모또' },
+      { id: 4, name: '최또또' },
+      { id: 5, name: '정모또' },
+      { id: 6, name: '한또또' },
     ],
     onEdit: () => console.log('edit clicked'),
   },
@@ -30,8 +30,8 @@ export const Default: Story = {};
 export const FewMembers: Story = {
   args: {
     members: [
-      { name: '김모또(총무)', isHighlighted: true },
-      { name: '박또또' },
+      { id: 1, name: '김모또(총무)', isHighlighted: true },
+      { id: 2, name: '박또또' },
     ],
   },
 };
@@ -46,12 +46,12 @@ export const Showcase: Story = {
         placeName="투썸플레이스"
         amount={120000}
         members={[
-          { name: '김모또(총무)', isHighlighted: true },
-          { name: '박또또' },
-          { name: '이모또' },
-          { name: '최또또' },
-          { name: '정모또' },
-          { name: '한또또' },
+          { id: 1, name: '김모또(총무)', isHighlighted: true },
+          { id: 2, name: '박또또' },
+          { id: 3, name: '이모또' },
+          { id: 4, name: '최또또' },
+          { id: 5, name: '정모또' },
+          { id: 6, name: '한또또' },
         ]}
         onEdit={() => {}}
       />
@@ -60,8 +60,8 @@ export const Showcase: Story = {
         placeName="스타벅스"
         amount={54000}
         members={[
-          { name: '김모또(총무)', isHighlighted: true },
-          { name: '박또또' },
+          { id: 1, name: '김모또(총무)', isHighlighted: true },
+          { id: 2, name: '박또또' },
         ]}
         onEdit={() => {}}
       />

@@ -2,6 +2,7 @@ import { NameChip } from '@/shared/design-system/ui';
 import * as S from './GroupCard.styles';
 
 interface GroupMember {
+  id: number;
   name: string;
   isHighlighted?: boolean;
 }
@@ -18,7 +19,7 @@ function GroupCard({ groupName, members }: GroupCardProps) {
       <S.ChipList>
         {members.map((member) => (
           <NameChip
-            key={member.name}
+            key={member.id}
             label={member.name}
             size="s"
             variant={member.isHighlighted ? 'selected' : 'unselected'}
