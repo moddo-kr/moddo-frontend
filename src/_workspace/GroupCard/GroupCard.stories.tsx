@@ -9,9 +9,9 @@ const meta: Meta<GroupCardProps> = {
   args: {
     groupName: '합정동 모각디',
     members: [
-      { name: '김모또', isHighlighted: true },
-      { name: '안맥북' },
-      { name: '박삼성' },
+      { id: 1, name: '김모또', isHighlighted: true },
+      { id: 2, name: '안맥북' },
+      { id: 3, name: '박삼성' },
     ],
   },
 };
@@ -29,25 +29,25 @@ export const Showcase: Story = {
       <GroupCard
         groupName="합정동 모각디"
         members={[
-          { name: '김모또', isHighlighted: true },
-          { name: '안맥북' },
-          { name: '박삼성' },
+          { id: 1, name: '김모또', isHighlighted: true },
+          { id: 2, name: '안맥북' },
+          { id: 3, name: '박삼성' },
         ]}
       />
       <GroupCard
         groupName="멤버도 많고 이름도 정말정말정말정말 긴 모임 이름"
         members={[
-          { name: '김모또', isHighlighted: true },
-          { name: '안맥북' },
-          { name: '박삼성' },
-          { name: '이노트북' },
-          { name: '최아이맥' },
-          { name: '정갤럭시' },
+          { id: 1, name: '김모또', isHighlighted: true },
+          { id: 2, name: '안맥북' },
+          { id: 3, name: '박삼성' },
+          { id: 4, name: '이노트북' },
+          { id: 5, name: '최아이맥' },
+          { id: 6, name: '정갤럭시' },
         ]}
       />
       <GroupCard
         groupName="나 혼자 모임"
-        members={[{ name: '김모또', isHighlighted: true }]}
+        members={[{ id: 1, name: '김모또', isHighlighted: true }]}
       />
     </div>
   ),
