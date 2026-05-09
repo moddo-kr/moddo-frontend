@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import * as S from '@/shared/ui/Header/index.styles';
 
 // 공통 trailing(우측) 영역
@@ -8,6 +8,8 @@ interface TrailingProps {
   trailingLabel?: string;
   trailingIcon?: ReactElement;
   trailingSubIcon?: ReactElement;
+  trailingIconAriaLabel?: string;
+  trailingSubIconAriaLabel?: string;
   onTrailingIconClick?: () => void;
   onTrailingSubIconClick?: () => void;
 }
@@ -20,6 +22,8 @@ interface DefaultHeaderProps extends TrailingProps {
   headingIcon?: ReactElement;
   headingLabel?: string;
   headingSubIcon?: ReactElement;
+  headingIconAriaLabel?: string;
+  headingSubIconAriaLabel?: string;
   onHeadingIconClick?: () => void;
   onHeadingSubIconClick?: () => void;
   bgColor?: string;
@@ -39,6 +43,8 @@ function TrailingSection({
   trailingLabel,
   trailingIcon,
   trailingSubIcon,
+  trailingIconAriaLabel,
+  trailingSubIconAriaLabel,
   onTrailingIconClick,
   onTrailingSubIconClick,
 }: TrailingProps) {
@@ -49,14 +55,20 @@ function TrailingSection({
     <S.TrailingArea>
       {trailingLabel && <span>{trailingLabel}</span>}
       {trailingIcon && (
-        <Button variant="text" onClick={onTrailingIconClick}>
+        <TextButton
+          aria-label={trailingIconAriaLabel ?? trailingLabel}
+          onClick={onTrailingIconClick}
+        >
           {trailingIcon}
-        </Button>
+        </TextButton>
       )}
       {trailingSubIcon && (
-        <Button variant="text" onClick={onTrailingSubIconClick}>
+        <TextButton
+          aria-label={trailingSubIconAriaLabel}
+          onClick={onTrailingSubIconClick}
+        >
           {trailingSubIcon}
-        </Button>
+        </TextButton>
       )}
     </S.TrailingArea>
   );
@@ -69,6 +81,8 @@ function DefaultHeader({
   headingIcon,
   headingLabel,
   headingSubIcon,
+  headingIconAriaLabel,
+  headingSubIconAriaLabel,
   onHeadingIconClick,
   onHeadingSubIconClick,
   ...trailingProps
@@ -78,14 +92,20 @@ function DefaultHeader({
       {showHeading ? (
         <S.HeadingArea>
           {headingIcon && (
-            <Button variant="text" onClick={onHeadingIconClick}>
+            <TextButton
+              aria-label={headingIconAriaLabel ?? headingLabel}
+              onClick={onHeadingIconClick}
+            >
               {headingIcon}
-            </Button>
+            </TextButton>
           )}
           {headingSubIcon && (
-            <Button variant="text" onClick={onHeadingSubIconClick}>
+            <TextButton
+              aria-label={headingSubIconAriaLabel}
+              onClick={onHeadingSubIconClick}
+            >
               {headingSubIcon}
-            </Button>
+            </TextButton>
           )}
           {headingLabel && <span>{headingLabel}</span>}
         </S.HeadingArea>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import notfoundHam from '@/shared/assets/pngs/notfound-ham.png';
 import Text from '@/shared/ui/Text';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { ROUTE } from '@/shared/config/route';
 import * as S from './NotFoundPage.style';
 

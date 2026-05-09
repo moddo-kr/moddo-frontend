@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { Button } from '@/shared/design-system/ui';
 import Modal, { ModalProps } from '.';
-import Button from '../Button'; // Button 컴포넌트
 
 const SAMPLE_TITLE = '타이틀입력 최대 한줄';
 const SAMPLE_SUBSCRIBE = '설명을 입력해주세요.';

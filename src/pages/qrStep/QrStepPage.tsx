@@ -6,8 +6,7 @@ import saveAs from 'file-saver';
 import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
 import { showToast } from '@/shared/ui/Toast';
 import Header from '@/shared/ui/Header';
-import Button from '@/shared/ui/Button';
-import DescriptionField from '@/shared/ui/DescriptionField';
+import { Button, DescriptionField } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import * as S from './QrStepPage.styles';
@@ -47,8 +46,10 @@ function QrStepPage({ onBack }: QrStepProps) {
         type="default"
         title="QR코드"
         headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
         trailingIcon={<Reset width="1.5rem" />}
+        trailingIconAriaLabel="QR코드 초기화"
         // TODO: QR코드 리셋 핸들러 연결 필요
         onTrailingIconClick={() => {}}
       />

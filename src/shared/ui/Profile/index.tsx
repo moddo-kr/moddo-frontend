@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 import { CheckCircle, SystemDanger } from '@/shared/assets/svgs/icon';
-import ProfileImage from '@/shared/ui/ProfileImage';
+import { ProfileImage } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
 import * as S from './index.style';

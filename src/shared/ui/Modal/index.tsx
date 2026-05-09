@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
+import { Button } from '@/shared/design-system/ui';
 import * as S from './index.style';
 import Text from '../Text';
 import ButtonGroup from '../ButtonGroup';
-import Button from '../Button';
 
 export interface ModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

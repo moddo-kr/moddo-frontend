@@ -3,9 +3,8 @@ import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
-import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
-import Button from '@/shared/ui/Button';
+import { Button, DescriptionField } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { showToast } from '@/shared/ui/Toast';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
@@ -66,6 +65,7 @@ function EditExpenseStepPage({
       <Header
         type="default"
         headingIcon={<Close width={24} />}
+        headingIconAriaLabel="지출 수정 취소"
         onHeadingIconClick={onBack}
       />
       <DescriptionField
