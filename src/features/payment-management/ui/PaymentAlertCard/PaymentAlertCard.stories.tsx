@@ -6,14 +6,15 @@ const meta: Meta<PaymentAlertCardProps> = {
   title: 'Feature UI/PaymentAlertCard',
   component: PaymentAlertCard,
   tags: ['autodocs'],
-  argTypes: {
-    nickname: { control: 'text' },
-    amount: { control: 'number' },
-    src: { control: 'text' },
-  },
   args: {
-    nickname: '김모또',
-    amount: 10000,
+    payment: {
+      paymentRequestId: 1,
+      memberId: 1,
+      name: '김모또',
+      profileUrl: '',
+      totalAmount: 10000,
+      requestedAt: '2025-01-01T00:00:00',
+    },
     onReject: () => console.log('rejected'),
     onConfirm: () => console.log('confirmed'),
   },
@@ -30,14 +31,26 @@ export const Showcase: Story = {
       style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 350 }}
     >
       <PaymentAlertCard
-        nickname="김모또"
-        amount={10000}
+        payment={{
+          paymentRequestId: 1,
+          memberId: 1,
+          name: '김모또',
+          profileUrl: '',
+          totalAmount: 10000,
+          requestedAt: '2025-01-01T00:00:00',
+        }}
         onReject={() => {}}
         onConfirm={() => {}}
       />
       <PaymentAlertCard
-        nickname="김수한무거북이와두루미삼천갑자동방삭"
-        amount={1000000}
+        payment={{
+          paymentRequestId: 2,
+          memberId: 2,
+          name: '김수한무거북이와두루미삼천갑자동방삭',
+          profileUrl: '',
+          totalAmount: 1000000,
+          requestedAt: '2025-01-01T00:00:00',
+        }}
         onReject={() => {}}
         onConfirm={() => {}}
       />
