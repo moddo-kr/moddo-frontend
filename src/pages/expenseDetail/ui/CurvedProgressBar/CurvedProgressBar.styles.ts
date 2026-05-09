@@ -5,6 +5,9 @@ import SvgCrown from '@/shared/assets/svgs/icon/Crown';
 export const Container = styled.div`
   position: relative;
   width: 272px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export const ArcWrapper = styled.div`
