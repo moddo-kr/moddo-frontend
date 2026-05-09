@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Copy, Crown, DollarCircle } from '@/shared/assets/svgs/icon';
+import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
 import { useLoaderData } from 'react-router';
@@ -9,7 +9,7 @@ import { DescriptionField, TextButton } from '@/shared/design-system/ui';
 import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
-import CurvedProgressBar from '../CurvedProgressBar';
+import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
 import { getFormatDate } from './lib/getFormatDate';
@@ -135,10 +135,6 @@ function ExpenseTimeHeader({
   /** 상수 정의 */
 
   const percentage = (paidMember / totalMember) * 100;
-  const crownColor =
-    paidMember === totalMember
-      ? theme.color.primitive.base.white
-      : theme.color.semantic.secondary.heavy;
   const endDate = new Date(headerData.deadline);
   const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
@@ -204,11 +200,6 @@ function ExpenseTimeHeader({
             color="semantic.text.inverse"
           >{`/${totalMember} 정산 완료`}</Text>
         </S.ExpenseChip>
-        <Crown
-          width={theme.unit[24]}
-          fill={crownColor}
-          style={{ position: 'absolute', top: '44.5%', right: '1.5%' }}
-        />
         <S.TotalMoney>
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>

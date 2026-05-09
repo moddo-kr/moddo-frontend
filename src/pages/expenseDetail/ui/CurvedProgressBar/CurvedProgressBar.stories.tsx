@@ -6,12 +6,12 @@ const meta: Meta<typeof CurvedProgressBar> = {
   component: CurvedProgressBar,
   tags: ['autodocs'],
   argTypes: {
-    progress: {
+    percentage: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
     },
   },
   args: {
-    progress: 0,
+    percentage: 0,
   },
 };
 
@@ -25,12 +25,12 @@ export const Showcase: Story = {
     <div
       style={{ display: 'flex', flexDirection: 'column', gap: 32, padding: 24 }}
     >
-      {([0, 50, 100] as const).map((progress) => (
-        <div key={progress}>
+      {([0, 50, 100] as const).map((percentage) => (
+        <div key={percentage}>
           <p style={{ marginBottom: 8, fontSize: 12, color: '#666' }}>
-            {progress}%
+            {percentage}%
           </p>
-          <CurvedProgressBar progress={progress} />
+          <CurvedProgressBar percentage={percentage} />
         </div>
       ))}
     </div>
@@ -39,7 +39,7 @@ export const Showcase: Story = {
 
 export const WithChildren: Story = {
   render: () => (
-    <CurvedProgressBar progress={50}>
+    <CurvedProgressBar percentage={50}>
       <div
         style={{
           display: 'flex',

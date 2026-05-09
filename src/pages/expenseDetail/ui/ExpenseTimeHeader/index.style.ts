@@ -36,8 +36,8 @@ export const ExpenseChip = styled.div`
 export const TotalMoney = styled.span`
   position: absolute;
   color: ${({ theme }) => theme.color.semantic.orange.default};
-  font-size: ${TextVariant('body2Sb')};
-  right: -6%;
+  ${TextVariant('body2Sb')};
+  right: -7%;
   top: 57.5%;
   display: flex;
   justify-content: center;
