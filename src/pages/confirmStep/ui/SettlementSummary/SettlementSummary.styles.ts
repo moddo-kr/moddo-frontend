@@ -25,6 +25,12 @@ export const TitleText = styled.span`
   color: ${getToken('fg.neutral')};
 `;
 
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${getToken('gap.3')};
+`;
+
 export const EditButton = styled.button`
   display: flex;
   align-items: center;
