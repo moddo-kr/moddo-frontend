@@ -17,10 +17,15 @@ interface SettlementSummaryProps extends Expense {
 }
 
 function SelectFieldTrigger({ memberCount }: { memberCount: number }) {
-  const { isOpen, toggle } = useAccordionContext();
+  const { isOpen, toggle, accordionId } = useAccordionContext();
 
   return (
-    <S.SelectField type="button" onClick={toggle}>
+    <S.SelectField
+      type="button"
+      onClick={toggle}
+      aria-expanded={isOpen}
+      aria-controls={accordionId}
+    >
       <S.CountText>
         총 <S.CountHighlight>{memberCount}</S.CountHighlight>명
       </S.CountText>
