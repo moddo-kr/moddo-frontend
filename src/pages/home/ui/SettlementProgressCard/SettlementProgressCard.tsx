@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router';
 import SvgDollarCircle from '@/shared/assets/svgs/icon/DollarCircle';
 import * as S from './SettlementProgressCard.styles';
 
@@ -17,15 +16,13 @@ function SettlementProgressCard({
   paidMember,
   totalMember,
 }: SettlementProgressCardProps) {
-  const navigate = useNavigate();
   const progress =
     totalMember > 0
       ? Math.min(100, Math.max(0, (paidMember / totalMember) * 100))
       : 0;
 
-  // TODO: 디자이너 확인 후 클릭 시 정산 상세 페이지 이동 UX 확정 필요
   return (
-    <S.Container onClick={() => navigate(`/expense-detail/${groupCode}`)}>
+    <S.Container to={`/expense-detail/${groupCode}`}>
       <S.TextGroup>
         <S.GroupName>{groupName}</S.GroupName>
         <S.Amount>{totalAmount.toLocaleString('ko-KR')}원</S.Amount>

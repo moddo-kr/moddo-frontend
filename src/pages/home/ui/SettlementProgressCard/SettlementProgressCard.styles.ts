@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Link } from 'react-router';
 import { getToken, applyTypography } from '@/shared/design-system';
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   display: flex;
   flex-direction: column;
   /* HACK: Figma gap 14px, 가장 가까운 gap.5(12px) 사용 */
@@ -11,7 +12,8 @@ export const Container = styled.div`
   border-radius: ${getToken('radius.xl')};
   /* HACK: Figma py 18px, 가장 가까운 padding.6(20px) 사용 */
   padding: ${getToken('padding.6')};
-  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 `;
 
 export const TextGroup = styled.div`
