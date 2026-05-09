@@ -4,7 +4,7 @@ import useGetPayments from '@/features/payment-management/api/useGetPayments';
 import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
 import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { groupPaymentRequestsByDate } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
-import PaymentAlert from '@/features/payment-management/ui/PaymentAlert';
+import { PaymentAlertCard } from '@/features/payment-management/ui/PaymentAlertCard';
 import Header from '@/shared/ui/Header';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
@@ -118,7 +118,7 @@ function PaymentManagementPage() {
                 </Text>
                 <Flex direction="column" gap={20}>
                   {items.map((payment) => (
-                    <PaymentAlert
+                    <PaymentAlertCard
                       key={payment.paymentRequestId}
                       payment={payment}
                       onReject={handleReject}
