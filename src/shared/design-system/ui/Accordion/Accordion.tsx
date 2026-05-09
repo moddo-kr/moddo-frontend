@@ -1,18 +1,15 @@
-// Accordion component
-
 import {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
   useId,
   useMemo,
   useRef,
   useState,
+  useEffect,
 } from 'react';
 import { Next } from '@/shared/assets/svgs/icon';
-import theme from '@/shared/styles/theme';
-import * as S from './index.styles';
+import * as S from './Accordion.styles';
 
 interface AccordionContextType {
   isOpen: boolean;
@@ -76,7 +73,8 @@ function AccordionHeader({
     >
       <S.HeadingText as="h3">{children}</S.HeadingText>
       <Next
-        width={theme.unit[iconSize]}
+        width={iconSize}
+        height={iconSize}
         style={{
           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
           transition: 'transform 0.2s ease-in-out',
@@ -99,6 +97,7 @@ function AccordionContent({
       setHeight(contentRef.current.scrollHeight);
     }
   }, [isOpen]);
+
   return (
     <S.AccordionContent
       $isOpen={isOpen}
@@ -115,5 +114,4 @@ function AccordionContent({
 Accordion.Header = AccordionHeader;
 Accordion.Content = AccordionContent;
 
-export { useAccordionContext };
-export default Accordion;
+export { Accordion, useAccordionContext };
