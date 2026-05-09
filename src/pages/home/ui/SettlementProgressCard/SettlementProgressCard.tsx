@@ -28,7 +28,7 @@ function SettlementProgressCard({
         <S.Amount>{totalAmount.toLocaleString('ko-KR')}원</S.Amount>
       </S.TextGroup>
       <S.ProgressSection>
-        <S.ProgressBar>
+        <S.ProgressBar role="progressbar">
           <S.ProgressTrack />
           <S.ProgressFill $progress={progress} />
         </S.ProgressBar>
