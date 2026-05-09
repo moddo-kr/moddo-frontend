@@ -11,6 +11,7 @@ export const Container = styled.div`
   border-radius: ${getToken('radius.xl')};
   /* HACK: Figma py 18px, 가장 가까운 padding.6(20px) 사용 */
   padding: ${getToken('padding.6')};
+  cursor: pointer;
 `;
 
 export const TextGroup = styled.div`
