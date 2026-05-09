@@ -5,13 +5,12 @@ import Text from '@/shared/ui/Text';
 import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import CoinImg from '@/shared/assets/pngs/CoinImg.png';
 import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale/ko';
 import useGetSettlementList from '@/features/home/api/useGetSettlementList';
+import { groupSettlementsByDate } from '@/features/home/lib/groupSettlementsByDate';
 import type {
   SettlementSort,
   SettlementStatus,
@@ -22,7 +21,7 @@ import { TextButton } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Chip from '@/shared/ui/Chip';
 import * as S from './index.style';
-import HomeExpenseItem from '../HomeExpenseItem';
+import { SettlementDateSection } from '../SettlementDateSection';
 
 type SettlementType = SettlementStatus;
 
@@ -115,6 +114,11 @@ function SettlementContent({
   settlementList,
   settlementType,
 }: SettlementContentProps) {
+  const dateGroups = useMemo(
+    () => groupSettlementsByDate(settlementList),
+    [settlementList]
+  );
+
   if (isLoading) {
     return (
       <Flex
@@ -169,18 +173,8 @@ function SettlementContent({
 
   return (
     <S.SettlementListWrapper>
-      {settlementList.map((item) => (
-        <HomeExpenseItem
-          key={item.groupId}
-          groupCode={item.groupCode}
-          date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
-            locale: ko,
-          })}
-          groupName={item.name}
-          totalAmount={item.totalAmount}
-          paidMember={item.completedMemberCount}
-          totalMember={item.totalMemberCount}
-        />
+      {dateGroups.map(({ date, items }) => (
+        <SettlementDateSection key={date} date={date} items={items} />
       ))}
     </S.SettlementListWrapper>
   );
