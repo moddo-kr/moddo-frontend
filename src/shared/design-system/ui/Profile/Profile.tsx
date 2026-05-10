@@ -35,7 +35,8 @@ function Profile({
         <ProfileImage src={src} size={imageSize} />
         {type === 'disabled' && <S.DimOverlay />}
       </S.ImageWrapper>
-      {type === 'delete' && (
+      {/* TODO: type='delete'일 때 onDelete를 필수로 받도록 ProfileProps 타입 좁히기 */}
+      {type === 'delete' && onDelete && (
         <S.DeleteButton
           type="button"
           $size={size}
