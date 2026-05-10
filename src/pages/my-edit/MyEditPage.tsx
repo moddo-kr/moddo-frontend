@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { ArrowLeft, Menu } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
-import Divider from '@/shared/ui/Divider';
+import { Divider } from '@/shared/design-system/ui';
 import { useTheme } from 'styled-components';
 import { LogoutButton, UnregisterButton } from '@/features/auth';
 // import { TermsLink } from './ui';
