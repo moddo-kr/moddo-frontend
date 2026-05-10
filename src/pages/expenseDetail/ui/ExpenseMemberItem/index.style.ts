@@ -15,12 +15,24 @@ export const Container = styled(Accordion)<{ isPaid: boolean }>`
   flex: 1;
 `;
 
-export const HeaderContainer = styled(Accordion.Header)``;
-
-export const HeaderContent = styled.div`
+export const HeaderContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.unit[4]};
+  width: 100%;
+`;
+
+export const HeaderToggleButton = styled.button`
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
 `;
 
 export const LeftWrapper = styled.div`
@@ -47,6 +59,17 @@ export const StatusChipButton = styled.button`
   height: fit-content;
   cursor: pointer;
   z-index: 100;
+  border: none;
+  background: transparent;
+  padding: 0;
+`;
+
+export const ChevronWrapper = styled.span<{ $isOpen: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
+  transition: transform 0.2s ease-in-out;
 `;
 
 export const ContentContainer = styled(Accordion.Content)`

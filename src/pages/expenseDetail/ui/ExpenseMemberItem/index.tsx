@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
 
-import { Button, ProfileImage } from '@/shared/design-system/ui';
-import { Close, Confirm, Receipt } from '@/shared/assets/svgs/icon';
+import {
+  Button,
+  ProfileImage,
+  useAccordionContext,
+} from '@/shared/design-system/ui';
+import { Close, Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
 
 import BottomSheet from '@/shared/ui/BottomSheet';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
@@ -16,6 +20,37 @@ interface ExpenseMemberItemProps {
   member: MemberSettlement;
   groupToken: string;
   status: string;
+}
+
+function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
+  const { isOpen, toggle, accordionId } = useAccordionContext();
+  const theme = useTheme();
+
+  return (
+    <S.HeaderToggleButton
+      type="button"
+      onClick={toggle}
+      aria-expanded={isOpen}
+      aria-controls={accordionId}
+    >
+      <S.LeftWrapper>
+        <ProfileImage src={member.profile} size="40" />
+        <S.SubProfileWrapper>
+          <Text variant="body1Sb">
+            <span style={{ color: theme.color.primitive.gray[500] }}>
+              {member.name}
+            </span>
+          </Text>
+          <Text variant="heading2" color="semantic.text.strong">
+            {member.totalAmount.toLocaleString()}원
+          </Text>
+        </S.SubProfileWrapper>
+      </S.LeftWrapper>
+      <S.ChevronWrapper $isOpen={isOpen}>
+        <Next width={32} height={32} />
+      </S.ChevronWrapper>
+    </S.HeaderToggleButton>
+  );
 }
 
 /** 개별 멤버 렌더링 컴포넌트 */
@@ -68,99 +103,82 @@ function ExpenseMemberItem({
 
   return (
     <S.Container isPaid={member.isPaid}>
-      <S.HeaderContainer iconSize={32}>
-        <S.HeaderContent>
-          <S.LeftWrapper>
-            <ProfileImage src={member.profile} size="40" />
-            <S.SubProfileWrapper>
-              <Text variant="body1Sb">
-                <span style={{ color: theme.color.primitive.gray[500] }}>
-                  {member.name}
-                </span>
-              </Text>
-              <Text variant="heading2" color="semantic.text.strong">
-                {member.totalAmount.toLocaleString()}원
-              </Text>
-            </S.SubProfileWrapper>
-          </S.LeftWrapper>
-          <S.RightWrapper>
-            <S.StatusChipButton
-              onClick={handleStatusChipClick}
-              aria-label={`${member.name}의 정산 상태 변경`}
-            >
-              <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
-            </S.StatusChipButton>
-            {/* 정산 상태 변경 바텀시트 */}
-            <BottomSheet
-              open={open && status !== 'success'}
-              setOpen={resetState}
-              isPadding
-              pb={16}
-            >
-              <S.SheetContentWrapper>
-                <S.TextWrapper>
-                  <Text variant="heading2" color="semantic.text.default">
-                    정산 상태
-                  </Text>
-                  <Close
-                    width={theme.unit[24]}
-                    height={theme.unit[24]}
-                    onClick={resetState}
-                  />
-                </S.TextWrapper>
-                <S.TextButtonWrapper
-                  onClick={() => handleTextButtonClick(false)}
+      <S.HeaderContainer>
+        <MemberHeaderToggle member={member} />
+        <S.RightWrapper>
+          <S.StatusChipButton
+            type="button"
+            onClick={handleStatusChipClick}
+            aria-label={`${member.name}의 정산 상태 변경`}
+          >
+            <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
+          </S.StatusChipButton>
+          {/* 정산 상태 변경 바텀시트 */}
+          <BottomSheet
+            open={open && status !== 'success'}
+            setOpen={resetState}
+            isPadding
+            pb={16}
+          >
+            <S.SheetContentWrapper>
+              <S.TextWrapper>
+                <Text variant="heading2" color="semantic.text.default">
+                  정산 상태
+                </Text>
+                <Close
+                  width={theme.unit[24]}
+                  height={theme.unit[24]}
+                  onClick={resetState}
+                />
+              </S.TextWrapper>
+              <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
+                <Text
+                  variant="title"
+                  color={
+                    isPaid
+                      ? 'semantic.text.disabled'
+                      : 'semantic.orange.default'
+                  }
                 >
-                  <Text
-                    variant="title"
-                    color={
-                      isPaid
-                        ? 'semantic.text.disabled'
-                        : 'semantic.orange.default'
-                    }
-                  >
-                    미입금
-                  </Text>
-                  <Confirm
-                    width={theme.unit[20]}
-                    height={theme.unit[20]}
-                    stroke={
-                      isPaid ? 'none' : `${theme.color.semantic.orange.default}`
-                    }
-                  />
-                </S.TextButtonWrapper>
-                <S.TextButtonWrapper
-                  onClick={() => handleTextButtonClick(true)}
+                  미입금
+                </Text>
+                <Confirm
+                  width={theme.unit[20]}
+                  height={theme.unit[20]}
+                  stroke={
+                    isPaid ? 'none' : `${theme.color.semantic.orange.default}`
+                  }
+                />
+              </S.TextButtonWrapper>
+              <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
+                <Text
+                  variant="title"
+                  color={
+                    isPaid // 입금완료
+                      ? 'semantic.orange.default'
+                      : 'semantic.text.disabled'
+                  }
                 >
-                  <Text
-                    variant="title"
-                    color={
-                      isPaid // 입금완료
-                        ? 'semantic.orange.default'
-                        : 'semantic.text.disabled'
-                    }
-                  >
-                    입금완료
-                  </Text>
-                  <Confirm
-                    width={theme.unit[20]}
-                    height={theme.unit[20]}
-                    stroke={
-                      isPaid ? `${theme.color.semantic.orange.default}` : 'none'
-                    }
-                  />
-                </S.TextButtonWrapper>
-                <Button
-                  variant={isConfirm ? 'primary' : 'secondary'}
-                  onClick={isConfirm ? handleChangeButtonSubmit : resetState}
-                  disabled={!isConfirm}
-                >
-                  {isConfirm ? '확인' : '닫기'}
-                </Button>
-              </S.SheetContentWrapper>
-            </BottomSheet>
-          </S.RightWrapper>
-        </S.HeaderContent>
+                  입금완료
+                </Text>
+                <Confirm
+                  width={theme.unit[20]}
+                  height={theme.unit[20]}
+                  stroke={
+                    isPaid ? `${theme.color.semantic.orange.default}` : 'none'
+                  }
+                />
+              </S.TextButtonWrapper>
+              <Button
+                variant={isConfirm ? 'primary' : 'secondary'}
+                onClick={isConfirm ? handleChangeButtonSubmit : resetState}
+                disabled={!isConfirm}
+              >
+                {isConfirm ? '확인' : '닫기'}
+              </Button>
+            </S.SheetContentWrapper>
+          </BottomSheet>
+        </S.RightWrapper>
       </S.HeaderContainer>
       <S.ContentContainer>
         {member.expenses.map((expense) => (
