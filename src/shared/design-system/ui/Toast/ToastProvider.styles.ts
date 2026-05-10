@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const StyledToastContainer = styled(ToastContainer)`
   &.Toastify__toast-container {
-    width: fit-content;
     padding: 0;
     bottom: 4.5rem; /* 72px */
   }
