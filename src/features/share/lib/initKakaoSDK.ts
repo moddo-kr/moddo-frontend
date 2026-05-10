@@ -10,6 +10,12 @@ let kakaoInitPromise: Promise<void> | null = null;
 const initKakaoSDK = (): Promise<void> => {
   // 1. 이미 초기화된 경우
   if (window.Kakao?.isInitialized()) return Promise.resolve();
+  const kakaoKey = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
+  if (!kakaoKey) {
+    return Promise.reject(
+      new Error('VITE_KAKAO_JAVASCRIPT_KEY 환경 변수가 설정되지 않았습니다.')
+    );
+  }
   // 2. 로딩 중이거나 이미 로드된 경우 — 같은 Promise 반환 (로딩 중 중복 로딩을 막기 위함)
   if (kakaoInitPromise) return kakaoInitPromise;
   // 3. 스크립트 로드 시작
@@ -21,7 +27,7 @@ const initKakaoSDK = (): Promise<void> => {
     kakaoSdk.crossOrigin = KAKAO_SDK.crossorigin;
     document.head.appendChild(kakaoSdk);
     kakaoSdk.onload = () => {
-      window.Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY);
+      window.Kakao.init(kakaoKey);
       resolve();
     };
     kakaoSdk.onerror = () => {
