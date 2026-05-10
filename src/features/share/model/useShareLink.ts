@@ -50,7 +50,7 @@ function useShareLink(shareLink: string) {
     doCopy()
       .then((isCopied) => {
         if (isCopied) {
-          window.open('slack://open', '_blank');
+          window.location.href = 'slack://open';
         }
       })
       .finally(() => setIsOpen(false));
