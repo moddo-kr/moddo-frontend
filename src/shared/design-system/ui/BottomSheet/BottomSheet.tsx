@@ -6,14 +6,28 @@ import { Dimmed } from '../Dimmed';
 import { IconButton } from '../IconButton';
 import * as S from './BottomSheet.styles';
 
-export interface BottomSheetProps {
+type BottomSheetA11yProps =
+  | {
+      title: ReactNode;
+      ariaLabel?: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      title?: undefined;
+      ariaLabel: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      title?: undefined;
+      ariaLabel?: string;
+      ariaLabelledBy: string;
+    };
+
+export type BottomSheetProps = {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
-  title?: ReactNode;
-  ariaLabel?: string;
-  ariaLabelledBy?: string;
-}
+} & BottomSheetA11yProps;
 
 function BottomSheet({
   open = false,

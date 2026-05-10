@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { getToken } from '@/shared/design-system';
 import { ActionArea, Button } from '@/shared/design-system/ui';
-import { BottomSheet, BottomSheetProps } from '.';
+import { BottomSheet } from '.';
 
 const meta: Meta<typeof BottomSheet> = {
   title: 'Design System/BottomSheet',
@@ -39,17 +39,17 @@ const PageBackground = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-function WithTitleExample(args: Partial<BottomSheetProps>) {
+function WithTitleExample(args: { title?: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const { title } = args;
 
   return (
     <PageBackground>
       <Button onClick={() => setOpen(true)}>바텀시트 열기</Button>
       <BottomSheet
-        {...args}
         open={open}
         onClose={() => setOpen(false)}
-        title="헤더가 있는 바텀시트"
+        title={title ?? '헤더가 있는 바텀시트'}
       >
         <div
           style={{
@@ -74,14 +74,13 @@ function WithTitleExample(args: Partial<BottomSheetProps>) {
   );
 }
 
-function WithoutTitleExample(args: Partial<BottomSheetProps>) {
+function WithoutTitleExample() {
   const [open, setOpen] = useState(false);
 
   return (
     <PageBackground>
       <Button onClick={() => setOpen(true)}>바텀시트 열기 (헤더 없음)</Button>
       <BottomSheet
-        {...args}
         open={open}
         onClose={() => setOpen(false)}
         ariaLabel="헤더 없는 바텀시트"
@@ -125,5 +124,5 @@ export const WithTitle: Story = {
 };
 
 export const WithoutTitle: Story = {
-  render: (args) => <WithoutTitleExample {...args} />,
+  render: () => <WithoutTitleExample />,
 };
