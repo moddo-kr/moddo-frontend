@@ -17,9 +17,8 @@ import type {
 } from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
-import { TextButton } from '@/shared/design-system/ui';
+import { TextButton, TabChipList, TabChip } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
-import Chip from '@/shared/ui/Chip';
 import * as S from './index.style';
 import { SettlementDateSection } from '../SettlementDateSection';
 
@@ -214,18 +213,15 @@ export function SettlementList() {
         height={48}
         alignItems="center"
       >
-        <Flex gap={8}>
-          <Chip
-            variant={settlementType === 'IN_PROGRESS' ? 'primary' : 'secondary'}
-            onClick={() => handleSettlementTypeButtonClick('IN_PROGRESS')}
-            label="진행 중인 정산"
-          />
-          <Chip
-            variant={settlementType === 'COMPLETED' ? 'primary' : 'secondary'}
-            onClick={() => handleSettlementTypeButtonClick('COMPLETED')}
-            label="완료된 정산"
-          />
-        </Flex>
+        <TabChipList
+          activeValue={settlementType}
+          onValueChange={(value) =>
+            handleSettlementTypeButtonClick(value as SettlementType)
+          }
+        >
+          <TabChip label="진행 중인 정산" value="IN_PROGRESS" />
+          <TabChip label="완료된 정산" value="COMPLETED" />
+        </TabChipList>
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
         <TextButton onClick={handleSortOptionClick}>
           <Text variant="body2R" color="semantic.text.subtle">

@@ -1,4 +1,4 @@
-import Chip from '@/shared/ui/Chip';
+import { NameChip } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import { ExpenseDetail } from '@/entities/expense/model/expense.type';
 import * as S from './index.styles';
@@ -24,7 +24,7 @@ function ExpenseTimelineContent({ expense }: ExpenseTimelineContentProps) {
         </S.MemberChipHeader>
         <S.MemberChipList>
           {expense.groupMembers.map((name) => (
-            <Chip key={name} label={name} variant="disabled" size="sm" />
+            <NameChip key={name} label={name} variant="black" size="s" />
           ))}
         </S.MemberChipList>
       </S.MemberChipContainer>
