@@ -7,6 +7,7 @@ const VARIANTS: NameChipVariant[] = [
   'unselected',
   'disabled',
   'red',
+  'black',
 ];
 const SIZES: NameChipSize[] = ['m', 's'];
 
