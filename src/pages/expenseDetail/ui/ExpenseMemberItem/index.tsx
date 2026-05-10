@@ -6,10 +6,9 @@ import {
   Button,
   ProfileImage,
   useAccordionContext,
+  BottomSheet,
 } from '@/shared/design-system/ui';
-import { Close, Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
-
-import BottomSheet from '@/shared/ui/BottomSheet';
+import { Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
 import { useLoaderData } from 'react-router';
@@ -116,21 +115,10 @@ function ExpenseMemberItem({
           {/* 정산 상태 변경 바텀시트 */}
           <BottomSheet
             open={open && status !== 'success'}
-            setOpen={resetState}
-            isPadding
-            pb={16}
+            onClose={resetState}
+            title="정산 상태 변경"
           >
             <S.SheetContentWrapper>
-              <S.TextWrapper>
-                <Text variant="heading2" color="semantic.text.default">
-                  정산 상태
-                </Text>
-                <Close
-                  width={theme.unit[24]}
-                  height={theme.unit[24]}
-                  onClick={resetState}
-                />
-              </S.TextWrapper>
               <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
                 <Text
                   variant="title"

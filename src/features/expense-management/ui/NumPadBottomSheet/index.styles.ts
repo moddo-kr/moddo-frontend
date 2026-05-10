@@ -29,28 +29,10 @@ export const DisplayValueUnit = styled.span`
 
 export const NumPadContainer = styled.div`
   display: flex;
-  padding-top: 2rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
   width: 100%;
-`;
-
-export const Header = styled.div`
-  display: flex;
-  padding: 0rem 1.25rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  width: 100%;
-`;
-
-export const Description = styled.span`
-  flex: 1 0 0;
-  color: #444950;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 150%; /* 1.875rem */
 `;
 
 // FIXME : 공통 디자인 적용하기 (BottomButtonContainer)

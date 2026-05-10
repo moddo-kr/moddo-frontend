@@ -1,10 +1,13 @@
 import { Button } from '@/shared/design-system/ui';
 import styled from 'styled-components';
 
-export const DrawerHeader = styled.h2`
-  font-size: 1.25rem; // 20px
-  font-weight: 700;
-  padding-bottom: 1.75rem;
+export const DrawerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 ${({ theme }) => theme.unit[20]};
+  height: 70dvh;
+  width: 100%;
+  position: relative;
 `;
 
 export const DrawerBody = styled.div`

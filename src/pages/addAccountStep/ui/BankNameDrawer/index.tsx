@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import BottomSheet from '@/shared/ui/BottomSheet';
-import Flex from '@/shared/ui/Flex';
+import { BottomSheet } from '@/shared/design-system/ui';
 import BANK_LIST from './config/banks';
 import * as S from './index.style';
 
@@ -20,16 +19,8 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
   };
 
   return (
-    <BottomSheet open={open} setOpen={onClose}>
-      <Flex
-        direction="column"
-        pt={32}
-        px={20}
-        height="70dvh"
-        borderRadius={12}
-        width="100%"
-      >
-        <S.DrawerHeader>은행 선택</S.DrawerHeader>
+    <BottomSheet open={open} onClose={onClose} title="은행 선택">
+      <S.DrawerContainer>
         <S.DrawerBody>
           <S.GridContainer>
             {BANK_LIST.map((bank) => (
@@ -50,7 +41,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
             확인
           </S.SubmitButton>
         </S.ButtonWrapper>
-      </Flex>
+      </S.DrawerContainer>
     </BottomSheet>
   );
 }

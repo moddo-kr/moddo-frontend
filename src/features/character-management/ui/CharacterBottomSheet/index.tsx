@@ -1,7 +1,6 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
 import Text from '@/shared/ui/Text';
-import BottomSheet from '@/shared/ui/BottomSheet';
-import { ActionArea } from '@/shared/design-system/ui';
+import { BottomSheet, ActionArea } from '@/shared/design-system/ui';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
@@ -25,7 +24,11 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
   }
 
   return (
-    <BottomSheet open={open} setOpen={setOpen}>
+    <BottomSheet
+      open={open}
+      onClose={() => setOpen(false)}
+      ariaLabel="캐릭터 획득 알림"
+    >
       <S.BottomSheetContainer>
         <S.CharacterImageContainer>
           <img

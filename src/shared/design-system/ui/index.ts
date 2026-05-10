@@ -1,5 +1,7 @@
 export { Accordion, useAccordionContext } from './Accordion';
 export { ActionArea } from './ActionArea';
+export { BottomSheet } from './BottomSheet';
+export type { BottomSheetProps } from './BottomSheet';
 export { Alert } from './Alert';
 export { BottomSafeArea } from './BottomSafeArea';
 export { Button } from './Button';

@@ -98,16 +98,12 @@ export const SheetContentWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: ${({ theme }) => theme.unit[24]};
-  height: 16.25rem;
-  justify-content: space-between;
+  padding: 0 ${({ theme }) => theme.unit[20]} ${({ theme }) => theme.unit[16]};
 `;
 
-export const TextWrapper = styled.button`
+export const TextButtonWrapper = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const TextButtonWrapper = styled(TextWrapper)`
   cursor: pointer;
 `;
