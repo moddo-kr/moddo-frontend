@@ -1,6 +1,6 @@
 import { Close, Copy } from '@/shared/assets/svgs/icon';
 import { Kakaotalk, Slack } from '@/shared/assets/svgs/logo';
-import { TextButton } from '@/shared/design-system/ui';
+import { IconButton } from '@/shared/design-system/ui';
 import Modal from '@/shared/ui/Modal';
 import Text from '@/shared/ui/Text';
 import * as S from './ShareModal.styles';
@@ -27,9 +27,9 @@ function ShareModal({
           <Text variant="title" color="semantic.text.strong">
             링크 공유하기
           </Text>
-          <TextButton aria-label="공유 모달 닫기" onClick={onClose}>
+          <IconButton aria-label="공유 모달 닫기" onClick={onClose}>
             <Close width="1.5rem" />
-          </TextButton>
+          </IconButton>
         </S.ModalTitle>
         <S.ShareItemContainer>
           <S.IconButton

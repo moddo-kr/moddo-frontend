@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Close } from '@/shared/assets/svgs/icon';
 import BottomSheet from '@/shared/ui/BottomSheet';
-import { Button, TextButton } from '@/shared/design-system/ui';
+import { Button, IconButton } from '@/shared/design-system/ui';
 import NumberInput from '@/features/expense-management/ui/NumberInput';
 import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
@@ -41,12 +41,12 @@ function NumPadBottomSheet({
         <S.NumPadContainer>
           <S.Header>
             <Text variant="heading2">결제 금액 입력</Text>
-            <TextButton
+            <IconButton
               aria-label="금액 입력 닫기"
               onClick={() => setOpen(false)}
             >
               <Close width="1.5rem" />
-            </TextButton>
+            </IconButton>
           </S.Header>
           <NumPad
             input={input}
