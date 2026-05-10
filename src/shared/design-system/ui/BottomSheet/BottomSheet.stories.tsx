@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { getToken } from '@/shared/design-system';
 import { ActionArea, Button } from '@/shared/design-system/ui';
@@ -21,7 +21,7 @@ export default meta;
 
 type Story = StoryObj<typeof BottomSheet>;
 
-const PageBackground = ({ children }: { children: React.ReactNode }) => (
+const PageBackground = ({ children }: { children: ReactNode }) => (
   <div
     style={{
       width: '375px',
