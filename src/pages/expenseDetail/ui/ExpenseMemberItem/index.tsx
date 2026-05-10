@@ -102,7 +102,7 @@ function ExpenseMemberItem({
   };
 
   return (
-    <S.Container isPaid={member.isPaid}>
+    <S.Container $isPaid={member.isPaid}>
       <S.HeaderContainer>
         <MemberHeaderToggle member={member} />
         <S.RightWrapper>

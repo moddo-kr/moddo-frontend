@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { Accordion } from '@/shared/design-system/ui';
 
-export const Container = styled(Accordion)<{ isPaid: boolean }>`
+export const Container = styled(Accordion)<{ $isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: ${({ theme, isPaid }) =>
-    isPaid
+  background: ${({ theme, $isPaid }) =>
+    $isPaid
       ? theme.color.semantic.orange.subtle
       : theme.color.semantic.background.normal.alternative};
   border-radius: ${({ theme }) => theme.radius.large};
