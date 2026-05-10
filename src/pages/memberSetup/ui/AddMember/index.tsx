@@ -5,7 +5,6 @@ import { Member } from '@/entities/member/model/member.type';
 import { Button, Input } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import Profile from '@/shared/ui/Profile';
-import InputGroup from '@/shared/ui/InputGroup';
 import Flex from '@/shared/ui/Flex';
 import { showToast } from '@/shared/ui/Toast';
 import useAddGroupMember from './api/useAddGroupMember';
@@ -79,7 +78,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
   return (
     <Flex direction="column" height="fit-content">
       <form onSubmit={handleSubmit(handleAddName)}>
-        <InputGroup>
+        <S.InputRow>
           <Input
             placeholder="이정산"
             {...register('name', {
@@ -94,7 +93,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           >
             추가하기
           </Button>
-        </InputGroup>
+        </S.InputRow>
       </form>
       <Flex direction="column" gap={8} mt={28}>
         <S.MemberCount>
