@@ -13,6 +13,8 @@ export { IconButton } from './IconButton';
 export type { IconButtonProps } from './IconButton';
 export { Input } from './Input';
 export { Keypad } from './Keypad';
+export { Modal } from './Modal';
+export type { ModalProps } from './Modal';
 export { NameChip } from './NameChip';
 export { PaidChip } from './PaidChip';
 export type { PaidChipStatus } from './PaidChip';
