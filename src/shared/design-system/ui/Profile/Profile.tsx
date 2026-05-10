@@ -33,23 +33,23 @@ function Profile({
     <S.Container aria-disabled={type === 'disabled' ? true : undefined}>
       <S.ImageWrapper $size={size}>
         <ProfileImage src={src} size={imageSize} />
-        {type === 'delete' && (
-          <S.DeleteButton
-            type="button"
-            $size={size}
-            onClick={onDelete}
-            aria-label={`${label} 삭제`}
-          >
-            <SvgSystemDanger width="100%" height="100%" aria-hidden="true" />
-          </S.DeleteButton>
-        )}
-        {type === 'checked' && (
-          <S.CheckedIcon $size={size}>
-            <SvgSystemSuccess width="100%" height="100%" aria-hidden="true" />
-          </S.CheckedIcon>
-        )}
         {type === 'disabled' && <S.DimOverlay />}
       </S.ImageWrapper>
+      {type === 'delete' && (
+        <S.DeleteButton
+          type="button"
+          $size={size}
+          onClick={onDelete}
+          aria-label={`${label} 삭제`}
+        >
+          <SvgSystemDanger width="100%" height="100%" aria-hidden="true" />
+        </S.DeleteButton>
+      )}
+      {type === 'checked' && (
+        <S.CheckedIcon $size={size}>
+          <SvgSystemSuccess width="100%" height="100%" aria-hidden="true" />
+        </S.CheckedIcon>
+      )}
       <S.Label $size={size}>{label}</S.Label>
     </S.Container>
   );

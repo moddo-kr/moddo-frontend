@@ -3,6 +3,12 @@ import { getToken, getTypographyToken } from '@/shared/design-system';
 import type { ProfileSize } from './Profile';
 
 const iconSizeMap: Record<ProfileSize, string> = {
+  s: '1.04169rem', // 16.6667px
+  m: '1.25rem', // 20px
+  L: '1.25rem', // 20px
+};
+
+const iconButtonSizeMap: Record<ProfileSize, string> = {
   s: '1.25rem', // 20px
   m: '1.5rem', // 24px
   L: '1.5rem', // 24px
@@ -50,10 +56,17 @@ export const ImageWrapper = styled.div<{ $size: ProfileSize }>`
 
 const iconPositionStyle = css<{ $size: ProfileSize }>`
   position: absolute;
-  top: -0.25rem;
+  top: 0;
   right: -0.25rem;
-  width: ${({ $size }) => iconSizeMap[$size]};
-  height: ${({ $size }) => iconSizeMap[$size]};
+  width: ${({ $size }) => iconButtonSizeMap[$size]};
+  height: ${({ $size }) => iconButtonSizeMap[$size]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > svg {
+    width: ${({ $size }) => iconSizeMap[$size]};
+    height: ${({ $size }) => iconSizeMap[$size]};
+  }
 `;
 
 export const DeleteButton = styled.button<{ $size: ProfileSize }>`
