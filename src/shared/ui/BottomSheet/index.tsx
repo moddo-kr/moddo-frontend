@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useSpring, animated } from '@react-spring/web';
-import { Backdrop } from '../Modal/index.style';
+import { Dimmed } from '@/shared/design-system/ui';
 import * as S from './index.style';
 
 export interface BottomSheetProps {
@@ -54,8 +54,8 @@ function BottomSheet({
     },
   });
 
-  // Backdrop 애니메이션 스타일
-  const backdropSpringProps = useSpring({
+  // Dimmed 애니메이션 스타일
+  const dimmedSpringProps = useSpring({
     opacity: open ? 1 : 0,
   });
 
@@ -64,7 +64,7 @@ function BottomSheet({
       <>
         <animated.div
           style={{
-            ...backdropSpringProps,
+            ...dimmedSpringProps,
             position: 'fixed',
             top: 0,
             left: 0,
@@ -73,7 +73,7 @@ function BottomSheet({
             zIndex: 9998,
           }}
         >
-          <Backdrop onClick={onClose} />
+          <Dimmed onClick={onClose} />
         </animated.div>
         <S.BottomSheetWrapper
           style={springProps} // 애니메이션 스타일 적용
