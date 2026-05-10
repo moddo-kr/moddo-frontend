@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { showToast } from '@/shared/ui/Toast';
+import { showToast } from '@/shared/design-system/ui';
 import copyClipboard from '@/shared/lib/copyClipboard';
 import initKakaoSDK from '../lib/initKakaoSDK';
 import { shareDataFormat, shareMessageFormat } from '../lib/shareFormat';

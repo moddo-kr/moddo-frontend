@@ -1,8 +1,12 @@
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { showToast } from '@/shared/ui/Toast';
-import { Button, Header, TextButton } from '@/shared/design-system/ui';
+import {
+  Button,
+  Header,
+  TextButton,
+  showToast,
+} from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';

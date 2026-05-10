@@ -30,4 +30,4 @@ export { TabList, Tab } from './Tab';
 export { TabChipList, TabChip } from './TabChip';
 export { Tag } from './Tag';
 export { TextButton } from './TextButton';
-export { Toast } from './Toast';
+export { Toast, ToastProvider, showToast } from './Toast';

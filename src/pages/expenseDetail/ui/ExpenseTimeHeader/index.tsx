@@ -9,8 +9,8 @@ import {
   Dialog,
   IconButton,
   Modal,
+  showToast,
 } from '@/shared/design-system/ui';
-import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { CurvedProgressBar } from '../CurvedProgressBar';

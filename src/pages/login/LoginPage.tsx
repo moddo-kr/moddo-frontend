@@ -2,7 +2,7 @@ import Text from '@/shared/ui/Text';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import theme from '@/shared/styles/theme';
-import { Button } from '@/shared/design-system/ui';
+import { Button, showToast } from '@/shared/design-system/ui';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import Flex from '@/shared/ui/Flex';
 import { getGuestToken } from '@/entities/auth/api/auth';
@@ -10,7 +10,6 @@ import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
 import { LogoIcon } from '@/shared/assets/svgs';
 import { queryClient } from '@/shared/api/queryClient';
-import { showToast } from '@/shared/ui/Toast';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 

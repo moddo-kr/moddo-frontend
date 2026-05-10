@@ -5,11 +5,10 @@ import theme from '@/shared/styles/theme';
 import AppRouter from '@/app/Router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalErrorBoundary from '@/app/GlobalErrorBoundary';
-import Toast from '@/shared/ui/Toast';
+import { ToastProvider } from '@/shared/design-system/ui';
 import { queryClient } from '@/shared/api/queryClient';
 import '@/shared/design-system/tokens/build/token.css';
 import Layout from './Layout';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
             <GlobalStyles />
             <AppRouter />
             <ReactQueryDevtools />
-            <Toast />
+            <ToastProvider />
           </Layout>
         </QueryClientProvider>
       </GlobalErrorBoundary>

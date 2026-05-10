@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { assignMember } from '@/entities/member/api/assignMember';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import useMutationWithHandlers from '@/shared/hooks/useMutationWithHanders';
-import { showToast } from '@/shared/ui/Toast';
+import { showToast } from '@/shared/design-system/ui';
 
 const useAssignMember = (groupToken: string) => {
   const queryClient = useQueryClient();
