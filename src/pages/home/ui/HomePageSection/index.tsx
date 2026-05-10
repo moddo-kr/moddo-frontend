@@ -17,8 +17,12 @@ import type {
 } from '@/entities/group/model/group.type';
 
 import Flex from '@/shared/ui/Flex';
-import { TextButton, TabChipList, TabChip } from '@/shared/design-system/ui';
-import Header from '@/shared/ui/Header';
+import {
+  Header,
+  TextButton,
+  TabChipList,
+  TabChip,
+} from '@/shared/design-system/ui';
 import * as S from './index.style';
 import { SettlementDateSection } from '../SettlementDateSection';
 

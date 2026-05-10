@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextVariant } from '@/shared/ui/Text/index.styles';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 // 공통 베이스
 export const HeaderArea = styled.header<{ $bgColor?: string }>`
@@ -9,11 +9,10 @@ export const HeaderArea = styled.header<{ $bgColor?: string }>`
   top: 0;
   left: 0;
   z-index: 998;
-  padding: 1rem 1.25rem; // px로 변환하면 16px 20px
+  padding: 1rem 1.25rem;
   width: 100%;
   min-width: 320px;
-  max-height: 64px;
-  height: 100%;
+  height: 56px;
   background-color: ${({ $bgColor }) => $bgColor || 'white'};
 `;
 
@@ -24,11 +23,12 @@ export const DefaultHeaderArea = styled(HeaderArea)`
 
 export const DefaultTitleArea = styled.h2`
   all: unset;
-  ${TextVariant('body1Sb')};
+  ${applyTypography('typography.body.medium-semibold')};
   white-space: nowrap;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  color: ${getToken('fg.normal')};
 `;
 
 // 1depth: title(좌) + trailing(우)
@@ -38,18 +38,22 @@ export const Depth1HeaderArea = styled(HeaderArea)`
 
 export const Depth1TitleArea = styled.h2`
   all: unset;
-  ${TextVariant('heading1')};
+  ${applyTypography('typography.heading.medium')};
   white-space: nowrap;
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.color.primitive.gray[600]};
+  color: ${getToken('fg.normal')};
 `;
 
 // heading 영역 (default 전용, 좌측)
 export const HeadingArea = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ${getToken('gap.2')};
+`;
+
+export const HeadingLabel = styled.span`
+  color: ${getToken('fg.neutral')};
 `;
 
 // trailing 영역 (공통, 우측)
@@ -57,4 +61,8 @@ export const TrailingArea = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+`;
+
+export const TrailingLabel = styled.span`
+  color: ${getToken('fg.neutral')};
 `;

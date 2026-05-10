@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { Bell, Menu } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/ui/Header';
+import { Header } from '@/shared/design-system/ui';
 import { ROUTE } from '@/shared/config/route';
 import { CharacterSection } from '@/features/character-management/ui';
 import { MyProfile } from '@/features/user-profile/ui';

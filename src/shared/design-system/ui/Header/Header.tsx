@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { TextButton } from '@/shared/design-system/ui';
-import * as S from '@/shared/ui/Header/index.styles';
+import { IconButton } from '../IconButton';
+import * as S from './Header.styles';
 
 // 공통 trailing(우측) 영역
 interface TrailingProps {
@@ -36,7 +36,7 @@ interface Depth1HeaderProps extends TrailingProps {
   bgColor?: string;
 }
 
-export type HeaderProps = DefaultHeaderProps | Depth1HeaderProps;
+type HeaderProps = DefaultHeaderProps | Depth1HeaderProps;
 
 function TrailingSection({
   showTrailing = true,
@@ -53,22 +53,22 @@ function TrailingSection({
 
   return (
     <S.TrailingArea>
-      {trailingLabel && <span>{trailingLabel}</span>}
+      {trailingLabel && <S.TrailingLabel>{trailingLabel}</S.TrailingLabel>}
       {trailingIcon && (
-        <TextButton
+        <IconButton
           aria-label={trailingIconAriaLabel ?? trailingLabel}
           onClick={onTrailingIconClick}
         >
           {trailingIcon}
-        </TextButton>
+        </IconButton>
       )}
       {trailingSubIcon && (
-        <TextButton
+        <IconButton
           aria-label={trailingSubIconAriaLabel}
           onClick={onTrailingSubIconClick}
         >
           {trailingSubIcon}
-        </TextButton>
+        </IconButton>
       )}
     </S.TrailingArea>
   );
@@ -92,22 +92,22 @@ function DefaultHeader({
       {showHeading ? (
         <S.HeadingArea>
           {headingIcon && (
-            <TextButton
+            <IconButton
               aria-label={headingIconAriaLabel ?? headingLabel}
               onClick={onHeadingIconClick}
             >
               {headingIcon}
-            </TextButton>
+            </IconButton>
           )}
           {headingSubIcon && (
-            <TextButton
+            <IconButton
               aria-label={headingSubIconAriaLabel}
               onClick={onHeadingSubIconClick}
             >
               {headingSubIcon}
-            </TextButton>
+            </IconButton>
           )}
-          {headingLabel && <span>{headingLabel}</span>}
+          {headingLabel && <S.HeadingLabel>{headingLabel}</S.HeadingLabel>}
         </S.HeadingArea>
       ) : (
         <S.HeadingArea aria-hidden />
@@ -136,4 +136,5 @@ function Header({ type, ...rest }: HeaderProps) {
   }
 }
 
-export default Header;
+export { Header };
+export type { HeaderProps };

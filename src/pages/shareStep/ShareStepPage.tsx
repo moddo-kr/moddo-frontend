@@ -3,8 +3,11 @@ import Link from '@/shared/assets/pngs/Link.png';
 import LoginHamImg from '@/shared/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
-import Header from '@/shared/ui/Header';
-import { ActionArea, DescriptionField } from '@/shared/design-system/ui';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { useShareLink, ShareModal } from '@/features/share';

@@ -1,9 +1,13 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
-import Header from '@/shared/ui/Header';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField, Input } from '@/shared/design-system/ui';
+import {
+  Button,
+  DescriptionField,
+  Header,
+  Input,
+} from '@/shared/design-system/ui';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
