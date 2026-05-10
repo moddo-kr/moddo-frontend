@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import { Dimmed } from '../Dimmed';
 import * as S from './Modal.styles';
 
-interface ModalProps {
+type ModalA11yProps =
+  | { ariaLabel: string; ariaLabelledBy?: never }
+  | { ariaLabel?: never; ariaLabelledBy: string }
+  | { ariaLabel?: never; ariaLabelledBy?: never };
+
+type ModalProps = {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
-  ariaLabel?: string;
-  ariaLabelledBy?: string;
-}
+} & ModalA11yProps;
 
 function Modal({
   open,
