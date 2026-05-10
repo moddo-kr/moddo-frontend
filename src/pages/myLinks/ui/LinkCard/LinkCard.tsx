@@ -9,9 +9,15 @@ interface LinkCardProps {
 }
 
 async function handleCopy(url: string) {
-  const isCopied = await copyClipboard(url);
-  if (isCopied) {
-    showToast({ type: 'success', content: '링크 복사 완료!' });
+  try {
+    const isCopied = await copyClipboard(url);
+    if (isCopied) {
+      showToast({ type: 'success', content: '링크 복사 완료!' });
+    } else {
+      showToast({ type: 'error', content: '링크 복사에 실패했습니다.' });
+    }
+  } catch {
+    showToast({ type: 'error', content: '링크 복사에 실패했습니다.' });
   }
 }
 
