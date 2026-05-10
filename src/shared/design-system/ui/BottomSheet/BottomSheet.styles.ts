@@ -13,7 +13,7 @@ export const BottomSheetWrapper = styled(animated.div)`
   width: 100%;
   max-width: 37.5rem;
   height: fit-content;
-  z-index: 9999;
+  z-index: 9998;
 `;
 
 export const Header = styled.div`
