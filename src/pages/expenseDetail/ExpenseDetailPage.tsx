@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import ButtonGroup from '@/shared/ui/ButtonGroup';
-import { Button, Divider } from '@/shared/design-system/ui';
+import { ActionArea, Divider } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
@@ -162,15 +161,16 @@ function ExpenseDetailPage() {
               }
             </Text>
           </Flex>
-          <ButtonGroup direction="horizontal">
-            <Button
-              variant="secondary"
-              onClick={() => setIsPaymentModalOpen(false)}
-            >
-              취소
-            </Button>
-            <Button onClick={handlePaymentRequest}>알림 보내기</Button>
-          </ButtonGroup>
+          <ActionArea
+            layout="horizontal"
+            showBottomSafeArea={false}
+            hasHorizontalPadding={false}
+            mainAction={{ label: '알림 보내기', onClick: handlePaymentRequest }}
+            alternativeAction={{
+              label: '취소',
+              onClick: () => setIsPaymentModalOpen(false),
+            }}
+          />
         </Flex>
       </Modal>
     </>

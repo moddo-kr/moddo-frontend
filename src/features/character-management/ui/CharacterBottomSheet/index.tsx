@@ -1,8 +1,7 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
 import Text from '@/shared/ui/Text';
 import BottomSheet from '@/shared/ui/BottomSheet';
-import ButtonGroup from '@/shared/ui/ButtonGroup';
-import { Button } from '@/shared/design-system/ui';
+import { ActionArea } from '@/shared/design-system/ui';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
@@ -47,18 +46,17 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
             참여해준 모든 분께 캐릭터를 선물로 드려요!
           </Text>
         </S.DescriptionContainer>
-        <ButtonGroup>
-          <Button variant="secondary" onClick={() => setOpen(false)}>
-            닫기
-          </Button>
-          <Button
-            onClick={() =>
-              navigate(generatePath(ROUTE.characterShare, { groupToken }))
-            }
-          >
-            캐릭터 보기
-          </Button>
-        </ButtonGroup>
+        <ActionArea
+          layout="horizontal"
+          showBottomSafeArea={false}
+          hasHorizontalPadding={false}
+          mainAction={{
+            label: '캐릭터 보기',
+            onClick: () =>
+              navigate(generatePath(ROUTE.characterShare, { groupToken })),
+          }}
+          alternativeAction={{ label: '닫기', onClick: () => setOpen(false) }}
+        />
       </S.BottomSheetContainer>
     </BottomSheet>
   );

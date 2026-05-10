@@ -1,9 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@/shared/design-system/ui';
+import { ActionArea } from '@/shared/design-system/ui';
 import * as S from './index.style';
 import Text from '../Text';
-import ButtonGroup from '../ButtonGroup';
 
 export interface ModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -56,12 +55,19 @@ function Modal({
                 </Text>
               </S.TextWrapper>
               <S.ButtonWrapper>
-                <ButtonGroup direction="horizontal">
-                  <Button onClick={onCancel} variant="secondary">
-                    {cancel}
-                  </Button>
-                  <Button onClick={onSubmit}>{submit}</Button>
-                </ButtonGroup>
+                <ActionArea
+                  layout="horizontal"
+                  showBottomSafeArea={false}
+                  hasHorizontalPadding={false}
+                  mainAction={{
+                    label: submit ?? '',
+                    onClick: onSubmit ?? (() => {}),
+                  }}
+                  alternativeAction={{
+                    label: cancel ?? '',
+                    onClick: onCancel ?? (() => {}),
+                  }}
+                />
               </S.ButtonWrapper>
             </S.DefaultWrapper>
           )}
