@@ -2,9 +2,8 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
-import { Button, Input } from '@/shared/design-system/ui';
+import { Button, Input, Profile } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
-import Profile from '@/shared/ui/Profile';
 import Flex from '@/shared/ui/Flex';
 import { showToast } from '@/shared/ui/Toast';
 import useAddGroupMember from './api/useAddGroupMember';
@@ -107,11 +106,15 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           {members.map((member) => (
             <Profile
               key={member.id}
-              id={member.id}
-              name={member.name}
-              imageSrc={member.profile}
+              size="m"
               type={member.role === 'MANAGER' ? 'default' : 'delete'}
-              onDelete={handleDeleteMember}
+              label={member.name}
+              src={member.profile}
+              onDelete={
+                member.role === 'MANAGER'
+                  ? undefined
+                  : () => handleDeleteMember(member.id)
+              }
             />
           ))}
         </Flex>

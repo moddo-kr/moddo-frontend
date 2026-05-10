@@ -1,12 +1,16 @@
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
+import {
+  Button,
+  DescriptionField,
+  Header,
+  Profile,
+} from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { useTheme } from 'styled-components';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { useState } from 'react';
 import useAssignMember from '@/features/join/api/useAssignMember';
-import Profile from '@/shared/ui/Profile';
 import * as S from './JoinPage.styles';
 
 function JoinPage() {
@@ -26,7 +30,6 @@ function JoinPage() {
     if (selectedId === null || !groupToken) return;
     assignMember(selectedId, {
       onSuccess: () => {
-        console.log('프로필 선택 성공');
         navigate(`/expense-detail/${groupToken}`);
       },
     });
@@ -53,19 +56,24 @@ function JoinPage() {
         <S.ScrollArea>
           <S.ProfileGrid>
             {profiles.map((profile) => (
-              <Profile
+              <S.ProfileButton
                 key={profile.id}
-                id={profile.id}
-                name={profile.name}
-                imageSrc={profile.profile}
-                size="L"
-                type={getProfileType(profile)}
-                onClick={
+                type="button"
+                disabled={profile.userId !== null}
+                onClick={() => handleSelect(profile.id)}
+                aria-pressed={
                   profile.userId === null
-                    ? () => handleSelect(profile.id)
+                    ? profile.id === selectedId
                     : undefined
                 }
-              />
+              >
+                <Profile
+                  size="L"
+                  type={getProfileType(profile)}
+                  label={profile.name}
+                  src={profile.profile}
+                />
+              </S.ProfileButton>
             ))}
           </S.ProfileGrid>
         </S.ScrollArea>
