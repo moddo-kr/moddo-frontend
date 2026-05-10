@@ -5,8 +5,15 @@ export const ShareModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  /* HACK: py 24px에 해당하는 padding 토큰 없음. gap.8(24px)을 임시 사용. */
+  gap: ${getToken('gap.8')};
+  background: ${getToken('bg.normal')};
+  border-radius: ${getToken('radius.lg')};
+  padding: ${getToken('gap.8')} ${getToken('padding.6')};
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
+  max-width: 330px;
 `;
 
 export const ModalTitle = styled.div`
@@ -19,7 +26,6 @@ export const ShareItemContainer = styled.div`
   display: flex;
   align-items: center;
   gap: ${getToken('gap.6')};
-  padding-bottom: ${getToken('padding.5')};
 `;
 
 export const IconButton = styled.button`

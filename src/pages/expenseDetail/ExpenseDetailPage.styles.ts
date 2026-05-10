@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
+
+export const NameHighlight = styled.span`
+  color: ${getToken('fg.primary.normal')};
+`;
 
 export const Content = styled.div`
   display: flex;
