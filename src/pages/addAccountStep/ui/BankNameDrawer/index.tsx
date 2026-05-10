@@ -36,7 +36,7 @@ function BankNameDrawer({ open, onClose, setBankName }: BankNameDrawerProps) {
               <S.BankButton
                 key={bank.bankName}
                 onClick={() => setName(bank.bankName)}
-                isSelected={name === bank.bankName}
+                $isSelected={name === bank.bankName}
               >
                 <S.BankImg src={bank.url} />
                 <S.BankName>{bank.bankName}</S.BankName>
