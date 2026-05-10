@@ -4,7 +4,7 @@ import { ProfileImage } from '../ProfileImage';
 import * as S from './Profile.styles';
 
 type ProfileSize = 's' | 'm' | 'L';
-type ProfileType = 'delete' | 'checked' | 'disabled';
+type ProfileType = 'default' | 'delete' | 'checked' | 'disabled';
 
 interface ProfileProps {
   size: ProfileSize;
@@ -22,7 +22,7 @@ const profileImageSizeMap: Record<ProfileSize, '36' | '48' | '68'> = {
 
 function Profile({
   size,
-  type = 'delete',
+  type = 'default',
   label,
   src,
   onDelete,

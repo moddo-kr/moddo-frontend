@@ -3,7 +3,7 @@ import { Profile } from './Profile';
 import type { ProfileSize, ProfileType } from './Profile';
 
 const SIZES: ProfileSize[] = ['s', 'm', 'L'];
-const TYPES: ProfileType[] = ['delete', 'checked', 'disabled'];
+const TYPES: ProfileType[] = ['default', 'delete', 'checked', 'disabled'];
 
 const meta: Meta<typeof Profile> = {
   title: 'Design System/Profile',
@@ -17,7 +17,7 @@ const meta: Meta<typeof Profile> = {
   },
   args: {
     size: 'm',
-    type: 'delete',
+    type: 'default',
     label: '김모또',
   },
 };
