@@ -1,5 +1,5 @@
-import { TextVariant } from '@/shared/ui/Text/index.styles';
 import styled from 'styled-components';
+import { applyTypography } from '@/shared/design-system';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ export const ExpenseChip = styled.div`
 export const TotalMoney = styled.span`
   position: absolute;
   color: ${({ theme }) => theme.color.semantic.orange.default};
-  ${TextVariant('body2Sb')};
+  ${applyTypography('typography.body.small-semibold')};
   right: -7%;
   top: 57.5%;
   display: flex;
@@ -77,7 +77,7 @@ export const Bubble = styled.div`
   background: ${({ theme }) => theme.color.semantic.icon.subtle};
   border-radius: ${({ theme }) => theme.radius.default};
   color: ${({ theme }) => theme.color.semantic.text.inverse};
-  font-size: ${TextVariant('body1Sb')};
+  ${applyTypography('typography.body.medium-semibold')};
   padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[12]}`};
   display: flex;
   justify-content: center;

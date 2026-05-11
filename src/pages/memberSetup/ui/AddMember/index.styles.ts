@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { TextVariant } from '@/shared/ui/Text/index.styles';
-import { getToken } from '@/shared/design-system';
+import { getToken, applyTypography } from '@/shared/design-system';
 
 export const InputRow = styled.div`
   display: flex;
@@ -13,5 +12,5 @@ export const MemberCount = styled.div`
   display: flex;
   align-items: center;
   white-space: pre-wrap;
-  ${TextVariant('body1Sb')}
+  ${applyTypography('typography.body.medium-semibold')}
 `;

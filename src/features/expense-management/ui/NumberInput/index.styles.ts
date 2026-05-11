@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextVariant } from '@/shared/ui/Text/index.styles';
+import { applyTypography } from '@/shared/design-system';
 
 export const Container = styled.div`
   display: flex;
@@ -18,7 +18,9 @@ export const NumberInput = styled.input<{ $variant?: 'lg' | 'sm' }>`
   min-width: 0; // 자식 요소가 부모 요소의 크기를 넘어가지 않도록 함
   flex-shrink: 1;
   ${({ $variant }) =>
-    $variant === 'lg' ? TextVariant('title') : TextVariant('body1Sb')};
+    $variant === 'lg'
+      ? applyTypography('typography.title.small')
+      : applyTypography('typography.body.medium-semibold')};
   color: ${({ $variant, theme }) =>
     $variant === 'lg'
       ? theme.color.semantic.text.strong
