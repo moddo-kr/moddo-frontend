@@ -24,7 +24,9 @@ function MyLinksPage() {
           onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.primary.subtle}
         />
-        <S.LinksLoadingState>로딩중...</S.LinksLoadingState>
+        <S.LinksLoadingState role="status" aria-live="polite" aria-busy="true">
+          로딩중...
+        </S.LinksLoadingState>
       </>
     );
   }
