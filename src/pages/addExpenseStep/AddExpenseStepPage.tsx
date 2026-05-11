@@ -2,8 +2,11 @@ import { useLoaderData } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
-import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './AddExpenseStepPage.styles';
@@ -47,16 +50,15 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
           <FormCard key={field.id} ref={null} index={index} />
         ))}
       </S.ExpenseFormList>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          onClick={handleSubmit((data) =>
+      <ActionArea
+        mainAction={{
+          label: '지출 추가',
+          onClick: handleSubmit((data) =>
             mutation.mutate({ groupToken, data })
-          )}
-          disabled={!allFormsValid}
-        >
-          지출 추가
-        </Button>
-      </BottomButtonContainer>
+          ),
+          disabled: !allFormsValid,
+        }}
+      />
     </FormProvider>
   );
 }

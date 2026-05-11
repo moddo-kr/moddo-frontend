@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { BottomSheet, Button } from '@/shared/design-system/ui';
+import { ActionArea, BottomSheet } from '@/shared/design-system/ui';
 import NumberInput from '@/features/expense-management/ui/NumberInput';
 import * as S from './index.styles';
 import NumPad from '../NumPad';
@@ -45,17 +45,16 @@ function NumPadBottomSheet({
             setInput={setInput}
             onClose={() => setOpen(false)}
           />
-          <S.ButtonWrapper>
-            <Button
-              disabled={input === 0}
-              onClick={() => {
+          <ActionArea
+            mainAction={{
+              label: '완료',
+              onClick: () => {
                 setValue(input);
                 setOpen(false);
-              }}
-            >
-              완료
-            </Button>
-          </S.ButtonWrapper>
+              },
+              disabled: input === 0,
+            }}
+          />
         </S.NumPadContainer>
       </BottomSheet>
     </>

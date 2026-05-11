@@ -1,8 +1,11 @@
 import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
@@ -52,9 +55,7 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         expenses={data.expenses}
         onEdit={onEdit}
       />
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button onClick={onNext}>확인했어요</Button>
-      </BottomButtonContainer>
+      <ActionArea mainAction={{ label: '확인했어요', onClick: onNext }} />
     </>
   );
 }

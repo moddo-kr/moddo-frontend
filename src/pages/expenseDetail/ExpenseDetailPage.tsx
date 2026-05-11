@@ -11,7 +11,6 @@ import {
   TabList,
   showToast,
 } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
@@ -116,18 +115,16 @@ function ExpenseDetailPage() {
           <ExpenseMembers groupToken={groupToken} status={status} />
         )}
       </S.Content>
-      <BottomButtonContainer>
-        <BottomAction
-          status={status}
-          myProfile={myProfile}
-          memberTotal={MEMBER_TOTAL}
-          memberDone={MEMBER_DONE}
-          shareLink={shareLink}
-          onSettleClick={() => setIsChecked(false)}
-          onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
-          onBackToHome={handleBackToHome}
-        />
-      </BottomButtonContainer>
+      <BottomAction
+        status={status}
+        myProfile={myProfile}
+        memberTotal={MEMBER_TOTAL}
+        memberDone={MEMBER_DONE}
+        shareLink={shareLink}
+        onSettleClick={() => setIsChecked(false)}
+        onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
+        onBackToHome={handleBackToHome}
+      />
       <CharacterBottomSheet
         open={openBottomSheet}
         setOpen={setOpenBottomSheet}

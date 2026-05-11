@@ -1,7 +1,6 @@
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   Profile,
@@ -79,14 +78,13 @@ function JoinPage() {
         </S.ScrollArea>
         <S.GradientOverlay />
       </S.ScrollWrapper>
-      <BottomButtonContainer>
-        <Button
-          disabled={selectedId === null || isPending}
-          onClick={handleConfirm}
-        >
-          선택
-        </Button>
-      </BottomButtonContainer>
+      <ActionArea
+        mainAction={{
+          label: '선택',
+          onClick: handleConfirm,
+          disabled: selectedId === null || isPending,
+        }}
+      />
     </>
   );
 }

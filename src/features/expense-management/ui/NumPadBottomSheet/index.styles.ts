@@ -34,12 +34,3 @@ export const NumPadContainer = styled.div`
   gap: 1rem;
   width: 100%;
 `;
-
-// FIXME : 공통 디자인 적용하기 (BottomButtonContainer)
-export const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: ${({ theme }) => `0 ${theme.unit[20]}`};
-  margin-bottom: ${({ theme }) => theme.unit[16]};
-`;

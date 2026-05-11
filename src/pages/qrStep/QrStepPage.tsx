@@ -5,12 +5,11 @@ import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   showToast,
 } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import * as S from './QrStepPage.styles';
 
@@ -65,9 +64,7 @@ function QrStepPage({ onBack }: QrStepProps) {
           <QRCodeSVG size={160} value={shareLink} />
         </S.QrField>
       </S.QrContainer>
-      <BottomButtonContainer>
-        <Button onClick={handleDownload}>다운로드</Button>
-      </BottomButtonContainer>
+      <ActionArea mainAction={{ label: '다운로드', onClick: handleDownload }} />
     </>
   );
 }

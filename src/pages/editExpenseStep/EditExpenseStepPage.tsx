@@ -3,12 +3,11 @@ import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   showToast,
 } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';
@@ -84,11 +83,13 @@ function EditExpenseStepPage({
           <FormCard key={field.id} ref={null} index={index} />
         ))}
       </S.ExpenseFormList>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button onClick={updateHandler} disabled={!allFormsValid}>
-          수정 완료
-        </Button>
-      </BottomButtonContainer>
+      <ActionArea
+        mainAction={{
+          label: '수정 완료',
+          onClick: updateHandler,
+          disabled: !allFormsValid,
+        }}
+      />
     </FormProvider>
   );
 }

@@ -1,9 +1,8 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   Input,
@@ -88,14 +87,13 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           inputMode="numeric"
         />
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          onClick={handleNextButtonClick}
-          disabled={!bankName || !accountNumber}
-        >
-          다음
-        </Button>
-      </BottomButtonContainer>
+      <ActionArea
+        mainAction={{
+          label: '다음',
+          onClick: handleNextButtonClick,
+          disabled: !bankName || !accountNumber,
+        }}
+      />
     </>
   );
 }

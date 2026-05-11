@@ -5,12 +5,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   Input,
 } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './GroupNameSetupPage.styles';
 
 const groupNameSchema = z.object({
@@ -55,14 +54,13 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
           </S.ValidationMessage>
         ) : null}
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          onClick={handleSubmit((data) => onNext(data.groupName))}
-          disabled={!isValid}
-        >
-          다음
-        </Button>
-      </BottomButtonContainer>
+      <ActionArea
+        mainAction={{
+          label: '다음',
+          onClick: handleSubmit((data) => onNext(data.groupName)),
+          disabled: !isValid,
+        }}
+      />
     </>
   );
 }

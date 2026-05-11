@@ -3,14 +3,13 @@ import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Dialog,
   Header,
   Modal,
 } from '@/shared/design-system/ui';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
@@ -109,17 +108,15 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
           />
         ))}
       </S.ExpenseFormList>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          type="button"
-          onClick={handleSubmit((data) =>
+      <ActionArea
+        mainAction={{
+          label: `총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`,
+          onClick: handleSubmit((data) =>
             mutation.mutate({ groupToken, data })
-          )}
-          disabled={!allFormsValid}
-        >
-          {`총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`}
-        </Button>
-      </BottomButtonContainer>
+          ),
+          disabled: !allFormsValid,
+        }}
+      />
     </FormProvider>
   );
 }

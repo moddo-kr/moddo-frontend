@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import {
-  Button,
+  ActionArea,
   Header,
   TextButton,
   showToast,
@@ -10,7 +10,6 @@ import {
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import StarChip from '@/features/character-management/ui/StarChip';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
@@ -68,9 +67,9 @@ function CharacterSharePage() {
             </S.EmptyStateDescription>
           </S.TitleContainer>
         </S.CharacterContainer>
-        <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-          <Button onClick={() => navigate(-1)}>정산하러 가기</Button>
-        </BottomButtonContainer>
+        <ActionArea
+          mainAction={{ label: '정산하러 가기', onClick: () => navigate(-1) }}
+        />
       </>
     );
   }
@@ -111,10 +110,10 @@ function CharacterSharePage() {
           이미지 저장
         </TextButton>
       </S.CharacterContainer>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
-        <Button onClick={() => navigate(-1)}>돌아가기</Button>
-      </BottomButtonContainer>
+      {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
+      <ActionArea
+        mainAction={{ label: '돌아가기', onClick: () => navigate(-1) }}
+      />
     </>
   );
 }
