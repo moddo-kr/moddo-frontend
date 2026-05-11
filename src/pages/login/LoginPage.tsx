@@ -1,7 +1,6 @@
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import theme from '@/shared/styles/theme';
-import { Button, showToast } from '@/shared/design-system/ui';
+import { showToast } from '@/shared/design-system/ui';
 import { Kakao } from '@/shared/assets/svgs/icon';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
@@ -55,24 +54,15 @@ function LoginPage() {
     <S.LoginPageLayout>
       <S.ContentWrapper>
         <S.TextContainer>
-          <LogoIcon
-            width={187}
-            height={66}
-            fill={theme.color.semantic.orange.default}
-          />
+          <LogoIcon width={187} height={66} />
           <S.LogoTagline>모또와 함께라면 정산 걱정 끝!</S.LogoTagline>
         </S.TextContainer>
       </S.ContentWrapper>
       <S.BottomWrapper>
-        <Button
-          style={{
-            background: '#FEE500',
-          }}
-          onClick={() => handleLoginButtonClick('KAKAO')}
-        >
-          <Kakao width={theme.unit[24]} />
+        <S.KakaoButton onClick={() => handleLoginButtonClick('KAKAO')}>
+          <Kakao width={24} height={24} />
           <S.KakaoLoginLabel>카카오로 로그인</S.KakaoLoginLabel>
-        </Button>
+        </S.KakaoButton>
         <S.TextWrapper>
           <S.TermsNotice>회원가입 시 서비스 이용약관과</S.TermsNotice>
           <S.TermsNotice>
