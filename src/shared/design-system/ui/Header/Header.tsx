@@ -26,14 +26,12 @@ interface DefaultHeaderProps extends TrailingProps {
   headingSubIconAriaLabel?: string;
   onHeadingIconClick?: () => void;
   onHeadingSubIconClick?: () => void;
-  bgColor?: string;
 }
 
 // 1depth: 좌측 큰 타이틀/커스텀 요소 + trailing — 홈, 마이페이지 등 최상위 페이지용
 interface Depth1HeaderProps extends TrailingProps {
   type: '1depth';
   title?: string | ReactElement;
-  bgColor?: string;
 }
 
 type HeaderProps = DefaultHeaderProps | Depth1HeaderProps;
@@ -76,7 +74,6 @@ function TrailingSection({
 
 function DefaultHeader({
   title,
-  bgColor,
   showHeading = true,
   headingIcon,
   headingLabel,
@@ -88,7 +85,7 @@ function DefaultHeader({
   ...trailingProps
 }: DefaultHeaderProps) {
   return (
-    <S.DefaultHeaderArea $bgColor={bgColor}>
+    <S.DefaultHeaderArea>
       {showHeading ? (
         <S.HeadingArea>
           {headingIcon && (
@@ -118,9 +115,9 @@ function DefaultHeader({
   );
 }
 
-function Depth1Header({ title, bgColor, ...trailingProps }: Depth1HeaderProps) {
+function Depth1Header({ title, ...trailingProps }: Depth1HeaderProps) {
   return (
-    <S.Depth1HeaderArea $bgColor={bgColor}>
+    <S.Depth1HeaderArea>
       <S.Depth1TitleArea>{title}</S.Depth1TitleArea>
       <TrailingSection {...trailingProps} />
     </S.Depth1HeaderArea>
