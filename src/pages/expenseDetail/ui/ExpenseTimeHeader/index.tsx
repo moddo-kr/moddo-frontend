@@ -10,7 +10,6 @@ import {
   Modal,
   showToast,
 } from '@/shared/design-system/ui';
-import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
@@ -166,13 +165,13 @@ function ExpenseTimeHeader({
     <S.Wrapper>
       <DescriptionField
         title={
-          <Flex direction="column">
+          <S.DescriptionTitle>
             <S.DeadlineDate>{getFormatDate(endDate)}까지</S.DeadlineDate>
             <S.SettlementPrompt>정산을 완료해주세요</S.SettlementPrompt>
-          </Flex>
+          </S.DescriptionTitle>
         }
         sub={
-          <Flex gap={4} alignItems="center">
+          <S.AccountRow>
             정산 계좌: {accountFormat}
             <IconButton
               aria-label="계좌번호 복사"
@@ -180,7 +179,7 @@ function ExpenseTimeHeader({
             >
               <Copy width={16} height={16} />
             </IconButton>
-          </Flex>
+          </S.AccountRow>
         }
       />
       <CurvedProgressBar percentage={percentage}>
@@ -200,7 +199,7 @@ function ExpenseTimeHeader({
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>
       </CurvedProgressBar>
-      <Flex direction="column" px={20} gap={12}>
+      <S.TimerSection>
         <S.DeadlineLabel>정산 마감까지 남은 시간</S.DeadlineLabel>
         <S.TimeBox>
           <S.Timer>
@@ -220,7 +219,7 @@ function ExpenseTimeHeader({
             ))}
           </S.Timer>
         </S.TimeBox>
-      </Flex>
+      </S.TimerSection>
       <Modal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}

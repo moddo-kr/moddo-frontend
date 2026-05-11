@@ -106,6 +106,24 @@ export const TimerUnit = styled.span<{ $gridColumn: number }>`
   grid-column: ${({ $gridColumn }) => $gridColumn};
 `;
 
+export const DescriptionTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AccountRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${getToken('gap.2')};
+`;
+
+export const TimerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 ${getToken('padding.6')};
+  gap: ${getToken('gap.5')};
+`;
+
 export const Bubble = styled.div`
   position: absolute;
   height: ${({ theme }) => theme.unit[40]};

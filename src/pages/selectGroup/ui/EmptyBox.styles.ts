@@ -18,3 +18,11 @@ export const EmptyBoxMessage = styled.span`
   ${applyTypography('typography.body.small')};
   color: ${getToken('fg.alternative')};
 `;
+
+export const EmptyBoxContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: ${getToken('gap.2')};
+`;

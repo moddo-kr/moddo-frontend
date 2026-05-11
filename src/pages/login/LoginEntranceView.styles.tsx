@@ -29,3 +29,19 @@ export const EntranceTagline = styled.span`
   ${applyTypography('typography.body.medium')};
   color: ${getToken('fg.alternative')};
 `;
+
+export const EntranceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${getToken('fill.primary.assistive')};
+  flex-grow: 1;
+  gap: ${getToken('gap.6')};
+`;
+
+export const LogoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

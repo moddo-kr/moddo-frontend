@@ -19,3 +19,22 @@ export const MemberCountHighlight = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.primary.normal')};
 `;
+
+export const AddMemberContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+`;
+
+export const MemberListSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${getToken('gap.4')};
+  margin-top: 1.75rem;
+`;
+
+export const MemberChipList = styled.div`
+  display: flex;
+  gap: ${getToken('gap.5')};
+  flex-wrap: wrap;
+`;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const LinkButton = styled(Link)`
   width: 100%;
@@ -17,4 +17,15 @@ export const LinkButton = styled(Link)`
 
 export const GroupName = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
+`;
+
+export const GroupLinkContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${getToken('gap.4')};
+`;
+
+export const MemberChipRow = styled.div`
+  display: flex;
+  gap: ${getToken('gap.2')};
 `;

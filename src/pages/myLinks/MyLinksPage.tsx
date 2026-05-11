@@ -5,7 +5,6 @@ import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { Button, Header } from '@/shared/design-system/ui';
-import Flex from '@/shared/ui/Flex';
 import { LinkCard } from './ui/LinkCard';
 import * as S from './MyLinksPage.styles';
 
@@ -25,19 +24,7 @@ function MyLinksPage() {
           onHeadingIconClick={() => navigate(-1)}
           bgColor={color.semantic.primary.subtle}
         />
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          flex={1}
-          justifyContent="center"
-          alignItems="center"
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
-          로딩중...
-        </Flex>
+        <S.LinksLoadingState>로딩중...</S.LinksLoadingState>
       </>
     );
   }
@@ -53,16 +40,7 @@ function MyLinksPage() {
         bgColor={color.semantic.primary.subtle}
       />
       {groupList && groupList.length > 0 ? (
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          gap={8}
-          flex={1}
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
+        <S.LinkCardList>
           {groupList.map((group) => (
             <LinkCard
               key={group.settlementId}
@@ -70,20 +48,9 @@ function MyLinksPage() {
               url={generateShareLink(group.groupCode)}
             />
           ))}
-        </Flex>
+        </S.LinkCardList>
       ) : (
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          gap={24}
-          flex={1}
-          justifyContent="center"
-          alignItems="center"
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
+        <S.LinksEmptyState>
           <S.EmptyStateMessage>
             아직 링크가 없어요.
             <br />
@@ -96,7 +63,7 @@ function MyLinksPage() {
           >
             모임 생성하기
           </Button>
-        </Flex>
+        </S.LinksEmptyState>
       )}
     </>
   );

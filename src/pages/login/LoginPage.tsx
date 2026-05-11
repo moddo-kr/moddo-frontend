@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import theme from '@/shared/styles/theme';
 import { Button, showToast } from '@/shared/design-system/ui';
 import { Kakao } from '@/shared/assets/svgs/icon';
-import Flex from '@/shared/ui/Flex';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
@@ -53,13 +52,7 @@ function LoginPage() {
   }
 
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
-      bgColor="#fff"
-      flexGrow={1}
-    >
+    <S.LoginPageLayout>
       <S.ContentWrapper>
         <S.TextContainer>
           <LogoIcon
@@ -87,7 +80,7 @@ function LoginPage() {
           </S.TermsNotice>
         </S.TextWrapper>
       </S.BottomWrapper>
-    </Flex>
+    </S.LoginPageLayout>
   );
 }
 

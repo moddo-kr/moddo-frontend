@@ -46,8 +46,8 @@ export const BottomWrapper = styled.footer`
   bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; // 12px
-  padding: 0 1.25rem; // 20px
+  gap: ${getToken('gap.5')};
+  padding: 0 ${getToken('padding.6')};
   width: 100%;
   max-width: 600px;
   min-width: 320px;
@@ -66,4 +66,13 @@ export const KakaoLoginLabel = styled.span`
 export const TermsNotice = styled.span`
   ${applyTypography('typography.caption.xsmall')};
   color: ${getToken('fg.alternative')};
+`;
+
+export const LoginPageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${getToken('bg.normal')};
+  flex-grow: 1;
 `;

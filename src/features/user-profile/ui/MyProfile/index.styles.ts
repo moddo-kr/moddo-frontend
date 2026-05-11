@@ -11,6 +11,12 @@ export const ProfileContainer = styled.div`
     theme.color.semantic.background.normal.alternative};
 `;
 
+export const UserInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
 export const UserName = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
 `;

@@ -1,19 +1,19 @@
 import { Divider } from '@/shared/design-system/ui';
-import Flex from '@/shared/ui/Flex';
 import {
   MainHeader,
   SettlementBanner,
   SettlementList,
 } from './ui/HomePageSection';
+import * as S from './HomePage.style';
 
 function HomePage() {
   return (
-    <Flex direction="column" flexGrow={1}>
+    <S.PageContainer>
       <MainHeader />
       <SettlementBanner />
       <Divider />
       <SettlementList />
-    </Flex>
+    </S.PageContainer>
   );
 }
 

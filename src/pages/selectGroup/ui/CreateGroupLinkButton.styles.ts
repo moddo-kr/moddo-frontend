@@ -17,3 +17,11 @@ export const CreateGroupLabel = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.inverse.normal')};
 `;
+
+export const CreateGroupButtonContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: ${getToken('gap.2')};
+`;

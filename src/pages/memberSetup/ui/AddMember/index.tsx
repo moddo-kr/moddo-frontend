@@ -3,7 +3,6 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
 import { Button, Input, Profile, showToast } from '@/shared/design-system/ui';
-import Flex from '@/shared/ui/Flex';
 import useAddGroupMember from './api/useAddGroupMember';
 import useDeleteGroupMember from './api/useDeleteGroupMember';
 import * as S from './index.styles';
@@ -73,7 +72,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
   };
 
   return (
-    <Flex direction="column" height="fit-content">
+    <S.AddMemberContainer>
       <form onSubmit={handleSubmit(handleAddName)}>
         <S.InputRow>
           <Input
@@ -92,11 +91,11 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           </Button>
         </S.InputRow>
       </form>
-      <Flex direction="column" gap={8} mt={28}>
+      <S.MemberListSection>
         <S.MemberCount>
           총 <S.MemberCountHighlight>{members.length}</S.MemberCountHighlight>명
         </S.MemberCount>
-        <Flex gap={12} flexWrap="wrap">
+        <S.MemberChipList>
           {members.map((member) => (
             <Profile
               key={member.id}
@@ -111,9 +110,9 @@ function AddMember({ members, groupToken }: AddMemberProps) {
               }
             />
           ))}
-        </Flex>
-      </Flex>
-    </Flex>
+        </S.MemberChipList>
+      </S.MemberListSection>
+    </S.AddMemberContainer>
   );
 }
 
