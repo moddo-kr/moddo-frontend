@@ -5,12 +5,10 @@ import {
   ActionArea,
   Header,
   StarChip,
-  TextButton,
   showToast,
 } from '@/shared/design-system/ui';
 import type { StarCount } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
@@ -20,7 +18,6 @@ function CharacterSharePage() {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
-  const { unit, color } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
@@ -55,10 +52,9 @@ function CharacterSharePage() {
       <>
         <Header
           type="default"
-          headingIcon={<ArrowLeft width={unit[24]} />}
+          headingIcon={<ArrowLeft width={24} height={24} />}
           headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.alternative}
         />
         <S.CharacterContainer>
           <S.TitleContainer>
@@ -79,10 +75,9 @@ function CharacterSharePage() {
     <>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width={24} height={24} />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
-        bgColor={color.semantic.background.normal.alternative}
       />
       <S.CharacterContainer>
         <S.TitleContainer>
@@ -106,10 +101,10 @@ function CharacterSharePage() {
             </S.CharacterDescription>
           </S.CharacterCard>
         </S.CharacterCardContainer>
-        <TextButton onClick={handleDownload} style={{ marginBottom: unit[20] }}>
-          <Download width={unit[20]} />
+        <S.DownloadButton onClick={handleDownload}>
+          <Download width="1.25rem" />
           이미지 저장
-        </TextButton>
+        </S.DownloadButton>
       </S.CharacterContainer>
       {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
       <ActionArea
