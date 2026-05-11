@@ -28,9 +28,11 @@ export const ModdoImage = styled.img`
 
 export const ExpenseChip = styled.div`
   display: flex;
-  background: ${({ theme }) => theme.color.semantic.primary.default};
-  border-radius: ${({ theme }) => theme.radius.circle};
-  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
+  align-items: center;
+  gap: ${getToken('gap.4')};
+  background: ${getToken('fill.inverse.neutral')};
+  border-radius: ${getToken('radius.full')};
+  padding: ${getToken('padding.4')} ${getToken('padding.6')};
 `;
 
 export const TotalMoney = styled.span`
@@ -79,14 +81,13 @@ export const SettlementPrompt = styled.span`
   ${applyTypography('typography.heading.small')};
 `;
 
-export const PaidMemberCount = styled.span`
-  ${applyTypography('typography.body.medium-semibold')};
-  color: ${getToken('fg.primary.normal')};
-`;
-
 export const SettlementStatusText = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.inverse.normal')};
+`;
+
+export const PaidMemberCount = styled.span`
+  color: ${getToken('fg.primary.normal')};
 `;
 
 export const DeadlineLabel = styled.span`

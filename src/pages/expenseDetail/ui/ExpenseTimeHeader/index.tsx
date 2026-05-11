@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
-import { useTheme } from 'styled-components';
 import { useLoaderData } from 'react-router';
 import copyClipboard from '@/shared/lib/copyClipboard';
 import {
@@ -40,7 +39,6 @@ function ExpenseTimeHeader({
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
   const { groupToken } = useLoaderData();
-  const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -188,12 +186,11 @@ function ExpenseTimeHeader({
           {isBubble && <S.Bubble>{StatusContent[status].message}</S.Bubble>}
         </S.ModdoButton>
         <S.ExpenseChip>
-          <DollarCircle
-            width="32"
-            style={{ paddingRight: `${theme.unit[8]}` }}
-          />
-          <S.PaidMemberCount>{paidMember}</S.PaidMemberCount>
-          <S.SettlementStatusText>{`/${totalMember} 정산 완료`}</S.SettlementStatusText>
+          <DollarCircle width={24} height={24} />
+          <S.SettlementStatusText>
+            <S.PaidMemberCount>{paidMember}</S.PaidMemberCount>
+            {`/${totalMember} 정산 완료`}
+          </S.SettlementStatusText>
         </S.ExpenseChip>
         <S.TotalMoney>
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원

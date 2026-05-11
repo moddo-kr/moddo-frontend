@@ -102,15 +102,26 @@ export const SheetContentWrapper = styled.div`
   padding: 0 ${({ theme }) => theme.unit[20]} ${({ theme }) => theme.unit[16]};
 `;
 
-export const TextButtonWrapper = styled.button`
+export const TextButtonWrapper = styled.button<{ $isActive: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  color: ${({ $isActive }) =>
+    $isActive
+      ? getToken('fg.primary.normal')
+      : getToken(
+          'fill.normal-disable'
+        )}; /* HACK: #ACAFB2로 정의된 토큰이 없어 의미상 유사한 토큰을 임의로 사용함 */
+  > svg {
+    display: ${({ $isActive }) => ($isActive ? 'block' : 'none')};
+  }
 `;
 
 export const MemberName = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
+  /* HACK: Figma --text/default(#444950 = gray.40)에 대응하는 token 없음, fg.neutral(gray.30) 사용 */
+  color: ${getToken('fg.neutral')};
 `;
 
 export const MemberTotalAmount = styled.span`
@@ -127,12 +138,6 @@ export const ExpenseAmount = styled.span`
   color: ${getToken('fg.neutral')};
 `;
 
-export const PaymentStatusLabel = styled.span<{ $isActive: boolean }>`
+export const PaymentStatusLabel = styled.span`
   ${applyTypography('typography.title.small')};
-  color: ${({ $isActive }) =>
-    $isActive
-      ? getToken('fg.primary.normal')
-      : getToken(
-          'fill.normal-disable'
-        )}; /* HACK: #ACAFB2로 정의된 토큰이 없어 의미상 유사한 토큰을 임의로 사용함 */
 `;
