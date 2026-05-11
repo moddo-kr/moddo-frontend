@@ -8,6 +8,7 @@ import {
   Header,
   showToast,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';
@@ -63,33 +64,35 @@ function EditExpenseStepPage({
 
   return (
     <FormProvider {...formMethods}>
-      <Header
-        type="default"
-        headingIcon={<Close width={24} />}
-        headingIconAriaLabel="지출 수정 취소"
-        onHeadingIconClick={onBack}
-      />
-      <DescriptionField
-        title={
-          <>
-            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
-            {`의\n지출 내역을 입력해주세요.`}
-          </>
-        }
-        sub="총 지출 금액을 1/N로 나눌게요."
-      />
-      <S.ExpenseFormList>
-        {fieldArrayReturns.fields.map((field, index) => (
-          <FormCard key={field.id} ref={null} index={index} />
-        ))}
-      </S.ExpenseFormList>
-      <ActionArea
-        mainAction={{
-          label: '수정 완료',
-          onClick: updateHandler,
-          disabled: !allFormsValid,
-        }}
-      />
+      <PageLayout>
+        <Header
+          type="default"
+          headingIcon={<Close width={24} />}
+          headingIconAriaLabel="지출 수정 취소"
+          onHeadingIconClick={onBack}
+        />
+        <DescriptionField
+          title={
+            <>
+              <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
+              {`의\n지출 내역을 입력해주세요.`}
+            </>
+          }
+          sub="총 지출 금액을 1/N로 나눌게요."
+        />
+        <S.ExpenseFormList>
+          {fieldArrayReturns.fields.map((field, index) => (
+            <FormCard key={field.id} ref={null} index={index} />
+          ))}
+        </S.ExpenseFormList>
+        <ActionArea
+          mainAction={{
+            label: '수정 완료',
+            onClick: updateHandler,
+            disabled: !allFormsValid,
+          }}
+        />
+      </PageLayout>
     </FormProvider>
   );
 }

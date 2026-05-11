@@ -9,6 +9,7 @@ import {
   Header,
   Modal,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
@@ -62,61 +63,65 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
 
   return (
     <FormProvider {...formMethods}>
-      <Header
-        type="default"
-        headingIcon={<Close width="1.5rem" />}
-        headingIconAriaLabel="지출 입력 종료"
-        onHeadingIconClick={() => setOpen(true)}
-        trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}
-        onTrailingIconClick={handleAddExpense}
-      />
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        ariaLabel="지출 내역 입력을 종료할까요?"
-      >
-        <Dialog
-          title="지출 내역 입력을 종료할까요?"
-          description="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
-          mainAction={{ label: '끝내기', onClick: handleModalSubmit }}
-          alternativeAction={{
-            label: '계속 입력',
-            onClick: () => setOpen(false),
+      <PageLayout>
+        <Header
+          type="default"
+          headingIcon={<Close width="1.5rem" />}
+          headingIconAriaLabel="지출 입력 종료"
+          onHeadingIconClick={() => setOpen(true)}
+          trailingIcon={
+            <S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>
+          }
+          onTrailingIconClick={handleAddExpense}
+        />
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          ariaLabel="지출 내역 입력을 종료할까요?"
+        >
+          <Dialog
+            title="지출 내역 입력을 종료할까요?"
+            description="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
+            mainAction={{ label: '끝내기', onClick: handleModalSubmit }}
+            alternativeAction={{
+              label: '계속 입력',
+              onClick: () => setOpen(false),
+            }}
+          />
+        </Modal>
+        <DescriptionField
+          title={
+            <>
+              <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
+              {`의\n지출 내역을 입력해주세요.`}
+            </>
+          }
+          sub="총 지출 금액을 1/N로 나눌게요."
+        />
+        <S.ExpenseFormList>
+          {fieldArrayReturns.fields.map((field, index) => (
+            <FormCard
+              key={field.id}
+              ref={
+                index === fieldArrayReturns.fields.length - 1
+                  ? lastFormCardRef
+                  : null
+              }
+              index={index}
+              onDelete={handleDeleteExpense}
+            />
+          ))}
+        </S.ExpenseFormList>
+        <ActionArea
+          mainAction={{
+            label: `총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`,
+            onClick: handleSubmit((data) =>
+              mutation.mutate({ groupToken, data })
+            ),
+            disabled: !allFormsValid,
           }}
         />
-      </Modal>
-      <DescriptionField
-        title={
-          <>
-            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
-            {`의\n지출 내역을 입력해주세요.`}
-          </>
-        }
-        sub="총 지출 금액을 1/N로 나눌게요."
-      />
-      <S.ExpenseFormList>
-        {fieldArrayReturns.fields.map((field, index) => (
-          <FormCard
-            key={field.id}
-            ref={
-              index === fieldArrayReturns.fields.length - 1
-                ? lastFormCardRef
-                : null
-            }
-            index={index}
-            onDelete={handleDeleteExpense}
-          />
-        ))}
-      </S.ExpenseFormList>
-      <ActionArea
-        mainAction={{
-          label: `총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`,
-          onClick: handleSubmit((data) =>
-            mutation.mutate({ groupToken, data })
-          ),
-          disabled: !allFormsValid,
-        }}
-      />
+      </PageLayout>
     </FormProvider>
   );
 }

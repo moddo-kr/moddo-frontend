@@ -11,6 +11,7 @@ import {
   showToast,
 } from '@/shared/design-system/ui';
 import generateShareLink from '@/shared/lib/generateShareLink';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './QrStepPage.styles';
 
 interface QrStepProps {
@@ -43,7 +44,7 @@ function QrStepPage({ onBack }: QrStepProps) {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         title="QR코드"
@@ -65,7 +66,7 @@ function QrStepPage({ onBack }: QrStepProps) {
         </S.QrField>
       </S.QrContainer>
       <ActionArea mainAction={{ label: '다운로드', onClick: handleDownload }} />
-    </>
+    </PageLayout>
   );
 }
 

@@ -1,11 +1,11 @@
 import { useLoaderData } from 'react-router';
-import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import {
   ActionArea,
   DescriptionField,
   Header,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
@@ -22,7 +22,6 @@ interface ConfirmStepProps {
 function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   const { groupToken } = useLoaderData();
   const { data, isLoading } = useGetAllExpense(groupToken);
-  const { color } = useTheme();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -33,7 +32,7 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   }
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
         type="default"
         headingIcon={<ArrowLeft width="1.5rem" />}
@@ -41,7 +40,6 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         onHeadingIconClick={onBack}
         trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}
         onTrailingIconClick={onAdd}
-        bgColor={color.semantic.background.normal.alternative}
       />
       <DescriptionField title={`지출 내역을\n확인해주세요.`} />
       <S.TotalExpenseWrapper>
@@ -56,7 +54,7 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         onEdit={onEdit}
       />
       <ActionArea mainAction={{ label: '확인했어요', onClick: onNext }} />
-    </>
+    </PageLayout>
   );
 }
 

@@ -11,7 +11,7 @@ export const Flex = styled.div`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.unit[16]};
-  height: 100vh;
+  flex: 1;
 `;
 
 export const DescriptionContainer = styled.div`

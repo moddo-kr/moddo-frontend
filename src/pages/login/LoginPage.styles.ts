@@ -59,11 +59,10 @@ export const TermsNotice = styled.span`
   color: ${getToken('fg.alternative')};
 `;
 
-export const LoginPageLayout = styled.div`
+export const LoginPageContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: ${getToken('bg.normal')};
-  flex-grow: 1;
+  flex: 1;
 `;

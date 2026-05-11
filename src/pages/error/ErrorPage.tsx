@@ -1,6 +1,7 @@
 import errorHam from '@/shared/assets/pngs/error-ham.png';
 import { Button } from '@/shared/design-system/ui';
 import { ROUTE } from '@/shared/config/route';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './ErrorPage.style';
 
 interface ErrorPageProps {
@@ -23,16 +24,18 @@ function ErrorPage({
   },
 }: ErrorPageProps) {
   return (
-    <S.Flex>
-      <S.ErrorHamster src={errorHam} alt="error hamster" />
-      <S.DescriptionContainer>
-        <S.ErrorTitle>{title}</S.ErrorTitle>
-        <S.SubText>{description}</S.SubText>
-      </S.DescriptionContainer>
-      <Button onClick={action.onClick}>
-        <a href={action.href}>{action.text}</a>
-      </Button>
-    </S.Flex>
+    <PageLayout $bg="neutral">
+      <S.Flex>
+        <S.ErrorHamster src={errorHam} alt="error hamster" />
+        <S.DescriptionContainer>
+          <S.ErrorTitle>{title}</S.ErrorTitle>
+          <S.SubText>{description}</S.SubText>
+        </S.DescriptionContainer>
+        <Button onClick={action.onClick}>
+          <a href={action.href}>{action.text}</a>
+        </Button>
+      </S.Flex>
+    </PageLayout>
   );
 }
 

@@ -6,14 +6,13 @@ import {
   Profile,
 } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
-import { useTheme } from 'styled-components';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { useState } from 'react';
 import useAssignMember from '@/features/join/api/useAssignMember';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './JoinPage.styles';
 
 function JoinPage() {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   // TODO: groupToken → settlementCode 마이그레이션 시 파라미터 이름 변경 필요
   const { groupToken } = useParams();
@@ -41,9 +40,9 @@ function JoinPage() {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -85,7 +84,7 @@ function JoinPage() {
           disabled: selectedId === null || isPending,
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 

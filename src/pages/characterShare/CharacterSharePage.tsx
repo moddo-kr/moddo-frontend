@@ -10,6 +10,7 @@ import {
 import type { StarCount } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
@@ -49,7 +50,7 @@ function CharacterSharePage() {
     // NOTE : 임의로 만든 화면,,,
     // 캐릭터가 없는 경우에 대한 처리가 필요합니다...
     return (
-      <>
+      <PageLayout $bg="neutral">
         <Header
           type="default"
           headingIcon={<ArrowLeft width={24} height={24} />}
@@ -67,12 +68,12 @@ function CharacterSharePage() {
         <ActionArea
           mainAction={{ label: '정산하러 가기', onClick: () => navigate(-1) }}
         />
-      </>
+      </PageLayout>
     );
   }
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
         type="default"
         headingIcon={<ArrowLeft width={24} height={24} />}
@@ -110,7 +111,7 @@ function CharacterSharePage() {
       <ActionArea
         mainAction={{ label: '돌아가기', onClick: () => navigate(-1) }}
       />
-    </>
+    </PageLayout>
   );
 }
 

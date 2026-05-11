@@ -1,4 +1,3 @@
-import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -10,6 +9,7 @@ import {
   Header,
   Input,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './GroupNameSetupPage.styles';
 
 const groupNameSchema = z.object({
@@ -23,7 +23,6 @@ interface GroupNameSetupProps {
 }
 
 function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   const {
     register,
@@ -35,10 +34,10 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
   });
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -61,7 +60,7 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
           disabled: !isValid,
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import {
   Dialog,
   Divider,
@@ -25,7 +25,6 @@ import BottomAction from './ui/BottomAction';
 import * as S from './ExpenseDetailPage.styles';
 
 function ExpenseDetailPage() {
-  const { unit, color } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData, myProfile } = useLoaderData();
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
@@ -80,17 +79,16 @@ function ExpenseDetailPage() {
   };
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel={groupData.groupName}
         headingIconAriaLabel="홈으로 이동"
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
         trailingIcon={<S.ManageLabel>관리</S.ManageLabel>}
-        bgColor={color.semantic.background.normal.alternative}
       />
       <S.Content>
         <ExpenseTimeHeader
@@ -149,7 +147,7 @@ function ExpenseDetailPage() {
           }}
         />
       </Modal>
-    </>
+    </PageLayout>
   );
 }
 

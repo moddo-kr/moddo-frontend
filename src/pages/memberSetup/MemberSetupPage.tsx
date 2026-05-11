@@ -1,5 +1,4 @@
 import { generatePath, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
 import { ROUTE } from '@/shared/config/route';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
@@ -10,6 +9,7 @@ import {
 } from '@/shared/design-system/ui';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';
 
@@ -21,7 +21,6 @@ export interface ParticipantProfile {
 const GROUP_TOKEN = 'groupToken';
 
 function MemberSetupPage() {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   const [groupToken] = useLocalStorage<string>({
     key: GROUP_TOKEN,
@@ -51,10 +50,10 @@ function MemberSetupPage() {
   }
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -76,7 +75,7 @@ function MemberSetupPage() {
           disabled: data.members.length <= 1,
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 

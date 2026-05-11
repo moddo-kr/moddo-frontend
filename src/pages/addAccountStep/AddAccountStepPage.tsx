@@ -7,6 +7,7 @@ import {
   Header,
   Input,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
@@ -58,7 +59,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         headingIcon={<ArrowLeft width={24} />}
@@ -94,7 +95,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           disabled: !bankName || !accountNumber,
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 

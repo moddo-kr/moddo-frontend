@@ -10,6 +10,7 @@ import {
 } from '@/shared/design-system/ui';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { useShareLink, ShareModal } from '@/features/share';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {
@@ -25,7 +26,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
   const share = useShareLink(shareLink);
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         headingIcon={<ArrowLeft width="1.5rem" />}
@@ -56,7 +57,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         onSlackShare={share.shareSlack}
         onCopyLink={share.copyLink}
       />
-    </>
+    </PageLayout>
   );
 }
 

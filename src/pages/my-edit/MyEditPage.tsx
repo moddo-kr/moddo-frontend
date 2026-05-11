@@ -1,16 +1,15 @@
 import { useNavigate } from 'react-router';
 import { ArrowLeft, Menu } from '@/shared/assets/svgs/icon';
 import { Divider, Header } from '@/shared/design-system/ui';
-import { useTheme } from 'styled-components';
 import { LogoutButton, UnregisterButton } from '@/features/auth';
+import { PageLayout } from '@/shared/ui/PageLayout';
 // import { TermsLink } from './ui';
 
 function MyEditPage() {
   const navigate = useNavigate();
-  const { unit } = useTheme();
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         headingIcon={<ArrowLeft width="1.5rem" />}
@@ -23,10 +22,10 @@ function MyEditPage() {
       />
       {/* TODO: 이용 약관 페이지 추가 여부를 결정하고, 이용 약관 페이지를 생성한 다음 버튼 표시  */}
       {/* <TermsLink /> */}
-      <Divider style={{ margin: `${unit[16]} 0` }} />
+      <Divider style={{ margin: '1rem 0' }} />
       <UnregisterButton />
       <LogoutButton />
-    </>
+    </PageLayout>
   );
 }
 
