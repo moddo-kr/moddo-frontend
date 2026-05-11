@@ -6,12 +6,10 @@ export const EmptyBox = styled.div`
   @media (min-width: 600px) {
     font-size: 22px;
   }
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.default};
-  border-radius: ${({ theme }) => theme.radius.default};
-  border: ${({ theme }) => `1px dashed ${theme.color.semantic.border.default}`};
-  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[8]}`};
-  opacity: 0.5;
+  background-color: ${getToken('bg.normal')};
+  border-radius: ${getToken('radius.xl')};
+  border: ${`1px dashed ${getToken('border.neutral')}`};
+  padding: ${`${getToken('padding.5')} ${getToken('padding.6')}`};
 `;
 
 export const EmptyBoxMessage = styled.span`
@@ -25,4 +23,8 @@ export const EmptyBoxContent = styled.div`
   justify-content: center;
   align-items: center;
   gap: ${getToken('gap.2')};
+  svg {
+    fill: ${getToken('fg.normal-disable')};
+    opacity: 0.5;
+  }
 `;
