@@ -45,8 +45,9 @@ export const CharacterCard = styled.div`
   background-color: ${({ theme }) => theme.color.primitive.base.white};
 `;
 
-export const EmptyStateTitle = styled.p`
+export const EmptyStateTitle = styled.h1`
   ${applyTypography('typography.heading.medium')};
+  margin: 0;
 `;
 
 export const EmptyStateDescription = styled.p`
@@ -54,8 +55,9 @@ export const EmptyStateDescription = styled.p`
   color: ${getToken('fg.alternative')};
 `;
 
-export const PageTitle = styled.span`
+export const PageTitle = styled.h1`
   ${applyTypography('typography.heading.medium')};
+  margin: 0;
 `;
 
 export const CharacterName = styled.span`
