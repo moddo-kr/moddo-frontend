@@ -4,14 +4,15 @@ import saveAs from 'file-saver';
 import {
   ActionArea,
   Header,
+  StarChip,
   TextButton,
   showToast,
 } from '@/shared/design-system/ui';
+import type { StarCount } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
-import StarChip from '@/features/character-management/ui/StarChip';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 
@@ -89,7 +90,7 @@ function CharacterSharePage() {
         </S.TitleContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
-            <StarChip star={data.rarity} />
+            <StarChip count={data.rarity as StarCount} />
             <S.CharacterImageContainer>
               <img
                 src={data.imageBigUrl}
