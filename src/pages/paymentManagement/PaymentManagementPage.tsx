@@ -9,8 +9,8 @@ import { Header } from '@/shared/design-system/ui';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
+import * as S from './PaymentManagementPage.styles';
 
 const LIST_BOTTOM_SPACING_PX = '93px';
 
@@ -48,9 +48,9 @@ function PaymentManagementPage() {
           direction="column"
           bgColor={color.semantic.background.normal.default}
         >
-          <Text variant="body1R" color="semantic.text.subtle">
+          <S.PaymentStatusMessage>
             입금 내역을 불러오는 중입니다.
-          </Text>
+          </S.PaymentStatusMessage>
         </Flex>
       </>
     );
@@ -74,9 +74,9 @@ function PaymentManagementPage() {
           direction="column"
           bgColor={color.semantic.background.normal.default}
         >
-          <Text variant="body1R" color="semantic.text.subtle">
+          <S.PaymentStatusMessage>
             입금 내역을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.
-          </Text>
+          </S.PaymentStatusMessage>
         </Flex>
       </>
     );
@@ -113,9 +113,7 @@ function PaymentManagementPage() {
           <Flex direction="column" gap={36}>
             {paymentSections.map(({ label, items }) => (
               <Flex key={label} direction="column" gap={16}>
-                <Text variant="title" color="semantic.text.strong">
-                  {label}
-                </Text>
+                <S.PaymentDateLabel>{label}</S.PaymentDateLabel>
                 <Flex direction="column" gap={20}>
                   {items.map((payment) => (
                     <PaymentAlertCard
@@ -142,13 +140,7 @@ function PaymentManagementPage() {
           direction="column"
           bgColor={color.semantic.background.normal.default}
         >
-          <Text
-            textAlign="center"
-            variant="body1R"
-            color="semantic.text.subtle"
-          >
-            입금 내역이 없습니다.
-          </Text>
+          <S.PaymentEmptyMessage>입금 내역이 없습니다.</S.PaymentEmptyMessage>
         </Flex>
       )}
     </>

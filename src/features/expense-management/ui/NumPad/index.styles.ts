@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const NumPadWrapper = styled.div`
   display: flex;
@@ -49,6 +49,11 @@ export const ShortcutButton = styled.button<{ $isDanger?: boolean }>`
       ? theme.color.semantic.state.danger
       : theme.color.semantic.text.default};
   white-space: nowrap;
+`;
+
+export const CurrencyUnit = styled.span`
+  ${applyTypography('typography.heading.medium')};
+  color: ${getToken('fg.normal')};
 `;
 
 export const NumCellWrapper = styled.div`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Container = styled.div`
   display: flex;
@@ -12,4 +13,9 @@ export const TitleWrapper = styled.div`
 
 export const CharacterGrid = styled.div`
   padding: ${({ theme }) => theme.unit[20]};
+`;
+
+export const SectionTitle = styled.span`
+  ${applyTypography('typography.title.small')};
+  color: ${getToken('fg.normal')};
 `;

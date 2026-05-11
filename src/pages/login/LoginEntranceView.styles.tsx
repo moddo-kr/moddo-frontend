@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const ImgContainer = styled.div`
   display: flex;
@@ -22,4 +23,9 @@ export const LogoImg = styled.img`
   max-width: 12.625rem;
   height: 4.125rem;
   object-fit: contain;
+`;
+
+export const EntranceTagline = styled.span`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
 `;

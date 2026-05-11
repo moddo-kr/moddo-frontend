@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
+
+export const GroupNameHighlight = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.primary.normal')};
+`;
 
 export const ExpenseFormList = styled.form`
   display: flex;

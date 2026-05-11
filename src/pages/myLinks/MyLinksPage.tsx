@@ -6,8 +6,8 @@ import { ROUTE } from '@/shared/config/route';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { Button, Header } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import { LinkCard } from './ui/LinkCard';
+import * as S from './MyLinksPage.styles';
 
 function MyLinksPage() {
   const navigate = useNavigate();
@@ -84,15 +84,11 @@ function MyLinksPage() {
           direction="column"
           bgColor={color.semantic.background.normal.alternative}
         >
-          <Text
-            textAlign="center"
-            variant="body1R"
-            color="semantic.text.subtle"
-          >
+          <S.EmptyStateMessage>
             아직 링크가 없어요.
             <br />
             모임을 만들고 링크를 공유해 함께 정산해 보세요!
-          </Text>
+          </S.EmptyStateMessage>
           <Button
             variant="primary"
             size="medium"

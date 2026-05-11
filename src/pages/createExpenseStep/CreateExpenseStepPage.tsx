@@ -9,7 +9,6 @@ import {
   Header,
   Modal,
 } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
@@ -69,7 +68,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
         headingIcon={<Close width="1.5rem" />}
         headingIconAriaLabel="지출 입력 종료"
         onHeadingIconClick={() => setOpen(true)}
-        trailingIcon={<Text>지출 추가</Text>}
+        trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}
         onTrailingIconClick={handleAddExpense}
       />
       <Modal
@@ -90,9 +89,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
       <DescriptionField
         title={
           <>
-            <Text variant="heading2" color="semantic.orange.default">
-              {groupInfo.groupName}
-            </Text>
+            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
             {`의\n지출 내역을 입력해주세요.`}
           </>
         }

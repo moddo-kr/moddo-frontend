@@ -1,5 +1,4 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
-import Text from '@/shared/ui/Text';
 import { BottomSheet, ActionArea } from '@/shared/design-system/ui';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
@@ -40,14 +39,12 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
           />
         </S.CharacterImageContainer>
         <S.DescriptionContainer>
-          <Text variant="heading2" color="semantic.text.strong">
-            두둥, {data.name} 등장!
-          </Text>
-          <Text>
+          <S.CharacterTitle>두둥, {data.name} 등장!</S.CharacterTitle>
+          <S.CharacterDescription>
             모두가 시간 내에 정산을 완료했어요!
             <br />
             참여해준 모든 분께 캐릭터를 선물로 드려요!
-          </Text>
+          </S.CharacterDescription>
         </S.DescriptionContainer>
         <ActionArea
           layout="horizontal"

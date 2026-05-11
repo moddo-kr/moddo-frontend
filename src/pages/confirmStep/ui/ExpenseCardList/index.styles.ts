@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { applyTypography } from '@/shared/design-system';
+
+export const DateGroupLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+`;
 
 export const ListContainer = styled.div`
   display: flex;

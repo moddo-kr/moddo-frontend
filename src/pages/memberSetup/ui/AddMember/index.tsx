@@ -3,7 +3,6 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
 import { Button, Input, Profile, showToast } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
 import useAddGroupMember from './api/useAddGroupMember';
 import useDeleteGroupMember from './api/useDeleteGroupMember';
@@ -95,11 +94,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
       </form>
       <Flex direction="column" gap={8} mt={28}>
         <S.MemberCount>
-          총{' '}
-          <Text variant="body1Sb" color="semantic.orange.default">
-            {members.length}
-          </Text>
-          명
+          총 <S.MemberCountHighlight>{members.length}</S.MemberCountHighlight>명
         </S.MemberCount>
         <Flex gap={12} flexWrap="wrap">
           {members.map((member) => (

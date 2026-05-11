@@ -3,7 +3,6 @@ import { Group } from '@/entities/group/model/group.type';
 import { ROUTE } from '@/shared/config/route';
 import { NameChip } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import * as S from './GroupLinkButton.styles';
 
 function GroupLinkButton({ group }: { group: Group }) {
@@ -12,7 +11,7 @@ function GroupLinkButton({ group }: { group: Group }) {
   return (
     <S.LinkButton to={generatePath(ROUTE.createExpense, { groupToken })}>
       <Flex direction="column" gap={8}>
-        <Text variant="body1Sb">{groupName}</Text>
+        <S.GroupName>{groupName}</S.GroupName>
         <Flex gap={4}>
           {members?.map((member) => (
             <NameChip

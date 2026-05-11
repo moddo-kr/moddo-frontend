@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Accordion } from '@/shared/design-system/ui';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Container = styled(Accordion)<{ $isPaid: boolean }>`
   padding: ${({ theme }) => theme.unit[20]};
@@ -106,4 +107,22 @@ export const TextButtonWrapper = styled.button`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+`;
+
+export const MemberName = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+`;
+
+export const MemberTotalAmount = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const ExpenseContent = styled.span`
+  ${applyTypography('typography.body.medium')};
+`;
+
+export const ExpenseAmount = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.neutral')};
 `;

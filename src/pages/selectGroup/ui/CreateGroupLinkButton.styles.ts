@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const LinkButton = styled(Link)`
   width: 100%;
@@ -10,4 +11,9 @@ export const LinkButton = styled(Link)`
   border-radius: ${({ theme }) => theme.radius.default};
   padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[8]}`};
   cursor: pointer;
+`;
+
+export const CreateGroupLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.inverse.normal')};
 `;

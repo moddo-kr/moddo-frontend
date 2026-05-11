@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography } from '@/shared/design-system';
 
 export const CardContainerBase = styled.li`
   box-sizing: border-box;
@@ -36,4 +37,12 @@ export const CharacterImage = styled.img`
   min-height: 0;
   object-fit: contain;
   margin-bottom: ${({ theme }) => theme.unit[16]};
+`;
+
+export const CharacterName = styled.span`
+  ${applyTypography('typography.body.small-semibold')};
+`;
+
+export const CharacterAcquiredDate = styled.span`
+  ${applyTypography('typography.caption.xsmall')};
 `;

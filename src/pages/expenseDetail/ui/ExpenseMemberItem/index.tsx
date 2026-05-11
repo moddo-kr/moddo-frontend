@@ -35,14 +35,14 @@ function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
       <S.LeftWrapper>
         <ProfileImage src={member.profile} size="40" />
         <S.SubProfileWrapper>
-          <Text variant="body1Sb">
+          <S.MemberName>
             <span style={{ color: theme.color.primitive.gray[500] }}>
               {member.name}
             </span>
-          </Text>
-          <Text variant="heading2" color="semantic.text.strong">
+          </S.MemberName>
+          <S.MemberTotalAmount>
             {member.totalAmount.toLocaleString()}원
-          </Text>
+          </S.MemberTotalAmount>
         </S.SubProfileWrapper>
       </S.LeftWrapper>
       <S.ChevronWrapper $isOpen={isOpen}>
@@ -173,11 +173,11 @@ function ExpenseMemberItem({
           <S.ExpensesWrapper key={expense.content}>
             <S.PlaceWrapper>
               <Receipt width={theme.unit[24]} height={theme.unit[24]} />
-              <Text>{expense.content}</Text>
+              <S.ExpenseContent>{expense.content}</S.ExpenseContent>
             </S.PlaceWrapper>
-            <Text variant="body1Sb" color="semantic.text.default">
+            <S.ExpenseAmount>
               {expense.amount.toLocaleString()}원
-            </Text>
+            </S.ExpenseAmount>
           </S.ExpensesWrapper>
         ))}
       </S.ContentContainer>

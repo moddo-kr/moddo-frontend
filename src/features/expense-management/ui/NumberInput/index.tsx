@@ -1,5 +1,4 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
-import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
 interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -17,14 +16,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           $variant={variant}
           {...props}
         />
-        <Text
-          variant={variant === 'lg' ? 'title' : 'body1Sb'}
-          color={
-            variant === 'lg' ? 'semantic.text.strong' : 'semantic.text.default'
-          }
-        >
-          원
-        </Text>
+        <S.CurrencyUnit $variant={variant}>원</S.CurrencyUnit>
       </S.Container>
     );
   }

@@ -1,5 +1,4 @@
 import { NameChip } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import { ExpenseDetail } from '@/entities/expense/model/expense.type';
 import * as S from './index.styles';
 
@@ -11,16 +10,14 @@ function ExpenseTimelineContent({ expense }: ExpenseTimelineContentProps) {
   return (
     <S.ExpenseContent>
       <S.ContentTitle>
-        <Text variant="body1Sb" color="semantic.text.subtle">
-          {expense.content}
-        </Text>
-        <Text variant="heading2" color="semantic.text.strong">
+        <S.ExpenseContentName>{expense.content}</S.ExpenseContentName>
+        <S.ExpenseTotalAmount>
           {expense.totalAmount.toLocaleString()}원
-        </Text>
+        </S.ExpenseTotalAmount>
       </S.ContentTitle>
       <S.MemberChipContainer>
         <S.MemberChipHeader type="button">
-          <Text>{expense.groupMembers.length}명</Text>
+          <S.MemberCount>{expense.groupMembers.length}명</S.MemberCount>
         </S.MemberChipHeader>
         <S.MemberChipList>
           {expense.groupMembers.map((name) => (

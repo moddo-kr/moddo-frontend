@@ -1,5 +1,4 @@
 import errorHam from '@/shared/assets/pngs/error-ham.png';
-import Text from '@/shared/ui/Text';
 import { Button } from '@/shared/design-system/ui';
 import { ROUTE } from '@/shared/config/route';
 import * as S from './ErrorPage.style';
@@ -27,12 +26,8 @@ function ErrorPage({
     <S.Flex>
       <S.ErrorHamster src={errorHam} alt="error hamster" />
       <S.DescriptionContainer>
-        <Text variant="heading2" color="semantic.text.default">
-          {title}
-        </Text>
-        <S.SubText variant="body1R" color="semantic.text.subtle">
-          {description}
-        </S.SubText>
+        <S.ErrorTitle>{title}</S.ErrorTitle>
+        <S.SubText>{description}</S.SubText>
       </S.DescriptionContainer>
       <Button onClick={action.onClick}>
         <a href={action.href}>{action.text}</a>

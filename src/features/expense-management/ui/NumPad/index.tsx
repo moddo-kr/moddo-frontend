@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
-import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 import NumPadController from './numPadController';
 
@@ -22,9 +21,7 @@ function NumPad({ input, setInput, onClose }: NumPadProps) {
         <S.DisplayValue $isEmpty={input === 0}>
           {input === 0 ? '금액입력' : input.toLocaleString()}
         </S.DisplayValue>
-        <Text variant="heading1" color="semantic.text.strong">
-          원
-        </Text>
+        <S.CurrencyUnit>원</S.CurrencyUnit>
       </S.ValueWrapper>
       <S.ShortcutWrapper>
         {numPadController.SHORTCUTS.map((shortcut) => (

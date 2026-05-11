@@ -14,3 +14,8 @@ export const MemberCount = styled.div`
   white-space: pre-wrap;
   ${applyTypography('typography.body.medium-semibold')}
 `;
+
+export const MemberCountHighlight = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.primary.normal')};
+`;

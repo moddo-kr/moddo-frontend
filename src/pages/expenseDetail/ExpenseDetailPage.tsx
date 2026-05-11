@@ -9,7 +9,6 @@ import {
   Modal,
   showToast,
 } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
@@ -90,11 +89,7 @@ function ExpenseDetailPage() {
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
-        trailingIcon={
-          <Text variant="body1R" color="semantic.text.subtle">
-            관리
-          </Text>
-        }
+        trailingIcon={<S.ManageLabel>관리</S.ManageLabel>}
         bgColor={color.semantic.background.normal.alternative}
       />
       <S.Content>

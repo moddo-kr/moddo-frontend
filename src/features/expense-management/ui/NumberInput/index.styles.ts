@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Container = styled.div`
   display: flex;
@@ -9,6 +9,15 @@ export const Container = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.color.semantic.border.default};
   flex-grow: 1;
   min-width: 0; // 자식 요소가 부모 요소의 크기를 넘어가지 않도록 함
+`;
+
+export const CurrencyUnit = styled.span<{ $variant: 'lg' | 'sm' }>`
+  ${({ $variant }) =>
+    $variant === 'lg'
+      ? applyTypography('typography.title.small')
+      : applyTypography('typography.body.medium-semibold')};
+  color: ${({ $variant }) =>
+    $variant === 'lg' ? getToken('fg.normal') : getToken('fg.neutral')};
 `;
 
 export const NumberInput = styled.input<{ $variant?: 'lg' | 'sm' }>`

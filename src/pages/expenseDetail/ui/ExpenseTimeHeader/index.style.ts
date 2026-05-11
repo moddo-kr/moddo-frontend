@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -68,6 +68,42 @@ export const TimeSep = styled.span`
   display: flex;
   justify-content: center;
   width: 2.375rem;
+`;
+
+export const DeadlineDate = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.primary.normal')};
+`;
+
+export const SettlementPrompt = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const PaidMemberCount = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.primary.normal')};
+`;
+
+export const SettlementStatusText = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.inverse.normal')};
+`;
+
+export const DeadlineLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const TimerDigit = styled.span<{ $isFailure: boolean }>`
+  ${applyTypography('typography.heading.medium')};
+  color: ${({ $isFailure }) =>
+    $isFailure ? getToken('fg.accent-red.normal') : getToken('fg.normal')};
+`;
+
+export const TimerUnit = styled.span<{ $gridColumn: number }>`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
+  grid-column: ${({ $gridColumn }) => $gridColumn};
 `;
 
 export const Bubble = styled.div`

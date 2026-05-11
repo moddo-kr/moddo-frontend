@@ -1,7 +1,6 @@
 import { useTheme } from 'styled-components';
 import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
 import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import { LogoIcon } from '@/shared/assets/svgs';
 import { Header } from '@/shared/design-system/ui';
 import * as S from './LoginEntranceView.styles';
@@ -21,9 +20,7 @@ function LoginEntranceView() {
       <Header type="1depth" bgColor={theme.color.semantic.orange.subtle} />
       <Flex direction="column" alignItems="center">
         <LogoIcon width={187} fill={theme.color.semantic.orange.default} />
-        <Text variant="body1R" color="semantic.text.subtle">
-          모또와 함께라면 정산 걱정 끝!
-        </Text>
+        <S.EntranceTagline>모또와 함께라면 정산 걱정 끝!</S.EntranceTagline>
       </Flex>
       <S.ImgContainer>
         <S.EntranceImg src={EntranceModdo} alt="EntranceImg" />

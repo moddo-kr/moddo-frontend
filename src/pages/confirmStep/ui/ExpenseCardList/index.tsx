@@ -1,6 +1,5 @@
 import { Fragment } from 'react/jsx-runtime';
 import { Expense } from '@/entities/expense/model/expense.type';
-import Text from '@/shared/ui/Text';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useDeleteMutation from '@/features/expense-management/api/useDeleteExpense';
 import { SettlementSummary } from '../SettlementSummary';
@@ -25,7 +24,7 @@ function ExpenseCardList({
     <S.ListContainer>
       {categorizedExpenses.map(([date, expensesArray]) => (
         <Fragment key={date}>
-          <Text variant="body1Sb">{date}</Text>
+          <S.DateGroupLabel>{date}</S.DateGroupLabel>
           {expensesArray.map((expense) => (
             <SettlementSummary
               key={expense.id}

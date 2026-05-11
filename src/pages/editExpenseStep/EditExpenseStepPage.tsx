@@ -2,7 +2,6 @@ import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
-import Text from '@/shared/ui/Text';
 import {
   Button,
   DescriptionField,
@@ -74,9 +73,7 @@ function EditExpenseStepPage({
       <DescriptionField
         title={
           <>
-            <Text variant="heading2" color="semantic.orange.default">
-              {groupInfo.groupName}
-            </Text>
+            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
             {`의\n지출 내역을 입력해주세요.`}
           </>
         }

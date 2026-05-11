@@ -4,7 +4,6 @@ import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpe
 import { FormProvider } from 'react-hook-form';
 import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Text from '@/shared/ui/Text';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './AddExpenseStepPage.styles';
@@ -37,9 +36,7 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
       <DescriptionField
         title={
           <>
-            <Text variant="heading2" color="semantic.orange.default">
-              {groupInfo.groupName}
-            </Text>
+            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
             {`의\n지출 내역을 입력해주세요.`}
           </>
         }

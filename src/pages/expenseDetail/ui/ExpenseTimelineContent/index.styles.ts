@@ -1,5 +1,6 @@
 import { Accordion } from '@/shared/design-system/ui';
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const ExpenseContent = styled.div`
   display: flex;
@@ -35,4 +36,18 @@ export const MemberChipList = styled(Accordion.Content)`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.unit[6]};
   margin-top: ${({ theme }) => theme.unit[6]};
+`;
+
+export const ExpenseContentName = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const ExpenseTotalAmount = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const MemberCount = styled.span`
+  ${applyTypography('typography.body.medium')};
 `;

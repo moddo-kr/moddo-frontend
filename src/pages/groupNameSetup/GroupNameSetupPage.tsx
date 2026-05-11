@@ -10,7 +10,6 @@ import {
   Header,
   Input,
 } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './GroupNameSetupPage.styles';
 
@@ -51,9 +50,9 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
       <S.PageContentWrapper>
         <Input placeholder="모또 미팅" {...register('groupName')} />
         {errors.groupName ? (
-          <Text as="p" variant="caption" color="semantic.state.danger">
+          <S.ValidationMessage>
             {errors.groupName?.message?.toString()}
-          </Text>
+          </S.ValidationMessage>
         ) : null}
       </S.PageContentWrapper>
       <BottomButtonContainer>

@@ -1,7 +1,6 @@
 import { Add } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
 import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import * as S from './CreateGroupLinkButton.styles';
 
 function CreateGroupLinkButton() {
@@ -14,9 +13,7 @@ function CreateGroupLinkButton() {
         gap={4}
       >
         <Add width={36} />
-        <Text variant="body1Sb" color="semantic.text.inverse">
-          새로 생성
-        </Text>
+        <S.CreateGroupLabel>새로 생성</S.CreateGroupLabel>
       </Flex>
     </S.LinkButton>
   );

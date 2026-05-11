@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const SelectGroupButton = styled.button`
   display: flex;
@@ -58,4 +59,34 @@ export const SettlementListWrapper = styled.div`
   margin: ${({ theme }) => `${theme.unit[20]} 0`};
   overflow-y: auto;
   flex: 1;
+`;
+
+export const BannerActionLabel = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const BannerDescription = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.inverse.normal')};
+  display: inline-block;
+  margin-top: 0.25rem; /* 4px */
+`;
+
+export const BoxButtonLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.neutral')};
+`;
+
+export const SettlementStatusMessage = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const SectionHeading = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const SortLabel = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.alternative')};
 `;
