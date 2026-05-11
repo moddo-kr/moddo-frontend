@@ -7,6 +7,8 @@ import {
   Divider,
   Header,
   Modal,
+  Tab,
+  TabList,
   showToast,
 } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
@@ -16,7 +18,6 @@ import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
-import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
@@ -104,10 +105,10 @@ function ExpenseDetailPage() {
         />
         <Divider />
         <S.TabListContainer>
-          <TabsList activeTab={activeTab} setActiveTab={setActiveTab}>
+          <TabList activeTab={activeTab} onTabChange={setActiveTab}>
             <Tab label="참여자별 정산" value="member" />
             <Tab label="전체 지출내역" value="expense" />
-          </TabsList>
+          </TabList>
         </S.TabListContainer>
         {activeTab === 'expense' ? (
           <ExpenseTimeline groupToken={groupToken} />
