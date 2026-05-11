@@ -126,3 +126,13 @@ export const ExpenseAmount = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.neutral')};
 `;
+
+export const PaymentStatusLabel = styled.span<{ $isActive: boolean }>`
+  ${applyTypography('typography.title.small')};
+  color: ${({ $isActive }) =>
+    $isActive
+      ? getToken('fg.primary.normal')
+      : getToken(
+          'fill.normal-disable'
+        )}; /* HACK: #ACAFB2로 정의된 토큰이 없어 의미상 유사한 토큰을 임의로 사용함 */
+`;

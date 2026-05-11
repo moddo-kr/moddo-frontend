@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import Text from '@/shared/ui/Text';
-
 import {
   Button,
   ProfileImage,
@@ -120,16 +118,9 @@ function ExpenseMemberItem({
           >
             <S.SheetContentWrapper>
               <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid
-                      ? 'semantic.text.disabled'
-                      : 'semantic.orange.default'
-                  }
-                >
+                <S.PaymentStatusLabel $isActive={!isPaid}>
                   미입금
-                </Text>
+                </S.PaymentStatusLabel>
                 <Confirm
                   width={theme.unit[20]}
                   height={theme.unit[20]}
@@ -139,16 +130,9 @@ function ExpenseMemberItem({
                 />
               </S.TextButtonWrapper>
               <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid // 입금완료
-                      ? 'semantic.orange.default'
-                      : 'semantic.text.disabled'
-                  }
-                >
+                <S.PaymentStatusLabel $isActive={isPaid}>
                   입금완료
-                </Text>
+                </S.PaymentStatusLabel>
                 <Confirm
                   width={theme.unit[20]}
                   height={theme.unit[20]}
