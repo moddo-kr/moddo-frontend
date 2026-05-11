@@ -22,9 +22,10 @@ export const ModalTitle = styled.div`
   justify-content: space-between;
 `;
 
-export const ModalHeading = styled.span`
+export const ModalHeading = styled.h2`
   ${applyTypography('typography.title.small')};
   color: ${getToken('fg.normal')};
+  margin: 0;
 `;
 
 export const ShareItemContainer = styled.div`
