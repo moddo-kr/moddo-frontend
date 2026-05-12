@@ -16,6 +16,7 @@ export { IconButton } from './IconButton';
 export type { IconButtonProps } from './IconButton';
 export { Input } from './Input';
 export { Keypad } from './Keypad';
+export type { KeyValue } from './Keypad';
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal';
 export { NameChip } from './NameChip';
