@@ -5,11 +5,11 @@ import {
   ProfileImage,
   useAccordionContext,
   BottomSheet,
+  PaidChip,
 } from '@/shared/design-system/ui';
 import { Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
-import StatusChip from './ui/StatusChip';
 import * as S from './index.style';
 
 interface ExpenseMemberItemProps {
@@ -101,7 +101,7 @@ function ExpenseMemberItem({
             onClick={handleStatusChipClick}
             aria-label={`${member.name}의 정산 상태 변경`}
           >
-            <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
+            <PaidChip status={member.isPaid ? '입금완료' : '미입금'} />
           </S.StatusChipButton>
           {/* 정산 상태 변경 바텀시트 */}
           <BottomSheet
