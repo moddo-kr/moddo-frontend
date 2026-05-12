@@ -16,6 +16,7 @@ const semanticSpacingTokenValues = {
   'padding.4': 12,
   'padding.5': 16,
   'padding.6': 20,
+  'padding.7': 24,
 } as const satisfies Record<string, AtomicNumberKey>;
 
 type SemanticSpacingKey = keyof typeof semanticSpacingTokenValues;

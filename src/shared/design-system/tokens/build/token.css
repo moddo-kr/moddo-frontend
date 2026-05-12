@@ -83,6 +83,7 @@
   --spacing-padding-4: var(--spacing-12);
   --spacing-padding-5: var(--spacing-16);
   --spacing-padding-6: var(--spacing-20);
+  --spacing-padding-7: var(--spacing-24);
 
   /* Radius */
   --radius-xs: 4px;
