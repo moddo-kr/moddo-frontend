@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { getToken, applyTypography } from '@/shared/design-system';
 
 interface StyledButtonProps {
-  $variant: 'primary' | 'secondary' | 'tertiary' | 'black';
+  $variant: 'primary' | 'secondary' | 'tertiary' | 'black' | 'red';
   $size: 'medium' | 'small' | 'xsmall';
 }
 
@@ -48,6 +48,13 @@ const variantStyles = {
     color: ${getToken('fg.static-white')};
     &:active:not(:disabled) {
       background: ${getToken('fill.inverse.normal')};
+    }
+  `,
+  red: css`
+    background: ${getToken('fill.accent-red.assistive')};
+    color: ${getToken('fg.accent-red.normal')};
+    &:active:not(:disabled) {
+      background: #f8cecc; /* HACK: 정해진 디자인이 없어 임의로 Red.90을 사용함 */
     }
   `,
 };

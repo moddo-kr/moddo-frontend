@@ -2,7 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
 import type { ButtonVariant, ButtonSize } from './Button';
 
-const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'tertiary', 'black'];
+const VARIANTS: ButtonVariant[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'black',
+  'red',
+];
 const SIZES: ButtonSize[] = ['medium', 'small', 'xsmall'];
 
 const meta: Meta<typeof Button> = {
