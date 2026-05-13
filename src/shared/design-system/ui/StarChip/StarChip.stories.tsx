@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { StarCount } from '@/entities/character/model/character.type';
 import { StarChip } from './StarChip';
-import type { StarCount } from './StarChip';
 
 const COUNTS: StarCount[] = [1, 2, 3];
 

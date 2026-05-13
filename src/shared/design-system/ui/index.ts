@@ -28,7 +28,6 @@ export { Profile } from './Profile';
 export { ProfileImage } from './ProfileImage';
 export { Select } from './Select';
 export { StarChip } from './StarChip';
-export type { StarCount } from './StarChip';
 export { TabList, Tab } from './Tab';
 export { TabChipList, TabChip } from './TabChip';
 export { Tag } from './Tag';

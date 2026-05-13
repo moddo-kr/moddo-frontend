@@ -7,7 +7,6 @@ import {
   StarChip,
   showToast,
 } from '@/shared/design-system/ui';
-import type { StarCount } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import { PageLayout } from '@/shared/ui/PageLayout';
@@ -86,7 +85,7 @@ function CharacterSharePage() {
         </S.TitleContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
-            <StarChip count={data.rarity as StarCount} />
+            <StarChip count={data.rarity} />
             <S.CharacterImageContainer>
               <img
                 src={data.imageBigUrl}
