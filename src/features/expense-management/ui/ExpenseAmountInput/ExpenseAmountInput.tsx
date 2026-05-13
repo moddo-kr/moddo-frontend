@@ -37,6 +37,7 @@ function ExpenseAmountInput({
   setOpen,
 }: ExpenseAmountInputProps) {
   const [input, setInput] = useState<number>(initialValue);
+  const formattedInput = input === 0 ? '' : formatAmount(input);
 
   const handleOpen = () => {
     setOpen(true);
@@ -78,11 +79,11 @@ function ExpenseAmountInput({
         required
         placeholder="금액입력"
         variant="price"
-        value={formatAmount(input)}
+        value={formattedInput}
         readOnly
       />
       <BottomSheet open={open} onClose={handleClose} title="결제 금액 입력">
-        <PriceDisplay value={formatAmount(input)} />
+        <PriceDisplay value={formattedInput} />
         <S.QuickAddContainer>
           {QUICK_ADD_BUTTONS.map(({ label, amount }) => (
             <Button
