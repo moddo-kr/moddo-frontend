@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const CardContainerBase = styled.li`
   box-sizing: border-box;
@@ -8,27 +8,27 @@ export const CardContainerBase = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
-  border-radius: ${({ theme }) => theme.radius.default};
-  background-color: ${({ theme }) => theme.color.semantic.orange.subtle};
+  gap: ${getToken('gap.2')};
+  border-radius: ${getToken('radius.lg')};
+  background-color: ${getToken('fill.primary.assistive')};
 `;
 
 export const CardContainer = styled(CardContainerBase)`
   justify-content: flex-end;
-  padding-top: ${({ theme }) => theme.unit[32]};
-  padding-bottom: ${({ theme }) => theme.unit[16]};
-  padding-left: ${({ theme }) => theme.unit[16]};
-  padding-right: ${({ theme }) => theme.unit[16]};
-  border: 1px solid ${({ theme }) => theme.color.semantic.orange.subtle};
+  padding-top: 2rem;
+  padding-bottom: ${getToken('padding.5')};
+  padding-left: ${getToken('padding.5')};
+  padding-right: ${getToken('padding.5')};
+  border: 1px solid ${getToken('fill.primary.assistive')};
 `;
 
 export const LockedCharacterCard = styled(CardContainerBase)`
   justify-content: center;
-  padding-top: ${({ theme }) => theme.unit[28]};
-  padding-bottom: ${({ theme }) => theme.unit[36]};
-  padding-left: ${({ theme }) => theme.unit[16]};
-  padding-right: ${({ theme }) => theme.unit[16]};
-  border: 1px dashed ${({ theme }) => theme.color.semantic.border.default};
+  padding-top: 1.75rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  padding-bottom: 2.25rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  padding-left: ${getToken('padding.5')};
+  padding-right: ${getToken('padding.5')};
+  border: 1px dashed #d2d4ds; /* HACK: 토큰에 정의되어 있지 않아 임시로 하드코딩함 */
 `;
 
 export const CharacterImage = styled.img`
@@ -36,7 +36,7 @@ export const CharacterImage = styled.img`
   flex-shrink: 1;
   min-height: 0;
   object-fit: contain;
-  margin-bottom: ${({ theme }) => theme.unit[16]};
+  margin-bottom: ${getToken('padding.5')};
 `;
 
 export const CharacterName = styled.span`

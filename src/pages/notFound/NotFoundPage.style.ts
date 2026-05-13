@@ -10,7 +10,7 @@ export const Flex = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.unit[16]};
+  gap: ${getToken('gap.6')};
   flex: 1;
 `;
 
@@ -19,7 +19,7 @@ export const DescriptionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
 `;
 
 export const NotFoundTitle = styled.span`

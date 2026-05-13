@@ -3,15 +3,13 @@ import { Accordion } from '@/shared/design-system/ui';
 import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Container = styled(Accordion)<{ $isPaid: boolean }>`
-  padding: ${({ theme }) => theme.unit[20]};
+  padding: ${getToken('padding.6')};
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: ${({ theme, $isPaid }) =>
-    $isPaid
-      ? theme.color.semantic.orange.subtle
-      : theme.color.semantic.background.normal.alternative};
-  border-radius: ${({ theme }) => theme.radius.large};
+  background: ${({ $isPaid }) =>
+    $isPaid ? getToken('fill.primary.assistive') : getToken('bg.neutral')};
+  border-radius: 1.25rem /* HACK: 토큰에 없는 border-radius 값 */;
   height: fit-content;
   flex: 1;
 `;
@@ -20,7 +18,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
   width: 100%;
 `;
 
@@ -39,20 +37,20 @@ export const HeaderToggleButton = styled.button`
 export const LeftWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
 `;
 
 export const SubProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: ${({ theme }) => theme.unit[2]};
+  gap: ${getToken('gap.1')};
 `;
 
 export const RightWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
 `;
 
 export const StatusChipButton = styled.button`
@@ -77,20 +75,19 @@ export const ContentContainer = styled(Accordion.Content)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.unit[12]};
+  gap: ${getToken('gap.5')};
 `;
 
 export const ExpensesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) =>
-    `${theme.unit[12]} ${theme.unit[12]} 0 ${theme.unit[12]}`};
+  padding: ${getToken('padding.4')} ${getToken('padding.4')} 0;
 `;
 
 export const PlaceWrapper = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.unit[20]};
+  gap: ${getToken('gap.7')};
   align-items: center;
 `;
 
@@ -98,8 +95,8 @@ export const SheetContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: ${({ theme }) => theme.unit[24]};
-  padding: 0 ${({ theme }) => theme.unit[20]} ${({ theme }) => theme.unit[16]};
+  gap: 1.5rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  padding: 0 ${getToken('padding.6')} ${getToken('padding.5')};
 `;
 
 export const TextButtonWrapper = styled.button<{ $isActive: boolean }>`

@@ -101,28 +101,32 @@ function ExpenseDetailPage() {
           setIsChecked={setIsChecked}
         />
         <Divider />
-        <S.TabListContainer>
-          <TabList activeTab={activeTab} onTabChange={setActiveTab}>
-            <Tab label="참여자별 정산" value="member" />
-            <Tab label="전체 지출내역" value="expense" />
-          </TabList>
-        </S.TabListContainer>
-        {activeTab === 'expense' ? (
-          <ExpenseTimeline groupToken={groupToken} />
-        ) : (
-          <ExpenseMembers groupToken={groupToken} status={status} />
-        )}
+        <S.BottomArea>
+          <S.TabListContainer>
+            <TabList activeTab={activeTab} onTabChange={setActiveTab}>
+              <Tab label="참여자별 정산" value="member" />
+              <Tab label="전체 지출내역" value="expense" />
+            </TabList>
+          </S.TabListContainer>
+          {activeTab === 'expense' ? (
+            <ExpenseTimeline groupToken={groupToken} />
+          ) : (
+            <ExpenseMembers groupToken={groupToken} status={status} />
+          )}
+        </S.BottomArea>
       </S.Content>
-      <BottomAction
-        status={status}
-        myProfile={myProfile}
-        memberTotal={MEMBER_TOTAL}
-        memberDone={MEMBER_DONE}
-        shareLink={shareLink}
-        onSettleClick={() => setIsChecked(false)}
-        onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
-        onBackToHome={handleBackToHome}
-      />
+      <S.BottomArea>
+        <BottomAction
+          status={status}
+          myProfile={myProfile}
+          memberTotal={MEMBER_TOTAL}
+          memberDone={MEMBER_DONE}
+          shareLink={shareLink}
+          onSettleClick={() => setIsChecked(false)}
+          onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
+          onBackToHome={handleBackToHome}
+        />
+      </S.BottomArea>
       <CharacterBottomSheet
         open={openBottomSheet}
         setOpen={setOpenBottomSheet}

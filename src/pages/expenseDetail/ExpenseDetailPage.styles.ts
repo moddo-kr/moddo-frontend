@@ -16,15 +16,12 @@ export const Content = styled.div`
   overflow-y: auto;
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
+export const TabListContainer = styled.div`
+  padding: 1.5rem ${getToken('padding.6')} 0; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  border-bottom: 1px solid ${getToken('border.alternative')}; /* HACK : #E8E8E7가 정의되어있는 곳이 없어 임의로 border.alternative 사용 */
+  background-color: ${getToken('bg.normal')};
 `;
 
-export const TabListContainer = styled.div`
-  padding: ${({ theme }) =>
-    `${theme.unit[24]} ${theme.unit[20]} 0 ${theme.unit[20]}`};
-  border-bottom: 1px solid ${({ theme }) => theme.color.semantic.border.subtle};
+export const BottomArea = styled.div`
+  background-color: ${getToken('bg.normal')};
 `;

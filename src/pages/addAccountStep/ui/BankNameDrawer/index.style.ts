@@ -1,10 +1,11 @@
 import { Button } from '@/shared/design-system/ui';
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const DrawerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 ${({ theme }) => theme.unit[20]};
+  padding: 0 ${getToken('padding.6')};
   height: 70dvh;
   width: 100%;
   position: relative;
@@ -68,10 +69,9 @@ export const BankButton = styled.button<{ $isSelected: boolean }>`
   cursor: pointer;
   border-radius: 12px;
   border: 2px solid
-    ${({ $isSelected, theme }) =>
-      $isSelected ? `${theme.color.semantic.orange.default}` : 'none'};
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
+    ${({ $isSelected }) =>
+      $isSelected ? getToken('fg.primary.normal') : 'none'};
+  background-color: ${getToken('bg.neutral')};
   padding: 1rem; // 20px
   display: flex;
   flex-direction: column;

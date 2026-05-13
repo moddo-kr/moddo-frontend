@@ -7,9 +7,9 @@ export const LinkButton = styled(Link)`
   @media (min-width: 600px) {
     font-size: 22px;
   }
-  background-color: ${({ theme }) => theme.color.semantic.orange.default};
-  border-radius: ${({ theme }) => theme.radius.default};
-  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[8]}`};
+  background-color: ${getToken('fg.primary.normal')};
+  border-radius: ${getToken('radius.lg')};
+  padding: ${getToken('padding.5')} ${getToken('padding.3')};
   cursor: pointer;
 `;
 

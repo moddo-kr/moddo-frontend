@@ -5,16 +5,16 @@ import { applyTypography, getToken } from '@/shared/design-system';
 export const ExpenseContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${({ theme }) => `${theme.unit[24]} ${theme.unit[20]}`};
+  padding: 1.5rem ${getToken('padding.6')}; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
   align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
-  border-radius: ${({ theme }) => theme.radius.large};
-  background: ${({ theme }) => theme.color.semantic.primary.subtle};
+  gap: ${getToken('gap.2')};
+  border-radius: 1.25rem /* HACK: 토큰에 없는 border-radius 값 */;
+  background: ${getToken('bg.neutral')};
 `;
 
 export const ContentTitle = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
   justify-content: space-between;
   width: 100%;
   align-items: center;
@@ -26,7 +26,7 @@ export const MemberChipContainer = styled(Accordion)`
 
 export const MemberChipHeader = styled(Accordion.Header)`
   display: flex;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
   padding: 0;
   width: fit-content;
 `;
@@ -34,8 +34,8 @@ export const MemberChipHeader = styled(Accordion.Header)`
 export const MemberChipList = styled(Accordion.Content)`
   display: flex;
   flex-wrap: wrap;
-  gap: ${({ theme }) => theme.unit[6]};
-  margin-top: ${({ theme }) => theme.unit[6]};
+  gap: ${getToken('gap.3')};
+  margin-top: 0.375rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
 `;
 
 export const ExpenseContentName = styled.span`

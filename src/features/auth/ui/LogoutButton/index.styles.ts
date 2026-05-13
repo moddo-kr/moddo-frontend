@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Button = styled.button`
-  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
-  color: ${({ theme }) => theme.color.semantic.state.danger};
+  padding: ${getToken('padding.4')} ${getToken('padding.6')};
+  color: ${getToken('fg.accent-red.normal')};
   ${applyTypography('typography.body.medium')};
 `;

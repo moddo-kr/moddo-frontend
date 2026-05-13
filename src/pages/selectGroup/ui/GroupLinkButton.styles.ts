@@ -7,11 +7,10 @@ export const LinkButton = styled(Link)`
   @media (min-width: 600px) {
     font-size: 22px;
   }
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.default};
-  border-radius: ${({ theme }) => theme.radius.default};
-  border: ${({ theme }) => `1px solid ${theme.color.semantic.border.default}`};
-  padding: ${({ theme }) => `${theme.unit[20]} ${theme.unit[16]}`};
+  background-color: ${getToken('bg.normal')};
+  border-radius: ${getToken('radius.lg')};
+  border: ${`1px solid ${getToken('border.neutral')}`};
+  padding: ${getToken('padding.6')} ${getToken('padding.5')};
   cursor: pointer;
 `;
 
