@@ -1,16 +1,12 @@
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import {
-  ActionArea,
-  Header,
-  StarChip,
-  showToast,
-} from '@/shared/design-system/ui';
+import { ActionArea, Header, showToast } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
+import { StarChip } from '@/features/character-management/ui';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 

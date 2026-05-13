@@ -5,7 +5,7 @@ import { StarChip } from './StarChip';
 const COUNTS: StarCount[] = [1, 2, 3];
 
 const meta: Meta<typeof StarChip> = {
-  title: 'Design System/StarChip',
+  title: 'Feature UI/StarChip',
   component: StarChip,
   tags: ['autodocs'],
   argTypes: {
