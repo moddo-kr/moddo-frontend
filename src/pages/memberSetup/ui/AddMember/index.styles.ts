@@ -35,6 +35,10 @@ export const MemberListSection = styled.div`
 
 export const MemberChipList = styled.div`
   display: flex;
-  gap: ${getToken('gap.5')};
-  flex-wrap: wrap;
+  gap: ${getToken('gap.7')};
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  > * {
+    flex: 0 0 auto;
+  }
 `;
