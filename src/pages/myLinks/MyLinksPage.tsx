@@ -37,7 +37,9 @@ function MyLinksPage() {
       <Header
         type="default"
         title="링크 관리"
-        headingIcon={<ArrowLeft width={24} />}
+        headingIcon={
+          <ArrowLeft width={24} color={getToken('fg.alternative')} />
+        }
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
