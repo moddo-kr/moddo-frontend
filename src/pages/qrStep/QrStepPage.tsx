@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import {
   ActionArea,
   DescriptionField,
@@ -51,10 +51,6 @@ function QrStepPage({ onBack }: QrStepProps) {
         headingIcon={<ArrowLeft width="1.5rem" />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
-        trailingIcon={<Reset width="1.5rem" />}
-        trailingIconAriaLabel="QR코드 초기화"
-        // TODO: QR코드 리셋 핸들러 연결 필요
-        onTrailingIconClick={() => {}}
       />
       <DescriptionField
         title={`QR코드를 공유하면\n바로 정산에 참여할 수 있어요!`}

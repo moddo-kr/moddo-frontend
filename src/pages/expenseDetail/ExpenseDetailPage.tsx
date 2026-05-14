@@ -88,7 +88,7 @@ function ExpenseDetailPage() {
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
-        trailingIcon={<S.ManageLabel>관리</S.ManageLabel>}
+        // trailingIcon={<S.ManageLabel>관리</S.ManageLabel>} // TODO : 추가를 논의중인 기능이기 때문에 삭제하지 않고 주석 처리함
       />
       <S.Content>
         <ExpenseTimeHeader

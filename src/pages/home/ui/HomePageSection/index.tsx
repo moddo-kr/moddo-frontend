@@ -1,6 +1,6 @@
 import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
-import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
+import { ArrowRight, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
 import { useState, useMemo } from 'react';
@@ -34,12 +34,9 @@ export function MainHeader() {
       title={
         <LogoIcon width={98} height={36} fill={getToken('fg.primary.normal')} />
       }
-      trailingIcon={<Bell width={24} height={24} />}
-      // trailingIconAriaLabel="알림"
-      // TODO: 알림 기능 개발 후 onTrailingIconClick 핸들러 연결
-      trailingSubIcon={<Menu width={24} height={24} />}
-      trailingSubIconAriaLabel="마이페이지로 이동"
-      onTrailingSubIconClick={() => navigate(ROUTE.my)}
+      trailingIcon={<Menu width={24} height={24} />}
+      trailingIconAriaLabel="마이페이지로 이동"
+      onTrailingIconClick={() => navigate(ROUTE.my)}
     />
   );
 }
