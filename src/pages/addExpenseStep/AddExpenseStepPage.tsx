@@ -54,6 +54,7 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
           ))}
         </S.ExpenseFormList>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{
             label: '지출 추가',
             onClick: handleSubmit((data) =>

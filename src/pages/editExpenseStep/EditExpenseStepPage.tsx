@@ -87,6 +87,7 @@ function EditExpenseStepPage({
           ))}
         </S.ExpenseFormList>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{
             label: '수정 완료',
             onClick: updateHandler,

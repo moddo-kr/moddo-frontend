@@ -46,7 +46,7 @@ function CharacterSharePage() {
     // NOTE : 임의로 만든 화면,,,
     // 캐릭터가 없는 경우에 대한 처리가 필요합니다...
     return (
-      <PageLayout $bg="neutral">
+      <PageLayout $bg="neutral" $hasBottomFixedAction>
         <Header
           type="default"
           headingIcon={
@@ -68,6 +68,7 @@ function CharacterSharePage() {
           </S.TitleContainer>
         </S.CharacterContainer>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{ label: '정산하러 가기', onClick: () => navigate(-1) }}
         />
       </PageLayout>
@@ -75,7 +76,7 @@ function CharacterSharePage() {
   }
 
   return (
-    <PageLayout $bg="neutral">
+    <PageLayout $bg="neutral" $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -117,6 +118,7 @@ function CharacterSharePage() {
       </S.CharacterContainer>
       {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
       <ActionArea
+        position="bottom-fixed"
         mainAction={{ label: '돌아가기', onClick: () => navigate(-1) }}
       />
     </PageLayout>

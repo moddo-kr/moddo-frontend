@@ -51,7 +51,7 @@ function MemberSetupPage() {
   }
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -71,6 +71,7 @@ function MemberSetupPage() {
         />
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '정산 시작!',
           onClick: () =>

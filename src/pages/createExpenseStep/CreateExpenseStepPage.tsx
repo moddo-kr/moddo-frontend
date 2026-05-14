@@ -116,6 +116,7 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
           ))}
         </S.ExpenseFormList>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{
             label: `총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`,
             onClick: handleSubmit((data) =>

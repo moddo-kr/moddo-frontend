@@ -45,7 +45,7 @@ function QrStepPage({ onBack }: QrStepProps) {
   };
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
         title="QR코드"
@@ -64,7 +64,10 @@ function QrStepPage({ onBack }: QrStepProps) {
           <QRCodeSVG size={160} value={shareLink} />
         </S.QrField>
       </S.QrContainer>
-      <ActionArea mainAction={{ label: '다운로드', onClick: handleDownload }} />
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{ label: '다운로드', onClick: handleDownload }}
+      />
     </PageLayout>
   );
 }

@@ -118,18 +118,16 @@ function ExpenseDetailPage() {
           )}
         </S.BottomArea>
       </S.Content>
-      <S.BottomArea>
-        <BottomAction
-          status={status}
-          myProfile={myProfile}
-          memberTotal={MEMBER_TOTAL}
-          memberDone={MEMBER_DONE}
-          shareLink={shareLink}
-          onSettleClick={() => setIsChecked(false)}
-          onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
-          onBackToHome={handleBackToHome}
-        />
-      </S.BottomArea>
+      <BottomAction
+        status={status}
+        myProfile={myProfile}
+        memberTotal={MEMBER_TOTAL}
+        memberDone={MEMBER_DONE}
+        shareLink={shareLink}
+        onSettleClick={() => setIsChecked(false)}
+        onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
+        onBackToHome={handleBackToHome}
+      />
       <CharacterBottomSheet
         open={openBottomSheet}
         setOpen={setOpenBottomSheet}

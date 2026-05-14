@@ -10,18 +10,36 @@ interface StyledContentsProps {
   $hasHorizontalPadding: boolean;
 }
 
-export const Container = styled.div`
+interface StyledContainerProps {
+  $position: 'static' | 'bottom-fixed';
+}
+
+export const Container = styled.div<StyledContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: ${getToken('padding.5')};
   width: 100%;
+
+  ${({ $position }) =>
+    $position === 'bottom-fixed' &&
+    css`
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      z-index: 9996;
+      max-width: 600px;
+      min-width: 320px;
+      transform: translateX(-50%);
+      pointer-events: none;
+    `}
 `;
 
 export const Contents = styled.div<StyledContentsProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
+  pointer-events: auto;
   ${({ $hasHorizontalPadding }) =>
     $hasHorizontalPadding
       ? css`

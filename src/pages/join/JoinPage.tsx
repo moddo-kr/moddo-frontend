@@ -41,7 +41,7 @@ function JoinPage() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         headingIcon={
           <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
@@ -81,6 +81,7 @@ function JoinPage() {
         <S.GradientOverlay />
       </S.ScrollWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '선택',
           onClick: handleConfirm,

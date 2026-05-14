@@ -27,7 +27,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
   const share = useShareLink(shareLink);
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -46,6 +46,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         <S.HamImg src={LoginHamImg} alt="정산햄" />
       </S.ImageWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
         alternativeAction={{
           label: '정산 내역 확인하기',

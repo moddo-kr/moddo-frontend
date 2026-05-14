@@ -33,7 +33,7 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   }
 
   return (
-    <PageLayout $bg="neutral">
+    <PageLayout $bg="neutral" $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -56,7 +56,10 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         expenses={data.expenses}
         onEdit={onEdit}
       />
-      <ActionArea mainAction={{ label: '확인했어요', onClick: onNext }} />
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{ label: '확인했어요', onClick: onNext }}
+      />
     </PageLayout>
   );
 }

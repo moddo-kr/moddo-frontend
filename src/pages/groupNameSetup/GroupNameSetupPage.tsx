@@ -35,7 +35,7 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
   });
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -57,6 +57,7 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
         ) : null}
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '다음',
           onClick: handleSubmit((data) => onNext(data.groupName)),

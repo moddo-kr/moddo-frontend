@@ -60,7 +60,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   };
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
         headingIcon={
@@ -94,6 +94,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
         />
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '다음',
           onClick: handleNextButtonClick,
