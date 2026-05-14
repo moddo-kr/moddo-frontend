@@ -1,4 +1,3 @@
-import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
 import { ArrowRight, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
@@ -13,6 +12,7 @@ import type {
   SettlementSort,
   SettlementStatus,
 } from '@/entities/group/model/group.type';
+import { LogoIcon } from '@/shared/assets/svgs/logo';
 import { getToken } from '@/shared/design-system';
 
 import {
