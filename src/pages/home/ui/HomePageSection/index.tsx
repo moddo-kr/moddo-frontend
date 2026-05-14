@@ -14,7 +14,6 @@ import type {
 } from '@/entities/group/model/group.type';
 import { LogoIcon } from '@/shared/assets/svgs/logo';
 import { getToken } from '@/shared/design-system';
-
 import {
   Header,
   TextButton,
@@ -31,10 +30,10 @@ export function MainHeader() {
   return (
     <Header
       type="1depth"
-      title={
-        <LogoIcon width={98} height={36} fill={getToken('fg.primary.normal')} />
+      title={<LogoIcon width={98} height={36} />}
+      trailingIcon={
+        <Menu width={24} height={24} color={getToken('fg.neutral')} />
       }
-      trailingIcon={<Menu width={24} height={24} />}
       trailingIconAriaLabel="마이페이지로 이동"
       onTrailingIconClick={() => navigate(ROUTE.my)}
     />
@@ -180,6 +179,7 @@ export function SettlementList() {
               transform: `rotate(${sort === 'OLDEST' ? 180 : 0}deg)`,
               transition: 'transform 0.2s ease',
             }}
+            color={getToken('fg.assistive')}
           />
         </TextButton>
       </S.FilterRow>

@@ -11,7 +11,7 @@
     "prettier:fix": "prettier --write src",
     "preview": "vite preview",
     "build:token": "vite-node src/shared/design-system/lib/build-token.ts",
-    "svgr": "npx @svgr/cli -d src/shared/assets/svgs/icon --typescript --no-dimensions public/svgs",
+    "svgr": "npx @svgr/cli -d src/shared/assets/svgs --typescript --no-dimensions public/svgs",
     "pwa": "pwa-assets-generator --preset minimal public/pwa/moddo.svg",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "STORYBOOK=true storybook build",

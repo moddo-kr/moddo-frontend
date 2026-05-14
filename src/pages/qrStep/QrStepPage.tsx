@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import {
   ActionArea,
   DescriptionField,
@@ -48,7 +49,9 @@ function QrStepPage({ onBack }: QrStepProps) {
       <Header
         type="default"
         title="QR코드"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
       />

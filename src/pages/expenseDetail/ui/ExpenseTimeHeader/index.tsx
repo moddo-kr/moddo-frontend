@@ -10,6 +10,7 @@ import {
   showToast,
 } from '@/shared/design-system/ui';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { getToken } from '@/shared/design-system';
 import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
@@ -175,7 +176,11 @@ function ExpenseTimeHeader({
               aria-label="계좌번호 복사"
               onClick={() => handleCopyButtonClick(accountFormat)}
             >
-              <Copy width={16} height={16} />
+              <Copy
+                width={16}
+                height={16}
+                color={getToken('fill.inverse.alternative')}
+              />
             </IconButton>
           </S.AccountRow>
         }
@@ -186,7 +191,7 @@ function ExpenseTimeHeader({
           {isBubble && <S.Bubble>{StatusContent[status].message}</S.Bubble>}
         </S.ModdoButton>
         <S.ExpenseChip>
-          <DollarCircle width={24} height={24} />
+          <DollarCircle width={24} height={24} color="#FECB3F" />
           <S.SettlementStatusText>
             <S.PaidMemberCount>{paidMember}</S.PaidMemberCount>
             {`/${totalMember} 정산 완료`}

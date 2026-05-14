@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import useGetPayments from '@/features/payment-management/api/useGetPayments';
 import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
 import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
@@ -32,7 +33,9 @@ function PaymentManagementPage() {
         <Header
           type="default"
           title="입금 관리"
-          headingIcon={<ArrowLeft width={24} />}
+          headingIcon={
+            <ArrowLeft width={24} color={getToken('fg.alternative')} />
+          }
           headingLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
         />

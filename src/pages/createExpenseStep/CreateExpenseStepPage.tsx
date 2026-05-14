@@ -15,6 +15,7 @@ import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
+import { getToken } from '@/shared/design-system';
 import * as S from './CreateExpenseStepPage.styles';
 
 interface CreateExpenseStepProps {
@@ -66,7 +67,9 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
       <PageLayout>
         <Header
           type="default"
-          headingIcon={<Close width="1.5rem" />}
+          headingIcon={
+            <Close width="1.5rem" color={getToken('fg.alternative')} />
+          }
           headingIconAriaLabel="지출 입력 종료"
           onHeadingIconClick={() => setOpen(true)}
           trailingIcon={

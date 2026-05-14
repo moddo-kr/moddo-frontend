@@ -5,6 +5,7 @@ import {
   Header,
   Profile,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { useState } from 'react';
@@ -42,7 +43,9 @@ function JoinPage() {
   return (
     <PageLayout>
       <Header
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />

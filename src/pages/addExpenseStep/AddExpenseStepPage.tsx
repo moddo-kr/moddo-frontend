@@ -7,6 +7,7 @@ import {
   DescriptionField,
   Header,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
@@ -34,7 +35,7 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
       <PageLayout>
         <Header
           type="default"
-          headingIcon={<Close width={24} />}
+          headingIcon={<Close width={24} color={getToken('fg.alternative')} />}
           headingIconAriaLabel="지출 입력 완료"
           onHeadingIconClick={onNext}
         />

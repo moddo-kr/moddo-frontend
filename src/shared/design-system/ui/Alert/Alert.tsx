@@ -5,6 +5,7 @@ import {
   SystemWarning,
   SystemSuccess,
 } from '@/shared/assets/svgs/icon';
+import { getToken } from '../../lib/getToken';
 import * as S from './Alert.styles';
 
 type AlertState = 'info' | 'success' | 'warning' | 'danger';
@@ -17,10 +18,34 @@ interface AlertProps {
 }
 
 const icons: Record<AlertState, ReactNode> = {
-  info: <SystemInfo width="100%" height="100%" />,
-  success: <SystemSuccess width="100%" height="100%" />,
-  warning: <SystemWarning width="100%" height="100%" />,
-  danger: <SystemDanger width="100%" height="100%" />,
+  info: (
+    <SystemInfo
+      width="100%"
+      height="100%"
+      color={getToken('fill.accent-blue.normal')}
+    />
+  ),
+  success: (
+    <SystemSuccess
+      width="100%"
+      height="100%"
+      color={getToken('fill.accent-green.normal')}
+    />
+  ),
+  warning: (
+    <SystemWarning
+      width="100%"
+      height="100%"
+      color={getToken('fill.accent-yellow.normal')}
+    />
+  ),
+  danger: (
+    <SystemDanger
+      width="100%"
+      height="100%"
+      color={getToken('fill.accent-red.normal')}
+    />
+  ),
 };
 
 const ariaRoleMap: Record<AlertState, 'alert' | 'status'> = {

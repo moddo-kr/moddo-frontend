@@ -11,6 +11,7 @@ import {
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { useShareLink, ShareModal } from '@/features/share';
 import { PageLayout } from '@/shared/ui/PageLayout';
+import { getToken } from '@/shared/design-system';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {
@@ -29,7 +30,9 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
     <PageLayout>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}
         trailingIcon={<S.QRCodeLabel>QR코드 만들기</S.QRCodeLabel>}

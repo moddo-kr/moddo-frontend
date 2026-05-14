@@ -8,7 +8,7 @@ export const TextContainer = styled.div`
   align-items: center;
   width: 100%;
   svg {
-    fill: ${getToken('fg.primary.normal')};
+    color: ${getToken('fg.primary.normal')};
   }
 `;
 

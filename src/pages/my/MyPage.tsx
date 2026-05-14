@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
 import { Menu } from '@/shared/assets/svgs/icon';
 import { Header } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { ROUTE } from '@/shared/config/route';
 import { CharacterSection } from '@/features/character-management/ui';
 import { MyProfile } from '@/features/user-profile/ui';
@@ -16,7 +17,7 @@ function MyPage() {
       <Header
         type="1depth"
         title="마이페이지"
-        trailingIcon={<Menu width={24} />}
+        trailingIcon={<Menu width={24} color={getToken('fg.alternative')} />}
         trailingIconAriaLabel="홈으로 이동"
         onTrailingIconClick={() => navigate(ROUTE.home)}
       />

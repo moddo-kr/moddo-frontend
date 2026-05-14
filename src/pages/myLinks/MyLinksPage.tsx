@@ -4,6 +4,7 @@ import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { Button, Header } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import { LinkCard } from './ui/LinkCard';
 import * as S from './MyLinksPage.styles';
@@ -18,7 +19,9 @@ function MyLinksPage() {
         <Header
           type="default"
           title="링크 관리"
-          headingIcon={<ArrowLeft width={24} />}
+          headingIcon={
+            <ArrowLeft width={24} color={getToken('fg.alternative')} />
+          }
           headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
         />

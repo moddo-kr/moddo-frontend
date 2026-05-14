@@ -5,6 +5,7 @@ import {
   DescriptionField,
   Header,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
@@ -35,7 +36,9 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
     <PageLayout $bg="neutral">
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
         trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}

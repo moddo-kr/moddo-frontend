@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import {
   ExpenseFormMember,
   RemainderData,
@@ -80,7 +81,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 aria-label="지출 입력 폼 삭제"
                 onClick={() => onDelete?.(index)}
               >
-                <Close width="1.5rem" />
+                <Close width="1.5rem" color={getToken('fg.alternative')} />
               </IconButton>
             ) : null}
           </S.FormCardTitleContainer>

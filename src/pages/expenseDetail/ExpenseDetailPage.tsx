@@ -17,6 +17,7 @@ import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
@@ -82,7 +83,9 @@ function ExpenseDetailPage() {
     <PageLayout $bg="neutral">
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel={groupData.groupName}
         headingIconAriaLabel="홈으로 이동"
         onHeadingIconClick={() => {
