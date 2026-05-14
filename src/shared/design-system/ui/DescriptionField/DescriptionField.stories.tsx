@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DescriptionField } from './DescriptionField';
 
 const meta: Meta<typeof DescriptionField> = {
-  title: 'Design System/DescriptionField',
+  title: 'Components/DescriptionField',
   component: DescriptionField,
   tags: ['autodocs'],
   argTypes: {
@@ -27,6 +27,6 @@ type Story = StoryObj<typeof DescriptionField>;
 
 export const Default: Story = {};
 
-export const WithoutSub: Story = {
+export const WithoutSubtitle: Story = {
   args: { sub: undefined },
 };

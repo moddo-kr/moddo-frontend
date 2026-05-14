@@ -3,7 +3,7 @@ import { PriceDisplay } from './PriceDisplay';
 import type { PriceDisplayProps } from './PriceDisplay';
 
 const meta: Meta<PriceDisplayProps> = {
-  title: 'Design System/PriceDisplay',
+  title: 'Components/PriceDisplay',
   component: PriceDisplay,
   tags: ['autodocs'],
   argTypes: {

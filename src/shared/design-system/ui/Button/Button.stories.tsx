@@ -12,7 +12,7 @@ const VARIANTS: ButtonVariant[] = [
 const SIZES: ButtonSize[] = ['medium', 'small', 'xsmall'];
 
 const meta: Meta<typeof Button> = {
-  title: 'Design System/Button',
+  title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {

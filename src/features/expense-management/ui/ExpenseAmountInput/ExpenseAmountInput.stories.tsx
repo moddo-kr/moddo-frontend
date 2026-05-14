@@ -4,7 +4,7 @@ import { getToken } from '@/shared/design-system';
 import { ExpenseAmountInput } from '.';
 
 const meta: Meta<typeof ExpenseAmountInput> = {
-  title: 'Feature UI/ExpenseAmountInput',
+  title: 'Feature Components/ExpenseAmountInput',
   component: ExpenseAmountInput,
   tags: ['autodocs'],
   parameters: {

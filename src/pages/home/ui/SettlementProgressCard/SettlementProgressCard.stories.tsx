@@ -4,7 +4,7 @@ import { SettlementProgressCard } from './SettlementProgressCard';
 import type { SettlementProgressCardProps } from './SettlementProgressCard';
 
 const meta: Meta<SettlementProgressCardProps> = {
-  title: 'Feature UI/SettlementProgressCard',
+  title: 'Feature Components/SettlementProgressCard',
   component: SettlementProgressCard,
   tags: ['autodocs'],
   decorators: [

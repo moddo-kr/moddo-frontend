@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TabChipList, TabChip } from './TabChip';
 
 const meta: Meta = {
-  title: 'Design System/TabChip',
+  title: 'Components/TabChip',
   tags: ['autodocs'],
 };
 

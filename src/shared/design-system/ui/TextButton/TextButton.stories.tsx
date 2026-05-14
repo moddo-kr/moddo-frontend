@@ -5,7 +5,7 @@ import type { TextButtonSize } from './TextButton';
 const SIZES: TextButtonSize[] = ['medium', 'small'];
 
 const meta: Meta<typeof TextButton> = {
-  title: 'Design System/TextButton',
+  title: 'Components/TextButton',
   component: TextButton,
   tags: ['autodocs'],
   argTypes: {

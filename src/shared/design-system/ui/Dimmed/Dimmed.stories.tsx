@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Dimmed } from './Dimmed';
 
 const meta: Meta<typeof Dimmed> = {
-  title: 'Design System/Dimmed',
+  title: 'Utilities/Dimmed',
   component: Dimmed,
   tags: ['autodocs'],
   argTypes: {

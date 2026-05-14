@@ -3,7 +3,7 @@ import { Header } from './Header';
 import type { HeaderProps } from './Header';
 
 const meta: Meta<typeof Header> = {
-  title: 'Design System/Header',
+  title: 'Components/Header',
   component: Header,
 };
 

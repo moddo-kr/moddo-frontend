@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CurvedProgressBar } from './CurvedProgressBar';
 
 const meta: Meta<typeof CurvedProgressBar> = {
-  title: 'Feature UI/CurvedProgressBar',
+  title: 'Feature Components/CurvedProgressBar',
   component: CurvedProgressBar,
   tags: ['autodocs'],
   argTypes: {

@@ -10,7 +10,7 @@ const defaultOptions = [
 ];
 
 const meta: Meta<SelectProps> = {
-  title: 'Design System/Select',
+  title: 'Components/Select',
   component: Select,
   tags: ['autodocs'],
   args: {

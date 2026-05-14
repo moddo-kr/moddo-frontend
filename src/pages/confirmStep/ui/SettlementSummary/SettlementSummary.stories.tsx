@@ -48,7 +48,7 @@ const mockMembers = [
 ];
 
 const meta: Meta<SettlementSummaryProps> = {
-  title: 'Feature UI/SettlementSummary',
+  title: 'Feature Components/SettlementSummary',
   component: SettlementSummary,
   tags: ['autodocs'],
   args: {

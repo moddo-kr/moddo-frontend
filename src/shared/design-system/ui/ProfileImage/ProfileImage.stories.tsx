@@ -5,7 +5,7 @@ import type { ProfileImageSize } from './ProfileImage';
 const SIZES: ProfileImageSize[] = ['36', '40', '48', '68'];
 
 const meta: Meta<typeof ProfileImage> = {
-  title: 'Design System/ProfileImage',
+  title: 'Components/ProfileImage',
   component: ProfileImage,
   tags: ['autodocs'],
   argTypes: {
