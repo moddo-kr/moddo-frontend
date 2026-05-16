@@ -1,4 +1,4 @@
-import { Button } from '@/shared/design-system/ui';
+import { ActionArea } from '@/shared/design-system/ui';
 import { useShareLink, ShareModal } from '@/features/share';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { StatusType } from '../ExpenseTimeHeader/index.type';
@@ -26,26 +26,52 @@ function BottomAction({
 }: BottomActionProps) {
   const share = useShareLink(shareLink);
 
-  if (status === 'success') {
-    return <Button onClick={onBackToHome}>홈으로 돌아가기</Button>;
-  }
+  if (status === 'success')
+    return (
+      <ActionArea
+        mainAction={{
+          label: '홈으로 돌아가기',
+          onClick: onBackToHome,
+        }}
+      />
+    );
 
-  // status === 'pending'
-  if (myProfile.role === 'MANAGER' && memberTotal === memberDone) {
-    return <Button onClick={onSettleClick}>정산 완료하기</Button>;
-  }
+  if (myProfile.role === 'MANAGER' && memberTotal === memberDone)
+    return (
+      <ActionArea
+        mainAction={{
+          label: '정산 완료하기',
+          onClick: onSettleClick,
+        }}
+      />
+    );
 
-  if (myProfile.role === 'PARTICIPANT' && !myProfile.isPaid) {
-    return <Button onClick={onPaymentRequestClick}>입금 확인 요청</Button>;
-  }
+  if (myProfile.role === 'PARTICIPANT' && !myProfile.isPaid)
+    return (
+      <ActionArea
+        mainAction={{
+          label: '입금 확인 요청',
+          onClick: onPaymentRequestClick,
+        }}
+      />
+    );
 
-  if (myProfile.role === 'PARTICIPANT' && myProfile.isPaid) {
-    return <Button disabled>정산 완료</Button>;
-  }
+  if (myProfile.role === 'PARTICIPANT' && myProfile.isPaid)
+    return (
+      <ActionArea
+        mainAction={{
+          label: '정산 완료',
+          onClick: () => {},
+          disabled: true,
+        }}
+      />
+    );
 
   return (
     <>
-      <Button onClick={share.startShare}>링크 공유하기</Button>
+      <ActionArea
+        mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
+      />
       <ShareModal
         open={share.isOpen}
         onClose={share.close}

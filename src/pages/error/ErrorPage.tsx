@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router';
 import errorHam from '@/shared/assets/pngs/error-ham.png';
 import { Button } from '@/shared/design-system/ui';
 import { ROUTE } from '@/shared/config/route';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './ErrorPage.style';
 
 interface ErrorPageProps {
@@ -9,8 +11,7 @@ interface ErrorPageProps {
   action?: {
     text?: string;
     href?: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onClick?: (arg: any) => void;
+    onClick?: () => void;
   };
 }
 
@@ -22,17 +23,30 @@ function ErrorPage({
     href: ROUTE.home,
   },
 }: ErrorPageProps) {
+  const navigate = useNavigate();
+
+  const handleActionClick = () => {
+    if (action.onClick) {
+      action.onClick();
+      return;
+    }
+
+    if (action.href) {
+      navigate(action.href);
+    }
+  };
+
   return (
-    <S.Flex>
-      <S.ErrorHamster src={errorHam} alt="error hamster" />
-      <S.DescriptionContainer>
-        <S.ErrorTitle>{title}</S.ErrorTitle>
-        <S.SubText>{description}</S.SubText>
-      </S.DescriptionContainer>
-      <Button onClick={action.onClick}>
-        <a href={action.href}>{action.text}</a>
-      </Button>
-    </S.Flex>
+    <PageLayout $bg="neutral">
+      <S.Flex>
+        <S.ErrorHamster src={errorHam} alt="error hamster" />
+        <S.DescriptionContainer>
+          <S.ErrorTitle>{title}</S.ErrorTitle>
+          <S.SubText>{description}</S.SubText>
+        </S.DescriptionContainer>
+        <Button onClick={handleActionClick}>{action.text}</Button>
+      </S.Flex>
+    </PageLayout>
   );
 }
 

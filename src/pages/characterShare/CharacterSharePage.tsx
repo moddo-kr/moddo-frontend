@@ -1,18 +1,12 @@
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import {
-  Button,
-  Header,
-  TextButton,
-  showToast,
-} from '@/shared/design-system/ui';
+import { ActionArea, Header, showToast } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
-import StarChip from '@/features/character-management/ui/StarChip';
+import { StarChip } from '@/features/character-management/ui';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 
@@ -20,7 +14,6 @@ function CharacterSharePage() {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
-  const { unit, color } = useTheme();
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
@@ -52,13 +45,12 @@ function CharacterSharePage() {
     // NOTE : 임의로 만든 화면,,,
     // 캐릭터가 없는 경우에 대한 처리가 필요합니다...
     return (
-      <>
+      <PageLayout $bg="neutral">
         <Header
           type="default"
-          headingIcon={<ArrowLeft width={unit[24]} />}
+          headingIcon={<ArrowLeft width={24} height={24} />}
           headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.alternative}
         />
         <S.CharacterContainer>
           <S.TitleContainer>
@@ -68,21 +60,20 @@ function CharacterSharePage() {
             </S.EmptyStateDescription>
           </S.TitleContainer>
         </S.CharacterContainer>
-        <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-          <Button onClick={() => navigate(-1)}>정산하러 가기</Button>
-        </BottomButtonContainer>
-      </>
+        <ActionArea
+          mainAction={{ label: '정산하러 가기', onClick: () => navigate(-1) }}
+        />
+      </PageLayout>
     );
   }
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width={24} height={24} />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
-        bgColor={color.semantic.background.normal.alternative}
       />
       <S.CharacterContainer>
         <S.TitleContainer>
@@ -90,7 +81,7 @@ function CharacterSharePage() {
         </S.TitleContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
-            <StarChip star={data.rarity} />
+            <StarChip count={data.rarity} />
             <S.CharacterImageContainer>
               <img
                 src={data.imageBigUrl}
@@ -106,16 +97,16 @@ function CharacterSharePage() {
             </S.CharacterDescription>
           </S.CharacterCard>
         </S.CharacterCardContainer>
-        <TextButton onClick={handleDownload} style={{ marginBottom: unit[20] }}>
-          <Download width={unit[20]} />
+        <S.DownloadButton onClick={handleDownload}>
+          <Download width="1.25rem" />
           이미지 저장
-        </TextButton>
+        </S.DownloadButton>
       </S.CharacterContainer>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
-        <Button onClick={() => navigate(-1)}>돌아가기</Button>
-      </BottomButtonContainer>
-    </>
+      {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
+      <ActionArea
+        mainAction={{ label: '돌아가기', onClick: () => navigate(-1) }}
+      />
+    </PageLayout>
   );
 }
 

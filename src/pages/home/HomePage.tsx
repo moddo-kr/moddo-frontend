@@ -1,19 +1,19 @@
 import { Divider } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import {
   MainHeader,
   SettlementBanner,
   SettlementList,
 } from './ui/HomePageSection';
-import * as S from './HomePage.style';
 
 function HomePage() {
   return (
-    <S.PageContainer>
+    <PageLayout>
       <MainHeader />
       <SettlementBanner />
       <Divider />
       <SettlementList />
-    </S.PageContainer>
+    </PageLayout>
   );
 }
 

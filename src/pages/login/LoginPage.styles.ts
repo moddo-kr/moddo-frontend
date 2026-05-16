@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 import { applyTypography, getToken } from '@/shared/design-system';
-
-export const LogoImg = styled.img`
-  width: 44%;
-  max-width: 12.625rem;
-  height: 4.125rem;
-  object-fit: contain;
-`;
+import { Button } from '@/shared/design-system/ui';
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  svg {
+    fill: ${getToken('fg.primary.normal')};
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -24,30 +21,20 @@ export const ContentWrapper = styled.div`
   margin-top: 40vh;
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.unit[12]};
-  width: 100%;
-  padding: ${({ theme }) =>
-    `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
-`;
-
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[12]}`};
 `;
 
-export const BottomWrapper = styled.footer`
+export const BottomWrapper = styled.div`
   position: fixed;
   bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: ${getToken('gap.5')};
-  padding: 0 ${getToken('padding.6')};
+  gap: ${getToken('gap.6')};
+  padding: ${`${getToken('padding.6')} ${getToken('padding.6')} 2rem ${getToken('padding.6')}`};
   width: 100%;
   max-width: 600px;
   min-width: 320px;
@@ -63,16 +50,19 @@ export const KakaoLoginLabel = styled.span`
   color: ${getToken('fg.normal')};
 `;
 
+export const KakaoButton = styled(Button)`
+  background: #fee500; /* 카카오 브랜드 컬러 */
+`;
+
 export const TermsNotice = styled.span`
   ${applyTypography('typography.caption.xsmall')};
   color: ${getToken('fg.alternative')};
 `;
 
-export const LoginPageLayout = styled.div`
+export const LoginPageContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: ${getToken('bg.normal')};
-  flex-grow: 1;
+  flex: 1;
 `;

@@ -1,13 +1,13 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import {
-  Button,
+  ActionArea,
   DescriptionField,
   Header,
   Input,
 } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
@@ -59,7 +59,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         headingIcon={<ArrowLeft width={24} />}
@@ -88,15 +88,14 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           inputMode="numeric"
         />
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          onClick={handleNextButtonClick}
-          disabled={!bankName || !accountNumber}
-        >
-          다음
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        mainAction={{
+          label: '다음',
+          onClick: handleNextButtonClick,
+          disabled: !bankName || !accountNumber,
+        }}
+      />
+    </PageLayout>
   );
 }
 

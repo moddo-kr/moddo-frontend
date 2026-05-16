@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const QrContainer = styled.div`
   display: flex;
@@ -15,7 +16,6 @@ export const QrField = styled.div`
   align-items: center;
   width: 12.5rem;
   height: 12.5rem;
-  border-radius: ${({ theme }) => theme.radius.default};
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.default};
+  border-radius: ${getToken('radius.lg')};
+  background-color: ${getToken('bg.normal')};
 `;

@@ -10,7 +10,7 @@ import { Alert, DatePicker, IconButton } from '@/shared/design-system/ui';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
 import MemberExpenses from '@/features/expense-management/ui/MemberExpenses';
-import NumPadBottomSheet from '@/features/expense-management/ui/NumPadBottomSheet';
+import { ExpenseAmountInput } from '../ExpenseAmountInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -91,7 +91,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.amount`}
               renderInput={({ field }) => (
-                <NumPadBottomSheet
+                <ExpenseAmountInput
                   initialValue={field.value}
                   open={openNumPad}
                   setOpen={setOpenNumPad}

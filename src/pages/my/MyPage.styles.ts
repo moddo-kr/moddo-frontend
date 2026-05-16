@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: ${({ theme }) => theme.unit[20]};
-  gap: ${({ theme }) => theme.unit[16]};
+  padding: ${getToken('padding.6')};
+  gap: ${getToken('gap.6')};
   min-height: 5.925rem;
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
+  background-color: ${getToken('bg.neutral')};
 `;

@@ -1,10 +1,19 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
+
+export const StateMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+`;
 
 export const TimelineContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${({ theme }) =>
-    `${theme.unit[32]} ${theme.unit[20]} ${theme.unit[32]} 0`};
+  padding: 2rem ${getToken('padding.6')} 2rem 0; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
 `;
 
 // 점, 선, 내용, 여백을 포함하고 있는 타임라인 아이템
@@ -22,20 +31,19 @@ export const TimelineLeft = styled.div`
 `;
 
 export const Dot = styled.div`
-  width: ${({ theme }) => theme.unit[10]};
-  height: ${({ theme }) => theme.unit[10]};
-  border-radius: ${({ theme }) => theme.radius.circle};
-  background-color: ${({ theme }) => theme.color.primitive.orange[500]};
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: ${getToken('radius.full')};
+  background-color: ${getToken('fill.primary.normal')};
   flex-shrink: 0;
 `;
 
 export const Line = styled.div<{ $hidden?: boolean }>`
   flex: 1;
   ${({ $hidden }) => $hidden && 'visibility: hidden;'}
-  border-left: 2px dotted ${({ theme }) =>
-    theme.color.semantic.secondary.strong};
+  border-left: 2px dotted #d2d4d5; /* HACK: 토큰에 정의되어 있지 않아 임시로 하드코딩함 */
 `;
 
 export const Gap = styled.div`
-  height: ${({ theme }) => theme.unit[16]};
+  height: 1rem;
 `;

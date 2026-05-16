@@ -2,8 +2,12 @@ import { useLoaderData } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
-import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import * as S from './AddExpenseStepPage.styles';
@@ -27,36 +31,37 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
 
   return (
     <FormProvider {...formMethods}>
-      <Header
-        type="default"
-        headingIcon={<Close width={24} />}
-        headingIconAriaLabel="지출 입력 완료"
-        onHeadingIconClick={onNext}
-      />
-      <DescriptionField
-        title={
-          <>
-            <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
-            {`의\n지출 내역을 입력해주세요.`}
-          </>
-        }
-        sub="총 지출 금액을 1/N로 나눌게요."
-      />
-      <S.ExpenseFormList>
-        {fieldArrayReturns.fields.map((field, index) => (
-          <FormCard key={field.id} ref={null} index={index} />
-        ))}
-      </S.ExpenseFormList>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          onClick={handleSubmit((data) =>
-            mutation.mutate({ groupToken, data })
-          )}
-          disabled={!allFormsValid}
-        >
-          지출 추가
-        </Button>
-      </BottomButtonContainer>
+      <PageLayout>
+        <Header
+          type="default"
+          headingIcon={<Close width={24} />}
+          headingIconAriaLabel="지출 입력 완료"
+          onHeadingIconClick={onNext}
+        />
+        <DescriptionField
+          title={
+            <>
+              <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
+              {`의\n지출 내역을 입력해주세요.`}
+            </>
+          }
+          sub="총 지출 금액을 1/N로 나눌게요."
+        />
+        <S.ExpenseFormList>
+          {fieldArrayReturns.fields.map((field, index) => (
+            <FormCard key={field.id} ref={null} index={index} />
+          ))}
+        </S.ExpenseFormList>
+        <ActionArea
+          mainAction={{
+            label: '지출 추가',
+            onClick: handleSubmit((data) =>
+              mutation.mutate({ groupToken, data })
+            ),
+            disabled: !allFormsValid,
+          }}
+        />
+      </PageLayout>
     </FormProvider>
   );
 }

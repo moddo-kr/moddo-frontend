@@ -13,12 +13,10 @@ export const GroupNameHighlight = styled.span`
 export const ExpenseFormList = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.unit[24]};
+  gap: 1.5rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
   width: 100%;
   flex: 1 0 0;
   overflow-y: auto;
-  padding: ${({ theme }) =>
-    `0 ${theme.unit[20]} ${theme.unit[24]} ${theme.unit[20]}`};
-  background: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
+  padding: 0 ${getToken('padding.6')} 1.5rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  background: ${getToken('bg.neutral')};
 `;

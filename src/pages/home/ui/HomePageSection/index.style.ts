@@ -5,9 +5,9 @@ import { applyTypography, getToken } from '@/shared/design-system';
 export const SelectGroupButton = styled.button`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
   background: transparent;
-  color: ${({ theme }) => theme.color.semantic.orange.default};
+  color: ${getToken('fg.primary.normal')};
 `;
 
 export const DescriptionImg = styled.img`
@@ -27,11 +27,11 @@ export const NoSettlementImg = styled.img`
 
 export const BoxButton = styled(Link)`
   display: flex;
-  padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[20]}`};
+  padding: ${getToken('padding.5')} ${getToken('padding.6')};
   position: relative;
   height: 5rem;
-  background-color: ${({ theme }) => theme.color.semantic.orange.subtle};
-  border-radius: ${({ theme }) => theme.radius.default};
+  background-color: ${getToken('fill.primary.assistive')};
+  border-radius: ${getToken('radius.lg')};
 
   width: 100%;
 `;
@@ -47,16 +47,15 @@ export const SmallImg = styled.img`
 export const BoxButtonWrapper = styled.div`
   display: flex;
   max-width: 37.5rem;
-  margin: ${({ theme }) =>
-    `0 ${theme.unit[20]} ${theme.unit[32]} ${theme.unit[20]}`};
-  gap: ${({ theme }) => theme.unit[8]};
+  margin: 0 ${getToken('padding.6')} 2rem ${getToken('padding.6')}; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  gap: ${getToken('gap.4')};
 `;
 
 export const SettlementListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.unit[20]};
-  margin: ${({ theme }) => `${theme.unit[20]} 0`};
+  gap: ${getToken('gap.7')};
+  margin: ${getToken('padding.6')} 0;
   overflow-y: auto;
   flex: 1;
 `;

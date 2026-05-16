@@ -44,4 +44,7 @@ export const LogoSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  svg {
+    fill: ${getToken('fg.primary.normal')};
+  }
 `;

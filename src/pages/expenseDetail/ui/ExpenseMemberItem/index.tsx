@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { useTheme } from 'styled-components';
+import { useLoaderData } from 'react-router';
 import {
   Button,
   ProfileImage,
   useAccordionContext,
   BottomSheet,
+  PaidChip,
 } from '@/shared/design-system/ui';
 import { Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
-import { useLoaderData } from 'react-router';
 import * as S from './index.style';
-import StatusChip from './ui/StatusChip';
 
 interface ExpenseMemberItemProps {
   member: MemberSettlement;
@@ -21,7 +20,6 @@ interface ExpenseMemberItemProps {
 
 function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
   const { isOpen, toggle, accordionId } = useAccordionContext();
-  const theme = useTheme();
 
   return (
     <S.HeaderToggleButton
@@ -33,11 +31,7 @@ function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
       <S.LeftWrapper>
         <ProfileImage src={member.profile} size="40" />
         <S.SubProfileWrapper>
-          <S.MemberName>
-            <span style={{ color: theme.color.primitive.gray[500] }}>
-              {member.name}
-            </span>
-          </S.MemberName>
+          <S.MemberName>{member.name}</S.MemberName>
           <S.MemberTotalAmount>
             {member.totalAmount.toLocaleString()}원
           </S.MemberTotalAmount>
@@ -60,7 +54,6 @@ function ExpenseMemberItem({
   const [isPaid, setIsPaid] = useState<boolean>(member.isPaid);
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const { myProfile } = useLoaderData();
-  const theme = useTheme();
   const updatePaymentStatusMutation = useUpdatePaymentStatus({
     groupToken,
     groupMemberId: member.id,
@@ -108,7 +101,7 @@ function ExpenseMemberItem({
             onClick={handleStatusChipClick}
             aria-label={`${member.name}의 정산 상태 변경`}
           >
-            <StatusChip status={member.isPaid ? 'paid' : 'unpaid'} />
+            <PaidChip status={member.isPaid ? '입금완료' : '미입금'} />
           </S.StatusChipButton>
           {/* 정산 상태 변경 바텀시트 */}
           <BottomSheet
@@ -117,29 +110,19 @@ function ExpenseMemberItem({
             title="정산 상태 변경"
           >
             <S.SheetContentWrapper>
-              <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
-                <S.PaymentStatusLabel $isActive={!isPaid}>
-                  미입금
-                </S.PaymentStatusLabel>
-                <Confirm
-                  width={theme.unit[20]}
-                  height={theme.unit[20]}
-                  stroke={
-                    isPaid ? 'none' : `${theme.color.semantic.orange.default}`
-                  }
-                />
+              <S.TextButtonWrapper
+                $isActive={!isPaid}
+                onClick={() => handleTextButtonClick(false)}
+              >
+                <S.PaymentStatusLabel>미입금</S.PaymentStatusLabel>
+                <Confirm width={20} height={20} />
               </S.TextButtonWrapper>
-              <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
-                <S.PaymentStatusLabel $isActive={isPaid}>
-                  입금완료
-                </S.PaymentStatusLabel>
-                <Confirm
-                  width={theme.unit[20]}
-                  height={theme.unit[20]}
-                  stroke={
-                    isPaid ? `${theme.color.semantic.orange.default}` : 'none'
-                  }
-                />
+              <S.TextButtonWrapper
+                $isActive={isPaid}
+                onClick={() => handleTextButtonClick(true)}
+              >
+                <S.PaymentStatusLabel>입금완료</S.PaymentStatusLabel>
+                <Confirm width={20} height={20} />
               </S.TextButtonWrapper>
               <Button
                 variant={isConfirm ? 'primary' : 'secondary'}
@@ -156,7 +139,7 @@ function ExpenseMemberItem({
         {member.expenses.map((expense) => (
           <S.ExpensesWrapper key={expense.content}>
             <S.PlaceWrapper>
-              <Receipt width={theme.unit[24]} height={theme.unit[24]} />
+              <Receipt width={24} height={24} />
               <S.ExpenseContent>{expense.content}</S.ExpenseContent>
             </S.PlaceWrapper>
             <S.ExpenseAmount>

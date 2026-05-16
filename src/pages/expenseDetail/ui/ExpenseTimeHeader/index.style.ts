@@ -4,10 +4,9 @@ import { applyTypography, getToken } from '@/shared/design-system';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
-  padding-top: ${({ theme }) => theme.unit[6]};
-  padding-bottom: ${({ theme }) => theme.unit[48]};
+  background: ${getToken('bg.neutral')};
+  padding-top: 0.375rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+  padding-bottom: 3rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
 `;
 
 export const ModdoButton = styled.button`
@@ -21,21 +20,23 @@ export const ModdoButton = styled.button`
 export const ModdoImage = styled.img`
   width: 47%;
   margin-top: 18%;
-  margin-bottom: ${({ theme }) => theme.unit[20]};
+  margin-bottom: 1.25rem;
   contain: content;
   cursor: pointer;
 `;
 
 export const ExpenseChip = styled.div`
   display: flex;
-  background: ${({ theme }) => theme.color.semantic.primary.default};
-  border-radius: ${({ theme }) => theme.radius.circle};
-  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
+  align-items: center;
+  gap: ${getToken('gap.4')};
+  background: ${getToken('fill.inverse.neutral')};
+  border-radius: ${getToken('radius.full')};
+  padding: ${getToken('padding.4')} ${getToken('padding.6')};
 `;
 
 export const TotalMoney = styled.span`
   position: absolute;
-  color: ${({ theme }) => theme.color.semantic.orange.default};
+  color: ${getToken('fg.primary.normal')};
   ${applyTypography('typography.body.small-semibold')};
   right: -7%;
   top: 57.5%;
@@ -45,8 +46,8 @@ export const TotalMoney = styled.span`
 `;
 
 export const TimeBox = styled.div`
-  background: ${({ theme }) => theme.color.primitive.base.white};
-  border-radius: ${({ theme }) => theme.radius.large};
+  background: ${getToken('fill.normal')};
+  border-radius: 1.25rem /* HACK: 토큰에 없는 border-radius 값 */;
   height: 6.5rem;
   display: flex;
   flex-direction: column;
@@ -62,7 +63,7 @@ export const Timer = styled.div`
 `;
 
 export const TimeSep = styled.span`
-  color: ${({ theme }) => theme.color.semantic.secondary.strong};
+  color: ${getToken('fg.normal')};
   font-size: 1.75rem;
   font-weight: bold;
   display: flex;
@@ -79,14 +80,13 @@ export const SettlementPrompt = styled.span`
   ${applyTypography('typography.heading.small')};
 `;
 
-export const PaidMemberCount = styled.span`
-  ${applyTypography('typography.body.medium-semibold')};
-  color: ${getToken('fg.primary.normal')};
-`;
-
 export const SettlementStatusText = styled.span`
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.inverse.normal')};
+`;
+
+export const PaidMemberCount = styled.span`
+  color: ${getToken('fg.primary.normal')};
 `;
 
 export const DeadlineLabel = styled.span`
@@ -126,13 +126,14 @@ export const TimerSection = styled.div`
 
 export const Bubble = styled.div`
   position: absolute;
-  height: ${({ theme }) => theme.unit[40]};
+  height: 2.5rem;
   top: 10%;
-  background: ${({ theme }) => theme.color.semantic.icon.subtle};
-  border-radius: ${({ theme }) => theme.radius.default};
-  color: ${({ theme }) => theme.color.semantic.text.inverse};
+  background: ${getToken('fill.inverse.alternative')};
+  border-radius: ${getToken('radius.lg')};
+  color: ${getToken('fg.inverse.normal')};
   ${applyTypography('typography.body.medium-semibold')};
-  padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[12]}`};
+  padding: 0.625rem /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
+    ${getToken('padding.4')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,9 +143,9 @@ export const Bubble = styled.div`
     bottom: -10px; /* 꼬리가 말풍선 아래에 위치하도록 */
     left: 50%;
     transform: translateX(-50%);
-    border-width: ${({ theme }) => `${theme.unit[14]} ${theme.unit[10]} 0`};
+    border-width: 0.875rem 0.625rem 0;
     border-style: solid;
-    border-color: ${({ theme }) => theme.color.semantic.icon.subtle} transparent
+    border-color: ${getToken('fill.inverse.alternative')} transparent
       transparent;
   }
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { applyTypography } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Button = styled.button`
-  padding: ${({ theme }) => `${theme.unit[12]} ${theme.unit[20]}`};
+  padding: ${getToken('padding.4')} ${getToken('padding.6')};
   ${applyTypography('typography.body.medium')};
 `;

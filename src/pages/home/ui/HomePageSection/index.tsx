@@ -1,4 +1,3 @@
-import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
 import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
@@ -14,6 +13,7 @@ import type {
   SettlementSort,
   SettlementStatus,
 } from '@/entities/group/model/group.type';
+import { getToken } from '@/shared/design-system';
 
 import {
   Header,
@@ -27,17 +27,12 @@ import { SettlementDateSection } from '../SettlementDateSection';
 type SettlementType = SettlementStatus;
 
 export function MainHeader() {
-  const theme = useTheme();
   const navigate = useNavigate();
   return (
     <Header
       type="1depth"
       title={
-        <LogoIcon
-          width={98}
-          height={36}
-          fill={theme.color.semantic.orange.default}
-        />
+        <LogoIcon width={98} height={36} fill={getToken('fg.primary.normal')} />
       }
       trailingIcon={<Bell width={24} height={24} />}
       // trailingIconAriaLabel="알림"
@@ -45,23 +40,21 @@ export function MainHeader() {
       trailingSubIcon={<Menu width={24} height={24} />}
       trailingSubIconAriaLabel="마이페이지로 이동"
       onTrailingSubIconClick={() => navigate(ROUTE.my)}
-      bgColor={theme.color.semantic.background.normal.default}
     />
   );
 }
 
 export function SettlementBanner() {
   const navigate = useNavigate();
-  const theme = useTheme();
   return (
     <>
       <S.BannerCard>
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
           <S.BannerActionLabel>정산하기</S.BannerActionLabel>
           <ArrowRight
-            width={theme.unit[20]}
-            height={theme.unit[20]}
-            fill={theme.color.semantic.orange.default}
+            width="1.25rem"
+            height="1.25rem"
+            fill={getToken('fg.primary.normal')}
           />
         </S.SelectGroupButton>
         <S.BannerDescription>
@@ -147,7 +140,6 @@ export function SettlementList() {
   const [settlementType, setSettlementType] =
     useState<SettlementType>('IN_PROGRESS');
   const [sort, setSort] = useState<SettlementSort>('LATEST');
-  const theme = useTheme();
 
   const handleSettlementTypeButtonClick = (type: SettlementType) => {
     if (settlementType === type) {
@@ -185,8 +177,8 @@ export function SettlementList() {
         <TextButton onClick={handleSortOptionClick}>
           <S.SortLabel>{sort === 'OLDEST' ? '오래된순' : '최신순'}</S.SortLabel>
           <Next
-            width={theme.unit[24]}
-            height={theme.unit[24]}
+            width="1.5rem"
+            height="1.5rem"
             style={{
               transform: `rotate(${sort === 'OLDEST' ? 180 : 0}deg)`,
               transition: 'transform 0.2s ease',

@@ -4,7 +4,7 @@ import { applyTypography, getToken } from '@/shared/design-system';
 export const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
   width: 100%;
 `;
 
@@ -13,7 +13,7 @@ export const FormFieldHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
 `;
 
 export const FieldLabel = styled.span`

@@ -1,23 +1,21 @@
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { DescriptionField, Header } from '@/shared/design-system/ui';
-import { useTheme } from 'styled-components';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { CreateGroupLinkButton, EmptyBox } from './ui';
 import * as S from './SelectGroupPage.styles';
 
 function SelectGroupPage() {
   const navigate = useNavigate();
-  const { color } = useTheme();
 
   return (
-    <S.SelectGroupPageContainer>
+    <PageLayout $bg="neutral">
       {/** @Todo Header는 layout으로 분리 -> url 경로에 따라 나오게 변경 */}
       <Header
         type="default"
         headingIcon={<ArrowLeft width={24} height={24} />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
-        bgColor={color.semantic.primary.subtle}
       />
       <S.SelectGroupContent>
         <main>
@@ -31,7 +29,7 @@ function SelectGroupPage() {
           </S.GroupButtonList>
         </main>
       </S.SelectGroupContent>
-    </S.SelectGroupPageContainer>
+    </PageLayout>
   );
 }
 

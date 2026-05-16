@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import {
   Dialog,
   Divider,
@@ -11,7 +11,6 @@ import {
   TabList,
   showToast,
 } from '@/shared/design-system/ui';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
@@ -26,7 +25,6 @@ import BottomAction from './ui/BottomAction';
 import * as S from './ExpenseDetailPage.styles';
 
 function ExpenseDetailPage() {
-  const { unit, color } = useTheme();
   const [activeTab, setActiveTab] = useState('member');
   const { groupToken, groupData, myProfile } = useLoaderData();
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
@@ -81,17 +79,16 @@ function ExpenseDetailPage() {
   };
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel={groupData.groupName}
         headingIconAriaLabel="홈으로 이동"
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
         trailingIcon={<S.ManageLabel>관리</S.ManageLabel>}
-        bgColor={color.semantic.background.normal.alternative}
       />
       <S.Content>
         <ExpenseTimeHeader
@@ -104,19 +101,21 @@ function ExpenseDetailPage() {
           setIsChecked={setIsChecked}
         />
         <Divider />
-        <S.TabListContainer>
-          <TabList activeTab={activeTab} onTabChange={setActiveTab}>
-            <Tab label="참여자별 정산" value="member" />
-            <Tab label="전체 지출내역" value="expense" />
-          </TabList>
-        </S.TabListContainer>
-        {activeTab === 'expense' ? (
-          <ExpenseTimeline groupToken={groupToken} />
-        ) : (
-          <ExpenseMembers groupToken={groupToken} status={status} />
-        )}
+        <S.BottomArea>
+          <S.TabListContainer>
+            <TabList activeTab={activeTab} onTabChange={setActiveTab}>
+              <Tab label="참여자별 정산" value="member" />
+              <Tab label="전체 지출내역" value="expense" />
+            </TabList>
+          </S.TabListContainer>
+          {activeTab === 'expense' ? (
+            <ExpenseTimeline groupToken={groupToken} />
+          ) : (
+            <ExpenseMembers groupToken={groupToken} status={status} />
+          )}
+        </S.BottomArea>
       </S.Content>
-      <BottomButtonContainer>
+      <S.BottomArea>
         <BottomAction
           status={status}
           myProfile={myProfile}
@@ -127,7 +126,7 @@ function ExpenseDetailPage() {
           onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
           onBackToHome={handleBackToHome}
         />
-      </BottomButtonContainer>
+      </S.BottomArea>
       <CharacterBottomSheet
         open={openBottomSheet}
         setOpen={setOpenBottomSheet}
@@ -152,7 +151,7 @@ function ExpenseDetailPage() {
           }}
         />
       </Modal>
-    </>
+    </PageLayout>
   );
 }
 

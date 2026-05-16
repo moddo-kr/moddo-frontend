@@ -1,12 +1,15 @@
 import { generatePath, useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
 import { ROUTE } from '@/shared/config/route';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';
 
@@ -18,7 +21,6 @@ export interface ParticipantProfile {
 const GROUP_TOKEN = 'groupToken';
 
 function MemberSetupPage() {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   const [groupToken] = useLocalStorage<string>({
     key: GROUP_TOKEN,
@@ -48,10 +50,10 @@ function MemberSetupPage() {
   }
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={unit[24]} />}
+        headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -65,17 +67,15 @@ function MemberSetupPage() {
           groupToken={groupToken}
         />
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          disabled={data.members.length <= 1}
-          onClick={() =>
-            navigate(generatePath(ROUTE.createExpense, { groupToken }))
-          }
-        >
-          정산 시작!
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        mainAction={{
+          label: '정산 시작!',
+          onClick: () =>
+            navigate(generatePath(ROUTE.createExpense, { groupToken })),
+          disabled: data.members.length <= 1,
+        }}
+      />
+    </PageLayout>
   );
 }
 

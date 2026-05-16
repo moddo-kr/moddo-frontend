@@ -20,8 +20,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* HACK: py 28px에 해당하는 padding 토큰 없음 (padding.6 = 20px). 하드코딩. */
-  padding: 1.75rem ${getToken('padding.6')};
+  padding: ${getToken('padding.7')} ${getToken('padding.6')};
 `;
 
 export const Title = styled.div`

@@ -7,13 +7,12 @@ import { groupPaymentRequestsByDate } from '@/features/payment-management/lib/gr
 import { PaymentAlertCard } from '@/features/payment-management/ui/PaymentAlertCard';
 import { Header } from '@/shared/design-system/ui';
 import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './PaymentManagementPage.styles';
 
 function PaymentManagementPage() {
   const navigate = useNavigate();
-  const { color } = useTheme();
 
   const { data, isLoading, isError } = useGetPayments();
   const { mutate: approvePayment } = useApprovePayment();
@@ -29,41 +28,39 @@ function PaymentManagementPage() {
 
   if (isLoading) {
     return (
-      <>
+      <PageLayout>
         <Header
           type="default"
           title="입금 관리"
           headingIcon={<ArrowLeft width={24} />}
           headingLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.default}
         />
         <S.PaymentStatusContent>
           <S.PaymentStatusMessage>
             입금 내역을 불러오는 중입니다.
           </S.PaymentStatusMessage>
         </S.PaymentStatusContent>
-      </>
+      </PageLayout>
     );
   }
 
   if (isError) {
     return (
-      <>
+      <PageLayout>
         <Header
           type="default"
           title="입금 관리"
           headingIcon={<ArrowLeft width={24} />}
           headingLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.default}
         />
         <S.PaymentStatusContent>
           <S.PaymentStatusMessage>
             입금 내역을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.
           </S.PaymentStatusMessage>
         </S.PaymentStatusContent>
-      </>
+      </PageLayout>
     );
   }
 
@@ -76,14 +73,13 @@ function PaymentManagementPage() {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
         type="default"
         title="입금 관리"
         headingIcon={<ArrowLeft width={24} />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
-        bgColor={color.semantic.background.normal.default}
       />
       {paymentSections.length > 0 ? (
         <S.PaymentListContainer>
@@ -111,7 +107,7 @@ function PaymentManagementPage() {
           <S.PaymentEmptyMessage>입금 내역이 없습니다.</S.PaymentEmptyMessage>
         </S.PaymentEmptyContainer>
       )}
-    </>
+    </PageLayout>
   );
 }
 

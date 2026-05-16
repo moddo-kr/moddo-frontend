@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { applyTypography, getToken } from '@/shared/design-system';
 
 // 공통 베이스
-export const HeaderArea = styled.header<{ $bgColor?: string }>`
+export const HeaderArea = styled.header`
   display: flex;
   align-items: center;
   position: sticky;
@@ -13,7 +13,7 @@ export const HeaderArea = styled.header<{ $bgColor?: string }>`
   width: 100%;
   min-width: 320px;
   height: 56px;
-  background-color: ${({ $bgColor }) => $bgColor || 'white'};
+  background-color: inherit;
 `;
 
 // default: heading(좌) + title(중앙) + trailing(우)

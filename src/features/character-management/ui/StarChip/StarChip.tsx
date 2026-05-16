@@ -1,6 +1,5 @@
+import { StarCount } from '@/entities/character/model/character.type';
 import * as S from './StarChip.styles';
-
-type StarCount = 1 | 2 | 3;
 
 interface StarChipProps {
   count: StarCount;
@@ -17,4 +16,4 @@ function StarChip({ count }: StarChipProps) {
 }
 
 export { StarChip };
-export type { StarChipProps, StarCount };
+export type { StarChipProps };
