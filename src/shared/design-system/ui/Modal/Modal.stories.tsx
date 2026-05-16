@@ -6,7 +6,7 @@ import { Dialog } from '../Dialog';
 import { Modal } from './Modal';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Design System/Modal',
+  title: 'Components/Modal',
   component: Modal,
   tags: ['autodocs'],
   args: {

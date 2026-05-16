@@ -6,7 +6,7 @@ const STATES: InputState[] = ['default', 'error', 'disabled'];
 const VARIANTS: InputVariant[] = ['default', 'price'];
 
 const meta: Meta<InputProps> = {
-  title: 'Design System/Input',
+  title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {

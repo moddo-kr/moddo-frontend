@@ -1,5 +1,6 @@
 import { Close } from '@/shared/assets/svgs/icon';
 import * as S from './Tag.styles';
+import { getToken } from '../../lib/getToken';
 
 interface TagProps {
   label: string;
@@ -18,7 +19,7 @@ function Tag(props: TagProps) {
           onClick={onClose}
           aria-label={`${label} 태그 닫기`}
         >
-          <Close width="100%" />
+          <Close width="100%" color={getToken('fg.neutral')} />
         </S.CloseButton>
       )}
     </S.Container>

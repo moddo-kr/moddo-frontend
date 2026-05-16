@@ -90,7 +90,7 @@ export const Wrapper = styled.div`
 
   .react-datepicker__week {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     place-items: center;
     height: 44px;
   }
@@ -102,8 +102,8 @@ export const Wrapper = styled.div`
     ${applyTypography('typography.body.small')}
     /* HACK: Figma --text/strong(#292c30 = gray.20)에 대응하는 token 없음, fg.normal(gray.10) 사용 */
     color: ${getToken('fg.normal')};
-    width: 100%;
-    aspect-ratio: 1 / 1;
+    width: 36px;
+    height: 36px;
     padding: 0;
     margin: 0;
     border-radius: ${getToken('radius.full')};

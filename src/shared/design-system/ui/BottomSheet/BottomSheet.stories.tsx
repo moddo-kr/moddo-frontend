@@ -5,7 +5,7 @@ import { ActionArea, Button } from '@/shared/design-system/ui';
 import { BottomSheet } from '.';
 
 const meta: Meta<typeof BottomSheet> = {
-  title: 'Design System/BottomSheet',
+  title: 'Components/BottomSheet',
   component: BottomSheet,
   tags: ['autodocs'],
   parameters: {

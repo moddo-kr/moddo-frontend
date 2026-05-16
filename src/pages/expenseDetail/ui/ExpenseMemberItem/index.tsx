@@ -10,6 +10,7 @@ import {
 import { Confirm, Next, Receipt } from '@/shared/assets/svgs/icon';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
+import { getToken } from '@/shared/design-system';
 import * as S from './index.style';
 
 interface ExpenseMemberItemProps {
@@ -38,7 +39,11 @@ function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
         </S.SubProfileWrapper>
       </S.LeftWrapper>
       <S.ChevronWrapper $isOpen={isOpen}>
-        <Next width={32} height={32} />
+        <Next
+          width={32}
+          height={32}
+          color={getToken('fill.inverse.alternative')}
+        />
       </S.ChevronWrapper>
     </S.HeaderToggleButton>
   );
@@ -139,7 +144,11 @@ function ExpenseMemberItem({
         {member.expenses.map((expense) => (
           <S.ExpensesWrapper key={expense.content}>
             <S.PlaceWrapper>
-              <Receipt width={24} height={24} />
+              <Receipt
+                width={24}
+                height={24}
+                color={getToken('fill.primary.normal')}
+              />
               <S.ExpenseContent>{expense.content}</S.ExpenseContent>
             </S.PlaceWrapper>
             <S.ExpenseAmount>

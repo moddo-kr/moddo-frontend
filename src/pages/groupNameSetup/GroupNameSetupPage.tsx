@@ -9,6 +9,7 @@ import {
   Header,
   Input,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './GroupNameSetupPage.styles';
 
@@ -34,10 +35,12 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
   });
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -54,6 +57,7 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
         ) : null}
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '다음',
           onClick: handleSubmit((data) => onNext(data.groupName)),

@@ -3,7 +3,7 @@ import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { IconButton } from './IconButton';
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Design System/IconButton',
+  title: 'Components/IconButton',
   component: IconButton,
   tags: ['autodocs'],
   argTypes: {

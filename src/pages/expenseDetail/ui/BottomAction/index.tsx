@@ -29,6 +29,7 @@ function BottomAction({
   if (status === 'success')
     return (
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '홈으로 돌아가기',
           onClick: onBackToHome,
@@ -39,6 +40,7 @@ function BottomAction({
   if (myProfile.role === 'MANAGER' && memberTotal === memberDone)
     return (
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '정산 완료하기',
           onClick: onSettleClick,
@@ -49,6 +51,7 @@ function BottomAction({
   if (myProfile.role === 'PARTICIPANT' && !myProfile.isPaid)
     return (
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '입금 확인 요청',
           onClick: onPaymentRequestClick,
@@ -59,6 +62,7 @@ function BottomAction({
   if (myProfile.role === 'PARTICIPANT' && myProfile.isPaid)
     return (
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '정산 완료',
           onClick: () => {},
@@ -70,6 +74,7 @@ function BottomAction({
   return (
     <>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
       />
       <ShareModal

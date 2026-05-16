@@ -6,7 +6,7 @@ const SIZES: ProfileSize[] = ['s', 'm', 'L'];
 const TYPES: ProfileType[] = ['default', 'delete', 'checked', 'disabled'];
 
 const meta: Meta<typeof Profile> = {
-  title: 'Design System/Profile',
+  title: 'Components/Profile',
   component: Profile,
   tags: ['autodocs'],
   argTypes: {

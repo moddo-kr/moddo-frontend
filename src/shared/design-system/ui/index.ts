@@ -1,5 +1,5 @@
 export { Accordion, useAccordionContext } from './Accordion';
-export { ActionArea } from './ActionArea';
+export { ActionArea, ACTION_AREA_BOTTOM_FIXED_PADDING } from './ActionArea';
 export type { ActionAreaAction } from './ActionArea';
 export { BottomSheet } from './BottomSheet';
 export type { BottomSheetProps } from './BottomSheet';

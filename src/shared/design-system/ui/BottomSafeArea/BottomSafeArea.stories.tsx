@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BottomSafeArea } from './BottomSafeArea';
 
 const meta: Meta<typeof BottomSafeArea> = {
-  title: 'Design System/BottomSafeArea',
+  title: 'Utilities/BottomSafeArea',
   component: BottomSafeArea,
   tags: ['autodocs'],
 };

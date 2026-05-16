@@ -7,6 +7,7 @@ import {
   DescriptionField,
   Header,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
 import { PageLayout } from '@/shared/ui/PageLayout';
@@ -50,10 +51,12 @@ function MemberSetupPage() {
   }
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -68,6 +71,7 @@ function MemberSetupPage() {
         />
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '정산 시작!',
           onClick: () =>

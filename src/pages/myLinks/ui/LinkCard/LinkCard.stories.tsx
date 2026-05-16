@@ -3,7 +3,7 @@ import { LinkCard } from './LinkCard';
 import type { LinkCardProps } from './LinkCard';
 
 const meta: Meta<LinkCardProps> = {
-  title: 'Feature UI/LinkCard',
+  title: 'Feature Components/LinkCard',
   component: LinkCard,
   tags: ['autodocs'],
   args: {

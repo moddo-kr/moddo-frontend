@@ -1,4 +1,5 @@
 import { Close, Copy } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import { Kakaotalk, Slack } from '@/shared/assets/svgs/logo';
 import { IconButton, Modal } from '@/shared/design-system/ui';
 import * as S from './ShareModal.styles';
@@ -24,7 +25,7 @@ function ShareModal({
         <S.ModalTitle>
           <S.ModalHeading>링크 공유하기</S.ModalHeading>
           <IconButton aria-label="공유 모달 닫기" onClick={onClose}>
-            <Close width="1.5rem" />
+            <Close width="1.5rem" color={getToken('fg.neutral')} />
           </IconButton>
         </S.ModalTitle>
         <S.ShareItemContainer>
@@ -47,7 +48,7 @@ function ShareModal({
             aria-label="링크 복사"
             onClick={onCopyLink}
           >
-            <Copy width="1.5rem" />
+            <Copy width="1.5rem" color={getToken('fg.assistive')} />
           </S.IconButton>
         </S.ShareItemContainer>
       </S.ShareModalContainer>

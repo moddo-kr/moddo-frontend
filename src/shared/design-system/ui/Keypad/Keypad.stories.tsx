@@ -4,7 +4,7 @@ import { Keypad } from './Keypad';
 import type { KeypadProps, KeyValue } from './Keypad';
 
 const meta: Meta<KeypadProps> = {
-  title: 'Design System/Keypad',
+  title: 'Components/Keypad',
   component: Keypad,
   tags: ['autodocs'],
   args: {

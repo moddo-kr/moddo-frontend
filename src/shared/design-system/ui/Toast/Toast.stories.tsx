@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Toast } from './Toast';
 
 const meta: Meta<typeof Toast> = {
-  title: 'Design System/Toast',
+  title: 'Components/Toast',
   component: Toast,
   tags: ['autodocs'],
   argTypes: {
@@ -35,7 +35,7 @@ export const Warning: Story = {
   args: { type: 'warning' },
 };
 
-export const ErrorType: Story = {
+export const Error: Story = {
   name: 'Error',
   args: { type: 'error' },
 };

@@ -4,6 +4,10 @@ import { TextButton } from '../TextButton';
 import * as S from './ActionArea.styles';
 
 type ActionAreaLayout = 'horizontal' | 'vertical';
+type ActionAreaPosition = 'static' | 'bottom-fixed';
+
+const ACTION_AREA_BOTTOM_FIXED_PADDING =
+  'calc(8rem + env(safe-area-inset-bottom))';
 
 interface ActionAreaAction {
   label: string;
@@ -17,6 +21,7 @@ interface ActionAreaAction {
  */
 interface ActionAreaProps {
   layout?: ActionAreaLayout;
+  position?: ActionAreaPosition;
   mainAction: ActionAreaAction;
   alternativeAction?: ActionAreaAction;
   showBottomSafeArea?: boolean;
@@ -73,6 +78,7 @@ function MainActionButton(props: ActionAreaAction) {
 function ActionArea(props: ActionAreaProps) {
   const {
     layout = 'vertical',
+    position = 'static',
     mainAction,
     alternativeAction,
     showBottomSafeArea = true,
@@ -80,7 +86,7 @@ function ActionArea(props: ActionAreaProps) {
   } = props;
 
   return (
-    <S.Container>
+    <S.Container $position={position}>
       <S.Contents $hasHorizontalPadding={hasHorizontalPadding}>
         <S.Actions $type={layout}>
           <S.MainActionWrapper $type={layout}>
@@ -101,5 +107,10 @@ function ActionArea(props: ActionAreaProps) {
   );
 }
 
-export { ActionArea };
-export type { ActionAreaProps, ActionAreaAction, ActionAreaLayout };
+export { ActionArea, ACTION_AREA_BOTTOM_FIXED_PADDING };
+export type {
+  ActionAreaProps,
+  ActionAreaAction,
+  ActionAreaLayout,
+  ActionAreaPosition,
+};

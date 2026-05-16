@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { applyTypography, getToken } from '@/shared/design-system';
+import { ACTION_AREA_BOTTOM_FIXED_PADDING } from '@/shared/design-system/ui';
 
 export const NameHighlight = styled.span`
   color: ${getToken('fg.primary.normal')};
@@ -24,4 +25,5 @@ export const TabListContainer = styled.div`
 
 export const BottomArea = styled.div`
   background-color: ${getToken('bg.normal')};
+  padding-bottom: ${ACTION_AREA_BOTTOM_FIXED_PADDING};
 `;

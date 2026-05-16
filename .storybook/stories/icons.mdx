@@ -2,14 +2,14 @@ import { Meta, IconGallery, IconItem } from '@storybook/addon-docs';
 import { getToken } from '@/shared/design-system';
 import * as Icons from '@/shared/assets/svgs/icon';
 
-<Meta title="Design Tokens/Icon Gallery" />
+<Meta title="Foundation/Icons" />
 
-# Icon Gallery
+# Iconography
 
 <IconGallery>
   {Object.entries(Icons).map(([name, Icon]) => (
     <IconItem key={name} name={name}>
-      <Icon width={24} height={24} fill={getToken('fg.normal')} />
+      <Icon width={24} height={24} color={getToken('fg.normal')} />
     </IconItem>
   ))}
 </IconGallery>

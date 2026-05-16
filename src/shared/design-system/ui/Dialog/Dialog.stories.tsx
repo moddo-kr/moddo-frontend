@@ -3,7 +3,7 @@ import { getToken } from '@/shared/design-system';
 import { Dialog } from './Dialog';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'Design System/Dialog',
+  title: 'Components/Dialog',
   component: Dialog,
   tags: ['autodocs'],
   decorators: [

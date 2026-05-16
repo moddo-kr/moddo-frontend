@@ -3,7 +3,7 @@ import { PaymentAlertCard } from './PaymentAlertCard';
 import type { PaymentAlertCardProps } from './PaymentAlertCard';
 
 const meta: Meta<PaymentAlertCardProps> = {
-  title: 'Feature UI/PaymentAlertCard',
+  title: 'Feature Components/PaymentAlertCard',
   component: PaymentAlertCard,
   tags: ['autodocs'],
   args: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Accordion } from './Accordion';
 
 const meta: Meta<typeof Accordion> = {
-  title: 'Design System/Accordion',
+  title: 'Components/Accordion',
   component: Accordion,
   tags: ['autodocs'],
 };
@@ -16,7 +16,7 @@ const items = [
   { title: 'Accordion 3', content: 'Accordion 3 content' },
 ];
 
-export const SingleAccordionStory: Story = {
+export const Single: Story = {
   name: 'Default',
   render: () => (
     <div style={{ width: '100%', maxWidth: '600px' }}>
@@ -30,7 +30,7 @@ export const SingleAccordionStory: Story = {
   ),
 };
 
-export const MultipleAccordionStory: Story = {
+export const Multiple: Story = {
   name: 'Multiple',
   render: () => (
     <div

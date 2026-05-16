@@ -4,6 +4,7 @@ import saveAs from 'file-saver';
 import { ActionArea, Header, showToast } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { StarChip } from '@/features/character-management/ui';
@@ -45,10 +46,16 @@ function CharacterSharePage() {
     // NOTE : 임의로 만든 화면,,,
     // 캐릭터가 없는 경우에 대한 처리가 필요합니다...
     return (
-      <PageLayout $bg="neutral">
+      <PageLayout $bg="neutral" $hasBottomFixedAction>
         <Header
           type="default"
-          headingIcon={<ArrowLeft width={24} height={24} />}
+          headingIcon={
+            <ArrowLeft
+              width={24}
+              height={24}
+              color={getToken('fg.alternative')}
+            />
+          }
           headingIconAriaLabel="뒤로가기"
           onHeadingIconClick={() => navigate(-1)}
         />
@@ -61,6 +68,7 @@ function CharacterSharePage() {
           </S.TitleContainer>
         </S.CharacterContainer>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{ label: '정산하러 가기', onClick: () => navigate(-1) }}
         />
       </PageLayout>
@@ -68,10 +76,16 @@ function CharacterSharePage() {
   }
 
   return (
-    <PageLayout $bg="neutral">
+    <PageLayout $bg="neutral" $hasBottomFixedAction>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={24} height={24} />}
+        headingIcon={
+          <ArrowLeft
+            width={24}
+            height={24}
+            color={getToken('fg.alternative')}
+          />
+        }
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -98,12 +112,13 @@ function CharacterSharePage() {
           </S.CharacterCard>
         </S.CharacterCardContainer>
         <S.DownloadButton onClick={handleDownload}>
-          <Download width="1.25rem" />
+          <Download width="1.25rem" color={getToken('fill.inverse.neutral')} />
           이미지 저장
         </S.DownloadButton>
       </S.CharacterContainer>
       {/* TODO : 공유하기 기능 개발시 공유하기 버튼으로 변경 */}
       <ActionArea
+        position="bottom-fixed"
         mainAction={{ label: '돌아가기', onClick: () => navigate(-1) }}
       />
     </PageLayout>

@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import {
   ActionArea,
   DescriptionField,
@@ -59,10 +60,12 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   };
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width={24} />}
+        headingIcon={
+          <ArrowLeft width={24} color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}
       />
@@ -72,7 +75,9 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           placeholder="은행 선택"
           value={bankName}
           onClick={handleBankInputClick}
-          trailingIcon={<ArrowDown width={24} />}
+          trailingIcon={
+            <ArrowDown width={24} color={getToken('fg.alternative')} />
+          }
           readOnly
         />
         <BankNameDrawer
@@ -89,6 +94,7 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
         />
       </S.PageContentWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '다음',
           onClick: handleNextButtonClick,

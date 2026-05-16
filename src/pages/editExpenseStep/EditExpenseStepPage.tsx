@@ -12,6 +12,7 @@ import { PageLayout } from '@/shared/ui/PageLayout';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';
+import { getToken } from '@/shared/design-system';
 import * as S from './EditExpenseStepPage.styles';
 
 type EditExpenseStepProps = {
@@ -67,7 +68,7 @@ function EditExpenseStepPage({
       <PageLayout>
         <Header
           type="default"
-          headingIcon={<Close width={24} />}
+          headingIcon={<Close width={24} color={getToken('fg.alternative')} />}
           headingIconAriaLabel="지출 수정 취소"
           onHeadingIconClick={onBack}
         />
@@ -86,6 +87,7 @@ function EditExpenseStepPage({
           ))}
         </S.ExpenseFormList>
         <ActionArea
+          position="bottom-fixed"
           mainAction={{
             label: '수정 완료',
             onClick: updateHandler,

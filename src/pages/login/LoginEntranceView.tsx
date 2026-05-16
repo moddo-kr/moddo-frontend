@@ -1,5 +1,5 @@
 import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
-import { LogoIcon } from '@/shared/assets/svgs';
+import { LogoIcon } from '@/shared/assets/svgs/logo';
 import { Header } from '@/shared/design-system/ui';
 import * as S from './LoginEntranceView.styles';
 

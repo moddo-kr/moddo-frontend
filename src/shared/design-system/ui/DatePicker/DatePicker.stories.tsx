@@ -4,7 +4,7 @@ import { DatePicker } from './DatePicker';
 import type { DatePickerProps } from './DatePicker';
 
 const meta: Meta<DatePickerProps> = {
-  title: 'Design System/DatePicker',
+  title: 'Components/DatePicker',
   component: DatePicker,
   tags: ['autodocs'],
   argTypes: {

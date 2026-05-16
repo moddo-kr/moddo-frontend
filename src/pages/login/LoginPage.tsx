@@ -1,11 +1,10 @@
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { showToast } from '@/shared/design-system/ui';
-import { Kakao } from '@/shared/assets/svgs/icon';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
-import { LogoIcon } from '@/shared/assets/svgs';
+import { LogoIcon, Kakao } from '@/shared/assets/svgs/logo';
 import { queryClient } from '@/shared/api/queryClient';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import LoginEntranceView from './LoginEntranceView';

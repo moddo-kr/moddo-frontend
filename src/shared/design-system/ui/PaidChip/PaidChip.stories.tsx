@@ -5,7 +5,7 @@ import type { PaidChipStatus } from './PaidChip';
 const STATUSES: PaidChipStatus[] = ['입금완료', '미입금', '확인중'];
 
 const meta: Meta<typeof PaidChip> = {
-  title: 'Design System/PaidChip',
+  title: 'Components/PaidChip',
   component: PaidChip,
   tags: ['autodocs'],
   argTypes: {

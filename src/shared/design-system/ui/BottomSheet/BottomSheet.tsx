@@ -4,6 +4,7 @@ import { useSpring, animated } from '@react-spring/web';
 import { Close } from '@/shared/assets/svgs/icon';
 import { Dimmed } from '../Dimmed';
 import { IconButton } from '../IconButton';
+import { getToken } from '../../lib/getToken';
 import * as S from './BottomSheet.styles';
 
 type BottomSheetA11yProps =
@@ -101,7 +102,7 @@ function BottomSheet({
           <S.Header>
             <S.Title id={titleId}>{title}</S.Title>
             <IconButton aria-label="바텀시트 닫기" onClick={onClose}>
-              <Close width="1.5rem" />
+              <Close width="1.5rem" color={getToken('fg.neutral')} />
             </IconButton>
           </S.Header>
         )}

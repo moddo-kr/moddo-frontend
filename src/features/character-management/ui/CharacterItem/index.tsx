@@ -6,7 +6,8 @@ import * as S from './index.styles';
 function LockedCharacterCard() {
   return (
     <S.LockedCharacterCard aria-label="잠긴 캐릭터">
-      <Certified width={62} />
+      {/* HACK : 정의되지 않은 토큰이라 #D2D4D5를 그대로 사용 */}
+      <Certified width={62} color="#D2D4D5" />
     </S.LockedCharacterCard>
   );
 }

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ActionArea } from './ActionArea';
 
 const meta: Meta<typeof ActionArea> = {
-  title: 'Design System/ActionArea',
+  title: 'Components/ActionArea',
   component: ActionArea,
   tags: ['autodocs'],
   args: {

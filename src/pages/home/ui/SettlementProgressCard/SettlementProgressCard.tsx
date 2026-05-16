@@ -39,7 +39,7 @@ function SettlementProgressCard({
           <S.ProgressFill $progress={progress} />
         </S.ProgressBar>
         <S.CountRow>
-          <SvgDollarCircle width={24} height={24} />
+          <SvgDollarCircle width={24} height={24} color="#FECB3F" />
           <S.CountGroup>
             <S.PaidCountText>{paidMember}</S.PaidCountText>
             <S.TotalCountText>/{totalMember} 정산 완료</S.TotalCountText>

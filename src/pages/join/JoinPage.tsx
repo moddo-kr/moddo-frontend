@@ -5,6 +5,7 @@ import {
   Header,
   Profile,
 } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { useState } from 'react';
@@ -40,9 +41,11 @@ function JoinPage() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
       />
@@ -78,6 +81,7 @@ function JoinPage() {
         <S.GradientOverlay />
       </S.ScrollWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{
           label: '선택',
           onClick: handleConfirm,

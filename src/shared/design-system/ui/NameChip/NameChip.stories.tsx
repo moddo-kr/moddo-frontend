@@ -12,7 +12,7 @@ const VARIANTS: NameChipVariant[] = [
 const SIZES: NameChipSize[] = ['m', 's'];
 
 const meta: Meta<typeof NameChip> = {
-  title: 'Design System/NameChip',
+  title: 'Components/NameChip',
   component: NameChip,
   tags: ['autodocs'],
   argTypes: {

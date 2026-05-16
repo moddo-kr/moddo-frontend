@@ -6,7 +6,7 @@ const STATES: AlertState[] = ['info', 'success', 'warning', 'danger'];
 const VARIANTS: AlertVariant[] = ['colored', 'white'];
 
 const meta: Meta<typeof Alert> = {
-  title: 'Design System/Alert',
+  title: 'Components/Alert',
   component: Alert,
   tags: ['autodocs'],
   argTypes: {

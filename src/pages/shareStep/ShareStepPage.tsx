@@ -11,6 +11,7 @@ import {
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { useShareLink, ShareModal } from '@/features/share';
 import { PageLayout } from '@/shared/ui/PageLayout';
+import { getToken } from '@/shared/design-system';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {
@@ -26,10 +27,12 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
   const share = useShareLink(shareLink);
 
   return (
-    <PageLayout>
+    <PageLayout $hasBottomFixedAction>
       <Header
         type="default"
-        headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}
         trailingIcon={<S.QRCodeLabel>QR코드 만들기</S.QRCodeLabel>}
@@ -43,6 +46,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         <S.HamImg src={LoginHamImg} alt="정산햄" />
       </S.ImageWrapper>
       <ActionArea
+        position="bottom-fixed"
         mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
         alternativeAction={{
           label: '정산 내역 확인하기',
