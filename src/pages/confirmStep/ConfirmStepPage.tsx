@@ -49,7 +49,11 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
           {getTotalExpense(data.expenses).toLocaleString()}원
         </Text>
       </S.TotalExpenseWrapper>
-      <ExpenseCardList expenses={data.expenses} onEdit={onEdit} />
+      <ExpenseCardList
+        groupToken={groupToken}
+        expenses={data.expenses}
+        onEdit={onEdit}
+      />
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
         <Button onClick={onNext}>확인했어요</Button>
       </BottomButtonContainer>

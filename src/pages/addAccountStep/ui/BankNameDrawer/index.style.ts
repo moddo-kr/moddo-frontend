@@ -56,7 +56,7 @@ export const SubmitButton = styled(Button)`
   z-index: 1;
 `;
 
-export const BankButton = styled.button<{ isSelected: boolean }>`
+export const BankButton = styled.button<{ $isSelected: boolean }>`
   width: 6.875rem; // 110px
   @media (max-width: 385px) {
     width: 6.25rem; // 100px
@@ -65,8 +65,8 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
   cursor: pointer;
   border-radius: 12px;
   border: 2px solid
-    ${({ isSelected, theme }) =>
-      isSelected ? `${theme.color.semantic.orange.default}` : 'none'};
+    ${({ $isSelected, theme }) =>
+      $isSelected ? `${theme.color.semantic.orange.default}` : 'none'};
   background-color: ${({ theme }) =>
     theme.color.semantic.background.normal.alternative};
   padding: 1rem; // 20px

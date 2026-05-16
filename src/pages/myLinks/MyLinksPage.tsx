@@ -8,7 +8,7 @@ import { Button } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
-import LinkBox from './ui/LinkBox';
+import { LinkCard } from './ui/LinkCard';
 
 function MyLinksPage() {
   const navigate = useNavigate();
@@ -65,9 +65,8 @@ function MyLinksPage() {
           bgColor={color.semantic.background.normal.alternative}
         >
           {groupList.map((group) => (
-            <LinkBox
+            <LinkCard
               key={group.settlementId}
-              id={group.settlementId}
               name={group.name}
               url={generateShareLink(group.groupCode)}
             />
