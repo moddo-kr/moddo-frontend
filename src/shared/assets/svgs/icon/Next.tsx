@@ -8,7 +8,7 @@ const SvgNext = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
   >
     <path
-      stroke="#6F7379"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
