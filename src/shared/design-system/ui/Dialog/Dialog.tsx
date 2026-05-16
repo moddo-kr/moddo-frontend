@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { ActionArea } from '../ActionArea';
 import * as S from './Dialog.styles';
 
@@ -7,8 +8,8 @@ interface DialogAction {
 }
 
 interface DialogProps {
-  title: string;
-  description?: string;
+  title: ReactNode;
+  description?: ReactNode;
   mainAction: DialogAction;
   alternativeAction?: DialogAction;
 }

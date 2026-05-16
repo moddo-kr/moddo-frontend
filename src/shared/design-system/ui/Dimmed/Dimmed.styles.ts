@@ -6,5 +6,5 @@ export const Overlay = styled.div`
   inset: 0;
   background: ${getToken('bg.dim')};
   opacity: 0.32;
-  z-index: 9998;
+  z-index: 9997;
 `;

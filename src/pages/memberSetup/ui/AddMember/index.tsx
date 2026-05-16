@@ -2,12 +2,9 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
-import { Button, Input } from '@/shared/design-system/ui';
+import { Button, Input, Profile, showToast } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
-import Profile from '@/shared/ui/Profile';
-import InputGroup from '@/shared/ui/InputGroup';
 import Flex from '@/shared/ui/Flex';
-import { showToast } from '@/shared/ui/Toast';
 import useAddGroupMember from './api/useAddGroupMember';
 import useDeleteGroupMember from './api/useDeleteGroupMember';
 import * as S from './index.styles';
@@ -79,7 +76,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
   return (
     <Flex direction="column" height="fit-content">
       <form onSubmit={handleSubmit(handleAddName)}>
-        <InputGroup>
+        <S.InputRow>
           <Input
             placeholder="이정산"
             {...register('name', {
@@ -94,7 +91,7 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           >
             추가하기
           </Button>
-        </InputGroup>
+        </S.InputRow>
       </form>
       <Flex direction="column" gap={8} mt={28}>
         <S.MemberCount>
@@ -108,11 +105,15 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           {members.map((member) => (
             <Profile
               key={member.id}
-              id={member.id}
-              name={member.name}
-              imageSrc={member.profile}
+              size="m"
               type={member.role === 'MANAGER' ? 'default' : 'delete'}
-              onDelete={handleDeleteMember}
+              label={member.name}
+              src={member.profile}
+              onDelete={
+                member.role === 'MANAGER'
+                  ? undefined
+                  : () => handleDeleteMember(member.id)
+              }
             />
           ))}
         </Flex>

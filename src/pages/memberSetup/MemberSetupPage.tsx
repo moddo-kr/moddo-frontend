@@ -1,11 +1,10 @@
 import { generatePath, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
-import Header from '@/shared/ui/Header';
 import { ROUTE } from '@/shared/config/route';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField } from '@/shared/design-system/ui';
+import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
 import { BoundaryError } from '@/shared/types/error.type';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
 import AddMember from './ui/AddMember';

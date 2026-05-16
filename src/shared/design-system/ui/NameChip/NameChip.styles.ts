@@ -6,7 +6,7 @@ import {
 } from '@/shared/design-system';
 
 interface StyledNameChipProps {
-  $variant: 'selected' | 'unselected' | 'disabled' | 'red';
+  $variant: 'selected' | 'unselected' | 'disabled' | 'red' | 'black';
   $size: 'm' | 's';
 }
 
@@ -45,6 +45,10 @@ const variantStyles = {
   red: css`
     background: ${getToken('fill.accent-red.assistive')};
     color: ${getToken('fg.accent-red.normal')};
+  `,
+  black: css`
+    background: ${getToken('fill.inverse.neutral')};
+    color: ${getToken('fg.inverse.normal')};
   `,
 };
 

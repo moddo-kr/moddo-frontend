@@ -5,7 +5,7 @@ import useApprovePayment from '@/features/payment-management/api/useApprovePayme
 import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { groupPaymentRequestsByDate } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
 import { PaymentAlertCard } from '@/features/payment-management/ui/PaymentAlertCard';
-import Header from '@/shared/ui/Header';
+import { Header } from '@/shared/design-system/ui';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import Flex from '@/shared/ui/Flex';

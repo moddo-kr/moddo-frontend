@@ -3,7 +3,7 @@ import EntranceModdo from '@/shared/assets/pngs/EntranceModdo.png';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
 import { LogoIcon } from '@/shared/assets/svgs';
-import Header from '@/shared/ui/Header';
+import { Header } from '@/shared/design-system/ui';
 import * as S from './LoginEntranceView.styles';
 
 // 로그인 페이지 전에 잠시 보여지는 진입 페이지

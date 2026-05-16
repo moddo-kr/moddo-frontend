@@ -1,5 +1,5 @@
 import { Button } from '@/shared/design-system/ui';
-import ShareButton from '@/shared/ui/ShareButton';
+import { useShareLink, ShareModal } from '@/features/share';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { StatusType } from '../ExpenseTimeHeader/index.type';
 
@@ -24,6 +24,8 @@ function BottomAction({
   onPaymentRequestClick,
   onBackToHome,
 }: BottomActionProps) {
+  const share = useShareLink(shareLink);
+
   if (status === 'success') {
     return <Button onClick={onBackToHome}>홈으로 돌아가기</Button>;
   }
@@ -41,7 +43,18 @@ function BottomAction({
     return <Button disabled>정산 완료</Button>;
   }
 
-  return <ShareButton shareLink={shareLink} />;
+  return (
+    <>
+      <Button onClick={share.startShare}>링크 공유하기</Button>
+      <ShareModal
+        open={share.isOpen}
+        onClose={share.close}
+        onKakaoShare={share.shareKakao}
+        onSlackShare={share.shareSlack}
+        onCopyLink={share.copyLink}
+      />
+    </>
+  );
 }
 
 export default BottomAction;

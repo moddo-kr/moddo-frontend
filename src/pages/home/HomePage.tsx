@@ -1,4 +1,4 @@
-import Divider from '@/shared/ui/Divider';
+import { Divider } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import {
   MainHeader,

@@ -1,10 +1,9 @@
 import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { Button, DescriptionField } from '@/shared/design-system/ui';
+import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';

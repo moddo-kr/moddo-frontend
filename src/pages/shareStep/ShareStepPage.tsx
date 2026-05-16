@@ -1,17 +1,16 @@
-import { useEffect } from 'react';
 import { generatePath, useLoaderData, useNavigate } from 'react-router';
 import Link from '@/shared/assets/pngs/Link.png';
 import LoginHamImg from '@/shared/assets/pngs/LoginHamImg.png';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
-import Header from '@/shared/ui/Header';
-import { Button, DescriptionField } from '@/shared/design-system/ui';
-import ButtonGroup from '@/shared/ui/ButtonGroup';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
-import initKakaoSDK from '@/shared/lib/initKakaoSDK';
-import ShareButton from '@/shared/ui/ShareButton';
 import generateShareLink from '@/shared/lib/generateShareLink';
+import { useShareLink, ShareModal } from '@/features/share';
 import * as S from './ShareStepPage.styles';
 
 interface ShareStepProps {
@@ -22,11 +21,9 @@ interface ShareStepProps {
 function ShareStepPage({ onNext, onBack }: ShareStepProps) {
   const { groupToken } = useLoaderData();
   const navigate = useNavigate();
-  useEffect(() => {
-    initKakaoSDK();
-  }, []);
 
   const shareLink = generateShareLink(groupToken);
+  const share = useShareLink(shareLink);
 
   return (
     <>
@@ -45,20 +42,21 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         <S.LinkImg src={Link} alt="링크" />
         <S.HamImg src={LoginHamImg} alt="정산햄" />
       </S.ImageWrapper>
-      <BottomButtonContainer>
-        <ButtonGroup direction="vertical">
-          <ShareButton shareLink={shareLink} />
-          <Button
-            size="small"
-            variant="tertiary"
-            onClick={() =>
-              navigate(generatePath(ROUTE.expenseDetail, { groupToken }))
-            }
-          >
-            정산 내역 확인하기
-          </Button>
-        </ButtonGroup>
-      </BottomButtonContainer>
+      <ActionArea
+        mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
+        alternativeAction={{
+          label: '정산 내역 확인하기',
+          onClick: () =>
+            navigate(generatePath(ROUTE.expenseDetail, { groupToken })),
+        }}
+      />
+      <ShareModal
+        open={share.isOpen}
+        onClose={share.close}
+        onKakaoShare={share.shareKakao}
+        onSlackShare={share.shareSlack}
+        onCopyLink={share.copyLink}
+      />
     </>
   );
 }

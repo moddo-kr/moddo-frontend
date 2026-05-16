@@ -4,8 +4,12 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { Button, DescriptionField, Input } from '@/shared/design-system/ui';
-import Header from '@/shared/ui/Header';
+import {
+  Button,
+  DescriptionField,
+  Header,
+  Input,
+} from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Text from '@/shared/ui/Text';
 import * as S from './PasswordSetupPage.styles';

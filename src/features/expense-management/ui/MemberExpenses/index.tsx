@@ -1,6 +1,6 @@
 import NumberInput from '@/features/expense-management/ui/NumberInput';
 import { ExpenseFormMember } from '@/entities/expense/model/expense.type';
-import Profile from '@/shared/ui/Profile';
+import { Profile } from '@/shared/design-system/ui';
 import * as S from './index.styles';
 
 interface MemberExpensesProps {
@@ -15,10 +15,10 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
         <S.MemberContainer key={member.id}>
           <S.ProfileContainer>
             <Profile
-              id={member.id}
-              name={member.name}
-              imageSrc={member.profile}
+              size="m"
               type="delete"
+              label={member.name}
+              src={member.profile}
               onDelete={() => onDelete(member.name)}
             />
           </S.ProfileContainer>

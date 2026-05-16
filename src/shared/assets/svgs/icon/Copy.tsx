@@ -8,7 +8,7 @@ const SvgCopy = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <g
-      stroke="#6F7379"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.8}

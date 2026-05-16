@@ -2,21 +2,21 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import ButtonGroup from '@/shared/ui/ButtonGroup';
-import { Button } from '@/shared/design-system/ui';
-import Header from '@/shared/ui/Header';
+import {
+  Dialog,
+  Divider,
+  Header,
+  Modal,
+  showToast,
+} from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
-import Flex from '@/shared/ui/Flex';
-import Modal from '@/shared/ui/Modal';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Divider from '@/shared/ui/Divider';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
-import { showToast } from '@/shared/ui/Toast';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -138,41 +138,23 @@ function ExpenseDetailPage() {
       />
       <Modal
         open={isPaymentModalOpen}
-        setOpen={setIsPaymentModalOpen}
-        variant="empty"
+        onClose={() => setIsPaymentModalOpen(false)}
+        ariaLabel={`${myProfile.name}님의 정산 입금을 알릴게요.`}
       >
-        <Flex direction="column" gap={28} style={{ width: '100%' }}>
-          <Flex direction="column" gap={16}>
-            <Text
-              variant="title"
-              color="semantic.text.strong"
-              style={{ whiteSpace: 'pre-line' }}
-            >
-              <Text variant="title" color="semantic.orange.default" as="span">
-                {myProfile.name}
-              </Text>
+        <Dialog
+          title={
+            <>
+              <S.NameHighlight>{myProfile.name}</S.NameHighlight>
               {'님의\n정산 입금을 알릴게요.'}
-            </Text>
-            <Text
-              variant="body1R"
-              color="semantic.text.strong"
-              style={{ whiteSpace: 'pre-line' }}
-            >
-              {
-                '총무에게 입금 확인 요청 알림이 전송됩니다.\n입금을 완료했을 때만 눌러주세요.'
-              }
-            </Text>
-          </Flex>
-          <ButtonGroup direction="horizontal">
-            <Button
-              variant="secondary"
-              onClick={() => setIsPaymentModalOpen(false)}
-            >
-              취소
-            </Button>
-            <Button onClick={handlePaymentRequest}>알림 보내기</Button>
-          </ButtonGroup>
-        </Flex>
+            </>
+          }
+          description={`총무에게 입금 확인 요청 알림이 전송됩니다.\n입금을 완료했을 때만 눌러주세요.`}
+          mainAction={{ label: '알림 보내기', onClick: handlePaymentRequest }}
+          alternativeAction={{
+            label: '취소',
+            onClick: () => setIsPaymentModalOpen(false),
+          }}
+        />
       </Modal>
     </>
   );

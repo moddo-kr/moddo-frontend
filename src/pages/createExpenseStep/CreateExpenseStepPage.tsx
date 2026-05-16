@@ -2,11 +2,15 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
-import { Button, DescriptionField } from '@/shared/design-system/ui';
-import Header from '@/shared/ui/Header';
+import {
+  Button,
+  DescriptionField,
+  Dialog,
+  Header,
+  Modal,
+} from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
-import Modal from '@/shared/ui/Modal';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
@@ -68,19 +72,21 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
         trailingIcon={<Text>지출 추가</Text>}
         onTrailingIconClick={handleAddExpense}
       />
-      {open && (
-        <Modal
-          open={open}
-          setOpen={setOpen}
-          variant="default"
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        ariaLabel="지출 내역 입력을 종료할까요?"
+      >
+        <Dialog
           title="지출 내역 입력을 종료할까요?"
-          subscribe="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
-          cancel="계속 입력"
-          submit="끝내기"
-          onCancel={() => setOpen(false)}
-          onSubmit={handleModalSubmit}
+          description="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
+          mainAction={{ label: '끝내기', onClick: handleModalSubmit }}
+          alternativeAction={{
+            label: '계속 입력',
+            onClick: () => setOpen(false),
+          }}
         />
-      )}
+      </Modal>
       <DescriptionField
         title={
           <>

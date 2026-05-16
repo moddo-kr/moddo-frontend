@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { DescriptionField } from '@/shared/design-system/ui';
-import Header from '@/shared/ui/Header';
+import { DescriptionField, Header } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import { useTheme } from 'styled-components';
 import { CreateGroupLinkButton, EmptyBox } from './ui';

@@ -33,6 +33,16 @@ export const ProfileGrid = styled.div`
   }
 `;
 
+export const ProfileButton = styled.button`
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
+`;
+
 export const GradientOverlay = styled.div`
   position: absolute;
   bottom: 0;

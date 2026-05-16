@@ -3,10 +3,14 @@ import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
 import { useLoaderData } from 'react-router';
-import Modal from '@/shared/ui/Modal';
 import copyClipboard from '@/shared/lib/copyClipboard';
-import { DescriptionField, TextButton } from '@/shared/design-system/ui';
-import { showToast } from '@/shared/ui/Toast';
+import {
+  DescriptionField,
+  Dialog,
+  IconButton,
+  Modal,
+  showToast,
+} from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { CurvedProgressBar } from '../CurvedProgressBar';
@@ -173,12 +177,12 @@ function ExpenseTimeHeader({
         sub={
           <Flex gap={4} alignItems="center">
             정산 계좌: {accountFormat}
-            <TextButton
+            <IconButton
               aria-label="계좌번호 복사"
               onClick={() => handleCopyButtonClick(accountFormat)}
             >
               <Copy width={16} height={16} />
-            </TextButton>
+            </IconButton>
           </Flex>
         }
       />
@@ -240,15 +244,19 @@ function ExpenseTimeHeader({
       </Flex>
       <Modal
         open={isModalOpen}
-        setOpen={setIsModalOpen}
-        variant="default"
-        title="모임원이 모두 입금했어요!"
-        subscribe="정산을 완료하고 캐릭터를 확인하시겠어요?"
-        cancel="미완료"
-        submit="완료"
-        onCancel={() => setIsModalOpen(false)}
-        onSubmit={handleModalButtonClick}
-      />
+        onClose={() => setIsModalOpen(false)}
+        ariaLabel="모임원이 모두 입금했어요!"
+      >
+        <Dialog
+          title="모임원이 모두 입금했어요!"
+          description="정산을 완료하고 캐릭터를 확인하시겠어요?"
+          mainAction={{ label: '완료', onClick: handleModalButtonClick }}
+          alternativeAction={{
+            label: '미완료',
+            onClick: () => setIsModalOpen(false),
+          }}
+        />
+      </Modal>
     </S.Wrapper>
   );
 }

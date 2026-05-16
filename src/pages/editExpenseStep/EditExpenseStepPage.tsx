@@ -1,12 +1,15 @@
 import { useLoaderData } from 'react-router';
 import { FormProvider } from 'react-hook-form';
 import { Close } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/ui/Header';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import Text from '@/shared/ui/Text';
-import { Button, DescriptionField } from '@/shared/design-system/ui';
+import {
+  Button,
+  DescriptionField,
+  Header,
+  showToast,
+} from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import { showToast } from '@/shared/ui/Toast';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import FormCard from '@/features/expense-management/ui/FormCard';
 import useUpdateExpense from '@/features/expense-management/api/useUpdateExpense';

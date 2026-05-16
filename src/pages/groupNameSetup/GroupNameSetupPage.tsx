@@ -4,9 +4,13 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { Button, DescriptionField, Input } from '@/shared/design-system/ui';
+import {
+  Button,
+  DescriptionField,
+  Header,
+  Input,
+} from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
-import Header from '@/shared/ui/Header';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import * as S from './GroupNameSetupPage.styles';
 
