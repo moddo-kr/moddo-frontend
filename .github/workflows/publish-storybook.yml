@@ -57,7 +57,7 @@ jobs:
             👉 ${{ steps.chromatic.outputs.buildUrl }}
 
       - name: Comment on PR (no snapshot changes)
-        if: steps.chromatic.outputs.changeCount == '0' && (github.event_name == 'pull_request' || inputs.pr_number)
+x        if: steps.chromatic.outputs.changeCount == '0' && (github.event_name == 'pull_request' || inputs.pr_number)
         uses: thollander/actions-comment-pull-request@v3
         with:
           pr-number: ${{ github.event.pull_request.number || inputs.pr_number }}
