@@ -1,7 +1,6 @@
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
-import DescriptionField from '@/shared/ui/DescriptionField';
+import { Button, DescriptionField } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { useTheme } from 'styled-components';

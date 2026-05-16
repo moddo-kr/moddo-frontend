@@ -2,10 +2,9 @@ import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { useGetUserInfo } from '@/entities/auth/api/useGetUserInfo';
 import { ROUTE } from '@/shared/config/route';
-import ProfileImage from '@/shared/ui/ProfileImage';
+import { Button, ProfileImage } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
-import Button from '@/shared/ui/Button';
 import * as S from './index.styles';
 
 function MyProfile() {
@@ -35,7 +34,7 @@ function MyProfile() {
       </Flex>
       {/* TODO: 현 피그마 디자인은 Chip이 Button으로 쓰이고 있는 상황이라 우선 button 컴포넌트 기준으로 구현했습니다. 디자인시스템 정리 후 다시 확인이 필요합니다! */}
       <Button
-        size="sm"
+        size="small"
         onClick={() => navigate(ROUTE.myEdit)}
         style={{
           backgroundColor: theme.color.semantic.background.normal.inverse,

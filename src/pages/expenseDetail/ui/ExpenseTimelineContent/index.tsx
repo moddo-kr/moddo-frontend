@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Chip from '@/shared/ui/Chip';
 import Text from '@/shared/ui/Text';
 import { ExpenseDetail } from '@/entities/expense/model/expense.type';
@@ -24,9 +24,9 @@ function ExpenseTimelineContent({ expense }: ExpenseTimelineContentProps) {
       </S.ContentTitle>
       <S.MemberChipContainer>
         <S.MemberChipHeader>
-          <Button variant="text" onClick={() => setIsExpanded(!isExpanded)}>
+          <TextButton onClick={() => setIsExpanded(!isExpanded)}>
             <Text>{expense.groupMembers.length}명</Text>
-          </Button>
+          </TextButton>
         </S.MemberChipHeader>
         <S.MemberChipList>
           {expense.groupMembers.map((name) => (

@@ -6,9 +6,7 @@ import {
   ExpenseFormMember,
   RemainderData,
 } from '@/entities/expense/model/expense.type';
-import Alert from '@/shared/ui/Alert';
-import Button from '@/shared/ui/Button';
-import ExpenseDatePicker from '@/shared/ui/DatePicker';
+import { Alert, DatePicker, TextButton } from '@/shared/design-system/ui';
 import Text from '@/shared/ui/Text';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
@@ -79,9 +77,12 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
           <S.FormCardTitleContainer>
             <Text variant="title">{index + 1}차</Text>
             {index > 0 ? (
-              <Button variant="text" onClick={() => onDelete?.(index)}>
+              <TextButton
+                aria-label="지출 입력 폼 삭제"
+                onClick={() => onDelete?.(index)}
+              >
                 <Close width="1.5rem" />
-              </Button>
+              </TextButton>
             ) : null}
           </S.FormCardTitleContainer>
           <S.FormContainer>
@@ -111,7 +112,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.date`}
               renderInput={({ field }) => (
-                <ExpenseDatePicker
+                <DatePicker
                   selected={new Date(field.value)}
                   onChange={(date) =>
                     field.onChange(format(date || new Date(), 'yyyy-MM-dd'))
@@ -131,7 +132,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 <>
                   {remainderData ? (
                     <Alert
-                      type="info"
+                      state="info"
                       message={`${remainderData.name}님에게 남은 ${remainderData.remainder}원이 부과됐어요.`}
                     />
                   ) : null}

@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
+import { Button } from '@/shared/design-system/ui';
 import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import Flex from '@/shared/ui/Flex';
@@ -86,6 +86,7 @@ function ExpenseDetailPage() {
         type="default"
         headingIcon={<ArrowLeft width={unit[24]} />}
         headingLabel={groupData.groupName}
+        headingIconAriaLabel="홈으로 이동"
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}

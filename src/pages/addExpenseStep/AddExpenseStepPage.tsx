@@ -3,9 +3,8 @@ import { Close } from '@/shared/assets/svgs/icon';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
 import { FormProvider } from 'react-hook-form';
 import Header from '@/shared/ui/Header';
-import Button from '@/shared/ui/Button';
+import { Button, DescriptionField } from '@/shared/design-system/ui';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
@@ -33,6 +32,7 @@ function AddExpenseStepPage({ onNext }: AddExpenseStepProps) {
       <Header
         type="default"
         headingIcon={<Close width={24} />}
+        headingIconAriaLabel="지출 입력 완료"
         onHeadingIconClick={onNext}
       />
       <DescriptionField

@@ -2,7 +2,7 @@ import { useTheme } from 'styled-components';
 import { ExpenseLink } from '@/entities/expense/model/expense.type';
 import { Copy } from '@/shared/assets/svgs/icon';
 import copyClipboard from '@/shared/lib/copyClipboard';
-import Button from '@/shared/ui/Button';
+import { TextButton } from '@/shared/design-system/ui';
 import Flex from '@/shared/ui/Flex';
 import Text from '@/shared/ui/Text';
 import { showToast } from '@/shared/ui/Toast';
@@ -43,9 +43,9 @@ function LinkBox({ name, url }: ExpenseLink) {
         >
           {url}
         </Text>
-        <Button variant="text" onClick={() => copyLink(url)}>
+        <TextButton aria-label="링크 복사" onClick={() => copyLink(url)}>
           <Copy width={theme.unit[16]} height={theme.unit[16]} />
-        </Button>
+        </TextButton>
       </Flex>
     </Flex>
   );

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { buttonGroupDirection } from './index.type';
 import ButtonGroup from '.';
 

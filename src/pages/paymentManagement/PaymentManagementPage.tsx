@@ -96,6 +96,7 @@ function PaymentManagementPage() {
         type="default"
         title="입금 관리"
         headingIcon={<ArrowLeft width={24} />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         bgColor={color.semantic.background.normal.default}
       />

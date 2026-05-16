@@ -2,10 +2,9 @@ import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import Header from '@/shared/ui/Header';
-import DescriptionField from '@/shared/ui/DescriptionField';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
+import { Button, DescriptionField } from '@/shared/design-system/ui';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
@@ -37,15 +36,13 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
       <Header
         type="default"
         headingIcon={<ArrowLeft width="1.5rem" />}
+        headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
         trailingIcon={<Text variant="body1Sb">지출 추가</Text>}
         onTrailingIconClick={onAdd}
         bgColor={color.semantic.background.normal.alternative}
       />
-      <DescriptionField
-        bgColor="semantic.background.normal.alternative"
-        title={`지출 내역을\n확인해주세요.`}
-      />
+      <DescriptionField title={`지출 내역을\n확인해주세요.`} />
       <S.TotalExpenseWrapper>
         <Text variant="body1Sb">누적 금액</Text>
         <Text variant="heading2" color="semantic.text.strong">

@@ -2,7 +2,7 @@ import { useNavigate, generatePath, useLoaderData } from 'react-router';
 import Text from '@/shared/ui/Text';
 import BottomSheet from '@/shared/ui/BottomSheet';
 import ButtonGroup from '@/shared/ui/ButtonGroup';
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';

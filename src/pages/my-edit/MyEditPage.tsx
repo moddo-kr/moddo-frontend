@@ -18,6 +18,7 @@ function MyEditPage() {
         headingLabel="뒤로가기"
         onHeadingIconClick={() => navigate(-1)}
         trailingIcon={<Menu width="1.5rem" />}
+        trailingIconAriaLabel="메뉴 열기"
         // TODO: 사이드 메뉴 핸들러 연결 필요
         onTrailingIconClick={() => {}}
       />
