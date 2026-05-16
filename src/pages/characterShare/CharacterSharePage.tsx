@@ -10,7 +10,6 @@ import {
 import { useLoaderData, useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import StarChip from '@/features/character-management/ui/StarChip';
@@ -63,12 +62,10 @@ function CharacterSharePage() {
         />
         <S.CharacterContainer>
           <S.TitleContainer>
-            <Text as="p" variant="heading1">
-              획득한 캐릭터가 없어요!
-            </Text>
-            <Text as="p" variant="body1R" color="semantic.text.subtle">
+            <S.EmptyStateTitle>획득한 캐릭터가 없어요!</S.EmptyStateTitle>
+            <S.EmptyStateDescription>
               정산을 완료하면 캐릭터를 획득할 수 있어요!
-            </Text>
+            </S.EmptyStateDescription>
           </S.TitleContainer>
         </S.CharacterContainer>
         <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
@@ -89,7 +86,7 @@ function CharacterSharePage() {
       />
       <S.CharacterContainer>
         <S.TitleContainer>
-          <Text variant="heading1">캐릭터를 획득했어요!</Text>
+          <S.PageTitle>캐릭터를 획득했어요!</S.PageTitle>
         </S.TitleContainer>
         <S.CharacterCardContainer ref={imageRef}>
           <S.CharacterCard>
@@ -103,17 +100,15 @@ function CharacterSharePage() {
                 }}
               />
             </S.CharacterImageContainer>
-            <Text variant="heading2" color="semantic.text.strong">
-              {data.name}
-            </Text>
-            <Text variant="body1R" color="semantic.text.subtle">
+            <S.CharacterName>{data.name}</S.CharacterName>
+            <S.CharacterDescription>
               {CHARACTER_DATA[data.name].description}
-            </Text>
+            </S.CharacterDescription>
           </S.CharacterCard>
         </S.CharacterCardContainer>
         <TextButton onClick={handleDownload} style={{ marginBottom: unit[20] }}>
           <Download width={unit[20]} />
-          <Text>이미지 저장</Text>
+          이미지 저장
         </TextButton>
       </S.CharacterContainer>
       <BottomButtonContainer $bgColor="semantic.background.normal.alternative">

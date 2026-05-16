@@ -1,5 +1,5 @@
-import { TextVariant } from '@/shared/ui/Text/index.styles';
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ export const ExpenseChip = styled.div`
 export const TotalMoney = styled.span`
   position: absolute;
   color: ${({ theme }) => theme.color.semantic.orange.default};
-  ${TextVariant('body2Sb')};
+  ${applyTypography('typography.body.small-semibold')};
   right: -7%;
   top: 57.5%;
   display: flex;
@@ -70,6 +70,60 @@ export const TimeSep = styled.span`
   width: 2.375rem;
 `;
 
+export const DeadlineDate = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.primary.normal')};
+`;
+
+export const SettlementPrompt = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const PaidMemberCount = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.primary.normal')};
+`;
+
+export const SettlementStatusText = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.inverse.normal')};
+`;
+
+export const DeadlineLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const TimerDigit = styled.span<{ $isFailure: boolean }>`
+  ${applyTypography('typography.heading.medium')};
+  color: ${({ $isFailure }) =>
+    $isFailure ? getToken('fg.accent-red.normal') : getToken('fg.normal')};
+`;
+
+export const TimerUnit = styled.span<{ $gridColumn: number }>`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
+  grid-column: ${({ $gridColumn }) => $gridColumn};
+`;
+
+export const DescriptionTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AccountRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${getToken('gap.2')};
+`;
+
+export const TimerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 ${getToken('padding.6')};
+  gap: ${getToken('gap.5')};
+`;
+
 export const Bubble = styled.div`
   position: absolute;
   height: ${({ theme }) => theme.unit[40]};
@@ -77,7 +131,7 @@ export const Bubble = styled.div`
   background: ${({ theme }) => theme.color.semantic.icon.subtle};
   border-radius: ${({ theme }) => theme.radius.default};
   color: ${({ theme }) => theme.color.semantic.text.inverse};
-  font-size: ${TextVariant('body1Sb')};
+  ${applyTypography('typography.body.medium-semibold')};
   padding: ${({ theme }) => `${theme.unit[10]} ${theme.unit[12]}`};
   display: flex;
   justify-content: center;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography } from '@/shared/design-system';
 
 export const RefTarget = styled.div`
   height: ${({ theme }) => theme.unit[24]};
@@ -28,4 +29,8 @@ export const FormContainer = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.unit[24]};
   width: 100%;
+`;
+
+export const ExpenseSequenceLabel = styled.span`
+  ${applyTypography('typography.title.small')};
 `;

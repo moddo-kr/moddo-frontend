@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const BottomSheetContainer = styled.div`
   width: 100%;
@@ -25,4 +26,13 @@ export const DescriptionContainer = styled.div`
   align-items: center;
   text-align: center;
   gap: ${({ theme }) => theme.unit[8]};
+`;
+
+export const CharacterTitle = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const CharacterDescription = styled.span`
+  ${applyTypography('typography.body.medium')};
 `;

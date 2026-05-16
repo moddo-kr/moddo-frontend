@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { TextVariant } from '@/shared/ui/Text/index.styles';
+import { applyTypography } from '@/shared/design-system';
 import { PaymentStatus } from './index.type';
 
 const statusVariants = {
@@ -22,6 +22,6 @@ export const StatusChip = styled.div<StyledStatusChipProps>`
   width: fit-content;
   padding: ${({ theme }) => `${theme.unit[4]} ${theme.unit[8]}`};
   border-radius: ${({ theme }) => theme.unit[6]};
-  ${TextVariant('caption')};
+  ${applyTypography('typography.caption.xsmall')};
   ${({ $status }) => statusVariants[$status]};
 `;

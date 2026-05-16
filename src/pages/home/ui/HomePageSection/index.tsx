@@ -1,7 +1,6 @@
 import { useTheme } from 'styled-components';
 import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
-import Text from '@/shared/ui/Text';
 import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
@@ -16,7 +15,6 @@ import type {
   SettlementStatus,
 } from '@/entities/group/model/group.type';
 
-import Flex from '@/shared/ui/Flex';
 import {
   Header,
   TextButton,
@@ -57,46 +55,29 @@ export function SettlementBanner() {
   const theme = useTheme();
   return (
     <>
-      <Flex
-        direction="column"
-        position="relative"
-        bgColor={theme.color.semantic.primary.default}
-        height="136px"
-        borderRadius={theme.radius.default}
-        margin={20}
-        px={20}
-        py={18}
-      >
+      <S.BannerCard>
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
-          <Text variant="heading2">정산하기</Text>
+          <S.BannerActionLabel>정산하기</S.BannerActionLabel>
           <ArrowRight
             width={theme.unit[20]}
             height={theme.unit[20]}
             fill={theme.color.semantic.orange.default}
           />
         </S.SelectGroupButton>
-        <Text
-          variant="body2R"
-          color="semantic.text.inverse"
-          style={{ display: 'inline-block', marginTop: theme.unit[4] }}
-        >
+        <S.BannerDescription>
           모임은 즐겁게, 정산은 깔끔하게!
           <br />
           모또만 믿고 맡겨줘!
-        </Text>
+        </S.BannerDescription>
         <S.DescriptionImg src={MainHamImg2} alt="" />
-      </Flex>
+      </S.BannerCard>
       <S.BoxButtonWrapper>
         <S.BoxButton to={ROUTE.myLinks}>
-          <Text variant="body1Sb" color="semantic.text.default">
-            링크 관리
-          </Text>
+          <S.BoxButtonLabel>링크 관리</S.BoxButtonLabel>
           <S.SmallImg src={LinkMain} alt="" />
         </S.BoxButton>
         <S.BoxButton to={ROUTE.paymentManagement}>
-          <Text variant="body1Sb" color="semantic.text.default">
-            입금 관리
-          </Text>
+          <S.BoxButtonLabel>입금 관리</S.BoxButtonLabel>
           <S.SmallImg src={CardMain} alt="" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
@@ -124,53 +105,32 @@ function SettlementContent({
 
   if (isLoading) {
     return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
-        <Text variant="body2R" color="semantic.text.subtle">
+      <S.SettlementEmptyState>
+        <S.SettlementStatusMessage>
           정산 내역을 불러오는 중이에요.
-        </Text>
-      </Flex>
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
   if (isError) {
     return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
-        <Text variant="body2R" color="semantic.text.subtle">
+      <S.SettlementEmptyState>
+        <S.SettlementStatusMessage>
           정산 내역을 불러오지 못했어요.
-        </Text>
-      </Flex>
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
   if (settlementList.length === 0) {
     return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
+      <S.SettlementEmptyState>
         <S.NoSettlementImg src={CoinImg} alt="" />
-        <Text variant="body2R" color="semantic.text.subtle">
+        <S.SettlementStatusMessage>
           {settlementType === 'IN_PROGRESS'
             ? '아직 진행중인 정산이 없어요.'
             : '완료된 정산이 없어요.'}
-        </Text>
-      </Flex>
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
 
@@ -207,16 +167,11 @@ export function SettlementList() {
   const settlementList = data ?? [];
 
   return (
-    <Flex direction="column" pt={16} flexGrow={1}>
-      <Flex pl={20} py={8}>
-        <Text variant="heading2">정산 내역</Text>
-      </Flex>
-      <Flex
-        justifyContent="space-between"
-        px={20}
-        height={48}
-        alignItems="center"
-      >
+    <S.SettlementListContainer>
+      <S.SectionHeadingRow>
+        <S.SectionHeading>정산 내역</S.SectionHeading>
+      </S.SectionHeadingRow>
+      <S.FilterRow>
         <TabChipList
           activeValue={settlementType}
           onValueChange={(value) =>
@@ -228,9 +183,7 @@ export function SettlementList() {
         </TabChipList>
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
         <TextButton onClick={handleSortOptionClick}>
-          <Text variant="body2R" color="semantic.text.subtle">
-            {sort === 'OLDEST' ? '오래된순' : '최신순'}
-          </Text>
+          <S.SortLabel>{sort === 'OLDEST' ? '오래된순' : '최신순'}</S.SortLabel>
           <Next
             width={theme.unit[24]}
             height={theme.unit[24]}
@@ -240,13 +193,13 @@ export function SettlementList() {
             }}
           />
         </TextButton>
-      </Flex>
+      </S.FilterRow>
       <SettlementContent
         isLoading={isLoading}
         isError={isError}
         settlementList={settlementList}
         settlementType={settlementType}
       />
-    </Flex>
+    </S.SettlementListContainer>
   );
 }

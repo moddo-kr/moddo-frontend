@@ -8,7 +8,6 @@ import {
   DescriptionField,
   Header,
 } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { useShareLink, ShareModal } from '@/features/share';
 import * as S from './ShareStepPage.styles';
@@ -32,7 +31,7 @@ function ShareStepPage({ onNext, onBack }: ShareStepProps) {
         headingIcon={<ArrowLeft width="1.5rem" />}
         headingLabel="뒤로가기"
         onHeadingIconClick={onBack}
-        trailingIcon={<Text>QR코드 만들기</Text>}
+        trailingIcon={<S.QRCodeLabel>QR코드 만들기</S.QRCodeLabel>}
         onTrailingIconClick={onNext}
       />
       <DescriptionField

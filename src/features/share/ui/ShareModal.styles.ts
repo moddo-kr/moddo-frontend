@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getToken } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const ShareModalContainer = styled.div`
   display: flex;
@@ -20,6 +20,12 @@ export const ModalTitle = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+`;
+
+export const ModalHeading = styled.h2`
+  ${applyTypography('typography.title.small')};
+  color: ${getToken('fg.normal')};
+  margin: 0;
 `;
 
 export const ShareItemContainer = styled.div`

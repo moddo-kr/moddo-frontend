@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const SelectGroupButton = styled.button`
   display: flex;
@@ -58,4 +59,75 @@ export const SettlementListWrapper = styled.div`
   margin: ${({ theme }) => `${theme.unit[20]} 0`};
   overflow-y: auto;
   flex: 1;
+`;
+
+export const BannerActionLabel = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const BannerDescription = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.inverse.normal')};
+  display: inline-block;
+  margin-top: 0.25rem; /* 4px */
+`;
+
+export const BoxButtonLabel = styled.span`
+  ${applyTypography('typography.body.medium-semibold')};
+  color: ${getToken('fg.neutral')};
+`;
+
+export const SettlementStatusMessage = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const SectionHeading = styled.span`
+  ${applyTypography('typography.heading.small')};
+`;
+
+export const SortLabel = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const BannerCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: ${getToken('fill.inverse.neutral')};
+  height: 8.5rem;
+  border-radius: ${getToken('radius.lg')};
+  margin: 1.25rem;
+  padding: 1.125rem ${getToken('padding.6')}; /* semantic token으로 정의되지 않은 값을 의도적으로 사용함 */
+`;
+
+export const SettlementEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: ${getToken('gap.7')};
+  padding: ${getToken('padding.6')} 0;
+`;
+
+export const SettlementListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: ${getToken('padding.5')};
+  flex-grow: 1;
+`;
+
+export const SectionHeadingRow = styled.div`
+  display: flex;
+  padding: ${getToken('padding.3')} ${getToken('padding.6')};
+`;
+
+export const FilterRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 ${getToken('padding.6')};
+  height: 3rem;
 `;

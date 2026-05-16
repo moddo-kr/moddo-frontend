@@ -1,7 +1,6 @@
 import { format } from 'date-fns';
 import { CharacterItemData } from '@/entities/character/model/character.type';
 import { Certified } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
 function LockedCharacterCard() {
@@ -22,10 +21,10 @@ function CharacterCard({ character }: CharacterCardProps) {
   return (
     <S.CardContainer>
       <S.CharacterImage src={imageUrl} alt={name} />
-      <Text variant="body2Sb">{name}</Text>
-      <Text variant="caption">
+      <S.CharacterName>{name}</S.CharacterName>
+      <S.CharacterAcquiredDate>
         {acquiredAt ? format(acquiredAt, 'yyyy.MM.dd') : null}
-      </Text>
+      </S.CharacterAcquiredDate>
     </S.CardContainer>
   );
 }

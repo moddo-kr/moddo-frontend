@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { getToken } from '@/shared/design-system';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const NameHighlight = styled.span`
   color: ${getToken('fg.primary.normal')};
+`;
+
+export const ManageLabel = styled.span`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
 `;
 
 export const Content = styled.div`

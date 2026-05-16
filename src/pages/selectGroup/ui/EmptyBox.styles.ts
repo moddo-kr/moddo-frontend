@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const EmptyBox = styled.div`
   width: 100%;
@@ -11,4 +12,17 @@ export const EmptyBox = styled.div`
   border: ${({ theme }) => `1px dashed ${theme.color.semantic.border.default}`};
   padding: ${({ theme }) => `${theme.unit[16]} ${theme.unit[8]}`};
   opacity: 0.5;
+`;
+
+export const EmptyBoxMessage = styled.span`
+  ${applyTypography('typography.body.small')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const EmptyBoxContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: ${getToken('gap.2')};
 `;

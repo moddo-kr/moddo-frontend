@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
 export const MainText = styled.h2`
   font-size: 1.25rem; // 20px
   font-weight: 700;

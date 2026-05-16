@@ -7,9 +7,10 @@ import {
   Divider,
   Header,
   Modal,
+  Tab,
+  TabList,
   showToast,
 } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
@@ -17,7 +18,6 @@ import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
-import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
@@ -90,11 +90,7 @@ function ExpenseDetailPage() {
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
-        trailingIcon={
-          <Text variant="body1R" color="semantic.text.subtle">
-            관리
-          </Text>
-        }
+        trailingIcon={<S.ManageLabel>관리</S.ManageLabel>}
         bgColor={color.semantic.background.normal.alternative}
       />
       <S.Content>
@@ -109,10 +105,10 @@ function ExpenseDetailPage() {
         />
         <Divider />
         <S.TabListContainer>
-          <TabsList activeTab={activeTab} setActiveTab={setActiveTab}>
+          <TabList activeTab={activeTab} onTabChange={setActiveTab}>
             <Tab label="참여자별 정산" value="member" />
             <Tab label="전체 지출내역" value="expense" />
-          </TabsList>
+          </TabList>
         </S.TabListContainer>
         {activeTab === 'expense' ? (
           <ExpenseTimeline groupToken={groupToken} />

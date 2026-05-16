@@ -7,7 +7,6 @@ import {
   RemainderData,
 } from '@/entities/expense/model/expense.type';
 import { Alert, DatePicker, IconButton } from '@/shared/design-system/ui';
-import Text from '@/shared/ui/Text';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
 import MemberExpenses from '@/features/expense-management/ui/MemberExpenses';
@@ -75,7 +74,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
         <S.RefTarget ref={ref} />
         <S.FormCard>
           <S.FormCardTitleContainer>
-            <Text variant="title">{index + 1}차</Text>
+            <S.ExpenseSequenceLabel>{index + 1}차</S.ExpenseSequenceLabel>
             {index > 0 ? (
               <IconButton
                 aria-label="지출 입력 폼 삭제"

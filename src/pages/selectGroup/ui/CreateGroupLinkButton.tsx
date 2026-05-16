@@ -1,23 +1,14 @@
 import { Add } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
-import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import * as S from './CreateGroupLinkButton.styles';
 
 function CreateGroupLinkButton() {
   return (
     <S.LinkButton to={ROUTE.groupSetup} aria-label="새로운 모임 생성">
-      <Flex
-        justifyContent="center"
-        direction="column"
-        alignItems="center"
-        gap={4}
-      >
+      <S.CreateGroupButtonContent>
         <Add width={36} />
-        <Text variant="body1Sb" color="semantic.text.inverse">
-          새로 생성
-        </Text>
-      </Flex>
+        <S.CreateGroupLabel>새로 생성</S.CreateGroupLabel>
+      </S.CreateGroupButtonContent>
     </S.LinkButton>
   );
 }

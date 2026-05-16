@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { TextVariant } from '@/shared/ui/Text/index.styles';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const NumPadWrapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const ValueWrapper = styled.div`
 `;
 
 export const DisplayValue = styled.span<{ $isEmpty?: boolean }>`
-  ${TextVariant('heading1')};
+  ${applyTypography('typography.heading.medium')};
   color: ${({ theme, $isEmpty }) =>
     $isEmpty
       ? theme.color.semantic.text.subtle
@@ -43,12 +43,17 @@ export const ShortcutButton = styled.button<{ $isDanger?: boolean }>`
   border-radius: ${({ theme }) => theme.unit.max};
   background: ${({ theme, $isDanger }) =>
     $isDanger ? theme.color.semantic.background.state.danger : '#EDEEEE'};
-  ${TextVariant('body2R')};
+  ${applyTypography('typography.body.small')};
   color: ${({ theme, $isDanger }) =>
     $isDanger
       ? theme.color.semantic.state.danger
       : theme.color.semantic.text.default};
   white-space: nowrap;
+`;
+
+export const CurrencyUnit = styled.span`
+  ${applyTypography('typography.heading.medium')};
+  color: ${getToken('fg.normal')};
 `;
 
 export const NumCellWrapper = styled.div`
@@ -67,7 +72,9 @@ export const NumCellButton = styled.button<{ $isSecondary?: boolean }>`
   justify-content: center;
   align-items: center;
   ${({ $isSecondary }) =>
-    $isSecondary ? TextVariant('body1R') : TextVariant('heading1')};
+    $isSecondary
+      ? applyTypography('typography.body.medium')
+      : applyTypography('typography.heading.medium')};
   color: ${({ theme, $isSecondary }) =>
     $isSecondary
       ? theme.color.semantic.text.default

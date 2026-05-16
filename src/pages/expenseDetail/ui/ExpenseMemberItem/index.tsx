@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
-import Text from '@/shared/ui/Text';
-
 import {
   Button,
   ProfileImage,
@@ -35,14 +33,14 @@ function MemberHeaderToggle({ member }: { member: MemberSettlement }) {
       <S.LeftWrapper>
         <ProfileImage src={member.profile} size="40" />
         <S.SubProfileWrapper>
-          <Text variant="body1Sb">
+          <S.MemberName>
             <span style={{ color: theme.color.primitive.gray[500] }}>
               {member.name}
             </span>
-          </Text>
-          <Text variant="heading2" color="semantic.text.strong">
+          </S.MemberName>
+          <S.MemberTotalAmount>
             {member.totalAmount.toLocaleString()}원
-          </Text>
+          </S.MemberTotalAmount>
         </S.SubProfileWrapper>
       </S.LeftWrapper>
       <S.ChevronWrapper $isOpen={isOpen}>
@@ -120,16 +118,9 @@ function ExpenseMemberItem({
           >
             <S.SheetContentWrapper>
               <S.TextButtonWrapper onClick={() => handleTextButtonClick(false)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid
-                      ? 'semantic.text.disabled'
-                      : 'semantic.orange.default'
-                  }
-                >
+                <S.PaymentStatusLabel $isActive={!isPaid}>
                   미입금
-                </Text>
+                </S.PaymentStatusLabel>
                 <Confirm
                   width={theme.unit[20]}
                   height={theme.unit[20]}
@@ -139,16 +130,9 @@ function ExpenseMemberItem({
                 />
               </S.TextButtonWrapper>
               <S.TextButtonWrapper onClick={() => handleTextButtonClick(true)}>
-                <Text
-                  variant="title"
-                  color={
-                    isPaid // 입금완료
-                      ? 'semantic.orange.default'
-                      : 'semantic.text.disabled'
-                  }
-                >
+                <S.PaymentStatusLabel $isActive={isPaid}>
                   입금완료
-                </Text>
+                </S.PaymentStatusLabel>
                 <Confirm
                   width={theme.unit[20]}
                   height={theme.unit[20]}
@@ -173,11 +157,11 @@ function ExpenseMemberItem({
           <S.ExpensesWrapper key={expense.content}>
             <S.PlaceWrapper>
               <Receipt width={theme.unit[24]} height={theme.unit[24]} />
-              <Text>{expense.content}</Text>
+              <S.ExpenseContent>{expense.content}</S.ExpenseContent>
             </S.PlaceWrapper>
-            <Text variant="body1Sb" color="semantic.text.default">
+            <S.ExpenseAmount>
               {expense.amount.toLocaleString()}원
-            </Text>
+            </S.ExpenseAmount>
           </S.ExpensesWrapper>
         ))}
       </S.ContentContainer>

@@ -1,7 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { useTheme } from 'styled-components';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { Button, DescriptionField, Header } from '@/shared/design-system/ui';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
@@ -37,16 +36,16 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
         headingIcon={<ArrowLeft width="1.5rem" />}
         headingIconAriaLabel="뒤로가기"
         onHeadingIconClick={onBack}
-        trailingIcon={<Text variant="body1Sb">지출 추가</Text>}
+        trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}
         onTrailingIconClick={onAdd}
         bgColor={color.semantic.background.normal.alternative}
       />
       <DescriptionField title={`지출 내역을\n확인해주세요.`} />
       <S.TotalExpenseWrapper>
-        <Text variant="body1Sb">누적 금액</Text>
-        <Text variant="heading2" color="semantic.text.strong">
+        <S.TotalExpenseLabel>누적 금액</S.TotalExpenseLabel>
+        <S.TotalExpenseAmount>
           {getTotalExpense(data.expenses).toLocaleString()}원
-        </Text>
+        </S.TotalExpenseAmount>
       </S.TotalExpenseWrapper>
       <ExpenseCardList
         groupToken={groupToken}

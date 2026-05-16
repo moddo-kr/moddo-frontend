@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
-import Text from '@/shared/ui/Text';
 import { useLoaderData } from 'react-router';
 import copyClipboard from '@/shared/lib/copyClipboard';
 import {
@@ -11,7 +10,6 @@ import {
   Modal,
   showToast,
 } from '@/shared/design-system/ui';
-import Flex from '@/shared/ui/Flex';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
@@ -167,15 +165,13 @@ function ExpenseTimeHeader({
     <S.Wrapper>
       <DescriptionField
         title={
-          <Flex direction="column">
-            <Text color="semantic.orange.default" variant="heading2">
-              {getFormatDate(endDate)}까지
-            </Text>
-            <Text variant="heading2">정산을 완료해주세요</Text>
-          </Flex>
+          <S.DescriptionTitle>
+            <S.DeadlineDate>{getFormatDate(endDate)}까지</S.DeadlineDate>
+            <S.SettlementPrompt>정산을 완료해주세요</S.SettlementPrompt>
+          </S.DescriptionTitle>
         }
         sub={
-          <Flex gap={4} alignItems="center">
+          <S.AccountRow>
             정산 계좌: {accountFormat}
             <IconButton
               aria-label="계좌번호 복사"
@@ -183,7 +179,7 @@ function ExpenseTimeHeader({
             >
               <Copy width={16} height={16} />
             </IconButton>
-          </Flex>
+          </S.AccountRow>
         }
       />
       <CurvedProgressBar percentage={percentage}>
@@ -196,52 +192,34 @@ function ExpenseTimeHeader({
             width="32"
             style={{ paddingRight: `${theme.unit[8]}` }}
           />
-          <Text variant="body1Sb" color="semantic.orange.default">
-            {paidMember}
-          </Text>
-          <Text
-            variant="body1Sb"
-            color="semantic.text.inverse"
-          >{`/${totalMember} 정산 완료`}</Text>
+          <S.PaidMemberCount>{paidMember}</S.PaidMemberCount>
+          <S.SettlementStatusText>{`/${totalMember} 정산 완료`}</S.SettlementStatusText>
         </S.ExpenseChip>
         <S.TotalMoney>
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>
       </CurvedProgressBar>
-      <Flex direction="column" px={20} gap={12}>
-        <Text variant="body1Sb" color="semantic.text.strong">
-          정산 마감까지 남은 시간
-        </Text>
+      <S.TimerSection>
+        <S.DeadlineLabel>정산 마감까지 남은 시간</S.DeadlineLabel>
         <S.TimeBox>
           <S.Timer>
             {([hours, minutes, seconds] as number[]).map((time, index, arr) => (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
-                <Text
-                  variant="heading1"
-                  color={
-                    status === 'failure'
-                      ? 'semantic.state.danger'
-                      : 'semantic.text.strong'
-                  }
-                >
+                <S.TimerDigit $isFailure={status === 'failure'}>
                   {String(time).padStart(2, '0')}
-                </Text>
+                </S.TimerDigit>
                 {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}
               </React.Fragment>
             ))}
             {['시', '분', '초'].map((label, idx) => (
-              <Text
-                key={label}
-                color="semantic.text.subtle"
-                style={{ gridColumn: idx * 2 + 1 }}
-              >
+              <S.TimerUnit key={label} $gridColumn={idx * 2 + 1}>
                 {label}
-              </Text>
+              </S.TimerUnit>
             ))}
           </S.Timer>
         </S.TimeBox>
-      </Flex>
+      </S.TimerSection>
       <Modal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}

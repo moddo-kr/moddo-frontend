@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const TitleContainer = styled.div`
   width: 100%;
@@ -42,6 +43,31 @@ export const CharacterCard = styled.div`
   border-radius: ${({ theme }) => theme.radius.large};
   border: 1px solid ${({ theme }) => theme.color.semantic.border.default};
   background-color: ${({ theme }) => theme.color.primitive.base.white};
+`;
+
+export const EmptyStateTitle = styled.h1`
+  ${applyTypography('typography.heading.medium')};
+  margin: 0;
+`;
+
+export const EmptyStateDescription = styled.p`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const PageTitle = styled.h1`
+  ${applyTypography('typography.heading.medium')};
+  margin: 0;
+`;
+
+export const CharacterName = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const CharacterDescription = styled.span`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
 `;
 
 export const CharacterImageContainer = styled.div`
