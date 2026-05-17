@@ -28,6 +28,7 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: ${getToken('gap.4')};
   width: 100%;
+  min-width: 0;
 `;
 
 export const LabelRow = styled.div`
