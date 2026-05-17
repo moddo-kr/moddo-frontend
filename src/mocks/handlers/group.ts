@@ -1,6 +1,10 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/lib/getIsMocked';
-import { AccountVariable, Group } from '@/entities/group/model/group.type';
+import {
+  AccountVariable,
+  Group,
+  GroupHeaderResponse,
+} from '@/entities/group/model/group.type';
 
 const dummyGroups: Group[] = [
   {
@@ -101,17 +105,26 @@ const dummyMemberList = [
   },
 ];
 
+const dummyGroupHeader: GroupHeaderResponse = {
+  groupName: dummyGroups[0].groupName,
+  totalAmount: 150000,
+  deadline: new Date(
+    new Date().setMonth(new Date().getMonth() + 1)
+  ).toISOString(),
+  bank: '국민은행',
+  accountNumber: '123456-78-910111',
+  totalMemberCount: dummyGroups[0].members.length,
+  completedMemberCount: dummyGroups[0].members.filter((member) => member.isPaid)
+    .length,
+};
+
 const groupHandlers = [
   // GET GetGroupHeader (path 방식)
   // 모임 상단 조회
   http.get('/api/v1/groups/:groupToken/header', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
-    return HttpResponse.json({
-      ...dummyGroups[0],
-      totalMemberCount: 3,
-      completedMemberCount: 0,
-    });
+    return HttpResponse.json(dummyGroupHeader);
   }),
 
   // GET GetGroupOne
