@@ -78,6 +78,7 @@ export const DeleteButton = styled.button<{ $size: ProfileSize }>`
 `;
 
 export const CheckedIcon = styled.div<{ $size: ProfileSize }>`
+  color: ${getToken('fill.inverse.neutral')};
   ${iconPositionStyle}
 `;
 
