@@ -1,27 +1,26 @@
 import { generatePath } from 'react-router';
 import { Group } from '@/entities/group/model/group.type';
 import { ROUTE } from '@/shared/config/route';
-import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
-import NameChip from '@/shared/ui/NameChip';
+import { NameChip } from '@/shared/design-system/ui';
 import * as S from './GroupLinkButton.styles';
 
 function GroupLinkButton({ group }: { group: Group }) {
-  const { groupName, members, id: groupToken } = group;
+  const { groupName, members, id } = group;
+  const groupToken = String(id);
   return (
     <S.LinkButton to={generatePath(ROUTE.createExpense, { groupToken })}>
-      <Flex direction="column" gap={8}>
-        <Text variant="body1Sb">{groupName}</Text>
-        <Flex gap={4}>
+      <S.GroupLinkContent>
+        <S.GroupName>{groupName}</S.GroupName>
+        <S.MemberChipRow>
           {members?.map((member) => (
             <NameChip
               key={member.id}
               label={member.name}
-              variant={member.role === 'MANAGER' ? 'orange' : 'alternative'}
+              variant={member.role === 'MANAGER' ? 'selected' : 'unselected'}
             />
           ))}
-        </Flex>
-      </Flex>
+        </S.MemberChipRow>
+      </S.GroupLinkContent>
     </S.LinkButton>
   );
 }

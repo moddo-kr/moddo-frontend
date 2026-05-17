@@ -1,13 +1,13 @@
 import { format } from 'date-fns';
 import { CharacterItemData } from '@/entities/character/model/character.type';
 import { Certified } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/ui/Text';
 import * as S from './index.styles';
 
 function LockedCharacterCard() {
   return (
     <S.LockedCharacterCard aria-label="잠긴 캐릭터">
-      <Certified width={62} />
+      {/* HACK : 정의되지 않은 토큰이라 #D2D4D5를 그대로 사용 */}
+      <Certified width={62} color="#D2D4D5" />
     </S.LockedCharacterCard>
   );
 }
@@ -22,10 +22,10 @@ function CharacterCard({ character }: CharacterCardProps) {
   return (
     <S.CardContainer>
       <S.CharacterImage src={imageUrl} alt={name} />
-      <Text variant="body2Sb">{name}</Text>
-      <Text variant="caption">
+      <S.CharacterName>{name}</S.CharacterName>
+      <S.CharacterAcquiredDate>
         {acquiredAt ? format(acquiredAt, 'yyyy.MM.dd') : null}
-      </Text>
+      </S.CharacterAcquiredDate>
     </S.CardContainer>
   );
 }

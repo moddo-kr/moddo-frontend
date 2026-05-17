@@ -8,7 +8,7 @@ const SvgBtnShortcut = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#444950"
+      fill="currentColor"
       fillRule="evenodd"
       d="M2.667 12a.8.8 0 0 0 .245.577l5.2 5a.8.8 0 1 0 1.11-1.154L5.452 12.8h16.413a.8.8 0 0 0 0-1.6H5.453l3.768-3.623a.8.8 0 0 0-1.109-1.154l-5.2 5a.8.8 0 0 0-.245.577"
       clipRule="evenodd"

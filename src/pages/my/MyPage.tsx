@@ -1,32 +1,31 @@
 import { Suspense } from 'react';
 import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { Menu } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/ui/Header';
+import { Header } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { ROUTE } from '@/shared/config/route';
 import { CharacterSection } from '@/features/character-management/ui';
 import { MyProfile } from '@/features/user-profile/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './MyPage.styles';
 
 function MyPage() {
   const navigate = useNavigate();
-  const { color } = useTheme();
 
   return (
-    <>
-      {/* TODO: 디자인 시스템 정리 + 헤더 컴포넌트 정비 후에 다시 스타일링이 필요합니다. */}
+    <PageLayout $bg="neutral">
       <Header
-        type="TitleCenter"
+        type="1depth"
         title="마이페이지"
-        rightButtonContent={<Menu width={24} />}
-        rightButtonOnClick={() => navigate(ROUTE.myEdit)}
-        bgColor={color.semantic.background.normal.alternative}
+        trailingIcon={<Menu width={24} color={getToken('fg.alternative')} />}
+        trailingIconAriaLabel="홈으로 이동"
+        onTrailingIconClick={() => navigate(ROUTE.home)}
       />
       <Suspense fallback={<S.ProfileContainer>로딩 중...</S.ProfileContainer>}>
         <MyProfile />
       </Suspense>
       <CharacterSection />
-    </>
+    </PageLayout>
   );
 }
 

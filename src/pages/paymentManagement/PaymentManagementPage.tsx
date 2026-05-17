@@ -1,22 +1,19 @@
 import { useMemo } from 'react';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import useGetPayments from '@/features/payment-management/api/useGetPayments';
 import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
 import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { groupPaymentRequestsByDate } from '@/features/payment-management/lib/groupPaymentRequestsBySection';
-import PaymentAlert from '@/features/payment-management/ui/PaymentAlert';
-import Header from '@/shared/ui/Header';
+import { PaymentAlertCard } from '@/features/payment-management/ui/PaymentAlertCard';
+import { Header } from '@/shared/design-system/ui';
 import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
-import Flex from '@/shared/ui/Flex';
-import Text from '@/shared/ui/Text';
 import type { PaymentRequest } from '@/entities/payment/model/payment.type';
-
-const LIST_BOTTOM_SPACING_PX = '93px';
+import { PageLayout } from '@/shared/ui/PageLayout';
+import * as S from './PaymentManagementPage.styles';
 
 function PaymentManagementPage() {
   const navigate = useNavigate();
-  const { color } = useTheme();
 
   const { data, isLoading, isError } = useGetPayments();
   const { mutate: approvePayment } = useApprovePayment();
@@ -32,51 +29,41 @@ function PaymentManagementPage() {
 
   if (isLoading) {
     return (
-      <>
+      <PageLayout>
         <Header
-          type="TitleCenter"
+          type="default"
           title="입금 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.default}
+          headingIcon={
+            <ArrowLeft width={24} color={getToken('fg.alternative')} />
+          }
+          headingLabel="뒤로가기"
+          onHeadingIconClick={() => navigate(-1)}
         />
-        <Flex
-          pt={24}
-          px={20}
-          flex={1}
-          direction="column"
-          bgColor={color.semantic.background.normal.default}
-        >
-          <Text variant="body1R" color="semantic.text.subtle">
+        <S.PaymentStatusContent>
+          <S.PaymentStatusMessage>
             입금 내역을 불러오는 중입니다.
-          </Text>
-        </Flex>
-      </>
+          </S.PaymentStatusMessage>
+        </S.PaymentStatusContent>
+      </PageLayout>
     );
   }
 
   if (isError) {
     return (
-      <>
+      <PageLayout>
         <Header
-          type="TitleCenter"
+          type="default"
           title="입금 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.default}
+          headingIcon={<ArrowLeft width={24} />}
+          headingLabel="뒤로가기"
+          onHeadingIconClick={() => navigate(-1)}
         />
-        <Flex
-          pt={24}
-          px={20}
-          flex={1}
-          direction="column"
-          bgColor={color.semantic.background.normal.default}
-        >
-          <Text variant="body1R" color="semantic.text.subtle">
+        <S.PaymentStatusContent>
+          <S.PaymentStatusMessage>
             입금 내역을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.
-          </Text>
-        </Flex>
-      </>
+          </S.PaymentStatusMessage>
+        </S.PaymentStatusContent>
+      </PageLayout>
     );
   }
 
@@ -89,66 +76,41 @@ function PaymentManagementPage() {
   };
 
   return (
-    <>
+    <PageLayout>
       <Header
-        type="TitleCenter"
+        type="default"
         title="입금 관리"
-        leftButtonContent={<ArrowLeft width={24} />}
-        leftButtonOnClick={() => navigate(-1)}
-        bgColor={color.semantic.background.normal.default}
+        headingIcon={<ArrowLeft width={24} />}
+        headingIconAriaLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       {paymentSections.length > 0 ? (
-        <Flex
-          pt={24}
-          pb={LIST_BOTTOM_SPACING_PX}
-          px={20}
-          flex={1}
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.default}
-        >
-          <Flex direction="column" gap={36}>
+        <S.PaymentListContainer>
+          <S.PaymentSectionList>
             {paymentSections.map(({ label, items }) => (
-              <Flex key={label} direction="column" gap={16}>
-                <Text variant="title" color="semantic.text.strong">
-                  {label}
-                </Text>
-                <Flex direction="column" gap={20}>
+              <S.PaymentDateGroup key={label}>
+                <S.PaymentDateLabel>{label}</S.PaymentDateLabel>
+                <S.PaymentCardList>
                   {items.map((payment) => (
-                    <PaymentAlert
+                    <PaymentAlertCard
                       key={payment.paymentRequestId}
                       payment={payment}
                       onReject={handleReject}
                       onConfirm={handleConfirm}
                     />
                   ))}
-                </Flex>
-              </Flex>
+                </S.PaymentCardList>
+              </S.PaymentDateGroup>
             ))}
-          </Flex>
-        </Flex>
+          </S.PaymentSectionList>
+        </S.PaymentListContainer>
       ) : (
         // TODO: 입금 내역이 없을 경우에 대한 디자인 확정 시 변경
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          gap={8}
-          flex={1}
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.default}
-        >
-          <Text
-            textAlign="center"
-            variant="body1R"
-            color="semantic.text.subtle"
-          >
-            입금 내역이 없습니다.
-          </Text>
-        </Flex>
+        <S.PaymentEmptyContainer>
+          <S.PaymentEmptyMessage>입금 내역이 없습니다.</S.PaymentEmptyMessage>
+        </S.PaymentEmptyContainer>
       )}
-    </>
+    </PageLayout>
   );
 }
 

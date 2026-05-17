@@ -1,102 +1,72 @@
-import { useTheme } from 'styled-components';
-import { LogoIcon } from '@/shared/assets/svgs';
 import MainHamImg2 from '@/shared/assets/pngs/MainHamImg2.png';
-import Text from '@/shared/ui/Text';
-import { ArrowRight, Bell, Menu, Next } from '@/shared/assets/svgs/icon';
+import { ArrowRight, Menu, Next } from '@/shared/assets/svgs/icon';
 import { useNavigate } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import CoinImg from '@/shared/assets/pngs/CoinImg.png';
 import LinkMain from '@/shared/assets/pngs/link_main.png';
 import CardMain from '@/shared/assets/pngs/card_main.png';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale/ko';
 import useGetSettlementList from '@/features/home/api/useGetSettlementList';
+import { groupSettlementsByDate } from '@/features/home/lib/groupSettlementsByDate';
 import type {
   SettlementSort,
   SettlementStatus,
 } from '@/entities/group/model/group.type';
-
-import Flex from '@/shared/ui/Flex';
-import Button from '@/shared/ui/Button';
-import Header from '@/shared/ui/Header';
-import Chip from '@/shared/ui/Chip';
+import { LogoIcon } from '@/shared/assets/svgs/logo';
+import { getToken } from '@/shared/design-system';
+import {
+  Header,
+  TextButton,
+  TabChipList,
+  TabChip,
+} from '@/shared/design-system/ui';
 import * as S from './index.style';
-import HomeExpenseItem from '../HomeExpenseItem';
+import { SettlementDateSection } from '../SettlementDateSection';
 
 type SettlementType = SettlementStatus;
 
 export function MainHeader() {
-  const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Header
-      type="TitleCenter"
-      leftButtonContent={
-        <LogoIcon
-          width={98}
-          height={36}
-          fill={theme.color.semantic.orange.default}
-        />
+      type="1depth"
+      title={<LogoIcon width={98} height={36} />}
+      trailingIcon={
+        <Menu width={24} height={24} color={getToken('fg.neutral')} />
       }
-      // leftButtonOnClick={() => navigate(ROUTE.login)}
-      rightButtonContent={
-        <Flex gap={16}>
-          {/** @Todo 알림 기능 개발 후 변경 */}
-          <Bell width={24} height={24} />
-          {/** @Todo 마이페이지로 이동하는 핸들러 추가 */}
-          <Menu width={24} height={24} />
-        </Flex>
-      }
-      bgColor="semantic.background.normal.alternative"
+      trailingIconAriaLabel="마이페이지로 이동"
+      onTrailingIconClick={() => navigate(ROUTE.my)}
     />
   );
 }
 
 export function SettlementBanner() {
   const navigate = useNavigate();
-  const theme = useTheme();
   return (
     <>
-      <Flex
-        direction="column"
-        position="relative"
-        bgColor={theme.color.semantic.primary.default}
-        height="136px"
-        borderRadius={theme.radius.default}
-        margin={20}
-        px={20}
-        py={18}
-      >
+      <S.BannerCard>
         <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
-          <Text variant="heading2">정산하기</Text>
+          <S.BannerActionLabel>정산하기</S.BannerActionLabel>
           <ArrowRight
-            width={theme.unit[20]}
-            height={theme.unit[20]}
-            fill={theme.color.semantic.orange.default}
+            width="1.25rem"
+            height="1.25rem"
+            fill={getToken('fg.primary.normal')}
           />
         </S.SelectGroupButton>
-        <Text
-          variant="body2R"
-          color="semantic.text.inverse"
-          style={{ display: 'inline-block', marginTop: theme.unit[4] }}
-        >
+        <S.BannerDescription>
           모임은 즐겁게, 정산은 깔끔하게!
           <br />
           모또만 믿고 맡겨줘!
-        </Text>
+        </S.BannerDescription>
         <S.DescriptionImg src={MainHamImg2} alt="" />
-      </Flex>
+      </S.BannerCard>
       <S.BoxButtonWrapper>
         <S.BoxButton to={ROUTE.myLinks}>
-          <Text variant="body1Sb" color="semantic.text.default">
-            링크 관리
-          </Text>
+          <S.BoxButtonLabel>링크 관리</S.BoxButtonLabel>
           <S.SmallImg src={LinkMain} alt="" />
         </S.BoxButton>
         <S.BoxButton to={ROUTE.paymentManagement}>
-          <Text variant="body1Sb" color="semantic.text.default">
-            입금 관리
-          </Text>
+          <S.BoxButtonLabel>입금 관리</S.BoxButtonLabel>
           <S.SmallImg src={CardMain} alt="" />
         </S.BoxButton>
       </S.BoxButtonWrapper>
@@ -117,72 +87,48 @@ function SettlementContent({
   settlementList,
   settlementType,
 }: SettlementContentProps) {
+  const dateGroups = useMemo(
+    () => groupSettlementsByDate(settlementList),
+    [settlementList]
+  );
+
   if (isLoading) {
     return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
-        <Text variant="body2R" color="semantic.text.subtle">
+      <S.SettlementEmptyState>
+        <S.SettlementStatusMessage>
           정산 내역을 불러오는 중이에요.
-        </Text>
-      </Flex>
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
   if (isError) {
     return (
-      <Flex
-        direction="column"
-        py={20}
-        justifyContent="center"
-        alignItems="center"
-        flexGrow={1}
-        gap={20}
-      >
-        <Text variant="body2R" color="semantic.text.subtle">
+      <S.SettlementEmptyState>
+        <S.SettlementStatusMessage>
           정산 내역을 불러오지 못했어요.
-        </Text>
-      </Flex>
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
-  if (settlementList.length > 0) {
+  if (settlementList.length === 0) {
     return (
-      <S.SettlementListWrapper>
-        {settlementList.map((item) => (
-          <HomeExpenseItem
-            key={item.groupId}
-            date={format(new Date(item.createdAt), 'yyyy년 M월 d일', {
-              locale: ko,
-            })}
-            groupName={item.name}
-            totalAmount={item.totalAmount}
-            paidMember={item.completedMemberCount}
-            totalMember={item.totalMemberCount}
-          />
-        ))}
-      </S.SettlementListWrapper>
+      <S.SettlementEmptyState>
+        <S.NoSettlementImg src={CoinImg} alt="" />
+        <S.SettlementStatusMessage>
+          {settlementType === 'IN_PROGRESS'
+            ? '아직 진행중인 정산이 없어요.'
+            : '완료된 정산이 없어요.'}
+        </S.SettlementStatusMessage>
+      </S.SettlementEmptyState>
     );
   }
+
   return (
-    <Flex
-      direction="column"
-      py={20}
-      justifyContent="center"
-      alignItems="center"
-      flexGrow={1}
-      gap={20}
-    >
-      <S.NoSettlementImg src={CoinImg} alt="" />
-      <Text variant="body2R" color="semantic.text.subtle">
-        {settlementType === 'IN_PROGRESS'
-          ? '아직 진행중인 정산이 없어요.'
-          : '완료된 정산이 없어요.'}
-      </Text>
-    </Flex>
+    <S.SettlementListWrapper>
+      {dateGroups.map(({ date, items }) => (
+        <SettlementDateSection key={date} date={date} items={items} />
+      ))}
+    </S.SettlementListWrapper>
   );
 }
 
@@ -190,7 +136,6 @@ export function SettlementList() {
   const [settlementType, setSettlementType] =
     useState<SettlementType>('IN_PROGRESS');
   const [sort, setSort] = useState<SettlementSort>('LATEST');
-  const theme = useTheme();
 
   const handleSettlementTypeButtonClick = (type: SettlementType) => {
     if (settlementType === type) {
@@ -210,49 +155,40 @@ export function SettlementList() {
   const settlementList = data ?? [];
 
   return (
-    <Flex direction="column" pt={16} flexGrow={1}>
-      <Flex pl={20} py={8}>
-        <Text variant="heading2">정산 내역</Text>
-      </Flex>
-      <Flex
-        justifyContent="space-between"
-        px={20}
-        height={48}
-        alignItems="center"
-      >
-        <Flex gap={8}>
-          <Chip
-            variant={settlementType === 'IN_PROGRESS' ? 'primary' : 'secondary'}
-            onClick={() => handleSettlementTypeButtonClick('IN_PROGRESS')}
-            label="진행 중인 정산"
-          />
-          <Chip
-            variant={settlementType === 'COMPLETED' ? 'primary' : 'secondary'}
-            onClick={() => handleSettlementTypeButtonClick('COMPLETED')}
-            label="완료된 정산"
-          />
-        </Flex>
+    <S.SettlementListContainer>
+      <S.SectionHeadingRow>
+        <S.SectionHeading>정산 내역</S.SectionHeading>
+      </S.SectionHeadingRow>
+      <S.FilterRow>
+        <TabChipList
+          activeValue={settlementType}
+          onValueChange={(value) =>
+            handleSettlementTypeButtonClick(value as SettlementType)
+          }
+        >
+          <TabChip label="진행 중인 정산" value="IN_PROGRESS" />
+          <TabChip label="완료된 정산" value="COMPLETED" />
+        </TabChipList>
         {/** @Todo Select 컴포넌트 개발 후 변경 */}
-        <Button variant="text" onClick={handleSortOptionClick}>
-          <Text variant="body2R" color="semantic.text.subtle">
-            {sort === 'OLDEST' ? '오래된순' : '최신순'}
-          </Text>
+        <TextButton onClick={handleSortOptionClick}>
+          <S.SortLabel>{sort === 'OLDEST' ? '오래된순' : '최신순'}</S.SortLabel>
           <Next
-            width={theme.unit[24]}
-            height={theme.unit[24]}
+            width="1.5rem"
+            height="1.5rem"
             style={{
               transform: `rotate(${sort === 'OLDEST' ? 180 : 0}deg)`,
               transition: 'transform 0.2s ease',
             }}
+            color={getToken('fg.assistive')}
           />
-        </Button>
-      </Flex>
+        </TextButton>
+      </S.FilterRow>
       <SettlementContent
         isLoading={isLoading}
         isError={isError}
         settlementList={settlementList}
         settlementType={settlementType}
       />
-    </Flex>
+    </S.SettlementListContainer>
   );
 }

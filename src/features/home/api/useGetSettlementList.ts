@@ -12,6 +12,7 @@ const useGetSettlementList = (
   return useQuery({
     queryKey: ['settlementList', status, sort],
     queryFn: () => getSettlementList(status, sort),
+    throwOnError: false,
   });
 };
 

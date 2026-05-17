@@ -1,107 +1,75 @@
 import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
-import useGetExpensesLinks from '@/features/expense-management/api/useGetExpensesLinks';
+import useGetGroupLinks from '@/features/expense-management/api/useGetExpensesLinks';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { ROUTE } from '@/shared/config/route';
-import Button from '@/shared/ui/Button';
-import Flex from '@/shared/ui/Flex';
-import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
-import LinkBox from './ui/LinkBox';
+import generateShareLink from '@/shared/lib/generateShareLink';
+import { Button, Header } from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
+import { PageLayout } from '@/shared/ui/PageLayout';
+import { LinkCard } from './ui/LinkCard';
+import * as S from './MyLinksPage.styles';
 
 function MyLinksPage() {
   const navigate = useNavigate();
-  const { color } = useTheme();
-  const { data, isLoading } = useGetExpensesLinks({}, []);
+  const { data: groupList, isLoading } = useGetGroupLinks({}, []);
 
   if (isLoading) {
     return (
-      <>
+      <PageLayout $bg="neutral">
         <Header
-          type="TitleCenter"
+          type="default"
           title="링크 관리"
-          leftButtonContent={<ArrowLeft width={24} />}
-          leftButtonOnClick={() => navigate(-1)}
-          bgColor={color.semantic.background.normal.alternative}
+          headingIcon={
+            <ArrowLeft width={24} color={getToken('fg.alternative')} />
+          }
+          headingIconAriaLabel="뒤로가기"
+          onHeadingIconClick={() => navigate(-1)}
         />
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          flex={1}
-          justifyContent="center"
-          alignItems="center"
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
+        <S.LinksLoadingState role="status" aria-live="polite" aria-busy="true">
           로딩중...
-        </Flex>
-      </>
+        </S.LinksLoadingState>
+      </PageLayout>
     );
   }
 
   return (
-    <>
+    <PageLayout $bg="neutral">
       <Header
-        type="TitleCenter"
+        type="default"
         title="링크 관리"
-        leftButtonContent={<ArrowLeft width={24} />}
-        leftButtonOnClick={() => navigate(-1)}
-        bgColor="semantic.background.normal.alternative"
+        headingIcon={
+          <ArrowLeft width={24} color={getToken('fg.alternative')} />
+        }
+        headingIconAriaLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
-      {data?.links && data.links.length > 0 ? (
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          gap={8}
-          flex={1}
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
-          {data.links.map((link) => (
-            <LinkBox
-              key={link.id}
-              id={link.id}
-              name={link.name}
-              url={link.url}
+      {groupList && groupList.length > 0 ? (
+        <S.LinkCardList>
+          {groupList.map((group) => (
+            <LinkCard
+              key={group.settlementId}
+              name={group.name}
+              url={generateShareLink(group.groupCode)}
             />
           ))}
-        </Flex>
+        </S.LinkCardList>
       ) : (
-        <Flex
-          pt={24}
-          pb={22}
-          px={20}
-          gap={24}
-          flex={1}
-          justifyContent="center"
-          alignItems="center"
-          height="auto"
-          direction="column"
-          bgColor={color.semantic.background.normal.alternative}
-        >
-          <Text
-            textAlign="center"
-            variant="body1R"
-            color="semantic.text.subtle"
-          >
+        <S.LinksEmptyState>
+          <S.EmptyStateMessage>
             아직 링크가 없어요.
             <br />
             모임을 만들고 링크를 공유해 함께 정산해 보세요!
-          </Text>
+          </S.EmptyStateMessage>
           <Button
             variant="primary"
-            size="md"
+            size="medium"
             onClick={() => navigate(ROUTE.groupSetup)}
           >
             모임 생성하기
           </Button>
-        </Flex>
+        </S.LinksEmptyState>
       )}
-    </>
+    </PageLayout>
   );
 }
 

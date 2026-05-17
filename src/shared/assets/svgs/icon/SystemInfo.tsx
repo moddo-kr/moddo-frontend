@@ -10,7 +10,7 @@ const SvgSystemInfo = (props: SVGProps<SVGSVGElement>) => (
     <rect
       width={20}
       height={20}
-      fill="#2391F6"
+      fill="currentColor"
       rx={10}
       transform="matrix(1 0 0 -1 0 20)"
     />

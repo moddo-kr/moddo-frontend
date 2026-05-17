@@ -1,16 +1,12 @@
-import LogoImg from '@/shared/assets/pngs/LogoImg.png';
-import Text from '@/shared/ui/Text';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import theme from '@/shared/styles/theme';
-import Button from '@/shared/ui/Button';
-import { Kakao } from '@/shared/assets/svgs/icon';
-import Flex from '@/shared/ui/Flex';
+import { showToast } from '@/shared/design-system/ui';
 import { getGuestToken } from '@/entities/auth/api/auth';
 import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
+import { LogoIcon, Kakao } from '@/shared/assets/svgs/logo';
 import { queryClient } from '@/shared/api/queryClient';
-import { showToast } from '@/shared/ui/Toast';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 
@@ -55,53 +51,28 @@ function LoginPage() {
   }
 
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
-      bgColor="#fff"
-      flexGrow={1}
-    >
-      <S.ContentWrapper>
-        <S.TextContainer>
-          <S.LogoImg src={LogoImg} alt="logo" />
-          <Text variant="body1R" color="semantic.text.subtle">
-            모또와 함께라면 정산 걱정 끝!
-          </Text>
-        </S.TextContainer>
-      </S.ContentWrapper>
-      <S.BottomWrapper>
-        <Button
-          style={{
-            background: '#FEE500',
-          }}
-          onClick={() => handleLoginButtonClick('KAKAO')}
-        >
-          <Kakao width={theme.unit[24]} />
-          <Text variant="body1Sb" color="semantic.text.strong">
-            카카오로 로그인
-          </Text>
-        </Button>
-        <Button
-          variant="secondary"
-          disabled={isGuestLoginPending}
-          onClick={() => handleLoginButtonClick('GUEST')}
-        >
-          <Text variant="body1R" color="semantic.text.strong">
-            비회원으로 진행
-          </Text>
-        </Button>
-
-        <S.TextWrapper>
-          <Text color="semantic.text.subtle" variant="caption">
-            회원가입 시 서비스 이용약관과
-          </Text>
-          <Text color="semantic.text.subtle" variant="caption">
-            개인정보 수집 및 이용에 동의하게 됩니다.
-          </Text>
-        </S.TextWrapper>
-      </S.BottomWrapper>
-    </Flex>
+    <PageLayout>
+      <S.LoginPageContent>
+        <S.ContentWrapper>
+          <S.TextContainer>
+            <LogoIcon width={187} height={66} />
+            <S.LogoTagline>모또와 함께라면 정산 걱정 끝!</S.LogoTagline>
+          </S.TextContainer>
+        </S.ContentWrapper>
+        <S.BottomWrapper>
+          <S.KakaoButton onClick={() => handleLoginButtonClick('KAKAO')}>
+            <Kakao width={24} height={24} />
+            <S.KakaoLoginLabel>카카오로 로그인</S.KakaoLoginLabel>
+          </S.KakaoButton>
+          <S.TextWrapper>
+            <S.TermsNotice>회원가입 시 서비스 이용약관과</S.TermsNotice>
+            <S.TermsNotice>
+              개인정보 수집 및 이용에 동의하게 됩니다.
+            </S.TermsNotice>
+          </S.TextWrapper>
+        </S.BottomWrapper>
+      </S.LoginPageContent>
+    </PageLayout>
   );
 }
 

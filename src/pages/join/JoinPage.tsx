@@ -1,19 +1,19 @@
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+  Profile,
+} from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { useLoaderData, useNavigate, useParams } from 'react-router';
-import { useTheme } from 'styled-components';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import { useState } from 'react';
 import useAssignMember from '@/features/join/api/useAssignMember';
-import Profile from '@/shared/ui/Profile';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './JoinPage.styles';
 
 function JoinPage() {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   // TODO: groupToken → settlementCode 마이그레이션 시 파라미터 이름 변경 필요
   const { groupToken } = useParams();
@@ -29,7 +29,6 @@ function JoinPage() {
     if (selectedId === null || !groupToken) return;
     assignMember(selectedId, {
       onSuccess: () => {
-        console.log('프로필 선택 성공');
         navigate(`/expense-detail/${groupToken}`);
       },
     });
@@ -42,16 +41,13 @@ function JoinPage() {
   };
 
   return (
-    <>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
         }
-        leftButtonOnClick={() => navigate(-1)}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title="정산에 참여할 프로필을 선택하세요."
@@ -61,33 +57,38 @@ function JoinPage() {
         <S.ScrollArea>
           <S.ProfileGrid>
             {profiles.map((profile) => (
-              <Profile
+              <S.ProfileButton
                 key={profile.id}
-                id={profile.id}
-                name={profile.name}
-                imageSrc={profile.profile}
-                size="L"
-                type={getProfileType(profile)}
-                onClick={
+                type="button"
+                disabled={profile.userId !== null}
+                onClick={() => handleSelect(profile.id)}
+                aria-pressed={
                   profile.userId === null
-                    ? () => handleSelect(profile.id)
+                    ? profile.id === selectedId
                     : undefined
                 }
-              />
+              >
+                <Profile
+                  size="L"
+                  type={getProfileType(profile)}
+                  label={profile.name}
+                  src={profile.profile}
+                />
+              </S.ProfileButton>
             ))}
           </S.ProfileGrid>
         </S.ScrollArea>
         <S.GradientOverlay />
       </S.ScrollWrapper>
-      <BottomButtonContainer>
-        <Button
-          disabled={selectedId === null || isPending}
-          onClick={handleConfirm}
-        >
-          선택
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{
+          label: '선택',
+          onClick: handleConfirm,
+          disabled: selectedId === null || isPending,
+        }}
+      />
+    </PageLayout>
   );
 }
 

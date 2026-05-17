@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const ScrollWrapper = styled.div`
   flex: 1;
@@ -20,7 +21,7 @@ export const ProfileGrid = styled.div`
     1fr
   ); // 기본적으로 4열로 시작 (피그마 디자인 기준)
   justify-items: center;
-  padding: ${({ theme }) => theme.unit[16]};
+  padding: ${getToken('padding.5')};
 
   // 피그마 디자인의 Frame 너비가 390px 이상이므로, 390px 이상에서는 5열로 변경
   @media (min-width: 390px) {
@@ -30,6 +31,16 @@ export const ProfileGrid = styled.div`
   // body 최대 너비가 600px 이므로, 600px 이상에서는 6열로 변경
   @media (min-width: 600px) {
     grid-template-columns: repeat(6, 1fr);
+  }
+`;
+
+export const ProfileButton = styled.button`
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
   }
 `;
 

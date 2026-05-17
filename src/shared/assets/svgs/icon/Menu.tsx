@@ -8,7 +8,7 @@ const SvgMenu = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#242424"
+      fill="currentColor"
       fillRule="evenodd"
       d="M2.2 6a.8.8 0 0 1 .8-.8h18a.8.8 0 0 1 0 1.6H3a.8.8 0 0 1-.8-.8m0 6a.8.8 0 0 1 .8-.8h18a.8.8 0 0 1 0 1.6H3a.8.8 0 0 1-.8-.8m.8 5.2a.8.8 0 0 0 0 1.6h18a.8.8 0 0 0 0-1.6z"
       clipRule="evenodd"

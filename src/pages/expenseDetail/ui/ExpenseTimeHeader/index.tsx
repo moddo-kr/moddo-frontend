@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import { Copy, Crown, DollarCircle } from '@/shared/assets/svgs/icon';
-import { useTheme } from 'styled-components';
-import Text from '@/shared/ui/Text';
-import Modal from '@/shared/ui/Modal';
+import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
 import copyClipboard from '@/shared/lib/copyClipboard';
-import Button from '@/shared/ui/Button';
-import { showToast } from '@/shared/ui/Toast';
-import Flex from '@/shared/ui/Flex';
+import {
+  DescriptionField,
+  Dialog,
+  IconButton,
+  Modal,
+  showToast,
+} from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { GroupHeaderResponse } from '@/entities/group/model/group.type';
-import CurvedProgressBar from '../CurvedProgressBar';
+import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
 import { getFormatDate } from './lib/getFormatDate';
@@ -37,9 +38,10 @@ function ExpenseTimeHeader({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-  const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const totalMember = headerData?.totalMemberCount ?? 0;
+  const paidMember = headerData?.completedMemberCount ?? 0;
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -66,44 +68,45 @@ function ExpenseTimeHeader({
     }
   };
 
+  // TODO: isChecked를 sessionStorage/localStorage로 관리하여 새로고침 시에도 모달이 다시 뜨지 않도록 개선 필요 (groupToken별 키 사용)
+  // 모든 멤버가 입금 완료된 "순간"에만 모달 표시
   useEffect(() => {
-    if (!headerData) return () => {};
+    if (totalMember > 0 && paidMember === totalMember && !isChecked) {
+      setIsModalOpen(true);
+      setIsChecked(true);
+    }
+  }, [paidMember, totalMember, isChecked, setIsChecked]);
 
-    const totalMember = headerData.totalMemberCount;
-    const paidMember = headerData.completedMemberCount;
+  useEffect(() => {
+    if (!headerData || status !== 'pending') return () => {};
 
     intervalRef.current = setInterval(() => {
       const now = new Date();
       const endDate = new Date(headerData.deadline);
       const timeDifference = endDate.getTime() - now.getTime();
       if (timeDifference <= 0) {
-        if (status === 'success') return;
         setHours(0);
         setMinutes(0);
         setSeconds(0);
         updateStatus('failure');
         stopTimer();
       } else {
-        if (totalMember > 0 && totalMember === paidMember && !isChecked) {
-          setIsModalOpen(true);
-          setIsChecked(true);
-        }
         updateTimer(timeDifference);
       }
     }, 1000);
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData, isChecked]);
+  }, [headerData, status]);
 
   const handleModalButtonClick = () => {
+    stopTimer();
     setIsModalOpen(false);
     updateStatus('success');
     setHours(0);
     setMinutes(0);
     setSeconds(0);
     onShareClick();
-    stopTimer(); // 버튼 클릭 시 타이머 멈추기
   };
 
   if (isLoading) {
@@ -116,13 +119,7 @@ function ExpenseTimeHeader({
 
   /** 상수 정의 */
 
-  const totalMember = headerData.totalMemberCount;
-  const paidMember = headerData.completedMemberCount;
   const percentage = totalMember > 0 ? (paidMember / totalMember) * 100 : 0;
-  const crownColor =
-    totalMember > 0 && paidMember === totalMember
-      ? theme.color.primitive.base.white
-      : theme.color.semantic.secondary.heavy;
   const endDate = new Date(headerData.deadline);
   const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
@@ -151,25 +148,26 @@ function ExpenseTimeHeader({
     <S.Wrapper>
       <DescriptionField
         title={
-          <Flex direction="column">
-            <Text color="semantic.orange.default" variant="heading2">
-              {getFormatDate(endDate)}까지
-            </Text>
-            <Text variant="heading2">정산을 완료해주세요</Text>
-          </Flex>
+          <S.DescriptionTitle>
+            <S.DeadlineDate>{getFormatDate(endDate)}까지</S.DeadlineDate>
+            <S.SettlementPrompt>정산을 완료해주세요</S.SettlementPrompt>
+          </S.DescriptionTitle>
         }
         sub={
-          <Flex gap={4} alignItems="center">
+          <S.AccountRow>
             정산 계좌: {accountFormat}
-            <Button
-              variant="text"
+            <IconButton
+              aria-label="계좌번호 복사"
               onClick={() => handleCopyButtonClick(accountFormat)}
             >
-              <Copy width={16} height={16} />
-            </Button>
-          </Flex>
+              <Copy
+                width={16}
+                height={16}
+                color={getToken('fill.inverse.alternative')}
+              />
+            </IconButton>
+          </S.AccountRow>
         }
-        bgColor="semantic.background.normal.alternative"
       />
       <CurvedProgressBar percentage={percentage}>
         <S.ModdoButton onClick={handleModdoButtonClick}>
@@ -177,72 +175,52 @@ function ExpenseTimeHeader({
           {isBubble && <S.Bubble>{StatusContent[status].message}</S.Bubble>}
         </S.ModdoButton>
         <S.ExpenseChip>
-          <DollarCircle
-            width="32"
-            style={{ paddingRight: `${theme.unit[8]}` }}
-          />
-          <Text variant="body1Sb" color="semantic.orange.default">
-            {paidMember}
-          </Text>
-          <Text
-            variant="body1Sb"
-            color="semantic.text.inverse"
-          >{`/${totalMember} 정산 완료`}</Text>
+          <DollarCircle width={24} height={24} color="#FECB3F" />
+          <S.SettlementStatusText>
+            <S.PaidMemberCount>{paidMember}</S.PaidMemberCount>
+            {`/${totalMember} 정산 완료`}
+          </S.SettlementStatusText>
         </S.ExpenseChip>
-        <Crown
-          width={theme.unit[24]}
-          fill={crownColor}
-          style={{ position: 'absolute', top: '44.5%', right: '1.5%' }}
-        />
         <S.TotalMoney>
           {(headerData?.totalAmount ?? 0).toLocaleString('ko-KR')}원
         </S.TotalMoney>
       </CurvedProgressBar>
-      <Flex direction="column" px={20} gap={12}>
-        <Text variant="body1Sb" color="semantic.text.strong">
-          정산 마감까지 남은 시간
-        </Text>
+      <S.TimerSection>
+        <S.DeadlineLabel>정산 마감까지 남은 시간</S.DeadlineLabel>
         <S.TimeBox>
           <S.Timer>
             {([hours, minutes, seconds] as number[]).map((time, index, arr) => (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
-                <Text
-                  variant="heading1"
-                  color={
-                    status === 'failure'
-                      ? 'semantic.state.danger'
-                      : 'semantic.text.strong'
-                  }
-                >
+                <S.TimerDigit $isFailure={status === 'failure'}>
                   {String(time).padStart(2, '0')}
-                </Text>
+                </S.TimerDigit>
                 {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}
               </React.Fragment>
             ))}
             {['시', '분', '초'].map((label, idx) => (
-              <Text
-                key={label}
-                color="semantic.text.subtle"
-                style={{ gridColumn: idx * 2 + 1 }}
-              >
+              <S.TimerUnit key={label} $gridColumn={idx * 2 + 1}>
                 {label}
-              </Text>
+              </S.TimerUnit>
             ))}
           </S.Timer>
         </S.TimeBox>
-      </Flex>
+      </S.TimerSection>
       <Modal
         open={isModalOpen}
-        setOpen={setIsModalOpen}
-        variant="default"
-        title="모임원이 모두 입금했어요!"
-        subscribe="정산을 완료하고 캐릭터를 확인하시겠어요?"
-        cancel="미완료"
-        submit="완료"
-        onCancel={() => setIsModalOpen(false)}
-        onSubmit={handleModalButtonClick}
-      />
+        onClose={() => setIsModalOpen(false)}
+        ariaLabel="모임원이 모두 입금했어요!"
+      >
+        <Dialog
+          title="모임원이 모두 입금했어요!"
+          description="정산을 완료하고 캐릭터를 확인하시겠어요?"
+          mainAction={{ label: '완료', onClick: handleModalButtonClick }}
+          alternativeAction={{
+            label: '미완료',
+            onClick: () => setIsModalOpen(false),
+          }}
+        />
+      </Modal>
     </S.Wrapper>
   );
 }

@@ -1,14 +1,14 @@
-import expense from '@/entities/expense/api/expense';
+import { getGroupList } from '@/entities/group/api/group';
 import useQueryWithHandlers from '@/shared/hooks/useQueryWithHandlers';
 import { ErrorHandlers, IgnoreBoundaryErrors } from '@/shared/types/error.type';
 
-const useGetExpensesLinks = (
+const useGetGroupLinks = (
   errorHandlers: ErrorHandlers,
   ignoreBoundaryErrors: IgnoreBoundaryErrors
 ) => {
   const query = useQueryWithHandlers({
-    queryKey: ['expense-links'],
-    queryFn: expense.getLinks,
+    queryKey: ['group-list'],
+    queryFn: getGroupList,
     staleTime: 10 * 60 * 1000, // 10분
     gcTime: 60 * 60 * 1000, // 1시간
     errorHandlers,
@@ -18,4 +18,4 @@ const useGetExpensesLinks = (
   return query;
 };
 
-export default useGetExpensesLinks;
+export default useGetGroupLinks;

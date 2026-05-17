@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import Button from '@/shared/ui/Button';
-import Chip from '@/shared/ui/Chip';
-import Text from '@/shared/ui/Text';
+import { NameChip } from '@/shared/design-system/ui';
 import { ExpenseDetail } from '@/entities/expense/model/expense.type';
 import * as S from './index.styles';
 
@@ -10,27 +7,21 @@ interface ExpenseTimelineContentProps {
 }
 
 function ExpenseTimelineContent({ expense }: ExpenseTimelineContentProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <S.ExpenseContent>
       <S.ContentTitle>
-        <Text variant="body1Sb" color="semantic.text.subtle">
-          {expense.content}
-        </Text>
-        <Text variant="heading2" color="semantic.text.strong">
+        <S.ExpenseContentName>{expense.content}</S.ExpenseContentName>
+        <S.ExpenseTotalAmount>
           {expense.totalAmount.toLocaleString()}원
-        </Text>
+        </S.ExpenseTotalAmount>
       </S.ContentTitle>
       <S.MemberChipContainer>
-        <S.MemberChipHeader>
-          <Button variant="text" onClick={() => setIsExpanded(!isExpanded)}>
-            <Text>{expense.groupMembers.length}명</Text>
-          </Button>
+        <S.MemberChipHeader type="button">
+          <S.MemberCount>{expense.groupMembers.length}명</S.MemberCount>
         </S.MemberChipHeader>
         <S.MemberChipList>
           {expense.groupMembers.map((name) => (
-            <Chip key={name} label={name} variant="disabled" size="sm" />
+            <NameChip key={name} label={name} variant="black" size="s" />
           ))}
         </S.MemberChipList>
       </S.MemberChipContainer>

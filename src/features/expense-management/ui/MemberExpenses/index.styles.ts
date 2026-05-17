@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
 export const MemberExpensesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
   width: 100%;
 `;
 
@@ -11,10 +12,10 @@ export const MemberContainer = styled.div`
   display: flex;
   align-items: center;
   gap: clamp(
-    ${({ theme }) => theme.unit[24]},
+    1.5rem,
     10vw,
-    ${({ theme }) => theme.unit[64]}
-  );
+    4rem
+  ); /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
   align-self: stretch;
 `;
 
@@ -24,6 +25,6 @@ export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ theme }) => theme.unit[4]};
+  gap: ${getToken('gap.2')};
   flex-shrink: 0;
 `;

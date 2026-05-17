@@ -11,11 +11,11 @@ const useAddGroupMember = (
   const queryClient = useQueryClient();
 
   return useMutationWithHandlers({
-    mutationFn: groupMembers.put,
+    mutationFn: groupMembers.post,
     onSuccess: () => {
       // NOTE : 더 좋은 방법이 있을지 고민해봐야 할 것 같아요...
       queryClient.invalidateQueries({
-        queryKey: ['groupBasicInfo', groupToken],
+        queryKey: ['groupDetail', groupToken],
       });
     },
     errorHandlers,

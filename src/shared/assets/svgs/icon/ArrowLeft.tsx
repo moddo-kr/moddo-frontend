@@ -8,7 +8,7 @@ const SvgArrowLeft = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#444950"
+      fill="currentColor"
       fillRule="evenodd"
       d="M15.595 19.735a.8.8 0 0 1-1.13.06l-8-7.2a.8.8 0 0 1 0-1.19l8-7.2a.8.8 0 1 1 1.07 1.19L8.195 12l7.34 6.605a.8.8 0 0 1 .06 1.13"
       clipRule="evenodd"

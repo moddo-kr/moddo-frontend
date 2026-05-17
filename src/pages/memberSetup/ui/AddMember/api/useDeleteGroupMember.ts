@@ -13,7 +13,7 @@ const useDeleteGroupMember = (
     mutationFn: groupMembers.delete,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['groupBasicInfo', groupToken],
+        queryKey: ['groupDetail', groupToken],
       });
     },
     errorHandlers,

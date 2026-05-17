@@ -1,8 +1,5 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
-import Text from '@/shared/ui/Text';
-import BottomSheet from '@/shared/ui/BottomSheet';
-import ButtonGroup from '@/shared/ui/ButtonGroup';
-import Button from '@/shared/ui/Button';
+import { BottomSheet, ActionArea } from '@/shared/design-system/ui';
 import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
@@ -26,7 +23,11 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
   }
 
   return (
-    <BottomSheet open={open} setOpen={setOpen}>
+    <BottomSheet
+      open={open}
+      onClose={() => setOpen(false)}
+      ariaLabel="캐릭터 획득 알림"
+    >
       <S.BottomSheetContainer>
         <S.CharacterImageContainer>
           <img
@@ -38,27 +39,24 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
           />
         </S.CharacterImageContainer>
         <S.DescriptionContainer>
-          <Text variant="heading2" color="semantic.text.strong">
-            두둥, {data.name} 등장!
-          </Text>
-          <Text>
+          <S.CharacterTitle>두둥, {data.name} 등장!</S.CharacterTitle>
+          <S.CharacterDescription>
             모두가 시간 내에 정산을 완료했어요!
             <br />
             참여해준 모든 분께 캐릭터를 선물로 드려요!
-          </Text>
+          </S.CharacterDescription>
         </S.DescriptionContainer>
-        <ButtonGroup>
-          <Button variant="secondary" onClick={() => setOpen(false)}>
-            닫기
-          </Button>
-          <Button
-            onClick={() =>
-              navigate(generatePath(ROUTE.characterShare, { groupToken }))
-            }
-          >
-            캐릭터 보기
-          </Button>
-        </ButtonGroup>
+        <ActionArea
+          layout="horizontal"
+          showBottomSafeArea={false}
+          hasHorizontalPadding={false}
+          mainAction={{
+            label: '캐릭터 보기',
+            onClick: () =>
+              navigate(generatePath(ROUTE.characterShare, { groupToken })),
+          }}
+          alternativeAction={{ label: '닫기', onClick: () => setOpen(false) }}
+        />
       </S.BottomSheetContainer>
     </BottomSheet>
   );

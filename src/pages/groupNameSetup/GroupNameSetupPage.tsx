@@ -1,15 +1,16 @@
-import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Text from '@/shared/ui/Text';
-import Header from '@/shared/ui/Header';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
-import Input from '@/shared/ui/Input';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+  Input,
+} from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './GroupNameSetupPage.styles';
 
 const groupNameSchema = z.object({
@@ -23,7 +24,6 @@ interface GroupNameSetupProps {
 }
 
 function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   const {
     register,
@@ -35,16 +35,14 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
   });
 
   return (
-    <>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
+        type="default"
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
         }
-        leftButtonOnClick={() => navigate(-1)}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title={`생성할 모임의\n이름을 입력해주세요.`}
@@ -53,20 +51,20 @@ function GroupNameSetupPage({ onNext }: GroupNameSetupProps) {
       <S.PageContentWrapper>
         <Input placeholder="모또 미팅" {...register('groupName')} />
         {errors.groupName ? (
-          <Text as="p" variant="caption" color="semantic.state.danger">
+          <S.ValidationMessage>
             {errors.groupName?.message?.toString()}
-          </Text>
+          </S.ValidationMessage>
         ) : null}
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          onClick={handleSubmit((data) => onNext(data.groupName))}
-          disabled={!isValid}
-        >
-          다음
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{
+          label: '다음',
+          onClick: handleSubmit((data) => onNext(data.groupName)),
+          disabled: !isValid,
+        }}
+      />
+    </PageLayout>
   );
 }
 

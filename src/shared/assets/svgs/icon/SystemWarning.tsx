@@ -8,7 +8,7 @@ const SvgSystemWarning = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#FAE03E"
+      fill="currentColor"
       d="M10.17.494a.944.944 0 0 1 1.66 0l9.54 17.026c.369.657-.092 1.48-.83 1.48H1.46c-.738 0-1.199-.823-.83-1.48z"
     />
     <path

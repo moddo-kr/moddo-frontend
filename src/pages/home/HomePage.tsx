@@ -1,5 +1,5 @@
-import Divider from '@/shared/ui/Divider';
-import Flex from '@/shared/ui/Flex';
+import { Divider } from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import {
   MainHeader,
   SettlementBanner,
@@ -8,12 +8,12 @@ import {
 
 function HomePage() {
   return (
-    <Flex direction="column" flexGrow={1}>
+    <PageLayout>
       <MainHeader />
       <SettlementBanner />
       <Divider />
       <SettlementList />
-    </Flex>
+    </PageLayout>
   );
 }
 

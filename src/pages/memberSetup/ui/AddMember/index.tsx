@@ -2,13 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member } from '@/entities/member/model/member.type';
-import Text from '@/shared/ui/Text';
-import Profile from '@/shared/ui/Profile';
-import InputGroup from '@/shared/ui/InputGroup';
-import Input from '@/shared/ui/Input';
-import Button from '@/shared/ui/Button';
-import Flex from '@/shared/ui/Flex';
-import { showToast } from '@/shared/ui/Toast';
+import { Button, Input, Profile, showToast } from '@/shared/design-system/ui';
 import useAddGroupMember from './api/useAddGroupMember';
 import useDeleteGroupMember from './api/useDeleteGroupMember';
 import * as S from './index.styles';
@@ -78,9 +72,9 @@ function AddMember({ members, groupToken }: AddMemberProps) {
   };
 
   return (
-    <Flex direction="column" height="fit-content">
+    <S.AddMemberContainer>
       <form onSubmit={handleSubmit(handleAddName)}>
-        <InputGroup>
+        <S.InputRow>
           <Input
             placeholder="이정산"
             {...register('name', {
@@ -90,35 +84,35 @@ function AddMember({ members, groupToken }: AddMemberProps) {
           <Button
             type="submit"
             variant="secondary"
-            size="md"
+            size="medium"
             disabled={!formState.isValid}
           >
             추가하기
           </Button>
-        </InputGroup>
+        </S.InputRow>
       </form>
-      <Flex direction="column" gap={8} mt={28}>
+      <S.MemberListSection>
         <S.MemberCount>
-          총{' '}
-          <Text variant="body1Sb" color="semantic.orange.default">
-            {members.length}
-          </Text>
-          명
+          총 <S.MemberCountHighlight>{members.length}</S.MemberCountHighlight>명
         </S.MemberCount>
-        <Flex gap={12} flexWrap="wrap">
+        <S.MemberChipList>
           {members.map((member) => (
             <Profile
               key={member.id}
-              id={member.id}
-              name={member.name}
-              imageSrc={member.profile}
+              size="m"
               type={member.role === 'MANAGER' ? 'default' : 'delete'}
-              onDelete={handleDeleteMember}
+              label={member.name}
+              src={member.profile}
+              onDelete={
+                member.role === 'MANAGER'
+                  ? undefined
+                  : () => handleDeleteMember(member.id)
+              }
             />
           ))}
-        </Flex>
-      </Flex>
-    </Flex>
+        </S.MemberChipList>
+      </S.MemberListSection>
+    </S.AddMemberContainer>
   );
 }
 

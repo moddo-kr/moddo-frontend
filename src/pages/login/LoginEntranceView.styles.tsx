@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const ImgContainer = styled.div`
   display: flex;
@@ -15,7 +16,6 @@ export const EntranceImg = styled.img`
   height: auto;
   object-fit: contain;
   position: absolute;
-  top: 33%;
 `;
 
 export const LogoImg = styled.img`
@@ -23,4 +23,28 @@ export const LogoImg = styled.img`
   max-width: 12.625rem;
   height: 4.125rem;
   object-fit: contain;
+`;
+
+export const EntranceTagline = styled.span`
+  ${applyTypography('typography.body.medium')};
+  color: ${getToken('fg.alternative')};
+`;
+
+export const EntranceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${getToken('fill.primary.assistive')};
+  flex-grow: 1;
+  gap: ${getToken('gap.6')};
+`;
+
+export const LogoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  svg {
+    color: ${getToken('fg.primary.normal')};
+  }
 `;

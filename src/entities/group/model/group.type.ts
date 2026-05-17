@@ -1,7 +1,7 @@
 import { Member } from '@/entities/member/model/member.type';
 
 export interface Group {
-  id: string;
+  id: number;
   groupName: string;
   members: Member[];
 }
@@ -13,7 +13,6 @@ export interface GroupTokenUrlLoaderData {
 
 export interface CreateGroupData {
   name: string;
-  password: string;
 }
 
 export interface AccountVariable {
@@ -29,6 +28,15 @@ export interface GroupHeaderResponse {
   accountNumber: string;
   totalMemberCount: number;
   completedMemberCount: number;
+}
+
+export interface GroupListItem {
+  settlementId: number;
+  name: string;
+  groupCode: string;
+  createdAt: string;
+  completedAt: string | null;
+  members: Member[];
 }
 
 export type SettlementStatus = 'ALL' | 'IN_PROGRESS' | 'COMPLETED';
