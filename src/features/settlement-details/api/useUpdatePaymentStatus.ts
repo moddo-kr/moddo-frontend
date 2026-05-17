@@ -12,9 +12,11 @@ const useUpdatePaymentStatus = ({
     mutationFn: () =>
       updatePaymentStatus({ groupToken, groupMemberId, isPaid }),
     onSuccess: () => {
-      // 성공하면 memberExpenseDetails 쿼리를 다시 불러온다.
       queryClient.invalidateQueries({
         queryKey: ['memberExpenseDetails', groupToken],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['groupHeader', groupToken],
       });
     },
   });
