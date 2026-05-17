@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { waitFor, within } from '@storybook/test';
-import { createMemoryRouter, RouterProvider } from 'react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import ExpenseTimeHeader from './index';
 
@@ -12,8 +10,6 @@ import ExpenseTimeHeader from './index';
  *
  * 나중에 유지보수가 과도해질 경우 삭제해도 괜찮습니다.
  */
-
-const queryClient = new QueryClient();
 
 const meta: Meta<typeof ExpenseTimeHeader> = {
   title: 'ui/ExpenseTimeHeader',
@@ -29,27 +25,13 @@ const meta: Meta<typeof ExpenseTimeHeader> = {
             deadline: '2025-12-26T23:59:59Z',
             bank: '국민은행',
             accountNumber: '123456-78-910111',
+            totalMemberCount: 6,
+            completedMemberCount: 3,
           });
         }),
       ],
     },
   },
-  decorators: [
-    (Story) => {
-      const mockRouter = createMemoryRouter([
-        {
-          path: '/*',
-          element: <Story />,
-          loader: () => ({ groupToken: 'mock-group-token' }),
-        },
-      ]);
-      return (
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={mockRouter} />
-        </QueryClientProvider>
-      );
-    },
-  ],
 };
 
 export default meta;
@@ -57,8 +39,16 @@ type Story = StoryObj<typeof ExpenseTimeHeader>;
 
 export const Default: Story = {
   args: {
-    totalMember: 6,
-    paidMember: 3,
+    headerData: {
+      groupName: '모또 정기모임',
+      totalAmount: 150000,
+      deadline: '2025-12-26T23:59:59Z',
+      bank: '국민은행',
+      accountNumber: '123456-78-910111',
+      totalMemberCount: 6,
+      completedMemberCount: 3,
+    },
+    isLoading: false,
     status: 'success',
     isChecked: false,
   },

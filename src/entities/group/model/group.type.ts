@@ -24,9 +24,11 @@ export interface AccountVariable {
 export interface GroupHeaderResponse {
   groupName: string;
   totalAmount: number;
-  deadline: Date;
+  deadline: string;
   bank: string;
   accountNumber: string;
+  totalMemberCount: number;
+  completedMemberCount: number;
 }
 
 export type SettlementStatus = 'ALL' | 'IN_PROGRESS' | 'COMPLETED';

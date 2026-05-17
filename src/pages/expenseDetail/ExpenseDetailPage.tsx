@@ -7,11 +7,11 @@ import Header from '@/shared/ui/Header';
 import Text from '@/shared/ui/Text';
 import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import Divider from '@/shared/ui/Divider';
-import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import ShareButton from '@/shared/ui/ShareButton';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
+import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { TabsList, Tab } from './ui/Tabs';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -25,17 +25,26 @@ function ExpenseDetailPage() {
   const { groupToken, groupData } = useLoaderData();
   const [status, setStatus] = useState<StatusType>('pending');
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
-  const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  let MEMBER_TOTAL = 0;
-  let MEMBER_DONE = 0;
-
-  if (memberExpenseDetails) {
-    MEMBER_TOTAL = memberExpenseDetails.length;
-    MEMBER_DONE = memberExpenseDetails.filter((member) => member.isPaid).length;
-  }
+  const { data: headerData, isLoading: isHeaderLoading } = useGetGroupHeader(
+    groupToken,
+    {
+      // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
+      // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
+      // 401: () => {
+      //   throw new BoundaryError({
+      //     title: '접근할 수 없는 페이지예요',
+      //     description: '참여한 모임의 정산만 확인할 수 있어요.',
+      //   });
+      // },
+    },
+    [401]
+  );
+  const memberTotal = headerData?.totalMemberCount ?? 0;
+  const memberDone = headerData?.completedMemberCount ?? 0;
+  const isAllMemberPaid = memberTotal > 0 && memberTotal === memberDone;
 
   const shareLink = generateShareLink(groupToken);
 
@@ -66,8 +75,8 @@ function ExpenseDetailPage() {
       />
       <S.Content>
         <ExpenseTimeHeader
-          totalMember={MEMBER_TOTAL}
-          paidMember={MEMBER_DONE}
+          headerData={headerData}
+          isLoading={isHeaderLoading}
           onShareClick={() => setOpenBottomSheet(true)}
           status={status}
           setStatus={setStatus}
@@ -89,7 +98,7 @@ function ExpenseDetailPage() {
       </S.Content>
       <BottomButtonContainer>
         {/* eslint-disable-next-line */}
-        {MEMBER_TOTAL === MEMBER_DONE && status === 'pending' ? (
+        {isAllMemberPaid && status === 'pending' ? (
           <Button onClick={() => setIsChecked(false)}>정산 완료하기</Button>
         ) : status === 'success' ? (
           <Button onClick={handleBackToHome}>홈으로 돌아가기</Button>

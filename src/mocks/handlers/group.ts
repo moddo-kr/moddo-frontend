@@ -112,6 +112,8 @@ const groupHandlers = [
 
     return HttpResponse.json({
       ...dummyGroups[0],
+      totalMemberCount: 3,
+      completedMemberCount: 0,
     });
   }),
 

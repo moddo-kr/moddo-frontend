@@ -3,21 +3,20 @@ import DescriptionField from '@/shared/ui/DescriptionField';
 import { Copy, Crown, DollarCircle } from '@/shared/assets/svgs/icon';
 import { useTheme } from 'styled-components';
 import Text from '@/shared/ui/Text';
-import { useLoaderData } from 'react-router';
 import Modal from '@/shared/ui/Modal';
 import copyClipboard from '@/shared/lib/copyClipboard';
 import Button from '@/shared/ui/Button';
 import { showToast } from '@/shared/ui/Toast';
 import Flex from '@/shared/ui/Flex';
-import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { GroupHeaderResponse } from '@/entities/group/model/group.type';
 import CurvedProgressBar from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
 import { getFormatDate } from './lib/getFormatDate';
 
 interface ExpenseTimeHeaderProps {
-  totalMember: number;
-  paidMember: number;
+  headerData?: GroupHeaderResponse;
+  isLoading: boolean;
   onShareClick: () => void;
   status: StatusType;
   setStatus: (status: StatusType) => void;
@@ -26,8 +25,8 @@ interface ExpenseTimeHeaderProps {
 }
 
 function ExpenseTimeHeader({
-  totalMember,
-  paidMember,
+  headerData,
+  isLoading,
   onShareClick,
   status,
   setStatus,
@@ -38,26 +37,9 @@ function ExpenseTimeHeader({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-  const { groupToken } = useLoaderData();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  /** API 호출 관련 로직 */
-  const { data: headerData, isLoading } = useGetGroupHeader(
-    groupToken,
-    {
-      // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
-      // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
-      // 401: () => {
-      //   throw new BoundaryError({
-      //     title: '접근할 수 없는 페이지예요',
-      //     description: '참여한 모임의 정산만 확인할 수 있어요.',
-      //   });
-      // },
-    },
-    [401]
-  );
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -87,9 +69,12 @@ function ExpenseTimeHeader({
   useEffect(() => {
     if (!headerData) return () => {};
 
+    const totalMember = headerData.totalMemberCount;
+    const paidMember = headerData.completedMemberCount;
+
     intervalRef.current = setInterval(() => {
       const now = new Date();
-      const endDate = new Date(headerData!.deadline);
+      const endDate = new Date(headerData.deadline);
       const timeDifference = endDate.getTime() - now.getTime();
       if (timeDifference <= 0) {
         if (status === 'success') return;
@@ -99,7 +84,7 @@ function ExpenseTimeHeader({
         updateStatus('failure');
         stopTimer();
       } else {
-        if (totalMember === paidMember && !isChecked) {
+        if (totalMember > 0 && totalMember === paidMember && !isChecked) {
           setIsModalOpen(true);
           setIsChecked(true);
         }
@@ -109,7 +94,7 @@ function ExpenseTimeHeader({
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData, totalMember, paidMember, isChecked]);
+  }, [headerData, isChecked]);
 
   const handleModalButtonClick = () => {
     setIsModalOpen(false);
@@ -131,9 +116,11 @@ function ExpenseTimeHeader({
 
   /** 상수 정의 */
 
-  const percentage = (paidMember / totalMember) * 100;
+  const totalMember = headerData.totalMemberCount;
+  const paidMember = headerData.completedMemberCount;
+  const percentage = totalMember > 0 ? (paidMember / totalMember) * 100 : 0;
   const crownColor =
-    paidMember === totalMember
+    totalMember > 0 && paidMember === totalMember
       ? theme.color.primitive.base.white
       : theme.color.semantic.secondary.heavy;
   const endDate = new Date(headerData.deadline);
