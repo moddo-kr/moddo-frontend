@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import {
@@ -16,6 +17,7 @@ import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { getProfiles } from '@/entities/member/api/getProfiles';
 import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -37,6 +39,12 @@ function ExpenseDetailPage() {
   );
   const memberTotal = headerData?.totalMemberCount ?? 0;
   const memberDone = headerData?.completedMemberCount ?? 0;
+  const { data: profiles = [] } = useQuery({
+    queryKey: ['profiles', groupToken],
+    queryFn: () => getProfiles(groupToken),
+  });
+  const currentProfile =
+    profiles.find((profile) => profile.id === myProfile.id) ?? myProfile;
 
   // TODO: GroupHeaderResponse에 completedAt 필드를 추가하여 서버에서 정산 완료 여부를 직접 내려받도록 개선 필요
   const derivedStatus = useMemo<StatusType>(() => {
@@ -118,7 +126,7 @@ function ExpenseDetailPage() {
       </S.Content>
       <BottomAction
         status={status}
-        myProfile={myProfile}
+        myProfile={currentProfile}
         memberTotal={memberTotal}
         memberDone={memberDone}
         shareLink={shareLink}
@@ -133,12 +141,12 @@ function ExpenseDetailPage() {
       <Modal
         open={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-        ariaLabel={`${myProfile.name}님의 정산 입금을 알릴게요.`}
+        ariaLabel={`${currentProfile.name}님의 정산 입금을 알릴게요.`}
       >
         <Dialog
           title={
             <>
-              <S.NameHighlight>{myProfile.name}</S.NameHighlight>
+              <S.NameHighlight>{currentProfile.name}</S.NameHighlight>
               {'님의\n정산 입금을 알릴게요.'}
             </>
           }
