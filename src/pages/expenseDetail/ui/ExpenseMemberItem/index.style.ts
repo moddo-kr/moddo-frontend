@@ -83,12 +83,17 @@ export const ExpensesWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: ${getToken('padding.4')} ${getToken('padding.4')} 0;
+  gap: ${getToken('gap.4')};
 `;
 
 export const PlaceWrapper = styled.div`
   display: flex;
-  gap: ${getToken('gap.7')};
+  gap: ${getToken('gap.4')};
   align-items: center;
+
+  & > svg {
+    flex-shrink: 0;
+  }
 `;
 
 export const SheetContentWrapper = styled.div`
@@ -131,6 +136,7 @@ export const ExpenseContent = styled.span`
 `;
 
 export const ExpenseAmount = styled.span`
+  word-break: keep-all;
   ${applyTypography('typography.body.medium-semibold')};
   color: ${getToken('fg.neutral')};
 `;
