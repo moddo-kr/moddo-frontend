@@ -7,12 +7,12 @@ const defaultWrapperStateStyles = {
     border: 1px solid ${getToken('border.neutral')};
     background: ${getToken('fill.normal')};
     &:focus-within {
-      border-color: ${getToken('border.primary.normal')};
+      border: 2px solid ${getToken('border.primary.normal')};
     }
   `,
   /* HACK: error border에 대응하는 semantic token 없음, fg.accent-red.normal(red.50) 사용 */
   error: css`
-    border: 1px solid ${getToken('fg.accent-red.normal')};
+    border: 2px solid ${getToken('fg.accent-red.normal')};
     background: ${getToken('fill.normal')};
   `,
   disabled: css`
