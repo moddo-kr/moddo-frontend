@@ -37,7 +37,11 @@ function BottomAction({
       />
     );
 
-  if (myProfile.role === 'MANAGER' && memberTotal === memberDone)
+  if (
+    myProfile.role === 'MANAGER' &&
+    memberTotal > 0 &&
+    memberTotal === memberDone
+  )
     return (
       <ActionArea
         position="bottom-fixed"

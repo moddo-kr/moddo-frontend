@@ -51,7 +51,9 @@ function ExpenseDetailPage() {
   const [status, setStatus] = useState<StatusType>('pending');
 
   useEffect(() => {
-    setStatus(derivedStatus);
+    setStatus((prevStatus) =>
+      prevStatus === 'success' ? prevStatus : derivedStatus
+    );
   }, [derivedStatus]);
   const navigate = useNavigate();
   const { mutate: createPaymentRequest } = useCreatePaymentRequest();
