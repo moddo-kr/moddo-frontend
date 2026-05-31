@@ -105,7 +105,15 @@ function ExpenseTimeHeader({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerData, status]);
 
+  const isSettlementCompleted = Boolean(headerData?.completedAt);
+
   const handleModalButtonClick = async () => {
+    if (isSettlementCompleted) {
+      setIsModalOpen(false);
+      onShareClick();
+      return;
+    }
+
     await onCompleteSettlement();
     stopTimer();
     setIsModalOpen(false);
@@ -221,9 +229,12 @@ function ExpenseTimeHeader({
         <Dialog
           title="모임원이 모두 입금했어요!"
           description="정산을 완료하고 캐릭터를 확인하시겠어요?"
-          mainAction={{ label: '완료', onClick: handleModalButtonClick }}
+          mainAction={{
+            label: isSettlementCompleted ? '확인' : '완료',
+            onClick: handleModalButtonClick,
+          }}
           alternativeAction={{
-            label: '미완료',
+            label: isSettlementCompleted ? '닫기' : '미완료',
             onClick: () => setIsModalOpen(false),
           }}
         />
