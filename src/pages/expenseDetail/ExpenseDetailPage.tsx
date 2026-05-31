@@ -18,6 +18,7 @@ import CharacterBottomSheet from '@/features/character-management/ui/CharacterBo
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
+import { useCompleteGroupSettlement } from '@/features/settlement-details/api/useCompleteGroupSettlement';
 import { getProfiles } from '@/entities/member/api/getProfiles';
 import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
@@ -41,6 +42,8 @@ function ExpenseDetailPage() {
   );
   const { data: memberExpenseDetails = [] } =
     useGetMemberExpenseDetails(groupToken);
+  const { mutateAsync: completeGroupSettlement } =
+    useCompleteGroupSettlement(groupToken);
   const memberTotal = memberExpenseDetails.length;
   const memberDone = memberExpenseDetails.filter(
     (member) => member.isPaid
@@ -123,6 +126,7 @@ function ExpenseDetailPage() {
           setStatus={setStatus}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
+          onCompleteSettlement={completeGroupSettlement}
         />
         <Divider />
         <S.BottomArea>

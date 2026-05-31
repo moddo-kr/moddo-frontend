@@ -26,6 +26,7 @@ interface ExpenseTimeHeaderProps {
   setStatus: (status: StatusType) => void;
   isChecked: boolean;
   setIsChecked: (isChecked: boolean) => void;
+  onCompleteSettlement: () => Promise<void>;
 }
 
 function ExpenseTimeHeader({
@@ -39,6 +40,7 @@ function ExpenseTimeHeader({
   setStatus,
   isChecked,
   setIsChecked,
+  onCompleteSettlement,
 }: ExpenseTimeHeaderProps) {
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
@@ -103,7 +105,8 @@ function ExpenseTimeHeader({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerData, status]);
 
-  const handleModalButtonClick = () => {
+  const handleModalButtonClick = async () => {
+    await onCompleteSettlement();
     stopTimer();
     setIsModalOpen(false);
     updateStatus('success');

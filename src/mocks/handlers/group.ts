@@ -106,6 +106,8 @@ const dummyMemberList: MemberProfileRaw[] = [
   },
 ];
 
+let dummyCompletedAt: string | null = null;
+
 const getDummyGroupHeader = (): GroupHeaderResponse => ({
   groupName: dummyGroups[0].groupName,
   totalAmount: 150000,
@@ -115,7 +117,7 @@ const getDummyGroupHeader = (): GroupHeaderResponse => ({
   bank: '국민은행',
   accountNumber: '123456-78-910111',
   createdAt: new Date().toISOString(),
-  completedAt: null,
+  completedAt: dummyCompletedAt,
   totalMemberCount: dummyMemberList.length,
   completedMemberCount: dummyMemberList.filter((member) => member.isPaid)
     .length,
@@ -228,6 +230,17 @@ const groupHandlers = [
       if (target) target.userId = 1;
 
       return HttpResponse.json({ success: true }, { status: 200 });
+    }
+  ),
+
+  http.patch<{ groupToken: string }>(
+    '/api/v1/groups/:groupToken/complete',
+    ({ request }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      dummyCompletedAt = new Date().toISOString();
+
+      return new HttpResponse(null, { status: 200 });
     }
   ),
 
