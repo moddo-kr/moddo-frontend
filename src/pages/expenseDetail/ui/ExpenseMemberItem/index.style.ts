@@ -6,7 +6,6 @@ export const Container = styled(Accordion)<{ $isPaid: boolean }>`
   padding: ${getToken('padding.6')};
   display: flex;
   flex-direction: column;
-  gap: ${getToken('gap.6')};
   width: 100%;
   background: ${({ $isPaid }) =>
     $isPaid ? getToken('fill.primary.assistive') : getToken('bg.neutral')};
@@ -19,6 +18,7 @@ export const HeaderRow = styled.div`
   display: flex;
   align-items: center;
   gap: ${getToken('gap.4')};
+  margin-bottom: ${getToken('gap.6')};
 `;
 
 export const InfoColumn = styled.div`
@@ -32,7 +32,7 @@ export const InfoColumn = styled.div`
 export const InfoSubRow = styled.div`
   display: flex;
   align-items: center;
-  gap: ${getToken('gap.2')};
+  gap: ${getToken('gap.4')};
 `;
 
 export const MemberName = styled.span`
@@ -61,7 +61,7 @@ export const KebabButton = styled.button`
 export const Divider = styled.hr`
   border: none;
   border-top: 1px solid ${getToken('fill.normal-disable')};
-  margin: 0;
+  margin: 0 0 ${getToken('gap.6')};
 `;
 
 export const AccordionToggleButton = styled.button`
@@ -92,9 +92,13 @@ export const ChevronWrapper = styled.span<{ $isOpen: boolean }>`
 
 export const ContentContainer = styled(Accordion.Content)`
   width: 100%;
+`;
+
+export const ContentInner = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${getToken('gap.5')};
+  padding-top: ${getToken('gap.6')};
 `;
 
 export const ExpensesWrapper = styled.div`

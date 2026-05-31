@@ -122,44 +122,46 @@ function ExpenseMemberItem({
 
       {/* 아코디언 콘텐츠 */}
       <S.ContentContainer>
-        {member.expenses.map((expense) => (
-          <S.ExpensesWrapper key={expense.content}>
-            <S.PlaceWrapper>
-              <Receipt
-                width={24}
-                height={24}
-                color={getToken('fill.primary.normal')}
-                style={{ flexShrink: 0 }}
-              />
-              <S.ExpenseContent>{expense.content}</S.ExpenseContent>
-            </S.PlaceWrapper>
-            <S.ExpenseAmount>
-              {expense.amount.toLocaleString()}원
-            </S.ExpenseAmount>
-          </S.ExpensesWrapper>
-        ))}
-        {/* MANAGER 액션 버튼 (paymentRequestId 있을 때만) */}
-        {showManagerButtons && (
-          <ActionArea
-            layout="horizontal"
-            showBottomSafeArea={false}
-            hasHorizontalPadding={false}
-            mainAction={{
-              label: member.isPaid ? '확인완료' : '요청확인',
-              onClick: () => {
-                // TODO: useApprovePayment 연결 필요
-              },
-              disabled: member.isPaid,
-            }}
-            alternativeAction={{
-              label: '거절',
-              onClick: () => {
-                // TODO: useRejectPayment 연결 필요
-              },
-              disabled: member.isPaid,
-            }}
-          />
-        )}
+        <S.ContentInner>
+          {member.expenses.map((expense) => (
+            <S.ExpensesWrapper key={expense.content}>
+              <S.PlaceWrapper>
+                <Receipt
+                  width={24}
+                  height={24}
+                  color={getToken('fill.primary.normal')}
+                  style={{ flexShrink: 0 }}
+                />
+                <S.ExpenseContent>{expense.content}</S.ExpenseContent>
+              </S.PlaceWrapper>
+              <S.ExpenseAmount>
+                {expense.amount.toLocaleString()}원
+              </S.ExpenseAmount>
+            </S.ExpensesWrapper>
+          ))}
+          {/* MANAGER 액션 버튼 (paymentRequestId 있을 때만) */}
+          {showManagerButtons && (
+            <ActionArea
+              layout="horizontal"
+              showBottomSafeArea={false}
+              hasHorizontalPadding={false}
+              mainAction={{
+                label: member.isPaid ? '확인완료' : '요청확인',
+                onClick: () => {
+                  // TODO: useApprovePayment 연결 필요
+                },
+                disabled: member.isPaid,
+              }}
+              alternativeAction={{
+                label: '거절',
+                onClick: () => {
+                  // TODO: useRejectPayment 연결 필요
+                },
+                disabled: member.isPaid,
+              }}
+            />
+          )}
+        </S.ContentInner>
       </S.ContentContainer>
 
       {/* 정산 상태 변경 바텀시트 (⋮ 클릭 시) */}
