@@ -17,6 +17,7 @@ export const dummyGroupMembers: Member[] = [
     isPaid: true,
     userId: 1,
     paidAt: new Date().toISOString(),
+    paymentRequestId: null,
   },
 ];
 
@@ -61,6 +62,7 @@ const groupMemberHandlers = [
             profile: defaultProfileImg,
             isPaid: false,
             paidAt: null,
+            paymentRequestId: null,
           };
           return newMember;
         }
