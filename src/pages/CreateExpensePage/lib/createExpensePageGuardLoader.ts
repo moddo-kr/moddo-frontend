@@ -14,7 +14,7 @@ const createExpensePageGuardLoader: LoaderFunction = async ({ params }) => {
 
   // groupToken이 없으면 모임 선택 페이지로 리다이렉트
   if (!groupToken) {
-    return redirect(ROUTE.selectGroup);
+    return redirect(ROUTE.groupSetup);
   }
 
   // 토큰 유효성 검사
@@ -31,7 +31,7 @@ const createExpensePageGuardLoader: LoaderFunction = async ({ params }) => {
     // 토큰이 유효하지 않은 경우에는 모임 선택 페이지로 이동
     if (isAxiosError(error)) {
       if (error.response?.status === 401 || error.response?.status === 404) {
-        return redirect(ROUTE.selectGroup);
+        return redirect(ROUTE.groupSetup);
       }
     }
     // 그 외에는 에러를 그대로 던진다

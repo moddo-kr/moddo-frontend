@@ -8,7 +8,6 @@ export const ROUTE = {
   my: '/my',
   myEdit: '/my/edit',
   createExpense: '/create-expense/:groupToken',
-  selectGroup: '/select-group',
   groupSetup: '/group-setup',
   join: '/join/:groupToken',
   expenseDetail: '/expense-detail/:groupToken',
