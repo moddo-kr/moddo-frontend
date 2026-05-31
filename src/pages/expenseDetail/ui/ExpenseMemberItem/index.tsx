@@ -13,8 +13,11 @@ import {
   ArrowDown,
   EllipsisVertical,
 } from '@/shared/assets/svgs/icon';
+import { useQueryClient } from '@tanstack/react-query';
 import { MemberSettlement } from '@/entities/settlement/model/settlement.type';
 import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdatePaymentStatus';
+import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
+import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { getToken } from '@/shared/design-system';
 import * as S from './index.style';
 
@@ -61,11 +64,16 @@ function ExpenseMemberItem({
   const [isPaid, setIsPaid] = useState(member.isPaid);
   const [isConfirm, setIsConfirm] = useState(false);
 
+  const queryClient = useQueryClient();
   const updatePaymentStatusMutation = useUpdatePaymentStatus({
     groupToken,
     groupMemberId: member.id,
     isPaid,
   });
+  const approveMutation = useApprovePayment();
+  const rejectMutation = useRejectPayment();
+
+  const isActionPending = approveMutation.isPending || rejectMutation.isPending;
 
   const displayName =
     member.role === 'MANAGER' ? `${member.name}(총무)` : member.name;
@@ -90,6 +98,30 @@ function ExpenseMemberItem({
     setIsPaid(member.isPaid);
     setIsConfirm(false);
     setSheetOpen(false);
+  };
+
+  const invalidateRelatedQueries = () => {
+    queryClient.invalidateQueries({
+      queryKey: ['memberExpenseDetails', groupToken],
+    });
+    // TEMP: member-expenses에 paymentRequestId 추가되면 groupDetail invalidate 제거
+    queryClient.invalidateQueries({
+      queryKey: ['groupDetail', groupToken],
+    });
+  };
+
+  const handleApprove = () => {
+    if (!member.paymentRequestId) return;
+    approveMutation.mutate(member.paymentRequestId, {
+      onSuccess: invalidateRelatedQueries,
+    });
+  };
+
+  const handleReject = () => {
+    if (!member.paymentRequestId) return;
+    rejectMutation.mutate(member.paymentRequestId, {
+      onSuccess: invalidateRelatedQueries,
+    });
   };
 
   return (
@@ -147,17 +179,13 @@ function ExpenseMemberItem({
               hasHorizontalPadding={false}
               mainAction={{
                 label: member.isPaid ? '확인완료' : '요청확인',
-                onClick: () => {
-                  // TODO: useApprovePayment 연결 필요
-                },
-                disabled: member.isPaid,
+                onClick: handleApprove,
+                disabled: member.isPaid || isActionPending,
               }}
               alternativeAction={{
                 label: '거절',
-                onClick: () => {
-                  // TODO: useRejectPayment 연결 필요
-                },
-                disabled: member.isPaid,
+                onClick: handleReject,
+                disabled: member.isPaid || isActionPending,
               }}
             />
           )}
