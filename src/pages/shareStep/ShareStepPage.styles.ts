@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import styled from 'styled-components';
+import { applyTypography } from '@/shared/design-system';
 
 export const ButtonWrapper = styled.div`
   display: flex;
@@ -34,4 +35,8 @@ export const LinkImg = styled.img`
   width: 4.5rem;
   height: 3.16756rem;
   margin-bottom: -1rem;
+`;
+
+export const QRCodeLabel = styled.span`
+  ${applyTypography('typography.body.medium')};
 `;

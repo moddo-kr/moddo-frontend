@@ -1,0 +1,36 @@
+import { useNavigate } from 'react-router';
+import { useGetUserInfo } from '@/entities/auth/api/useGetUserInfo';
+import { ROUTE } from '@/shared/config/route';
+import { Button, ProfileImage } from '@/shared/design-system/ui';
+import * as S from './index.styles';
+
+function MyProfile() {
+  const { data: user } = useGetUserInfo();
+  const navigate = useNavigate();
+
+  // suspense로 감싸져 있긴 초기에 없는 경우의 에러를 방지하기 위해 null guard를 추가했습니다.
+  // ref: https://github.com/moddo-kr/moddo-frontend/pull/30#discussion_r3068041167
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <S.ProfileContainer>
+      <ProfileImage size="36" src={user?.profile} />
+      <S.UserInfoWrapper>
+        <S.UserName>{user.name}</S.UserName>
+        {/* TODO: 디자인 시스템 정비 후 다시 디자인 확인이 필요합니다 (Opacity를 계속 쓰는지?) */}
+        <S.UserEmail>{user.email}</S.UserEmail>
+      </S.UserInfoWrapper>
+      <Button
+        variant="black"
+        size="xsmall"
+        onClick={() => navigate(ROUTE.myEdit)}
+      >
+        정보수정
+      </Button>
+    </S.ProfileContainer>
+  );
+}
+
+export default MyProfile;

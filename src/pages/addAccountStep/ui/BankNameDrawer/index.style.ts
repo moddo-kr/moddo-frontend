@@ -1,10 +1,14 @@
-import Button from '@/shared/ui/Button';
+import { Button } from '@/shared/design-system/ui';
 import styled from 'styled-components';
+import { getToken } from '@/shared/design-system';
 
-export const DrawerHeader = styled.h2`
-  font-size: 1.25rem; // 20px
-  font-weight: 700;
-  padding-bottom: 1.75rem;
+export const DrawerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 ${getToken('padding.6')};
+  height: 70dvh;
+  width: 100%;
+  position: relative;
 `;
 
 export const DrawerBody = styled.div`
@@ -56,7 +60,7 @@ export const SubmitButton = styled(Button)`
   z-index: 1;
 `;
 
-export const BankButton = styled.button<{ isSelected: boolean }>`
+export const BankButton = styled.button<{ $isSelected: boolean }>`
   width: 6.875rem; // 110px
   @media (max-width: 385px) {
     width: 6.25rem; // 100px
@@ -65,10 +69,9 @@ export const BankButton = styled.button<{ isSelected: boolean }>`
   cursor: pointer;
   border-radius: 12px;
   border: 2px solid
-    ${({ isSelected, theme }) =>
-      isSelected ? `${theme.color.semantic.orange.default}` : 'none'};
-  background-color: ${({ theme }) =>
-    theme.color.semantic.background.normal.alternative};
+    ${({ $isSelected }) =>
+      $isSelected ? getToken('fg.primary.normal') : 'none'};
+  background-color: ${getToken('bg.neutral')};
   padding: 1rem; // 20px
   display: flex;
   flex-direction: column;

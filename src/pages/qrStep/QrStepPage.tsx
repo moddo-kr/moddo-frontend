@@ -3,13 +3,16 @@ import { useLoaderData } from 'react-router';
 import { QRCodeSVG } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
-import { ArrowLeft, Reset } from '@/shared/assets/svgs/icon';
-import { showToast } from '@/shared/ui/Toast';
-import Header from '@/shared/ui/Header';
-import Button from '@/shared/ui/Button';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
+import { ArrowLeft } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+  showToast,
+} from '@/shared/design-system/ui';
 import generateShareLink from '@/shared/lib/generateShareLink';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import * as S from './QrStepPage.styles';
 
 interface QrStepProps {
@@ -42,13 +45,15 @@ function QrStepPage({ onBack }: QrStepProps) {
   };
 
   return (
-    <>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
+        type="default"
         title="QR코드"
-        leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={onBack}
-        rightButtonContent={<Reset width="1.5rem" />}
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
+        headingIconAriaLabel="뒤로가기"
+        onHeadingIconClick={onBack}
       />
       <DescriptionField
         title={`QR코드를 공유하면\n바로 정산에 참여할 수 있어요!`}
@@ -59,10 +64,11 @@ function QrStepPage({ onBack }: QrStepProps) {
           <QRCodeSVG size={160} value={shareLink} />
         </S.QrField>
       </S.QrContainer>
-      <BottomButtonContainer>
-        <Button onClick={handleDownload}>다운로드</Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{ label: '다운로드', onClick: handleDownload }}
+      />
+    </PageLayout>
   );
 }
 

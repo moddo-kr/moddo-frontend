@@ -1,12 +1,14 @@
 import { useLoaderData } from 'react-router';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import Header from '@/shared/ui/Header';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import Text from '@/shared/ui/Text';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
-import { EditBillContext } from '@/features/expense-management/lib/createBillFunnel.type';
+import { EditExpenseContext } from '@/features/expense-management/lib/createExpenseFunnel.type';
 import useGetAllExpense from '../../features/expense-management/api/useGetAllExpense';
 import ExpenseCardList from './ui/ExpenseCardList';
 import * as S from './ConfirmStepPage.styles';
@@ -14,7 +16,7 @@ import * as S from './ConfirmStepPage.styles';
 interface ConfirmStepProps {
   onNext: () => void;
   onBack: () => void;
-  onEdit: ({ expenseId, initialExpense }: EditBillContext) => void;
+  onEdit: ({ expenseId, initialExpense }: EditExpenseContext) => void;
   onAdd: () => void;
 }
 
@@ -31,30 +33,34 @@ function ConfirmStepPage({ onNext, onBack, onEdit, onAdd }: ConfirmStepProps) {
   }
 
   return (
-    <>
+    <PageLayout $bg="neutral" $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
-        leftButtonContent={<ArrowLeft width="1.5rem" />}
-        leftButtonOnClick={onBack}
-        rightButtonContent={<Text variant="body1Sb">지출 추가</Text>}
-        rightButtonOnClick={onAdd}
-        bgColor="#F1F3F5"
+        type="default"
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
+        }
+        headingIconAriaLabel="뒤로가기"
+        onHeadingIconClick={onBack}
+        trailingIcon={<S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>}
+        onTrailingIconClick={onAdd}
       />
-      <DescriptionField
-        bgColor="semantic.background.normal.alternative"
-        title={`지출 내역을\n확인해주세요.`}
-      />
+      <DescriptionField title={`지출 내역을\n확인해주세요.`} />
       <S.TotalExpenseWrapper>
-        <Text variant="body1Sb">누적 금액</Text>
-        <Text variant="heading2" color="semantic.text.strong">
+        <S.TotalExpenseLabel>누적 금액</S.TotalExpenseLabel>
+        <S.TotalExpenseAmount>
           {getTotalExpense(data.expenses).toLocaleString()}원
-        </Text>
+        </S.TotalExpenseAmount>
       </S.TotalExpenseWrapper>
-      <ExpenseCardList expenses={data.expenses} onEdit={onEdit} />
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button onClick={onNext}>확인했어요</Button>
-      </BottomButtonContainer>
-    </>
+      <ExpenseCardList
+        groupToken={groupToken}
+        expenses={data.expenses}
+        onEdit={onEdit}
+      />
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{ label: '확인했어요', onClick: onNext }}
+      />
+    </PageLayout>
   );
 }
 

@@ -1,6 +1,5 @@
-import NumberInput from '@/features/expense-management/ui/NumberInput';
 import { ExpenseFormMember } from '@/entities/expense/model/expense.type';
-import MemberProfile from '@/shared/ui/MemberProfile';
+import { Input, Profile } from '@/shared/design-system/ui';
 import * as S from './index.styles';
 
 interface MemberExpensesProps {
@@ -14,18 +13,18 @@ function MemberExpenses({ members, onDelete }: MemberExpensesProps) {
       {members.map((member) => (
         <S.MemberContainer key={member.id}>
           <S.ProfileContainer>
-            <MemberProfile
-              id={member.id}
-              name={member.name}
-              profile={member.profile}
-              canDelete
-              handleDeleteButtonClick={() => onDelete(member.name)}
+            <Profile
+              size="m"
+              type="delete"
+              label={member.name}
+              src={member.profile}
+              onDelete={() => onDelete(member.name)}
             />
           </S.ProfileContainer>
-          <NumberInput
+          <Input
             value={member.amount ? member.amount.toLocaleString() : ''}
             readOnly
-            variant="sm"
+            variant="price"
             placeholder="금액 입력"
           />
         </S.MemberContainer>

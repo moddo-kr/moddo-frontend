@@ -1,6 +1,7 @@
 import { Member } from '@/entities/member/model/member.type';
 
 export interface Group {
+  id: number;
   groupName: string;
   members: Member[];
 }
@@ -12,7 +13,6 @@ export interface GroupTokenUrlLoaderData {
 
 export interface CreateGroupData {
   name: string;
-  password: string;
 }
 
 export interface AccountVariable {
@@ -26,4 +26,27 @@ export interface GroupHeaderResponse {
   deadline: Date;
   bank: string;
   accountNumber: string;
+}
+
+export interface GroupListItem {
+  settlementId: number;
+  name: string;
+  groupCode: string;
+  createdAt: string;
+  completedAt: string | null;
+  members: Member[];
+}
+
+export type SettlementStatus = 'ALL' | 'IN_PROGRESS' | 'COMPLETED';
+export type SettlementSort = 'LATEST' | 'OLDEST';
+
+export interface SettlementGroup {
+  groupId: number;
+  groupCode: string;
+  name: string;
+  totalAmount: number;
+  totalMemberCount: number;
+  completedMemberCount: number;
+  createdAt: string;
+  completedAt: string | null;
 }

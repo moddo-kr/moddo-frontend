@@ -23,32 +23,27 @@ jobs:
   add-jira-link:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' # PR 생성 시에만 실행
+    permissions:
+      pull-requests: write
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # 가장 최근 커밋만 가져오기
+
       - name: Extract JIRA issue key from branch name
         id: extract-jira-key
+        env:
+          HEAD_REF: ${{ github.head_ref }} # PR의 브랜치 이름
         run: |
-          JIRA_KEY=$(echo ${{ github.head_ref }} | grep -oE 'MOD-[0-9]+' || echo "")
+          JIRA_KEY=$(echo "$HEAD_REF" | grep -oE 'MD-[0-9]+' || echo "")
           echo "jira_key=$JIRA_KEY" >> "$GITHUB_OUTPUT"
 
-      # PR 본문을 JSON 형식으로 파싱하기 위한 jq 설치
-      - name: Install jq
+      - name: Add JIRA issue link to Comment
         if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
-        run: sudo apt-get update && sudo apt-get install -y jq
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: |
+            ## 📝 관련 이슈
 
-      # https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-pull-request
-      - name: Add JIRA issue link to PR body
-        if: steps.extract-jira-key.outputs.jira_key != '' # JIRA 이슈 키가 없는 경우에는 실행하지 않음
-        run: |
-          PR_BODY=$(cat <<EOF
-          ${{ github.event.pull_request.body }}
-          EOF)
-          JIRA_KEY=${{ steps.extract-jira-key.outputs.jira_key }}
-          JIRA_LINK=$(printf "## 📝 관련 이슈\n\n[%s](%s/browse/%s)" "$JIRA_KEY" "${{ vars.JIRA_BASE_URL }}" "$JIRA_KEY")
-          UPDATED_BODY=$(printf "%s\n\n%s" "$JIRA_LINK" "$PR_BODY")
-          curl -L \
-            -X PATCH \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} \
-            -d "$(jq -n --arg body "$UPDATED_BODY" '{body: $body}')"
+            [${{ steps.extract-jira-key.outputs.jira_key }}](${{ vars.JIRA_BASE_URL }}/browse/${{ steps.extract-jira-key.outputs.jira_key }})

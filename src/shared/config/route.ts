@@ -1,12 +1,16 @@
-export const BASE_URL = 'https://www.moddo.kr';
+export const BASE_URL = window.location.origin;
 
 export const ROUTE = {
   login: '/login',
-  onboarding: '/onboarding',
   home: '/',
-  createBill: '/create-bill',
+  myLinks: '/my-links',
+  paymentManagement: '/payment-management',
+  my: '/my',
+  myEdit: '/my/edit',
+  createExpense: '/create-expense/:groupToken',
   selectGroup: '/select-group',
   groupSetup: '/group-setup',
-  billDetail: '/bill-detail/:groupToken',
-  billDetailCharacterShare: '/bill-detail/:groupToken/character',
+  join: '/join/:groupToken',
+  expenseDetail: '/expense-detail/:groupToken',
+  characterShare: '/expense-detail/:groupToken/character',
 } as const;

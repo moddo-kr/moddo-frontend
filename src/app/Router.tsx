@@ -3,47 +3,70 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 import { ROUTE } from '@/shared/config/route';
 import RouteErrorBoundary from '@/app/RouteErrorBoundary';
 import RouteErrorElement from '@/app/RouteErrorElement';
-import checkAuth from '@/entities/auth/lib/checkAuth';
-import getGroupManagerAuth from '@/entities/auth/lib/getGroupManagerAuth';
+import checkAuth from '@/features/auth/lib/checkAuth';
+import checkAlreadyAuthLoader from '@/features/auth/lib/checkAlreadyAuthLoader';
 import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
+import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
+import joinLoader from '@/pages/join/loader';
+import expenseDetailLoader from '@/pages/expenseDetail/loader';
 
-const BillDetail = lazy(() =>
-  import('@/pages/billDetail/').then(({ BillDetailPage }) => ({
-    default: BillDetailPage,
+const LazyExpenseDetail = lazy(() =>
+  import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
+    default: ExpenseDetailPage,
   }))
 );
-const CharacterShare = lazy(() =>
+const LazyCharacterShare = lazy(() =>
   import('@/pages/characterShare').then(({ CharacterSharePage }) => ({
     default: CharacterSharePage,
   }))
 );
-const CreateBill = lazy(() =>
-  import('@/pages/createBill').then(({ CreateBillPage }) => ({
-    default: CreateBillPage,
+const LazyCreateExpense = lazy(() =>
+  import('@/pages/CreateExpensePage').then(({ CreateExpensePage }) => ({
+    default: CreateExpensePage,
   }))
 );
-const GroupSetup = lazy(() =>
+const LazyGroupSetup = lazy(() =>
   import('@/pages/groupSetup').then(({ GroupSetupPage }) => ({
     default: GroupSetupPage,
   }))
 );
-const Home = lazy(() =>
+const LazyHome = lazy(() =>
   import('@/pages/home').then(({ HomePage }) => ({ default: HomePage }))
 );
-const Login = lazy(() =>
+const LazyLogin = lazy(() =>
   import('@/pages/login').then(({ LoginPage }) => ({ default: LoginPage }))
 );
-const Onboarding = lazy(() =>
-  import('@/pages/onboarding').then(({ OnboardingPage }) => ({
-    default: OnboardingPage,
+const LazyMyLinks = lazy(() =>
+  import('@/pages/myLinks').then(({ MyLinksPage }) => ({
+    default: MyLinksPage,
   }))
 );
-const SelectGroup = lazy(() =>
+const LazyPaymentManagement = lazy(() =>
+  import('@/pages/paymentManagement').then(({ PaymentManagementPage }) => ({
+    default: PaymentManagementPage,
+  }))
+);
+const LazyMyPage = lazy(() =>
+  import('@/pages/my').then(({ MyPage }) => ({
+    default: MyPage,
+  }))
+);
+const LazyMyEditPage = lazy(() =>
+  import('@/pages/my-edit').then(({ MyEditPage }) => ({
+    default: MyEditPage,
+  }))
+);
+const LazySelectGroup = lazy(() =>
   import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
     default: SelectGroupPage,
   }))
 );
-const NotFound = lazy(() =>
+const LazyJoinPage = lazy(() =>
+  import('@/pages/join').then(({ JoinPage }) => ({
+    default: JoinPage,
+  }))
+);
+const LazyNotFound = lazy(() =>
   import('@/pages/notFound').then(({ NotFoundPage }) => ({
     default: NotFoundPage,
   }))
@@ -52,66 +75,87 @@ const NotFound = lazy(() =>
 function AppRouter() {
   const router = createBrowserRouter([
     {
-      path: '',
+      id: 'root',
       element: (
         <RouteErrorBoundary>
-          <Outlet />
+          <Suspense fallback={<div>loading...</div>}>
+            <Outlet />
+          </Suspense>
         </RouteErrorBoundary>
       ),
       errorElement: <RouteErrorElement />,
       children: [
         {
           path: ROUTE.login,
-          element: <Login />,
+          element: <LazyLogin />,
+          loader: checkAlreadyAuthLoader,
         },
         {
-          path: ROUTE.onboarding,
-          element: <Onboarding />,
-        },
-        {
-          path: ROUTE.home,
-          element: <Home />,
+          id: 'protected',
           loader: checkAuth,
+          element: <Outlet />,
+          children: [
+            {
+              path: ROUTE.home,
+              element: <LazyHome />,
+            },
+            {
+              path: ROUTE.myLinks,
+              element: <LazyMyLinks />,
+            },
+            {
+              path: ROUTE.my,
+              element: <LazyMyPage />,
+            },
+            {
+              path: ROUTE.myEdit,
+              element: <LazyMyEditPage />,
+            },
+            {
+              path: ROUTE.paymentManagement,
+              element: <LazyPaymentManagement />,
+            },
+            {
+              path: ROUTE.selectGroup,
+              element: <LazySelectGroup />,
+            },
+            {
+              path: ROUTE.groupSetup,
+              element: <LazyGroupSetup />,
+            },
+            {
+              path: ROUTE.createExpense,
+              element: <LazyCreateExpense />,
+              loader: createExpensePageGuardLoader,
+            },
+          ],
+        },
+        // TODO : 로그인 기능으로 변경될 예정
+        {
+          path: ROUTE.join,
+          element: <LazyJoinPage />,
+          loader: joinLoader,
         },
         {
-          path: ROUTE.selectGroup,
-          element: <SelectGroup />,
-          loader: checkAuth,
+          path: ROUTE.expenseDetail,
+          element: <LazyExpenseDetail />,
+          loader: expenseDetailLoader,
         },
         {
-          path: ROUTE.groupSetup,
-          element: <GroupSetup />,
-          loader: checkAuth,
-        },
-        {
-          path: ROUTE.createBill,
-          element: <CreateBill />,
-          loader: getGroupManagerAuth,
-        },
-        {
-          path: ROUTE.billDetail,
-          element: <BillDetail />,
+          path: ROUTE.characterShare,
+          element: <LazyCharacterShare />,
           loader: groupTokenUrlLoader,
         },
+
         {
-          path: ROUTE.billDetailCharacterShare,
-          element: <CharacterShare />,
-          loader: groupTokenUrlLoader,
+          path: '*',
+          element: <LazyNotFound />,
         },
       ],
     },
-    {
-      path: '*',
-      element: <NotFound />,
-    },
   ]);
 
-  return (
-    // TODO : 로딩 페이지 추가하기
-    <Suspense fallback={<div>loading...</div>}>
-      <RouterProvider router={router} />
-    </Suspense>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default AppRouter;

@@ -16,6 +16,9 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       # Step 2: node_modules 캐싱
       - name: Cache node modules
         uses: actions/cache@v4
@@ -33,6 +36,8 @@ jobs:
         # Cache node modules 단계에서 설정된 출력이 캐시 히트를 발생시키지 않는다면
         if: steps.cache.outputs.cache-hit != 'true'
         # yarn install을 실행하여 새로운 캐시 키를 생성함
+        env:
+          HUSKY: 0 # CI 환경에서는 git 훅이 불필요하므로 husky 비활성화
         run: yarn install
 
       # Step 4: 코드 품질 검사
@@ -48,7 +53,9 @@ jobs:
         env:
           VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
           VITE_KAKAO_JAVASCRIPT_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_KEY }}
-          VITE_SUPABASE_PUBLIC_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_KEY }}
+          # VITE_SUPABASE_PUBLIC_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_KEY }}
+          VITE_KAKAO_CLIENT_ID: ${{ secrets.VITE_KAKAO_CLIENT_ID }}
+          VITE_KAKAO_REDIRECT_URI: ${{ secrets.VITE_KAKAO_REDIRECT_URI }}
         run: yarn build
 
       # Step 7: 빌드 결과물 저장

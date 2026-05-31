@@ -4,21 +4,23 @@ import {
   CreateGroupData,
   Group,
   GroupHeaderResponse,
+  GroupListItem,
+  SettlementGroup,
+  SettlementSort,
+  SettlementStatus,
 } from '@/entities/group/model/group.type';
 
-const group = {
-  get: (groupToken: string): Promise<Group> =>
-    axiosInstance
-      .get(`/group?groupToken=${groupToken}`)
-      .then((res) => res.data),
+export const getGroupDetail = async (groupToken: string): Promise<Group> => {
+  const response = await axiosInstance.get(`/groups/${groupToken}`);
+  return response.data;
+};
 
-  post: async (groupData: CreateGroupData) => {
-    const response = await axiosInstance.post<{ groupToken: string }>(
-      '/group',
-      groupData
-    );
-    return response.data;
-  },
+export const createGroup = async (groupData: CreateGroupData) => {
+  const response = await axiosInstance.post<{ groupToken: string }>(
+    '/groups',
+    groupData
+  );
+  return response.data;
 };
 
 export const putGroupAccount = async ({
@@ -29,18 +31,31 @@ export const putGroupAccount = async ({
   groupToken: string;
 }) => {
   const response = await axiosInstance.put(
-    `/group/account?groupToken=${groupToken}`,
+    `/groups/${groupToken}/account`,
     accountData
   );
   return response.data;
 };
 
+// NOTE : 기존에 groupToken을 전달하는 방식에서 settlementCode를 전달하는 방식으로 변경함
 export const getGroupHeader = (
-  groupToken: string
+  settlementCode: string
 ): Promise<GroupHeaderResponse> => {
   return axiosInstance
-    .get(`/group/header?groupToken=${groupToken}`)
+    .get(`/groups/${settlementCode}/header`)
     .then((res) => res.data);
 };
 
-export default group;
+export const getSettlementList = (
+  status: SettlementStatus,
+  sort: SettlementSort,
+  limit = 100
+): Promise<SettlementGroup[]> => {
+  return axiosInstance
+    .get('/groups', { params: { status, sort, limit } })
+    .then((res) => res.data);
+};
+
+export const getGroupList = (): Promise<GroupListItem[]> => {
+  return axiosInstance.get('/groups/list').then((res) => res.data);
+};

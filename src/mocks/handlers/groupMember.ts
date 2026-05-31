@@ -15,7 +15,8 @@ export const dummyGroupMembers: Member[] = [
     name: '김모또',
     profile: defaultProfileImg,
     isPaid: true,
-    paidAt: new Date(),
+    userId: 1,
+    paidAt: new Date().toISOString(),
   },
 ];
 

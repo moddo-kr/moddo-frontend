@@ -8,17 +8,18 @@ export type ErrorHandlers = Partial<DefaultErrorHandlers>;
 
 export type IgnoreBoundaryErrors = number[];
 
+type BoundaryErrorAction = {
+  text?: string;
+  href?: string;
+  onClick?: () => void;
+};
+
 export class BoundaryError extends Error {
   title?: string;
 
   description?: string;
 
-  action?: {
-    text?: string;
-    href?: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onClick?: (arg: any) => void;
-  };
+  action?: BoundaryErrorAction;
 
   constructor({
     message,
@@ -29,12 +30,7 @@ export class BoundaryError extends Error {
     message?: string;
     title?: string;
     description?: string;
-    action?: {
-      text?: string;
-      href?: string;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onClick?: (arg: any) => void;
-    };
+    action?: BoundaryErrorAction;
   }) {
     super(message);
     this.name = 'BoundaryError';

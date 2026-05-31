@@ -2,18 +2,16 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { format } from 'date-fns';
 import { Close } from '@/shared/assets/svgs/icon';
+import { getToken } from '@/shared/design-system';
 import {
   ExpenseFormMember,
   RemainderData,
 } from '@/entities/expense/model/expense.type';
-import Alert from '@/shared/ui/Alert';
-import Button from '@/shared/ui/Button';
-import BillDatePicker from '@/shared/ui/DatePicker';
-import Text from '@/shared/ui/Text';
+import { Alert, DatePicker, IconButton } from '@/shared/design-system/ui';
 import FormField from '@/features/expense-management/ui/FormField';
 import distributeAmount from '@/features/expense-management/lib/distributeExpense';
 import MemberExpenses from '@/features/expense-management/ui/MemberExpenses';
-import NumPadBottomSheet from '@/features/expense-management/ui/NumPadBottomSheet';
+import { ExpenseAmountInput } from '../ExpenseAmountInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from './index.styles';
 
@@ -77,11 +75,14 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
         <S.RefTarget ref={ref} />
         <S.FormCard>
           <S.FormCardTitleContainer>
-            <Text variant="title">{index + 1}차</Text>
+            <S.ExpenseSequenceLabel>{index + 1}차</S.ExpenseSequenceLabel>
             {index > 0 ? (
-              <Button variant="text" onClick={() => onDelete?.(index)}>
-                <Close width="1.5rem" />
-              </Button>
+              <IconButton
+                aria-label="지출 입력 폼 삭제"
+                onClick={() => onDelete?.(index)}
+              >
+                <Close width="1.5rem" color={getToken('fg.alternative')} />
+              </IconButton>
             ) : null}
           </S.FormCardTitleContainer>
           <S.FormContainer>
@@ -91,7 +92,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.amount`}
               renderInput={({ field }) => (
-                <NumPadBottomSheet
+                <ExpenseAmountInput
                   initialValue={field.value}
                   open={openNumPad}
                   setOpen={setOpenNumPad}
@@ -111,7 +112,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
               control={control}
               name={`expenses.${index}.date`}
               renderInput={({ field }) => (
-                <BillDatePicker
+                <DatePicker
                   selected={new Date(field.value)}
                   onChange={(date) =>
                     field.onChange(format(date || new Date(), 'yyyy-MM-dd'))
@@ -131,7 +132,7 @@ const FormCard = forwardRef<HTMLDivElement, FormCardProps>(
                 <>
                   {remainderData ? (
                     <Alert
-                      type="info"
+                      state="info"
                       message={`${remainderData.name}님에게 남은 ${remainderData.remainder}원이 부과됐어요.`}
                     />
                   ) : null}

@@ -1,16 +1,16 @@
-import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
-import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
+import { generatePath, useNavigate } from 'react-router';
+import { useGetGroupDetail } from '@/entities/group/api/groupQueries';
 import { ROUTE } from '@/shared/config/route';
-
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+} from '@/shared/design-system/ui';
+import { getToken } from '@/shared/design-system';
 import { BoundaryError } from '@/shared/types/error.type';
-import useGetGroupBasicInfo from '@/features/group-creation/api/useGetGroupBasicInfo';
 import useLocalStorage from '@/shared/lib/useLocalStorage';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import AddMember from './ui/AddMember';
 import * as S from './MemberSetupPage.styles';
 
@@ -22,13 +22,12 @@ export interface ParticipantProfile {
 const GROUP_TOKEN = 'groupToken';
 
 function MemberSetupPage() {
-  const { unit } = useTheme();
   const navigate = useNavigate();
   const [groupToken] = useLocalStorage<string>({
     key: GROUP_TOKEN,
     initialValue: '',
   });
-  const { data, isLoading } = useGetGroupBasicInfo(
+  const { data, isLoading } = useGetGroupDetail(
     groupToken,
     {
       // 총무가 아닌 토큰으로 모임 정보를 요청하는 경우
@@ -52,16 +51,14 @@ function MemberSetupPage() {
   }
 
   return (
-    <>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={unit[24]} />
-            <Text>뒤로가기</Text>
-          </>
+        type="default"
+        headingIcon={
+          <ArrowLeft width="1.5rem" color={getToken('fg.alternative')} />
         }
-        leftButtonOnClick={() => navigate(-1)}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={() => navigate(-1)}
       />
       <DescriptionField
         title={`모임에 함께한\n참여자를 추가해주세요.`}
@@ -73,15 +70,16 @@ function MemberSetupPage() {
           groupToken={groupToken}
         />
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          disabled={data.members.length <= 1}
-          onClick={() => navigate(ROUTE.createBill)}
-        >
-          정산 시작!
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{
+          label: '정산 시작!',
+          onClick: () =>
+            navigate(generatePath(ROUTE.createExpense, { groupToken })),
+          disabled: data.members.length <= 1,
+        }}
+      />
+    </PageLayout>
   );
 }
 

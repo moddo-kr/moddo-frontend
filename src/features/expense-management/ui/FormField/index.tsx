@@ -8,9 +8,7 @@ import {
   UseFormRegisterReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
-import Button from '@/shared/ui/Button';
-import Text from '@/shared/ui/Text';
-import Input from '@/shared/ui/Input';
+import { Input } from '@/shared/design-system/ui';
 import * as S from './index.styles';
 
 interface RenderInputProps {
@@ -45,24 +43,18 @@ function FormField({
   register,
   renderInput,
   placeholder,
-  subButton,
 }: FormFieldProps) {
   return (
     <S.FormField>
       <S.FormFieldHeader>
-        <Text variant="body2Sb">
+        <S.FieldLabel>
           {label}
-          {required && (
-            <Text variant="body2R" color="semantic.state.danger">
-              {' *'}
-            </Text>
-          )}
-        </Text>
-        {subButton && (
-          <Button variant="text" onClick={subButton.onClick}>
-            <Text variant="caption">{subButton.label}</Text>
-          </Button>
-        )}
+          {required && <S.RequiredMark>{' *'}</S.RequiredMark>}
+        </S.FieldLabel>
+        {/* NOTE : 현재 폼 안에서 사용자를 추가하는 기능이 없는 상황이므로 주석처리함. */}
+        {/* {subButton && (
+          <TextButton onClick={subButton.onClick}>{subButton.label}</TextButton>
+        )} */}
       </S.FormFieldHeader>
       {renderInput ? (
         <Controller

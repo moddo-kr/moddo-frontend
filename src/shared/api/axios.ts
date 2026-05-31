@@ -1,12 +1,26 @@
-import axios, { AxiosHeaders } from 'axios';
+import axios, { AxiosHeaders, isAxiosError } from 'axios';
 import { ROUTE } from '@/shared/config/route';
 
+// 개발 환경에서는 Vite proxy(/api/v1)를 경유해 cross-origin 쿠키 차단을 우회 (참고: vite.config.ts의 server.proxy 설정)
+// 프로덕션에서는 VITE_SERVER_URL로 직접 요청
+const BASE_URL = import.meta.env.DEV
+  ? '/api/v1'
+  : `${import.meta.env.VITE_SERVER_URL ?? ''}/api/v1`;
+
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}/functions/v1`,
+  baseURL: BASE_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `${localStorage.getItem('accessToken')}`,
+  },
+});
+
+// 토큰 재발급 전용 클라이언트 - response interceptor 없이 사용해 재발급 시 무한 루프 방지
+const refreshClient = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
   },
 });
 
@@ -14,24 +28,12 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const newConfig = { ...config }; // config 객체를 복사하여 수정
-    /** 최신값이 있다면 바꿔주기 */
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      newConfig.headers.Authorization = accessToken;
-    }
-    /** useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
-    if (newConfig.useMock) {
-      newConfig.baseURL = 'http://localhost:3000/api/v1';
+    /** 개발 환경에서 useMock 설정이 true인 경우에는 X-Mock-Request 헤더를 추가해서 모킹한 API를 사용할 수 있게 하는 interceptor */
+    if (import.meta.env.MODE === 'development' && newConfig.useMock) {
+      newConfig.baseURL = '/api/v1';
       newConfig.headers = AxiosHeaders.from({
         ...newConfig.headers,
         'X-Mock-Request': 'true',
-      });
-    }
-    // SUPABASE용 apikey 헤더 추가 (필요 시)
-    else if (newConfig.url?.split('?')[0].endsWith('user/guest/token')) {
-      newConfig.headers = AxiosHeaders.from({
-        ...newConfig.headers,
-        apikey: import.meta.env.VITE_SUPABASE_PUBLIC_KEY,
       });
     }
     return newConfig;
@@ -42,20 +44,36 @@ axiosInstance.interceptors.request.use(
 );
 
 /**
- * accessToken 만료 시 재발급받도록 로그인 페이지로 리다이렉션
- * @Todo accessToken, refreshToken 저장 방식 수정 후 로직 추가
- * refreshToken 여부 확인 후 재발급 or 로그인 페이지 리다이렉션 로직 추가
+ * 401 응답 시 refreshToken으로 재발급 시도
+ * 재발급 성공 시 원래 요청 재시도, 실패 시 로그인 페이지로 redirect
  */
 axiosInstance.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  async function (error) {
-    if (error.response && error.response.status === 401) {
-      alert('세션이 만료되었습니다. 재로그인해주세요');
-      window.location.href = ROUTE.login;
-      localStorage.removeItem('accessToken');
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // isRetry: 재시도한 원래 요청이 다시 401을 반환할 경우 무한 루프 방지
+    if (error.response?.status === 401 && !originalRequest.isRetry) {
+      originalRequest.isRetry = true;
+
+      try {
+        // refreshClient 사용: response interceptor가 없어 재발급 요청 자체가 인터셉터를 타지 않음
+        await refreshClient.put('/user/reissue/token');
+        return await axiosInstance(originalRequest); // 원래 요청 재시도
+      } catch (refreshError: unknown) {
+        // 실제 인증 실패(401)일 때만 로그인으로 redirect
+        // 로그인 페이지로 redirect할 때, 현재 페이지 경로를 쿼리 파라미터로 전달해서 로그인 후 원래 페이지로 돌아올 수 있도록 함
+        if (
+          isAxiosError(refreshError) &&
+          refreshError?.response?.status === 401
+        ) {
+          const redirectTo = encodeURIComponent(window.location.pathname);
+          window.location.href = `${ROUTE.login}?redirectTo=${redirectTo}`;
+        }
+        return Promise.reject(refreshError);
+      }
     }
+
     return Promise.reject(error);
   }
 );

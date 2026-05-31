@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/blocks';
+import { semanticColorTokenValues } from '@/shared/design-system/tokens/semantic/color';
+import { atomicColorTokens } from '@/shared/design-system/tokens/atomic/color';
+
+<Meta title="Foundation/Colors/Semantic" />
+
+export const tableStyle = { width: '100%', borderCollapse: 'collapse' };
+export const thStyle = { textAlign: 'left', padding: '8px 12px', fontWeight: 600, borderBottom: '2px solid var(--color-border-alternative)' };
+export const tdStyle = { padding: '8px 12px', borderBottom: '1px solid var(--color-border-alternative)', verticalAlign: 'middle' };
+
+export const toCssVar = (key) => `--color-${key.replace(/\./g, '-')}`;
+
+export const Swatch = ({ hex }) => (
+  <div style={{
+    width: 28,
+    height: 28,
+    borderRadius: 4,
+    backgroundColor: hex,
+    border: '1px solid var(--color-border-alternative)',
+    flexShrink: 0,
+  }} />
+);
+
+export const ColorTable = ({ prefix }) => (
+  <table style={tableStyle}>
+    <thead>
+      <tr>
+        <th style={thStyle}>Swatch</th>
+        <th style={thStyle}>Token</th>
+        <th style={thStyle}>CSS Variable</th>
+        <th style={thStyle}>Hex</th>
+        <th style={thStyle}>Atomic ref</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.entries(semanticColorTokenValues)
+        .filter(([k]) => k.startsWith(prefix + '.'))
+        .map(([key, atomicKey]) => {
+          const hex = atomicColorTokens[atomicKey];
+          return (
+            <tr key={key}>
+              <td style={tdStyle}><Swatch hex={hex} /></td>
+              <td style={tdStyle}><code>{key}</code></td>
+              <td style={tdStyle}><code>{toCssVar(key)}</code></td>
+              <td style={tdStyle}><code>{hex}</code></td>
+              <td style={tdStyle}><code>{atomicKey}</code></td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+);
+
+# Semantic Color
+
+색상은 정보 전달과 시각적 경험을 결정하는 핵심 요소로, 사용자의 주의를 유도하고 메시지를 명확히 전달하여 직관적인 사용자 경험을 형성한다. Theme Color는 Atomic Color를 기반으로 정의된 Semantic 색상 체계로, UI 요소의 역할과 상태에 따라 일관된 색상 사용을 가능하게 한다.
+
+개발에서는 `getToken('fg.strong')` 형태로 접근하며, CSS 변수로 직접 참조할 수도 있다.
+
+---
+
+## Foreground (fg)
+
+텍스트와 아이콘에 사용한다.
+
+<ColorTable prefix="fg" />
+
+---
+
+## Fill
+
+카드, 모달 버튼 등 배경 이외의 면 요소에 사용한다.
+
+<ColorTable prefix="fill" />
+
+---
+
+## Border
+
+선 요소에 사용한다.
+
+<ColorTable prefix="border" />
+
+---
+
+## Background (bg)
+
+페이지의 배경 같은 인터랙션이 없는 넓은 면에 사용한다.
+
+<ColorTable prefix="bg" />

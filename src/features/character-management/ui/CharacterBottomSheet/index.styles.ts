@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import { applyTypography, getToken } from '@/shared/design-system';
 
 export const BottomSheetContainer = styled.div`
   width: 100%;
   display: inline-flex;
   flex-direction: column;
-  padding: ${({ theme }) =>
-    `${theme.unit[32]} ${theme.unit[20]} ${theme.unit[20]} ${theme.unit[20]}`};
+  padding: 2rem ${getToken('padding.6')} ${getToken('padding.6')}; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
   align-items: center;
-  gap: ${({ theme }) => theme.unit[32]};
+  gap: 2rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
 `;
 
 export const CharacterImageContainer = styled.div`
@@ -24,5 +24,14 @@ export const DescriptionContainer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: ${({ theme }) => theme.unit[8]};
+  gap: ${getToken('gap.4')};
+`;
+
+export const CharacterTitle = styled.span`
+  ${applyTypography('typography.heading.small')};
+  color: ${getToken('fg.normal')};
+`;
+
+export const CharacterDescription = styled.span`
+  ${applyTypography('typography.body.medium')};
 `;

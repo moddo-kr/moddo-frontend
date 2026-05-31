@@ -7,12 +7,16 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "prettier:check": "prettier --check src",
+    "prettier:fix": "prettier --write src",
     "preview": "vite preview",
-    "svgr": "npx @svgr/cli -d src/shared/assets/svgs/icon --typescript --no-dimensions public/svgs",
+    "build:token": "vite-node src/shared/design-system/lib/build-token.ts",
+    "svgr": "npx @svgr/cli -d src/shared/assets/svgs --typescript --no-dimensions public/svgs",
     "pwa": "pwa-assets-generator --preset minimal public/pwa/moddo.svg",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "STORYBOOK=true storybook build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.3.1",
@@ -42,7 +46,6 @@
     "react-toastify": "^11.0.3",
     "styled-components": "^6.1.14",
     "styled-normalize": "^8.1.1",
-    "swiper": "^11.2.6",
     "zod": "^3.24.1",
     "zustand": "^5.0.3"
   },
@@ -63,7 +66,6 @@
     "@types/node": "^22.10.7",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@types/swiper": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "5.59.9",
     "@typescript-eslint/parser": "5.59.9",
     "@vite-pwa/assets-generator": "^0.2.6",
@@ -83,6 +85,8 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-storybook": "^0.11.2",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "msw": "^2.7.0",
     "msw-storybook-addon": "^2.0.6",
     "prettier": "^3.4.2",
@@ -102,9 +106,16 @@
       "plugin:storybook/recommended"
     ]
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint"
+    ]
+  },
   "msw": {
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

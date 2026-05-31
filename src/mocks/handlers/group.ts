@@ -1,21 +1,119 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/lib/getIsMocked';
-import { AccountVariable } from '@/entities/group/model/group.type';
+import { AccountVariable, Group } from '@/entities/group/model/group.type';
 
-const dummyGroups = [
+const dummyGroups: Group[] = [
   {
     id: 1,
     groupName: '강남역 모각코',
     members: [
-      { id: 1, name: '김모또', role: 'MANAGER' },
-      { id: 2, name: '박완숙', role: 'PARTICIPANT' },
-      { id: 3, name: '정에그', role: 'PARTICIPANT' },
+      {
+        id: 1,
+        name: '김모또',
+        role: 'MANAGER',
+        profile: '',
+        userId: 1,
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 2,
+        name: '박완숙',
+        role: 'PARTICIPANT',
+        profile: '',
+        userId: 2,
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 3,
+        name: '정에그',
+        role: 'PARTICIPANT',
+        profile: '',
+        userId: 3,
+        isPaid: false,
+        paidAt: null,
+      },
+    ],
+  },
+  {
+    id: 2,
+    groupName: '서교동 모각코',
+    members: [
+      {
+        id: 1,
+        role: 'MANAGER',
+        name: '김모또',
+        profile: '',
+        userId: 1,
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 4,
+        role: 'PARTICIPANT',
+        name: '안맥북',
+        profile: '',
+        userId: 4,
+        isPaid: false,
+        paidAt: null,
+      },
+      {
+        id: 5,
+        role: 'PARTICIPANT',
+        name: '박삼성',
+        profile: '',
+        userId: 5,
+        isPaid: false,
+        paidAt: null,
+      },
     ],
   },
 ];
 
+const dummyMemberList = [
+  {
+    id: 1,
+    role: 'MANAGER',
+    name: '김모또',
+    profile: '',
+    userId: null as number | null,
+    isPaid: false,
+    paidAt: null,
+  },
+  {
+    id: 2,
+    role: 'PARTICIPANT',
+    name: '박완숙',
+    profile: '',
+    userId: null as number | null,
+    isPaid: false,
+    paidAt: null,
+  },
+  {
+    id: 3,
+    role: 'PARTICIPANT',
+    name: '정에그',
+    profile: '',
+    userId: 3,
+    isPaid: false,
+    paidAt: null,
+  },
+];
+
 const groupHandlers = [
+  // GET GetGroupHeader (path 방식)
+  // 모임 상단 조회
+  http.get('/api/v1/groups/:groupToken/header', ({ request }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    return HttpResponse.json({
+      ...dummyGroups[0],
+    });
+  }),
+
   // GET GetGroupOne
+  // TODO: /api/v1/groups/:groupToken/header 로 대체 예정, 삭제 필요
   http.get(`/api/v1/group`, ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
@@ -23,10 +121,10 @@ const groupHandlers = [
     const groupToken = url.searchParams.get('groupToken');
 
     if (!groupToken) {
-      return HttpResponse.json({
-        error: 'groupToken is required',
-        status: 401,
-      });
+      return HttpResponse.json(
+        { error: 'groupToken is required' },
+        { status: 401 }
+      );
     }
 
     return HttpResponse.json({
@@ -60,10 +158,10 @@ const groupHandlers = [
       const groupToken = url.searchParams.get('groupToken');
 
       if (!groupToken) {
-        return HttpResponse.json({
-          error: 'groupToken is required',
-          status: 401,
-        });
+        return HttpResponse.json(
+          { error: 'groupToken is required' },
+          { status: 401 }
+        );
       }
 
       const body = await request.json();
@@ -78,6 +176,40 @@ const groupHandlers = [
         bank,
         accountNumber,
       });
+    }
+  ),
+
+  // GET /api/v1/groups/:settlementCode/members
+  http.get('/api/v1/groups/:settlementCode/members', ({ request, params }) => {
+    if (!getIsMocked(request)) return passthrough();
+
+    const { settlementCode } = params;
+
+    if (!settlementCode) {
+      return HttpResponse.json(
+        { error: 'settlementCode is required' },
+        { status: 400 }
+      );
+    }
+
+    return HttpResponse.json({ members: dummyMemberList });
+  }),
+
+  http.post<{ settlementCode: string }, { memberId: number }>(
+    '/api/v1/groups/:settlementCode/members/assign',
+    async ({ request, params }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      const { settlementCode } = params;
+      const { memberId } = await request.json();
+
+      console.log(`settlementCode: ${settlementCode}, memberId: ${memberId}`);
+
+      // mock user id: 1 (auth.ts 참고)
+      const target = dummyMemberList.find((m) => m.id === memberId);
+      if (target) target.userId = 1;
+
+      return HttpResponse.json({ success: true }, { status: 200 });
     }
   ),
 ];

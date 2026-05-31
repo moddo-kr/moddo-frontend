@@ -2,17 +2,20 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Close } from '@/shared/assets/svgs/icon';
-import Button from '@/shared/ui/Button';
-import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
-import DescriptionField from '@/shared/ui/DescriptionField';
+import {
+  ActionArea,
+  DescriptionField,
+  Dialog,
+  Header,
+  Modal,
+} from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import useAddExpenseFormArray from '@/features/expense-management/lib/useAddExpenseFormArray';
-import Modal from '@/shared/ui/Modal';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
 import { ROUTE } from '@/shared/config/route';
 import getTotalExpense from '@/entities/expense/lib/getTotalExpense';
 import useCreateExpense from '@/features/expense-management/api/useCreateExpense';
 import FormCard from '@/features/expense-management/ui/FormCard';
+import { getToken } from '@/shared/design-system';
 import * as S from './CreateExpenseStepPage.styles';
 
 interface CreateExpenseStepProps {
@@ -61,62 +64,68 @@ function CreateExpenseStepPage({ onNext }: CreateExpenseStepProps) {
 
   return (
     <FormProvider {...formMethods}>
-      <Header
-        type="TitleCenter"
-        leftButtonContent={<Close width="1.5rem" />}
-        rightButtonContent={<Text>지출 추가</Text>}
-        rightButtonOnClick={handleAddExpense}
-        leftButtonOnClick={() => setOpen(true)}
-      />
-      {open && (
+      <PageLayout>
+        <Header
+          type="default"
+          headingIcon={
+            <Close width="1.5rem" color={getToken('fg.alternative')} />
+          }
+          headingIconAriaLabel="지출 입력 종료"
+          onHeadingIconClick={() => setOpen(true)}
+          trailingIcon={
+            <S.HeaderTrailingLabel>지출 추가</S.HeaderTrailingLabel>
+          }
+          onTrailingIconClick={handleAddExpense}
+        />
         <Modal
           open={open}
-          setOpen={setOpen}
-          variant="default"
-          title="지출 내역 입력을 종료할까요?"
-          subscribe="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
-          cancel="계속 입력"
-          submit="끝내기"
-          onCancel={() => setOpen(false)}
-          onSubmit={handleModalSubmit}
-        />
-      )}
-      <DescriptionField
-        title={
-          <>
-            <Text variant="heading2" color="semantic.orange.default">
-              {groupInfo.groupName}
-            </Text>
-            {`의\n지출 내역을 입력해주세요.`}
-          </>
-        }
-        sub="총 지출 금액을 1/N로 나눌게요."
-      />
-      <S.BillFormList>
-        {fieldArrayReturns.fields.map((field, index) => (
-          <FormCard
-            key={field.id}
-            ref={
-              index === fieldArrayReturns.fields.length - 1
-                ? lastFormCardRef
-                : null
-            }
-            index={index}
-            onDelete={handleDeleteExpense}
-          />
-        ))}
-      </S.BillFormList>
-      <BottomButtonContainer $bgColor="semantic.background.normal.alternative">
-        <Button
-          type="button"
-          onClick={handleSubmit((data) =>
-            mutation.mutate({ groupToken, data })
-          )}
-          disabled={!allFormsValid}
+          onClose={() => setOpen(false)}
+          ariaLabel="지출 내역 입력을 종료할까요?"
         >
-          {`총 ${getTotalExpense(expenses).toLocaleString()}원`}
-        </Button>
-      </BottomButtonContainer>
+          <Dialog
+            title="지출 내역 입력을 종료할까요?"
+            description="입력한 내용은 사라지지만, 모임이 생성되어 있어 나중에 다시 추가할 수 있어요."
+            mainAction={{ label: '끝내기', onClick: handleModalSubmit }}
+            alternativeAction={{
+              label: '계속 입력',
+              onClick: () => setOpen(false),
+            }}
+          />
+        </Modal>
+        <DescriptionField
+          title={
+            <>
+              <S.GroupNameHighlight>{groupInfo.groupName}</S.GroupNameHighlight>
+              {`의\n지출 내역을 입력해주세요.`}
+            </>
+          }
+          sub="총 지출 금액을 1/N로 나눌게요."
+        />
+        <S.ExpenseFormList>
+          {fieldArrayReturns.fields.map((field, index) => (
+            <FormCard
+              key={field.id}
+              ref={
+                index === fieldArrayReturns.fields.length - 1
+                  ? lastFormCardRef
+                  : null
+              }
+              index={index}
+              onDelete={handleDeleteExpense}
+            />
+          ))}
+        </S.ExpenseFormList>
+        <ActionArea
+          position="bottom-fixed"
+          mainAction={{
+            label: `총 ${getTotalExpense(expenses ?? []).toLocaleString()}원`,
+            onClick: handleSubmit((data) =>
+              mutation.mutate({ groupToken, data })
+            ),
+            disabled: !allFormsValid,
+          }}
+        />
+      </PageLayout>
     </FormProvider>
   );
 }

@@ -1,19 +1,15 @@
 import { useFunnel } from '@use-funnel/react-router';
 import { GroupNameSetupPage } from '@/pages/groupNameSetup';
-import { PasswordSetupPage } from '@/pages/passwordSetup';
 import { MemberSetupPage } from '@/pages/memberSetup';
 import { usePostCreateGroup } from '@/features/group-creation/api/usePostCreateGroup';
+import { showToast } from '@/shared/design-system/ui';
 
 // 모임 이름 입력 스텝에 필요한 context type
 type NameSetupType = {
   groupName?: string;
   password?: string;
 };
-// 비밀번호 입력 스텝에 필요한 context type
-type PasswordSetupType = {
-  groupName: string;
-  password?: string;
-};
+
 // 참여자 입력 스텝에 필요한 context type
 type MemberSetupType = {
   groupName: string;
@@ -24,7 +20,6 @@ function GroupSetupPage() {
   const { mutateAsync: createGroup, isPending } = usePostCreateGroup();
   const funnel = useFunnel<{
     name: NameSetupType;
-    password: PasswordSetupType;
     member: MemberSetupType;
   }>({
     id: 'group-setup',
@@ -39,25 +34,16 @@ function GroupSetupPage() {
       // eslint-disable-next-line react/no-unstable-nested-components
       name={({ history }) => (
         <GroupNameSetupPage
-          onNext={(groupName: string) =>
-            history.push('password', { groupName })
-          }
-        />
-      )}
-      // eslint-disable-next-line react/no-unstable-nested-components
-      password={({ history, context }) => (
-        <PasswordSetupPage
-          groupName={context.groupName}
-          onNext={async (password: string) => {
+          onNext={async (groupName: string) => {
             if (isPending) return;
             try {
-              await createGroup({
-                name: context.groupName,
-                password,
-              });
-              history.push('member', { password });
+              await createGroup({ name: groupName });
+              history.push('member', { groupName, password: '' });
             } catch {
-              // 실패 로직,,
+              showToast({
+                type: 'error',
+                content: '모임 생성에 실패했어요. 다시 시도해 주세요.',
+              });
             }
           }}
         />

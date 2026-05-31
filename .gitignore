@@ -29,3 +29,7 @@ dist-ssr
 # VitePWA가 개발 모드에서 실행될 때 자동으로 생성
 dev-dist/
 *storybook.log
+
+.claude/settings.local.json
+AGENTS.md
+CLAUDE.md

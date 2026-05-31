@@ -1,12 +1,14 @@
 import { useLoaderData } from 'react-router';
 import { useState } from 'react';
-import Header from '@/shared/ui/Header';
-import Text from '@/shared/ui/Text';
 import { ArrowDown, ArrowLeft } from '@/shared/assets/svgs/icon';
-import { BottomButtonContainer } from '@/shared/styles/bottomButton.styles';
-import Button from '@/shared/ui/Button';
-import DescriptionField from '@/shared/ui/DescriptionField';
-import Input from '@/shared/ui/Input';
+import { getToken } from '@/shared/design-system';
+import {
+  ActionArea,
+  DescriptionField,
+  Header,
+  Input,
+} from '@/shared/design-system/ui';
+import { PageLayout } from '@/shared/ui/PageLayout';
 import { BoundaryError } from '@/shared/types/error.type';
 import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import useDisclosure from './hooks/useDisclosure';
@@ -58,16 +60,14 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
   };
 
   return (
-    <>
+    <PageLayout $hasBottomFixedAction>
       <Header
-        type="TitleCenter"
-        leftButtonContent={
-          <>
-            <ArrowLeft width={24} />
-            <Text>뒤로가기</Text>
-          </>
+        type="default"
+        headingIcon={
+          <ArrowLeft width={24} color={getToken('fg.alternative')} />
         }
-        leftButtonOnClick={onBack}
+        headingLabel="뒤로가기"
+        onHeadingIconClick={onBack}
       />
       <DescriptionField title={`정산 받을 계좌를\n입력해주세요.`} />
       <S.PageContentWrapper>
@@ -75,7 +75,9 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           placeholder="은행 선택"
           value={bankName}
           onClick={handleBankInputClick}
-          icon={<ArrowDown width={24} />}
+          trailingIcon={
+            <ArrowDown width={24} color={getToken('fg.alternative')} />
+          }
           readOnly
         />
         <BankNameDrawer
@@ -91,15 +93,15 @@ function AddAccountStepPage({ onNext, onBack }: AddAccountStepProps) {
           inputMode="numeric"
         />
       </S.PageContentWrapper>
-      <BottomButtonContainer>
-        <Button
-          onClick={handleNextButtonClick}
-          disabled={!bankName || !accountNumber}
-        >
-          다음
-        </Button>
-      </BottomButtonContainer>
-    </>
+      <ActionArea
+        position="bottom-fixed"
+        mainAction={{
+          label: '다음',
+          onClick: handleNextButtonClick,
+          disabled: !bankName || !accountNumber,
+        }}
+      />
+    </PageLayout>
   );
 }
 

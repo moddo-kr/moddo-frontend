@@ -2,11 +2,16 @@ name: Publish Storybook
 # https://www.chromatic.com/docs/github-actions/
 
 on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Storybook URL을 코멘트할 PR 번호'
+        required: false
+        type: number
   pull_request:
     types: [opened, synchronize]
     branches:
       - develop
-      - refactor/remove-chakra-ui # Chakra UI 제거 작업을 위한 브랜치
     paths:
       - '**/stories/**'
       - '**/*.stories.tsx'
@@ -39,9 +44,11 @@ jobs:
           onlyChanged: true # Only run Chromatic on changed stories
 
       - name: Comment on PR (with snapshot changes)
-        if: steps.chromatic.outputs.changeCount != '0'
+        if: steps.chromatic.outputs.changeCount != '0' && (github.event_name == 'pull_request' || inputs.pr_number)
         uses: thollander/actions-comment-pull-request@v3
         with:
+          pr-number: ${{ github.event.pull_request.number || inputs.pr_number }}
+          comment-tag: chromatic-storybook
           message: |
             ✨ Storybook
             👉 ${{ steps.chromatic.outputs.storybookUrl }}
@@ -50,9 +57,11 @@ jobs:
             👉 ${{ steps.chromatic.outputs.buildUrl }}
 
       - name: Comment on PR (no snapshot changes)
-        if: steps.chromatic.outputs.changeCount == '0'
+        if: steps.chromatic.outputs.changeCount == '0' && (github.event_name == 'pull_request' || inputs.pr_number)
         uses: thollander/actions-comment-pull-request@v3
         with:
+          pr-number: ${{ github.event.pull_request.number || inputs.pr_number }}
+          comment-tag: chromatic-storybook
           message: |
             ✨ Storybook
             👉 ${{ steps.chromatic.outputs.storybookUrl }}
