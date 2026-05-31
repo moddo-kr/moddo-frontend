@@ -55,8 +55,9 @@ function ExpenseDetailPage() {
   });
   const currentProfile =
     profiles.find((profile) => profile.id === myProfile.id) ?? myProfile;
+  const isManager = currentProfile.role === 'MANAGER';
   const bottomActionProfile =
-    currentProfile.role === 'PARTICIPANT' && isPaymentRequested
+    !isManager && isPaymentRequested
       ? { ...currentProfile, isPaid: true }
       : currentProfile;
 
@@ -121,6 +122,7 @@ function ExpenseDetailPage() {
           totalMember={memberTotal}
           paidMember={memberDone}
           isEveryMemberPaid={isEveryMemberPaid}
+          isManager={isManager}
           onShareClick={() => setOpenBottomSheet(true)}
           status={status}
           setStatus={setStatus}
