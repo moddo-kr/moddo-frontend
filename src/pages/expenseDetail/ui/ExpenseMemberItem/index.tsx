@@ -162,7 +162,6 @@ function ExpenseMemberItem({
                   width={24}
                   height={24}
                   color={getToken('fill.primary.normal')}
-                  style={{ flexShrink: 0 }}
                 />
                 <S.ExpenseContent>{expense.content}</S.ExpenseContent>
               </S.PlaceWrapper>

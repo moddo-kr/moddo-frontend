@@ -26,6 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     trailingIcon,
     value,
     onChange,
+    onClick,
     ...rest
   },
   ref
@@ -53,11 +54,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {...rest}
           value={value}
           onChange={onChange}
+          onClick={onClick}
           disabled={isDisabled}
         />
         {isPrice && <S.PriceUnit>원</S.PriceUnit>}
         {!isPrice && trailingIcon && (
-          <S.IconWrapper $disabled={isDisabled}>{trailingIcon}</S.IconWrapper>
+          <S.IconWrapper
+            $disabled={isDisabled}
+            onClick={!isDisabled ? onClick : undefined}
+          >
+            {trailingIcon}
+          </S.IconWrapper>
         )}
       </S.InputWrapper>
       {/* TODO: 헬프텍스트 - 디자인 확정 후 추가 예정 */}

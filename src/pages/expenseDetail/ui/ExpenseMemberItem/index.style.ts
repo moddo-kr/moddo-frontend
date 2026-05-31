@@ -113,6 +113,10 @@ export const PlaceWrapper = styled.div`
   align-items: center;
   flex: 1;
   min-width: 0;
+
+  & > svg {
+    flex-shrink: 0;
+  }
 `;
 
 export const ExpenseContent = styled.span`

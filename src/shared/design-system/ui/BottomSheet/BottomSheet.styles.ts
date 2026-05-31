@@ -12,6 +12,7 @@ export const BottomSheetWrapper = styled(animated.div)`
   transform: translateX(-50%);
   width: 100%;
   max-width: 37.5rem;
+  min-width: 320px; /* 페이지 레이아웃에 설정된 최소 너비 */
   height: fit-content;
   z-index: 9998;
 `;
