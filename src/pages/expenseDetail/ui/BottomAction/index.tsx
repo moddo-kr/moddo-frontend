@@ -6,8 +6,7 @@ import { StatusType } from '../ExpenseTimeHeader/index.type';
 interface BottomActionProps {
   status: StatusType;
   myProfile: MemberProfile;
-  memberTotal: number;
-  memberDone: number;
+  isEveryMemberPaid: boolean;
   shareLink: string;
   onSettleClick: () => void;
   onPaymentRequestClick: () => void;
@@ -17,8 +16,7 @@ interface BottomActionProps {
 function BottomAction({
   status,
   myProfile,
-  memberTotal,
-  memberDone,
+  isEveryMemberPaid,
   shareLink,
   onSettleClick,
   onPaymentRequestClick,
@@ -37,7 +35,7 @@ function BottomAction({
       />
     );
 
-  if (myProfile.role === 'MANAGER' && memberTotal === memberDone)
+  if (myProfile.role === 'MANAGER' && isEveryMemberPaid)
     return (
       <ActionArea
         position="bottom-fixed"
@@ -71,21 +69,24 @@ function BottomAction({
       />
     );
 
-  return (
-    <>
-      <ActionArea
-        position="bottom-fixed"
-        mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
-      />
-      <ShareModal
-        open={share.isOpen}
-        onClose={share.close}
-        onKakaoShare={share.shareKakao}
-        onSlackShare={share.shareSlack}
-        onCopyLink={share.copyLink}
-      />
-    </>
-  );
+  if (myProfile.role === 'MANAGER')
+    return (
+      <>
+        <ActionArea
+          position="bottom-fixed"
+          mainAction={{ label: '링크 공유하기', onClick: share.startShare }}
+        />
+        <ShareModal
+          open={share.isOpen}
+          onClose={share.close}
+          onKakaoShare={share.shareKakao}
+          onSlackShare={share.shareSlack}
+          onCopyLink={share.copyLink}
+        />
+      </>
+    );
+
+  return null;
 }
 
 export default BottomAction;

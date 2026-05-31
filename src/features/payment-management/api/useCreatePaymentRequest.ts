@@ -1,12 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import payment from '@/entities/payment/api/payment';
-import { queryClient } from '@/shared/api/queryClient';
 
 const useCreatePaymentRequest = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (code: string) => payment.create(code),
-    onSuccess: () => {
+    onSuccess: (_data, code) => {
       queryClient.invalidateQueries({ queryKey: ['payments'] });
+      queryClient.invalidateQueries({ queryKey: ['profiles', code] });
+      queryClient.invalidateQueries({ queryKey: ['groupHeader', code] });
     },
   });
 };
