@@ -104,10 +104,6 @@ function ExpenseMemberItem({
     queryClient.invalidateQueries({
       queryKey: ['memberExpenseDetails', groupToken],
     });
-    // TEMP: member-expenses에 paymentRequestId 추가되면 groupDetail invalidate 제거
-    queryClient.invalidateQueries({
-      queryKey: ['groupDetail', groupToken],
-    });
   };
 
   const handleApprove = () => {

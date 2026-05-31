@@ -10,10 +10,8 @@ interface ExpenseMembersProps {
 }
 
 function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
-  const { myProfile, paymentRequestIdMap } = useLoaderData() as {
+  const { myProfile } = useLoaderData() as {
     myProfile: MemberProfile;
-    // TEMP: member-expenses에 paymentRequestId 추가되면 paymentRequestIdMap 제거
-    paymentRequestIdMap: Map<number, number | null>;
   };
 
   const {
@@ -36,11 +34,7 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
       {memberExpenseData.map((member) => (
         <ExpenseMemberItem
           key={member.id}
-          // TEMP: member-expenses에 paymentRequestId 추가되면 병합 제거
-          member={{
-            ...member,
-            paymentRequestId: paymentRequestIdMap.get(member.id),
-          }}
+          member={member}
           groupToken={groupToken}
           status={status}
           isManager={isManager}

@@ -2,7 +2,7 @@
 // TODO : 기존 groupToken들을 사용하는 방식을 settlementCode를 사용하는 방식으로 변경했음. 동작 확인 필요함.
 
 import { getAuth } from '@/entities/auth/api/auth';
-import { getGroupDetail, getGroupHeader } from '@/entities/group/api/group';
+import { getGroupHeader } from '@/entities/group/api/group';
 import { getProfiles } from '@/entities/member/api/getProfiles';
 import { queryClient } from '@/shared/api/queryClient';
 import { ROUTE } from '@/shared/config/route';
@@ -43,17 +43,7 @@ async function expenseDetailLoader({ params }: LoaderFunctionArgs) {
       queryFn: () => getGroupHeader(groupToken),
     });
 
-    // TEMP: member-expenses에 paymentRequestId 추가되면 아래 블록 제거
-    const groupDetail = await queryClient.ensureQueryData({
-      queryKey: ['groupDetail', groupToken],
-      queryFn: () => getGroupDetail(groupToken),
-    });
-    const paymentRequestIdMap = new Map(
-      groupDetail.members.map((m) => [m.id, m.paymentRequestId])
-    );
-    // TEMP 끝
-
-    return { groupToken, groupData, myProfile, paymentRequestIdMap };
+    return { groupToken, groupData, myProfile };
   } catch (error: unknown) {
     if (isAxiosError(error)) {
       // CHECK - 문서에는 401 에러로 되어있지만 실제로는 500 에러가 발생함
