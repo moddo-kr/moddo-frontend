@@ -26,8 +26,10 @@ export interface GroupHeaderResponse {
   deadline: string;
   bank: string;
   accountNumber: string;
-  totalMemberCount: number;
-  completedMemberCount: number;
+  createdAt?: string;
+  completedAt: string | null;
+  totalMemberCount?: number;
+  completedMemberCount?: number;
 }
 
 export interface GroupListItem {

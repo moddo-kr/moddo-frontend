@@ -18,6 +18,9 @@ import { getFormatDate } from './lib/getFormatDate';
 interface ExpenseTimeHeaderProps {
   headerData?: GroupHeaderResponse;
   isLoading: boolean;
+  totalMember: number;
+  paidMember: number;
+  isEveryMemberPaid: boolean;
   onShareClick: () => void;
   status: StatusType;
   setStatus: (status: StatusType) => void;
@@ -28,6 +31,9 @@ interface ExpenseTimeHeaderProps {
 function ExpenseTimeHeader({
   headerData,
   isLoading,
+  totalMember,
+  paidMember,
+  isEveryMemberPaid,
   onShareClick,
   status,
   setStatus,
@@ -40,8 +46,6 @@ function ExpenseTimeHeader({
   const [isBubble, setIsBubble] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const totalMember = headerData?.totalMemberCount ?? 0;
-  const paidMember = headerData?.completedMemberCount ?? 0;
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -71,11 +75,11 @@ function ExpenseTimeHeader({
   // TODO: isChecked를 sessionStorage/localStorage로 관리하여 새로고침 시에도 모달이 다시 뜨지 않도록 개선 필요 (groupToken별 키 사용)
   // 모든 멤버가 입금 완료된 "순간"에만 모달 표시
   useEffect(() => {
-    if (totalMember > 0 && paidMember === totalMember && !isChecked) {
+    if (isEveryMemberPaid && !isChecked) {
       setIsModalOpen(true);
       setIsChecked(true);
     }
-  }, [paidMember, totalMember, isChecked, setIsChecked]);
+  }, [isEveryMemberPaid, isChecked, setIsChecked]);
 
   useEffect(() => {
     if (!headerData || status !== 'pending') return () => {};

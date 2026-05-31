@@ -17,6 +17,7 @@ import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import { getProfiles } from '@/entities/member/api/getProfiles';
 import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
@@ -31,24 +32,34 @@ function ExpenseDetailPage() {
   const { groupToken, groupData, myProfile } = useLoaderData();
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
+  const [isPaymentRequested, setIsPaymentRequested] = useState(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const { data: headerData, isLoading: isHeaderLoading } = useGetGroupHeader(
     groupToken,
     {},
     [401]
   );
-  const memberTotal = headerData?.totalMemberCount ?? 0;
-  const memberDone = headerData?.completedMemberCount ?? 0;
+  const { data: memberExpenseDetails = [] } =
+    useGetMemberExpenseDetails(groupToken);
+  const memberTotal = memberExpenseDetails.length;
+  const memberDone = memberExpenseDetails.filter(
+    (member) => member.isPaid
+  ).length;
+  const isEveryMemberPaid = memberTotal > 0 && memberTotal === memberDone;
   const { data: profiles = [] } = useQuery({
     queryKey: ['profiles', groupToken],
     queryFn: () => getProfiles(groupToken),
   });
   const currentProfile =
     profiles.find((profile) => profile.id === myProfile.id) ?? myProfile;
+  const bottomActionProfile =
+    currentProfile.role === 'PARTICIPANT' && isPaymentRequested
+      ? { ...currentProfile, isPaid: true }
+      : currentProfile;
 
-  // TODO: GroupHeaderResponse에 completedAt 필드를 추가하여 서버에서 정산 완료 여부를 직접 내려받도록 개선 필요
   const derivedStatus = useMemo<StatusType>(() => {
     if (!headerData) return 'pending';
+    if (headerData.completedAt) return 'success';
 
     const isExpired = new Date(headerData.deadline).getTime() < Date.now();
     if (isExpired) return 'failure';
@@ -69,6 +80,7 @@ function ExpenseDetailPage() {
   const handlePaymentRequest = () => {
     createPaymentRequest(groupToken, {
       onSuccess: () => {
+        setIsPaymentRequested(true);
         setIsPaymentModalOpen(false);
         showToast({
           type: 'success',
@@ -103,6 +115,9 @@ function ExpenseDetailPage() {
         <ExpenseTimeHeader
           headerData={headerData}
           isLoading={isHeaderLoading}
+          totalMember={memberTotal}
+          paidMember={memberDone}
+          isEveryMemberPaid={isEveryMemberPaid}
           onShareClick={() => setOpenBottomSheet(true)}
           status={status}
           setStatus={setStatus}
@@ -126,9 +141,8 @@ function ExpenseDetailPage() {
       </S.Content>
       <BottomAction
         status={status}
-        myProfile={currentProfile}
-        memberTotal={memberTotal}
-        memberDone={memberDone}
+        myProfile={bottomActionProfile}
+        isEveryMemberPaid={isEveryMemberPaid}
         shareLink={shareLink}
         onSettleClick={() => setIsChecked(false)}
         onPaymentRequestClick={() => setIsPaymentModalOpen(true)}

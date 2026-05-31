@@ -5,6 +5,7 @@ import {
   Group,
   GroupHeaderResponse,
 } from '@/entities/group/model/group.type';
+import { MemberProfileRaw } from '@/entities/member/model/member.type';
 
 const dummyGroups: Group[] = [
   {
@@ -75,7 +76,7 @@ const dummyGroups: Group[] = [
   },
 ];
 
-const dummyMemberList = [
+const dummyMemberList: MemberProfileRaw[] = [
   {
     id: 1,
     role: 'MANAGER',
@@ -105,7 +106,7 @@ const dummyMemberList = [
   },
 ];
 
-const dummyGroupHeader: GroupHeaderResponse = {
+const getDummyGroupHeader = (): GroupHeaderResponse => ({
   groupName: dummyGroups[0].groupName,
   totalAmount: 150000,
   deadline: new Date(
@@ -113,10 +114,12 @@ const dummyGroupHeader: GroupHeaderResponse = {
   ).toISOString(),
   bank: '국민은행',
   accountNumber: '123456-78-910111',
-  totalMemberCount: dummyGroups[0].members.length,
-  completedMemberCount: dummyGroups[0].members.filter((member) => member.isPaid)
+  createdAt: new Date().toISOString(),
+  completedAt: null,
+  totalMemberCount: dummyMemberList.length,
+  completedMemberCount: dummyMemberList.filter((member) => member.isPaid)
     .length,
-};
+});
 
 const groupHandlers = [
   // GET GetGroupHeader (path 방식)
@@ -124,7 +127,7 @@ const groupHandlers = [
   http.get('/api/v1/groups/:groupToken/header', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
-    return HttpResponse.json(dummyGroupHeader);
+    return HttpResponse.json(getDummyGroupHeader());
   }),
 
   // GET GetGroupOne
@@ -225,6 +228,35 @@ const groupHandlers = [
       if (target) target.userId = 1;
 
       return HttpResponse.json({ success: true }, { status: 200 });
+    }
+  ),
+
+  http.put<{ groupToken: string; groupMemberId: string }, { isPaid: boolean }>(
+    '/api/v1/groups/:groupToken/members/:groupMemberId',
+    async ({ request, params }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      const { groupMemberId } = params;
+      const { isPaid } = await request.json();
+      const target = dummyMemberList.find(
+        (member) => member.id === Number(groupMemberId)
+      );
+
+      if (!target) {
+        return HttpResponse.json(
+          { error: 'group member not found' },
+          { status: 404 }
+        );
+      }
+
+      target.isPaid = isPaid;
+      target.paidAt = isPaid ? new Date().toISOString() : null;
+
+      return HttpResponse.json({
+        id: target.id,
+        isPaid: target.isPaid,
+        paidAt: target.paidAt,
+      });
     }
   ),
 ];
