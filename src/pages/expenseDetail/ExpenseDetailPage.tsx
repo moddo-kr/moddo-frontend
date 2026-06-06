@@ -24,6 +24,7 @@ import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
 import ExpenseMembers from './ui/ExpenseMembers';
+import ManageMenu from './ui/ManageMenu';
 import { StatusType } from './ui/ExpenseTimeHeader/index.type';
 import BottomAction from './ui/BottomAction';
 import * as S from './ExpenseDetailPage.styles';
@@ -117,7 +118,9 @@ function ExpenseDetailPage() {
         onHeadingIconClick={() => {
           navigate(ROUTE.home);
         }}
-        // trailingIcon={<S.ManageLabel>관리</S.ManageLabel>} // TODO : 추가를 논의중인 기능이기 때문에 삭제하지 않고 주석 처리함
+        trailingIcon={
+          isManager ? <ManageMenu groupToken={groupToken} /> : undefined
+        }
       />
       <S.Content>
         <ExpenseTimeHeader
