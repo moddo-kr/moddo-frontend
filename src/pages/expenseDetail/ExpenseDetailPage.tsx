@@ -62,6 +62,9 @@ function ExpenseDetailPage() {
           content: '입금 확인 요청이 전송되었습니다.',
         });
       },
+      onError: () => {
+        setIsPaymentModalOpen(false);
+      },
     });
   };
 
