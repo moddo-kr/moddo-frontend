@@ -33,7 +33,7 @@ type ChipStatus = '입금완료' | '확인중' | '미입금';
 
 function getChipStatus(member: MemberSettlement): ChipStatus {
   if (member.isPaid) return '입금완료';
-  if (member.paymentRequestId) return '확인중';
+  if (member.paymentRequestStatus === 'PENDING') return '확인중';
   return '미입금';
 }
 
