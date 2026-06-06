@@ -4,7 +4,7 @@ import { MemberProfile } from '@/entities/member/model/member.type';
 import { StatusType } from '../ExpenseTimeHeader/index.type';
 
 interface BottomActionProps {
-  status: StatusType;
+  settlementStatus: StatusType;
   myProfile: MemberProfile;
   isEveryMemberPaid: boolean;
   shareLink: string;
@@ -14,7 +14,7 @@ interface BottomActionProps {
 }
 
 function BottomAction({
-  status,
+  settlementStatus,
   myProfile,
   isEveryMemberPaid,
   shareLink,
@@ -24,7 +24,7 @@ function BottomAction({
 }: BottomActionProps) {
   const share = useShareLink(shareLink);
 
-  if (status === 'success')
+  if (settlementStatus === 'success')
     return (
       <ActionArea
         position="bottom-fixed"

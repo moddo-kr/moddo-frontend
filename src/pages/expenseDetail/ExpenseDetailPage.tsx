@@ -71,10 +71,11 @@ function ExpenseDetailPage() {
     return 'pending';
   }, [headerData]);
 
-  const [status, setStatus] = useState<StatusType>('pending');
+  const [settlementStatus, setSettlementStatus] =
+    useState<StatusType>('pending');
 
   useEffect(() => {
-    setStatus((prevStatus) =>
+    setSettlementStatus((prevStatus) =>
       prevStatus === 'success' ? prevStatus : derivedStatus
     );
   }, [derivedStatus]);
@@ -90,6 +91,9 @@ function ExpenseDetailPage() {
           type: 'success',
           content: '입금 확인 요청이 전송되었습니다.',
         });
+      },
+      onError: () => {
+        setIsPaymentModalOpen(false);
       },
     });
   };
@@ -124,8 +128,8 @@ function ExpenseDetailPage() {
           isEveryMemberPaid={isEveryMemberPaid}
           isManager={isManager}
           onShareClick={() => setOpenBottomSheet(true)}
-          status={status}
-          setStatus={setStatus}
+          settlementStatus={settlementStatus}
+          setSettlementStatus={setSettlementStatus}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
           onCompleteSettlement={completeGroupSettlement}
@@ -141,12 +145,15 @@ function ExpenseDetailPage() {
           {activeTab === 'expense' ? (
             <ExpenseTimeline groupToken={groupToken} />
           ) : (
-            <ExpenseMembers groupToken={groupToken} status={status} />
+            <ExpenseMembers
+              groupToken={groupToken}
+              settlementStatus={settlementStatus}
+            />
           )}
         </S.BottomArea>
       </S.Content>
       <BottomAction
-        status={status}
+        settlementStatus={settlementStatus}
         myProfile={bottomActionProfile}
         isEveryMemberPaid={isEveryMemberPaid}
         shareLink={shareLink}

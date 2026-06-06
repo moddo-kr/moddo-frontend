@@ -8,6 +8,7 @@ import * as S from './ErrorPage.style';
 interface ErrorPageProps {
   title?: string;
   description?: string;
+  onReset?: () => void;
   action?: {
     text?: string;
     href?: string;
@@ -18,6 +19,7 @@ interface ErrorPageProps {
 function ErrorPage({
   title = '잠시 문제가 발생했어요',
   description = `현재 서버 연결에 문제가 있어요.\n잠시 후 다시 시도해 주세요.`,
+  onReset,
   action = {
     text: '홈으로 돌아가기',
     href: ROUTE.home,
@@ -28,11 +30,13 @@ function ErrorPage({
   const handleActionClick = () => {
     if (action.onClick) {
       action.onClick();
+      onReset?.();
       return;
     }
 
     if (action.href) {
       navigate(action.href);
+      onReset?.();
     }
   };
 
