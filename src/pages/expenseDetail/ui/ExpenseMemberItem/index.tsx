@@ -19,12 +19,13 @@ import useUpdatePaymentStatus from '@/features/settlement-details/api/useUpdateP
 import useApprovePayment from '@/features/payment-management/api/useApprovePayment';
 import useRejectPayment from '@/features/payment-management/api/useRejectPayment';
 import { getToken } from '@/shared/design-system';
+import { StatusType } from '../ExpenseTimeHeader/index.type';
 import * as S from './index.style';
 
 interface ExpenseMemberItemProps {
   member: MemberSettlement;
   groupToken: string;
-  status: string;
+  settlementStatus: StatusType;
   isManager: boolean;
 }
 
@@ -57,7 +58,7 @@ function MemberAccordionToggle() {
 function ExpenseMemberItem({
   member,
   groupToken,
-  status,
+  settlementStatus,
   isManager,
 }: ExpenseMemberItemProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -82,8 +83,14 @@ function ExpenseMemberItem({
 
   const showManagerButtons = isManager && member.paymentRequestId != null;
 
+  const resetSheet = () => {
+    setIsPaid(member.isPaid);
+    setIsConfirm(false);
+    setSheetOpen(false);
+  };
+
   const handleTextButtonClick = (paidUpdate: boolean) => {
-    if (status === 'success') return;
+    if (settlementStatus === 'success') return;
     setIsPaid(paidUpdate);
     setIsConfirm(paidUpdate !== member.isPaid);
   };
@@ -94,12 +101,6 @@ function ExpenseMemberItem({
     } catch {
       return;
     }
-    setIsConfirm(false);
-    setSheetOpen(false);
-  };
-
-  const resetSheet = () => {
-    setIsPaid(member.isPaid);
     setIsConfirm(false);
     setSheetOpen(false);
   };
@@ -193,7 +194,7 @@ function ExpenseMemberItem({
 
       {/* 정산 상태 변경 바텀시트 (⋮ 클릭 시) */}
       <BottomSheet
-        open={sheetOpen && status !== 'success'}
+        open={sheetOpen && settlementStatus !== 'success'}
         onClose={resetSheet}
         title="정산 상태 변경"
       >

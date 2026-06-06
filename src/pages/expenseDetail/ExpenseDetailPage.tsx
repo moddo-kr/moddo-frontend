@@ -44,10 +44,11 @@ function ExpenseDetailPage() {
     return 'pending';
   }, [headerData]);
 
-  const [status, setStatus] = useState<StatusType>('pending');
+  const [settlementStatus, setSettlementStatus] =
+    useState<StatusType>('pending');
 
   useEffect(() => {
-    setStatus(derivedStatus);
+    setSettlementStatus(derivedStatus);
   }, [derivedStatus]);
   const navigate = useNavigate();
   const { mutate: createPaymentRequest } = useCreatePaymentRequest();
@@ -98,8 +99,8 @@ function ExpenseDetailPage() {
           totalMember={MEMBER_TOTAL}
           paidMember={MEMBER_DONE}
           onShareClick={() => setOpenBottomSheet(true)}
-          status={status}
-          setStatus={setStatus}
+          settlementStatus={settlementStatus}
+          setSettlementStatus={setSettlementStatus}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
         />
@@ -114,12 +115,15 @@ function ExpenseDetailPage() {
           {activeTab === 'expense' ? (
             <ExpenseTimeline groupToken={groupToken} />
           ) : (
-            <ExpenseMembers groupToken={groupToken} status={status} />
+            <ExpenseMembers
+              groupToken={groupToken}
+              settlementStatus={settlementStatus}
+            />
           )}
         </S.BottomArea>
       </S.Content>
       <BottomAction
-        status={status}
+        settlementStatus={settlementStatus}
         myProfile={myProfile}
         memberTotal={MEMBER_TOTAL}
         memberDone={MEMBER_DONE}

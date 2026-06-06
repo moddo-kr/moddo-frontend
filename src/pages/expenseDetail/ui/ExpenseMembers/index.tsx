@@ -2,14 +2,15 @@ import { useLoaderData } from 'react-router';
 import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import { MemberProfile } from '@/entities/member/model/member.type';
 import ExpenseMemberItem from '@/pages/expenseDetail/ui/ExpenseMemberItem';
+import { StatusType } from '../ExpenseTimeHeader/index.type';
 import * as S from './index.style';
 
 interface ExpenseMembersProps {
   groupToken: string;
-  status: string;
+  settlementStatus: StatusType;
 }
 
-function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
+function ExpenseMembers({ groupToken, settlementStatus }: ExpenseMembersProps) {
   const { myProfile } = useLoaderData() as {
     myProfile: MemberProfile;
   };
@@ -36,7 +37,7 @@ function ExpenseMembers({ groupToken, status }: ExpenseMembersProps) {
           key={member.id}
           member={member}
           groupToken={groupToken}
-          status={status}
+          settlementStatus={settlementStatus}
           isManager={isManager}
         />
       ))}
