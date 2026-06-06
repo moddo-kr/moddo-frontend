@@ -34,6 +34,10 @@ export const MenuItemButton = styled.button`
   cursor: pointer;
   text-align: left;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:hover,
   &:active {
     /* HACK: Figma --text/strong(#292c30 = gray.20)에 대응하는 token 없음, 의미상 동일한 'fg.strong' 사용 */
