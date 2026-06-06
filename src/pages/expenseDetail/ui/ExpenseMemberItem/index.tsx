@@ -215,7 +215,7 @@ function ExpenseMemberItem({
           <Button
             variant={isConfirm ? 'primary' : 'secondary'}
             onClick={isConfirm ? handleConfirm : resetSheet}
-            disabled={!isConfirm}
+            disabled={!isConfirm || updatePaymentStatusMutation.isPending}
           >
             확인
           </Button>
