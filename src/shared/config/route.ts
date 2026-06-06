@@ -11,5 +11,6 @@ export const ROUTE = {
   groupSetup: '/group-setup',
   join: '/join/:groupToken',
   expenseDetail: '/expense-detail/:groupToken',
+  editExpenses: '/expense-detail/:groupToken/edit-expenses',
   characterShare: '/expense-detail/:groupToken/character',
 } as const;
