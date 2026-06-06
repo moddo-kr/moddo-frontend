@@ -17,11 +17,11 @@ interface CharacterCardProps {
 }
 
 function CharacterCard({ character }: CharacterCardProps) {
-  const { imageUrl, name, acquiredAt } = character;
+  const { imageBigUrl, name, acquiredAt } = character;
 
   return (
     <S.CardContainer>
-      <S.CharacterImage src={imageUrl} alt={name} />
+      <S.CharacterImage src={imageBigUrl} alt={name} />
       <S.CharacterName>{name}</S.CharacterName>
       <S.CharacterAcquiredDate>
         {acquiredAt ? format(acquiredAt, 'yyyy.MM.dd') : null}
