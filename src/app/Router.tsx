@@ -56,11 +56,6 @@ const LazyMyEditPage = lazy(() =>
     default: MyEditPage,
   }))
 );
-const LazySelectGroup = lazy(() =>
-  import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
-    default: SelectGroupPage,
-  }))
-);
 const LazyJoinPage = lazy(() =>
   import('@/pages/join').then(({ JoinPage }) => ({
     default: JoinPage,
@@ -114,10 +109,6 @@ function AppRouter() {
             {
               path: ROUTE.paymentManagement,
               element: <LazyPaymentManagement />,
-            },
-            {
-              path: ROUTE.selectGroup,
-              element: <LazySelectGroup />,
             },
             {
               path: ROUTE.groupSetup,
