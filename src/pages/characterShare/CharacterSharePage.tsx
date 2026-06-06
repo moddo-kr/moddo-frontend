@@ -7,6 +7,10 @@ import { PageLayout } from '@/shared/ui/PageLayout';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 
+const sanitizeFilename = (name: string): string => {
+  return name.replace(/[/\\:*?"<>|]/g, '_');
+};
+
 function CharacterSharePage() {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetCharacter(groupToken);
@@ -18,7 +22,7 @@ function CharacterSharePage() {
       const response = await fetch(data.imageUrl);
       if (!response.ok) throw new Error();
       const blob = await response.blob();
-      saveAs(blob, `${data.name}.png`);
+      saveAs(blob, `${sanitizeFilename(data.name)}.png`);
       showToast({ type: 'success', content: '이미지 저장 완료!' });
     } catch {
       showToast({ type: 'error', content: '이미지 저장 실패!' });
