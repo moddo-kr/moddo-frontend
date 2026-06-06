@@ -23,22 +23,8 @@ export const CharacterCardContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  padding: ${getToken('padding.3')};
+  padding: 0.5rem 2.5rem;
   background-color: ${getToken('bg.neutral')};
-`;
-
-export const CharacterCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 19.375rem;
-  height: 25rem;
-  flex-shrink: 0;
-  border-radius: ${getToken('radius.xl')};
-  border: 1px solid ${getToken('border.normal')};
-  background-color: ${getToken('bg.normal')};
 `;
 
 export const EmptyStateTitle = styled.h1`
@@ -56,27 +42,13 @@ export const PageTitle = styled.h1`
   margin: 0;
 `;
 
-export const CharacterName = styled.span`
-  ${applyTypography('typography.heading.small')};
-  color: ${getToken('fg.normal')};
-`;
-
-export const CharacterDescription = styled.span`
-  ${applyTypography('typography.body.medium')};
-  color: ${getToken('fg.alternative')};
-`;
-
 export const DownloadButton = styled(TextButton)`
   margin-top: 0.75rem;
   margin-bottom: 1.25rem;
 `;
 
-export const CharacterImageContainer = styled.div`
-  display: flex;
-  width: 15rem;
-  height: 14.25rem;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin-top: 1.5rem;
+export const CharacterImage = styled.img`
+  width: 100%;
+  max-width: 19.375rem;
+  height: auto;
 `;

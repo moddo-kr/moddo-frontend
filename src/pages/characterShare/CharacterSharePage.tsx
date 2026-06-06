@@ -1,13 +1,9 @@
-import { useRef } from 'react';
-import { toPng } from 'html-to-image';
 import saveAs from 'file-saver';
 import { ActionArea, Header, showToast } from '@/shared/design-system/ui';
 import { useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Download } from '@/shared/assets/svgs/icon';
 import { getToken } from '@/shared/design-system';
 import { PageLayout } from '@/shared/ui/PageLayout';
-import { CHARACTER_DATA } from '@/entities/character/config/character';
-import { StarChip } from '@/features/character-management/ui';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './CharacterSharePage.styles';
 
@@ -15,28 +11,17 @@ function CharacterSharePage() {
   const { groupToken } = useLoaderData();
   const { data, isLoading, isError } = useGetCharacter(groupToken);
   const navigate = useNavigate();
-  const imageRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!data) return;
-    // 돔 요소를 이미지로 변환
-    if (imageRef.current) {
-      // 390x390 사이즈로 이미지 다운로드
-      toPng(imageRef.current, { width: 390, height: 390 })
-        .then((dataUrl) => {
-          // 이미지 다운로드
-          saveAs(dataUrl, `${data.name}.png`);
-          showToast({
-            type: 'success',
-            content: '이미지 저장 완료!',
-          });
-        })
-        .catch(() => {
-          showToast({
-            type: 'error',
-            content: '이미지 저장 실패!',
-          });
-        });
+    try {
+      const response = await fetch(data.imageUrl);
+      if (!response.ok) throw new Error();
+      const blob = await response.blob();
+      saveAs(blob, `${data.name}.png`);
+      showToast({ type: 'success', content: '이미지 저장 완료!' });
+    } catch {
+      showToast({ type: 'error', content: '이미지 저장 실패!' });
     }
   };
 
@@ -93,23 +78,8 @@ function CharacterSharePage() {
         <S.TitleContainer>
           <S.PageTitle>캐릭터를 획득했어요!</S.PageTitle>
         </S.TitleContainer>
-        <S.CharacterCardContainer ref={imageRef}>
-          <S.CharacterCard>
-            <StarChip count={data.rarity} />
-            <S.CharacterImageContainer>
-              <img
-                src={data.imageBigUrl}
-                alt={data.name}
-                style={{
-                  ...CHARACTER_DATA[data.name].imageSize.big,
-                }}
-              />
-            </S.CharacterImageContainer>
-            <S.CharacterName>{data.name}</S.CharacterName>
-            <S.CharacterDescription>
-              {CHARACTER_DATA[data.name].description}
-            </S.CharacterDescription>
-          </S.CharacterCard>
+        <S.CharacterCardContainer>
+          <S.CharacterImage src={data.imageUrl} alt={data.name} />
         </S.CharacterCardContainer>
         <S.DownloadButton onClick={handleDownload}>
           <Download width="1.25rem" color={getToken('fill.inverse.neutral')} />
