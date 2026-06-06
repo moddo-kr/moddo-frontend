@@ -17,6 +17,9 @@ const useUpdatePaymentStatus = ({
       queryClient.invalidateQueries({
         queryKey: ['memberExpenseDetails', groupToken],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['groupHeader', groupToken],
+      });
     },
     errorHandlers: {
       default: () =>

@@ -46,6 +46,12 @@ export const getGroupHeader = (
     .then((res) => res.data);
 };
 
+export const completeGroupSettlement = async (
+  settlementCode: string
+): Promise<void> => {
+  await axiosInstance.patch(`/groups/${settlementCode}/complete`);
+};
+
 export const getSettlementList = (
   status: SettlementStatus,
   sort: SettlementSort,

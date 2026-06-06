@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft } from '@/shared/assets/svgs/icon';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import {
@@ -11,12 +12,14 @@ import {
   TabList,
   showToast,
 } from '@/shared/design-system/ui';
-import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
 import generateShareLink from '@/shared/lib/generateShareLink';
 import { ROUTE } from '@/shared/config/route';
 import CharacterBottomSheet from '@/features/character-management/ui/CharacterBottomSheet';
 import useCreatePaymentRequest from '@/features/payment-management/api/useCreatePaymentRequest';
 import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
+import { useGetMemberExpenseDetails } from '@/features/expense-management/api/useGetMemberExpenseDetails';
+import { useCompleteGroupSettlement } from '@/features/settlement-details/api/useCompleteGroupSettlement';
+import { getProfiles } from '@/entities/member/api/getProfiles';
 import { getToken } from '@/shared/design-system';
 import ExpenseTimeline from './ui/ExpenseTimeline';
 import ExpenseTimeHeader from './ui/ExpenseTimeHeader';
@@ -30,13 +33,37 @@ function ExpenseDetailPage() {
   const { groupToken, groupData, myProfile } = useLoaderData();
   const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
-  const { data: memberExpenseDetails } = useGetMemberExpenseDetails(groupToken);
-  const { data: headerData } = useGetGroupHeader(groupToken, {}, [401]);
+  const [isPaymentRequested, setIsPaymentRequested] = useState(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const { data: headerData, isLoading: isHeaderLoading } = useGetGroupHeader(
+    groupToken,
+    {},
+    [401]
+  );
+  const { data: memberExpenseDetails = [] } =
+    useGetMemberExpenseDetails(groupToken);
+  const { mutateAsync: completeGroupSettlement } =
+    useCompleteGroupSettlement(groupToken);
+  const memberTotal = memberExpenseDetails.length;
+  const memberDone = memberExpenseDetails.filter(
+    (member) => member.isPaid
+  ).length;
+  const isEveryMemberPaid = memberTotal > 0 && memberTotal === memberDone;
+  const { data: profiles = [] } = useQuery({
+    queryKey: ['profiles', groupToken],
+    queryFn: () => getProfiles(groupToken),
+  });
+  const currentProfile =
+    profiles.find((profile) => profile.id === myProfile.id) ?? myProfile;
+  const isManager = currentProfile.role === 'MANAGER';
+  const bottomActionProfile =
+    !isManager && isPaymentRequested
+      ? { ...currentProfile, isPaid: true }
+      : currentProfile;
 
-  // TODO: GroupHeaderResponse에 completedAt 필드를 추가하여 서버에서 정산 완료 여부를 직접 내려받도록 개선 필요
   const derivedStatus = useMemo<StatusType>(() => {
     if (!headerData) return 'pending';
+    if (headerData.completedAt) return 'success';
 
     const isExpired = new Date(headerData.deadline).getTime() < Date.now();
     if (isExpired) return 'failure';
@@ -48,7 +75,9 @@ function ExpenseDetailPage() {
     useState<StatusType>('pending');
 
   useEffect(() => {
-    setSettlementStatus(derivedStatus);
+    setSettlementStatus((prevStatus) =>
+      prevStatus === 'success' ? prevStatus : derivedStatus
+    );
   }, [derivedStatus]);
   const navigate = useNavigate();
   const { mutate: createPaymentRequest } = useCreatePaymentRequest();
@@ -56,6 +85,7 @@ function ExpenseDetailPage() {
   const handlePaymentRequest = () => {
     createPaymentRequest(groupToken, {
       onSuccess: () => {
+        setIsPaymentRequested(true);
         setIsPaymentModalOpen(false);
         showToast({
           type: 'success',
@@ -67,14 +97,6 @@ function ExpenseDetailPage() {
       },
     });
   };
-
-  let MEMBER_TOTAL = 0;
-  let MEMBER_DONE = 0;
-
-  if (memberExpenseDetails) {
-    MEMBER_TOTAL = memberExpenseDetails.length;
-    MEMBER_DONE = memberExpenseDetails.filter((member) => member.isPaid).length;
-  }
 
   const shareLink = generateShareLink(groupToken);
 
@@ -99,13 +121,18 @@ function ExpenseDetailPage() {
       />
       <S.Content>
         <ExpenseTimeHeader
-          totalMember={MEMBER_TOTAL}
-          paidMember={MEMBER_DONE}
+          headerData={headerData}
+          isLoading={isHeaderLoading}
+          totalMember={memberTotal}
+          paidMember={memberDone}
+          isEveryMemberPaid={isEveryMemberPaid}
+          isManager={isManager}
           onShareClick={() => setOpenBottomSheet(true)}
           settlementStatus={settlementStatus}
           setSettlementStatus={setSettlementStatus}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
+          onCompleteSettlement={completeGroupSettlement}
         />
         <Divider />
         <S.BottomArea>
@@ -127,9 +154,8 @@ function ExpenseDetailPage() {
       </S.Content>
       <BottomAction
         settlementStatus={settlementStatus}
-        myProfile={myProfile}
-        memberTotal={MEMBER_TOTAL}
-        memberDone={MEMBER_DONE}
+        myProfile={bottomActionProfile}
+        isEveryMemberPaid={isEveryMemberPaid}
         shareLink={shareLink}
         onSettleClick={() => setIsChecked(false)}
         onPaymentRequestClick={() => setIsPaymentModalOpen(true)}
@@ -142,12 +168,12 @@ function ExpenseDetailPage() {
       <Modal
         open={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-        ariaLabel={`${myProfile.name}님의 정산 입금을 알릴게요.`}
+        ariaLabel={`${currentProfile.name}님의 정산 입금을 알릴게요.`}
       >
         <Dialog
           title={
             <>
-              <S.NameHighlight>{myProfile.name}</S.NameHighlight>
+              <S.NameHighlight>{currentProfile.name}</S.NameHighlight>
               {'님의\n정산 입금을 알릴게요.'}
             </>
           }
