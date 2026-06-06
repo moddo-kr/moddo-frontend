@@ -89,7 +89,11 @@ function ExpenseMemberItem({
   };
 
   const handleConfirm = async () => {
-    await updatePaymentStatusMutation.mutate();
+    try {
+      await updatePaymentStatusMutation.mutateAsync();
+    } catch {
+      return;
+    }
     setIsConfirm(false);
     setSheetOpen(false);
   };
