@@ -139,13 +139,15 @@ function ExpenseMemberItem({
             </S.MemberTotalAmount>
           </S.InfoSubRow>
         </S.InfoColumn>
-        <S.KebabButton
-          type="button"
-          onClick={() => setSheetOpen(true)}
-          aria-label={`${displayName}의 정산 상태 변경`}
-        >
-          <EllipsisVertical width={24} height={24} />
-        </S.KebabButton>
+        {settlementStatus !== 'success' && (
+          <S.KebabButton
+            type="button"
+            onClick={() => setSheetOpen(true)}
+            aria-label={`${displayName}의 정산 상태 변경`}
+          >
+            <EllipsisVertical width={24} height={24} />
+          </S.KebabButton>
+        )}
       </S.HeaderRow>
 
       <S.Divider />
