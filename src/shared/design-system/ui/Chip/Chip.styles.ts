@@ -5,7 +5,7 @@ import {
   applyTypography,
 } from '@/shared/design-system';
 
-interface StyledNameChipProps {
+interface StyledChipProps {
   $variant: 'selected' | 'unselected' | 'disabled' | 'red' | 'black';
   $size: 'm' | 's';
   $clickable?: boolean;
@@ -53,7 +53,7 @@ const variantStyles = {
   `,
 };
 
-export const Chip = styled.div<StyledNameChipProps>`
+export const ChipRoot = styled.div<StyledChipProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;

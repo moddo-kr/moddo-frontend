@@ -5,7 +5,7 @@ import {
   Input,
   Keypad,
   KeyValue,
-  NameChip,
+  Chip,
   PriceDisplay,
 } from '@/shared/design-system/ui';
 import {
@@ -86,14 +86,14 @@ function ExpenseAmountInput({
         <PriceDisplay value={formattedInput} />
         <S.QuickAddContainer>
           {QUICK_ADD_BUTTONS.map(({ label, amount }) => (
-            <NameChip
+            <Chip
               key={amount}
               label={label}
               variant="unselected"
               onClick={() => handleQuickAdd(amount)}
             />
           ))}
-          <NameChip label="전체삭제" variant="red" onClick={handleClearInput} />
+          <Chip label="전체삭제" variant="red" onClick={handleClearInput} />
         </S.QuickAddContainer>
         <Keypad onPress={handleKeypadPress} />
         <ActionArea
