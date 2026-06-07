@@ -2,6 +2,9 @@ name: Publish Storybook
 # https://www.chromatic.com/docs/github-actions/
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       pr_number:

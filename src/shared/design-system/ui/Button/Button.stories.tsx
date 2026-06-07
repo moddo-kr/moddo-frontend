@@ -43,35 +43,28 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
+const gridStyle = {
+  display: 'grid',
+  gridTemplateColumns: '3rem repeat(6, auto)',
+  gap: 8,
+  alignItems: 'center',
+  justifyItems: 'start',
+} as const;
+
 export const Showcase: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '3rem repeat(5, auto)',
-          gap: 8,
-          alignItems: 'center',
-        }}
-      >
+      <div style={gridStyle}>
         <span />
         {VARIANTS.map((variant) => (
-          <span key={variant} style={{ fontSize: 12, textAlign: 'center' }}>
+          <span key={variant} style={{ fontSize: 12 }}>
             {variant}
           </span>
         ))}
-        <span style={{ fontSize: 12, textAlign: 'center' }}>disabled</span>
+        <span style={{ fontSize: 12 }}>disabled</span>
       </div>
       {SIZES.map((size) => (
-        <div
-          key={size}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '3rem repeat(5, auto)',
-            gap: 8,
-            alignItems: 'center',
-          }}
-        >
+        <div key={size} style={gridStyle}>
           <span style={{ fontSize: 12, fontWeight: 'bold' }}>{size}</span>
           {VARIANTS.map((variant) => (
             <Button key={variant} variant={variant} size={size}>
@@ -82,25 +75,6 @@ export const Showcase: Story = {
             label
           </Button>
         </div>
-      ))}
-    </div>
-  ),
-};
-
-export const Disabled: Story = {
-  render: () => (
-    <div
-      style={{
-        display: 'flex',
-        gap: 8,
-        flexWrap: 'wrap',
-        alignItems: 'center',
-      }}
-    >
-      {VARIANTS.map((variant) => (
-        <Button key={variant} variant={variant} disabled>
-          label
-        </Button>
       ))}
     </div>
   ),

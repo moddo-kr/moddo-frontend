@@ -146,11 +146,7 @@ export const TextButtonWrapper = styled.button<{ $isActive: boolean }>`
   align-items: center;
   cursor: pointer;
   color: ${({ $isActive }) =>
-    $isActive
-      ? getToken('fg.primary.normal')
-      : getToken(
-          'fill.normal-disable'
-        )}; /* HACK: #ACAFB2로 정의된 토큰이 없어 의미상 유사한 토큰을 임의로 사용함 */
+    $isActive ? getToken('fg.primary.normal') : getToken('fg.normal-disable')};
   > svg {
     display: ${({ $isActive }) => ($isActive ? 'block' : 'none')};
   }

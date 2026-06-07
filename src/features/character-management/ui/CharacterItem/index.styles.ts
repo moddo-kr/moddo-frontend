@@ -28,7 +28,8 @@ export const LockedCharacterCard = styled(CardContainerBase)`
   padding-bottom: 2.25rem; /* 의도적으로 토큰으로 정의되지 않은 값 사용 */
   padding-left: ${getToken('padding.5')};
   padding-right: ${getToken('padding.5')};
-  border: 1px dashed #d2d4d5; /* HACK: 토큰에 정의되어 있지 않아 임시로 하드코딩함 */
+  border: 1px dashed ${getToken('border.normal')};
+  opacity: 0.5;
 `;
 
 export const CharacterImage = styled.img`

@@ -1,7 +1,7 @@
 import {
   Accordion,
   useAccordionContext,
-  NameChip,
+  Chip,
 } from '@/shared/design-system/ui';
 import SvgCarbonEdit from '@/shared/assets/svgs/icon/CarbonEdit';
 import SvgClose from '@/shared/assets/svgs/icon/Close';
@@ -83,7 +83,7 @@ function SettlementSummary({
         <Accordion.Content>
           <S.MemberChipList>
             {memberExpenses.map((member) => (
-              <NameChip
+              <Chip
                 key={member.id}
                 label={
                   member.role === 'MANAGER'

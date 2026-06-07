@@ -15,6 +15,7 @@ const meta: Meta<InputProps> = {
     label: { control: 'text' },
     required: { control: 'boolean' },
     placeholder: { control: 'text' },
+    helpText: { control: 'text' },
     value: { control: 'text' },
   },
   args: {
@@ -52,6 +53,25 @@ export const Showcase: Story = {
         placeholder="placeholder"
         readOnly
       />
+    </div>
+  ),
+};
+
+export const WithHelpText: Story = {
+  render: () => (
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 32, width: 350 }}
+    >
+      {STATES.map((state) => (
+        <Input
+          key={state}
+          label={state}
+          required
+          placeholder="placeholder"
+          state={state}
+          helpText="메시지를 입력해주세요."
+        />
+      ))}
     </div>
   ),
 };
