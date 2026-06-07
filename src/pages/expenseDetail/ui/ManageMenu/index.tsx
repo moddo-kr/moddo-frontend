@@ -1,10 +1,20 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { Dimmed, Dialog, Modal, showToast } from '@/shared/design-system/ui';
 import payment from '@/entities/payment/api/payment';
+import usePutUpdateAccount from '@/features/expense-management/api/usePutUpdateAccount';
 import { ROUTE } from '@/shared/config/route';
+import { BoundaryError } from '@/shared/types/error.type';
+import { AccountEditDialog } from '@/_workspace/AccountEditDialog';
+import BANK_LIST from '@/pages/addAccountStep/ui/BankNameDrawer/config/banks';
 import * as S from './index.styles';
+
+const BANK_OPTIONS = BANK_LIST.map((bank) => ({
+  label: bank.bankName,
+  value: bank.bankName,
+}));
 
 interface ManageMenuProps {
   groupToken: string;
@@ -14,7 +24,26 @@ function ManageMenu({ groupToken }: ManageMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isBlockedModalOpen, setIsBlockedModalOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [isAccountEditOpen, setIsAccountEditOpen] = useState(false);
+  const [bankName, setBankName] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: updateAccountMutate } = usePutUpdateAccount(
+    groupToken,
+    {
+      // CHECK - 문서에는 403 에러로 되어 있지만, 실제로는 500 에러가 발생함
+      // 유저가 모임 총무가 아닐 경우에 발생하는 에러
+      403: () => {
+        throw new BoundaryError({
+          title: '접근 권한이 없어요.',
+          description: '계좌는 총무만 수정할 수 있어요.',
+        });
+      },
+    },
+    [403]
+  );
 
   const handleEditExpenses = async () => {
     setIsOpen(false);
@@ -36,6 +65,29 @@ function ManageMenu({ groupToken }: ManageMenuProps) {
     }
   };
 
+  const handleOpenAccountEdit = () => {
+    setIsOpen(false);
+    setIsAccountEditOpen(true);
+  };
+
+  const handleAccountEditConfirm = () => {
+    updateAccountMutate(
+      {
+        accountData: { bank: bankName, accountNumber },
+        groupToken,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ['groupHeader', groupToken],
+          });
+          showToast({ type: 'success', content: '계좌를 수정했어요.' });
+          setIsAccountEditOpen(false);
+        },
+      }
+    );
+  };
+
   return (
     <>
       <S.TriggerButton onClick={() => setIsOpen(true)} disabled={isPending}>
@@ -49,12 +101,23 @@ function ManageMenu({ groupToken }: ManageMenuProps) {
               <S.MenuItemButton onClick={handleEditExpenses}>
                 정산 내역 수정
               </S.MenuItemButton>
-              {/* TODO: 계좌 수정 기능 구현 시 연결 */}
-              <S.MenuItemButton disabled>계좌 수정</S.MenuItemButton>
+              <S.MenuItemButton onClick={handleOpenAccountEdit}>
+                계좌 수정
+              </S.MenuItemButton>
             </S.MenuCard>
           </>,
           document.querySelector('#modal') ?? document.body
         )}
+      <AccountEditDialog
+        open={isAccountEditOpen}
+        bankOptions={BANK_OPTIONS}
+        bankValue={bankName}
+        onBankChange={setBankName}
+        accountNumber={accountNumber}
+        onAccountNumberChange={(e) => setAccountNumber(e.target.value)}
+        onCancel={() => setIsAccountEditOpen(false)}
+        onConfirm={handleAccountEditConfirm}
+      />
       <Modal
         open={isBlockedModalOpen}
         onClose={() => setIsBlockedModalOpen(false)}
