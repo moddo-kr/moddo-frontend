@@ -20,6 +20,11 @@ const payment = {
 
   create: (code: string): Promise<PaymentActionResult> =>
     axiosInstance.post(`/groups/${code}/payments`).then((res) => res.data),
+
+  exists: (groupCode: string): Promise<{ exists: boolean }> =>
+    axiosInstance
+      .get(`/groups/${groupCode}/payments/exists`)
+      .then((res) => res.data),
 };
 
 export default payment;
