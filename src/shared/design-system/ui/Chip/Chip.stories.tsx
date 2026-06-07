@@ -57,3 +57,27 @@ export const Showcase: Story = {
     </div>
   ),
 };
+
+export const AsButton: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {SIZES.map((size) => (
+        <div
+          key={size}
+          style={{ display: 'flex', gap: 8, alignItems: 'center' }}
+        >
+          <span style={{ width: 16, fontSize: 12 }}>{size}</span>
+          {VARIANTS.map((variant) => (
+            <Chip
+              key={variant}
+              variant={variant}
+              size={size}
+              label="김모또"
+              onClick={() => alert(`${variant} 클릭`)}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  ),
+};
