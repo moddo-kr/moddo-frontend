@@ -10,6 +10,7 @@ export interface Member {
   userId: number;
   isPaid: boolean;
   paidAt: string | null;
+  paymentRequestId: number | null;
 }
 
 export interface MemberData {

@@ -79,10 +79,13 @@ export default defineConfig(({ mode }) => {
             clientsClaim: true,
             runtimeCaching: [
               {
-                urlPattern: /\.(?:js|css|png|jpg|jpeg|svg)$/,
+                // same-origin 정적 자원만 캐시 (외부 S3 이미지는 제외 - CORS/tainted canvas 방지)
+                urlPattern: ({ url, sameOrigin }) =>
+                  sameOrigin &&
+                  /\.(?:js|css|png|jpg|jpeg|svg)$/.test(url.pathname),
                 handler: 'StaleWhileRevalidate', // 네트워크를 먼저 시도
                 options: {
-                  cacheName: 'static-assets',
+                  cacheName: 'static-assets-v2',
                   expiration: {
                     maxEntries: 60, // 최대 캐시 항목 수
                     maxAgeSeconds: 30 * 24 * 60 * 60, // 30일

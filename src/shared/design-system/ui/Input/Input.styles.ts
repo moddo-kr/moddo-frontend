@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
-import { getToken, applyTypography } from '@/shared/design-system';
+import {
+  getToken,
+  getTypographyToken,
+  applyTypography,
+} from '@/shared/design-system';
 import type { InputState, InputVariant } from './Input';
 
 const defaultWrapperStateStyles = {
@@ -116,4 +120,30 @@ export const PriceUnit = styled.span`
   ${applyTypography('typography.title.small')}
   color: ${getToken('fg.normal')};
   flex-shrink: 0;
+`;
+
+export const HelpTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${getToken('gap.1')};
+`;
+
+export const HelpTextIconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: ${getToken('fg.accent-red.normal')};
+`;
+
+// HACK: 12px Medium에 해당하는 semantic token 없음.
+// caption.xsmall(12px Regular)에 caption.small-medium의 font-weight(Medium)를 override해 적용.
+// HACK: --text/default(#444950)에 대응하는 text용 semantic token 없음.
+export const HelpText = styled.span<{ $state: InputState }>`
+  ${applyTypography('typography.caption.xsmall')}
+  font-weight: ${getTypographyToken('typography.caption.small-medium')
+    .fontWeight};
+  color: ${({ $state }) =>
+    $state === 'error' ? getToken('fg.accent-red.normal') : '#444950'};
 `;

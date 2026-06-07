@@ -9,6 +9,7 @@ import groupTokenUrlLoader from '@/entities/auth/lib/groupTokenUrlLoader';
 import createExpensePageGuardLoader from '@/pages/CreateExpensePage/lib/createExpensePageGuardLoader';
 import joinLoader from '@/pages/join/loader';
 import expenseDetailLoader from '@/pages/expenseDetail/loader';
+import editExpensesLoader from '@/pages/editExpenses/loader';
 
 const LazyExpenseDetail = lazy(() =>
   import('@/pages/expenseDetail/').then(({ ExpenseDetailPage }) => ({
@@ -56,14 +57,14 @@ const LazyMyEditPage = lazy(() =>
     default: MyEditPage,
   }))
 );
-const LazySelectGroup = lazy(() =>
-  import('@/pages/selectGroup').then(({ SelectGroupPage }) => ({
-    default: SelectGroupPage,
-  }))
-);
 const LazyJoinPage = lazy(() =>
   import('@/pages/join').then(({ JoinPage }) => ({
     default: JoinPage,
+  }))
+);
+const LazyEditExpenses = lazy(() =>
+  import('@/pages/editExpenses').then(({ EditExpensesPage }) => ({
+    default: EditExpensesPage,
   }))
 );
 const LazyNotFound = lazy(() =>
@@ -116,10 +117,6 @@ function AppRouter() {
               element: <LazyPaymentManagement />,
             },
             {
-              path: ROUTE.selectGroup,
-              element: <LazySelectGroup />,
-            },
-            {
               path: ROUTE.groupSetup,
               element: <LazyGroupSetup />,
             },
@@ -140,6 +137,11 @@ function AppRouter() {
           path: ROUTE.expenseDetail,
           element: <LazyExpenseDetail />,
           loader: expenseDetailLoader,
+        },
+        {
+          path: ROUTE.editExpenses,
+          element: <LazyEditExpenses />,
+          loader: editExpensesLoader,
         },
         {
           path: ROUTE.characterShare,

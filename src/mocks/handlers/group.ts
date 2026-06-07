@@ -1,6 +1,11 @@
 import { http, HttpResponse, passthrough } from 'msw';
 import getIsMocked from '@/mocks/lib/getIsMocked';
-import { AccountVariable, Group } from '@/entities/group/model/group.type';
+import {
+  AccountVariable,
+  Group,
+  GroupHeaderResponse,
+} from '@/entities/group/model/group.type';
+import { MemberProfileRaw } from '@/entities/member/model/member.type';
 
 const dummyGroups: Group[] = [
   {
@@ -15,6 +20,7 @@ const dummyGroups: Group[] = [
         userId: 1,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 2,
@@ -24,6 +30,7 @@ const dummyGroups: Group[] = [
         userId: 2,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: 1,
       },
       {
         id: 3,
@@ -33,6 +40,7 @@ const dummyGroups: Group[] = [
         userId: 3,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
     ],
   },
@@ -48,6 +56,7 @@ const dummyGroups: Group[] = [
         userId: 1,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 4,
@@ -57,6 +66,7 @@ const dummyGroups: Group[] = [
         userId: 4,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 5,
@@ -66,12 +76,13 @@ const dummyGroups: Group[] = [
         userId: 5,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
     ],
   },
 ];
 
-const dummyMemberList = [
+const dummyMemberList: MemberProfileRaw[] = [
   {
     id: 1,
     role: 'MANAGER',
@@ -101,15 +112,30 @@ const dummyMemberList = [
   },
 ];
 
+let dummyCompletedAt: string | null = null;
+
+const getDummyGroupHeader = (): GroupHeaderResponse => ({
+  groupName: dummyGroups[0].groupName,
+  totalAmount: 150000,
+  deadline: new Date(
+    new Date().setMonth(new Date().getMonth() + 1)
+  ).toISOString(),
+  bank: '국민은행',
+  accountNumber: '123456-78-910111',
+  createdAt: new Date().toISOString(),
+  completedAt: dummyCompletedAt,
+  totalMemberCount: dummyMemberList.length,
+  completedMemberCount: dummyMemberList.filter((member) => member.isPaid)
+    .length,
+});
+
 const groupHandlers = [
   // GET GetGroupHeader (path 방식)
   // 모임 상단 조회
   http.get('/api/v1/groups/:groupToken/header', ({ request }) => {
     if (!getIsMocked(request)) return passthrough();
 
-    return HttpResponse.json({
-      ...dummyGroups[0],
-    });
+    return HttpResponse.json(getDummyGroupHeader());
   }),
 
   // GET GetGroupOne
@@ -210,6 +236,46 @@ const groupHandlers = [
       if (target) target.userId = 1;
 
       return HttpResponse.json({ success: true }, { status: 200 });
+    }
+  ),
+
+  http.patch<{ groupToken: string }>(
+    '/api/v1/groups/:groupToken/complete',
+    ({ request }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      dummyCompletedAt = new Date().toISOString();
+
+      return new HttpResponse(null, { status: 200 });
+    }
+  ),
+
+  http.put<{ groupToken: string; groupMemberId: string }, { isPaid: boolean }>(
+    '/api/v1/groups/:groupToken/members/:groupMemberId',
+    async ({ request, params }) => {
+      if (!getIsMocked(request)) return passthrough();
+
+      const { groupMemberId } = params;
+      const { isPaid } = await request.json();
+      const target = dummyMemberList.find(
+        (member) => member.id === Number(groupMemberId)
+      );
+
+      if (!target) {
+        return HttpResponse.json(
+          { error: 'group member not found' },
+          { status: 404 }
+        );
+      }
+
+      target.isPaid = isPaid;
+      target.paidAt = isPaid ? new Date().toISOString() : null;
+
+      return HttpResponse.json({
+        id: target.id,
+        isPaid: target.isPaid,
+        paidAt: target.paidAt,
+      });
     }
   ),
 ];

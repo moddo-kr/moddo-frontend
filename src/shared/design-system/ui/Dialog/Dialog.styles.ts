@@ -16,6 +16,19 @@ export const Container = styled.div`
   max-width: 330px;
 `;
 
+export const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* HACK: 32px에 해당하는 gap 토큰 없음(gap.8=24px이 최대). Figma 스펙(32px) 일치 위해 직접 사용. */
+  gap: 32px;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${getToken('gap.8')};
+`;
+
 export const TextSection = styled.div`
   display: flex;
   flex-direction: column;

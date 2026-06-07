@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Copy, DollarCircle } from '@/shared/assets/svgs/icon';
-import { useLoaderData } from 'react-router';
 import copyClipboard from '@/shared/lib/copyClipboard';
 import {
   DescriptionField,
@@ -9,55 +8,48 @@ import {
   Modal,
   showToast,
 } from '@/shared/design-system/ui';
-import { useGetGroupHeader } from '@/features/settlement-details/api/useGetGroupHeader';
 import { getToken } from '@/shared/design-system';
+import { GroupHeaderResponse } from '@/entities/group/model/group.type';
 import { CurvedProgressBar } from '../CurvedProgressBar';
 import { StatusContent, StatusType } from './index.type';
 import * as S from './index.style';
 import { getFormatDate } from './lib/getFormatDate';
 
 interface ExpenseTimeHeaderProps {
+  headerData?: GroupHeaderResponse;
+  isLoading: boolean;
   totalMember: number;
   paidMember: number;
+  isEveryMemberPaid: boolean;
+  isManager: boolean;
   onShareClick: () => void;
-  status: StatusType;
-  setStatus: (status: StatusType) => void;
+  settlementStatus: StatusType;
+  setSettlementStatus: (settlementStatus: StatusType) => void;
   isChecked: boolean;
   setIsChecked: (isChecked: boolean) => void;
+  onCompleteSettlement: () => Promise<void>;
 }
 
 function ExpenseTimeHeader({
+  headerData,
+  isLoading,
   totalMember,
   paidMember,
+  isEveryMemberPaid,
+  isManager,
   onShareClick,
-  status,
-  setStatus,
+  settlementStatus,
+  setSettlementStatus,
   isChecked,
   setIsChecked,
+  onCompleteSettlement,
 }: ExpenseTimeHeaderProps) {
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const [isBubble, setIsBubble] = useState<boolean>(false);
-  const { groupToken } = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  /** API 호출 관련 로직 */
-  const { data: headerData, isLoading } = useGetGroupHeader(
-    groupToken,
-    {
-      // CHECK - API 문서에는 401 에러로 되어 있지만 실제로는 500 에러가 발생함
-      // 모임의 참여자가 아닌 사용자가 모임 정보를 요청하는 경우
-      // 401: () => {
-      //   throw new BoundaryError({
-      //     title: '접근할 수 없는 페이지예요',
-      //     description: '참여한 모임의 정산만 확인할 수 있어요.',
-      //   });
-      // },
-    },
-    [401]
-  );
 
   // 타이머 업데이트 함수
   const updateTimer = (timeDifference: number) => {
@@ -73,7 +65,7 @@ function ExpenseTimeHeader({
 
   // 상태 업데이트 함수
   const updateStatus = (statusValue: StatusType) => {
-    setStatus(statusValue);
+    setSettlementStatus(statusValue);
     setIsBubble(true);
   };
 
@@ -87,18 +79,18 @@ function ExpenseTimeHeader({
   // TODO: isChecked를 sessionStorage/localStorage로 관리하여 새로고침 시에도 모달이 다시 뜨지 않도록 개선 필요 (groupToken별 키 사용)
   // 모든 멤버가 입금 완료된 "순간"에만 모달 표시
   useEffect(() => {
-    if (totalMember > 0 && paidMember === totalMember && !isChecked) {
+    if (isManager && isEveryMemberPaid && !isChecked) {
       setIsModalOpen(true);
       setIsChecked(true);
     }
-  }, [paidMember, totalMember, isChecked, setIsChecked]);
+  }, [isEveryMemberPaid, isChecked, isManager, setIsChecked]);
 
   useEffect(() => {
-    if (!headerData || status !== 'pending') return () => {};
+    if (!headerData || settlementStatus !== 'pending') return () => {};
 
     intervalRef.current = setInterval(() => {
       const now = new Date();
-      const endDate = new Date(headerData!.deadline);
+      const endDate = new Date(headerData.deadline);
       const timeDifference = endDate.getTime() - now.getTime();
       if (timeDifference <= 0) {
         setHours(0);
@@ -113,9 +105,20 @@ function ExpenseTimeHeader({
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData, status]);
+  }, [headerData, settlementStatus]);
 
-  const handleModalButtonClick = () => {
+  const isSettlementCompleted = Boolean(headerData?.completedAt);
+
+  const handleModalButtonClick = async () => {
+    if (isSettlementCompleted) {
+      setIsModalOpen(false);
+      onShareClick();
+      return;
+    }
+
+    if (!isManager) return;
+
+    await onCompleteSettlement();
     stopTimer();
     setIsModalOpen(false);
     updateStatus('success');
@@ -135,16 +138,16 @@ function ExpenseTimeHeader({
 
   /** 상수 정의 */
 
-  const percentage = (paidMember / totalMember) * 100;
+  const percentage = totalMember > 0 ? (paidMember / totalMember) * 100 : 0;
   const endDate = new Date(headerData.deadline);
   const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
   const handleModdoButtonClick = () => {
-    if (status === 'success') {
+    if (settlementStatus === 'success') {
       onShareClick();
       return;
     }
-    if (status === 'failure') {
+    if (settlementStatus === 'failure') {
       return;
     }
     setIsBubble(true);
@@ -187,8 +190,10 @@ function ExpenseTimeHeader({
       />
       <CurvedProgressBar percentage={percentage}>
         <S.ModdoButton onClick={handleModdoButtonClick}>
-          <S.ModdoImage src={StatusContent[status].image} />
-          {isBubble && <S.Bubble>{StatusContent[status].message}</S.Bubble>}
+          <S.ModdoImage src={StatusContent[settlementStatus].image} />
+          {isBubble && (
+            <S.Bubble>{StatusContent[settlementStatus].message}</S.Bubble>
+          )}
         </S.ModdoButton>
         <S.ExpenseChip>
           <DollarCircle width={24} height={24} color="#FECB3F" />
@@ -208,7 +213,7 @@ function ExpenseTimeHeader({
             {([hours, minutes, seconds] as number[]).map((time, index, arr) => (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
-                <S.TimerDigit $isFailure={status === 'failure'}>
+                <S.TimerDigit $isFailure={settlementStatus === 'failure'}>
                   {String(time).padStart(2, '0')}
                 </S.TimerDigit>
                 {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}
@@ -230,9 +235,12 @@ function ExpenseTimeHeader({
         <Dialog
           title="모임원이 모두 입금했어요!"
           description="정산을 완료하고 캐릭터를 확인하시겠어요?"
-          mainAction={{ label: '완료', onClick: handleModalButtonClick }}
+          mainAction={{
+            label: isSettlementCompleted ? '확인' : '완료',
+            onClick: handleModalButtonClick,
+          }}
           alternativeAction={{
-            label: '미완료',
+            label: isSettlementCompleted ? '닫기' : '미완료',
             onClick: () => setIsModalOpen(false),
           }}
         />

@@ -1,42 +1,18 @@
-import { useNavigate, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import { showToast } from '@/shared/design-system/ui';
-import { getGuestToken } from '@/entities/auth/api/auth';
-import { ROUTE } from '@/shared/config/route';
 import kakaoLogin from '@/entities/auth/lib/kakaoLogin';
 import { LogoIcon, Kakao } from '@/shared/assets/svgs/logo';
-import { queryClient } from '@/shared/api/queryClient';
 import { PageLayout } from '@/shared/ui/PageLayout';
 import LoginEntranceView from './LoginEntranceView';
 import * as S from './LoginPage.styles';
 
 function LoginPage() {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isEntrance, setIsEntrance] = useState(true);
-  const [isGuestLoginPending, setIsGuestLoginPending] = useState(false);
 
-  const handleLoginButtonClick = async (loginType: 'KAKAO' | 'GUEST') => {
-    if (loginType === 'KAKAO') {
-      const redirectPathAfterLogin =
-        searchParams.get('redirectTo') ?? undefined;
-      kakaoLogin(redirectPathAfterLogin);
-    } else {
-      if (isGuestLoginPending) return;
-      setIsGuestLoginPending(true);
-      try {
-        await getGuestToken();
-        queryClient.removeQueries({ queryKey: ['auth', 'user'] });
-        navigate(ROUTE.selectGroup);
-      } catch {
-        showToast({
-          type: 'error',
-          content: '비회원 로그인에 실패했습니다. 다시 시도해주세요.',
-        });
-      } finally {
-        setIsGuestLoginPending(false);
-      }
-    }
+  const handleKakaoLogin = () => {
+    const redirectPathAfterLogin = searchParams.get('redirectTo') ?? undefined;
+    kakaoLogin(redirectPathAfterLogin);
   };
 
   useEffect(() => {
@@ -60,7 +36,7 @@ function LoginPage() {
           </S.TextContainer>
         </S.ContentWrapper>
         <S.BottomWrapper>
-          <S.KakaoButton onClick={() => handleLoginButtonClick('KAKAO')}>
+          <S.KakaoButton onClick={handleKakaoLogin}>
             <Kakao width={24} height={24} />
             <S.KakaoLoginLabel>카카오로 로그인</S.KakaoLoginLabel>
           </S.KakaoButton>
