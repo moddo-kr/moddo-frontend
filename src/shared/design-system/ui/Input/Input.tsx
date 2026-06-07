@@ -1,5 +1,6 @@
 import { useId, forwardRef } from 'react';
 import type { ReactNode, ChangeEventHandler, InputHTMLAttributes } from 'react';
+import SvgSystemDanger from '@/shared/assets/svgs/icon/SystemDanger';
 import * as S from './Input.styles';
 
 type InputState = 'default' | 'error' | 'disabled';
@@ -11,6 +12,7 @@ interface InputProps
   state?: InputState;
   variant?: InputVariant;
   trailingIcon?: ReactNode;
+  helpText?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
@@ -24,6 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     state = 'default',
     variant = 'default',
     trailingIcon,
+    helpText,
     value,
     onChange,
     onClick,
@@ -67,7 +70,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           </S.IconWrapper>
         )}
       </S.InputWrapper>
-      {/* TODO: 헬프텍스트 - 디자인 확정 후 추가 예정 */}
+      {helpText && variant === 'default' && (
+        <S.HelpTextContainer>
+          {state === 'error' && (
+            <S.HelpTextIconWrapper>
+              <SvgSystemDanger width={18} height={18} />
+            </S.HelpTextIconWrapper>
+          )}
+          <S.HelpText $state={state}>{helpText}</S.HelpText>
+        </S.HelpTextContainer>
+      )}
     </S.Container>
   );
 });

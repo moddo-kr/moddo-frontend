@@ -45,7 +45,7 @@ export function SettlementBanner() {
   return (
     <>
       <S.BannerCard>
-        <S.SelectGroupButton onClick={() => navigate(ROUTE.selectGroup)}>
+        <S.SelectGroupButton onClick={() => navigate(ROUTE.groupSetup)}>
           <S.BannerActionLabel>정산하기</S.BannerActionLabel>
           <ArrowRight
             width="1.25rem"

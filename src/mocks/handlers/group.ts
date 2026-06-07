@@ -20,6 +20,7 @@ const dummyGroups: Group[] = [
         userId: 1,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 2,
@@ -29,6 +30,7 @@ const dummyGroups: Group[] = [
         userId: 2,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: 1,
       },
       {
         id: 3,
@@ -38,6 +40,7 @@ const dummyGroups: Group[] = [
         userId: 3,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
     ],
   },
@@ -53,6 +56,7 @@ const dummyGroups: Group[] = [
         userId: 1,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 4,
@@ -62,6 +66,7 @@ const dummyGroups: Group[] = [
         userId: 4,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
       {
         id: 5,
@@ -71,6 +76,7 @@ const dummyGroups: Group[] = [
         userId: 5,
         isPaid: false,
         paidAt: null,
+        paymentRequestId: null,
       },
     ],
   },

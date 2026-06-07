@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NameChip } from './NameChip';
-import type { NameChipVariant, NameChipSize } from './NameChip';
+import { Chip } from './Chip';
+import type { ChipVariant, ChipSize } from './Chip';
 
-const VARIANTS: NameChipVariant[] = [
+const VARIANTS: ChipVariant[] = [
   'selected',
   'unselected',
   'disabled',
   'red',
   'black',
 ];
-const SIZES: NameChipSize[] = ['m', 's'];
+const SIZES: ChipSize[] = ['m', 's'];
 
-const meta: Meta<typeof NameChip> = {
-  title: 'Components/NameChip',
-  component: NameChip,
+const meta: Meta<typeof Chip> = {
+  title: 'Components/Chip',
+  component: Chip,
   tags: ['autodocs'],
   argTypes: {
     variant: {
@@ -36,7 +36,7 @@ const meta: Meta<typeof NameChip> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof NameChip>;
+type Story = StoryObj<typeof Chip>;
 
 export const Default: Story = {};
 
@@ -50,11 +50,30 @@ export const Showcase: Story = {
         >
           <span style={{ width: 16, fontSize: 12 }}>{size}</span>
           {VARIANTS.map((variant) => (
-            <NameChip
+            <Chip key={variant} variant={variant} size={size} label="김모또" />
+          ))}
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const AsButton: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {SIZES.map((size) => (
+        <div
+          key={size}
+          style={{ display: 'flex', gap: 8, alignItems: 'center' }}
+        >
+          <span style={{ width: 16, fontSize: 12 }}>{size}</span>
+          {VARIANTS.map((variant) => (
+            <Chip
               key={variant}
               variant={variant}
               size={size}
               label="김모또"
+              onClick={() => alert(`${variant} 클릭`)}
             />
           ))}
         </div>

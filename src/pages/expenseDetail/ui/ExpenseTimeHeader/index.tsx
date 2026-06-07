@@ -23,8 +23,8 @@ interface ExpenseTimeHeaderProps {
   isEveryMemberPaid: boolean;
   isManager: boolean;
   onShareClick: () => void;
-  status: StatusType;
-  setStatus: (status: StatusType) => void;
+  settlementStatus: StatusType;
+  setSettlementStatus: (settlementStatus: StatusType) => void;
   isChecked: boolean;
   setIsChecked: (isChecked: boolean) => void;
   onCompleteSettlement: () => Promise<void>;
@@ -38,8 +38,8 @@ function ExpenseTimeHeader({
   isEveryMemberPaid,
   isManager,
   onShareClick,
-  status,
-  setStatus,
+  settlementStatus,
+  setSettlementStatus,
   isChecked,
   setIsChecked,
   onCompleteSettlement,
@@ -65,7 +65,7 @@ function ExpenseTimeHeader({
 
   // 상태 업데이트 함수
   const updateStatus = (statusValue: StatusType) => {
-    setStatus(statusValue);
+    setSettlementStatus(statusValue);
     setIsBubble(true);
   };
 
@@ -86,7 +86,7 @@ function ExpenseTimeHeader({
   }, [isEveryMemberPaid, isChecked, isManager, setIsChecked]);
 
   useEffect(() => {
-    if (!headerData || status !== 'pending') return () => {};
+    if (!headerData || settlementStatus !== 'pending') return () => {};
 
     intervalRef.current = setInterval(() => {
       const now = new Date();
@@ -105,7 +105,7 @@ function ExpenseTimeHeader({
 
     return () => stopTimer(); // 컴포넌트 언마운트 시 타이머 멈추기
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerData, status]);
+  }, [headerData, settlementStatus]);
 
   const isSettlementCompleted = Boolean(headerData?.completedAt);
 
@@ -143,11 +143,11 @@ function ExpenseTimeHeader({
   const accountFormat = `${headerData.bank} ${headerData.accountNumber}`; // 신한 110123456789
 
   const handleModdoButtonClick = () => {
-    if (status === 'success') {
+    if (settlementStatus === 'success') {
       onShareClick();
       return;
     }
-    if (status === 'failure') {
+    if (settlementStatus === 'failure') {
       return;
     }
     setIsBubble(true);
@@ -190,8 +190,10 @@ function ExpenseTimeHeader({
       />
       <CurvedProgressBar percentage={percentage}>
         <S.ModdoButton onClick={handleModdoButtonClick}>
-          <S.ModdoImage src={StatusContent[status].image} />
-          {isBubble && <S.Bubble>{StatusContent[status].message}</S.Bubble>}
+          <S.ModdoImage src={StatusContent[settlementStatus].image} />
+          {isBubble && (
+            <S.Bubble>{StatusContent[settlementStatus].message}</S.Bubble>
+          )}
         </S.ModdoButton>
         <S.ExpenseChip>
           <DollarCircle width={24} height={24} color="#FECB3F" />
@@ -211,7 +213,7 @@ function ExpenseTimeHeader({
             {([hours, minutes, seconds] as number[]).map((time, index, arr) => (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
-                <S.TimerDigit $isFailure={status === 'failure'}>
+                <S.TimerDigit $isFailure={settlementStatus === 'failure'}>
                   {String(time).padStart(2, '0')}
                 </S.TimerDigit>
                 {index < arr.length - 1 && <S.TimeSep>:</S.TimeSep>}

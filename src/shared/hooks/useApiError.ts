@@ -31,22 +31,19 @@ const useApiError = <TError = Error>({
     [errorHandlers]
   );
 
-  // customErrorHandlers를 우선 처리하고, defaultHandler를 처리합니다.
+  // ignoreBoundaryErrors에 포함된 에러만 핸들러를 실행합니다.
+  // 그 외 에러는 shouldThrowError가 true를 반환하여 ErrorBoundary에서 처리합니다.
   const handleError = useCallback(
     (error: TError) => {
       if (isAxiosError(error)) {
         const status = error.response?.status;
-        if (status) {
+        if (status && ignoreBoundaryErrors?.includes(status)) {
           const customHandler = handlers[status] || handlers.default;
           customHandler();
-        } else {
-          handlers.default();
         }
-      } else {
-        handlers.default();
       }
     },
-    [handlers]
+    [handlers, ignoreBoundaryErrors]
   );
 
   // ignoreBoundaryErrors에 포함된 에러코드인지 확인합니다.

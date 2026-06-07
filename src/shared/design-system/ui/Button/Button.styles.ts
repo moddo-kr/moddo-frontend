@@ -10,15 +10,18 @@ const sizeStyles = {
   medium: css`
     padding: ${getToken('padding.4')} ${getToken('padding.5')};
     ${applyTypography('typography.body.medium-semibold')}
+    border-radius: ${getToken('radius.lg')};
   `,
   small: css`
     padding: ${getToken('padding.3')} ${getToken('padding.5')};
     ${applyTypography('typography.body.small-semibold')}
+    border-radius: ${getToken('radius.lg')};
   `,
   xsmall: css`
     height: 1.75rem;
     padding: 0 ${getToken('padding.4')};
     ${applyTypography('typography.caption.small-medium')}
+    border-radius: ${getToken('radius.md')};
   `,
 };
 
@@ -64,7 +67,6 @@ export const Button = styled.button<StyledButtonProps>`
   justify-content: center;
   align-items: center;
   gap: ${getToken('gap.2')};
-  border-radius: ${getToken('radius.full')};
   border: none;
   cursor: pointer;
   white-space: nowrap;
