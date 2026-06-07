@@ -100,6 +100,7 @@ function CharacterSharePage() {
               <img
                 src={data.imageBigUrl}
                 alt={data.name}
+                crossOrigin="anonymous"
                 style={{
                   ...CHARACTER_DATA[data.name].imageSize.big,
                 }}
