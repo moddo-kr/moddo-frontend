@@ -8,6 +8,7 @@ import {
 interface StyledNameChipProps {
   $variant: 'selected' | 'unselected' | 'disabled' | 'red' | 'black';
   $size: 'm' | 's';
+  $clickable?: boolean;
 }
 
 // HACK: s size는 12px Medium이지만 해당 semantic token 없음.
@@ -59,6 +60,12 @@ export const Chip = styled.div<StyledNameChipProps>`
   gap: ${getToken('gap.1')};
   border-radius: ${getToken('radius.full')};
   white-space: nowrap;
+  ${({ $clickable }) =>
+    $clickable &&
+    css`
+      border: none;
+      cursor: pointer;
+    `}
   ${({ $size }) => sizeStyles[$size]}
   ${({ $variant }) => variantStyles[$variant]}
 `;

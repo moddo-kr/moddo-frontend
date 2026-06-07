@@ -2,10 +2,10 @@ import { useState } from 'react';
 import {
   ActionArea,
   BottomSheet,
-  Button,
   Input,
   Keypad,
   KeyValue,
+  NameChip,
   PriceDisplay,
 } from '@/shared/design-system/ui';
 import {
@@ -86,18 +86,14 @@ function ExpenseAmountInput({
         <PriceDisplay value={formattedInput} />
         <S.QuickAddContainer>
           {QUICK_ADD_BUTTONS.map(({ label, amount }) => (
-            <Button
+            <NameChip
               key={amount}
+              label={label}
+              variant="unselected"
               onClick={() => handleQuickAdd(amount)}
-              variant="secondary"
-              size="small"
-            >
-              {label}
-            </Button>
+            />
           ))}
-          <Button onClick={handleClearInput} variant="red" size="small">
-            전체삭제
-          </Button>
+          <NameChip label="전체삭제" variant="red" onClick={handleClearInput} />
         </S.QuickAddContainer>
         <Keypad onPress={handleKeypadPress} />
         <ActionArea
