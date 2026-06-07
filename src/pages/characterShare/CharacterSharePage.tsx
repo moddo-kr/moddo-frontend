@@ -83,11 +83,7 @@ function CharacterSharePage() {
           <S.PageTitle>캐릭터를 획득했어요!</S.PageTitle>
         </S.TitleContainer>
         <S.CharacterCardContainer>
-          <S.CharacterImage
-            src={data.imageUrl}
-            alt={data.name}
-            crossOrigin="anonymous"
-          />
+          <S.CharacterImage src={data.imageUrl} alt={data.name} />
         </S.CharacterCardContainer>
         <S.DownloadButton onClick={handleDownload}>
           <Download width="1.25rem" color={getToken('fill.inverse.neutral')} />
