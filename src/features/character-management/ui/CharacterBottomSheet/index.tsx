@@ -1,6 +1,5 @@
 import { useNavigate, generatePath, useLoaderData } from 'react-router';
 import { BottomSheet, ActionArea } from '@/shared/design-system/ui';
-import { CHARACTER_DATA } from '@/entities/character/config/character';
 import { ROUTE } from '@/shared/config/route';
 import useGetCharacter from '@/features/character-management/api/useGetCharacter';
 import * as S from './index.styles';
@@ -30,13 +29,7 @@ function CharacterBottomSheet({ open, setOpen }: CharacterBottomSheetProps) {
     >
       <S.BottomSheetContainer>
         <S.CharacterImageContainer>
-          <img
-            src={data.imageUrl}
-            alt={data.name}
-            style={{
-              ...CHARACTER_DATA[data.name].imageSize.small,
-            }}
-          />
+          <S.CharacterImage src={data.imageBigUrl} alt={data.name} />
         </S.CharacterImageContainer>
         <S.DescriptionContainer>
           <S.CharacterTitle>두둥, {data.name} 등장!</S.CharacterTitle>

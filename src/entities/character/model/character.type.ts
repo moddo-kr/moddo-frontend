@@ -1,11 +1,7 @@
-import { CHARACTER_DATA } from '@/entities/character/config/character';
-
-// 새 캐릭터 추가 시 CHARACTER_DATA에만 추가하면 타입이 자동으로 확장됨
-export type CharacterType = keyof typeof CHARACTER_DATA;
 export type StarCount = 1 | 2 | 3;
 
 export interface CharacterData {
-  name: CharacterType;
+  name: string;
   rarity: StarCount;
   imageUrl: string;
   imageBigUrl: string;

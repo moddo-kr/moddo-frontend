@@ -18,6 +18,12 @@ export const CharacterImageContainer = styled.div`
   height: 11.25rem;
 `;
 
+export const CharacterImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+`;
+
 export const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
